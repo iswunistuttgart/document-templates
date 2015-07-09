@@ -1,12 +1,3 @@
-
-\RequirePackage[utf8x]{inputenc}
-
-\RequirePackage[T1]{fontenc}
-
-% The package manages culturally determined typographical (and other) rules, and hyphenation patterns for a wide range of languages
-\RequirePackage[english]{babel}
-\RequirePackage[ngerman]{babel}
-
 % Provides optional arguments to \includegraphics
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{images/}}
@@ -44,7 +35,15 @@
 \RequirePackage[per-mode=symbol]{siunitx}
 
 % Typeset source code listings using LaTeX. The pack­age en­ables the user to type­set pro­grams (pro­gram­ming code) within LaTeX; the source code is read di­rectly by TeX—no front-end pro­ces­sor is needed. Key­words, com­ments and strings can be type­set us­ing dif­fer­ent styles (de­fault is bold for key­words, italic for com­ments and no spe­cial style for strings). Sup­port for hy­per­ref is pro­vided. To use, \usep­a­ck­age{list­ings}, iden­tify the lan­guage of the ob­ject to type­set, us­ing a con­struct like: \lst­set{lan­guage=Python}, then use en­vi­ron­ment lstlist­ing for in­line code. Ex­ter­nal files may be for­mat­ted us­ing \lstin­put­list­ing to pro­cess a given file in the form ap­pro­pri­ate for the cur­rent lan­guage. Short (in-line) list­ings are also avail­able, us­ing ei­ther \lstin­line|...| or |...| (af­ter defin­ing the | to­ken with the \lstMakeShortIn­line com­mand).
-\RequirePackage{listings}
+%\RequirePackage{listings}
+
+% minted is a package that allows formatting source code in LATEX. For example:
+%\begin{minted}{<language>}
+% <code>
+%\end{minted}
+% will highlight a piece of code in a chosen language. The appearance can be customized with a number of options and color schemes.
+% ftp://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/minted/minted.pdf
+\RequirePackage[chapter]{minted}
 
 % Enumerate and itemize within paragraphs. Pro­vides enu­mer­ate and item­ize en­vi­ron­ments that can be used within para­graphs to for­mat the items ei­ther as run­ning text or as sep­a­rate para­graphs with a pre­ced­ing num­ber or sym­bol. Also pro­vides com­pacted ver­sions of enu­mer­ate and item­ize.
 \RequirePackage{paralist}
@@ -52,14 +51,11 @@
 % The cap­tion pack­age pro­vides many ways to cus­tomise the cap­tions in float­ing en­vi­ron­ments like fig­ure and ta­ble, and co­op­er­ates with many other pack­ages. Fa­cil­i­ties in­clude ro­tat­ing cap­tions, side­ways cap­tions, con­tin­ued cap­tions (for ta­bles or fig­ures that come in sev­eral parts). A list of com­pat­i­bil­ity notes, for other pack­ages, is pro­vided in the doc­u­men­ta­tion. The pack­age also pro­vides the “cap­tion out­side float” fa­cil­ity, in the same way that sim­pler pack­ages like capt-of do. The pack­age su­per­sedes cap­tion2.
 \RequirePackage{caption}
 \captionsetup{labelsep=space, justification=justified, singlelinecheck=off, format=hang}
-\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+\captionsetup[subfigure]{subrefformat=simple, labelformat=simple}
 
 
 % Marking things to do in a LaTeX document The pack­age lets the user mark things to do later, in a sim­ple and vi­su­ally ap­peal­ing way. The pack­age takes sev­eral op­tions to en­able cus­tomiza­tion/fine­tun­ing of the vi­sual ap­pear­ance.
 \RequirePackage{todonotes}
-
-% Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
-\RequirePackage[capitalise]{cleveref}
 
 % An extended version of TeX, from the NTS project An ex­tended ver­sion of TeX (which is ca­pa­ble of run­ning as if it were TeX un­mod­i­fied). E-TeX has been spec­i­fied by the LaTeX team as the en­gine for the de­vel­op­ment of LaTeX 2e, in the im­me­di­ate fu­ture; as a re­sult, LaTeX pro­gram­mers may (in all cur­rent TeX dis­tri­bu­tions) as­sume e-TeX func­tion­al­ity. Devel­op­ment ver­sions of e-TeX are to be found in the TeX live source repos­i­tory.
 \RequirePackage{etex}
@@ -98,7 +94,9 @@
 \RequirePackage[super]{nth}
 
 % Show label, ref, cite and bib keys. The showkeys pack­age mod­i­fies the \la­bel, \ref, \pageref, \cite and \bib­item com­mands so that the ‘in­ter­nal’ key is printed, with­out af­fect­ing the ap­pear­ance of the rest of the text, so far as is pos­si­ble (the keys typ­i­cally ap­pear in the mar­gin). The pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
-\RequirePackage{showkeys}
+\if@thesisdraft
+    \RequirePackage{showkeys}
+\fi
 
 % Expand acronyms at least once. This pack­age en­sures that all acronyms used in the text are spelled out in full at least once. It also pro­vides an en­vi­ron­ment to build a list of acronyms used. The pack­age is com­pat­i­ble with pdf book­marks. The pack­age re­quires the suf­fix pack­age, which in turn re­quires that it runs un­der e-TeX.
 \RequirePackage{acronym}
@@ -123,7 +121,7 @@
     % Seite, welche automatisch geoeffnet werden soll
     % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
     % werden soll oder eine Seite bearbeitet wird.
-    pdfstartpage=0,
+    pdfstartpage=1,
 %   % Miniaturansicht nicht anzeigen
     pdfpagemode=UseOutlines,
     % Startansicht des PDF-Dokuments
@@ -144,31 +142,39 @@
     % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
     % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
     pdfpagelayout=TwoColumnRight,
-%   pdfhighlight=/N,
+%    pdfhighlight=/N,
     % ermoeglicht einen Umbruch von URLs
     breaklinks=true,
     % Einfaerbung von Links
-    colorlinks=true,
+    colorlinks=false,
     % Linkfarbe: rot
-    linkcolor=black,
+    linkcolor=red,
     % Ankerfarbe: rot
-    anchorcolor=black,
+    anchorcolor=red,
     % Literaturlinks: rot
-    citecolor=black,
+    citecolor=red,
     % Links zu lokalen Dateien: rot
-    filecolor=black,
+    filecolor=red,
     % Acrobat Menueeintraege: rot
-    menucolor=black,
-    % Links zu anderen Seiten im Text: rot
-    pagecolor=black,
+    menucolor=red,
     % URL-Farbe: rot
-    urlcolor=black,
+    urlcolor=red,
     % Use DVIPS background
-%   dvips,
+%    dvips,
     % Put an anchor on every page
     pageanchor,
     % Use small caps instead of color for links
-%   frenchlinks=true,
-    % Document is in final version
-    final
+%    frenchlinks=true,
 ]{hyperref}
+% Set the mode of hyperref to draft if the thesis is in draft mode
+\if@thesisdraft
+    \PassOptionsToPackage{draft}{hyperref}
+    \PassOptionsToPackage{draft}{minted}
+% Otherwise set hyperref's internal mode to final
+\else
+    \PassOptionsToPackage{final}{hyperref}
+    \PassOptionsToPackage{final}{minted}
+\fi
+
+% Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
+\RequirePackage[capitalise]{cleveref}

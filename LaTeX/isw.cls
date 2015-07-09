@@ -187,8 +187,8 @@
 
 \addto\captionsngerman{  % no blank linkes allowed!
     \def\@supervisorstring{Betreuer}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{figures/logos/uni-stuttgart-deutsch}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{figures/logos/institut-deutsch}}
+    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-deutsch}}
+    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-deutsch}}
     %\def\@majorpretextString{\vspace{2cm}im Studiengang}
     \def\@majorpretextString{\vspace{.5cm}Studiengang}
     \def\@submittedByString{vorgelegt von}
@@ -214,8 +214,8 @@
 
 \addto\captionsenglish{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{figures/logos/uni-stuttgart-english}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{figures/logos/institut-english}}
+    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
+    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
     \def\@majorpretextString{Graduate Program}
     \def\@submittedByString{by}
     \def\@cooperationString{in coorporation with}
@@ -257,8 +257,8 @@
 
 \addto\captionsamerican{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{figures/logos/uni-stuttgart-english}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{figures/logos/institut-english}}
+    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
+    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
     \def\@majorpretextString{Graduate Program}
     \def\@submittedByString{by}
     \def\@cooperationString{in coorporation with}
@@ -300,8 +300,8 @@
 
 \addto\captionsbritsh{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{figures/logos/uni-stuttgart-english}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{figures/logos/institut-english}}
+    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
+    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
     \def\@majorpretextString{Graduate Program}
     \def\@submittedByString{by}
     \def\@cooperationString{in coorporation with}
@@ -508,6 +508,7 @@
     \fi
 }
 
+\input{config/packages.tex}
 
 %\newtheorem{thm}{Theorem}[section]
 %\newtheorem{cor}[thm]{Corollar}
