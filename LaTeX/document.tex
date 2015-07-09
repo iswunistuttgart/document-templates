@@ -1,0 +1,37 @@
+\documentclass[%
+    thesis=ma, %
+    language=american, %
+    paper=a4,%
+    %draft
+]{isw}
+
+
+\setcounter{errorcontextlines}{999}
+
+\title{This shall be a great thesis paper with an extremely long title but who cares}
+\subtitle{Some theses even have subtitles}
+\author{Philipp Tempel}
+\major{Technische Kybernetik}
+\examiner{Jun.-Prof.~Dr.-Ing.~Andreas Pott}
+\major{Technische Kybernetik}
+\supervisor{Dipl.-Ing.~Philipp Tempel}
+
+\usepackage{lipsum}
+
+\begin{document}
+    \maketitle
+    
+    \begin{otherlanguage}{ngerman}\maketitle \end{otherlanguage}
+    
+    \tableofcontents
+    
+    \listoffigures
+    
+    \listoftables
+    
+    \chapter{The very first chapter with a very long title just to see what it looks likes since it also spans multiple lines in the ToC}
+    
+    \section{A very first section}
+    
+    \lipsum[1-60]
+\end{document}
