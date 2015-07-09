@@ -1,0 +1,172 @@
+\RequirePackage[utf8x]{inputenc}
+
+\RequirePackage[T1]{fontenc}
+
+% The package manages culturally determined typographical (and other) rules, and hyphenation patterns for a wide range of languages
+\RequirePackage[english]{babel}
+\RequirePackage[ngerman]{babel}
+
+% Provides optional arguments to \includegraphics
+\RequirePackage{graphicx}
+
+% Im­proves the in­ter­face for defin­ing float­ing ob­jects such as fig­ures and ta­bles. In­tro­duces the boxed float, the ruled float and the plain­top float. You can de­fine your own floats and im­prove the be­haviour of the old ones. The pack­age also pro­vides the H float mod­i­fier op­tion of the ob­so­lete here pack­age. You can se­lect this as au­to­matic de­fault with \float­place­ment{fig­ure}{H}.
+\RequirePackage{float}
+
+% Include Encapsulated PostScript in LaTeX documents
+\RequirePackage{epsfig}
+
+% The package provides the principal packages in the AMS-LaTeX distribution. It adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it is highly recommendsd as an adjunct to serious mathematical typesetting in LaTeX. 
+\RequirePackage{amsmath}
+
+% Additional math symbolys for a list see http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf
+\RequirePackage{amssymb}
+
+% The bm package defines a command \bm which makes its argument bold. The argument may be any maths object from a single symbol to an expression. This is closely related to the specification of the \boldsymbol command in AMS-LaTeX, but \bm is rather more careful in the way it does things. 
+\RequirePackage{bm}
+
+% The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
+\RequirePackage{booktabs}
+
+% The pack­age starts from the ba­sic fa­cil­i­ties of the color pack­age, and pro­vides easy driver-in­de­pen­dent ac­cess to sev­eral kinds of color tints, shades, tones, and mixes of ar­bi­trary col­ors. It al­lows a user to se­lect a doc­u­ment-wide tar­get color model and of­fers com­plete tools for con­ver­sion be­tween eight color mod­els. Ad­di­tion­ally, there is a com­mand for al­ter­nat­ing row col­ors plus re­peated non-aligned ma­te­rial (like hor­i­zon­tal lines) in ta­bles. Colors can be mixed like \color{red!30!green!40!blue}.
+\RequirePackage{xcolor}
+% Defines the 16 colors from Ethan Schoonover's Solarized palette
+\RequirePackage{xcolor-solarized}
+
+% Typeset in-line fractions in a "nice" way. The pack­age type­sets frac­tions “nicely” — in the form ‘a/b’ (i.e., stag­gered with a slash be­tween them, rather than di­rectly one over the other). The pack­age is dis­tributed as part of a bun­dle in­clud­ing the units pack­age. Nice­frac’s fa­cil­i­ties are pro­vided, in a cleaner way, by the (ex­per­i­men­tal) xfrac pack­age, but see also the fak­tor pack­age for quo­tient spaces and the like.
+\RequirePackage{nicefrac}
+
+% Place lines through maths formulae. A pack­age to draw di­ag­o­nal lines (“can­celling” a term) and ar­rows with lim­its (can­celling a term “to a value”) through parts of maths for­mu­lae.
+\RequirePackage{cancel}
+
+% A comprehensive (SI) units package. Type­set­ting val­ues with units re­quires care to en­sure that the com­bined math­e­mat­i­cal mean­ing of the value plus unit com­bi­na­tion is clear. In par­tic­u­lar, the SI units sys­tem lays down a con­sis­tent set of units with rules on how they are to be used. How­ever, dif­fer­ent coun­tries and pub­lish­ers have dif­fer­ing con­ven­tions on the ex­act ap­pear­ance of num­bers (and units). A num­ber of LaTeX pack­ages have been de­vel­oped to pro­vide con­sis­tent ap­pli­ca­tion of the var­i­ous rules: SIu­nits, sistyle, units­def and units are the lead­ing ex­am­ples. The numprint pack­age pro­vides a large num­ber of num­ber-re­lated func­tions, while dcol­umn and rc­col pro­vide tools for type­set­ting tab­u­lar num­bers. The siu­nitx pack­age takes the best from the ex­ist­ing pack­ages, and adds new fea­tures and a con­sis­tent in­ter­face. A num­ber of new ideas have been in­cor­po­rated, to fill gaps in the ex­ist­ing pro­vi­sion. The pack­age also pro­vides back­ward-com­pat­i­bil­ity with SIu­nits, sistyle, units­def and units. The aim is to have one pack­age to han­dle all of the pos­si­ble unit-re­lated needs of LaTeX users. The pack­age re­lies on LaTeX 3 sup­port from the l3k­er­nel and l3­pack­ages bun­dles.
+\RequirePackage[per-mode=symbol]{siunitx}
+
+% Typeset source code listings using LaTeX. The pack­age en­ables the user to type­set pro­grams (pro­gram­ming code) within LaTeX; the source code is read di­rectly by TeX—no front-end pro­ces­sor is needed. Key­words, com­ments and strings can be type­set us­ing dif­fer­ent styles (de­fault is bold for key­words, italic for com­ments and no spe­cial style for strings). Sup­port for hy­per­ref is pro­vided. To use, \usep­a­ck­age{list­ings}, iden­tify the lan­guage of the ob­ject to type­set, us­ing a con­struct like: \lst­set{lan­guage=Python}, then use en­vi­ron­ment lstlist­ing for in­line code. Ex­ter­nal files may be for­mat­ted us­ing \lstin­put­list­ing to pro­cess a given file in the form ap­pro­pri­ate for the cur­rent lan­guage. Short (in-line) list­ings are also avail­able, us­ing ei­ther \lstin­line|...| or |...| (af­ter defin­ing the | to­ken with the \lstMakeShortIn­line com­mand).
+\RequirePackage{listings}
+
+% Enumerate and itemize within paragraphs. Pro­vides enu­mer­ate and item­ize en­vi­ron­ments that can be used within para­graphs to for­mat the items ei­ther as run­ning text or as sep­a­rate para­graphs with a pre­ced­ing num­ber or sym­bol. Also pro­vides com­pacted ver­sions of enu­mer­ate and item­ize.
+\RequirePackage{paralist}
+
+% The cap­tion pack­age pro­vides many ways to cus­tomise the cap­tions in float­ing en­vi­ron­ments like fig­ure and ta­ble, and co­op­er­ates with many other pack­ages. Fa­cil­i­ties in­clude ro­tat­ing cap­tions, side­ways cap­tions, con­tin­ued cap­tions (for ta­bles or fig­ures that come in sev­eral parts). A list of com­pat­i­bil­ity notes, for other pack­ages, is pro­vided in the doc­u­men­ta­tion. The pack­age also pro­vides the “cap­tion out­side float” fa­cil­ity, in the same way that sim­pler pack­ages like capt-of do. The pack­age su­per­sedes cap­tion2.
+\RequirePackage{caption}
+\captionsetup{labelsep=space, justification=justified, singlelinecheck=off, format=hang}
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+
+
+% Marking things to do in a LaTeX document The pack­age lets the user mark things to do later, in a sim­ple and vi­su­ally ap­peal­ing way. The pack­age takes sev­eral op­tions to en­able cus­tomiza­tion/fine­tun­ing of the vi­sual ap­pear­ance.
+\RequirePackage{todonotes}
+
+% Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
+\RequirePackage[capitalise]{cleveref}
+
+% An extended version of TeX, from the NTS project An ex­tended ver­sion of TeX (which is ca­pa­ble of run­ning as if it were TeX un­mod­i­fied). E-TeX has been spec­i­fied by the LaTeX team as the en­gine for the de­vel­op­ment of LaTeX 2e, in the im­me­di­ate fu­ture; as a re­sult, LaTeX pro­gram­mers may (in all cur­rent TeX dis­tri­bu­tions) as­sume e-TeX func­tion­al­ity. Devel­op­ment ver­sions of e-TeX are to be found in the TeX live source repos­i­tory.
+\RequirePackage{etex}
+
+% Intermix single and multiple columns. Mul­ti­col de­fines a mul­ti­cols en­vi­ron­ment which type­sets text in mul­ti­ple columns (up to a max­i­mum of 10), and (by de­fault) bal­ances the end of each col­umn at the end of the en­vi­ron­ment. The pack­age en­ables you to switch be­tween any (per­mit­ted) num­ber of columns at will: there is no im­posed "clear page" op­er­a­tion, as there is in un­adorned LaTeX at a switch be­tween \onecol­umn and \twocol­umn sec­tions. The mul­ti­col­umn en­vi­ron­ment can also be used in­side a box, thus al­low­ing mul­ti­columned in­sets in text. Mul­ti­col patches the out­put rou­tine, and may clash with other pack­ages that do the same (e.g., longtable); fur­ther­more, there is no pro­vi­sion for sin­gle col­umn floats in­side a mul­ti­col­umn en­vi­ron­ment, so fig­ures and ta­bles must be coded in-line (us­ing, for ex­am­ple, the H mod­i­fier of the float pack­age). The pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
+\RequirePackage{multicol}
+
+% Tune the output format of dates according to language. This pack­age pro­vides ten out­put for­mats of the com­mands \to­day, \print­date, \print­datε-TeX, and \dat­erange (partly lan­guage de­pen­dent). For­mats avail­able are: ISO (yyyy-mm-dd), nu­meric (e.g. dd.\,mm.~yyyy), short (e.g. dd.\,mm.\,yy), TeX (yyyy/mm/dd), orig­i­nal (e.g. dd. mmm yyyy), short orig­i­nal (e.g. dd. mmm yy), as well as nu­mer­i­cal for­mats with Ro­man nu­mer­als for the month. The com­mands \print­date and \print­datε-TeX print any date. The com­mand \dat­erange prints a date range and leaves out un­nec­es­sary year or month en­tries. This pack­age sup­ports Ger­man (old and new rules), Aus­trian, US English, Bri­tish English, French, Dan­ish, Swedish, and Nor­we­gian.
+\RequirePackage{isodate}
+
+% Extended UTF-8 input encoding support for LaTeX. The bun­dle pro­vides the ucs pack­age, and ut­f8x.def, to­gether with a large num­ber of sup­port files. The ut­f8x.def def­i­ni­tion file for use with in­pu­tenc cov­ers a wider range of Uni­code char­ac­ters than does utf8.def in the LaTeX dis­tri­bu­tion. The pack­age pro­vides fa­cil­i­ties for ef­fi­cient use of its large sets of Uni­code char­ac­ters. Glyph pro­duc­tion may be con­trolled by var­i­ous op­tions, which per­mits use of non-ASCII char­ac­ters when cod­ing math­e­mat­i­cal for­mu­lae. Note that the bun­dle pre­vi­ously had an alias “uni­code”; that alias has now been with­drawn, and no pack­age of that name now ex­ists.
+\RequirePackage{ucs}
+
+% Reference last page for Page N of M type footers. Ref­er­ence the num­ber of pages in your LaTeX doc­u­ment through the in­tro­duc­tion of a new la­bel which can be ref­er­enced like \pageref{LastPage} to give a ref­er­ence to the last page of a doc­u­ment. It is par­tic­u­larly use­ful in the page footer that says: Page N of M.
+\RequirePackage{lastpage}
+
+% EMPHasizing EQuations. The em­pheq pack­age is part of the math­tools bun­dle. The pack­age pro­vides a vi­sual markup ex­ten­sion to ams­math. The user-friendly in­ter­face al­lows the user to put a set of equa­tions in­side a box thus en­hanc­ing the \boxed fea­ture of ams­math. As a side ef­fect it's also pos­si­ble to add ma­te­rial on both sides of the equa­tions thus pro­vid­ing (and sur­pass­ing) the func­tion­al­ity of the cases pack­age. Users of nthe­o­rem will prob­a­bly want to have a look at it as well, since the prob­lem with end-of-the­o­rem marks in gather and other en­vi­ron­ments can be cir­cum­vented us­ing em­pheq.
+\RequirePackage{empheq}
+
+% Control layout of itemize, enumerate, description. This pack­age pro­vides user con­trol over the lay­out of the three ba­sic list en­vi­ron­ments: enu­mer­ate, item­ize and de­scrip­tion. It su­per­sedes both enu­mer­ate and md­wlist (pro­vid­ing well-struc­tured re­place­ments for all their fun­tion­al­ity), and in ad­di­tion pro­vides func­tions to com­pute the lay­out of la­bels, and to ‘clone’ the stan­dard en­vi­ron­ments, to cre­ate new en­vi­ron­ments with coun­ters of their own.
+\RequirePackage{enumitem}
+
+% Create glossaries and lists of acronyms. The glos­saries pack­age sup­ports acronyms and mul­ti­ple glos­saries, and has pro­vi­sion for op­er­a­tion in sev­eral lan­guages (us­ing the fa­cil­i­ties of ei­ther ba­bel or poly­glos­sia). New en­tries are de­fined to have a name and de­scrip­tion (and op­tion­ally an as­so­ci­ated sym­bol). Sup­port for mul­ti­ple lan­guages is of­fered, and plu­ral forms of terms may be spec­i­fied. An ad­di­tional pack­age, glos­saries-acc­supp, can make use of the acc­supp pack­age mech­a­nisms for ac­ces­si­bil­ity sup­port for PDF files con­tain­ing glos­saries. The user may de­fine new glos­sary styles, and pream­bles and postam­bles can be spec­i­fied. There is pro­vi­sion for load­ing a database of terms, but only terms used in the text will be added to the rel­e­vant glos­sary. The pack­age uses an in­dex­ing pro­gram to pro­vide the ac­tual glos­sary; ei­ther makein­dex or xindy may serve this pur­pose, and a Perl script is pro­vided to serve as in­ter­face. The pack­age dis­tri­bu­tion also pro­vides the mfirstuc pack­age, for chang­ing the first let­ter of a word to up­per case. The pack­age su­per­sedes the au­thor’s glos­sary pack­age (which is now ob­so­lete), and a con­ver­sion tool is pro­vided.
+\RequirePackage{glossaries}
+
+% Produce lists of symbols as in nomenclature. Pro­duces lists of sym­bols us­ing the ca­pa­bil­i­ties of the MakeIn­dex pro­gram.
+\RequirePackage{nomencl}
+
+% Typesetting theorems (AMS style). The pack­age fa­cil­i­tates the kind of the­o­rem setup typ­i­cally needed in Amer­i­can Math­e­mat­i­cal So­ci­ety pub­li­ca­tions. The pack­age of­fers the the­o­rem setup of the AMS doc­u­ment classes (am­sart, ams­book, etc.) en­cap­su­lated in LaTeX pack­age form so that it can be used with other doc­u­ment classes. Am­sthm is part of the (re­quired) AMS-LaTeX dis­tri­bu­tion, so should be present in any LaTeX dis­tri­bu­tion.
+\RequirePackage{amsthm}
+
+% A simple type of box for LaTeX. This small pack­age pro­vides a con­ve­nient in­put syn­tax for boxes that don't break their text over lines au­to­mat­i­cally, but do al­low man­ual line breaks. The boxes shrink to the nat­u­ral width of the longest line they con­tain
+\RequirePackage{minibox}
+
+% Generate English ordinal numbers. The com­mand \nth{<num­ber>} gen­er­ates English or­di­nal num­bers of the form 1st, 2nd, 3rd, 4th, etc. LaTeX pack­age op­tions may spec­ify that the or­di­nal mark be su­per­scripted, and that neg­a­tive num­bers may be treated; Plain TeX users have no ac­cess to pack­age op­tions, so need to re­de­fine macros for these changes.
+\RequirePackage[super]{nth}
+
+% Show label, ref, cite and bib keys. The showkeys pack­age mod­i­fies the \la­bel, \ref, \pageref, \cite and \bib­item com­mands so that the ‘in­ter­nal’ key is printed, with­out af­fect­ing the ap­pear­ance of the rest of the text, so far as is pos­si­ble (the keys typ­i­cally ap­pear in the mar­gin). The pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
+\RequirePackage{showkeys}
+
+% Expand acronyms at least once. This pack­age en­sures that all acronyms used in the text are spelled out in full at least once. It also pro­vides an en­vi­ron­ment to build a list of acronyms used. The pack­age is com­pat­i­ble with pdf book­marks. The pack­age re­quires the suf­fix pack­age, which in turn re­quires that it runs un­der e-TeX.
+\RequirePackage{acronym}
+
+% LaTeX’s built-in two-column code finishes off a document exactly where the text stops; this will typically leave an isolated left-hand column, or a right-hand column shorter than the left-hand one. This package modifies the LaTeX output routine to make the two columns as nearly of the same length as possible. 
+% Only used with two-column layout (or, in general, multicols)
+\RequirePackage{flushend}
+
+% The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; % for TeX4ht; and for VTeX’s pdf and HTML backends.
+% The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
+% The package depends on the author’s kvoptions, ltxcmdsand refcount packages.
+% A list of all options can be found at ftp://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/hyperref/doc/options.pdf
+\RequirePackage[
+    % Lesezeichen erzeugen
+    bookmarks=true,
+    % Lesezeichen ausgeklappt
+    bookmarksopen=false,
+    % Level bis zu welchen Bookmarks geofffnet sind
+    bookmarksopenlevel=1,
+    % Anzeige der Kapitelzahlen am Anfang der Namen der Lesezeichen
+    bookmarksnumbered=true,
+    % Seite, welche automatisch geoeffnet werden soll
+    % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
+    % werden soll oder eine Seite bearbeitet wird.
+    pdfstartpage=0,
+%   % Miniaturansicht nicht anzeigen
+    pdfpagemode=UseOutlines,
+    % Startansicht des PDF-Dokuments
+    pdfstartview=Fit,
+    % URL des PDF-Dokuments (oder Hintergrundinformationen)
+%   baseurl=,
+    % Titel des PDF-Dokuments
+    pdftitle={},
+    % Autor(Innen) des PDF-Dokuments
+    pdfauthor={},
+    % Inhaltsbeschreibung des PDF-Dokuments
+    pdfsubject={},
+    % Stichwortangabe zum PDF-Dokument
+    pdfkeywords={},
+    % Display document title instead of file name in title bar
+    pdfdisplaydoctitle=true,
+    % Setzt die StandardAnsicht fuer das Dokument auf
+    % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
+    % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
+    pdfpagelayout=TwoColumnRight,
+%   pdfhighlight=/N,
+    % ermoeglicht einen Umbruch von URLs
+    breaklinks=true,
+    % Einfaerbung von Links
+    colorlinks=true,
+    % Linkfarbe: rot
+    linkcolor=black,
+    % Ankerfarbe: rot
+    anchorcolor=black,
+    % Literaturlinks: rot
+    citecolor=black,
+    % Links zu lokalen Dateien: rot
+    filecolor=black,
+    % Acrobat Menueeintraege: rot
+    menucolor=black,
+    % Links zu anderen Seiten im Text: rot
+    pagecolor=black,
+    % URL-Farbe: rot
+    urlcolor=black,
+    % Use DVIPS background
+%   dvips,
+    % Put an anchor on every page
+    pageanchor,
+    % Use small caps instead of color for links
+%   frenchlinks=true,
+    % Document is in final version
+    final
+    ]{hyperref}
