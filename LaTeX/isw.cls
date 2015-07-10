@@ -6,7 +6,7 @@
 \typeout{  Thesis Style 2015, Version 0.1.0 }
 \typeout{}
 
-
+% Declare all conditional options
 \newif\if@english
 \newif\if@british
 \newif\if@german
@@ -16,8 +16,9 @@
 \newif\if@oneside
 \newif\if@printedAbstract
 \@printedAbstractfalse
+\newif\if@listings
+\newif\if@minted
 
-%\def\@thesistype{}
 \def\@thesistype{\@latex@error{No \noexpand\thesistype given}\@ehc}
 
 % Thesis type
@@ -46,6 +47,12 @@
 
 % Indentation
 \DeclareOption{neverindent}{\PassOptionsToPackage{\CurrentOption}{paxcommands}}
+
+% Code highlighting
+\DeclareOption{listings}{\@listingstrue\@mintedfalse}
+\DeclareOption{minted}{\@listingsfalse\@mintedtrue}
+\DeclareOption{codehighlight=listings}{\@listingstrue\@mintedfalse}
+\DeclareOption{codehighlight=minted}{\@listingsfalse\@mintedtrue}
 
 % Draft
 \DeclareOption{draft}{\@thesisdrafttrue}

@@ -35,7 +35,9 @@
 \RequirePackage[per-mode=symbol]{siunitx}
 
 % Typeset source code listings using LaTeX. The pack­age en­ables the user to type­set pro­grams (pro­gram­ming code) within LaTeX; the source code is read di­rectly by TeX—no front-end pro­ces­sor is needed. Key­words, com­ments and strings can be type­set us­ing dif­fer­ent styles (de­fault is bold for key­words, italic for com­ments and no spe­cial style for strings). Sup­port for hy­per­ref is pro­vided. To use, \usep­a­ck­age{list­ings}, iden­tify the lan­guage of the ob­ject to type­set, us­ing a con­struct like: \lst­set{lan­guage=Python}, then use en­vi­ron­ment lstlist­ing for in­line code. Ex­ter­nal files may be for­mat­ted us­ing \lstin­put­list­ing to pro­cess a given file in the form ap­pro­pri­ate for the cur­rent lan­guage. Short (in-line) list­ings are also avail­able, us­ing ei­ther \lstin­line|...| or |...| (af­ter defin­ing the | to­ken with the \lstMakeShortIn­line com­mand).
-%\RequirePackage{listings}
+\if@listings
+    \RequirePackage{listings}
+\fi
 
 % minted is a package that allows formatting source code in LATEX. For example:
 %\begin{minted}{<language>}
@@ -43,7 +45,9 @@
 %\end{minted}
 % will highlight a piece of code in a chosen language. The appearance can be customized with a number of options and color schemes.
 % ftp://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/minted/minted.pdf
-\RequirePackage[chapter]{minted}
+\if@minted
+    \RequirePackage[chapter]{minted}
+\fi
 
 % Enumerate and itemize within paragraphs. Pro­vides enu­mer­ate and item­ize en­vi­ron­ments that can be used within para­graphs to for­mat the items ei­ther as run­ning text or as sep­a­rate para­graphs with a pre­ced­ing num­ber or sym­bol. Also pro­vides com­pacted ver­sions of enu­mer­ate and item­ize.
 \RequirePackage{paralist}
@@ -169,11 +173,15 @@
 % Set the mode of hyperref to draft if the thesis is in draft mode
 \if@thesisdraft
     \PassOptionsToPackage{draft}{hyperref}
-    \PassOptionsToPackage{draft}{minted}
+    \if@minted
+        \PassOptionsToPackage{draft}{minted}
+    \fi
 % Otherwise set hyperref's internal mode to final
 \else
     \PassOptionsToPackage{final}{hyperref}
-    \PassOptionsToPackage{final}{minted}
+    \if@minted
+        \PassOptionsToPackage{final}{minted}
+    \fi
 \fi
 
 % Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
