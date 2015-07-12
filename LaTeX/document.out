@@ -1,5 +1,6 @@
 \BOOKMARK [0][-]{chapter*.2}{List of Figures}{}% 1
 \BOOKMARK [0][-]{chapter*.3}{List of Tables}{}% 2
-\BOOKMARK [0][-]{chapter.1}{1 The short title of the chapter showing up in the TOC and the page headers}{}% 3
-\BOOKMARK [1][-]{section.1.1}{1.1 A very first section}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.2}{1.2 Referencing}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.1}{1 The Short Title of the Chapter Showing Up in the TOC and the Page Headers}{}% 3
+\BOOKMARK [0][-]{chapter.2}{2 A Second Chapter}{}% 4
+\BOOKMARK [1][-]{section.2.1}{2.1 A First Section}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.2}{2.2 Referencing}{chapter.2}% 6

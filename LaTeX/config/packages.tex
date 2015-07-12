@@ -54,8 +54,8 @@
 \captionsetup[subfigure]{subrefformat=simple, labelformat=simple}
 
 
-% Marking things to do in a LaTeX document The pack­age lets the user mark things to do later, in a sim­ple and vi­su­ally ap­peal­ing way. The pack­age takes sev­eral op­tions to en­able cus­tomiza­tion/fine­tun­ing of the vi­sual ap­pear­ance.
-\RequirePackage{todonotes}
+% The pack­age lets the user mark things to do later, in a sim­ple and vi­su­ally ap­peal­ing way. The pack­age takes sev­eral op­tions to en­able cus­tomiza­tion/fine­tun­ing of the vi­sual ap­pear­ance.
+\RequirePackage[obeyFinal, colorinlistoftodos]{todonotes}
 
 % An extended version of TeX, from the NTS project An ex­tended ver­sion of TeX (which is ca­pa­ble of run­ning as if it were TeX un­mod­i­fied). E-TeX has been spec­i­fied by the LaTeX team as the en­gine for the de­vel­op­ment of LaTeX 2e, in the im­me­di­ate fu­ture; as a re­sult, LaTeX pro­gram­mers may (in all cur­rent TeX dis­tri­bu­tions) as­sume e-TeX func­tion­al­ity. Devel­op­ment ver­sions of e-TeX are to be found in the TeX live source repos­i­tory.
 \RequirePackage{etex}
@@ -104,6 +104,9 @@
 % LaTeX’s built-in two-column code finishes off a document exactly where the text stops; this will typically leave an isolated left-hand column, or a right-hand column shorter than the left-hand one. This package modifies the LaTeX output routine to make the two columns as nearly of the same length as possible. 
 % Only used with two-column layout (or, in general, multicols)
 \RequirePackage{flushend}
+
+% The bun­dle pro­vides a pack­age that im­ple­ments both au­thor-year and num­bered ref­er­ences, as well as much de­tailed of sup­port for other bib­li­og­ra­phy use. Also Pro­vided are ver­sions of the stan­dard BibTeX styles that are com­pat­i­ble with nat­bib—plain­nat, un­srt­nat, ab­br­nat. The bib­li­og­ra­phy styles pro­duced by cus­tom-bib are de­signed from the start to be com­pat­i­ble with nat­bib.
+\RequirePackage[square, comma, sort&compress, numbers]{natbib}
 
 % The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; % for TeX4ht; and for VTeX’s pdf and HTML backends.
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
@@ -159,6 +162,8 @@
     menucolor=red,
     % URL-Farbe: rot
     urlcolor=red,
+    % Alle links verstecken
+%    hidelinks=true,
     % Use DVIPS background
 %    dvips,
     % Put an anchor on every page
@@ -166,7 +171,27 @@
     % Use small caps instead of color for links
 %    frenchlinks=true,
 ]{hyperref}
-% Set the mode of hyperref to draft if the thesis is in draft mode
+
+
+% Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
+\RequirePackage[capitalise]{cleveref}
+
+% Set package specific options for the ngerman language
+\if@german
+    \PassOptionsToPackage{ngerman}{todonotes}
+\fi
+
+\if@english
+
+\fi
+
+\if@printOnline
+    \hypersetup{hidelinks=true}
+\else
+    \hypersetup{hidelinks=false}
+\fi
+
+% Set draft specific options
 \if@thesisdraft
     \PassOptionsToPackage{draft}{hyperref}
     \PassOptionsToPackage{draft}{minted}
@@ -174,7 +199,5 @@
 \else
     \PassOptionsToPackage{final}{hyperref}
     \PassOptionsToPackage{final}{minted}
+    \PassOptionsToPackage{disable}{todonotes}
 \fi
-
-% Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
-\RequirePackage[capitalise]{cleveref}

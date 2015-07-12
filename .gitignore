@@ -8,5 +8,7 @@
 *.synctex.gz
 *.toc
 *.log
+*.tdo
 *eps-converted-to.pdf
 _minted-document
+

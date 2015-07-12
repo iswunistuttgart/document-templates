@@ -16,6 +16,10 @@
 \newif\if@oneside
 \newif\if@printedAbstract
 \@printedAbstractfalse
+\newif\if@printOnline
+\newif\if@printPaper
+\@printOnlinefalse
+\@printPapertrue
 
 %\def\@thesistype{}
 \def\@thesistype{\@latex@error{No \noexpand\thesistype given}\@ehc}
@@ -35,7 +39,7 @@
 % Language
 \DeclareOption{english}{\@englishtrue\@britishfalse\@germanfalse}
 \DeclareOption{american}{\@englishtrue\@britishfalse\@germanfalse}
-\DeclareOption{british}{\@englishfalse\@britishtrue\@germanfalse}
+\DeclareOption{british}{\@englishtrue\@britishtrue\@germanfalse}
 \DeclareOption{german}{\@germantrue\@britishfalse\@englishfalse}
 \DeclareOption{ngerman}{\@germantrue\@britishfalse\@englishfalse}
 \DeclareOption{language=english}{\@englishtrue\@britishfalse\@germanfalse}
@@ -43,6 +47,10 @@
 \DeclareOption{language=british}{\@englishtrue\@britishtrue\@germanfalse}
 \DeclareOption{language=german}{\@germantrue\@britishfalse\@englishfalse}
 \DeclareOption{language=ngerman}{\@germantrue\@britishfalse\@englishfalse}
+
+% Print mode
+\DeclareOption{online}{\@printOnlinetrue\@printPaperfalse}
+\DeclareOption{paper}{\@printOnlinefalse\@printPapertrue}
 
 % Indentation
 \DeclareOption{neverindent}{\PassOptionsToPackage{\CurrentOption}{paxcommands}}
@@ -69,7 +77,7 @@
 \DeclareOption*{\ClassWarning{isw}{Unknown option '\CurrentOption'}}
 
 % Default options
-\ExecuteOptions{thesis=ba, language=english, paper=a4, twoside}
+\ExecuteOptions{thesis=ba,language=english,paper=a4,twoside}
 % And process all options
 \ProcessOptions\relax
 
@@ -93,13 +101,17 @@
     listof=totoc,			% 
     bibliography=totoc,		% 
     parskip=half,			% 
-    chapterprefix,			% 
+    chapterprefix=true,		%  
     numbers=noenddot,		% 
     open=right,				% 
     cleardoublepage=empty,  % Do not number empty pages 
     twoside=true,			% 
     captions=tableheading,	% 
     captions=nooneline,		% 
+    numbers=noendperiod,	% 
+    toc=bibliography,		% 
+%    toc=listof,				% 
+    version=last,			% 
 ]{scrbook}
 
 % Classic serif fonts for headlines
@@ -188,7 +200,7 @@
 \addto\captionsngerman{  % no blank linkes allowed!
     \def\@supervisorstring{Betreuer}
     \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-deutsch}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-deutsch}}
+    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-deutsch}}
     %\def\@majorpretextString{\vspace{2cm}im Studiengang}
     \def\@majorpretextString{\vspace{.5cm}Studiengang}
     \def\@submittedByString{vorgelegt von}
@@ -215,7 +227,7 @@
 \addto\captionsenglish{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
     \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
+    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
     \def\@majorpretextString{Graduate Program}
     \def\@submittedByString{by}
     \def\@cooperationString{in coorporation with}
@@ -258,7 +270,7 @@
 \addto\captionsamerican{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
     \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
+    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
     \def\@majorpretextString{Graduate Program}
     \def\@submittedByString{by}
     \def\@cooperationString{in coorporation with}
@@ -301,7 +313,7 @@
 \addto\captionsbritsh{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
     \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
-    %\def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
+    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
     \def\@majorpretextString{Graduate Program}
     \def\@submittedByString{by}
     \def\@cooperationString{in coorporation with}
@@ -507,6 +519,9 @@
         \cleardoublepage
     \fi
 }
+
+\RequirePackage{epstopdf}
+\RequirePackage{epsfig}
 
 \input{config/packages.tex}
 
