@@ -112,6 +112,14 @@
 % The bun­dle pro­vides a pack­age that im­ple­ments both au­thor-year and num­bered ref­er­ences, as well as much de­tailed of sup­port for other bib­li­og­ra­phy use. Also Pro­vided are ver­sions of the stan­dard BibTeX styles that are com­pat­i­ble with nat­bib—plain­nat, un­srt­nat, ab­br­nat. The bib­li­og­ra­phy styles pro­duced by cus­tom-bib are de­signed from the start to be com­pat­i­ble with nat­bib.
 \RequirePackage[square, comma, sort&compress, numbers]{natbib}
 
+% The package has a lot of flexibility, including an option for specifying an entry at the “natural” width of its text.
+% The package is distributed with the bigdelim and bigstrut packages, which can be used to advantage with \multirow cells.
+\RequirePackage{multirow}
+
+% The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
+% This package is part of the tools bundle in the LaTeX required distribution.
+\RequirePackage{dcolumn}
+
 % The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; % for TeX4ht; and for VTeX’s pdf and HTML backends.
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
 % The package depends on the author’s kvoptions, ltxcmdsand refcount packages.
@@ -212,3 +220,4 @@
 
 % Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
 \RequirePackage[capitalise]{cleveref}
+    

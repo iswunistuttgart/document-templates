@@ -9,6 +9,8 @@
 % Declare all conditional options
 \newif\if@english
 \@englishtrue
+\newif\if@american
+\@americantrue
 \newif\if@british
 \@britishfalse
 \newif\if@german
@@ -19,6 +21,8 @@
 \@dategivenfalse
 \newif\if@subtitle
 \@subtitlefalse
+\newif\if@matriculation
+\@matriculationfalse
 \newif\if@oneside
 \@onesidetrue
 \newif\if@printedAbstract
@@ -47,16 +51,16 @@
 \DeclareOption{thesis=phd}{\def\@thesistype{phd}}
 
 % Language
-\DeclareOption{english}{\@englishtrue\@britishfalse\@germanfalse}
-\DeclareOption{american}{\@englishtrue\@britishfalse\@germanfalse}
-\DeclareOption{british}{\@englishtrue\@britishtrue\@germanfalse}
-\DeclareOption{german}{\@germantrue\@britishfalse\@englishfalse}
-\DeclareOption{ngerman}{\@germantrue\@britishfalse\@englishfalse}
-\DeclareOption{language=english}{\@englishtrue\@britishfalse\@germanfalse}
-\DeclareOption{language=american}{\@englishtrue\@britishfalse\@germanfalse}
-\DeclareOption{language=british}{\@englishtrue\@britishtrue\@germanfalse}
-\DeclareOption{language=german}{\@germantrue\@britishfalse\@englishfalse}
-\DeclareOption{language=ngerman}{\@germantrue\@britishfalse\@englishfalse}
+\DeclareOption{english}{\@englishtrue\@americantrue\@britishfalse\@germanfalse}
+\DeclareOption{american}{\@englishtrue\@americantrue\@britishfalse\@germanfalse}
+\DeclareOption{british}{\@englishtrue\@americanfalse\@britishtrue\@germanfalse}
+\DeclareOption{german}{\@germantrue\@americanfalse\@britishfalse\@englishfalse}
+\DeclareOption{ngerman}{\@germantrue\@americanfalse\@britishfalse\@englishfalse}
+\DeclareOption{language=english}{\@englishtrue\@americantrue\@britishfalse\@germanfalse}
+\DeclareOption{language=american}{\@englishtrue\@americantrue\@britishfalse\@germanfalse}
+\DeclareOption{language=british}{\@englishtrue\@americanfalse\@britishtrue\@germanfalse}
+\DeclareOption{language=german}{\@germantrue\@americanfalse\@britishfalse\@englishfalse}
+\DeclareOption{language=ngerman}{\@germantrue\@americanfalse\@britishfalse\@englishfalse}
 
 % Print mode
 \DeclareOption{online}{\@printOnlinetrue\@printPaperfalse}
@@ -74,6 +78,7 @@
 % Draft
 \DeclareOption{draft}{\@thesisdrafttrue}
 \DeclareOption{thesisdraft}{\@thesisdrafttrue}
+\DeclareOption{final}{\@thesisdraftfalse}
 
 % Oneside or twoside printing
 \DeclareOption{oneside}{\PassOptionsToClass{open=any}{scrreprt}\@onesidetrue}
@@ -111,23 +116,23 @@
 
 % Load the komascript book class
 \LoadClass[
-    fontsize=12pt,			% 
-    DIV=13,					% 
-    BCOR=8mm,				% 
-    listof=totoc,			% 
-    bibliography=totoc,		% 
-    parskip=half,			% 
-    chapterprefix=true,		%  
-    numbers=noenddot,		% 
-    open=right,				% 
+    fontsize=12pt,          %  
+    DIV=13,                 % 
+    BCOR=8mm,               % 
+    listof=totoc,           % 
+    bibliography=totoc,     % 
+    parskip=half,           % 
+    chapterprefix=true,     %  
+    numbers=noenddot,       % 
+    open=right,             % 
     cleardoublepage=empty,  % Do not number empty pages 
-    twoside=true,			% 
-    captions=tableheading,	% 
-    captions=nooneline,		% 
-    numbers=noendperiod,	% 
-    toc=bibliography,		% 
-%    toc=listof,				% 
-    version=last,			% 
+    twoside=true,           % 
+    captions=tableheading,  % 
+    captions=nooneline,     % 
+    numbers=noendperiod,    % 
+    toc=bibliography,       % 
+%    toc=listof,            % 
+    version=last,           % 
 ]{scrbook}
 
 % Classic serif fonts for headlines
@@ -202,27 +207,28 @@
 % Default values
 \def\@titlestring{\@latex@warning@no@line{No \noexpand\title given}}
 \def\@authorstring{\@latex@warning@no@line{No \noexpand\author given}}
+\def\@matriculationstring{}
 \def\@majorstring{\@latex@warning@no@line{No \noexpand\major given}}
 \def\@examinerName{\@latex@warning@no@line{No \noexpand\examiner given}}
 \def\@dateString{}
 \def\@subtitlestring{}
 \def\@partnerstring{}
 \def\@partnerLogostring{}
-\def\@instituteNameString{}
-\def\@RightTopLogo{\hfill}
-\def\@LeftTopLogo{\hfill}
+\def\@departmentNameString{}
+\def\@LogoUniversity{\hfill}
+\def\@LogoDepartment{\hfill}
 
 
 \addto\captionsngerman{  % no blank linkes allowed!
     \def\@supervisorstring{Betreuer}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-deutsch}}
-    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-deutsch}}
-    %\def\@majorpretextString{\vspace{2cm}im Studiengang}
-    \def\@majorpretextString{\vspace{.5cm}Studiengang}
+    \def\@LogoUniversity{\includegraphics[height=1.5cm, keepaspectratio=true]{images/logo/uni-stuttgart-deutsch}}
+    \def\@LogoDepartment{\includegraphics[height=2cm, keepaspectratio=true]{images/logo/department-deutsch}}
+    \def\@majorpretextString{Studiengang}
     \def\@submittedByString{vorgelegt von}
+    \def\@submittedOnString{am}
     \def\@cooperationString{in Kooperation mit}
     \def\@examinerString{Pr\"ufer}
-    \def\@instituteNameString{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen, Universit\"at Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen, Universit\"at Stuttgart, Seidenstr.~36, 70174 Stuttgart}
     \def\@preliminaryVersionString{Vorl\"aufige Version}
     \def\@thesistypestring{%
         %\tmp is local
@@ -233,6 +239,25 @@
         \def\@tmp{ma}\ifx\@thesistype\@tmp Masterarbeit \fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp Dissertation\fi%
     }
+    \def\@pretextString{\normalsize Eine %
+        % check if diploma, master or student thesis
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelorprojekt\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Studien\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master\fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor\fi%
+        arbeit zur Vorlage an der Fakult\"at zur Erlagung\\
+        des akademischen Grades %
+        %
+        %\tmp is local
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+    }
     \def\@dateString{Datum}
     \if@dategiven\else
     \def\@date{\today}
@@ -242,15 +267,16 @@
 
 \addto\captionsenglish{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
-    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
+    \def\@LogoUniversity{\includegraphics[height=1.5cm, keepaspectratio=true]{images/logo/uni-stuttgart-english}}
+    \def\@LogoDepartment{\includegraphics[height=2cm, keepaspectratio=true]{images/logo/department-english}}
     \def\@majorpretextString{Graduate Program}
-    \def\@submittedByString{by}
+    \def\@submittedByString{presented by}
+    \def\@submittedOnString{on}
     \def\@cooperationString{in coorporation with}
     \def\@examinerString{Examiner}
-    \def\@instituteNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
     \def\@preliminaryVersionString{Draft}
-    \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
+    \def\@thesistypestring{
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
         \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's thesis\fi%
         \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student research project\fi%
@@ -270,13 +296,13 @@
         the requirements for the degree %
         %
         %\tmp is local
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science\fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur\fi%
-        \space in}
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        }
     \def\@dateString{Date}
     \if@dategiven\else
     \def\@date{\today}
@@ -285,13 +311,14 @@
 
 \addto\captionsamerican{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
-    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
+    \def\@LogoUniversity{\includegraphics[height=1.5cm, keepaspectratio=true]{images/logo/uni-stuttgart-english}}
+    \def\@LogoDepartment{\includegraphics[height=2cm, keepaspectratio=true]{images/logo/department-english}}
     \def\@majorpretextString{Graduate Program}
-    \def\@submittedByString{by}
+    \def\@submittedByString{presented by}
+    \def\@submittedOnString{on}
     \def\@cooperationString{in coorporation with}
     \def\@examinerString{Examiner}
-    \def\@instituteNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
     \def\@preliminaryVersionString{Draft}
     \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
@@ -313,13 +340,13 @@
         the requirements for the degree %
         %
         %\tmp is local
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science\fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur\fi%
-        \space in}
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        }
     \def\@dateString{Date}
     \if@dategiven\else
         \def\@date{\today}
@@ -328,13 +355,14 @@
 
 \addto\captionsbritsh{ % no blank linkes allowed!
     \def\@supervisorstring{Supervisor}
-    \def\@RightTopLogo{\includegraphics[height=1.1cm]{images/logo/uni-stuttgart-english}}
-    \def\@LeftTopLogo{\includegraphics[height=1.1cm]{images/logo/institut-english}}
+    \def\@LogoUniversity{\includegraphics[height=1.5cm, keepaspectratio=true]{images/logo/uni-stuttgart-english}}
+    \def\@LogoDepartment{\includegraphics[height=2cm, keepaspectratio=true]{images/logo/department-english}}
     \def\@majorpretextString{Graduate Program}
-    \def\@submittedByString{by}
+    \def\@submittedByString{presented by}
+    \def\@submittedOnString{on}
     \def\@cooperationString{in coorporation with}
     \def\@examinerString{Examiner}
-    \def\@instituteNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
     \def\@preliminaryVersionString{Draft}
     \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
@@ -356,16 +384,16 @@
         the requirements for the degree %
         %
         %\tmp is local
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science\fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur\fi%
-        \space in}
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor of Science (B.Sc.)\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+    }
     \def\@dateString{Date}
     \if@dategiven\else
-    \def\@date{\today}
+        \def\@date{\today}
     \fi
 }
 
@@ -406,6 +434,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\examiner#1{\def\@examinerName{#1}}
 \def\author#1{\def\@authorstring{#1}}
+\def\matriculation#1{\def\@matriculationstring{#1}\@matriculationtrue}
 \def\major#1{\def\@majorstring{#1}}
 \def\date#1{\def\@date{\iflanguage{english}{\isodate}{\numdate}\printdate{#1}}\@dategiventrue}
 %\def\date#1{\def\@date{\origdate\printdate{#1}}\@dategiventrue}
@@ -413,119 +442,119 @@
 \def\subtitle#1{\def\@subtitlestring{#1}\@subtitletrue}
 \def\partner#1{\def\@partnerstring{#1}\@partnertrue}
 \def\partnerLogo#1{\def\@partnerLogostring{#1}\@partnerlogotrue}
-\def\institutename#1{\def\@instituteNameString{#1}}
-\def\righttoplogo#1{\def\@RightTopLogo{#1}}
-\def\righttoplogoheight#1{\def\@RightTopLogoHeight{#1}}
-\def\lefttoplogo#1{\def\@LeftTopLogo{#1}}
-\def\lefttoplogoheight#1{\def\@LeftTopLogoHeight{#1}}
+\def\departmentname#1{\def\@departmentNameString{#1}}
+\def\LogoUniversity#1{\def\@LogoUniversity{#1}}
+\def\LogoUniversityheight#1{\def\@LogoUniversityHeight{#1}}
+\def\LogoDepartment#1{\def\@LogoDepartment{#1}}
+\def\LogoDepartmentheight#1{\def\@LogoDepartmentHeight{#1}}
 
 
 %
-% MAKETITLE FOR ISYS SA/DA Thesis
+% MAKETITLE FOR ISW THESES
 %
 \def\maketitle{
-    \def\categoryfont{\sffamily\itshape\small}
-    \thispagestyle{empty}	
+    \def\categoryfont{\sffamily\itshape}
+    \thispagestyle{empty}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{titlepage}%
-        \raggedright
-        %
-        %
-        % Grafiken am Kopf der Seite
-        \vspace*{-1.8cm}
         \begin{center}
-            \hspace*{-0.6cm}
-            \begin{minipage}{7.8cm}
-                \begin{flushleft}
-                    \@LeftTopLogo
-                \end{flushleft}
-            \end{minipage}\hfill 
-            \begin{minipage}{7.5cm}
-                \begin{flushright}
-                    \@RightTopLogo
-                \end{flushright}
-            \end{minipage}  	
-            \hspace*{-1.5cm}
-        \end{center}
-        
-        % Art der Arbeit bzw. allg. Vorspann mit Abschluss in Englisch
-        \vspace{1.7cm}
-        \if@subtitle\else % Zusatz
-            \vspace{0.4cm}
-        \fi
-        {\categoryfont\Large\@thesistypestring}\par
-        \vspace{0.4cm}
-        % Titel und Untertitel
-        %\vspace{0.8cm}
-        \begingroup
-        \LARGE\bfseries\@titlestring\hfill\par
-        \endgroup
-        \if@subtitle
-            \vspace{0.4cm}
-            {\large\bfseries\@subtitlestring}\par
-        \else
+            \@LogoUniversity
+            
+            % Type of thesis
             \vspace{1cm}
-        \fi
-        % Vorlaeufige Version / Draft
-        \if@thesisdraft
-            \begin{center}
-                \categoryfont\Large
+            {\categoryfont\Large\@thesistypestring} \par
+            \vspace{0.4cm}
+            % Title
+            \begingroup
+                \LARGE\bfseries\@titlestring\hfill \par
+            \endgroup
+            % Subtitle
+            \vspace{0.4cm}
+            \large\bfseries
+            \if@subtitle
+                \@subtitlestring \par
+            \else
+                \vspace{\baselineskip}\vspace{\parskip}
+            \fi
+            \normalsize\normalfont \par
+            
+            % Vorlaeufige Version / Draft
+            \categoryfont\Huge \par
+            \if@thesisdraft
                 \@preliminaryVersionString
-            \end{center}
-        \else
-            \vspace{0.5cm}
-        \fi
-        % Art der Arbeit bzw. allg. Vorspann mit Abschluss in Englisch
-        % Autor
-        \vspace{.8cm}{\normalsize\categoryfont\@submittedByString}\\
-        \normalsize\@authorstring\mdseries\par\normalsize
-        
-        \vfill
-        
-%        % Partner
-%        \if@partner
-%            \vspace{.5cm}
-%            \begingroup
-%                \normalsize{\categoryfont\@cooperationString}\strut\\
-%                \if@partnerlogo
-%                    \begin{tabular}[c]{@{}l}
-%                        \@partnerLogostring
-%                    \end{tabular}
-%                \fi
-%                \begingroup
-%                    \normalsize
-%                    \begin{tabular}[c]{@{}l@{}}
-%                        \@partnerstring
-%                    \end{tabular}\par
-%                \endgroup
-%            \endgroup
-%        \fi
-%        \vfill
-        
-        % Studiengang
-        {\normalsize\categoryfont\@majorpretextString}\\
-        {\@majorstring}\par
-        \vspace{0.3cm}
-        % Supervisor Block	
-        \begingroup
-        % Examiner
-        \normalsize{\categoryfont\@examinerString}\\
-        \@examinerName \par
-        \vspace{0.3cm}
-        % Supervisor
-        \normalsize{\categoryfont\@supervisorstring}\\
-        \@supervisorstringA\@supervisorstringB\@supervisorstringC\@supervisorstringD\par
-        \endgroup
-        
-        
-        % Datum
-        \vspace{1.1cm}
-        \normalsize
-        {\categoryfont\@dateString}\\
-        \@date\par
-        \vspace{.7cm}
-        % Institut
-        \begin{center}\small\@instituteNameString\end{center}
+            \else
+                \vspace{\baselineskip}\vspace{\parskip}
+            \fi
+            \normalsize\normalfont \par
+            
+            \vspace{0.5\baselineskip}
+            
+            \@submittedByString
+            
+            \vspace{0.5\baselineskip}
+            
+            % Author and matriculation number
+            \begingroup
+                % Author
+                {\sffamily\itshape\Large\@authorstring\mdseries \par}
+                \normalsize\normalfont \par
+                
+                % Matriculation number
+                \large\mdseries \par
+                \if@matriculation
+                    \@matriculationstring
+                \else
+                    \vspace{\baselineskip}\vspace{\parskip}
+                \fi
+            \endgroup%
+            \normalsize\normalfont\par
+            %
+            % Datum
+            \@submittedOnString
+            
+            \vspace{0.5\baselineskip}
+            %
+            {\large\@date} \par
+            \normalsize\normalfont \par
+            %
+            \vfill
+            %
+            \@pretextString
+            %
+            \vfill%
+            %
+            \begin{minipage}[t]{0.5\linewidth}
+                \flushleft
+                % Supervisor Block
+                % Examiner
+                {\footnotesize\categoryfont\@examinerString}\\
+                {\normalsize\@examinerName} \par
+                \vspace{0.3cm}
+                % Supervisor
+                {\footnotesize\categoryfont\@supervisorstring}\\
+                \@supervisorstringA\@supervisorstringB\@supervisorstringC\@supervisorstringD \par
+            \end{minipage}%
+            %
+            \begin{minipage}[t]{0.5\linewidth}
+                \flushright
+                % Graduate Programme
+                {\footnotesize\categoryfont\@majorpretextString}\\
+                \@majorstring \par
+            \end{minipage}%
+            
+            \vfill
+            %
+            \begin{minipage}[c]{0.8\linewidth}
+                \begin{flushleft}
+                    \small\@departmentNameString
+                \end{flushleft}
+            \end{minipage}%
+            \begin{minipage}[c]{0.2\linewidth}
+                \begin{flushright}
+                    \@LogoDepartment
+                \end{flushright}
+            \end{minipage}
+        \end{center}
         \vspace*{-2.5cm}
     \end{titlepage}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -535,6 +564,37 @@
         \cleardoublepage
     \fi
 }
+
+\RequirePackage{fncychap}
+% Code for my fancy chapters.
+\makeatletter
+\ChNameVar{\normalfont\Large\scshape} % sets the style for name
+\ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
+\ChTitleVar{\normalfont\Huge\scshape\color{black}\raggedleft}
+\renewcommand{\DOCH}{%
+    \setlength{\fboxrule}{\RW}
+    \makebox[\linewidth][r]{
+        \rotatebox{90}{
+            \makebox[2cm][l]{
+                \resizebox{2.5cm}{!}{ %\fboxsep=6pt
+                    \CNV\FmN{\space\@chapapp}
+                }
+            }
+        }
+        \resizebox{!}{2.5cm}{\fboxsep=6pt
+            \CNoV\colorbox{black!40}{\thechapter}
+        }
+    }%
+    \par\nobreak
+    \vskip 0\p@
+}
+\renewcommand{\DOTI}[1]{%
+    \CTV\FmTi{#1}\par\nobreak
+    \vskip 40\p@}
+\renewcommand{\DOTIS}[1]{%
+    \CTV\FmTi{#1}\par\nobreak
+    \vskip 40\p@}
+\makeatother
 
 \RequirePackage{epstopdf}
 \RequirePackage{epsfig}
