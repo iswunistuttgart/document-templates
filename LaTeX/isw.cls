@@ -260,7 +260,7 @@
     \def\@submittedOnString{on}
     \def\@cooperationString{in coorporation with}
     \def\@examinerString{Examiner}
-    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart, Germany}
     \def\@preliminaryVersionString{Draft}
     \def\@thesistypestring{
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
@@ -304,7 +304,7 @@
     \def\@submittedOnString{on}
     \def\@cooperationString{in coorporation with}
     \def\@examinerString{Examiner}
-    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart, Germany}
     \def\@preliminaryVersionString{Draft}
     \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
@@ -348,7 +348,7 @@
     \def\@submittedOnString{on}
     \def\@cooperationString{in coorporation with}
     \def\@examinerString{Examiner}
-    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart}
+    \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart, Germany}
     \def\@preliminaryVersionString{Draft}
     \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
