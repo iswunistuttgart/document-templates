@@ -54,8 +54,34 @@
 
 % The cap­tion pack­age pro­vides many ways to cus­tomise the cap­tions in float­ing en­vi­ron­ments like fig­ure and ta­ble, and co­op­er­ates with many other pack­ages. Fa­cil­i­ties in­clude ro­tat­ing cap­tions, side­ways cap­tions, con­tin­ued cap­tions (for ta­bles or fig­ures that come in sev­eral parts). A list of com­pat­i­bil­ity notes, for other pack­ages, is pro­vided in the doc­u­men­ta­tion. The pack­age also pro­vides the “cap­tion out­side float” fa­cil­ity, in the same way that sim­pler pack­ages like capt-of do. The pack­age su­per­sedes cap­tion2.
 \RequirePackage{caption}
-\captionsetup{labelsep=space, justification=justified, singlelinecheck=off, format=hang}
-\captionsetup[subfigure]{subrefformat=simple, labelformat=simple}
+%%% Setup captions of all floats (figures and captions)
+\captionsetup{
+    format=hang,
+    labelsep=colon,
+    textformat=simple,
+    justification=RaggedRight,
+    singlelinecheck=on,
+    font={},
+    labelfont={footnotesize, sc},
+    textfont={sl},
+}
+%%% Setup captions of tables
+\captionsetup[table]{
+    position=above
+}
+%%% Setup captions of figures
+\captionsetup[figure]{
+    position=below
+}
+
+% The package provides a means of using facilities analagous to those of the caption package, when writing captions for subfigures and the like.
+% The package is distributed with caption.
+\RequirePackage{subcaption}
+%%% Setup captions of subfigures
+\captionsetup[subfigure]{
+    subrefformat=simple,
+    labelformat=parens,
+}
 
 
 % The pack­age lets the user mark things to do later, in a sim­ple and vi­su­ally ap­peal­ing way. The pack­age takes sev­eral op­tions to en­able cus­tomiza­tion/fine­tun­ing of the vi­sual ap­pear­ance.
@@ -119,6 +145,8 @@
 % The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
 % This package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{dcolumn}
+
+\RequirePackage{nomencl}
 
 % The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; % for TeX4ht; and for VTeX’s pdf and HTML backends.
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
@@ -184,13 +212,14 @@
 %    frenchlinks=true,
 ]{hyperref}
 
-
 % Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
 \RequirePackage[capitalise]{cleveref}
 
+\RequirePackage{glossaries}
+
 % Set package specific options for the ngerman language
 \if@german
-    \PassOptionsToPackage{ngerman}{todonotes}
+\PassOptionsToPackage{ngerman}{todonotes}
 \fi
 
 \if@english
@@ -199,16 +228,14 @@
 
 \if@printOnline
     \hypersetup{hidelinks=true}
-\else
-    \hypersetup{hidelinks=false}
 \fi
 
 % Set draft specific options
 \if@thesisdraft
     \PassOptionsToPackage{draft}{hyperref}
-    \if@minted
-        \PassOptionsToPackage{draft}{minted}
-    \fi
+\if@minted
+    \PassOptionsToPackage{draft}{minted}
+\fi
 % Otherwise set hyperref's internal mode to final
 \else
     \PassOptionsToPackage{final}{hyperref}
@@ -217,7 +244,3 @@
     \fi
     \PassOptionsToPackage{disable}{todonotes}
 \fi
-
-% Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
-\RequirePackage[capitalise]{cleveref}
-    

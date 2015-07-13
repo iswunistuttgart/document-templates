@@ -7,34 +7,20 @@
 \typeout{}
 
 % Declare all conditional options
-\newif\if@english
-\@englishtrue
-\newif\if@american
-\@americantrue
-\newif\if@british
-\@britishfalse
-\newif\if@german
-\@germanfalse
-\newif\if@thesisdraft
-\@thesisdrafttrue
-\newif\if@dategiven
-\@dategivenfalse
-\newif\if@subtitle
-\@subtitlefalse
-\newif\if@matriculation
-\@matriculationfalse
-\newif\if@oneside
-\@onesidetrue
-\newif\if@printedAbstract
-\@printedAbstractfalse
-\newif\if@listings
-\@listingsfalse
-\newif\if@minted
-\@mintedfalse
-\newif\if@printOnline
-\@printOnlinefalse
-\newif\if@printPaper
-\@printPapertrue
+\newif\if@english\@englishtrue
+\newif\if@american\@americantrue
+\newif\if@british\@britishfalse
+\newif\if@german\@germanfalse
+\newif\if@thesisdraft\@thesisdrafttrue
+\newif\if@dategiven\@dategivenfalse
+\newif\if@subtitle\@subtitlefalse
+\newif\if@matriculation\@matriculationfalse
+\newif\if@oneside\@onesidetrue
+\newif\if@printedAbstract\@printedAbstractfalse
+\newif\if@listings\@listingsfalse
+\newif\if@minted\@mintedfalse
+\newif\if@printOnline\@printOnlinefalse
+\newif\if@printPaper\@printPapertrue
 
 \def\@thesistype{\@latex@error{No \noexpand\thesistype given}\@ehc}
 
@@ -596,9 +582,7 @@
     \vskip 40\p@}
 \makeatother
 
-\RequirePackage{epstopdf}
-\RequirePackage{epsfig}
-
+% Input all the packages that this class provides (keeps this file's lines less)
 \input{config/packages.tex}
 
 %\newtheorem{thm}{Theorem}[section]

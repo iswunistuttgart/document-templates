@@ -8,11 +8,11 @@
     final,
 ]{isw}
 
-\listfiles
+%\usepackage{showframe}
 
+\input{demo/header.tex}
 
-\setcounter{errorcontextlines}{999}
-
+%% Fill in your thesis' data here
 \title{This shall be a great thesis paper with an extremely long title but who cares}
 \subtitle{Some theses even have subtitles}
 \author{Philipp Tempel}
@@ -22,12 +22,16 @@
 \supervisor{Dipl.-Ing.~Philipp Tempel}
 %\matriculation{2411697}
 
+% And done with the configuration you are!
+
 \usepackage{lipsum}
 
 \begin{document}
     \maketitle
     
-    \begin{otherlanguage}{ngerman}\maketitle \end{otherlanguage}
+    \begin{otherlanguage}{ngerman}
+        \maketitle
+    \end{otherlanguage}
     
     \tableofcontents
     
@@ -51,14 +55,112 @@
     
     \subparagraph{A Sample Subparagraph}
     
+    \chapter{The Main Template}
+    
+    \section{Document Structure}
+    
+    Basically you are free in organizing your document, however, it is recommended that a certain order of chapters is always obeyed to which is
+    
+    \begin{enumerate}
+        \item Table of Contents
+        \item List of Figures
+        \item List of Tables
+        \item List of Abbreviations
+        \item List of Symbols (math symbols and alike)
+        \item List of Abbreviations (textual abbreviations like e.g., CDPR)
+    \end{enumerate}
+    
     \begin{figure}
         \centering
-        \includegraphics[width=\linewidth, keepaspectratio=true]{placeholder/14942249547_f7f1d3e8bd_k}
-        \caption{A sample figure to show the effect of a loooong looooong caption. Credits by \url{https://www.flickr.com/photos/schubi74/14942249547/}.}
+        \includegraphics[width=\linewidth, keepaspectratio=true]{placeholder/800-600-1}
+        \caption{A sample figure of the New York Hotel at Las Vegas, NV, USA showing the effect of a loooong looooong caption.}
         \label{fig:sample-figure}
     \end{figure}
     
-%    \begin{listing}
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth, keepaspectratio]{placeholder/640-480-1}
+            \caption{Picture 1}
+            \label{fig:subfigures-two:1}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth, keepaspectratio]{placeholder/640-480-2}
+            \caption{Picture 2}
+            \label{fig:subfigures-two:2}
+        \end{subfigure}
+        
+        \caption{Even subfigures of two figures are possible}
+        \label{fig:subfigures-2}
+    \end{figure}
+    
+    \begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-1}
+            \caption{Picture 1}
+            \label{fig:subfigures-four:1}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-2}
+            \caption{Picture 2}
+            \label{fig:subfigures-four:2}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-3}
+            \caption{Picture 3}
+            \label{fig:subfigures-four:3}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.49\textwidth}
+            \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-4}
+            \caption{Picture 4}
+            \label{fig:subfigures-four:4}
+        \end{subfigure}
+        
+        \caption{Even subfigures of four figures are possible}
+        \label{fig:subfigures-2}
+    \end{figure}
+    
+    \begin{table}
+        \centering
+        \caption{A sample table}
+        \label{tbl:sample-table}
+        \begin{tabular}{@{}llr@{}} \toprule
+            \multicolumn{2}{c}{Item} \\ \cmidrule(r){1-2}
+            Animal & Description & Price (\$)\\ \midrule
+            Gnat  & per gram  & 13.65 \\
+            & each      & 0.01 \\
+            Gnu   & stuffed   & 92.50 \\
+            Emu   & stuffed   & 33.33 \\
+            Armadillo & frozen & 8.99 \\ \bottomrule
+        \end{tabular}
+    \end{table}
+    
+    \begin{table}
+        \centering
+        \caption{Tables can look nice, even for many many data to display}
+        \label{tbl:sample-table-large}
+        \begin{tabular}{SSSSSSSS} \toprule
+            {$m$} & {$\Re\{\underline{\mathfrak{X}}(m)\}$} & {$-\Im\{\underline{\mathfrak{X}}(m)\}$} & {$\mathfrak{X}(m)$} & {$\frac{\mathfrak{X}(m)}{23}$} & {$A_m$} & {$\varphi(m)\ /\ ^{\circ}$} & {$\varphi_m\ /\ ^{\circ}$} \\ \midrule
+            1  & 16.128 & +8.872 & 16.128 & 1.402 & 1.373 & -146.6 & -137.6 \\
+            2  & 3.442  & -2.509 & 3.442  & 0.299 & 0.343 & 133.2  & 152.4  \\
+            3  & 1.826  & -0.363 & 1.826  & 0.159 & 0.119 & 168.5  & -161.1 \\
+            4  & 0.993  & -0.429 & 0.993  & 0.086 & 0.08  & 25.6   & 90     \\ \midrule
+            5  & 1.29   & +0.099 & 1.29   & 0.112 & 0.097 & -175.6 & -114.7 \\
+            6  & 0.483  & -0.183 & 0.483  & 0.042 & 0.063 & 22.3   & 122.5  \\
+            7  & 0.766  & -0.475 & 0.766  & 0.067 & 0.039 & 141.6  & -122   \\
+            8  & 0.624  & +0.365 & 0.624  & 0.054 & 0.04  & -35.7  & 90     \\ \midrule
+            9  & 0.641  & -0.466 & 0.641  & 0.056 & 0.045 & 133.3  & -106.3 \\
+            10 & 0.45   & +0.421 & 0.45   & 0.039 & 0.034 & -69.4  & 110.9  \\
+            11 & 0.598  & -0.597 & 0.598  & 0.052 & 0.025 & 92.3   & -109.3 \\ \bottomrule
+        \end{tabular}
+    \end{table}
+    
+%    \begin{lstlisting}
 %        \begin{minted}{latex}
 %\begin{figure}
 %    \centering
@@ -71,7 +173,7 @@
 %        \end{minted}
 %        \caption{Sample code for \cref{fig:sample-figure}}
 %        \label{lst:sample-code}
-%    \end{listing}
+%    \end{lstlisting}
     
     For figures the guidelines are:
     \begin{itemize}
