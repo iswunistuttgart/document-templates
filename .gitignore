@@ -9,5 +9,7 @@
 *.toc
 *.log
 *.out
+*.tdo
 *eps-converted-to.pdf
 _minted-document
+
