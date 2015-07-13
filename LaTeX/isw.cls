@@ -119,7 +119,8 @@
     toc=bibliography,       % 
 %    toc=listof,            % 
     version=last,           % 
-]{scrbook}
+    abstract=on,            % 
+]{scrreprt}
 
 % Classic serif fonts for headlines
 \addtokomafont{sectioning}{\rmfamily}
@@ -146,6 +147,12 @@
 
 % At the beginning of the document...
 \AtBeginDocument{
+    \hypersetup{
+        pdfauthor={\@authorstring},
+        pdftitle={\@titlestring},
+        pdfsubject={\@pretextString},
+        pdfkeywords={},
+    }
     % Select the proper language
     \if@german
         \selectlanguage{ngerman}
@@ -158,7 +165,7 @@
     \fi
     %\cleardoubleemptypage
     %\setcounter{page}{1}
-    %\pagenumbering{Roman}
+    \pagenumbering{Roman}
     \pagenumbering{arabic}
     \pagestyle{scrheadings}
     \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}} 
@@ -203,8 +210,10 @@
 \def\@departmentNameString{}
 \def\@LogoUniversity{\hfill}
 \def\@LogoDepartment{\hfill}
+\def\@dedicationname{Dedication}
+\def\@keywordsString{Keywords}
 
-
+% Add German specific language code
 \addto\captionsngerman{  % no blank linkes allowed!
     \def\@supervisorstring{Betreuer}
     \def\@LogoUniversity{\includegraphics[height=1.5cm, keepaspectratio=true]{images/logo/uni-stuttgart-deutsch}}
@@ -229,11 +238,10 @@
         % check if diploma, master or student thesis
         \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelorprojekt\fi%
         \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Studien\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom\fi%
         \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor\fi%
-        arbeit zur Vorlage an der Fakult\"at zur Erlagung\\
+        arbeit zur Vorlage an der Fakult\"at zur Erlangung\\
         des akademischen Grades %
         %
         %\tmp is local
@@ -246,9 +254,11 @@
     }
     \def\@dateString{Datum}
     \if@dategiven\else
-    \def\@date{\today}
+        \def\@date{\today}
     \fi
-    \renewcommand{\abstractname}{Kurzfassung}
+    \def\@keywordsString{Schlagworte}
+    \renewcommand{\abstractname}{Zusammenfassung}
+    \def\@dedicationname{Widmung}
 }
 
 \addto\captionsenglish{ % no blank linkes allowed!
@@ -293,6 +303,7 @@
     \if@dategiven\else
     \def\@date{\today}
     \fi
+    \renewcommand{\abstractname}{Abstract}
 }
 
 \addto\captionsamerican{ % no blank linkes allowed!
@@ -337,6 +348,7 @@
     \if@dategiven\else
         \def\@date{\today}
     \fi
+    \renewcommand{\abstractname}{Abstract}
 }
 
 \addto\captionsbritsh{ % no blank linkes allowed!
@@ -381,6 +393,7 @@
     \if@dategiven\else
         \def\@date{\today}
     \fi
+    \renewcommand{\abstractname}{Abstract}
 }
 
 % Supervisors
@@ -388,7 +401,6 @@
 \def\@supervisorstringB{}
 \def\@supervisorstringC{}
 \def\@supervisorstringD{}
-
 \newcounter{@supervisors}
 \setcounter{@supervisors}{0}
 \def\supervisor#1{\stepcounter{@supervisors}%
@@ -435,13 +447,12 @@
 \def\LogoDepartmentheight#1{\def\@LogoDepartmentHeight{#1}}
 
 
-%
+%%%%%%%%%%
 % MAKETITLE FOR ISW THESES
-%
+%%%%%%%%%%
 \def\maketitle{
     \def\categoryfont{\sffamily\itshape}
     \thispagestyle{empty}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{titlepage}%
         \begin{center}
             \@LogoUniversity
@@ -543,7 +554,6 @@
         \end{center}
         \vspace*{-2.5cm}
     \end{titlepage}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \if@oneside
         \clearpage
     \else
@@ -551,8 +561,67 @@
     \fi
 }
 
+%%%%%%%%%%
+% Abstract of the thesis
+%%%%%%%%%%
+\newenvironment{thesis-abstract}{%
+    \chapter*{\abstractname}
+    \addcontentsline{toc}{chapter}{\abstractname}
+%    \vspace{\baselineskip}\vspace{\parskip}
+    \begin{RaggedRight}
+}{%
+\end{RaggedRight}
+\if@oneside
+    \clearpage
+\else
+    \cleardoublepage
+\fi
+}
+
+%%%%%%%%%%
+% Dedication environment
+%%%%%%%%%%
+\renewenvironment{dedication}{%
+    \chapter*{\@dedicationname}
+%    \vspace{\baselineskip}\vspace{\parskip}
+    \begin{RaggedRight}
+}{%
+\end{RaggedRight}
+\if@oneside
+    \clearpage
+\else
+    \cleardoublepage
+\fi
+}
+
+%%%%%%%%%%
+% Command to set front matter specific things
+%%%%%%%%%%
+\newcommand{\frontmatter}{%
+    \if@oneside
+        \clearpage
+    \else
+        \cleardoublepage
+    \fi
+    \pagenumbering{Roman}
+}
+
+%%%%%%%%%%
+% Command to set main matter specific things
+%%%%%%%%%%
+\newcommand{\mainmatter}{%
+    \if@oneside
+        \clearpage
+    \else
+        \cleardoublepage
+    \fi
+    \pagenumbering{arabic}
+}
+
+%%%%%%%%%%
+% Code for fancy chapters heading
+%%%%%%%%%%
 \RequirePackage{fncychap}
-% Code for my fancy chapters.
 \makeatletter
 \ChNameVar{\normalfont\Large\scshape} % sets the style for name
 \ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
@@ -584,10 +653,5 @@
 
 % Input all the packages that this class provides (keeps this file's lines less)
 \input{config/packages.tex}
-
-%\newtheorem{thm}{Theorem}[section]
-%\newtheorem{cor}[thm]{Corollar}
-%\newtheorem{lem}[thm]{Lemma}
-%\newtheorem{def}[thm]{Definition}
 
 \endinput

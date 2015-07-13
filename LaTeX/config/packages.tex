@@ -17,8 +17,15 @@
 % The bm package defines a command \bm which makes its argument bold. The argument may be any maths object from a single symbol to an expression. This is closely related to the specification of the \boldsymbol command in AMS-LaTeX, but \bm is rather more careful in the way it does things. 
 \RequirePackage{bm}
 
+% The pack­age is in­tended for set­ting rich text into ti­tling cap­i­tals (in which the first char­ac­ter of words are cap­i­tal­ized). It au­to­mat­i­cally ac­counts for di­a­crit­i­cal marks (like um­lauts), na­tional sym­bols (like “ae”), punc­tu­a­tion, and font chang­ing com­mands that al­ter the ap­pear­ance or size of the text. It al­lows a list of pre­des­ig­nated words to be pro­tected as lower-cased, and also al­lows for ti­tling ex­cep­tions of var­i­ous sorts.
+\RequirePackage{titlecaps}
+\Addlcwords{the,a,an,and,but,for,or,nor,to,}
+
 % The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
 \RequirePackage{booktabs}
+
+% The pack­age de­fines new com­mands \Cen­ter­ing, \RaggedLeft, and \RaggedRight and new en­vi­ron­ments Cen­ter, FlushLeft, and FlushRight, which set ragged text and are eas­ily con­fig­urable to al­low hy­phen­ation (the cor­re­spond­ing com­mands in LaTeX, all of whose names are lower-case, pre­vent hy­phen­ation al­to­gether).
+\RequirePackage{ragged2e}
 
 % The pack­age starts from the ba­sic fa­cil­i­ties of the color pack­age, and pro­vides easy driver-in­de­pen­dent ac­cess to sev­eral kinds of color tints, shades, tones, and mixes of ar­bi­trary col­ors. It al­lows a user to se­lect a doc­u­ment-wide tar­get color model and of­fers com­plete tools for con­ver­sion be­tween eight color mod­els. Ad­di­tion­ally, there is a com­mand for al­ter­nat­ing row col­ors plus re­peated non-aligned ma­te­rial (like hor­i­zon­tal lines) in ta­bles. Colors can be mixed like \color{red!30!green!40!blue}.
 \RequirePackage{xcolor}
@@ -83,6 +90,8 @@
     labelformat=parens,
 }
 
+% The ap­pendix pack­age pro­vides var­i­ous ways of for­mat­ting the ti­tles of ap­pen­dices. Also (sub)ap­pen­dices en­vi­ron­ments are pro­vided that can be used, for ex­am­ple, for per chap­ter/sec­tion ap­pen­dices. The word ‘Ap­pendix’ or sim­i­lar can be prepended to the ap­pendix num­ber for ar­ti­cle class doc­u­ments. The word ‘Ap­pen­dices’ or sim­i­lar can be added to the ta­ble of con­tents be­fore the ap­pen­dices are listed. The word ‘Ap­pen­dices’ or sim­i­lar can be type­set as a \part-like head­ing (page) in the body. An ap­pen­dices en­vi­ron­ment is pro­vided which can be used in­stead of the \ap­pendix com­mand.
+\RequirePackage[toc, page]{appendix}
 
 % The pack­age lets the user mark things to do later, in a sim­ple and vi­su­ally ap­peal­ing way. The pack­age takes sev­eral op­tions to en­able cus­tomiza­tion/fine­tun­ing of the vi­sual ap­pear­ance.
 \RequirePackage[obeyFinal, colorinlistoftodos]{todonotes}
