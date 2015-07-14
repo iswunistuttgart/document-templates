@@ -304,6 +304,7 @@
     \def\@date{\today}
     \fi
     \renewcommand{\abstractname}{Abstract}
+    \def\@dedicationname{Dedication}
 }
 
 \addto\captionsamerican{ % no blank linkes allowed!
@@ -349,6 +350,7 @@
         \def\@date{\today}
     \fi
     \renewcommand{\abstractname}{Abstract}
+    \def\@dedicationname{Dedication}
 }
 
 \addto\captionsbritsh{ % no blank linkes allowed!
@@ -394,6 +396,7 @@
         \def\@date{\today}
     \fi
     \renewcommand{\abstractname}{Abstract}
+    \def\@dedicationname{Dedication}
 }
 
 % Supervisors
@@ -424,7 +427,7 @@
     \fi
     \ifnum\value{@supervisors}=5
         \@latex@warning@no@line{Too many supervisors ...}
-    \fi   
+    \fi
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
