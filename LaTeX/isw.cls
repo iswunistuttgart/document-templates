@@ -51,6 +51,8 @@
 % Print mode
 \DeclareOption{online}{\@printOnlinetrue\@printPaperfalse}
 \DeclareOption{paper}{\@printOnlinefalse\@printPapertrue}
+\DeclareOption{docmode=online}{\@printOnlinetrue\@printPaperfalse}
+\DeclareOption{docmode=paper}{\@printOnlinefalse\@printPapertrue}
 
 % Indentation
 \DeclareOption{neverindent}{\PassOptionsToPackage{\CurrentOption}{paxcommands}}
@@ -84,7 +86,7 @@
 \DeclareOption*{\ClassWarning{isw}{Unknown option '\CurrentOption'}}
 
 % Default options
-\ExecuteOptions{thesis=ba,language=english,paper=a4,twoside}
+\ExecuteOptions{thesis=ba,language=english,paper=a4,twoside,draft}
 % And process all options
 \ProcessOptions\relax
 
@@ -656,5 +658,7 @@
 
 % Input all the packages that this class provides (keeps this file's lines less)
 \input{config/packages.tex}
+\input{config/commands.tex}
+\input{config/colors.tex}
 
 \endinput

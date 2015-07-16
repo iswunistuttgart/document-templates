@@ -2,6 +2,12 @@
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{images/}}
 
+% The pack­age de­fines com­mands that switch ac­cord­ing to the pre­vail­ing ‘draft’ or ‘fi­nal’ op­tions; each com­mand takes two ar­gu­ments, the first for the ‘true’, the sec­ond for the ‘false’ case. Com­mands are:
+%   \if­draft de­ter­mines whether we're op­er­at­ing in draft (‘true’) or fi­nal mode;
+%   \ifop­tion­draft de­ter­mines whether a ‘draft’ op­tion has been given; and
+%   \ifop­tion­fi­nal de­ter­mines whether a ‘fi­nal’ op­tion has been given.
+\RequirePackage{ifdraft}
+
 % Im­proves the in­ter­face for defin­ing float­ing ob­jects such as fig­ures and ta­bles. In­tro­duces the boxed float, the ruled float and the plain­top float. You can de­fine your own floats and im­prove the be­haviour of the old ones. The pack­age also pro­vides the H float mod­i­fier op­tion of the ob­so­lete here pack­age. You can se­lect this as au­to­matic de­fault with \float­place­ment{fig­ure}{H}.
 \RequirePackage{float}
 
@@ -24,11 +30,27 @@
 % The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
 \RequirePackage{booktabs}
 
+% Intermix single and multiple columns. Mul­ti­col de­fines a mul­ti­cols en­vi­ron­ment which type­sets text in mul­ti­ple columns (up to a max­i­mum of 10), and (by de­fault) bal­ances the end of each col­umn at the end of the en­vi­ron­ment. The pack­age en­ables you to switch be­tween any (per­mit­ted) num­ber of columns at will: there is no im­posed "clear page" op­er­a­tion, as there is in un­adorned LaTeX at a switch be­tween \onecol­umn and \twocol­umn sec­tions. The mul­ti­col­umn en­vi­ron­ment can also be used in­side a box, thus al­low­ing mul­ti­columned in­sets in text. Mul­ti­col patches the out­put rou­tine, and may clash with other pack­ages that do the same (e.g., longtable); fur­ther­more, there is no pro­vi­sion for sin­gle col­umn floats in­side a mul­ti­col­umn en­vi­ron­ment, so fig­ures and ta­bles must be coded in-line (us­ing, for ex­am­ple, the H mod­i­fier of the float pack­age). The pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
+\RequirePackage{multicol}
+
 % The pack­age de­fines new com­mands \Cen­ter­ing, \RaggedLeft, and \RaggedRight and new en­vi­ron­ments Cen­ter, FlushLeft, and FlushRight, which set ragged text and are eas­ily con­fig­urable to al­low hy­phen­ation (the cor­re­spond­ing com­mands in LaTeX, all of whose names are lower-case, pre­vent hy­phen­ation al­to­gether).
 \RequirePackage{ragged2e}
 
+% Longtable al­lows you to write ta­bles that con­tinue to the next page. You can write cap­tions within the ta­ble (typ­i­cally at the start of the ta­ble), and head­ers and trail­ers for pages of ta­ble. Longtable ar­ranges that the columns on suc­ces­sive pages have the same widths. This last con­trasts with the su­per­fi­cially sim­i­lar su­pertab­u­lar pack­age.
+% Longtable (un­like su­pertab­u­lar) mod­i­fies the out­put rou­tine, and con­se­quently won't work in a mul­ti­col­umn en­vi­ron­ment (or in other cir­cum­stances where the out­put rou­tine has been crit­i­cally al­tered); it also fails in twocol­umn pages.
+% This pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
+\RequirePackage{longtable}
+
+% The pack­age al­lows rows and columns to be coloured, and even in­di­vid­ual cells.
+\RequirePackage{colortbl}
+
 % The pack­age starts from the ba­sic fa­cil­i­ties of the color pack­age, and pro­vides easy driver-in­de­pen­dent ac­cess to sev­eral kinds of color tints, shades, tones, and mixes of ar­bi­trary col­ors. It al­lows a user to se­lect a doc­u­ment-wide tar­get color model and of­fers com­plete tools for con­ver­sion be­tween eight color mod­els. Ad­di­tion­ally, there is a com­mand for al­ter­nat­ing row col­ors plus re­peated non-aligned ma­te­rial (like hor­i­zon­tal lines) in ta­bles. Colors can be mixed like \color{red!30!green!40!blue}.
-\RequirePackage{xcolor}
+\RequirePackage[
+    dvipsnames,     % 
+    svgnames,       % 
+    table,          % 
+    hyperref,       % 
+]{xcolor}
 % Defines the 16 colors from Ethan Schoonover's Solarized palette
 \RequirePackage{xcolor-solarized}
 
@@ -99,9 +121,6 @@
 % An extended version of TeX, from the NTS project An ex­tended ver­sion of TeX (which is ca­pa­ble of run­ning as if it were TeX un­mod­i­fied). E-TeX has been spec­i­fied by the LaTeX team as the en­gine for the de­vel­op­ment of LaTeX 2e, in the im­me­di­ate fu­ture; as a re­sult, LaTeX pro­gram­mers may (in all cur­rent TeX dis­tri­bu­tions) as­sume e-TeX func­tion­al­ity. Devel­op­ment ver­sions of e-TeX are to be found in the TeX live source repos­i­tory.
 \RequirePackage{etex}
 
-% Intermix single and multiple columns. Mul­ti­col de­fines a mul­ti­cols en­vi­ron­ment which type­sets text in mul­ti­ple columns (up to a max­i­mum of 10), and (by de­fault) bal­ances the end of each col­umn at the end of the en­vi­ron­ment. The pack­age en­ables you to switch be­tween any (per­mit­ted) num­ber of columns at will: there is no im­posed "clear page" op­er­a­tion, as there is in un­adorned LaTeX at a switch be­tween \onecol­umn and \twocol­umn sec­tions. The mul­ti­col­umn en­vi­ron­ment can also be used in­side a box, thus al­low­ing mul­ti­columned in­sets in text. Mul­ti­col patches the out­put rou­tine, and may clash with other pack­ages that do the same (e.g., longtable); fur­ther­more, there is no pro­vi­sion for sin­gle col­umn floats in­side a mul­ti­col­umn en­vi­ron­ment, so fig­ures and ta­bles must be coded in-line (us­ing, for ex­am­ple, the H mod­i­fier of the float pack­age). The pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
-\RequirePackage{multicol}
-
 % Tune the output format of dates according to language. This pack­age pro­vides ten out­put for­mats of the com­mands \to­day, \print­date, \print­datε-TeX, and \dat­erange (partly lan­guage de­pen­dent). For­mats avail­able are: ISO (yyyy-mm-dd), nu­meric (e.g. dd.\,mm.~yyyy), short (e.g. dd.\,mm.\,yy), TeX (yyyy/mm/dd), orig­i­nal (e.g. dd. mmm yyyy), short orig­i­nal (e.g. dd. mmm yy), as well as nu­mer­i­cal for­mats with Ro­man nu­mer­als for the month. The com­mands \print­date and \print­datε-TeX print any date. The com­mand \dat­erange prints a date range and leaves out un­nec­es­sary year or month en­tries. This pack­age sup­ports Ger­man (old and new rules), Aus­trian, US English, Bri­tish English, French, Dan­ish, Swedish, and Nor­we­gian.
 \RequirePackage{isodate}
 
@@ -117,12 +136,6 @@
 % Control layout of itemize, enumerate, description. This pack­age pro­vides user con­trol over the lay­out of the three ba­sic list en­vi­ron­ments: enu­mer­ate, item­ize and de­scrip­tion. It su­per­sedes both enu­mer­ate and md­wlist (pro­vid­ing well-struc­tured re­place­ments for all their fun­tion­al­ity), and in ad­di­tion pro­vides func­tions to com­pute the lay­out of la­bels, and to ‘clone’ the stan­dard en­vi­ron­ments, to cre­ate new en­vi­ron­ments with coun­ters of their own.
 \RequirePackage{enumitem}
 
-% Create glossaries and lists of acronyms. The glos­saries pack­age sup­ports acronyms and mul­ti­ple glos­saries, and has pro­vi­sion for op­er­a­tion in sev­eral lan­guages (us­ing the fa­cil­i­ties of ei­ther ba­bel or poly­glos­sia). New en­tries are de­fined to have a name and de­scrip­tion (and op­tion­ally an as­so­ci­ated sym­bol). Sup­port for mul­ti­ple lan­guages is of­fered, and plu­ral forms of terms may be spec­i­fied. An ad­di­tional pack­age, glos­saries-acc­supp, can make use of the acc­supp pack­age mech­a­nisms for ac­ces­si­bil­ity sup­port for PDF files con­tain­ing glos­saries. The user may de­fine new glos­sary styles, and pream­bles and postam­bles can be spec­i­fied. There is pro­vi­sion for load­ing a database of terms, but only terms used in the text will be added to the rel­e­vant glos­sary. The pack­age uses an in­dex­ing pro­gram to pro­vide the ac­tual glos­sary; ei­ther makein­dex or xindy may serve this pur­pose, and a Perl script is pro­vided to serve as in­ter­face. The pack­age dis­tri­bu­tion also pro­vides the mfirstuc pack­age, for chang­ing the first let­ter of a word to up­per case. The pack­age su­per­sedes the au­thor’s glos­sary pack­age (which is now ob­so­lete), and a con­ver­sion tool is pro­vided.
-\RequirePackage{glossaries}
-
-% Produce lists of symbols as in nomenclature. Pro­duces lists of sym­bols us­ing the ca­pa­bil­i­ties of the MakeIn­dex pro­gram.
-\RequirePackage{nomencl}
-
 % Typesetting theorems (AMS style). The pack­age fa­cil­i­tates the kind of the­o­rem setup typ­i­cally needed in Amer­i­can Math­e­mat­i­cal So­ci­ety pub­li­ca­tions. The pack­age of­fers the the­o­rem setup of the AMS doc­u­ment classes (am­sart, ams­book, etc.) en­cap­su­lated in LaTeX pack­age form so that it can be used with other doc­u­ment classes. Am­sthm is part of the (re­quired) AMS-LaTeX dis­tri­bu­tion, so should be present in any LaTeX dis­tri­bu­tion.
 \RequirePackage{amsthm}
 
@@ -133,9 +146,7 @@
 \RequirePackage[super]{nth}
 
 % Show label, ref, cite and bib keys. The showkeys pack­age mod­i­fies the \la­bel, \ref, \pageref, \cite and \bib­item com­mands so that the ‘in­ter­nal’ key is printed, with­out af­fect­ing the ap­pear­ance of the rest of the text, so far as is pos­si­ble (the keys typ­i­cally ap­pear in the mar­gin). The pack­age is part of the tools bun­dle in the LaTeX re­quired dis­tri­bu­tion.
-\if@thesisdraft
-    \RequirePackage{showkeys}
-\fi
+\ifdraft{\RequirePackage{showkeys}}{}
 
 % Expand acronyms at least once. This pack­age en­sures that all acronyms used in the text are spelled out in full at least once. It also pro­vides an en­vi­ron­ment to build a list of acronyms used. The pack­age is com­pat­i­ble with pdf book­marks. The pack­age re­quires the suf­fix pack­age, which in turn re­quires that it runs un­der e-TeX.
 \RequirePackage{acronym}
@@ -154,8 +165,6 @@
 % The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
 % This package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{dcolumn}
-
-\RequirePackage{nomencl}
 
 % The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; % for TeX4ht; and for VTeX’s pdf and HTML backends.
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
@@ -198,21 +207,19 @@
     % ermoeglicht einen Umbruch von URLs
     breaklinks=true,
     % Einfaerbung von Links
-    colorlinks=false,
+    colorlinks=true,
     % Linkfarbe: rot
-    linkcolor=red,
+    linkcolor=linkcolorLink,
     % Ankerfarbe: rot
-    anchorcolor=red,
+    anchorcolor=linkcolorAnchor,
     % Literaturlinks: rot
-    citecolor=red,
+    citecolor=linkcolorCite,
     % Links zu lokalen Dateien: rot
-    filecolor=red,
+    filecolor=linkcolorFile,
     % Acrobat Menueeintraege: rot
-    menucolor=red,
+    menucolor=linkcolorMenu,
     % URL-Farbe: rot
-    urlcolor=red,
-    % Alle links verstecken
-%    hidelinks=true,
+    urlcolor=linkcolorUrl,
     % Use DVIPS background
 %    dvips,
     % Put an anchor on every page
@@ -224,32 +231,33 @@
 % Intelligent cross-referencing. The pack­age en­hances LaTeX's cross-ref­er­enc­ing fea­tures, al­low­ing the for­mat of ref­er­ences to be de­ter­mined au­to­mat­i­cally ac­cord­ing to the type of ref­er­ence. The for­mats used may be cus­tomised in the pream­ble of a doc­u­ment; ba­bel sup­port is avail­able (though the choice of lan­guages re­mains lim­ited: cur­rently Dan­ish, Dutch, English, French, Ger­man, Ital­ian, Nor­we­gian, Rus­sian, Span­ish and Ukra­nian). The pack­age also of­fers a means of ref­er­enc­ing a list of ref­er­ences, each for­mat­ted ac­cord­ing to its type. In such lists, it can col­lapse se­quences of nu­mer­i­cally-con­sec­u­tive la­bels to a ref­er­ence range.
 \RequirePackage[capitalise]{cleveref}
 
+% Create glossaries and lists of acronyms. The glos­saries pack­age sup­ports acronyms and mul­ti­ple glos­saries, and has pro­vi­sion for op­er­a­tion in sev­eral lan­guages (us­ing the fa­cil­i­ties of ei­ther ba­bel or poly­glos­sia). New en­tries are de­fined to have a name and de­scrip­tion (and op­tion­ally an as­so­ci­ated sym­bol). Sup­port for mul­ti­ple lan­guages is of­fered, and plu­ral forms of terms may be spec­i­fied. An ad­di­tional pack­age, glos­saries-acc­supp, can make use of the acc­supp pack­age mech­a­nisms for ac­ces­si­bil­ity sup­port for PDF files con­tain­ing glos­saries. The user may de­fine new glos­sary styles, and pream­bles and postam­bles can be spec­i­fied. There is pro­vi­sion for load­ing a database of terms, but only terms used in the text will be added to the rel­e­vant glos­sary. The pack­age uses an in­dex­ing pro­gram to pro­vide the ac­tual glos­sary; ei­ther makein­dex or xindy may serve this pur­pose, and a Perl script is pro­vided to serve as in­ter­face. The pack­age dis­tri­bu­tion also pro­vides the mfirstuc pack­age, for chang­ing the first let­ter of a word to up­per case. The pack­age su­per­sedes the au­thor’s glos­sary pack­age (which is now ob­so­lete), and a con­ver­sion tool is pro­vided.
 \RequirePackage{glossaries}
 
 % Set package specific options for the ngerman language
 \if@german
-\PassOptionsToPackage{ngerman}{todonotes}
+    \PassOptionsToPackage{ngerman}{todonotes}
 \fi
 
-\if@english
-
-\fi
-
-\if@printOnline
-    \hypersetup{hidelinks=true}
-\fi
+%\if@english
+%
+%\fi
 
 % Set draft specific options
-\if@thesisdraft
-    \PassOptionsToPackage{draft}{hyperref}
-\if@minted
-    \PassOptionsToPackage{draft}{minted}
-\fi
-% Otherwise set hyperref's internal mode to final
-\else
-    \PassOptionsToPackage{final}{hyperref}
+\ifdraft{
+    \AtBeginDocument{
+        \PassOptionsToPackage{draft}{hyperref}
+    }
+    \if@minted
+        \PassOptionsToPackage{draft}{minted}
+    \fi
+} % Otherwise set hyperref's internal mode to final
+{
+    \AtBeginDocument{
+        \PassOptionsToPackage{final}{hyperref}
+    }
     \if@minted
         \PassOptionsToPackage{final}{minted}
     \fi
     \PassOptionsToPackage{disable}{todonotes}
-\fi
+}
