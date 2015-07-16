@@ -12,4 +12,21 @@
 *.tdo
 *eps-converted-to.pdf
 _minted-document
+*.acn
+*.aux
+*.auxglg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.out
+*.toc
 
+*.xdy
