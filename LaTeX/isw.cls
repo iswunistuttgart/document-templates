@@ -29,12 +29,14 @@
 \DeclareOption{diplom}{{\def\@thesistype{da}}}
 \DeclareOption{master}{\def\@thesistype{ma}}
 \DeclareOption{doctorate}{\def\@thesistype{phd}}
+\DeclareOption{milestonereport}{\def\@thesistype{mire}}
 \DeclareOption{thesis=bpa}{\def\@thesistype{bpa}}
 \DeclareOption{thesis=ba}{\def\@thesistype{ba}}
-\DeclareOption{thesis=sa}{\def\@t\defhesistype{sa}}
+\DeclareOption{thesis=sa}{\def\@thesistype{sa}}
 \DeclareOption{thesis=da}{\def\@thesistype{da}}
 \DeclareOption{thesis=ma}{\def\@thesistype{ma}}
 \DeclareOption{thesis=phd}{\def\@thesistype{phd}}
+\DeclareOption{thesis=milestonereport}{\def\@thesistype{mire}}
 
 % Language
 \DeclareOption{english}{\@englishtrue\@americantrue\@britishfalse\@germanfalse}
@@ -197,6 +199,7 @@
     \def\@tmp{da} \ifx\@thesistype\@tmp \typeout{Thesis is Diploma Thesis} \fi
     \def\@tmp{ma} \ifx\@thesistype\@tmp \typeout{Thesis is Master's Thesis} \fi
     \def\@tmp{phd} \ifx\@thesistype\@tmp \typeout{Thesis is PhD Thesis} \fi
+    \def\@tmp{mire} \ifx\@thesistype\@tmp \typeout{Thesis is Milestone Report} \fi
 }
 
 % Default values
@@ -235,15 +238,17 @@
         \def\@tmp{da}\ifx\@thesistype\@tmp Diplomarbeit\fi%
         \def\@tmp{ma}\ifx\@thesistype\@tmp Masterarbeit \fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp Dissertation\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp Milestonebericht\fi%
     }
-    \def\@pretextString{\normalsize Eine %
+    \def\@pretextString{\normalsize Ein%
         % check if diploma, master or student thesis
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelorprojekt\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Diplom\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master\fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor\fi%
-        arbeit zur Vorlage an der Fakult\"at zur Erlangung\\
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}e Bachelorprojektarbeit \fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}e Bachelorarbeit \fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}e Diplomarbeit \fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}e Masterarbeit \fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}e Doktorarbeit \fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{} Meilensteinbericht \fi%
+        zur Vorlage an der Fakult\"at zur Erlangung\\
         des akademischen Grades %
         %
         %\tmp is local
@@ -253,6 +258,8 @@
         \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
         \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        .
     }
     \def\@dateString{Datum}
     \if@dategiven\else
@@ -275,22 +282,24 @@
     \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart, Germany}
     \def\@preliminaryVersionString{Draft}
     \def\@thesistypestring{
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's thesis\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student research project\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diploma thesis\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master's thesis\fi%
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's Project Thesis\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's Thesis\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student Research Project\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diploma Thesis\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master's Thesis\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doctoral Thesis\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Milestone Report\fi%
         \space}
     \def\@pretextString{\normalsize A %
         % check if diploma, master or student thesis
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}bachelor's project \fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}bachelor's \fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}student \fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}diploma \fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}master's \fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}doctoral \fi%
-        thesis presented to the faculty in partial fulfillment of \\
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}bachelor's project thesis \fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}bachelor's thesis \fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}student thesis \fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}diploma thesis \fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}master's thesis \fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}doctoral thesis \fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}milestone report \fi%
+        presented to the faculty in partial fulfillment of \\
         the requirements for the degree %
         %
         %\tmp is local
@@ -300,6 +309,8 @@
         \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
         \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        .
         }
     \def\@dateString{Date}
     \if@dategiven\else
@@ -320,23 +331,25 @@
     \def\@examinerString{Examiner}
     \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart, Germany}
     \def\@preliminaryVersionString{Draft}
-    \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's thesis\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student research project\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diploma thesis\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master's thesis\fi%
+    \def\@thesistypestring{
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's Project Thesis\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's Thesis\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student Research Project\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diploma Thesis\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master's Thesis\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doctoral Thesis\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Milestone Report\fi%
         \space}
     \def\@pretextString{\normalsize A %
         % check if diploma, master or student thesis
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}bachelor's project \fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}bachelor's \fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}student \fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}diploma \fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}master's \fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}doctoral \fi%
-        thesis presented to the faculty in partial fulfillment of \\
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}bachelor's project thesis \fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}bachelor's thesis \fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}student thesis \fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}diploma thesis \fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}master's thesis \fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}doctoral thesis \fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}milestone report \fi%
+        presented to the faculty in partial fulfillment of \\
         the requirements for the degree %
         %
         %\tmp is local
@@ -346,7 +359,9 @@
         \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
         \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
-        }
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        .
+    }
     \def\@dateString{Date}
     \if@dategiven\else
         \def\@date{\today}
@@ -366,23 +381,25 @@
     \def\@examinerString{Examiner}
     \def\@departmentNameString{Institute for Control Engineering of Machine Tools and Manufacturing Units, University of Stuttgart, Seidenstr.~36, 70174 Stuttgart, Germany}
     \def\@preliminaryVersionString{Draft}
-    \def\@thesistypestring{\def\@tmp{sa}\ifx\@thesistype\@tmp{}Student thesis\fi%
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's project thesis\fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's thesis\fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student research project\fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diploma thesis\fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master's thesis\fi%
+    \def\@thesistypestring{
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}Bachelor's Project Thesis\fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}Bachelor's Thesis\fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}Student Research Project\fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}Diploma Thesis\fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master's Thesis\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doctoral Thesis\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Milestone Report\fi%
         \space}
     \def\@pretextString{\normalsize A %
         % check if diploma, master or student thesis
-        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}bachelor's project \fi%
-        \def\@tmp{ba}\ifx\@thesistype\@tmp{}bachelor's \fi%
-        \def\@tmp{sa}\ifx\@thesistype\@tmp{}student \fi%
-        \def\@tmp{da}\ifx\@thesistype\@tmp{}diploma \fi%
-        \def\@tmp{ma}\ifx\@thesistype\@tmp{}master's \fi%
-        \def\@tmp{phd}\ifx\@thesistype\@tmp{}doctoral \fi%
-        thesis presented to the faculty in partial fulfillment of \\
+        \def\@tmp{bpa}\ifx\@thesistype\@tmp{}bachelor's project thesis \fi%
+        \def\@tmp{ba}\ifx\@thesistype\@tmp{}bachelor's thesis \fi%
+        \def\@tmp{sa}\ifx\@thesistype\@tmp{}student thesis \fi%
+        \def\@tmp{da}\ifx\@thesistype\@tmp{}diploma thesis \fi%
+        \def\@tmp{ma}\ifx\@thesistype\@tmp{}master's thesis \fi%
+        \def\@tmp{phd}\ifx\@thesistype\@tmp{}doctoral thesis \fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}milestone report \fi%
+        presented to the faculty in partial fulfillment of \\
         the requirements for the degree %
         %
         %\tmp is local
@@ -392,6 +409,8 @@
         \def\@tmp{da}\ifx\@thesistype\@tmp{}Diplom-Ingenieur (Dipl.-Ing.)\fi%
         \def\@tmp{ma}\ifx\@thesistype\@tmp{}Master of Science (M.Sc.)\fi%
         \def\@tmp{phd}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        \def\@tmp{mire}\ifx\@thesistype\@tmp{}Doktor-Ingenieur (Dr.-Ing.)\fi%
+        .
     }
     \def\@dateString{Date}
     \if@dategiven\else
