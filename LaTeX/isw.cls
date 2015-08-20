@@ -132,6 +132,8 @@
 
 % Chapter have empty head
 \renewcommand*{\chapterpagestyle}{plain}
+% Depth of number of sections down to subsubsection
+\setcounter{secnumdepth}{3}
 
 % Default pagestyle for begin
 \pagestyle{empty}
