@@ -1,0 +1,23 @@
+\usepackage{xparse}
+
+% Usage
+% \norm{a_i} renders || a_i ||_2 
+% \norm[1]{a_i} renders || a_i ||_1
+%\NewDocumentCommand\norm{mg}{%
+%    \ensuremath{\Vert {#1} \Vert_{\IfNoValueTF{#2}{2}{#2}}}%
+%}
+
+\newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{#1}}}
+
+% Usage
+% \pow{x} renders x^2
+% \pow[3]{x} renders x^3
+%\NewDocumentCommand\pow{mg}{%
+%    \ensuremath{{#1}^{\IfNoValueTF{#2}{2}{#2}}}%
+%}
+\newcommand{\pow}[2][2]{\ensuremath{{#2}^{#1}}}
+
+\newcommand{\abs}[1]{\ensuremath{\vert {#1} \vert}}
+
+\newcommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
+\newcommand{\registered}[1]{#1\textsuperscript{\textregistered}}
