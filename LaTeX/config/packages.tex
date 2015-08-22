@@ -106,9 +106,11 @@
 % The package provides a means of using facilities analagous to those of the caption package, when writing captions for subfigures and the like.
 % The package is distributed with caption.
 \RequirePackage{subcaption}
+\captionsetup{
+    subrefformat=simple,
+}
 %%% Setup captions of subfigures
 \captionsetup[subfigure]{
-    subrefformat=simple,
     labelformat=parens,
 }
 
