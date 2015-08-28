@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isw}[2015/07/10 ISW LaTeX Class]
+\ProvidesClass{isw}[2015/08/28 ISW LaTeX Class]
 
 \typeout{}
 \typeout{  ISW - Institute for Control Engineering of Machine Tools and Manufacturing Units, University Stuttgart}
@@ -21,6 +21,7 @@
 \newif\if@minted\@mintedfalse
 \newif\if@printOnline\@printOnlinefalse
 \newif\if@printPaper\@printPapertrue
+\newif\if@partnerlogo\@partnerlogofalse
 
 \def\@thesistype{\@latex@error{No \noexpand\thesistype given}\@ehc}
 
@@ -71,6 +72,8 @@
 \DeclareOption{final}{\@thesisdraftfalse}
 
 % Oneside or twoside printing
+\PassOptionsToClass{open=right}{scrreprt}
+\PassOptionsToClass{twoside=true}{scrreprt}
 \DeclareOption{oneside}{\PassOptionsToClass{open=any}{scrreprt}\@onesidetrue}
 \DeclareOption{twoside}{\PassOptionsToClass{open=right}{scrreprt}\@onesidefalse}
 
@@ -92,6 +95,8 @@
 % And process all options
 \ProcessOptions\relax
 
+\RequirePackage{etex}
+
 % Standard packages
 \RequirePackage{graphicx}
 \RequirePackage[american,british,ngerman]{babel}
@@ -108,15 +113,15 @@
 \LoadClass[
     fontsize=12pt,          %  
     DIV=13,                 % 
-    BCOR=8mm,               % 
+    BCOR=12mm,              % 
     listof=totoc,           % 
     bibliography=totoc,     % 
     parskip=half,           % 
     chapterprefix=true,     %  
     numbers=noenddot,       % 
-    open=right,             % 
+%    open=right,             % 
     cleardoublepage=empty,  % Do not number empty pages 
-    twoside=true,           % 
+%    twoside=true,           % 
     captions=tableheading,  % 
     captions=nooneline,     % 
     numbers=noendperiod,    % 
@@ -132,14 +137,15 @@
 
 % Chapter have empty head
 \renewcommand*{\chapterpagestyle}{plain}
-% Depth of number of sections down to subsubsection
+
+% Add numbers before (level given in braces) chapter (0), section (1), subsection (2), and subsection (3)
 \setcounter{secnumdepth}{3}
 
 % Default pagestyle for begin
 \pagestyle{empty}
 
 % Include only sections (since we are working with chapters and sections) in table of contents
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 
 % Start of main Body
 \newcommand{\mainMatter}{
@@ -481,7 +487,18 @@
     \thispagestyle{empty}
     \begin{titlepage}%
         \begin{center}
-            \@LogoUniversity
+            \begin{minipage}[b]{0.495\linewidth}
+                \if@partnerlogo%
+                \raggedright%
+                \fi%
+                \@LogoUniversity
+            \end{minipage}
+            \if@partnerlogo
+                \begin{minipage}[b]{0.495\linewidth}
+                    \raggedleft%
+                    \@partnerLogostring
+                \end{minipage}
+            \fi
             
             % Type of thesis
             \vspace{1cm}
@@ -681,5 +698,8 @@
 \input{config/packages.tex}
 \input{config/commands.tex}
 \input{config/colors.tex}
+
+% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
+\RequirePackage{scrhack}
 
 \endinput
