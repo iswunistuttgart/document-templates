@@ -1,23 +1,32 @@
-\documentclass[%
-    thesis=ma, %
-    language=american, %
-    paper=a4,%
-    listings,
-%    draft,
-%    final,
-]{isw}
+\documentclass[online,a4paper,thesisdraft]{isw}
+
+\renewcommand{\universitylogo}{images/logo/uni-stuttgart}
+\renewcommand{\partnerlogo}{images/logo/simtech}
 
 %% Fill in your thesis' data here
 % @todo Make sure that capitalized words will appear capitalized in the final document, too
+\title{This Shall be a Great Thesis Paper}
+\title{This Shall be a Great Thesis Paper with an Extremely Long Title but who}
 \title{This Shall be a Great Thesis Paper with an Extremely Long Title but who Cares}
 \subtitle{Some theses even have subtitles}
-\author{Student Brauer}
+\date{2015-07-28}
+\author{Maschinen Bauer}
 \matriculation{1234567}
 \examiner{Jun.-Prof.~Dr.-Ing.~Andreas Pott}
 \major{Technische Kybernetik}
-\supervisor{Dipl.-Ing.~Philipp Tempel}
+\supervisor{Dipl.-Ing.~Philipp Tempel \and Dipl.-Ing.~Martin Wehr}
+\partner{Fraunhofer IPA}
 
-\input{demo/header.tex}
+
+\departmentname{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr. 36, D-70174 Stuttgart, Germany}
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik (Maschinenbau)}
+
+\usepackage{lipsum}
+
+%\input{demo/header.tex}
+
 
 % And done with the configuration you are!
 
@@ -34,23 +43,29 @@
     \begin{otherlanguage}{ngerman}
         \title{Dies soll ein langer Titel der Arbeit sein damit er extra lang ist aber das macht ja niemandem etwas aus}
         \subtitle{Manche Arbeiten haben sogar Untertitel}
+        \university{Universtit\"at Stuttgart}
         \maketitle
     \end{otherlanguage}
     
     % Add a dedication (if you want to)
-    \begin{dedication}
-        \lipsum[1]
-    \end{dedication}
+%    \begin{dedication}
+%        \lipsum
+%    \end{dedication}
     
     % Add declaration of authorship (MUST be signed in version printed and handed in)
 %    \DeclarationOfAuthorship
     
     % Create the thesis abstract
-    \begin{thesis-abstract}
-        \lipsum[1-3]
-        
+    \begin{thesisabstract}
+        \lipsum
 %        \keywords{a,list,of,keywords}
-    \end{thesis-abstract}
+    \end{thesisabstract}
+    
+    \begin{otherlanguage}{ngerman}
+        \begin{thesisabstract}
+            \lipsum
+        \end{thesisabstract}
+    \end{otherlanguage}
     
     %% Output all the different "list of "
     % Table of contents
@@ -68,7 +83,7 @@
 %    \printnomenclature
     
     % List of open todos (finally and only in "draft" mode)
-    \listoftodos
+%    \listoftodos
     
     % Switch back to arabic page numbering and proper page headers and footers
     \mainmatter

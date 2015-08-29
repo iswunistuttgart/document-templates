@@ -14,8 +14,9 @@
 % Include Encapsulated PostScript in LaTeX documents
 \RequirePackage{epsfig}
 
-% The package provides the principal packages in the AMS-LaTeX distribution. It adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it is highly recommendsd as an adjunct to serious mathematical typesetting in LaTeX. 
+% The package provides the principal packages in the AMS-LaTeX distribution. It adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it is highly recommended as an adjunct to serious mathematical typesetting in LaTeX. 
 \RequirePackage{amsmath}
+\numberwithin{equation}{chapter}
 
 % Additional math symbolys for a list see http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf
 \RequirePackage{amssymb}
@@ -64,9 +65,9 @@
 \RequirePackage[per-mode=symbol]{siunitx}
 
 % Typeset source code listings using LaTeX. The package enables the user to typeset programs (programming code) within LaTeX; the source code is read directly by TeX—no front-end processor is needed. Keywords, comments and strings can be typeset using different styles (default is bold for keywords, italic for comments and no special style for strings). Support for hyperref is provided. To use, \usepackage{listings}, identify the language of the object to typeset, using a construct like: \lstset{language=Python}, then use environment lstlisting for inline code. External files may be formatted using \lstinputlisting to process a given file in the form appropriate for the current language. Short (in-line) listings are also available, using either \lstinline|...| or |...| (after defining the | token with the \lstMakeShortInline command).
-\if@listings
-    \RequirePackage{listings}
-\fi
+%\if@listings
+%    \RequirePackage{listings}
+%\fi
 
 % minted is a package that allows formatting source code in LATEX. For example:
 %\begin{minted}{<language>}
@@ -74,9 +75,9 @@
 %\end{minted}
 % will highlight a piece of code in a chosen language. The appearance can be customized with a number of options and color schemes.
 % ftp://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/minted/minted.pdf
-\if@minted
-    \RequirePackage[chapter]{minted}
-\fi
+%\if@minted
+%    \RequirePackage[chapter]{minted}
+%\fi
 
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
@@ -173,63 +174,63 @@
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
 % The package depends on the author’s kvoptions, ltxcmdsand refcount packages.
 % A list of all options can be found at ftp://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/hyperref/doc/options.pdf
-\RequirePackage[
-    % Lesezeichen erzeugen
-    bookmarks=true,
-    % Lesezeichen ausgeklappt
-    bookmarksopen=false,
-    % Level bis zu welchen Bookmarks geofffnet sind
-    bookmarksopenlevel=1,
-    % Anzeige der Kapitelzahlen am Anfang der Namen der Lesezeichen
-    bookmarksnumbered=true,
-    % Seite, welche automatisch geoeffnet werden soll
-    % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
-    % werden soll oder eine Seite bearbeitet wird.
-    pdfstartpage=1,
-%   % Miniaturansicht nicht anzeigen
-    pdfpagemode=UseOutlines,
-    % Startansicht des PDF-Dokuments
-    pdfstartview=Fit,
-    % URL des PDF-Dokuments (oder Hintergrundinformationen)
-%   baseurl=,
-    % Titel des PDF-Dokuments
-    pdftitle={},
-    % Autor(Innen) des PDF-Dokuments
-    pdfauthor={},
-    % Inhaltsbeschreibung des PDF-Dokuments
-    pdfsubject={},
-    % Stichwortangabe zum PDF-Dokument
-    pdfkeywords={},
-    % Display document title instead of file name in title bar
-    pdfdisplaydoctitle=true,
-    % Setzt die StandardAnsicht fuer das Dokument auf
-    % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
-    % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
-    pdfpagelayout=TwoColumnRight,
-%    pdfhighlight=/N,
-    % ermoeglicht einen Umbruch von URLs
-    breaklinks=true,
-    % Einfaerbung von Links
-    colorlinks=true,
-    % Linkfarbe: rot
-    linkcolor=linkcolorLink,
-    % Ankerfarbe: rot
-    anchorcolor=linkcolorAnchor,
-    % Literaturlinks: rot
-    citecolor=linkcolorCite,
-    % Links zu lokalen Dateien: rot
-    filecolor=linkcolorFile,
-    % Acrobat Menueeintraege: rot
-    menucolor=linkcolorMenu,
-    % URL-Farbe: rot
-    urlcolor=linkcolorUrl,
-    % Use DVIPS background
-%    dvips,
-    % Put an anchor on every page
-    pageanchor,
-    % Use small caps instead of color for links
-%    frenchlinks=true,
-]{hyperref}
+%\RequirePackage[
+%    % Lesezeichen erzeugen
+%    bookmarks=true,
+%    % Lesezeichen ausgeklappt
+%    bookmarksopen=false,
+%    % Level bis zu welchen Bookmarks geofffnet sind
+%    bookmarksopenlevel=1,
+%    % Anzeige der Kapitelzahlen am Anfang der Namen der Lesezeichen
+%    bookmarksnumbered=true,
+%    % Seite, welche automatisch geoeffnet werden soll
+%    % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
+%    % werden soll oder eine Seite bearbeitet wird.
+%    pdfstartpage=1,
+%%   % Miniaturansicht nicht anzeigen
+%    pdfpagemode=UseOutlines,
+%    % Startansicht des PDF-Dokuments
+%    pdfstartview=Fit,
+%    % URL des PDF-Dokuments (oder Hintergrundinformationen)
+%%   baseurl=,
+%    % Titel des PDF-Dokuments
+%    pdftitle={},
+%    % Autor(Innen) des PDF-Dokuments
+%    pdfauthor={},
+%    % Inhaltsbeschreibung des PDF-Dokuments
+%    pdfsubject={},
+%    % Stichwortangabe zum PDF-Dokument
+%    pdfkeywords={},
+%    % Display document title instead of file name in title bar
+%    pdfdisplaydoctitle=true,
+%    % Setzt die StandardAnsicht fuer das Dokument auf
+%    % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
+%    % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
+%    pdfpagelayout=TwoColumnRight,
+%%    pdfhighlight=/N,
+%    % ermoeglicht einen Umbruch von URLs
+%    breaklinks=true,
+%    % Einfaerbung von Links
+%    colorlinks=true,
+%    % Linkfarbe: rot
+%    linkcolor=linkcolorLink,
+%    % Ankerfarbe: rot
+%    anchorcolor=linkcolorAnchor,
+%    % Literaturlinks: rot
+%    citecolor=linkcolorCite,
+%    % Links zu lokalen Dateien: rot
+%    filecolor=linkcolorFile,
+%    % Acrobat Menueeintraege: rot
+%    menucolor=linkcolorMenu,
+%    % URL-Farbe: rot
+%    urlcolor=linkcolorUrl,
+%    % Use DVIPS background
+%%    dvips,
+%    % Put an anchor on every page
+%    pageanchor,
+%    % Use small caps instead of color for links
+%%    frenchlinks=true,
+%]{hyperref}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage[capitalise]{cleveref}
@@ -238,29 +239,29 @@
 \RequirePackage{glossaries}
 
 % Set package specific options for the ngerman language
-\if@german
-    \PassOptionsToPackage{ngerman}{todonotes}
-\fi
+%\if@german
+%    \PassOptionsToPackage{ngerman}{todonotes}
+%\fi
 
 %\if@english
 %
 %\fi
 
 % Set draft specific options
-\ifdraft{
-    \AtBeginDocument{
-        \PassOptionsToPackage{draft}{hyperref}
-    }
-    \if@minted
-        \PassOptionsToPackage{draft}{minted}
-    \fi
-} % Otherwise set hyperref's internal mode to final
-{
-    \AtBeginDocument{
-        \PassOptionsToPackage{final}{hyperref}
-    }
-    \if@minted
-        \PassOptionsToPackage{final}{minted}
-    \fi
-    \PassOptionsToPackage{disable}{todonotes}
-}
+%\ifdraft{
+%    \AtBeginDocument{
+%        \PassOptionsToPackage{draft}{hyperref}
+%    }
+%    \if@minted
+%        \PassOptionsToPackage{draft}{minted}
+%    \fi
+%} % Otherwise set hyperref's internal mode to final
+%{
+%    \AtBeginDocument{
+%        \PassOptionsToPackage{final}{hyperref}
+%    }
+%    \if@minted
+%        \PassOptionsToPackage{final}{minted}
+%    \fi
+%    \PassOptionsToPackage{disable}{todonotes}
+%}
