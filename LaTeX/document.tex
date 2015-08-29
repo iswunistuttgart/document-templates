@@ -18,7 +18,8 @@
 \partner{Fraunhofer IPA}
 
 
-\departmentname{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentlong{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentshort{ISW}
 \departmentaddress{Seidenstr. 36, D-70174 Stuttgart, Germany}
 \university{University of Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik (Maschinenbau)}
@@ -41,9 +42,10 @@
     
     % Creates a German titlepage (if you don't issue the \title - and possibly the subtitle - command inside this environment, the main language's title - and subtitle - will be displayed)
     \begin{otherlanguage}{ngerman}
+        % @TODO If we change the name of the university here, it will stick to this for the remainder of the file (which is not what we want, so we need to find a way to fix this and set localization based on the currently active language)
+        \university{Universtit\"at Stuttgart}
         \title{Dies soll ein langer Titel der Arbeit sein damit er extra lang ist aber das macht ja niemandem etwas aus}
         \subtitle{Manche Arbeiten haben sogar Untertitel}
-        \university{Universtit\"at Stuttgart}
         \maketitle
     \end{otherlanguage}
     

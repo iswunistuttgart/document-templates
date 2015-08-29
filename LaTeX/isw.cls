@@ -79,9 +79,12 @@
 % Name of the university
 \newcommand{\university}[1]{\gdef\@university{#1}}
 \newcommand{\@university}{\@latex@warning@no@line{No \noexpand\university given}}
-% Name of the department
-\newcommand{\departmentname}[1]{\gdef\@departmentName{#1}}
-\newcommand{\@departmentName}{\@latex@warning@no@line{No \noexpand\departmentname given}}
+% Long name of the department
+\newcommand{\departmentlong}[1]{\gdef\@departmentlong{#1}}
+\newcommand{\@departmentlong}{\@latex@warning@no@line{No \noexpand\departmentlong given}}
+% Short name of the department
+\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
+\newcommand{\@departmentshort}{}
 % Address of the department
 \newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
 \newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
@@ -113,28 +116,16 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrreprt}}
 
 % Default options
-\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,thesisdraft}
+\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,thesisdraft,rbg}
 
 % Process options (finally)
 \ProcessOptions\relax
 
-% Depending on online we will define options to hyperref
-\iftoggle{online}{%
-% Online options
-    \PassOptionsToPackage{%
-        anchorcolor=blue,%
-        bookmarksopen=true,%
-        colorlinks=true,%
-        urlcolor=blue,%
-    }{hyperref}
-% Print options
-}{%
-    \PassOptionsToPackage{%
-        hidelinks=true,%
-    }{hyperref}
-}
 
-%\ifbool{thesisfinal}{}{\PassOptionsToPackage{showframe}{geometry}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DEFAULT OPTIONS PASSED TO CLASSES AND PACKGES %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Default options to the scrreprt class (the main class of this class)
 \PassOptionsToClass{%
@@ -154,6 +145,13 @@
     version=last, %
 }{scrreprt}
 
+\PassOptionsToPackage{
+    automark, % 
+    headsepline=0.4pt, %
+    headtopline=0.6pt, %
+    footsepline=0.4pt, %
+}{scrlayer-scrpage}
+
 % Default options to the geometry paackage
 \PassOptionsToPackage{%
 %    showframe, % We are using 'showframe' only for typesetting the layout, it is not needed for the actual class
@@ -165,12 +163,44 @@
     inner=2.5cm,
 }{geometry}
 
+% Depending on online we will define options to hyperref
+\iftoggle{online}{%
+    % Online options
+    \PassOptionsToPackage{%
+        anchorcolor=blue,%
+        bookmarksopen=true,%
+        colorlinks=true,%
+        urlcolor=blue,%
+    }{hyperref}
+    % Print options
+}{%
+\PassOptionsToPackage{%
+    hidelinks=true,%
+}{hyperref}
+}
+
+\PassOptionsToPackage{
+    usenames,       % 
+    dvipsnames,     % 
+    svgnames,       % 
+    table,          % 
+    hyperref,       % 
+}{xcolor}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LOAD ALL PACKAGES NECESSARY FOR SETTING UP THE CLASS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Load the scrreprt class
 \LoadClass{scrreprt}
 
 % Load the language class
 \PassOptionsToPackage{english,ngerman}{babel}
 \RequirePackage{babel}
+
+\RequirePackage{scrlayer-scrpage}
 
 % Load the isodate class
 \PassOptionsToPackage{english,ngerman}{isodate}
@@ -203,9 +233,11 @@
 
 \RequirePackage{multirow}
 
-\RequirePackage{fancyhdr}
+%\RequirePackage{fancyhdr}
 
 \RequirePackage[Sonny]{fncychap}
+
+\RequirePackage{xcolor}
 
 \RequirePackage{hyperref}
 
@@ -214,38 +246,11 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% LAYOUT DEFINITION
-%%%%%%%%%%%%%%%%%%%%%%%
-% Styles for the header and footer lines
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.2pt}
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter\space#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\space#1}}
-% Styles for the header
-\fancyhead[LE]{\nouppercase{\sffamily\leftmark}}
-\fancyhead[CE]{}
-\fancyhead[RE]{}
-\fancyhead[LO]{\nouppercase{\sffamily\rightmark}}
-\fancyhead[CO]{}
-\fancyhead[RO]{}
-% Styles for the footer
-\fancyfoot[LE]{\sffamily\thepage}
-\fancyfoot[CE]{}
-\fancyfoot[RE]{\sffamily\@author}
-\fancyfoot[LO]{\sffamily\@author}
-\fancyfoot[CO]{}
-\fancyfoot[RO]{\sffamily\thepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LOCALIZATION and INTERNATIONALIZATION %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Make sure the ToC only shows entries down till subsubsection
-\setcounter{tocdepth}{2}
-
-% Setting some koma fonts
-\setkomafont{title}{\bfseries\Huge}
-\setkomafont{subtitle}{\slshape\Large}
-\setkomafont{author}{\sffamily\LARGE}
-
-% Add localized language lines for German
+% For German
 \addto\captionsngerman{%
     \def\@localDraft{Entwurf}
     \def\@localExaminer{Pr\"ufer}
@@ -257,7 +262,7 @@
     \def\@localPartner{In Kooperation mit}
     %
     \renewcommand{\abstractname}{Zusammenfassung}
-%    \renewcommand{\dedicationname}{Widmung}
+    %    \renewcommand{\@dedicationname}{Widmung}
     %
     \ifdefstring{\@thesis}{ba}{%
         \def\@ThesisName{Bachelorarbeit}
@@ -298,7 +303,7 @@
     \def\@ThesisPretext{Eine \@ThesisType\space zur Vorlage an der Fakult\"at \@faculty\space der \@university\space zur Erlangung des akademischen Grades \@DegreeLong\space (\@DegreeShort)}
 }
 
-% Add localized language lines for English
+% For English
 \addto\captionsenglish{%
     \def\@localDraft{Draft}
     \def\@localExaminer{Examiner}
@@ -310,7 +315,7 @@
     \def\@localPartner{In cooperation with}
     %
     \renewcommand{\abstractname}{Abstract}
-%    \renewcommand{\dedicationname}{Dedication}
+    %    \renewcommand{\@dedicationname}{Dedication}
     %
     \ifdefstring{\@thesis}{ba}{%
         \def\@ThesisName{Bachelor's Thesis}
@@ -351,6 +356,74 @@
     \def\@ThesisPretext{A \@ThesisType\space submitted to the faculty \@faculty\space of \@university\space in partial fulfilment of the requirements for the degree of \@DegreeLong\space (\@DegreeShort)}
 }
 
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% COLOR DEFINITIONS %
+%%%%%%%%%%%%%%%%%%%%%
+
+\colorlet{VVLGray}{Gray!10}
+%\definecolor{VLGray}{gray}{0.8}
+\colorlet{VLGray}{Gray!20}
+%\definecolor{LGray}{gray}{0.6}
+\colorlet{LGray}{Gray!40}
+%\definecolor{MGray}{gray}{0.5}
+\colorlet{MGray}{Gray!50}
+%\definecolor{DGray}{gray}{0.4}
+\colorlet{DGray}{Gray!60}
+%\definecolor{VDGray}{gray}{0.2}
+\colorlet{VDGray}{Gray!80}
+\colorlet{VVDGray}{Gray!90}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+% LAYOUT DEFINITIONS %
+%%%%%%%%%%%%%%%%%%%%%%
+
+% Styles for the header and footer lines
+%\renewcommand{\headrulewidth}{0.4pt}
+%\renewcommand{\footrulewidth}{0.2pt}
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter\space#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\space#1}}
+% Styles for the header
+%\fancyhead[LE]{\nouppercase{\sffamily\leftmark}}
+%\fancyhead[CE]{}
+%\fancyhead[RE]{}
+%\fancyhead[LO]{\nouppercase{\sffamily\rightmark}}
+%\fancyhead[CO]{}
+%\fancyhead[RO]{}
+%% Styles for the footer
+%\fancyfoot[LE]{\sffamily\thepage}
+%\fancyfoot[CE]{}
+%\fancyfoot[RE]{\sffamily\@author}
+%\fancyfoot[LO]{\sffamily\@author}
+%\fancyfoot[CO]{}
+%\fancyfoot[RO]{\sffamily\thepage}
+\lofoot{\copyright\,\the\year\space\@departmentshort, \@university}
+
+% Make sure the ToC only shows entries down till subsubsection
+\setcounter{tocdepth}{2}
+
+% Setting some koma fonts
+\setkomafont{title}{\bfseries\Huge}
+\setkomafont{subtitle}{\slshape\Large}
+\setkomafont{author}{\sffamily\LARGE}
+\setkomafont{pageheadfoot}{\color{VVDGray}\sffamily}
+\setkomafont{pagefoot}{\sffamily\small}
+\addtokomafont{pagenumber}{\sffamily\color{VVDGray}}
+\addtokomafont{headtopline}{\color{VDGray}}
+\addtokomafont{headsepline}{\color{MGray}}
+\addtokomafont{footsepline}{\color{DGray}}
+\addtokomafont{footbotline}{\color{VDGray}}
+
+\arrayrulecolor{VDGray}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NEW COMMANDS OR RENEWED COMMANDS FOR TYPESETTING %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % The command to create our beautiful titlepage
 \renewcommand{\maketitle}{%
     \newgeometry{margin=2cm}
@@ -369,53 +442,53 @@
                 \includegraphics[width=\linewidth, height=1.5cm, keepaspectratio]{\expandafter\partnerlogo\@localLogoSuffix\expandafter}%
             \end{minipage}%
         }\par%
-        \vspace{0.5cm}\par%
+        \vspace*{0.5cm}\par%
         % THESIS TYPE
         {\huge\sffamily\@ThesisName\par}%
         %
         % TITLE (and possibly subtitle)
-        \vspace{0.75cm}\par%
+        \vspace*{0.75cm}\par%
         \begin{minipage}[t][3.5cm][t]{\linewidth}%
             \centering%
             % TITLE
             {\usekomafont{title}{\huge\@title\par}}%
-            \vspace{0.33cm}%
+            \vspace*{0.33cm}%
             % Possibly subtitle
             {\ifdefempty{\@subtitle}{}{\usekomafont{subtitle}{\@subtitle\par}}}%
         \end{minipage}\par%
         %
-        \vspace{1cm}\par%
+        \vspace*{1cm}\par%
         % AUTHOR
         \begin{minipage}[t][2cm][t]{\linewidth}
             \centering%
             {\small\@localSubmittedBy\par}%
-%            \vspace{0.25cm}%
+%            \vspace*{0.25cm}%
             {\usekomafont{author}{\@author\par}}%
-            \vspace{0.25cm}%
+            \vspace*{0.25cm}%
             {\sffamily\@matriculation}%
         \end{minipage}\par
         % DATE
-        \vspace{0.25cm}%
+        \vspace*{0.25cm}%
         \begin{minipage}[t][0.5cm][t]{\linewidth}
             \centering%
             \@localSubmittedOn\par
             {\usekomafont{date}\printdate{\@date}\par}%
         \end{minipage}\par
         %
-        \vspace{1.25cm}
+        \vspace*{1.25cm}
         % DRAFT or not
         \begin{minipage}[t][0.75cm][t]{\linewidth}%
             \centering
             \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
         \end{minipage}\par
-        \vspace{1.25cm}
+        \vspace*{1.25cm}
         % Block for thesis pretext i.e., "a ... submitted in partial fulfillment of ..."
         \begin{minipage}[t][2cm][t]{\linewidth}%
             \centering%
             {\small\@ThesisPretext\par}%
         \end{minipage}\par%
         %
-        \vspace{1.5cm}%
+        \vspace*{1.5cm}%
         % EXAMINER, ADVISOR, GRADUATE PROGRAM, etc.
         \begin{minipage}[t][4cm][t]{\linewidth}%
             \begin{minipage}[t]{0.49\linewidth}%
@@ -423,7 +496,7 @@
                 % EXAMINER
                 {\sffamily\itshape\@localExaminer:}\par%
                     \@examiner\par%
-                \vspace{0.5cm}%
+                \vspace*{0.5cm}%
                 % SUPERVISOR
                 {\sffamily\itshape\@localSupervisor:}\par%
                     \renewcommand{\and}{\par}%
@@ -435,7 +508,7 @@
                 \raggedleft
                 {\sffamily\itshape\@localMajor:}\par%
                 \@major\par%
-                \vspace{0.5cm}
+                \vspace*{0.5cm}
                 % PARTNER
                 %
                 \ifdefempty{\@partner}{}{%
@@ -449,7 +522,7 @@
         \vfill%
         {%
             \begin{minipage}{0.79\linewidth}%
-                \@departmentName\\
+                \@departmentlong\\
                 \@departmentAddress
             \end{minipage}%
             \hfill%
@@ -477,7 +550,7 @@
 \newcommand{\mainmatter}{%
     \iftoggle{oneside}{\clearpage}{\cleardoublepage}%
     \pagenumbering{arabic}%
-    \pagestyle{fancy}
+    \pagestyle{scrheadings}
 }
 
 
@@ -485,8 +558,8 @@
 %% Abstract of the thesis
 %%%%%%%%%%%
 \newenvironment{thesisabstract}{%
-    \chapter*{\abstractname}
-    \addcontentsline{toc}{chapter}{\abstractname}
+    \chapter*{\abstractname}%
+    \addcontentsline{toc}{chapter}{\abstractname}%
 %    \vspace{\baselineskip}\vspace{\parskip}
     \begin{RaggedRight}
 }{%
@@ -495,37 +568,52 @@
 }
 
 %%%%%%%%%%%
+%% Dedication environment
+%%%%%%%%%%%
+%\renewenvironment{dedication}{%
+%    \thispagestyle{plain}
+%    \chapter*{\@dedicationname}%
+%%    \addcontentsline{toc}{chapter}{\dedicationname}%
+%%    \vspace{\baselineskip}\vspace{\parskip}
+%    \begin{RaggedRight}%
+%}{%
+%\end{RaggedRight}%
+%\iftoggle{oneside}{\clearpage}{\cleardoublepage}%
+%}
+
+
+%%%%%%%%%%%
 %% Code for fancy chapters heading
 %%%%%%%%%%%
-%\makeatletter
-%\ChNameVar{\normalfont\Large\scshape} % sets the style for name
-%\ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
-%\ChTitleVar{\normalfont\Huge\scshape\color{black}\raggedleft}
-%\renewcommand{\DOCH}{%
-%    \setlength{\fboxrule}{\RW}
-%    \makebox[\linewidth][r]{
-%        \rotatebox{90}{
-%            \makebox[2cm][l]{
-%                \resizebox{2.5cm}{!}{ %\fboxsep=6pt
-%                    \CNV\FmN{\space\@chapapp}
-%                }
-%            }
-%        }
-%        \resizebox{!}{2.5cm}{\fboxsep=6pt
-%            \CNoV\colorbox{black!40}{\thechapter}
-%        }
-%    }%
-%    \par\nobreak
-%    \vskip 0\p@
-%}
-%\renewcommand{\DOTI}[1]{%
-%    \CTV\FmTi{#1}\par\nobreak
-%    \vskip 40\p@}
-%\renewcommand{\DOTIS}[1]{%
-%    \CTV\FmTi{#1}\par\nobreak
-%    \vskip 40\p@}
-%\makeatother
-%
+\makeatletter
+\ChNameVar{\normalfont\Large\scshape} % sets the style for name
+\ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
+\ChTitleVar{\normalfont\Huge\scshape\color{black}\raggedleft}
+\renewcommand{\DOCH}{%
+    \setlength{\fboxrule}{\RW}
+    \makebox[\linewidth][r]{
+        \rotatebox{90}{
+            \makebox[2cm][l]{
+                \resizebox{2.5cm}{!}{ %\fboxsep=6pt
+                    \CNV\FmN{\space\@chapapp}
+                }
+            }
+        }
+        \resizebox{!}{2.5cm}{\fboxsep=6pt
+            \CNoV\colorbox{LGray}{\thechapter}
+        }
+    }%
+    \par\nobreak
+    \vskip 10\p@
+}
+\renewcommand{\DOTI}[1]{%
+    \CTV\FmTi{#1}\par\nobreak
+    \vskip 40\p@}
+\renewcommand{\DOTIS}[1]{%
+    \CTV\FmTi{#1}\par\nobreak
+    \vskip -20\p@}
+\makeatother
+
 
 \makeatletter
 \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{20\p@}}{}{}%

@@ -29,23 +29,24 @@
 
 \section{Document Structure}
 
-Basically you are free in organizing your document, however, it is recommended that a certain order of chapters is always obeyed to which is
+You are free in organizing your document, however, it is recommended that a certain order of chapters is always obeyed to. The chapters must be given in the following order
 
 \begin{enumerate}
     \item Titlepage
-    \item Dedication
-    \item Copyright
-    \item Declaration of Authorship
-    \item Abstract (with keywords)
-    \item Abstract in German if thesis written in English
+    \item Titlepage in second language (in German or English if thesis written in English or German, respectively)
+    \item Dedication (not needed)
+    \item Copyright (not needed)
+    \item Declaration of Authorship (needed only for student theses)
     \item Table of Contents
     \item List of Figures
     \item List of Tables
-    \item List of Abbreviations (textual abbreviations like e.g., CDPR)
-    \item List of Symbols (math symbols and alike)
-    \item Your main content
+    \item List of Abbreviations (not needed, textual abbreviations like e.g., CDPR)
+    \item List of Symbols (not needed, math symbols and alike)
+    \item Acknowledgments (not needed)
+    \item Abstract (with keywords)
+    \item Abstract in second language (in German or English if thesis written in English or German, respectively)
+    \item The main content (in \verb|\chapter|)
     \item Appendix or appendices
-    \item Acknowledgments
     \item Bibliography
 \end{enumerate}
 
@@ -60,17 +61,17 @@ Basically you are free in organizing your document, however, it is recommended t
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth, keepaspectratio]{placeholder/640-480-1}
-        \caption{Picture 1}
+        \caption{Picture 1.}
         \label{fig:subfigures-two:1}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth, keepaspectratio]{placeholder/640-480-2}
-        \caption{Picture 2}
+        \caption{Picture 2.}
         \label{fig:subfigures-two:2}
     \end{subfigure}
     
-    \caption{Even subfigures of two figures are possible}
+    \caption{Even subfigures of two figures are possible and the left one is referenced like so \subref{fig:subfigures-two:1} while the right one is referenced like so \subref{fig:subfigures-two:2}.}
     \label{fig:subfigures-two}
 \end{figure}
 
@@ -78,29 +79,29 @@ Basically you are free in organizing your document, however, it is recommended t
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-1}
-        \caption{Picture 1}
+        \caption{Picture 1.}
         \label{fig:subfigures-four:1}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-2}
-        \caption{Picture 2}
+        \caption{Picture 2.}
         \label{fig:subfigures-four:2}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-3}
-        \caption{Picture 3}
+        \caption{Picture 3.}
         \label{fig:subfigures-four:3}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth, keepaspectratio]{placeholder/800-600-4}
-        \caption{Picture 4}
+        \caption{Picture 4.}
         \label{fig:subfigures-four:4}
     \end{subfigure}
     
-    \caption{Even subfigures of four figures are possible}
+    \caption{Even subfigures of four figures are possible.}
     \label{fig:subfigures-four}
 \end{figure}
 
@@ -154,10 +155,11 @@ Basically you are free in organizing your document, however, it is recommended t
 %        \label{lst:sample-code}
 %    \end{lstlisting}
 
-For figures the guidelines are:
+For figures, the guidelines are:
+
 \begin{itemize}
     \item Always center images using \verb|\centering| as the very first command of the \verb|figure|-environment.
-    \item Make sure to set the width of your included images explicitely using the \verb|width=\linewidth| option.
+    \item Make sure to set the width of your included images explicitely using the \verb|width=| option. Have a single figure's width set to \verb|width=0.75\linewidth|, while two figures side by side must be set to \verb|width=\linewidth| as long as you set the width of the surrounding \verb|minipage| or \verb|subfigure| to \verb|0.49\linewidth|
     \item Don't forget to keep the aspect ratio of images if you change their width.
     \item Never ever under sample images. In other words: never ever enlarge images.
     \item It's best to use vector graphics i.e., \verb|*.eps| or \verb|*.tikz| for proper quality in both PDFs as well as on screen.
@@ -165,12 +167,44 @@ For figures the guidelines are:
     \item Let the labels be handled automatically by \LaTeX. A best practice is to set the prefix of figures' labels to \verb|fig:|.
     \item For a good example see \cref{fig:sample-figure} and its code at \cref{lst:sample-code} (this reference was created using the \verb|\cref{}| command).
     \item Always add a full stop to your figure captions like so.
+    \item Do not be afraid to use lengthy figure and table captions—better that than confusing or incomplete ones.
+    \item If your figure or table is essentially the same as or based on another author’s, but you recreated or adapted it, it is standard to include the words “Adapted from” or “After” followed by the author’s name and a citation at the end of the caption.
+    \item Always cite the figure or table if it—--or its data—--came from a source, using the same citation style that you have used throughout the paper. The most logical place for the citation to appear is at the end of the caption. See \cref{sec:referencing} of this manual for a thorough discussion of rules for source citation.
+    \item Do not crowd a table or figure, neither within itself nor within your text; give it room to breathe. When it appears amidst your body text, skip at least one line above and below it.
+    \item Rule of thumb: Try to present the table or figure so that it would make sense even if ripped from the paper.
+    \item If possible, label the axes of graphs with full words: ``Temperature versus time'' rather than ``T versus t.''
+    \item Be certain that your legend—--that part of the figure where you define any symbols or other visual markers that appear—--is readable, clear, and meaningfully placed. As long as it does not overwhelm the rest of the figure, do not be afraid to make the legend large to enhance its readability.
+    \item Use footnotes (a simple asterisk to indicate them will do) for explanatory material such as the number of respondents to a survey or the fact that certain values were estimated.
+\end{itemize}
+
+For tables, the guidelines are
+
+\begin{itemize}
+    \item The legend (sometimes called the caption) goes above the Table.
+    \item Units are specified in column headings wherever appropriate.
+    \item Lines of demarcation are used to set legend, headers, data, and footnotes apart from one another.
+    \item Footnotes are used to clarify points in the table, or to convey repetitive information about entries.
+    \item Footnotes may also be used to denote statistical differences among groups.
 \end{itemize}
 
 
-\section{Referencing}
+\section{Coloring}
 
-Referencing may be done using \verb|\ref{label}| even though usage of \verb|\cref{label}| is encouraged for that it automatically typesets the appropriate type like \texttt{Eqn.} or \texttt{Fig.}, \texttt{Tbl.}, or \texttt{Listing} to whatever is being reference. At the beginning of a sentence \verb|\Cref{label}| must be used to fully the referenced type in words. \Cref{fig:sample-figure} refers to a sample figure at the beginning of a sentence, while \cref{fig:sample-figure} refers to a sample figure in text.
+There are a few basic colors that are set for some default coloring of tables and should be used primarily for other things, where applicable.
+
+\begin{itemize}
+    \item very light gray \textcolor{VLGray}{VLGray}
+    \item light gray \textcolor{LGray}{LGray}
+    \item medium gray \textcolor{MGray}{MGray}
+    \item dark gray \textcolor{DGray}{DGray}
+    \item vary dark gray \textcolor{VDGray}{VDGray}
+    \item very very dark gray \textcolor{VVDGray}{VVDGray}
+\end{itemize}
+
+
+\section{Referencing}\label{sec:referencing}
+
+Referencing may be done using \verb|\ref{label}| even though usage of \verb|\cref{label}| is encouraged for that it automatically typesets the appropriate type like \texttt{Eqn.} or \texttt{Fig.}, \texttt{Tbl.}, or \texttt{Listing} to whatever is being reference. At the beginning of a sentence, \verb|\Cref{label}| must be used to fully give the referenced type in words. \Cref{fig:sample-figure} refers to a sample figure at the beginning of a sentence, while \cref{fig:sample-figure} refers to a sample figure in text.
 
 \begin{itemize}
     \item Capitalise and write in words the reference object at the beginning of a sentence
