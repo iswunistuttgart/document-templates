@@ -289,6 +289,8 @@
 
 \RequirePackage{xcolor}
 
+\RequirePackage{setspace}
+
 \RequirePackage{hyperref}
 
 %\ifbool{minitoc}{\RequirePackage[]{minitoc}}{}
@@ -355,7 +357,11 @@
         \def\@DegreeLong{Doktoringenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
-    \def\@ThesisPretext{Eine \@ThesisType\space zur Vorlage an der Fakult\"at \@faculty\space der \@university\space zur Erlangung des akademischen Grades \@DegreeLong\space (\@DegreeShort)}
+    \def\@ThesisPretext{Eine \@ThesisType\space zur Vorlage an der Fakult\"at\\%
+        {\scshape\@faculty}\\%
+        {\scshape\@university}\\%
+        zur Erlangung des akademischen Grades\\%
+        {\scshape\@DegreeLong}\space (\@DegreeShort)}
 }
 
 % For English
@@ -409,7 +415,11 @@
         \def\@DegreeLong{Doktoringenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
-    \def\@ThesisPretext{A \@ThesisType\space submitted to the faculty \@faculty\space of \@university\space in partial fulfilment of the requirements for the degree of \@DegreeLong\space (\@DegreeShort)}
+    \def\@ThesisPretext{A \@ThesisType\space presented to the faculty\\%
+        {\scshape\@faculty}\\%
+        {\scshape\@university}\\%
+        in partial fulfillment of the requirements for the degree of\\%
+        {\scshape\@DegreeLong}\space (\@DegreeShort)}
 }
 
 
@@ -503,20 +513,20 @@
 
 % The command to create our beautiful titlepage
 \renewcommand{\maketitle}{%
-    \newgeometry{margin=2cm}
+    \newgeometry{inner=2cm, outer=2cm, top=1.5cm, bottom=1.5cm}
     \begin{titlepage}
         \thispagestyle{empty}%
         \centering%
         % University Logo
         \begin{minipage}{0.49\linewidth}%
             \ifdefempty{\partnerlogo}{\centering}{\raggedright}%
-            \includegraphics[width=\linewidth, height=1.5cm, keepaspectratio]{\expandafter\universitylogo\@localLogoSuffix\expandafter}%
+            \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\universitylogo\@localLogoSuffix\expandafter}%
         \end{minipage}\hfill%
         % Partner logo, if given
         \ifdefempty{\partnerlogo}{}{%
             \begin{minipage}{0.49\linewidth}%
                 \raggedleft%
-                \includegraphics[width=\linewidth, height=1.5cm, keepaspectratio]{\expandafter\partnerlogo\@localLogoSuffix\expandafter}%
+                \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\partnerlogo\@localLogoSuffix\expandafter}%
             \end{minipage}%
         }\par%
         \vspace*{0.5cm}\par%
@@ -525,7 +535,7 @@
         %
         % TITLE (and possibly subtitle)
         \vspace*{0.75cm}\par%
-        \begin{minipage}[t][3.5cm][t]{\linewidth}%
+        \begin{minipage}[t][3cm][t]{\linewidth}%
             \centering%
             % TITLE
             {\usekomafont{title}{\huge\@title\par}}%
@@ -552,20 +562,22 @@
             {\usekomafont{date}\printdate{\@date}\par}%
         \end{minipage}\par
         %
-        \vspace*{1.25cm}
+        \vspace*{1cm}
         % DRAFT or not
-        \begin{minipage}[t][0.75cm][t]{\linewidth}%
+        \begin{minipage}[t][0.5cm][t]{\linewidth}%
             \centering
             \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
         \end{minipage}\par
         \vspace*{1.25cm}
         % Block for thesis pretext i.e., "a ... submitted in partial fulfillment of ..."
-        \begin{minipage}[t][2cm][t]{\linewidth}%
+        \begin{minipage}[t][2.5cm][t]{\linewidth}%
+            \begin{spacing}{1.33}
             \centering%
             {\small\@ThesisPretext\par}%
+            \end{spacing}
         \end{minipage}\par%
         %
-        \vspace*{1.5cm}%
+        \vspace*{2cm}%
         % EXAMINER, ADVISOR, GRADUATE PROGRAM, etc.
         \begin{minipage}[t][4cm][t]{\linewidth}%
             \begin{minipage}[t]{0.49\linewidth}%
@@ -719,6 +731,7 @@
 
 
 \input{config/packages}
+\input{config/department}
 \input{config/commands}
 \input{config/colors}
 
