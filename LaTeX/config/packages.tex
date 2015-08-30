@@ -119,7 +119,7 @@
 \RequirePackage[toc, page]{appendix}
 
 % The package lets the user mark things to do later, in a simple and visually appealing way. The package takes several options to enable customization/finetuning of the visual appearance.
-\RequirePackage[obeyFinal, colorinlistoftodos]{todonotes}
+\RequirePackage{todonotes}
 
 % An extended version of TeX, from the NTS project An extended version of TeX (which is capable of running as if it were TeX unmodified). E-TeX has been specified by the LaTeX team as the engine for the development of LaTeX 2e, in the immediate future; as a result, LaTeX programmers may (in all current TeX distributions) assume e-TeX functionality. Development versions of e-TeX are to be found in the TeX live source repository.
 \RequirePackage{etex}
@@ -159,7 +159,7 @@
 \RequirePackage{flushend}
 
 % The bundle provides a package that implements both author-year and numbered references, as well as much detailed of support for other bibliography use. Also Provided are versions of the standard BibTeX styles that are compatible with natbib—plainnat, unsrtnat, abbrnat. The bibliography styles produced by custom-bib are designed from the start to be compatible with natbib.
-\RequirePackage[square, comma, sort&compress, numbers]{natbib}
+\RequirePackage{natbib}
 \bibliographystyle{ieeetr}
 
 % The package has a lot of flexibility, including an option for specifying an entry at the “natural” width of its text.
@@ -170,71 +170,11 @@
 % This package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{dcolumn}
 
-% The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; % for TeX4ht; and for VTeX’s pdf and HTML backends.
-% The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
-% The package depends on the author’s kvoptions, ltxcmdsand refcount packages.
-% A list of all options can be found at ftp://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/hyperref/doc/options.pdf
-%\RequirePackage[
-%    % Lesezeichen erzeugen
-%    bookmarks=true,
-%    % Lesezeichen ausgeklappt
-%    bookmarksopen=false,
-%    % Level bis zu welchen Bookmarks geofffnet sind
-%    bookmarksopenlevel=1,
-%    % Anzeige der Kapitelzahlen am Anfang der Namen der Lesezeichen
-%    bookmarksnumbered=true,
-%    % Seite, welche automatisch geoeffnet werden soll
-%    % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
-%    % werden soll oder eine Seite bearbeitet wird.
-%    pdfstartpage=1,
-%%   % Miniaturansicht nicht anzeigen
-%    pdfpagemode=UseOutlines,
-%    % Startansicht des PDF-Dokuments
-%    pdfstartview=Fit,
-%    % URL des PDF-Dokuments (oder Hintergrundinformationen)
-%%   baseurl=,
-%    % Titel des PDF-Dokuments
-%    pdftitle={},
-%    % Autor(Innen) des PDF-Dokuments
-%    pdfauthor={},
-%    % Inhaltsbeschreibung des PDF-Dokuments
-%    pdfsubject={},
-%    % Stichwortangabe zum PDF-Dokument
-%    pdfkeywords={},
-%    % Display document title instead of file name in title bar
-%    pdfdisplaydoctitle=true,
-%    % Setzt die StandardAnsicht fuer das Dokument auf
-%    % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
-%    % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
-%    pdfpagelayout=TwoColumnRight,
-%%    pdfhighlight=/N,
-%    % ermoeglicht einen Umbruch von URLs
-%    breaklinks=true,
-%    % Einfaerbung von Links
-%    colorlinks=true,
-%    % Linkfarbe: rot
-%    linkcolor=linkcolorLink,
-%    % Ankerfarbe: rot
-%    anchorcolor=linkcolorAnchor,
-%    % Literaturlinks: rot
-%    citecolor=linkcolorCite,
-%    % Links zu lokalen Dateien: rot
-%    filecolor=linkcolorFile,
-%    % Acrobat Menueeintraege: rot
-%    menucolor=linkcolorMenu,
-%    % URL-Farbe: rot
-%    urlcolor=linkcolorUrl,
-%    % Use DVIPS background
-%%    dvips,
-%    % Put an anchor on every page
-%    pageanchor,
-%    % Use small caps instead of color for links
-%%    frenchlinks=true,
-%]{hyperref}
-\RequirePackage{hyperref}
+% The Euro­pean cur­rency sym­bol for the Euro im­ple­mented in METAFONT, us­ing the of­fi­cial Euro­pean Com­mis­sion di­men­sions, and pro­vid­ing sev­eral shapes (nor­mal, slanted, bold, out­line). The pack­age also in­cludes a LaTeX pack­age which de­fines the macro, pre-com­piled tfm files, and doc­u­men­ta­tion.
+\usepackage[gen]{eurosym}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
-\RequirePackage[capitalise]{cleveref}
+\RequirePackage{cleveref}
 
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author’s glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}

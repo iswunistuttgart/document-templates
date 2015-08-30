@@ -1,3 +1,179 @@
+\chapter{User Documentation}
+
+In this chapter, the user will get a general introduction to the usage of the thesis template and will be enabled to start with his work.
+Further information is given in the subsequent chapters.
+But don't be afraid, there is no need for you to read through all of it before starting your work.
+Instead, you might find it useful to just look at the table of contents and decide which sections you need to look at later when looking for a solution to a problem.
+
+
+\section{Introduction}\label{sec:user-documentation:introduction}
+
+\subsection{Target Users}\label{sec:user-documentation:target-users}
+
+Writing a good thesis can be cumbersome if you have never done it before.
+Even for experienced researches having published a sum of papers, writing up a thesis is not the same.
+Without underestimating the complexity of writing a thesis, it is cumbersome to get it all nicely wrapped up and in layout that is consistent from start to end.
+This thesis template tries to fill the gap between content and layout by providing you with certain commonly used packages and styles set to have a consistent layout that you don't have to bother about maintaining.
+
+
+\subsection{Features of the Class}\label{sec:user-documentation:features}
+
+With this thesis template you write a simple, nicely typeset thesis without the hassle of needing to configure it such that it suits the needs of your department (it should have applied all the necessary style guidelines already).
+
+
+\subsection{How to Get Started}\label{sec:user-documentation:get-started}
+
+In order to get your thesis started, there is a few things necessary to set up.
+One of them being obviously the choice of a good typewriting environment.
+The list out there for writing your thesis is longer than it should be so we will just briefly mention some of the most common editors (both IDE and simple text editors).
+Choose by your own needs
+
+
+\subsubsection{Configure Editor and System Settings}\label{sec:user-documentation:configure-system}
+
+You must choose a \LaTeX distribution and an editor.
+For a list of editors, please refer to or the following list (which is only an excerpt from the SO page).
+We prefer TeXstudio even though its implementation of using some keys can be cumbersome at times.
+
+\paragraph{Emacs with AUCTeX}
+\begin{itemize}
+    \item \textit{Platforms:} Windows, Mac (incl. Aquamacs fork), Unix
+    \item \textit{License:} Free software (GPL)
+    \item \textit{Languages:} de, dk, fr, is, it, jp, nl, pl, se, sk are supported by AUCTeX language styles
+    \item \textit{Unicode:} Yes, from Emacs 23, characters are represented using Unicode
+    \item \textit{RTL/bidirectional support:} From Emacs 24, through bidi-mode
+    \item \textit{\% !TEX directives:} No, but has several realizations of file local variables
+    \item \textit{Syntax highlighting:} Yes, customisable through customize and Elisp
+    \item \textit{Code completion:} Yes, via Emacs Predictive Completion, which supports AUCTeX without further configuration
+    \item \textit{Code folding:} Yes
+    \item \textit{Spell checking:} Yes
+    \item \textit{SyncTeX:} Yes
+    \item \textit{Built-in output viewer:} Yes
+    \item \textit{Project management:} org-mode, reftex-mode, speedbar
+\end{itemize}
+
+\paragraph{Vim with LaTeX-suite}
+\begin{itemize}
+    \item \textit{Platforms:} Windows, Mac, Linux and others
+    \item \textit{License:} Open Source Charityware
+    \item \textit{Languages:} ?
+    \item \textit{Unicode:} Yes
+    \item \textit{RTL/bidi support:} partially
+    \item \textit{\% !TEX directives:} No, but has modelines
+    \item \textit{Syntax Highlighting:} Yes, customizable
+    \item \textit{Code Completion:} Yes (using Omni Completion, extendable with SnipMate plugin)
+    \item \textit{Code Folding:} Yes
+    \item \textit{Spell Checking:} Yes
+    \item \textit{SyncTeX:} Yes, see e.g. this question
+    \item \textit{Built-in Output Viewer:} No
+    \item \textit{Project Management:} ?
+\end{itemize}
+
+\paragraph{Texmaker}
+\begin{itemize}
+    \item \textit{Platforms:} Windows XP/Vista/7/8, OS X 10.5+, Linux
+    \item \textit{License:} GPL license, free
+    \item \textit{Languages:} cs, de, el, en, es, fa, fr, gl, hu, it, nl, pl, pt, pt (bra), ru, se, sr, zh (cn), zh (tw)
+    \item \textit{Unicode:} Yes
+    \item \textit{RTL/bidi:} ?
+    \item \textit{\% !TEX directives:} No
+    \item \textit{Syntax Highlighting:} Yes, customizable
+    \item \textit{Code Completion:} Yes, customizable
+    \item \textit{Code Folding:} Yes
+    \item \textit{Spell Checking:} Yes
+    \item \textit{SyncTeX:} Yes
+    \item \textit{Built-in Output Viewer:} Yes, supports PDF
+    \item \textit{Project Management:} Yes
+\end{itemize}
+
+\paragraph{TeXstudio (formerly TexMakerX)}
+\begin{itemize}
+    \item \textit{Platforms:} Windows XP/Vista/7, OS X, Linux, FreeBSD
+    \item \textit{License:} GPL v2
+    \item \textit{Languages:} cs, de, en, es, fr, hu, ja, pt\_BR, zh\_CN
+    \item \textit{Unicode:} Yes
+    \item \textit{RTL/bidi:} ?
+    \item \textit{\% !TeX directives:} Yes
+    \item \textit{Syntax Highlighting:} Yes, customizable
+    \item \textit{Code Completion:} Yes, customizable and auto-customized
+    \item \textit{Code Folding:} Yes
+    \item \textit{Spell Checking:} Yes
+    \item \textit{SyncTeX:} Yes
+    \item \textit{Built-in Output Viewer:} Yes, supports PDF
+    \item \textit{Project Management:} Yes
+\end{itemize}
+
+\paragraph{TeXworks}
+\begin{itemize}
+    \item \textit{Platforms:} Windows XP/Vista/7/8, OS X, Linux all pre-compiled plus source available
+    \item \textit{License:} GPL
+    \item \textit{Languages:} en, af, ar, ca, cs, de, fa, fo fr, it, ja, nl, ko, pl, pl, ru, sl, tr zh
+    \item \textit{Unicode:} Yes
+    \item \textit{RTL/bidi:} Yes
+    \item \textit{\% !TEX directives:} Yes
+    \item \textit{Syntax Highlighting:} Yes, regex-based
+    \item \textit{Code Completion:} Yes, customizable based on 'known entry' list
+    \item \textit{Code Folding:} No
+    \item \textit{Spell Checking:} Yes, but have to install by hand
+    \item \textit{SyncTeX:} Yes
+    \item \textit{Built-in Output Viewer:} Yes, PDF (Poppler-based)
+    \item \textit{Project Management:} No
+\end{itemize}
+
+\paragraph{TeXnicCenter}
+\begin{itemize}
+    \item \textit{Platforms:} Windows XP/Vista/7/8
+    \item \textit{License:} Open Source
+    \item \textit{Languages:} English, German, more dictionaries for spelling control downloadable
+    \item \textit{Unicode:} Yes (in version 2, which was released mid-september 2013).
+    \item \textit{RTL/bidi:} ?
+    \item \textit{\% !TEX directives:} No
+    \item \textit{Syntax Highlighting:} Yes, customizable (also background colour)
+    \item \textit{Code Completion:} Yes
+    \item \textit{Code Folding:} Yes
+    \item \textit{Spell Checking:} Yes
+    \item \textit{SyncTeX:} Yes
+    \item \textit{Built-in Output Viewer:} No. You can config TeXnicCenter to use an external PDF viewer like Acrobat Reader or SumatraPDF with synchronized viewing.
+    \item \textit{Project Management:} Yes
+\end{itemize}
+
+\subsubsection{Configure the Document}\label{sec:user-documentation:configure-document}
+
+\subsubsection{Start Writing your Content}\label{sec:user-documentation:writing}
+
+
+\section{Conventions, Settings, Typesetting, etc.}\label{sec:user-documentation:settings}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter[The Short Title of the Chapter Showing Up in the TOC and the Page Headers]{The Very First Chapter With a Very Long Title Just to See What it Looks Like Since it Spans Multiple Lines in the ToC}
 
 

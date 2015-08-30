@@ -237,6 +237,44 @@
     hyperref,       % 
 }{xcolor}
 
+\PassOptionsToPackage{
+    centertags, % (default) center tags vertically
+%    tbtags,     % 'Top-or-bottom tags': For a split equation, place equation
+    % numbers level with the last (resp. first) line, if numbers
+    % are on the right (resp. left).
+    sumlimits,  %(default) Place the subscripts and superscripts of summation
+    % symbols above and below
+%    nosumlimits,  % Always place the subscripts and superscripts of
+    % summation-type symbols to the side, even in displayed
+    % equations.
+    intlimits,   % Like sumlimits, but for integral symbols.
+    %nointlimits, % (default) Opposite of intlimits.
+    namelimits,  % (default) Like sumlimits, but for certain 'operator names'
+    % such as det, inf, lim, max, min, that traditionally have
+    % subscripts placed underneath when they occur in a displayed
+    % equation.
+%    nonamelimits, % Opposite of namelimits.
+    leqno,     % Place equation numbers on the left.
+%    reqno,     % Place equation numbers on the right.
+%    fleqn,     % Position equations at a fixed indent from the left margin rather than centered in the text column.
+}{amsmath}
+
+\PassOptionsToPackage{
+    capitalise
+}{cleverref}
+
+\PassOptionsToPackage{
+    square,
+    comma,
+    sort&compress,
+    numbers
+}{natbib}
+
+\PassOptionsToPackage{
+    obeyFinal,
+    colorinlistoftodos
+}{todonotes}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,7 +296,7 @@
 \daymonthsepgerman{}%
 \monthyearsepgerman{}{}%
 
-\PassOptionsToPackage{english,ngerman}{todonotes}
+%\PassOptionsToPackage{english,ngerman}{todonotes}
 
 % Latin modern font package
 \RequirePackage{lmodern}

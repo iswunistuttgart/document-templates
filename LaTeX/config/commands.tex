@@ -2,25 +2,31 @@
 % MATH RELATED COMMANDS %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Math norm. Usage
-% \norm{a_i} renders || a_i ||_2 
-% \norm[1]{a_i} renders || a_i ||_1
-%\NewDocumentCommand\norm{mg}{%
-%    \ensuremath{\Vert {#1} \Vert_{\IfNoValueTF{#2}{2}{#2}}}%
-%}
-\newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{#1}}}
-
-% Math powers. Usage
-% \pow{x} renders x^2
-% \pow[3]{x} renders x^3
-%\NewDocumentCommand\pow{mg}{%
-%    \ensuremath{{#1}^{\IfNoValueTF{#2}{2}{#2}}}%
-%}
-\newcommand{\pow}[2][2]{\ensuremath{{#2}^{#1}}}
-
-% Math absolute. Usage
+% Absolute value
 % \abs{x} renders |x|
 \newcommand{\abs}[1]{\ensuremath{\vert {#1} \vert}}
+
+% Norm
+% \norm{a_i} renders || a_i ||_2 
+% \norm[1]{a_i} renders || a_i ||_1
+\newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{#1}}}
+
+% Power
+% \pow{x} renders x^2
+% \pow[3]{x} renders x^3
+\newcommand{\pow}[2][2]{\ensuremath{{#2}^{#1}}}
+
+% Partial differential
+\newcommand{\pd}[1]{\partial\mspace{1mu}{#1}}
+
+% Totial differential
+\newcommand{\td}[1]{\,\mathrm{d}{#1}}
+
+% Real value
+\renewcommand{\Re}{\operatorname{Re}}
+
+% Imaginary value
+\renewcommand{\Im}{\operatorname{Im}}
 
 
 
@@ -50,4 +56,15 @@
     \setlength{\figureheight}{#3}
     \tikzsetnextfilename{figures/#1}
     \include{figures/#1.tikz}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% TYPESETTING COMMANDS %
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\content}[1]{%
+    \input{content/#1}
+}
+
+\newcommand{\demo}[1]{%
+    \input{demo/#1}
 }
