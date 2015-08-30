@@ -28,6 +28,9 @@
 % Process 'key=value' schemes
 \RequirePackage{xkeyval}
 
+\RequirePackage{xparse}
+
+
 % Provide exclusive option pair "online/print" to allow for setting different color values in e.g., hyperref for online and print publication
 \newtoggle{online}\togglefalse{online}
 \newtoggle{print}\toggletrue{print}
@@ -38,9 +41,14 @@
 \DeclareOption{draft}{\setlength{\overfullrule}{5pt}}
 \DeclareOption{final}{}
 
+% Different thing than "draft/final"
 \newbool{thesisfinal}
 \DeclareOption{thesisdraft}{\boolfalse{thesisfinal}}
 \DeclareOption{thesisfinal}{\booltrue{thesisfinal}}
+
+% Allow user to choose whether they want a mini-toc at the beginning of every chapter
+%\newbool{minitoc}
+%\DeclareOption{minitoc}{\booltrue{minitoc}}
 
 % Define the arguments for the language
 \def\@thesisLanguage{english}
@@ -103,6 +111,9 @@
 % Name of the partner
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
 \gdef\@partner{}
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
@@ -116,7 +127,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrreprt}}
 
 % Default options
-\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,thesisdraft,rbg}
+\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,thesisdraft}
 
 % Process options (finally)
 \ProcessOptions\relax
@@ -129,8 +140,8 @@
 
 % Default options to the scrreprt class (the main class of this class)
 \PassOptionsToClass{%
-    fontsize=11pt, % Obvious option, eh?
-%    parskip=half, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
+%    fontsize=11pt, % Obvious option, eh? Fontsize may only be between 10pt...12pt
+    parskip=half*, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
     chapterprefix=false, %
     numbers=noenddot, % All the numbers (after part, section, etc.) are without ending period
     numbers=noendperiod, % All the numbers (after part, section, etc.) are without ending period
@@ -145,6 +156,7 @@
     version=last, %
 }{scrreprt}
 
+% Options to scrlayer-scrpage
 \PassOptionsToPackage{
     automark, % 
     headsepline=0.4pt, %
@@ -174,11 +186,49 @@
     }{hyperref}
     % Print options
 }{%
-\PassOptionsToPackage{%
-    hidelinks=true,%
-}{hyperref}
+    \PassOptionsToPackage{%
+        hidelinks=true,%
+    }{hyperref}
 }
 
+% Pass option final or draft to hyperref depending on thesisfinal
+\ifbool{thesisfinal}{
+    \PassOptionsToPackage{final}{hyperref}
+}{
+    \PassOptionsToPackage{draft}{hyperref}
+}
+
+\PassOptionsToPackage{%
+    % Lesezeichen erzeugen
+    bookmarks=true,
+    % Lesezeichen ausgeklappt
+    bookmarksopen=false,
+    % Level bis zu welchen Bookmarks geofffnet sind
+    bookmarksopenlevel=1,
+    % Anzeige der Kapitelzahlen am Anfang der Namen der Lesezeichen
+    bookmarksnumbered=true,
+    % Seite, welche automatisch geoeffnet werden soll
+    % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
+    % werden soll oder eine Seite bearbeitet wird.
+    pdfstartpage=1,
+%   % Miniaturansicht nicht anzeigen
+    pdfpagemode=UseOutlines,
+    % Startansicht des PDF-Dokuments
+    pdfstartview=Fit,
+    % URL des PDF-Dokuments (oder Hintergrundinformationen)
+    baseurl={http://www.isw.uni-stuttgart.de/},
+    % Display document title instead of file name in title bar
+    pdfdisplaydoctitle=true,
+    % Setzt die StandardAnsicht fuer das Dokument auf
+    % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
+    % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
+    pdfpagelayout=TwoColumnRight,
+%    pdfhighlight=/N,
+    % ermoeglicht einen Umbruch von URLs
+    breaklinks=true,
+}{hyperref}
+
+% Necessary options for package xcolor
 \PassOptionsToPackage{
     usenames,       % 
     dvipsnames,     % 
@@ -235,14 +285,18 @@
 
 %\RequirePackage{fancyhdr}
 
-\RequirePackage[Sonny]{fncychap}
+\RequirePackage{fncychap}
 
 \RequirePackage{xcolor}
 
 \RequirePackage{hyperref}
 
+%\ifbool{minitoc}{\RequirePackage[]{minitoc}}{}
+
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
+
+%\input{config/packages}
 
 
 
@@ -251,7 +305,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % For German
-\addto\captionsngerman{%
+\addto{\captionsngerman}{%
     \def\@localDraft{Entwurf}
     \def\@localExaminer{Pr\"ufer}
     \def\@localSupervisor{Betreuer}
@@ -260,6 +314,7 @@
     \def\@localSubmittedOn{am}
     \def\@localMajor{Studiengang}
     \def\@localPartner{In Kooperation mit}
+    \def\@localKeywords{Stichw\"orter}
     %
     \renewcommand{\abstractname}{Zusammenfassung}
     %    \renewcommand{\@dedicationname}{Widmung}
@@ -304,7 +359,7 @@
 }
 
 % For English
-\addto\captionsenglish{%
+\addto{\captionsenglish}{%
     \def\@localDraft{Draft}
     \def\@localExaminer{Examiner}
     \def\@localSupervisor{Supervisor}
@@ -313,6 +368,7 @@
     \def\@localSubmittedOn{on}
     \def\@localMajor{Major}
     \def\@localPartner{In cooperation with}
+    \def\@localKeywords{Keywords}
     %
     \renewcommand{\abstractname}{Abstract}
     %    \renewcommand{\@dedicationname}{Dedication}
@@ -405,7 +461,7 @@
 % Make sure the ToC only shows entries down till subsubsection
 \setcounter{tocdepth}{2}
 
-% Setting some koma fonts
+% Setting or adding to some koma fonts
 \setkomafont{title}{\bfseries\Huge}
 \setkomafont{subtitle}{\slshape\Large}
 \setkomafont{author}{\sffamily\LARGE}
@@ -416,8 +472,29 @@
 \addtokomafont{headsepline}{\color{MGray}}
 \addtokomafont{footsepline}{\color{DGray}}
 \addtokomafont{footbotline}{\color{VDGray}}
+\addtokomafont{chapter}{\normalfont\sffamily\Huge}
+\addtokomafont{part}{\normalfont\sffamily\Huge}
 
+% Color all rules in tables with very dark gray
 \arrayrulecolor{VDGray}
+
+% Set the overfullrule to 5pt if we are in thesisdraft mode
+\ifbool{thesisfinal}{}{%
+    \overfullrule=5pt
+}
+
+% Minitoc is not working proplery yet
+%\ifbool{minitoc}{%
+%    \mtcsetdepth{minitoc}{2}% ~ \setcounter{minitocdepth}{2}
+%    \mtcsetfont{minitoc}{*}{\usekomafont{chapterentry}}
+%    \mtcsetfont{minitoc}{section}{\usekomafont{chapterentry}\bfseries} 
+%    \mtcsetfont{minitoc}{subsection}{\usekomafont{chapterentry}} 
+%    \mtcsettitle{minitoc}{\relax}% remove “Contents”
+%    \mtcsetoffset{minitoc}{-3.5em}% don’t know the appropriate length
+%    \mtcsetrules{minitoc}{off}
+%    \mtcsetpagenumbers{minitoc}{on}% default anyway
+%    %\mtcsetfeature{minitoc}{before|after|open|close|pagestyle}{command} 
+%}{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -521,12 +598,12 @@
         %
         \vfill%
         {%
-            \begin{minipage}{0.79\linewidth}%
+            \begin{minipage}[b]{0.79\linewidth}%
                 \@departmentlong\\
                 \@departmentAddress
             \end{minipage}%
             \hfill%
-            \begin{minipage}{0.19\linewidth}%
+            \begin{minipage}[b]{0.19\linewidth}%
                 \raggedleft
                 \includegraphics[height=2cm,keepaspectratio]{\departmentlogo\@localLogoSuffix}
             \end{minipage}%
@@ -560,10 +637,9 @@
 \newenvironment{thesisabstract}{%
     \chapter*{\abstractname}%
     \addcontentsline{toc}{chapter}{\abstractname}%
-%    \vspace{\baselineskip}\vspace{\parskip}
-    \begin{RaggedRight}
 }{%
-\end{RaggedRight}%
+\vfill
+\textbf{\@localKeywords:} \@keywords
 \iftoggle{oneside}{\clearpage}{\cleardoublepage}%
 }
 
@@ -586,16 +662,18 @@
 %% Code for fancy chapters heading
 %%%%%%%%%%%
 \makeatletter
-\ChNameVar{\normalfont\Large\scshape} % sets the style for name
+\ChNameVar{\color{VDGray}\normalfont\Large\scshape} % sets the style for name
 \ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
-\ChTitleVar{\normalfont\Huge\scshape\color{black}\raggedleft}
+\ChTitleVar{\usekomafont{chapter}\raggedleft}
+\ChRuleWidth{2pt}
+\ChNameAsIs
 \renewcommand{\DOCH}{%
     \setlength{\fboxrule}{\RW}
     \makebox[\linewidth][r]{
         \rotatebox{90}{
             \makebox[2cm][l]{
-                \resizebox{2.5cm}{!}{ %\fboxsep=6pt
-                    \CNV\FmN{\space\@chapapp}
+                \resizebox{2.5cm}{!}{
+                    \CNV\FmN{\space\@chapapp}\space
                 }
             }
         }
@@ -604,7 +682,7 @@
         }
     }%
     \par\nobreak
-    \vskip 10\p@
+    \vskip 40\p@
 }
 \renewcommand{\DOTI}[1]{%
     \CTV\FmTi{#1}\par\nobreak
@@ -614,6 +692,25 @@
     \vskip -20\p@}
 \makeatother
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THINGS TO RUN AT THE BEGINNING OF THE DOCUMENT %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% At the beginning of the document...
+\makeatletter{
+    \AtBeginDocument{
+        \hypersetup{
+            pdfauthor={\@author},
+            pdftitle={\@title},
+            pdfsubject={\@ThesisPretext},
+            pdfkeywords={\@keywords},
+        }
+        % Select the proper language
+        \pagenumbering{Roman}
+        \pagenumbering{arabic}
+        \pagestyle{scrheadings}
+    %    \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}}
+    }
+\makeatother
 
 \makeatletter
 \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{20\p@}}{}{}%
@@ -779,32 +876,6 @@
 %% depth 1, so reset tocdepth if changed in toc
 %\newcounter{isw@savetocdepth}
 %
-%
-%% At the beginning of the document...
-%\AtBeginDocument{
-%    \hypersetup{
-%        pdfauthor={\@authorstring},
-%        pdftitle={\@titlestring},
-%        pdfsubject={\@pretextString},
-%        pdfkeywords={},
-%    }
-%    % Select the proper language
-%    \if@german
-%        \selectlanguage{ngerman}
-%    \else
-%        \if@british
-%            \selectlanguage{british}
-%        \else
-%            \selectlanguage{american}
-%        \fi
-%    \fi
-%    %\cleardoubleemptypage
-%    %\setcounter{page}{1}
-%    \pagenumbering{Roman}
-%    \pagenumbering{arabic}
-%    \pagestyle{scrheadings}
-%    \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}} 
-%}
 %
 %% At the end of the document
 %\AtEndDocument{

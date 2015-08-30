@@ -1,15 +1,16 @@
-\usepackage{xparse}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATH RELATED COMMANDS %
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Usage
+% Math norm. Usage
 % \norm{a_i} renders || a_i ||_2 
 % \norm[1]{a_i} renders || a_i ||_1
 %\NewDocumentCommand\norm{mg}{%
 %    \ensuremath{\Vert {#1} \Vert_{\IfNoValueTF{#2}{2}{#2}}}%
 %}
-
 \newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{#1}}}
 
-% Usage
+% Math powers. Usage
 % \pow{x} renders x^2
 % \pow[3]{x} renders x^3
 %\NewDocumentCommand\pow{mg}{%
@@ -17,7 +18,36 @@
 %}
 \newcommand{\pow}[2][2]{\ensuremath{{#2}^{#1}}}
 
+% Math absolute. Usage
+% \abs{x} renders |x|
 \newcommand{\abs}[1]{\ensuremath{\vert {#1} \vert}}
 
+
+
+%%%%%%%%%%%%%%%%%
+% TEXT COMMANDS %
+%%%%%%%%%%%%%%%%%
+% Add tm to any trademarked thing
 \newcommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
+% Add the (R) to any registered thing
 \newcommand{\registered}[1]{#1\textsuperscript{\textregistered}}
+
+
+
+%%%%%%%%%%%%%%%%%%%
+% FIGURE COMMANDS %
+%%%%%%%%%%%%%%%%%%%
+\newlength{\figurewidth}
+\newlength{\figureheight}
+\setlength{\figurewidth}{0.75\linewidth}
+\setlength{\figureheight}{0.55\linewidth}
+% Easily include a TikZ image with only three arguments
+% 1) Path to the file
+% 2) Width of rendered image
+% 3) Height of rendered image
+\newcommand{\includetikz}[3]{%
+    \setlength{\figurewidth}{#2}
+    \setlength{\figureheight}{#3}
+    \tikzsetnextfilename{figures/#1}
+    \include{figures/#1.tikz}
+}

@@ -1,32 +1,28 @@
-\documentclass[online,a4paper,thesisdraft]{isw}
-
-\renewcommand{\universitylogo}{images/logo/uni-stuttgart}
-\renewcommand{\partnerlogo}{images/logo/simtech}
+\documentclass[online,a4paper]{isw}
 
 %% Fill in your thesis' data here
 % @todo Make sure that capitalized words will appear capitalized in the final document, too
-\title{This Shall be a Great Thesis Paper}
-\title{This Shall be a Great Thesis Paper with an Extremely Long Title but who}
-\title{This Shall be a Great Thesis Paper with an Extremely Long Title but who Cares}
-\subtitle{Some theses even have subtitles}
-\date{2015-07-28}
-\author{Maschinen Bauer}
-\matriculation{1234567}
-\examiner{Jun.-Prof.~Dr.-Ing.~Andreas Pott}
-\major{Technische Kybernetik}
-\supervisor{Dipl.-Ing.~Philipp Tempel \and Dipl.-Ing.~Martin Wehr}
-\partner{Fraunhofer IPA}
+%\title{This Shall be a Great Thesis Paper with an Extremely Long Title but who Cares}
+%\subtitle{Some theses even have subtitles}
+%\date{2015-08-28}
+%\author{Maschinen Bauer}
+%\matriculation{1234567}
+%\examiner{Jun.-Prof.~Dr.-Ing.~Andreas Pott}
+%\major{Technische Kybernetik}
+%\supervisor{Dipl.-Ing.~Philipp Tempel \and Dipl.-Ing.~Martin Wehr}
+%\partner{Fraunhofer IPA}
 
-
+% This must be put into another file that will be incldued by thesis.cls
+\renewcommand{\universitylogo}{images/logo/uni-stuttgart}
+\renewcommand{\partnerlogo}{images/logo/simtech}
 \departmentlong{Institute for Control Engineering of Machine Tools and Manufacturing Units}
 \departmentshort{ISW}
 \departmentaddress{Seidenstr. 36, D-70174 Stuttgart, Germany}
 \university{University of Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik (Maschinenbau)}
 
-\usepackage{lipsum}
 
-%\input{demo/header.tex}
+\input{demo/header.tex}
 
 
 % And done with the configuration you are!
@@ -60,7 +56,7 @@
     % Create the thesis abstract
     \begin{thesisabstract}
         \lipsum
-%        \keywords{a,list,of,keywords}
+        \keywords{a, list, of, keywords}
     \end{thesisabstract}
     
     \begin{otherlanguage}{ngerman}
@@ -93,14 +89,14 @@
     %%% This is where your main content will go
     \input{demo/body.tex}
     
+    %% Last but not least the bilbiography
+    \bibliography{demo/bibliography.bib}
+    
     %% After the main content, you might want to add some appendices (like source code
     % or more detailed derivations of equations)
     % @todo The "\part{Appendices}" needs some adjustment in its style
     \begin{appendices}
         \input{demo/appendices.tex}
     \end{appendices}
-    
-    %% Last but not least the bilbiography
-    \bibliography{demo/bibliography.bib}
     
 \end{document}
