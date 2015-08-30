@@ -50,6 +50,12 @@
 %\newbool{minitoc}
 %\DeclareOption{minitoc}{\booltrue{minitoc}}
 
+\newbool{minted}
+\DeclareOption{minted}{\booltrue{minted}}
+\DeclareOption{listing}{\boolfalse{minted}}
+\DeclareOption{code=minted}{\booltrue{minted}}
+\DeclareOption{code=listing}{\boolfalse{minted}}
+
 % Define the arguments for the language
 \def\@thesisLanguage{english}
 %\DeclareOption{american}{\def\@thesisLanguage{american}}
@@ -141,7 +147,7 @@
 % Default options to the scrreprt class (the main class of this class)
 \PassOptionsToClass{%
 %    fontsize=11pt, % Obvious option, eh? Fontsize may only be between 10pt...12pt
-    parskip=half*, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
+    parskip=half-, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
     chapterprefix=false, %
     numbers=noenddot, % All the numbers (after part, section, etc.) are without ending period
     numbers=noendperiod, % All the numbers (after part, section, etc.) are without ending period
@@ -198,6 +204,7 @@
     \PassOptionsToPackage{draft}{hyperref}
 }
 
+% Configuration of hyperref
 \PassOptionsToPackage{%
     % Lesezeichen erzeugen
     bookmarks=true,
@@ -237,6 +244,7 @@
     hyperref,       % 
 }{xcolor}
 
+% Configure amsmath
 \PassOptionsToPackage{
     centertags, % (default) center tags vertically
 %    tbtags,     % 'Top-or-bottom tags': For a split equation, place equation
@@ -259,10 +267,12 @@
 %    fleqn,     % Position equations at a fixed indent from the left margin rather than centered in the text column.
 }{amsmath}
 
+% Only few configuration options to cleverref
 \PassOptionsToPackage{
     capitalise
 }{cleverref}
 
+% Some configuration of natbib
 \PassOptionsToPackage{
     square,
     comma,
@@ -270,10 +280,21 @@
     numbers
 }{natbib}
 
+% Todnotes be configured, too
 \PassOptionsToPackage{
     obeyFinal,
     colorinlistoftodos
 }{todonotes}
+
+% For code highlighting
+\PassOptionsToPackage{%
+    chapter, %
+}{minted}
+\ifbool{thesisfinal}{%
+    \PassOptionsToPackage{final}{minted}
+}{
+    \PassOptionsToPackage{draft}{minted}
+}
 
 
 
