@@ -65,9 +65,17 @@
 \RequirePackage[per-mode=symbol]{siunitx}
 
 % Typeset source code listings using LaTeX. The package enables the user to typeset programs (programming code) within LaTeX; the source code is read directly by TeX—no front-end processor is needed. Keywords, comments and strings can be typeset using different styles (default is bold for keywords, italic for comments and no special style for strings). Support for hyperref is provided. To use, \usepackage{listings}, identify the language of the object to typeset, using a construct like: \lstset{language=Python}, then use environment lstlisting for inline code. External files may be formatted using \lstinputlisting to process a given file in the form appropriate for the current language. Short (in-line) listings are also available, using either \lstinline|...| or |...| (after defining the | token with the \lstMakeShortInline command).
-%\if@listings
-%    \RequirePackage{listings}
-%\fi
+\ifbool{minted}{}{%
+    \RequirePackage{listings}
+    \lstset{
+        numbers=left,
+        numberstyle=\tiny,
+        stepnumber=2,
+        numbersep=5pt,
+        frame=leftline,
+    }
+    \lstloadlanguages{[Visual]C++,[95]Fortran,HTML,Java,make,Mathematica,Matlab,MuPAD,Octave,Pascal,Perl,Python,Ruby,sh,SQL,[LaTeX]TeX,XML,XSLT}
+}
 
 % minted is a package that allows formatting source code in LATEX. For example:
 %\begin{minted}{<language>}
@@ -75,9 +83,14 @@
 %\end{minted}
 % will highlight a piece of code in a chosen language. The appearance can be customized with a number of options and color schemes.
 % ftp://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/minted/minted.pdf
-%\if@minted
-%    \RequirePackage[chapter]{minted}
-%\fi
+\ifbool{minted}{%
+    \RequirePackage{minted}
+    \setminted{
+        linenos=true,
+        numbers=left,
+        frame=leftline,
+    }
+}{}
 
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
@@ -174,7 +187,7 @@
 \usepackage[gen]{eurosym}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
-\RequirePackage{cleveref}
+\RequirePackage[capitalise]{cleveref}
 
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author’s glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
