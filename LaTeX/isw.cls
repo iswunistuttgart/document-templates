@@ -37,14 +37,14 @@
 \DeclareOption{online}{\toggletrue{online}\togglefalse{print}}
 \DeclareOption{print}{\toggletrue{print}\togglefalse{online}}
 
-% Declare option draft and final
-\DeclareOption{draft}{\setlength{\overfullrule}{5pt}}
-\DeclareOption{final}{}
-
 % Different thing than "draft/final"
 \newbool{thesisfinal}
 \DeclareOption{thesisdraft}{\boolfalse{thesisfinal}}
 \DeclareOption{thesisfinal}{\booltrue{thesisfinal}}
+
+% Declare option draft and final
+\DeclareOption{draft}{\setlength{\overfullrule}{5pt}}
+\DeclareOption{final}{\booltrue{thesisfinal}}
 
 % Allow user to choose whether they want a mini-toc at the beginning of every chapter
 %\newbool{minitoc}
