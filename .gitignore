@@ -28,5 +28,6 @@ _minted-document
 *.lot
 *.out
 *.toc
-
+*.lol
 *.xdy
+
