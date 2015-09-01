@@ -272,24 +272,36 @@ Columns can be ragged differently, but spare with mixing the column ragging.
 Tables are most easily read if all columns are set left.
 In case you put your table header in the first column and not the first row, you may rag this column right and all other columns left.
 
+Tables, or parts of tables, may be colored, but must be keep to a minimum.
+A table header may be colored by triggering \lstinline|\rowcolor{TableHeader}| before giving your definition of the table header.
+Coloring columns is as easy is using the \lstinline|\columncolor{color}| command where its syntax is\\\lstinline|\columncolor[<color model>]{<color>} [<left overhang>][<right overhang>]|.\\
+If you need to highlight a single cell, then use the following code snippet to get you started for a left-aligned cell colored in the primary cell highlighting color\\ \lstinline|\multicolumn{1}{>{\rowcolor{TableCellHighlight}}l}|.\\
+However, there are some caveats to using colored rows as the rows are colored independent of their meaning to the table.
+Since this approach has some caveats especially when it comes to tables with headers, we provide you with two commands to be run before you are setting tables.
+The commands are \lstinline|\tablecolorwithouthead| to trigger the correct colors for tables with out a header and \lstinline|\tablecolorwithhead| to, obviously, trigger the correct coloring for tables with a header.
+Additionally, you can use the commands \lstinline!\theadbegin! and \lstinline!\theadend! before and after you have defined your table head to trigger the appropriate style changes.
+To apply an even better header style, use \lstinline!\thead{arg1}! to type set your table header cells (this is quite similar to HTML's markup for a table).
+
 To help you with proper code for a table, use the code samples from \cref{lst:table-small,lst:table-large} which results are rendered in \cref{tbl:a-sample-table-small,tbl:a-sample-table-large}, respectively.
 
-\begin{lstlisting}[float,language={[LaTeX]TeX}, caption={Sample code for type setting small table.},label={lst:table-small}]
+\begin{lstlisting}[language={[LaTeX]TeX}, caption={Sample code for type setting small table.},label={lst:table-small}]
 \begin{table}
     \centering
-    \caption{First set the caption, then the table.}
+    \caption{First, set the caption, then the table.}
+    \tablecolorwithouthead
     \begin{tabular}{ll} \toprule
         Column 1.1 & Column 2.1 \\
         Column 2.1 & Column 2.2 \\
-        \bottomrule
+    \bottomrule
     \end{tabular}
     \label{tbl:a-sample-table-small}
 \end{table}
 \end{lstlisting}
 
-\begin{table}
+\begin{table}[H]
     \centering
-    \caption{First set the caption, then the table.}
+    \caption{First, set the caption, then the table.}
+    \tablecolorwithouthead
     \begin{tabular}{ll} \toprule
         Column 1.1 & Column 2.1 \\
         Column 2.1 & Column 2.2 \\
@@ -299,26 +311,33 @@ To help you with proper code for a table, use the code samples from \cref{lst:ta
 \end{table}
 
 \begin{lstlisting}[float,language={[LaTeX]TeX}, caption={Sample code for type setting table with a header.},label={lst:table-large}]
-\begin{table}
-    \centering
-    \caption{This table has its caption above, too.}
-    \begin{tabular}{ll} \toprule
-        Column 1 & Column 2 & Column 3 \\ \midrule
+\centering
+    \caption{This table has its caption above, too, and%
+            has a header and colors and all that fancy%
+            stuff (plus a caption that spans multiple lines).}
+    \tablecolorwithhead
+    \begin{tabular}{lll} \toprule%
+        \theadbegin%
+            \thead{Col 1} & \thead{Col 2} & \thead{Col 3} \\
+        \theadend
         Cell 1.1 & Cell 1.2 & Cell 1.3 \\
         Cell 2.1 & Cell 2.2 & Cell 2.3 \\
         Cell 3.1 & Cell 3.2 & Cell 3.3 \\
         Cell 4.1 & Cell 4.2 & Cell 4.3 \\
         \bottomrule
     \end{tabular}
-\label{tbl:a-sample-table-large}
+    \label{tbl:a-sample-table-large}
 \end{table}
 \end{lstlisting}
 
-\begin{table}
+\begin{table}[H]
     \centering
-    \caption{This table has its caption above, too.}
-    \begin{tabular}{lll} \toprule
-        Column 1 & Column 2 & Column 3 \\ \midrule
+    \caption{This table has its caption above, too, and has a header and colors and all that fancy stuff (plus a heading that spans multiple lines).}
+    \tablecolorwithhead
+    \begin{tabular}{lll} \toprule%
+        \theadbegin%
+            \thead{Col 1} & \thead{Col 2} & \thead{Col 3} \\
+        \theadend
         Cell 1.1 & Cell 1.2 & Cell 1.3 \\
         Cell 2.1 & Cell 2.2 & Cell 2.3 \\
         Cell 3.1 & Cell 3.2 & Cell 3.3 \\
