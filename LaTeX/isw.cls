@@ -55,6 +55,10 @@
 \DeclareOption{draft}{\setlength{\overfullrule}{5pt}}
 \DeclareOption{final}{\booltrue{thesisfinal}}
 
+% Option for automatically colored table rows
+\newbool{alternatingrowcolors}
+\DeclareOption{coloredtables}{\booltrue{alternatingrowcolors}}
+
 % Allow user to choose whether they want a mini-toc at the beginning of every chapter
 %\newbool{minitoc}
 %\DeclareOption{minitoc}{\booltrue{minitoc}}
@@ -87,6 +91,8 @@
 
 % The actual thesis type
 \def\@thesis{ba}
+\DeclareOption{description-bsc}{\def\@thesis{description-bsc}}
+\DeclareOption{description-msc}{\def\@thesis{description-msc}}
 \DeclareOption{bachelor}{\def\@thesis{ba}}
 \DeclareOption{master}{\def\@thesis{ma}}
 \DeclareOption{study}{\def\@thesis{sa}}
@@ -297,7 +303,10 @@
 
 % The package provides the principal packages in the AMS-LaTeX distribution. It adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it is highly recommended as an adjunct to serious mathematical typesetting in LaTeX. 
 \RequirePackage{amsmath}
+% Number equations, figures, and tables according to their chapter
 \numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
 
 % Additional math symbolys for a list see http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf
 \RequirePackage{amssymb}
@@ -340,14 +349,8 @@
 \RequirePackage{titlecaps}
 \Addlcwords{the,a,an,and,but,for,or,nor,to,}
 
-% The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
-\RequirePackage{booktabs}
-
 % Intermix single and multiple columns. Multicol defines a multicols environment which typesets text in multiple columns (up to a maximum of 10), and (by default) balances the end of each column at the end of the environment. The package enables you to switch between any (permitted) number of columns at will: there is no imposed "clear page" operation, as there is in unadorned LaTeX at a switch between \onecolumn and \twocolumn sections. The multicolumn environment can also be used inside a box, thus allowing multicolumned insets in text. Multicol patches the output routine, and may clash with other packages that do the same (e.g., longtable); furthermore, there is no provision for single column floats inside a multicolumn environment, so figures and tables must be coded in-line (using, for example, the H modifier of the float package). The package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{multicol}
-
-% The package defines new commands \Centering, \RaggedLeft, and \RaggedRight and new environments Center, FlushLeft, and FlushRight, which set ragged text and are easily configurable to allow hyphenation (the corresponding commands in LaTeX, all of whose names are lower-case, prevent hyphenation altogether).
-\RequirePackage{ragged2e}
 
 % Longtable allows you to write tables that continue to the next page. You can write captions within the table (typically at the start of the table), and headers and trailers for pages of table. Longtable arranges that the columns on successive pages have the same widths. This last contrasts with the superficially similar supertabular package.
 % Longtable (unlike supertabular) modifies the output routine, and consequently won't work in a multicolumn environment (or in other circumstances where the output routine has been critically altered); it also fails in twocolumn pages.
@@ -356,6 +359,17 @@
 
 % The package allows rows and columns to be coloured, and even individual cells.
 \RequirePackage{colortbl}
+
+% Tabulars with adjustable-width columns
+% The package defines an environment tabularx, an extension of tabular which has an additional column designator, X, which creates a paragraph-like column whose width automatically expands so that the declared width of the environment is filled. (Two X columns together share out the available space between them, and so on.)
+% The package is part of the tools bundle in the LaTeX required distribution.
+\RequirePackage{tabularx}
+
+% The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
+\RequirePackage{booktabs}
+
+% The package defines new commands \Centering, \RaggedLeft, and \RaggedRight and new environments Center, FlushLeft, and FlushRight, which set ragged text and are easily configurable to allow hyphenation (the corresponding commands in LaTeX, all of whose names are lower-case, prevent hyphenation altogether).
+\RequirePackage{ragged2e}
 
 % Typeset in-line fractions in a "nice" way. The package typesets fractions “nicely” — in the form ‘a/b’ (i.e., staggered with a slash between them, rather than directly one over the other). The package is distributed as part of a bundle including the units package. Nicefrac’s facilities are provided, in a cleaner way, by the (experimental) xfrac package, but see also the faktor package for quotient spaces and the like.
 \RequirePackage{nicefrac}
@@ -478,17 +492,19 @@
 % This package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{dcolumn}
 
-% The Euro­pean cur­rency sym­bol for the Euro im­ple­mented in METAFONT, us­ing the of­fi­cial Euro­pean Com­mis­sion di­men­sions, and pro­vid­ing sev­eral shapes (nor­mal, slanted, bold, out­line). The pack­age also in­cludes a LaTeX pack­age which de­fines the macro, pre-com­piled tfm files, and doc­u­men­ta­tion.
-\usepackage[gen]{eurosym}
+% The European currency symbol for the Euro implemented in METAFONT, using the official European Commission dimensions, and providing several shapes (normal, slanted, bold, outline). The package also includes a LaTeX package which defines the macro, pre-compiled tfm files, and documentation.
+\RequirePackage[gen]{eurosym}
+
+% The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; for TeX4ht; and for VTeX’s pdf and HTML backends.
+% The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
+% The package depends on the author’s kvoptions, ltxcmdsand refcount packages.
+\RequirePackage{hyperref}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage{cleveref}
 
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author’s glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
-
-%
-\RequirePackage{hyperref}
 
 %
 %\ifbool{minitoc}{\RequirePackage[]{minitoc}}{}
@@ -522,6 +538,18 @@
     \renewcommand{\abstractname}{Zusammenfassung}
     %    \renewcommand{\@dedicationname}{Widmung}
     %
+    \ifdefstring{\@thesis}{description-bsc}{%
+        \def\@ThesisName{Projektexpos\'e}
+        \def\@ThesisType{Projektbeschreibung}
+        \def\@DegreeLong{Bachelor of Science}
+        \def\@DegreeShort{B.Sc.}
+    }{}
+    \ifdefstring{\@thesis}{description-msc}{%
+        \def\@ThesisName{Projektexpos\'e}
+        \def\@ThesisType{Projektbeschreibung}
+        \def\@DegreeLong{Master of Science}
+        \def\@DegreeShort{M.Sc.}
+    }{}
     \ifdefstring{\@thesis}{ba}{%
         \def\@ThesisName{Bachelorarbeit}
         \def\@ThesisType{Bachelorarbeit}
@@ -580,6 +608,18 @@
     \renewcommand{\abstractname}{Abstract}
     %    \renewcommand{\@dedicationname}{Dedication}
     %
+    \ifdefstring{\@thesis}{description-bsc}{%
+        \def\@ThesisName{Project Description}
+        \def\@ThesisType{project description}
+        \def\@DegreeLong{Bachelor of Science}
+        \def\@DegreeShort{B.Sc.}
+    }{}
+    \ifdefstring{\@thesis}{description-msc}{%
+        \def\@ThesisName{Project Description}
+        \def\@ThesisType{project description}
+        \def\@DegreeLong{Master of Science}
+        \def\@DegreeShort{M.Sc.}
+    }{}
     \ifdefstring{\@thesis}{ba}{%
         \def\@ThesisName{Bachelor's Thesis}
         \def\@ThesisType{bachelor's thesis}
@@ -629,18 +669,33 @@
 % COLORS                                                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\colorlet{VVLGray}{Gray!10}
-%\definecolor{VLGray}{gray}{0.8}
-\colorlet{VLGray}{Gray!20}
-%\definecolor{LGray}{gray}{0.6}
-\colorlet{LGray}{Gray!40}
-%\definecolor{MGray}{gray}{0.5}
-\colorlet{MGray}{Gray!50}
-%\definecolor{DGray}{gray}{0.4}
-\colorlet{DGray}{Gray!60}
-%\definecolor{VDGray}{gray}{0.2}
-\colorlet{VDGray}{Gray!80}
-\colorlet{VVDGray}{Gray!90}
+%\definecolor{VVLGray}{HTML}{D8D8D8}
+%%\colorlet{VVLGray}{Gray!10}
+%%\definecolor{VLGray}{gray}{0.8}
+%\definecolor{VLGray}{HTML}{FAFAFA}
+%\colorlet{VLGray}{Gray!20}
+%%\definecolor{LGray}{gray}{0.6}
+%\colorlet{LGray}{Gray!40}
+%%\definecolor{MGray}{gray}{0.5}
+%\colorlet{MGray}{Gray!50}
+%%\definecolor{DGray}{gray}{0.4}
+%\colorlet{DGray}{Gray!60}
+%%\definecolor{VDGray}{gray}{0.2}
+%\colorlet{VDGray}{Gray!80}
+%\colorlet{VVDGray}{Gray!90}
+\definecolor{VVLGray}{HTML}{F2F2F2}
+\definecolor{VLGray}{HTML}{E6E6E6}
+\definecolor{LGray}{HTML}{D8D8D8}
+\definecolor{MGray}{HTML}{BDBDBD}
+\definecolor{DGray}{HTML}{A4A4A4}
+\definecolor{VDGray}{HTML}{848484}
+\definecolor{VVDGray}{HTML}{6E6E6E}
+
+% Colors for tables
+\colorlet{TableHeader}{MGray}
+\colorlet{TableRowEven}{VLGray}
+\colorlet{TableRowOdd}{VVLGray}
+\colorlet{TableCellHighlight}{Cyan!25}
 
 % Main colors of the department and university
 \definecolor{department-main}{HTML}{D33035}
@@ -696,8 +751,14 @@
 \addtokomafont{chapter}{\normalfont\sffamily\Huge}
 \addtokomafont{part}{\normalfont\sffamily\Huge}
 
+%% Tables
 % Color all rules in tables with very dark gray
 \arrayrulecolor{VDGray}
+% Stretch the padding between table rows globally
+\renewcommand{\arraystretch}{1.4}
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\setlength{\belowbottomsep}{0pt}
 
 % Set the overfullrule to 5pt if we are in thesisdraft mode
 \ifbool{thesisfinal}{}{%
@@ -758,13 +819,28 @@
 \newcommand{\keywords}[1]{\gdef\@keywords{#1}}
 \newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
-
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
 \newcommand{\universitylogo}{logo/university}
 % Path to the department logo
 \newcommand{\departmentlogo}{logo/department}
 % Path to the partner's logo
 \newcommand{\partnerlogo}{}
+
+%%% Provide commands for easier (and more beautiful table creation)
+% Set the correct order of colors for tables with a head
+\newcommand{\tablecolorwithhead}{\rowcolors{1}{TableRowEven}{TableRowOdd}}
+% Set the correct order of colors for tables without a head
+\newcommand{\tablecolorwithouthead}{\rowcolors{1}{TableRowOdd}{TableRowEven}}
+% Sets the table head row color
+\newcommand{\tableheadcolor}{\rowcolor{TableHeader}}
+% Command to apply styles for a table head column
+\newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
+% Command to open a table header
+\newcommand{\theadbegin}{\tableheadcolor}
+% And command to close a table header
+\newcommand{\theadend}{\midrule}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
@@ -958,9 +1034,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% THINGS TO RUN AT THE BEGINNING OF THE DOCUMENT %
+% THINGS TO RUN AT LETTER                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% At the beginning of the document...
+% Set the hyperref document information
 \makeatletter{
     \AtBeginDocument{
         \hypersetup{
@@ -975,6 +1051,11 @@
         \pagestyle{scrheadings}
     %    \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}}
     }
+\makeatother
+
+% Reset the table row counter for even-odd coloring after every table
+\makeatletter
+    \preto\tabular{\global\rownum=\z@}
 \makeatother
 
 
