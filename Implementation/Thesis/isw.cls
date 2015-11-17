@@ -740,7 +740,7 @@
 % Setting or adding to some koma fonts
 \setkomafont{title}{\bfseries\LARGE}
 \setkomafont{subtitle}{\slshape\large}
-\setkomafont{author}{\sffamily\LARGE}
+\setkomafont{author}{\sffamily\Large}
 \setkomafont{pageheadfoot}{\color{VVDGray}\sffamily}
 \setkomafont{pagefoot}{\sffamily\small}
 \addtokomafont{pagenumber}{\sffamily\color{VVDGray}}
@@ -1094,6 +1094,26 @@
 
 % Imaginary value
 \renewcommand{\Im}{\operatorname{Im}}
+
+% Transpose items
+% \transp{A} renders A^T
+\newcommand{\transp}[1]{\ensuremath{{#1}^{\mathrm{T}}}}
+
+% Range of numbers
+% \irange{m} renders i = 1, ..., m
+% \irange{m}{j} renders j = 1, ..., m
+% \irange[3]{m} renders i = 1, 3, ..., m
+% \irange[3]{m}{j} renders j = 1, 3, ..., m
+\NewDocumentCommand{\irange}{o m g}{%
+    \def\runner{\IfValueTF{#3}{#3}{i}}
+    \def\delta{#1}
+    \def\ending{#2}
+    \IfValueTF{#1}{%
+        \ensuremath{\runner = 1, \delta, \ldots, \ending}
+    }{%
+        \ensuremath{\runner = 1, \ldots, \ending}
+    }
+}
 
 
 
