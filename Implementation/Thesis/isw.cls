@@ -145,7 +145,6 @@
 
 % Default options to the geometry paackage
 \PassOptionsToPackage{%
-%    showframe, % We are using 'showframe' only for typesetting the layout, it is not needed for the actual class
     paper=a4paper,
     marginparwidth=2.5cm,
     top=3cm,
@@ -240,10 +239,10 @@
 %    fleqn,     % Position equations at a fixed indent from the left margin rather than centered in the text column.
 }{amsmath}
 
-% Only few configuration options to cleverref
+% Only few configuration options to cleveref
 \PassOptionsToPackage{
     capitalise
-}{cleverref}
+}{cleveref}
 
 % Some configuration of natbib
 \PassOptionsToPackage{
