@@ -534,6 +534,9 @@
     \def\@localPartner{In Kooperation mit}
     \def\@localKeywords{Stichw\"orter}
     %
+    \renewcommand{\appendixtocname}{Anh\"ange}
+    \renewcommand{\appendixname}{Anhang}
+    \renewcommand{\appendixpagename}{Anh\"ange}
     \renewcommand{\abstractname}{Zusammenfassung}
     %    \renewcommand{\@dedicationname}{Widmung}
     %
@@ -604,6 +607,9 @@
     \def\@localPartner{In cooperation with}
     \def\@localKeywords{Keywords}
     %
+    \renewcommand{\appendixtocname}{Appendices}
+    \renewcommand{\appendixname}{Appendix}
+    \renewcommand{\appendixpagename}{Appendices}
     \renewcommand{\abstractname}{Abstract}
     %    \renewcommand{\@dedicationname}{Dedication}
     %
