@@ -348,6 +348,21 @@ To help you with proper code for a table, use the code samples from \cref{lst:ta
 \end{table}
 
 
+\section{Math Equations}\label{sec:math-equations}
+
+In many cases, there will be some math equations in your thesis.
+Even though \LaTeX allows many different formats of inputting your equations, there are preferred environments.
+One of these, apparently, is the \lstinline|align| environment which can be used as shown in \cref{lst:math-align} and renders as follows.
+
+\begin{align}
+    E & = m c^2 \label{eq:einsteins-equation}
+\end{align}
+
+\begin{lstlisting}[float,language={[LaTeX]TeX}, caption={Sample code for proper typesetting of math equations.},label={lst:math-align}]
+    \begin{align}
+        E & = m c^2 \label{eq:einsteins-equation}
+    \end{align}
+\end{lstlisting}
 
 
 
