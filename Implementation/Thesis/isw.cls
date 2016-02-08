@@ -92,12 +92,19 @@
 % The actual thesis type
 \def\@thesis{ba}
 \DeclareOption{description-bsc}{\def\@thesis{description-bsc}}
+\DeclareOption{description-bachelor}{\def\@thesis{description-bsc}}
 \DeclareOption{description-msc}{\def\@thesis{description-msc}}
+\DeclareOption{description-master}{\def\@thesis{description-msc}}
 \DeclareOption{bachelor}{\def\@thesis{ba}}
+\DeclareOption{bsc}{\def\@thesis{ba}}
 \DeclareOption{master}{\def\@thesis{ma}}
+\DeclareOption{msc}{\def\@thesis{ma}}
 \DeclareOption{study}{\def\@thesis{sa}}
+\DeclareOption{sa}{\def\@thesis{sa}}
 \DeclareOption{diplom}{\def\@thesis{da}}
+\DeclareOption{da}{\def\@thesis{da}}
 \DeclareOption{bachelorproject}{\def\@thesis{bpa}}
+\DeclareOption{bpa}{\def\@thesis{bpa}}
 \DeclareOption{doctorate}{\def\@thesis{phd}}
 \DeclareOption{phd}{\def\@thesis{phd}}
 \DeclareOption{report}{\def\@thesis{rep}}
@@ -745,7 +752,7 @@
 % Setting or adding to some koma fonts
 \setkomafont{title}{\bfseries\LARGE}
 \setkomafont{subtitle}{\slshape\large}
-\setkomafont{author}{\sffamily\Large}
+\setkomafont{author}{\bfseries\Large}
 \setkomafont{pageheadfoot}{\color{VVDGray}\sffamily}
 \setkomafont{pagefoot}{\sffamily\small}
 \addtokomafont{pagenumber}{\sffamily\color{VVDGray}}
@@ -947,12 +954,12 @@
         %
         \vfill%
         {%
-            \begin{minipage}[b]{0.79\linewidth}%
+            \begin{minipage}[c]{0.845\linewidth}%
                 \@departmentlong\\
                 \@departmentAddress
             \end{minipage}%
             \hfill%
-            \begin{minipage}[b]{0.19\linewidth}%
+            \begin{minipage}[c]{0.145\linewidth}%
                 \raggedleft
                 \includegraphics[height=1.5cm,keepaspectratio]{\departmentlogo\@localLogoSuffix}
             \end{minipage}%
