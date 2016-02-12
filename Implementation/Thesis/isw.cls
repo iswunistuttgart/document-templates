@@ -108,6 +108,10 @@
 \DeclareOption{doctorate}{\def\@thesis{phd}}
 \DeclareOption{phd}{\def\@thesis{phd}}
 \DeclareOption{report}{\def\@thesis{rep}}
+\DeclareOption{requirement}{\def\@thesis{prd}}
+\DeclareOption{requirements}{\def\@thesis{prd}}
+\DeclareOption{specification}{\def\@thesis{fsd}}
+\DeclareOption{specifications}{\def\@thesis{fsd}}
 
 % Pass any other options not known to the scrreprt package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrreprt}}
@@ -595,6 +599,18 @@
         \def\@DegreeLong{Doktoringenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
+    \ifdefstring{\@thesis}{prd}{
+        \def\@ThesisName{Lastenheft}
+        \def\@ThesisType{Lastenheft}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
+    }{}
+    \ifdefstring{\@thesis}{fsd}{
+        \def\@ThesisName{Pflichtenheft}
+        \def\@ThesisType{Pflichtenheft}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
+    }{}
     \def\@ThesisPretext{Eine \@ThesisType\space zur Vorlage an der Fakult\"at\\%
         {\scshape\@faculty}\\%
         {\scshape\@university}\\%
@@ -667,6 +683,18 @@
         \def\@ThesisType{dissertation}
         \def\@DegreeLong{Doktoringenieur}
         \def\@DegreeShort{Dr.-Ing.}
+    }{}
+    \ifdefstring{\@thesis}{prd}{
+        \def\@ThesisName{Product Requirements Document}
+        \def\@ThesisType{Product Requirements Document}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
+    }{}
+    \ifdefstring{\@thesis}{fsd}{
+        \def\@ThesisName{Functional Specification}
+        \def\@ThesisType{Functional Specification}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
     }{}
     \def\@ThesisPretext{A \@ThesisType\space presented to the faculty\\%
         {\scshape\@faculty}\\%
