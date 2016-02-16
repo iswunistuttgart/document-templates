@@ -149,9 +149,9 @@
 % Options to scrlayer-scrpage
 \PassOptionsToPackage{
     automark, % 
-    headsepline=0.4pt, %
+    headsepline=0.3pt, %
     headtopline=0.6pt, %
-    footsepline=0.4pt, %
+    footsepline=0.3pt, %
 }{scrlayer-scrpage}
 
 % Default options to the geometry paackage
@@ -528,6 +528,8 @@
 }
 
 
+\newcommand{\DeclarationOfAuthorship}{Unknown language set for declaration of authorship}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LOCALIZATION AND INTERNATIONALIZATION                                        %
@@ -611,11 +613,63 @@
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \def\@ThesisPretext{Eine \@ThesisType\space zur Vorlage an der Fakult\"at\\%
+    \def\@ThesisPretext{%
+        Eine \@ThesisType\space zur Vorlage an der Fakult\"at\\%
         {\scshape\@faculty}\\%
         {\scshape\@university}\\%
         zur Erlangung des akademischen Grades\\%
-        {\scshape\@DegreeLong}\space (\@DegreeShort)}
+        {\scshape\@DegreeLong}\space (\@DegreeShort)%
+    }
+    %
+    \renewcommand{\DeclarationOfAuthorship}{%
+        \thispagestyle{empty}%
+%        \vspace*{0.5cm}%
+        \chapter*{Ekl\"arung des Autors}%
+        \vspace{1\baselineskip}
+        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisType\space mit dem Titel%
+        \vspace{1\baselineskip}
+        \begin{center}
+            \selectfont\sffamily
+            \@title\\%
+            \ifdefempty{\@subtitle}{}{
+                \vspace{0.15cm}
+                \@subtitle\\%
+            }
+        \end{center}
+        \vspace{1\baselineskip}
+        \begin{enumerate}%
+            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+            \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+            \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+            \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+        \end{enumerate}%
+        \vfill%\vspace{2\baselineskip}%
+        %
+        \begin{center}%
+            \selectfont\sffamily%
+            \small%
+%            \newlength{\lettabcolsep}%
+%            \setlength{\lettabcolsep}{\tabcolsep}%
+            \renewcommand{\tabcolsep}{0pt}%
+            \begin{tabularx}{\linewidth}{%
+                    >{\raggedright\arraybackslash}p{0.4\linewidth}%
+                    X%
+                    >{\raggedleft\arraybackslash}p{0.4\linewidth}%
+            }%
+                \rule{\linewidth}{0.5pt}%
+                    & \rule{\linewidth}{0pt}%
+                    & \rule{\linewidth}{0.5pt}%
+                    \\[-1.5ex]%
+                Autor%
+                    & %
+                    & Datum \\%
+            \end{tabularx}%
+%            \renewcommand{\tabcolsep}{\lettabcolsep}%
+        \end{center}%
+        \vfill%
+        \cleardoublepage%
+    }
 }
 
 % For English
@@ -701,6 +755,57 @@
         {\scshape\@university}\\%
         in partial fulfillment of the requirements for the degree of\\%
         {\scshape\@DegreeLong}\space (\@DegreeShort)}
+    %
+    %
+    \renewcommand{\DeclarationOfAuthorship}{%
+        \thispagestyle{empty}%
+        %        \vspace*{0.5cm}%
+        \chapter*{Ekl\"arung des Autors}%
+        \vspace{1\baselineskip}
+        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisType\space mit dem Titel%
+        \vspace{1\baselineskip}
+        \begin{center}
+            \selectfont\sffamily
+            \@title\\%
+            \ifdefempty{\@subtitle}{}{
+                \vspace{0.15cm}
+                \@subtitle\\%
+            }
+        \end{center}
+        \vspace{1\baselineskip}
+        \begin{enumerate}%
+            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+            \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+            \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+            \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+        \end{enumerate}%
+        \vfill%\vspace{2\baselineskip}%
+        %
+        \begin{center}%
+            \selectfont\sffamily%
+            \small%
+            %            \newlength{\lettabcolsep}%
+            %            \setlength{\lettabcolsep}{\tabcolsep}%
+            \renewcommand{\tabcolsep}{0pt}%
+            \begin{tabularx}{\linewidth}{%
+                    >{\raggedright\arraybackslash}p{0.4\linewidth}%
+                    X%
+                    >{\raggedleft\arraybackslash}p{0.4\linewidth}%
+                }%
+                \rule{\linewidth}{0.5pt}%
+                & \rule{\linewidth}{0pt}%
+                & \rule{\linewidth}{0.5pt}%
+                \\[-1.5ex]%
+                Autor%
+                & %
+                & Datum \\%
+            \end{tabularx}%
+            %            \renewcommand{\tabcolsep}{\lettabcolsep}%
+        \end{center}%
+        \vfill%
+        \cleardoublepage%
+    }
 }
 
 
@@ -709,38 +814,29 @@
 % COLORS                                                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\definecolor{VVLGray}{HTML}{D8D8D8}
-%%\colorlet{VVLGray}{Gray!10}
-%%\definecolor{VLGray}{gray}{0.8}
-%\definecolor{VLGray}{HTML}{FAFAFA}
-%\colorlet{VLGray}{Gray!20}
-%%\definecolor{LGray}{gray}{0.6}
-%\colorlet{LGray}{Gray!40}
-%%\definecolor{MGray}{gray}{0.5}
-%\colorlet{MGray}{Gray!50}
-%%\definecolor{DGray}{gray}{0.4}
-%\colorlet{DGray}{Gray!60}
-%%\definecolor{VDGray}{gray}{0.2}
-%\colorlet{VDGray}{Gray!80}
-%\colorlet{VVDGray}{Gray!90}
-\definecolor{VVLGray}{HTML}{F2F2F2}
-\definecolor{VLGray}{HTML}{E6E6E6}
-\definecolor{LGray}{HTML}{D8D8D8}
-\definecolor{MGray}{HTML}{BDBDBD}
-\definecolor{DGray}{HTML}{A4A4A4}
-\definecolor{VDGray}{HTML}{848484}
-\definecolor{VVDGray}{HTML}{6E6E6E}
+\definecolor{MainGray}{HTML}{BDBDBD}
+\definecolor{MainGrayLight}{HTML}{D8D8D8}
+\definecolor{MainGrayVeryLight}{HTML}{E6E6E6}
+\definecolor{MainGrayDark}{HTML}{A4A4A4}
+\definecolor{MainGrayVeryDark}{HTML}{848484}
+
+\definecolor{PrimaryColor}{HTML}{004191}
+\definecolor{SecondaryColor}{HTML}{00BEFF}
+\colorlet{PrimaryColorVeryLight}{PrimaryColor!25}
+\colorlet{PrimaryColorLight}{PrimaryColor!50}
+\colorlet{PrimaryColorDark}{PrimaryColor!150}
+\colorlet{PrimaryColorVeryDark}{PrimaryColor!200}
+\colorlet{SecondaryColorVeryLight}{SecondaryColor!25}
+\colorlet{SecondaryColorLight}{SecondaryColor!50}
+\colorlet{SecondaryColorDark}{SecondaryColor!100}
+\colorlet{SecondaryColorVeryDark}{SecondaryColor!200}
 
 % Colors for tables
-\colorlet{TableHeader}{MGray}
-\colorlet{TableRowEven}{VLGray}
-\colorlet{TableRowOdd}{VVLGray}
-\colorlet{TableCellHighlight}{Cyan!25}
-
-% Main colors of the department and university
-\definecolor{department-main}{HTML}{D33035}
-\definecolor{department-sub}{HTML}{0076BD}
-\definecolor{uni-main}{HTML}{768A9D}
+\arrayrulecolor{MainGrayVeryDark}
+\colorlet{TableHeader}{MainGray}
+\colorlet{TableRowEven}{MainGrayVeryLight!33}
+\colorlet{TableRowOdd}{MainGrayVeryLight!50}
+\colorlet{TableCellHighlight}{SecondaryColor}
 
 
 
@@ -781,19 +877,17 @@
 \setkomafont{title}{\bfseries\LARGE}
 \setkomafont{subtitle}{\slshape\large}
 \setkomafont{author}{\bfseries\Large}
-\setkomafont{pageheadfoot}{\color{VVDGray}\sffamily}
+\setkomafont{pageheadfoot}{\color{MainGrayVeryDark}\sffamily}
 \setkomafont{pagefoot}{\sffamily\small}
-\addtokomafont{pagenumber}{\sffamily\color{VVDGray}}
-\addtokomafont{headtopline}{\color{VDGray}}
-\addtokomafont{headsepline}{\color{MGray}}
-\addtokomafont{footsepline}{\color{DGray}}
-\addtokomafont{footbotline}{\color{VDGray}}
+\addtokomafont{pagenumber}{\sffamily\color{MainGrayVeryDark}}
+\addtokomafont{headtopline}{\color{MainGrayVeryDark}}
+\addtokomafont{headsepline}{\color{MainGray}}
+\addtokomafont{footsepline}{\color{MainGrayDark}}
+\addtokomafont{footbotline}{\color{MainGrayVeryDark}}
 \addtokomafont{chapter}{\normalfont\sffamily\Huge}
 \addtokomafont{part}{\normalfont\sffamily\Huge}
 
 %% Tables
-% Color all rules in tables with very dark gray
-\arrayrulecolor{VDGray}
 % Stretch the padding between table rows globally
 \renewcommand{\arraystretch}{1.4}
 \setlength{\aboverulesep}{0pt}
@@ -1041,7 +1135,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Code for fancy chapters heading %
 \makeatletter
-\ChNameVar{\color{VDGray}\normalfont\Large\scshape} % sets the style for name
+\ChNameVar{\color{MainGrayDark}\normalfont\Large\scshape} % sets the style for name
 \ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
 \ChTitleVar{\usekomafont{chapter}\raggedleft}
 \ChRuleWidth{2pt}
@@ -1057,7 +1151,7 @@
             }
         }
         \resizebox{!}{2.5cm}{\fboxsep=6pt
-            \CNoV\colorbox{LGray}{\thechapter}
+            \CNoV\colorbox{MainGray}{\thechapter}
         }
     }%
     \par\nobreak
@@ -1185,6 +1279,8 @@
     \include{figures/#1.tikz}
 }
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%
 % TYPESETTING COMMANDS %
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -1195,6 +1291,8 @@
 \newcommand{\demo}[1]{%
     \input{demo/#1}
 }
+
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
 
 
 

@@ -203,7 +203,7 @@ On the other hand, do not shrink images too much otherwise you run into troubles
 
 Figure heights are limited to \lstinline!0.5\textheight! in order to not stretch them past half the page (no one wants to see a figure that is taller than half a page).
 If you happen to have images at odd dimensions and are not sure whether they will fit the available space, use the \lstinline!keepaspectratio! option together with \lstinline!width=\linewidth! and \lstinline!height=0.5\textheight!.
-\LaTeX will automatically determine the proper dimensions for your image included
+\LaTeX will automatically determine the proper dimensions for your image included.
 
 A standalone figure i.e., not part of a subfigure (matrix), must be set to a maximum width of \lstinline!\linewidth! to not stretch it farther than the line width, the height can be chosen arbitrarily.
 
@@ -311,7 +311,8 @@ To help you with proper code for a table, use the code samples from \cref{lst:ta
 \end{table}
 
 \begin{lstlisting}[float,language={[LaTeX]TeX}, caption={Sample code for type setting table with a header.},label={lst:table-large}]
-\centering
+\begin{table}
+    \centering
     \caption{This table has its caption above, too, and%
             has a header and colors and all that fancy%
             stuff (plus a caption that spans multiple lines).}
@@ -576,15 +577,48 @@ For tables, the guidelines are
 \section{Coloring}
 
 There are a few basic colors that are set for some default coloring of tables and should be used primarily for other things, where applicable.
+For all the available color commands and a sample of the rendered color, please see \cref{tbl:color-samples}.
 
-\begin{itemize}
-    \item very light gray \textcolor{VLGray}{VLGray}
-    \item light gray \textcolor{LGray}{LGray}
-    \item medium gray \textcolor{MGray}{MGray}
-    \item dark gray \textcolor{DGray}{DGray}
-    \item vary dark gray \textcolor{VDGray}{VDGray}
-    \item very very dark gray \textcolor{VVDGray}{VVDGray}
-\end{itemize}
+\begin{table}
+    \centering
+    \caption{List of available color codes and a sample colored box}
+    \label{tbl:color-samples}
+    \begin{tabular}{ll} \toprule
+        Color Code
+            & Color Sample \\ \midrule
+        MainGrayVeryLight
+            & \crule[MainGrayVeryLight]{7.5cm}{1cm} \\
+        MainGrayLight
+            & \crule[MainGrayLight]{7.5cm}{1cm} \\
+        MainGray
+            & \crule[MainGray]{7.5cm}{1cm} \\
+        MainGrayDark
+            & \crule[MainGrayDark]{7.5cm}{1cm} \\
+        MainGrayVeryDark
+            & \crule[MainGrayVeryDark]{7.5cm}{1cm} \\
+        PrimaryColorVeryLight
+            & \crule[PrimaryColorVeryLight]{7.5cm}{1cm} \\
+        PrimaryColorLight
+            & \crule[PrimaryColorLight]{7.5cm}{1cm} \\
+        PrimaryColor
+            & \crule[PrimaryColor]{7.5cm}{1cm} \\
+        PrimaryColorDark
+            & \crule[PrimaryColorDark]{7.5cm}{1cm} \\
+        PrimaryColorVeryDark
+            & \crule[PrimaryColorVeryDark]{7.5cm}{1cm} \\
+        SecondaryColorVeryLight
+            & \crule[SecondaryColorVeryLight]{7.5cm}{1cm} \\
+        SecondaryColorLight
+            & \crule[SecondaryColorLight]{7.5cm}{1cm} \\
+        SecondaryColor
+            & \crule[SecondaryColor]{7.5cm}{1cm} \\
+        SecondaryColorDark
+            & \crule[SecondaryColorDark]{7.5cm}{1cm} \\
+        SecondaryColorVeryDark
+            & \crule[SecondaryColorVeryDark]{7.5cm}{1cm} \\ \bottomrule
+    \end{tabular}
+\end{table}
+
 
 
 \section{Referencing}\label{sec:referencing}
