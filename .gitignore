@@ -30,4 +30,6 @@ _minted-document
 *.toc
 *.lol
 *.xdy
+*.mtc*
+*.maf
 
