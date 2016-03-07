@@ -42,9 +42,8 @@
 
 % Provide exclusive option pair "online/print" to allow for setting different color values in e.g., hyperref for online and print publication
 \newtoggle{online}\togglefalse{online}
-\newtoggle{print}\toggletrue{print}
-\DeclareOption{online}{\toggletrue{online}\togglefalse{print}}
-\DeclareOption{print}{\toggletrue{print}\togglefalse{online}}
+\DeclareOption{online}{\toggletrue{online}}
+\DeclareOption{print}{\togglefalse{online}}
 
 % Different thing than "draft/final"
 \newbool{thesisfinal}
