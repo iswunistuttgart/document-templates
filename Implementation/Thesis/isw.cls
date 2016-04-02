@@ -151,6 +151,7 @@
     headsepline=0.3pt, %
     headtopline=0.6pt, %
     footsepline=0.3pt, %
+    draft=false, % To remove rulers inserted by the package
 }{scrlayer-scrpage}
 
 % Default options to the geometry paackage
@@ -355,7 +356,7 @@
 % The package is distributed with the bigdelim and bigstrut packages, which can be used to advantage with \multirow cells.
 \RequirePackage{multirow}
 
-%
+% Each style can be mod­i­fied us­ing a set of sim­ple com­mands. Op­tion­ally one can mod­ify the for­mat­ting rou­tines in or­der to cre­ate ad­di­tional chap­ter head­ings. This pack­age was pre­vi­ously known as Fan­cyChap­ter.
 \RequirePackage{fncychap}
 
 % The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors. It allows a user to select a document-wide target color model and offers complete tools for conversion between eight color models. Additionally, there is a command for alternating row colors plus repeated non-aligned material (like horizontal lines) in tables. Colors can be mixed like \color{red!30!green!40!blue}.
@@ -384,10 +385,11 @@
 % The package allows rows and columns to be coloured, and even individual cells.
 \RequirePackage{colortbl}
 
-% Tabulars with adjustable-width columns
-% The package defines an environment tabularx, an extension of tabular which has an additional column designator, X, which creates a paragraph-like column whose width automatically expands so that the declared width of the environment is filled. (Two X columns together share out the available space between them, and so on.)
-% The package is part of the tools bundle in the LaTeX required distribution.
-\RequirePackage{tabularx}
+% The pack­age pro­vides an en­vi­ron­ment, tabu, which will make any sort of tab­u­lar (that doesn't need to split across pages), and an en­vi­ron­ment longtabu which pro­vides the fa­cil­i­ties of tabu in a mod­i­fied longtable en­vi­ron­ment. (Note that this lat­ter of­fers an en­hance­ment of ltxtable.)
+% The pack­age re­quires the ar­ray pack­age, and needs e-TeX to run (since ar­ray.sty is present in ev­ery con­form­ing dis­tri­bu­tion of LaTeX, and since ev­ery pub­licly avail­able LaTeX for­mat is built us­ing e-TeX, the re­quire­ments are pro­vided by de­fault on any rea­son­able sys­tem). The pack­age also re­quires xcolor for coloured rules in ta­bles, and col­ortbl for coloured cells. The longtabu en­vi­ron­ment fur­ther re­quires that longtable be loaded. The pack­age it­self does not load any of these pack­ages for the user.
+% The tabu en­vi­ron­ment may be used in place of tab­u­lar, tab­u­lar* and tab­u­larx en­vi­ron­ments, as well as the ar­ray en­vi­ron­ment in maths mode. It over­loads tab­u­larx's X-col­umn spec­i­fi­ca­tion, al­low­ing a width spec­i­fi­ca­tion, align­ment (l, r, c and j) and col­umn type in­di­ca­tion (p, m and b).
+% \be­gin{tabu} to <di­men> spec­i­fies a tar­get width, and \be­gin{tabu} spread <di­men> en­larges the en­vi­ron­ment’s “nat­u­ral” width.
+\RequirePackage{tabu}
 
 % The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
 \RequirePackage{booktabs}
@@ -541,14 +543,14 @@
 
 % This package helps you keep track of all the labels you define, by putting the name of new labels into the margin whenever the \label command is used.
 % The package allows you to do the same thing for other commands. The only one for which this is obviously useful is the \cite command, but it's easy to do it for others, such as the \ref or \begin commands
-\RequirePackage{showlabels}
-\renewcommand{\showlabelfont}{\small}
-\renewcommand{\showlabelsetlabel}[1]{%
-    \fboxsep2pt%
-    \fbox{%
-        \parbox[t]{2.25cm}{\showlabelfont #1}%
-    }
-}
+%\RequirePackage{showlabels}
+%\renewcommand{\showlabelfont}{\small}
+%\renewcommand{\showlabelsetlabel}[1]{%
+%    \fboxsep2pt%
+%    \fbox{%
+%        \parbox[t]{2.25cm}{\showlabelfont #1}%
+%    }
+%}
 
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author’s glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
@@ -578,7 +580,6 @@
     \def\@localSubmittedBy{eingereicht von}
     \def\@localFrom{aus}
     \def\@localSubmittedOn{Eingereicht am}
-    \def\@localDepartmentOf{der}
     \def\@localMajor{Studiengang}
     \def\@localPartner{In Kooperation mit}
     \def\@localKeywords{Stichw\"orter}
@@ -650,14 +651,13 @@
         \def\@DegreeShort{}
     }{}
     \def\@ThesisPretext{%
-        Eine \@ThesisType\space zur Vorlage an der Fakult\"at %\\%
-        {\@faculty} %\\%
-        {\@university} %\\%
+        Eine \@ThesisType\space zur Vorlage an der Fakult\"at %
+        \@faculty, \@university,%
         \ifdefempty{\@DegreeLong}{}{%
-            zur Erlangung des akademischen Grades %\\%
+            \space zur Erlangung des akademischen Grades %\\%
             {\@DegreeLong}\space (\@DegreeShort)%
-        }
-    }
+        }%
+    }%
     %
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
@@ -676,7 +676,7 @@
         \end{center}
         \vspace{1\baselineskip}
         \begin{enumerate}%
-            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
             \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
             \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
             \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
@@ -687,14 +687,7 @@
         \begin{center}%
             \selectfont\sffamily%
             \small%
-%            \newlength{\lettabcolsep}%
-%            \setlength{\lettabcolsep}{\tabcolsep}%
-            \renewcommand{\tabcolsep}{0pt}%
-            \begin{tabularx}{\linewidth}{%
-                    >{\raggedright\arraybackslash}p{0.4\linewidth}%
-                    X%
-                    >{\raggedleft\arraybackslash}p{0.4\linewidth}%
-            }%
+            \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
                 \rule{\linewidth}{0.5pt}%
                     & \rule{\linewidth}{0pt}%
                     & \rule{\linewidth}{0.5pt}%
@@ -702,8 +695,7 @@
                 Autor%
                     & %
                     & Datum \\%
-            \end{tabularx}%
-%            \renewcommand{\tabcolsep}{\lettabcolsep}%
+            \end{tabu}%
         \end{center}%
         \vfill%
         \cleardoublepage%
@@ -719,7 +711,6 @@
     \def\@localSubmittedBy{submitted by}
     \def\@localFrom{from}
     \def\@localSubmittedOn{Submitted on}
-    \def\@localDepartmentOf{at}
     \def\@localMajor{Major}
     \def\@localPartner{In cooperation with}
     \def\@localKeywords{Keywords}
@@ -791,10 +782,9 @@
         \def\@DegreeShort{}
     }{}
     \def\@ThesisPretext{A \@ThesisType\space presented to the faculty %\\%
-        {\@faculty} %\\%
-        {\@university} %\\%
+        \@faculty, \@university,%
         \ifdefempty{\@DegreeLong}{}{%
-            in partial fulfillment of the requirements for the degree of %\\%
+            \space in partial fulfillment of the requirements for the degree of %\\%
             {\@DegreeLong}\space (\@DegreeShort)%
         }%
     }%
@@ -817,7 +807,7 @@
         \end{center}
         \vspace{1\baselineskip}
         \begin{enumerate}%
-            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
             \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
             \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
             \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
@@ -828,23 +818,15 @@
         \begin{center}%
             \selectfont\sffamily%
             \small%
-            %            \newlength{\lettabcolsep}%
-            %            \setlength{\lettabcolsep}{\tabcolsep}%
-            \renewcommand{\tabcolsep}{0pt}%
-            \begin{tabularx}{\linewidth}{%
-                    >{\raggedright\arraybackslash}p{0.4\linewidth}%
-                    X%
-                    >{\raggedleft\arraybackslash}p{0.4\linewidth}%
-                }%
+            \begin{tabu} to \linewidth {X[5,L] X[1] X[5,R]}%
                 \rule{\linewidth}{0.5pt}%
-                & \rule{\linewidth}{0pt}%
-                & \rule{\linewidth}{0.5pt}%
-                \\[-1.5ex]%
+                    & \rule{\linewidth}{0pt}%
+                    & \rule{\linewidth}{0.5pt}%
+                    \\[-1.5ex]%
                 Autor%
-                & %
-                & Datum \\%
-            \end{tabularx}%
-            %            \renewcommand{\tabcolsep}{\lettabcolsep}%
+                    & %
+                    & Datum
+            \end{tabu}%
         \end{center}%
         \vfill%
         \cleardoublepage%
@@ -892,21 +874,21 @@
 % Set counter of what to show in the Toc and what not
 \setcounter{tocdepth}{2}
 
-% Styles for the header and footer lines
+% Styles for header and footer lines
 \setheadtopline{0.5pt}
 \setheadsepline{0.6pt}
 %\renewcommand{\headrulewidth}{0.4pt}
 %\renewcommand{\footrulewidth}{0.2pt}
 %\renewcommand{\chaptermark}[1]{\markboth{\thechapter\space#1}{}}
 %\renewcommand{\sectionmark}[1]{\markright{\thesection\space#1}}
-% Styles for the header
+% Styles for header
 %\fancyhead[LE]{\nouppercase{\sffamily\leftmark}}
 %\fancyhead[CE]{}
 %\fancyhead[RE]{}
 %\fancyhead[LO]{\nouppercase{\sffamily\rightmark}}
 %\fancyhead[CO]{}
 %\fancyhead[RO]{}
-%% Styles for the footer
+%% Styles for footer
 %\fancyfoot[LE]{\sffamily\thepage}
 %\fancyfoot[CE]{}
 %\fancyfoot[RE]{\sffamily\@author}
@@ -919,12 +901,13 @@
 \setcounter{tocdepth}{2}
 
 % Setting or adding to some koma fonts
-\setkomafont{title}{\bfseries\LARGE}
-\setkomafont{subtitle}{\slshape\large}
-\setkomafont{author}{\bfseries\Large}
+\setkomafont{title}{\sffamily\Huge}
+\setkomafont{subtitle}{\sffamily\large}
+\setkomafont{author}{\sffamily\huge}
 \setkomafont{date}{\normalfont\normalsize}
 \setkomafont{pageheadfoot}{\color{MainColorVeryDark}\sffamily}
 \setkomafont{pagefoot}{\sffamily\small}
+\newkomafont{placeofbirth}{\normalfont\normalsize}
 \addtokomafont{pagenumber}{\sffamily\color{MainColorVeryDark}}
 \addtokomafont{headtopline}{\color{MainColor}}
 \addtokomafont{headsepline}{\color{MainColorVeryDark}}
@@ -972,11 +955,11 @@
 \newcommand{\university}[1]{\gdef\@university{#1}}
 \newcommand{\@university}{\@latex@warning@no@line{No \noexpand\university given}}
 % Long name of the department
-\newcommand{\departmentlong}[1]{\gdef\@departmentlong{#1}}
-\newcommand{\@departmentlong}{\@latex@warning@no@line{No \noexpand\departmentlong given}}
+\newcommand{\department}[1]{\gdef\@department{#1}}
+\newcommand{\@department}{\@latex@warning@no@line{No \noexpand\department given}}
 % Short name of the department
 \newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
-\newcommand{\@departmentshort}{}
+\gdef\@departmentshort{}
 % Address of the department
 \newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
 \newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
@@ -1000,7 +983,7 @@
 \newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 % Place of birth
 \newcommand{\placeofbirth}[2]{\gdef\@placeofbirth{#1}}
-\newcommand{\@placeofbirth}{}
+\gdef\@placeofbirth{}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
 \newcommand{\universitylogo}{logo/university}
@@ -1024,8 +1007,6 @@
 \newcommand{\theadend}{\midrule}
 
 
-%\RequirePackage{showframe}
-
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
@@ -1034,9 +1015,9 @@
     \begin{titlepage}%
         \thispagestyle{empty}%
         \centering%
-        \vspace*{2cm}\par%
+        \vspace*{1.5cm}\par%
 %        \fbox{%
-            \begin{minipage}[t][2.5cm][c]{0.9\linewidth}%
+            \begin{minipage}[t][3cm][c]{0.9\linewidth}%
                 \centering%
                 {\usekomafont{title}{\@title}\par}%
             \end{minipage}\par%
@@ -1048,7 +1029,7 @@
                 \ifdefempty{\@subtitle}{%
                     %
                 }{%
-                    \par\par\usekomafont{subtitle}{\@subtitle}%
+                    \usekomafont{subtitle}{\@subtitle}%
                 }%
             \end{minipage}\par%
 %        }%
@@ -1061,48 +1042,50 @@
                 \end{spacing}
             \end{minipage}
 %        }%
-        \vspace*{1cm}\par%
+        \vspace*{1.5cm}\par%
 %        \fbox{%
-            \begin{minipage}[t][2cm][c]{0.8\linewidth}
+            \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
                 \centering%
                 \@localSubmittedBy\par%
-                \vspace{0.2cm}\par%
+                \vspace{0.5cm}\par%
                 {\usekomafont{author}{\@author}}\par%
-                \vspace{0.2cm}\par%
+                \vspace{0.5cm}\par%
                 \ifdefempty{\@placeofbirth}{%
                     \par%
                 }{%
-                    \@localFrom\space\@placeofbirth\par%
+                    \@localFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
                 }%
             \end{minipage}
-%        }
-        \vspace*{0.75cm}\par%
+%        }%
+        \vspace*{1cm}\par%
 %        \fbox{%
-            \begin{minipage}[t][0.75cm][c]{0.5\linewidth}
+            \begin{minipage}[t][1cm][c]{0.5\linewidth}
                 \centering
                 \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
             \end{minipage}
 %        }%
-        \vspace*{0.75cm}\par%
+        \vspace*{1cm}\par%
 %        \fbox{%
             \begin{minipage}[c][3cm][c]{0.7\linewidth}%
-                \begin{tabular}{p{0.2\linewidth}p{0.7\linewidth}}
+                \begin{tabu} to \linewidth {X[1,l] X[4,l]}
                 {\@localExaminer:}
                     & \@examiner \\
                 {\@localSupervisor:}
                     & {\renewcommand{\and}{\par}\@supervisor} \\
                 {\@localSubmittedOn:}
                     & {\usekomafont{date}{\printdate{\@date}}\par}
-                \end{tabular}
+                \end{tabu}
             \end{minipage}%
 %        }%
-        \vspace*{1cm}\par%
+%        \vspace*{1cm}\par%
+        \vfill
 %        \fbox{%
-            \begin{minipage}[t][1.5cm][t]{0.6\linewidth}
-                \@departmentlong\space\@localDepartmentOf\space\@university.
+            \begin{minipage}[t][1.5cm][t]{0.7\linewidth}
+                \@department, \@university.
             \end{minipage}
 %        }%
-        \vspace*{1.5cm}\par%
+        \vfill
+%        \vspace*{1.5cm}\par%
 %        \fbox{%
             \begin{minipage}[t][1cm][t]{0.2\linewidth}
                 \printdayoff
@@ -1111,115 +1094,7 @@
             \end{minipage}%
 %        }%
     \end{titlepage}%
-%    
-%    \begin{titlepage}
-%        \thispagestyle{empty}%
-%        % University Logo
-%        \begin{minipage}{0.49\linewidth}%
-%            \raggedright
-%            \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\universitylogo\@localLogoSuffix\expandafter}%
-%        \end{minipage}\hfill%
-%        % Partner logo, if given
-%        \ifdefempty{\partnerlogo}{}{%
-%            \begin{minipage}{0.49\linewidth}%
-%                \raggedleft%
-%                \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\partnerlogo\@localLogoSuffix\expandafter}%
-%            \end{minipage}%
-%        }\par%
-%        \centering%
-%        \vspace*{0.5cm}\par%
-%        % THESIS TYPE
-%        {\Large\sffamily\@ThesisName\par}%
-%        %
-%        % TITLE (and possibly subtitle)
-%        \vspace*{0.75cm}\par%
-%        \begin{minipage}[t][3.25cm][t]{\linewidth}%
-%            \centering%
-%            % TITLE
-%            {\usekomafont{title}{\@title\par}}%
-%            \vspace*{0.33cm}%
-%            % Possibly subtitle
-%            {\ifdefempty{\@subtitle}{}{\usekomafont{subtitle}{\@subtitle\par}}}%
-%        \end{minipage}\par%
-%        %
-%        \vspace*{1.5cm}\par%
-%        % AUTHOR
-%        \begin{minipage}[t][2cm][t]{\linewidth}
-%            \centering%
-%            {\small\@localSubmittedBy\par}%
-%%            \vspace*{0.25cm}%
-%            {\usekomafont{author}{\@author\par}}%
-%            \vspace*{0.25cm}%
-%            {\sffamily\@matriculation}%
-%        \end{minipage}\par%
-%        % DATE
-%        \vspace*{0.5cm}%
-%        \begin{minipage}[t][0.5cm][t]{\linewidth}
-%            \centering%
-%            \@localSubmittedOn\par
-%            {\usekomafont{date}\printdate{\@date}\par}%
-%        \end{minipage}\par
-%        %
-%        \vspace*{1cm}
-%        % DRAFT or not
-%        \begin{minipage}[t][0.5cm][t]{\linewidth}%
-%            \centering
-%            \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
-%        \end{minipage}\par
-%        \vspace*{1cm}
-%        % Block for thesis pretext i.e., "a ... submitted in partial fulfillment of ..."
-%        \begin{minipage}[t][2.5cm][t]{\linewidth}%
-%            \begin{spacing}{1.33}
-%            \centering%
-%            {\small\@ThesisPretext\par}%
-%            \end{spacing}
-%        \end{minipage}\par%
-%        %
-%        \vspace*{2.5cm}%
-%        % EXAMINER, ADVISOR, GRADUATE PROGRAM, etc.
-%        \begin{minipage}[t][3.5cm][t]{\linewidth}%
-%            \begin{minipage}[t]{0.49\linewidth}%
-%                \raggedright
-%                % EXAMINER
-%                {\sffamily\itshape\@localExaminer:}\par%
-%                    \@examiner\par%
-%                \vspace*{0.5cm}%
-%                % SUPERVISOR
-%                {\sffamily\itshape\@localSupervisor:}\par%
-%                    \renewcommand{\and}{\par}%
-%                    \@supervisor\par%
-%            \end{minipage}%
-%            \hfill%
-%            \begin{minipage}[t]{0.49\linewidth}%
-%                % MAJOR
-%                \raggedleft
-%                {\sffamily\itshape\@localMajor:}\par%
-%                \@major\par%
-%                \vspace*{0.5cm}
-%                % PARTNER
-%                %
-%                \ifdefempty{\@partner}{}{%
-%                    {\sffamily\itshape\@localPartner:}\par%
-%                    \@partner\par%
-%                }
-%                %{}
-%            \end{minipage}%
-%        \end{minipage}\par%
-%        %
-%        \vfill%
-%        {%
-%            \begin{minipage}[c]{0.845\linewidth}%
-%                \@departmentlong\\
-%                \@departmentAddress
-%            \end{minipage}%
-%            \hfill%
-%            \begin{minipage}[c]{0.145\linewidth}%
-%                \raggedleft
-%                \includegraphics[height=1.5cm,keepaspectratio]{\departmentlogo\@localLogoSuffix}
-%            \end{minipage}%
-%        }%
-%    \end{titlepage}
-    \restoregeometry
+    \restoregeometry%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
