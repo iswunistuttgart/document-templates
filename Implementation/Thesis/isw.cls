@@ -1,6 +1,6 @@
- % Definition of class version and last release date
-\def\fileversion{0.4.1}
-\def\filedate{2016/02/22}
+% Definition of class version and last release date
+\def\fileversion{0.5.0}
+\def\filedate{2016/04/02}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -576,7 +576,9 @@
     \def\@localSupervisor{Betreuer}
     \def\@localLogoSuffix{-deutsch}
     \def\@localSubmittedBy{eingereicht von}
-    \def\@localSubmittedOn{am}
+    \def\@localFrom{aus}
+    \def\@localSubmittedOn{Eingereicht am}
+    \def\@localDepartmentOf{der}
     \def\@localMajor{Studiengang}
     \def\@localPartner{In Kooperation mit}
     \def\@localKeywords{Stichw\"orter}
@@ -632,7 +634,7 @@
     \ifdefstring{\@thesis}{phd}{%
         \def\@ThesisName{Dissertation}
         \def\@ThesisType{Dissertation}
-        \def\@DegreeLong{Doktoringenieur}
+        \def\@DegreeLong{Doktor-Ingenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
     \ifdefstring{\@thesis}{prd}{
@@ -648,11 +650,13 @@
         \def\@DegreeShort{}
     }{}
     \def\@ThesisPretext{%
-        Eine \@ThesisType\space zur Vorlage an der Fakult\"at\\%
-        {\scshape\@faculty}\\%
-        {\scshape\@university}\\%
-        zur Erlangung des akademischen Grades\\%
-        {\scshape\@DegreeLong}\space (\@DegreeShort)%
+        Eine \@ThesisType\space zur Vorlage an der Fakult\"at %\\%
+        {\@faculty} %\\%
+        {\@university} %\\%
+        \ifdefempty{\@DegreeLong}{}{%
+            zur Erlangung des akademischen Grades %\\%
+            {\@DegreeLong}\space (\@DegreeShort)%
+        }
     }
     %
     \renewcommand{\DeclarationOfAuthorship}{%
@@ -713,7 +717,9 @@
     \def\@localSupervisor{Supervisor}
     \def\@localLogoSuffix{-english}
     \def\@localSubmittedBy{submitted by}
-    \def\@localSubmittedOn{on}
+    \def\@localFrom{from}
+    \def\@localSubmittedOn{Submitted on}
+    \def\@localDepartmentOf{at}
     \def\@localMajor{Major}
     \def\@localPartner{In cooperation with}
     \def\@localKeywords{Keywords}
@@ -769,7 +775,7 @@
     \ifdefstring{\@thesis}{phd}{%
         \def\@ThesisName{Dissertation}
         \def\@ThesisType{dissertation}
-        \def\@DegreeLong{Doktoringenieur}
+        \def\@DegreeLong{Doktor-Ingenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
     \ifdefstring{\@thesis}{prd}{
@@ -784,11 +790,14 @@
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \def\@ThesisPretext{A \@ThesisType\space presented to the faculty\\%
-        {\scshape\@faculty}\\%
-        {\scshape\@university}\\%
-        in partial fulfillment of the requirements for the degree of\\%
-        {\scshape\@DegreeLong}\space (\@DegreeShort)}
+    \def\@ThesisPretext{A \@ThesisType\space presented to the faculty %\\%
+        {\@faculty} %\\%
+        {\@university} %\\%
+        \ifdefempty{\@DegreeLong}{}{%
+            in partial fulfillment of the requirements for the degree of %\\%
+            {\@DegreeLong}\space (\@DegreeShort)%
+        }%
+    }%
     %
     %
     \renewcommand{\DeclarationOfAuthorship}{%
@@ -913,6 +922,7 @@
 \setkomafont{title}{\bfseries\LARGE}
 \setkomafont{subtitle}{\slshape\large}
 \setkomafont{author}{\bfseries\Large}
+\setkomafont{date}{\normalfont\normalsize}
 \setkomafont{pageheadfoot}{\color{MainColorVeryDark}\sffamily}
 \setkomafont{pagefoot}{\sffamily\small}
 \addtokomafont{pagenumber}{\sffamily\color{MainColorVeryDark}}
@@ -988,6 +998,9 @@
 % List of keywords
 \newcommand{\keywords}[1]{\gdef\@keywords{#1}}
 \newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+% Place of birth
+\newcommand{\placeofbirth}[2]{\gdef\@placeofbirth{#1}}
+\newcommand{\@placeofbirth}{}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
 \newcommand{\universitylogo}{logo/university}
@@ -1011,118 +1024,201 @@
 \newcommand{\theadend}{\midrule}
 
 
+%\RequirePackage{showframe}
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
-    \newgeometry{inner=2cm, outer=2cm, top=1.5cm, bottom=1.5cm}
-    \begin{titlepage}
+    \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+    \begin{titlepage}%
         \thispagestyle{empty}%
-        % University Logo
-        \begin{minipage}{0.49\linewidth}%
-            \raggedright
-            \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\universitylogo\@localLogoSuffix\expandafter}%
-        \end{minipage}\hfill%
-        % Partner logo, if given
-        \ifdefempty{\partnerlogo}{}{%
-            \begin{minipage}{0.49\linewidth}%
-                \raggedleft%
-                \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\partnerlogo\@localLogoSuffix\expandafter}%
-            \end{minipage}%
-        }\par%
         \centering%
-        \vspace*{0.5cm}\par%
-        % THESIS TYPE
-        {\Large\sffamily\@ThesisName\par}%
-        %
-        % TITLE (and possibly subtitle)
-        \vspace*{0.75cm}\par%
-        \begin{minipage}[t][3.25cm][t]{\linewidth}%
-            \centering%
-            % TITLE
-            {\usekomafont{title}{\@title\par}}%
-            \vspace*{0.33cm}%
-            % Possibly subtitle
-            {\ifdefempty{\@subtitle}{}{\usekomafont{subtitle}{\@subtitle\par}}}%
-        \end{minipage}\par%
-        %
+        \vspace*{2cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][2.5cm][c]{0.9\linewidth}%
+                \centering%
+                {\usekomafont{title}{\@title}\par}%
+            \end{minipage}\par%
+%        }%
+        \vspace*{0.1cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
+                \centering%
+                \ifdefempty{\@subtitle}{%
+                    %
+                }{%
+                    \par\par\usekomafont{subtitle}{\@subtitle}%
+                }%
+            \end{minipage}\par%
+%        }%
         \vspace*{1.5cm}\par%
-        % AUTHOR
-        \begin{minipage}[t][2cm][t]{\linewidth}
-            \centering%
-            {\small\@localSubmittedBy\par}%
+%        \fbox{%
+            \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
+                \centering
+                \begin{spacing}{1.25}
+                    {\@ThesisPretext\par}%
+                \end{spacing}
+            \end{minipage}
+%        }%
+        \vspace*{1cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][2cm][c]{0.8\linewidth}
+                \centering%
+                \@localSubmittedBy\par%
+                \vspace{0.2cm}\par%
+                {\usekomafont{author}{\@author}}\par%
+                \vspace{0.2cm}\par%
+                \ifdefempty{\@placeofbirth}{%
+                    \par%
+                }{%
+                    \@localFrom\space\@placeofbirth\par%
+                }%
+            \end{minipage}
+%        }
+        \vspace*{0.75cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][0.75cm][c]{0.5\linewidth}
+                \centering
+                \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
+            \end{minipage}
+%        }%
+        \vspace*{0.75cm}\par%
+%        \fbox{%
+            \begin{minipage}[c][3cm][c]{0.7\linewidth}%
+                \begin{tabular}{p{0.2\linewidth}p{0.7\linewidth}}
+                {\@localExaminer:}
+                    & \@examiner \\
+                {\@localSupervisor:}
+                    & {\renewcommand{\and}{\par}\@supervisor} \\
+                {\@localSubmittedOn:}
+                    & {\usekomafont{date}{\printdate{\@date}}\par}
+                \end{tabular}
+            \end{minipage}%
+%        }%
+        \vspace*{1cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][1.5cm][t]{0.6\linewidth}
+                \@departmentlong\space\@localDepartmentOf\space\@university.
+            \end{minipage}
+%        }%
+        \vspace*{1.5cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][1cm][t]{0.2\linewidth}
+                \printdayoff
+                \printdate{\@date}
+                \printdayon
+            \end{minipage}%
+%        }%
+    \end{titlepage}%
+%    
+%    \begin{titlepage}
+%        \thispagestyle{empty}%
+%        % University Logo
+%        \begin{minipage}{0.49\linewidth}%
+%            \raggedright
+%            \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\universitylogo\@localLogoSuffix\expandafter}%
+%        \end{minipage}\hfill%
+%        % Partner logo, if given
+%        \ifdefempty{\partnerlogo}{}{%
+%            \begin{minipage}{0.49\linewidth}%
+%                \raggedleft%
+%                \includegraphics[width=\linewidth, height=1.25cm, keepaspectratio]{\expandafter\partnerlogo\@localLogoSuffix\expandafter}%
+%            \end{minipage}%
+%        }\par%
+%        \centering%
+%        \vspace*{0.5cm}\par%
+%        % THESIS TYPE
+%        {\Large\sffamily\@ThesisName\par}%
+%        %
+%        % TITLE (and possibly subtitle)
+%        \vspace*{0.75cm}\par%
+%        \begin{minipage}[t][3.25cm][t]{\linewidth}%
+%            \centering%
+%            % TITLE
+%            {\usekomafont{title}{\@title\par}}%
+%            \vspace*{0.33cm}%
+%            % Possibly subtitle
+%            {\ifdefempty{\@subtitle}{}{\usekomafont{subtitle}{\@subtitle\par}}}%
+%        \end{minipage}\par%
+%        %
+%        \vspace*{1.5cm}\par%
+%        % AUTHOR
+%        \begin{minipage}[t][2cm][t]{\linewidth}
+%            \centering%
+%            {\small\@localSubmittedBy\par}%
+%%            \vspace*{0.25cm}%
+%            {\usekomafont{author}{\@author\par}}%
 %            \vspace*{0.25cm}%
-            {\usekomafont{author}{\@author\par}}%
-            \vspace*{0.25cm}%
-            {\sffamily\@matriculation}%
-        \end{minipage}\par%
-        % DATE
-        \vspace*{0.5cm}%
-        \begin{minipage}[t][0.5cm][t]{\linewidth}
-            \centering%
-            \@localSubmittedOn\par
-            {\usekomafont{date}\printdate{\@date}\par}%
-        \end{minipage}\par
-        %
-        \vspace*{1cm}
-        % DRAFT or not
-        \begin{minipage}[t][0.5cm][t]{\linewidth}%
-            \centering
-            \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
-        \end{minipage}\par
-        \vspace*{1cm}
-        % Block for thesis pretext i.e., "a ... submitted in partial fulfillment of ..."
-        \begin{minipage}[t][2.5cm][t]{\linewidth}%
-            \begin{spacing}{1.33}
-            \centering%
-            {\small\@ThesisPretext\par}%
-            \end{spacing}
-        \end{minipage}\par%
-        %
-        \vspace*{2.5cm}%
-        % EXAMINER, ADVISOR, GRADUATE PROGRAM, etc.
-        \begin{minipage}[t][3.5cm][t]{\linewidth}%
-            \begin{minipage}[t]{0.49\linewidth}%
-                \raggedright
-                % EXAMINER
-                {\sffamily\itshape\@localExaminer:}\par%
-                    \@examiner\par%
-                \vspace*{0.5cm}%
-                % SUPERVISOR
-                {\sffamily\itshape\@localSupervisor:}\par%
-                    \renewcommand{\and}{\par}%
-                    \@supervisor\par%
-            \end{minipage}%
-            \hfill%
-            \begin{minipage}[t]{0.49\linewidth}%
-                % MAJOR
-                \raggedleft
-                {\sffamily\itshape\@localMajor:}\par%
-                \@major\par%
-                \vspace*{0.5cm}
-                % PARTNER
-                %
-                \ifdefempty{\@partner}{}{%
-                    {\sffamily\itshape\@localPartner:}\par%
-                    \@partner\par%
-                }
-                %{}
-            \end{minipage}%
-        \end{minipage}\par%
-        %
-        \vfill%
-        {%
-            \begin{minipage}[c]{0.845\linewidth}%
-                \@departmentlong\\
-                \@departmentAddress
-            \end{minipage}%
-            \hfill%
-            \begin{minipage}[c]{0.145\linewidth}%
-                \raggedleft
-                \includegraphics[height=1.5cm,keepaspectratio]{\departmentlogo\@localLogoSuffix}
-            \end{minipage}%
-        }%
-    \end{titlepage}
+%            {\sffamily\@matriculation}%
+%        \end{minipage}\par%
+%        % DATE
+%        \vspace*{0.5cm}%
+%        \begin{minipage}[t][0.5cm][t]{\linewidth}
+%            \centering%
+%            \@localSubmittedOn\par
+%            {\usekomafont{date}\printdate{\@date}\par}%
+%        \end{minipage}\par
+%        %
+%        \vspace*{1cm}
+%        % DRAFT or not
+%        \begin{minipage}[t][0.5cm][t]{\linewidth}%
+%            \centering
+%            \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
+%        \end{minipage}\par
+%        \vspace*{1cm}
+%        % Block for thesis pretext i.e., "a ... submitted in partial fulfillment of ..."
+%        \begin{minipage}[t][2.5cm][t]{\linewidth}%
+%            \begin{spacing}{1.33}
+%            \centering%
+%            {\small\@ThesisPretext\par}%
+%            \end{spacing}
+%        \end{minipage}\par%
+%        %
+%        \vspace*{2.5cm}%
+%        % EXAMINER, ADVISOR, GRADUATE PROGRAM, etc.
+%        \begin{minipage}[t][3.5cm][t]{\linewidth}%
+%            \begin{minipage}[t]{0.49\linewidth}%
+%                \raggedright
+%                % EXAMINER
+%                {\sffamily\itshape\@localExaminer:}\par%
+%                    \@examiner\par%
+%                \vspace*{0.5cm}%
+%                % SUPERVISOR
+%                {\sffamily\itshape\@localSupervisor:}\par%
+%                    \renewcommand{\and}{\par}%
+%                    \@supervisor\par%
+%            \end{minipage}%
+%            \hfill%
+%            \begin{minipage}[t]{0.49\linewidth}%
+%                % MAJOR
+%                \raggedleft
+%                {\sffamily\itshape\@localMajor:}\par%
+%                \@major\par%
+%                \vspace*{0.5cm}
+%                % PARTNER
+%                %
+%                \ifdefempty{\@partner}{}{%
+%                    {\sffamily\itshape\@localPartner:}\par%
+%                    \@partner\par%
+%                }
+%                %{}
+%            \end{minipage}%
+%        \end{minipage}\par%
+%        %
+%        \vfill%
+%        {%
+%            \begin{minipage}[c]{0.845\linewidth}%
+%                \@departmentlong\\
+%                \@departmentAddress
+%            \end{minipage}%
+%            \hfill%
+%            \begin{minipage}[c]{0.145\linewidth}%
+%                \raggedleft
+%                \includegraphics[height=1.5cm,keepaspectratio]{\departmentlogo\@localLogoSuffix}
+%            \end{minipage}%
+%        }%
+%    \end{titlepage}
     \restoregeometry
 }
 
