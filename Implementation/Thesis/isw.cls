@@ -413,12 +413,19 @@
 \ifbool{minted}{}{%
     \RequirePackage{listings}
     \lstset{
-        numbers=left,
-        numberstyle=\tiny,
-        stepnumber=2,
-        numbersep=5pt,
-        frame=leftline,
-        breaklines=true,
+        backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+        breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+        breaklines=true,                 % sets automatic line breaking
+        deletekeywords={...},            % if you want to delete keywords from the given language
+        escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+%        fancyvrb=true,
+        frame=tb,                        % add a frame at the top and bottom
+        numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+        numbersep=5pt,                   % how far the line-numbers are from the code
+        numberstyle=\tiny\color{MainColorDark}, % the style that is used for the line-numbers
+        numberfirstline=true,            % number the first line regardless of stepnumber
+        rulecolor=\color{MainColorVeryDark}, % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+        stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
     }
     \lstloadlanguages{[Visual]C++,[95]Fortran,HTML,Java,make,Mathematica,Matlab,MuPAD,Octave,Pascal,Perl,Python,Ruby,sh,SQL,[LaTeX]TeX,XML,XSLT}
 }
@@ -472,6 +479,7 @@
 %%% Setup captions of subfigures
 \captionsetup[subfigure]{
     labelformat=parens,
+    textfont={sl},
 }
 
 % The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/section appendices. The word ‘Appendix’ or similar can be prepended to the appendix number for article class documents. The word ‘Appendices’ or similar can be added to the table of contents before the appendices are listed. The word ‘Appendices’ or similar can be typeset as a \part-like heading (page) in the body. An appendices environment is provided which can be used instead of the \appendix command.
@@ -1015,7 +1023,14 @@
     \begin{titlepage}%
         \thispagestyle{empty}%
         \centering%
-        \vspace*{1.5cm}\par%
+        \vspace*{0.25cm}\par%
+%        \fbox{%
+            \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+                \centering
+                \huge\@ThesisName\par%
+            \end{minipage}\par%
+%        }
+        \vspace*{0.75cm}\par%
 %        \fbox{%
             \begin{minipage}[t][3cm][c]{0.9\linewidth}%
                 \centering%
@@ -1077,7 +1092,6 @@
                 \end{tabu}
             \end{minipage}%
 %        }%
-%        \vspace*{1cm}\par%
         \vfill
 %        \fbox{%
             \begin{minipage}[t][1.5cm][t]{0.7\linewidth}
@@ -1085,7 +1099,6 @@
             \end{minipage}
 %        }%
         \vfill
-%        \vspace*{1.5cm}\par%
 %        \fbox{%
             \begin{minipage}[t][1cm][t]{0.2\linewidth}
                 \printdayoff

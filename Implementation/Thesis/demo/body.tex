@@ -205,10 +205,10 @@ Figure heights are limited to \lstinline!0.5\textheight! in order to not stretch
 If you happen to have images at odd dimensions and are not sure whether they will fit the available space, use the \lstinline!keepaspectratio! option together with \lstinline!width=\linewidth! and \lstinline!height=0.5\textheight!.
 \LaTeX will automatically determine the proper dimensions for your image included.
 
-A standalone figure i.e., not part of a subfigure (matrix), must be set to a maximum width of \lstinline!\linewidth! to not stretch it farther than the line width, the height can be chosen arbitrarily.
+A standalone figure i.e., not part of a subfigure (matrix), must be set to a maximum width of \lstinline!0.75\linewidth! to not stretch it farther than the line width, the height can be chosen arbitrarily.
 
 Figures can also be arranged in subfigures but no more than two per row.
-You can achieve this by setting each subfigure's width to be no larger than \lstinline!0.49\linewidth!, the height can be chosen arbitrarily.
+You can achieve this by setting each subfigure's width to be no larger than \lstinline!0.475\linewidth!, the height can be chosen arbitrarily.
 
 It's always best to use scalable graphics which will not be over- or undersampled when integrated into a document.
 This means, that you should use vector graphics wherever possible i.e., *.(e)ps or *.tikz files.
@@ -218,6 +218,8 @@ These need to be placed below the image and must be self-explanatory so that the
 Not sure if your caption is too detailed or too short?
 Rule of thumb: Try to present the table or figure so that it would make sense even if ripped from the paper.
 Additionally, do not be afraid to use lengthy figure captions over confusing or incomplete ones.
+
+Having a caption that is too long for the list of figures? There's an easy way to circumvent long captions in the list of figures: usage of the optional lof-caption argument to the \lstinline!\caption! command which looks like \lstinline[language={[LaTeX]TeX}]!\caption[This short caption shows up in the list of figures or tables, respectively]{While this very long long caption actually shows up under the caption just to show that it would be too long and spans multiple lines in the list of figures or tables, respectively.}!.
 
 Do not crowd a table or figure, neither within itself nor within your text; give it room to breathe. When it appears amidst your body text, skip at least one line above and below it.
 
@@ -243,6 +245,7 @@ To help you with the proper code for typesetting a figure, refer to \cref{lst:fi
     \label{fig:a-sample-figure}
 \end{figure}
 \end{lstlisting}
+
 
 
 \section{Tables}\label{sec:style-guide:tables}
@@ -386,29 +389,29 @@ One of these, apparently, is the \lstinline|align| environment which can be used
 \chapter[The Short Title of the Chapter Showing Up in the TOC and the Page Headers]{The Very First Chapter With a Very Long Title Just to See What it Looks Like Since it Spans Multiple Lines in the ToC}
 
 
-\lipsum[1]
+\lipsum[1-3]
 
 \chapter{Another Chapter}
 
-\lipsum[1]
+\lipsum[1-3]
 
 \section{A First Section}
 
-\lipsum[1]
+\lipsum[1-3]
 
 \subsection{A Sample Subsection}
 
-\lipsum[1]
+1\lipsum[1-3]
 
 \subsubsection{A Sample Subsubsection}
 
-\lipsum[1]
+\lipsum[1-3]
 
 \paragraph{A Sample Paragraph}
-\lipsum[1]
+\lipsum[1-3]
 
 \subparagraph{A Sample Subparagraph}
-\lipsum[1]
+\lipsum[1-3]
 
 
 \chapter{The Main Template}
@@ -431,7 +434,7 @@ You are free in organizing your document, however, it is recommended that a cert
     \item Acknowledgments (not mandatory)
     \item Abstract (with keywords)
     \item Abstract in second language (in German or English if thesis written in English or German, respectively)
-    \item The main content (in \lstinline!\chapter!)
+    \item The main content (separate them by use of \lstinline!\chapter!)
     \item Appendix or appendices
     \item Bibliography
 \end{enumerate}
@@ -457,7 +460,7 @@ You are free in organizing your document, however, it is recommended that a cert
         \label{fig:subfigures-two:2}
     \end{subfigure}
     
-    \caption{Even subfigures of two figures are possible and the left one is referenced like so \subref{fig:subfigures-two:1} while the right one is referenced like so \subref{fig:subfigures-two:2}.}
+    \caption{Even subfigures of two figures are possible and the left one is referenced like \subref{fig:subfigures-two:1} so, while the right one is referenced like \subref{fig:subfigures-two:2} so.}
     \label{fig:subfigures-two}
 \end{figure}
 
@@ -545,7 +548,7 @@ For figures, the guidelines are:
 
 \begin{itemize}
     \item Always center images using \lstinline!\centering! as the very first command of the \lstinline!figure!-environment.
-    \item Make sure to set the width of your included images explicitely using the \lstinline!width=! option. Have a single figure's width set to \lstinline!width=0.75\linewidth!, while two figures side by side must be set to \lstinline!width=\linewidth! as long as you set the width of the surrounding \lstinline!minipage! or \lstinline!subfigure! to \lstinline!0.49\linewidth!
+    \item Make sure to set the width of your included images explicitely using the \lstinline!width=! option. Have a single figure's width set to \lstinline!width=0.75\linewidth!, while two figures side by side must be set to \lstinline!width=\linewidth! as long as you set the width of the surrounding \lstinline!minipage! or \lstinline!subfigure! to \lstinline!0.49\linewidth!.
     \item Don't forget to keep the aspect ratio of images if you change their width.
     \item Never ever under sample images. In other words: never ever enlarge images.
     \item It's best to use vector graphics i.e., \lstinline!*.eps! or \lstinline!*.tikz! for proper quality in both PDFs as well as on screen.
@@ -553,8 +556,10 @@ For figures, the guidelines are:
     \item Let the labels be handled automatically by \LaTeX. A best practice is to set the prefix of figures' labels to \lstinline!fig:!.
     \item For a good example see \cref{fig:sample-figure} and its code at \cref{lst:sample-code} (this reference was created using the \lstinline!\cref{}! command).
     \item Always add a full stop to your figure captions like so.
-    \item Do not be afraid to use lengthy figure and table captions—better that than confusing or incomplete ones.
-    \item If your figure or table is essentially the same as or based on another author’s, but you recreated or adapted it, it is standard to include the words “Adapted from” or “After” followed by the author’s name and a citation at the end of the caption.
+    \item Do not be afraid to use lengthy figure and table captions-—better that than confusing or incomplete ones.
+    \item Figure and table captions must be elaborative i.e., do not fear having captions that span multiple lines. No really, don't.
+    \item If your table or figure caption is too long in the list of figures or list of tables, respectively, use the short-caption option to \lstinline!\caption! which looks like \lstinline!\caption[This short caption shows up in the list of figures/tables]{While this very long long caption actually shows up under the caption just to show that it would be too long and spans multiple lines in the list of figures/tables.}!.
+    \item If your figure or table is essentially the same as or based on another author’s, but you recreated or adapted it, it is standard to include the words ``Adapted from'' or ``After'' followed by the author’s name and a citation at the end of the caption.
     \item Always cite the figure or table if it—--or its data—--came from a source, using the same citation style that you have used throughout the paper. The most logical place for the citation to appear is at the end of the caption. See \cref{sec:referencing} of this manual for a thorough discussion of rules for source citation.
     \item Do not crowd a table or figure, neither within itself nor within your text; give it room to breathe. When it appears amidst your body text, skip at least one line above and below it.
     \item Rule of thumb: Try to present the table or figure so that it would make sense even if ripped from the paper.
@@ -626,7 +631,7 @@ For all the available color commands and a sample of the rendered color, please 
 Referencing may be done using \lstinline!\ref{label}! even though usage of \lstinline!\cref{label}! is encouraged for that it automatically typesets the appropriate type like \texttt{Eqn.} or \texttt{Fig.}, \texttt{Tbl.}, or \texttt{Listing} to whatever is being reference. At the beginning of a sentence, \lstinline!\Cref{label}! must be used to fully give the referenced type in words. \Cref{fig:sample-figure} refers to a sample figure at the beginning of a sentence, while \cref{fig:sample-figure} refers to a sample figure in text.
 
 \begin{itemize}
-    \item Capitalise and write in words the reference object at the beginning of a sentence
-    \item Otherwise use the abbreviated forms of \texttt{Fig.}, \texttt{Eqn.}, and \texttt{Tbl.} for referencing figures, equations, and tables, respectively
-    \item Refer to the \lstinline!cleveref! package documentation at \\\url{http://www.ctan.org/pkg/cleveref}
+    \item Capitalise and write in words the reference object at the beginning of a sentence.
+    \item Otherwise use the abbreviated forms of \texttt{Fig.}, \texttt{Eqn.}, and \texttt{Tbl.} for referencing figures, equations, and tables, respectively.
+    \item Refer to the \lstinline!cleveref! package documentation at \\\url{http://www.ctan.org/pkg/cleveref}.
 \end{itemize}
