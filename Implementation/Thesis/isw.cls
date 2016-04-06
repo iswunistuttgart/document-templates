@@ -1204,7 +1204,7 @@
                     raise=4pt,%
                     text color=PrimaryColor,%
                     text align={align=center},
-                    text={\normalfont\scshape\FmN{\space\@chapapp}\space},%
+                    text={\FmN{\space\@chapapp}\space},%
                     reverse path%
                 }%
             }%
