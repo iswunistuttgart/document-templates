@@ -352,6 +352,27 @@
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{images/}}
 
+%
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{tikz-3dplot}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{angles}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{fit}
+\usetikzlibrary{intersections}
+\usetikzlibrary{pgfplots.groupplots}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{positioning}
+\usetikzlibrary{quotes}
+\usetikzlibrary{shadows}
+
+
 % The package has a lot of flexibility, including an option for specifying an entry at the “natural” width of its text.
 % The package is distributed with the bigdelim and bigstrut packages, which can be used to advantage with \multirow cells.
 \RequirePackage{multirow}
@@ -377,10 +398,10 @@
 % Intermix single and multiple columns. Multicol defines a multicols environment which typesets text in multiple columns (up to a maximum of 10), and (by default) balances the end of each column at the end of the environment. The package enables you to switch between any (permitted) number of columns at will: there is no imposed "clear page" operation, as there is in unadorned LaTeX at a switch between \onecolumn and \twocolumn sections. The multicolumn environment can also be used inside a box, thus allowing multicolumned insets in text. Multicol patches the output routine, and may clash with other packages that do the same (e.g., longtable); furthermore, there is no provision for single column floats inside a multicolumn environment, so figures and tables must be coded in-line (using, for example, the H modifier of the float package). The package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{multicol}
 
-% Longtable allows you to write tables that continue to the next page. You can write captions within the table (typically at the start of the table), and headers and trailers for pages of table. Longtable arranges that the columns on successive pages have the same widths. This last contrasts with the superficially similar supertabular package.
-% Longtable (unlike supertabular) modifies the output routine, and consequently won't work in a multicolumn environment (or in other circumstances where the output routine has been critically altered); it also fails in twocolumn pages.
-% This package is part of the tools bundle in the LaTeX required distribution.
-\RequirePackage{longtable}
+%% Longtable allows you to write tables that continue to the next page. You can write captions within the table (typically at the start of the table), and headers and trailers for pages of table. Longtable arranges that the columns on successive pages have the same widths. This last contrasts with the superficially similar supertabular package.
+%% Longtable (unlike supertabular) modifies the output routine, and consequently won't work in a multicolumn environment (or in other circumstances where the output routine has been critically altered); it also fails in twocolumn pages.
+%% This package is part of the tools bundle in the LaTeX required distribution.
+%\RequirePackage{longtable}
 
 % The package allows rows and columns to be coloured, and even individual cells.
 \RequirePackage{colortbl}
@@ -458,7 +479,7 @@
     justification=RaggedRight,
     singlelinecheck=on,
     font={},
-    labelfont={footnotesize, sc},
+    labelfont={footnotesize, sc, color=PrimaryColor},
     textfont={sl},
 }
 %%% Setup captions of tables
@@ -865,10 +886,15 @@
 \colorlet{SecondaryColorVeryDark}{SecondaryColor!200}
 
 % Colors for tables
-\arrayrulecolor{MainColorVeryDark}
-\colorlet{TableHeader}{MainColor}
-\colorlet{TableRowEven}{MainColorVeryLight!33}
-\colorlet{TableRowOdd}{MainColorVeryLight!50}
+% \arrayrulecolor cannot be set in the preamble but in the document itself. That's why we are, further down, "extending" the mainmatter command to set the arrayrulecolor to Primarycolor
+%\arrayrulecolor{PrimaryColor}
+\colorlet{ArrayRuleColor}{PrimaryColor}
+\AtBeginDocument{%
+    \arrayrulecolor{ArrayRuleColor}%
+}
+\colorlet{TableHeader}{PrimaryColorLight}
+\colorlet{TableRowEven}{SecondaryColorVeryLight!33}
+\colorlet{TableRowOdd}{PrimaryColorVeryLight!50}
 \colorlet{TableCellHighlight}{SecondaryColor}
 
 
@@ -923,6 +949,7 @@
 \addtokomafont{footbotline}{\color{MainColorVeryDark}}
 \addtokomafont{chapter}{\normalfont\sffamily\Huge}
 \addtokomafont{part}{\normalfont\sffamily\Huge}
+\addtokomafont{disposition}{\color{PrimaryColor}}
 
 %% Tables
 % Stretch the padding between table rows globally
@@ -1010,7 +1037,7 @@
 % Command to apply styles for a table head column
 \newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
 % Command to open a table header
-\newcommand{\theadbegin}{\tableheadcolor}
+\newcommand{\theadbegin}{\toprule\tableheadcolor}
 % And command to close a table header
 \newcommand{\theadend}{\midrule}
 
@@ -1112,19 +1139,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Command to set front matter specific things %
-%\newcommand{\frontmatter}{%
-%    \iftoggle{oneside}{\clearpage}{\cleardoublepage}%
-%    \pagenumbering{Roman}%
-%    \pagestyle{plain}%
-%}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Command to set main matter specific things %
-%\newcommand{\mainmatter}{%
-%    \iftoggle{oneside}{\clearpage}{\cleardoublepage}%
-%    \pagenumbering{arabic}%
-%    \pagestyle{scrheadings}
-%}
+\let\originalmainmatter\mainmatter%
+\renewcommand{\mainmatter}{%
+    \originalmainmatter%
+    \arrayrulecolor{ArrayRuleColor}%
+}%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1155,24 +1178,42 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Code for fancy chapters heading %
 \makeatletter
-\ChNameVar{\color{MainColorDark}\normalfont\Large\scshape} % sets the style for name
+\ChNameVar{\color{PrimaryColor}\normalfont\Large\scshape} % sets the style for name
 \ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
-\ChTitleVar{\usekomafont{chapter}\raggedleft}
+\ChTitleVar{\usekomafont{disposition}\usekomafont{chapter}\raggedleft}
 \ChRuleWidth{2pt}
 \ChNameAsIs
 \renewcommand{\DOCH}{%
     \setlength{\fboxrule}{\RW}
     \makebox[\linewidth][r]{
-        \rotatebox{90}{
-            \makebox[2cm][l]{
-                \resizebox{2.5cm}{!}{
-                    \CNV\FmN{\space\@chapapp}\space
-                }
-            }
-        }
-        \resizebox{!}{2.5cm}{\fboxsep=6pt
-            \CNoV\colorbox{MainColor}{\thechapter}
-        }
+%        \rotatebox{90}{
+%            \makebox[2cm][l]{
+%                \resizebox{2.5cm}{!}{
+%                    \CNV\FmN{\space\@chapapp}\space
+%                }
+%            }
+%        }
+        \tikz \node[%
+            draw,%
+            fill=PrimaryColor,%
+            circle,%
+            postaction={%
+                decorate,%
+                decoration={%
+                    text along path,%
+                    raise=4pt,%
+                    text color=PrimaryColor,%
+                    text align={align=center},
+                    text={\normalfont\scshape\FmN{\space\@chapapp}\space},%
+                    reverse path%
+                }%
+            }%
+        ] {%
+            \CNoV\thechapter%
+        };%
+%        \resizebox{!}{2.5cm}{\fboxsep=6pt
+%            \CNoV\colorbox{PrimaryColor}{\thechapter}
+%        }
     }%
     \par\nobreak
     \vskip 40\p@
