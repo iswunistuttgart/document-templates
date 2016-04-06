@@ -32,4 +32,7 @@ _minted-document
 *.xdy
 *.mtc*
 *.maf
+*.nav
+*.snm
+*.vrb
 
