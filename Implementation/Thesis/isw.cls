@@ -1216,7 +1216,7 @@
 %        }
     }%
     \par\nobreak
-    \vskip 40\p@
+    \vskip 20\p@
 }
 \renewcommand{\DOTI}[1]{%
     \CTV\FmTi{#1}\par\nobreak
