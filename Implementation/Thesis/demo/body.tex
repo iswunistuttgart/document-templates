@@ -2,10 +2,12 @@
 
 \chapter{User Documentation}
 
+\begin{intro}
 In this chapter, the user will get a general introduction to the usage of the thesis template and will be enabled to start with his work.
 Further information is given in the subsequent chapters.
 But don't be afraid, there is no need for you to read through all of it before starting your work.
 Instead, you might find it useful to just look at the table of contents and decide which sections you need to look at later when looking for a solution to a problem.
+\end{intro}
 
 
 \section{Introduction}\label{sec:user-documentation:introduction}
@@ -320,7 +322,7 @@ To help you with proper code for a table, use the code samples from \cref{lst:ta
             has a header and colors and all that fancy%
             stuff (plus a caption that spans multiple lines).}
     \tablecolorwithhead
-    \begin{tabular}{lll} \toprule%
+    \begin{tabular}{lll}%
         \theadbegin%
             \thead{Col 1} & \thead{Col 2} & \thead{Col 3} \\
         \theadend
@@ -336,9 +338,9 @@ To help you with proper code for a table, use the code samples from \cref{lst:ta
 
 \begin{table}[H]
     \centering
-    \caption{This table has its caption above, too, and has a header and colors and all that fancy stuff (plus a heading that spans multiple lines).}
+    \caption{This table has its caption above, too, and has a header and colors and all that fancy stuff (plus a caption that spans multiple lines).}
     \tablecolorwithhead
-    \begin{tabular}{lll} \toprule%
+    \begin{tabular}{lll}
         \theadbegin%
             \thead{Col 1} & \thead{Col 2} & \thead{Col 3} \\
         \theadend
@@ -631,7 +633,15 @@ For all the available color commands and a sample of the rendered color, please 
 Referencing may be done using \lstinline!\ref{label}! even though usage of \lstinline!\cref{label}! is encouraged for that it automatically typesets the appropriate type like \texttt{Eqn.} or \texttt{Fig.}, \texttt{Tbl.}, or \texttt{Listing} to whatever is being reference. At the beginning of a sentence, \lstinline!\Cref{label}! must be used to fully give the referenced type in words. \Cref{fig:sample-figure} refers to a sample figure at the beginning of a sentence, while \cref{fig:sample-figure} refers to a sample figure in text.
 
 \begin{itemize}
-    \item Capitalise and write in words the reference object at the beginning of a sentence.
+    \item Capitalize and write in words the reference object at the beginning of a sentence.
     \item Otherwise use the abbreviated forms of \texttt{Fig.}, \texttt{Eqn.}, and \texttt{Tbl.} for referencing figures, equations, and tables, respectively.
     \item Refer to the \lstinline!cleveref! package documentation at \\\url{http://www.ctan.org/pkg/cleveref}.
 \end{itemize}
+
+\subsection{Subsection}
+
+\subsubsection{Subsubsection}
+
+\paragraph{Paragraph}
+
+\subparagraph{Subparagraph}
