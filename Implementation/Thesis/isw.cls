@@ -185,6 +185,7 @@
 %    linkbordercolor=SecondaryColor, % color of border aroudn links
 %    linkcolor=PrimaryColor, % color of links
     linktocpage=false, % mage page number, not text, be link on TOC, LOF, and LOT
+    linktoc=all, % Color all links in TOC
 %    menubordercolor=SecondaryColor, % color of border around menu links
 %    menucolor=PrimaryColor, % color for menu links
 %    nativepdf=false, % an alias for dvips
@@ -389,7 +390,10 @@
 \RequirePackage{multirow}
 
 % Each style can be mod­i­fied us­ing a set of sim­ple com­mands. Op­tion­ally one can mod­ify the for­mat­ting rou­tines in or­der to cre­ate ad­di­tional chap­ter head­ings. This pack­age was pre­vi­ously known as Fan­cyChap­ter.
-\RequirePackage{fncychap}
+%\RequirePackage{fncychap}
+
+% A package providing an interface to sectioning commands for selection from various title styles. E.g., marginal titles and to change the font of all headings with a single command, also providing simple one-step page styles. Also includes a package to change the page styles when there are floats in a page. You may assign headers/footers to individual floats, too.
+\RequirePackage[explicit]{titlesec}
 
 % The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors. It allows a user to select a document-wide target color model and offers complete tools for conversion between eight color models. Additionally, there is a command for alternating row colors plus repeated non-aligned material (like horizontal lines) in tables. Colors can be mixed like \color{red!30!green!40!blue}.
 \RequirePackage{xcolor}
@@ -489,17 +493,22 @@
     textformat=simple,
     justification=RaggedRight,
     singlelinecheck=on,
-    font={},
-    labelfont={footnotesize, sc, color=PrimaryColor},
-    textfont={sl},
+    font={}, % Affects the whole figure caption
+    labelfont={footnotesize, bf, color=PrimaryColor}, % Affects only the label name and its number
+    textfont={sl}, % Affects only the actual float caption
 }
 %%% Setup captions of tables
 \captionsetup[table]{
-    position=above
+    position=above, %
+    belowskip=2pt, % 
 }
 %%% Setup captions of figures
 \captionsetup[figure]{
-    position=below
+    position=below, %
+}
+\captionsetup[subfigure]{%
+    position=below, % 
+    belowskip=2pt, % 
 }
 
 % The package provides a means of using facilities analagous to those of the caption package, when writing captions for subfigures and the like.
@@ -632,70 +641,74 @@
     %
     \ifdefstring{\@thesis}{description-bsc}{%
         \def\@ThesisName{Projektexpos\'e}
-        \def\@ThesisType{Projektbeschreibung}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
     \ifdefstring{\@thesis}{description-msc}{%
         \def\@ThesisName{Projektexpos\'e}
-        \def\@ThesisType{Projektbeschreibung}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
     \ifdefstring{\@thesis}{ba}{%
         \def\@ThesisName{Bachelorarbeit}
-        \def\@ThesisType{Bachelorarbeit}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
     \ifdefstring{\@thesis}{ma}{%
         \def\@ThesisName{Masterarbeit}
-        \def\@ThesisType{Masterarbeit}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
     \ifdefstring{\@thesis}{sa}{%
         \def\@ThesisName{Studienarbeit}
-        \def\@ThesisType{Studienarbeit}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
     \ifdefstring{\@thesis}{da}{%
         \def\@ThesisName{Diplomarbeit}
-        \def\@ThesisType{Diplomarbeit}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
     \ifdefstring{\@thesis}{bpa}{%
         \def\@ThesisName{Bachelor Projektarbeit}
-        \def\@ThesisType{Bachelor Projektarbeit}
+        \def\@ThesisType{stuent}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
     \ifdefstring{\@thesis}{phd}{%
         \def\@ThesisName{Dissertation}
-        \def\@ThesisType{Dissertation}
+        \def\@ThesisType{phd}
         \def\@DegreeLong{Doktor-Ingenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
     \ifdefstring{\@thesis}{prd}{
         \def\@ThesisName{Lastenheft}
-        \def\@ThesisType{Lastenheft}
+        \def\@ThesisType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
     \ifdefstring{\@thesis}{fsd}{
         \def\@ThesisName{Pflichtenheft}
-        \def\@ThesisType{Pflichtenheft}
+        \def\@ThesisType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \def\@ThesisPretext{%
-        Eine \@ThesisType\space zur Vorlage an der Fakult\"at %
-        \@faculty, \@university,%
-        \ifdefempty{\@DegreeLong}{}{%
-            \space zur Erlangung des akademischen Grades %\\%
-            {\@DegreeLong}\space (\@DegreeShort)%
+    \ifdefstring{\@ThesisType}{document}{%
+        \def\@ThesisPretext{}
+    }{%
+        \def\@ThesisPretext{%
+            Eine \@ThesisName\space zur Vorlage an der Fakult\"at %
+            \@faculty, \@university,%
+            \ifdefempty{\@DegreeLong}{}{%
+                \space zur Erlangung des akademischen Grades %\\%
+                {\@DegreeLong}\space (\@DegreeShort)%
+            }%
         }%
     }%
     %
@@ -705,7 +718,7 @@
     %        \vspace*{0.5cm}%
             \chapter*{Ekl\"arung des Autors}%
             \vspace{1\baselineskip}
-            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisType\space mit dem Titel%
+            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
             \vspace{1\baselineskip}
             \begin{center}
                 \selectfont\sffamily
@@ -766,69 +779,73 @@
     %
     \ifdefstring{\@thesis}{description-bsc}{%
         \def\@ThesisName{Project Description}
-        \def\@ThesisType{project description}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
     \ifdefstring{\@thesis}{description-msc}{%
         \def\@ThesisName{Project Description}
-        \def\@ThesisType{project description}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
     \ifdefstring{\@thesis}{ba}{%
         \def\@ThesisName{Bachelor's Thesis}
-        \def\@ThesisType{bachelor's thesis}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
     \ifdefstring{\@thesis}{ma}{%
         \def\@ThesisName{Master's Thesis}
-        \def\@ThesisType{master's thesis}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
     \ifdefstring{\@thesis}{sa}{%
         \def\@ThesisName{Student Research Project}
-        \def\@ThesisType{student research project}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
     \ifdefstring{\@thesis}{da}{%
         \def\@ThesisName{Diploma Thesis}
-        \def\@ThesisType{diploma thesis}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
     \ifdefstring{\@thesis}{bpa}{%
         \def\@ThesisName{Bachelor's Project Report}
-        \def\@ThesisType{bachelor project report}
+        \def\@ThesisType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
     \ifdefstring{\@thesis}{phd}{%
-        \def\@ThesisName{Dissertation}
-        \def\@ThesisType{dissertation}
+        \def\@ThesisName{Doctoral Thesis}
+        \def\@ThesisType{phd}
         \def\@DegreeLong{Doktor-Ingenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
     \ifdefstring{\@thesis}{prd}{
         \def\@ThesisName{Product Requirements Document}
-        \def\@ThesisType{Product Requirements Document}
+        \def\@ThesisType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
     \ifdefstring{\@thesis}{fsd}{
         \def\@ThesisName{Functional Specification}
-        \def\@ThesisType{Functional Specification}
+        \def\@ThesisType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \def\@ThesisPretext{A \@ThesisType\space presented to the faculty %\\%
-        \@faculty, \@university,%
-        \ifdefempty{\@DegreeLong}{}{%
-            \space in partial fulfillment of the requirements for the degree of %\\%
-            {\@DegreeLong}\space (\@DegreeShort)%
+    \ifdefstring{\@ThesisType}{document}{%
+        \def\@ThesisPretext{}
+    }{%
+        \def\@ThesisPretext{A \@ThesisName\space presented to the faculty %\\%
+            \@faculty, \@university,%
+            \ifdefempty{\@DegreeLong}{}{%
+                \space in partial fulfillment of the requirements for the degree of %\\%
+                {\@DegreeLong}\space (\@DegreeShort)%
+            }%
         }%
     }%
     %
@@ -838,7 +855,7 @@
         %        \vspace*{0.5cm}%
         \chapter*{Ekl\"arung des Autors}%
         \vspace{1\baselineskip}
-        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisType\space mit dem Titel%
+        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
         \vspace{1\baselineskip}
         \begin{center}
             \selectfont\sffamily
@@ -923,9 +940,9 @@
 \AtBeginDocument{%
     \arrayrulecolor{ArrayRuleColor}%
 }
-\colorlet{TableHeader}{PrimaryColorLight}
-\colorlet{TableRowEven}{SecondaryColorVeryLight!33}
-\colorlet{TableRowOdd}{PrimaryColorVeryLight!50}
+\colorlet{TableHeader}{PrimaryColor}
+\colorlet{TableRowEven}{MainColorDark!33}
+\colorlet{TableRowOdd}{MainColorLight!50}
 \colorlet{TableCellHighlight}{SecondaryColor}
 
 
@@ -1066,7 +1083,7 @@
 % Sets the table head row color
 \newcommand{\tableheadcolor}{\rowcolor{TableHeader}}
 % Command to apply styles for a table head column
-\newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
+\newcommand{\thead}[1]{{\color{MainColorLight}{\bfseries{#1}}}}
 % Command to open a table header
 \newcommand{\theadbegin}{\toprule\tableheadcolor}
 % And command to close a table header
@@ -1085,7 +1102,9 @@
 %        \fbox{%
             \begin{minipage}[t][1cm][c]{0.9\linewidth}%
                 \centering
-                \huge\@ThesisName\par%
+                \ifdefstring{\@ThesisType}{phd}{}{%
+                    \huge\@ThesisName\par%
+                }
             \end{minipage}\par%
 %        }
         \vspace*{0.75cm}\par%
@@ -1224,55 +1243,90 @@
 }%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Code for fancy chapters heading %
-\makeatletter
-\ChNameVar{\color{PrimaryColor}\normalfont\Large\scshape} % sets the style for name
-\ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
-\ChTitleVar{\usekomafont{disposition}\usekomafont{chapter}\raggedleft}
-\ChRuleWidth{2pt}
-\ChNameAsIs
-\renewcommand{\DOCH}{%
-    \setlength{\fboxrule}{\RW}
-    \makebox[\linewidth][r]{
-%        \rotatebox{90}{
-%            \makebox[2cm][l]{
-%                \resizebox{2.5cm}{!}{
-%                    \CNV\FmN{\space\@chapapp}\space
-%                }
-%            }
-%        }
-        \tikz \node[%
-            draw,%
-            fill=PrimaryColor,%
-            circle,%
-            postaction={%
-                decorate,%
-                decoration={%
-                    text along path,%
-                    raise=4pt,%
-                    text color=PrimaryColor,%
-                    text align={align=center},
-                    text={\FmN{\space\@chapapp}\space},%
-                    reverse path%
+% Code for titlesec               %
+%\titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]%
+\titleformat%
+%command
+{\chapter}%
+% shape
+%[]%
+% format
+{}%
+% label
+{%
+    \setlength{\fboxrule}{2pt}
+    \makebox[\linewidth][r]{%
+        \rotatebox{90}{%
+            \makebox[2cm][l]{%
+                \resizebox{2.5cm}{!}{%
+                    \color{PrimaryColor}\normalfont\Large\scshape\space\chaptername\space%
                 }%
             }%
-        ] {%
-            \CNoV\thechapter%
-        };%
-%        \resizebox{!}{2.5cm}{\fboxsep=6pt
-%            \CNoV\colorbox{PrimaryColor}{\thechapter}
-%        }
+        } % Leave this white space here or the "CHAPTER" will move into the gray box
+        \resizebox{!}{2.5cm}{%
+            \fboxsep=6pt%
+            \fontsize{85}{100}\selectfont\sffamily\color{PrimaryColor}\colorbox{MainColor!80}{\thechapter}%
+        }%
     }%
-    \par\nobreak
-    \vskip 20\p@
+}%
+% sep
+{0pt}%
+% before-code
+{%
+    \RaggedLeft%
+    \usekomafont{disposition}\usekomafont{chapter}%
+    \\*%
+    \addvspace{20\p@}%
+    #1%
 }
-\renewcommand{\DOTI}[1]{%
-    \CTV\FmTi{#1}\par\nobreak
-    \vskip 40\p@}
-\renewcommand{\DOTIS}[1]{%
-    \CTV\FmTi{#1}\par\nobreak
-    \vskip -20\p@}
-\makeatother
+%\makeatletter
+%\ChNameVar{\color{PrimaryColor}\normalfont\Large\scshape} % sets the style for name
+%\ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
+%\ChTitleVar{\usekomafont{disposition}\usekomafont{chapter}\raggedleft}
+%\ChRuleWidth{2pt}
+%\ChNameAsIs
+%\renewcommand{\DOCH}{%
+%    \setlength{\fboxrule}{\RW}
+%    \makebox[\linewidth][r]{
+%%        \rotatebox{90}{
+%%            \makebox[2cm][l]{
+%%                \resizebox{2.5cm}{!}{
+%%                    \CNV\FmN{\space\@chapapp}\space
+%%                }
+%%            }
+%%        }
+%        \tikz \node[%
+%            draw,%
+%            fill=PrimaryColor,%
+%            circle,%
+%            postaction={%
+%                decorate,%
+%                decoration={%
+%                    text along path,%
+%                    raise=4pt,%
+%                    text color=PrimaryColor,%
+%                    text align={align=center},
+%                    text={\FmN{\space\@chapapp}\space},%
+%                    reverse path%
+%                }%
+%            }%
+%        ] {%
+%            \CNoV\thechapter%
+%        };%
+%%        \resizebox{!}{2.5cm}{\fboxsep=6pt
+%%            \CNoV\colorbox{PrimaryColor}{\thechapter}
+%%        }
+%    }%
+%    \par\nobreak
+%    \vskip 20\p@
+%}
+%\renewcommand{\DOTI}[1]{%
+%    \CTV\FmTi{#1}\par\nobreak
+%    \vskip 40\p@}
+%\renewcommand{\DOTIS}[1]{%
+%    \CTV\FmTi{#1}\par\nobreak
+%    \vskip -20\p@}
+%\makeatother
 
 
 
