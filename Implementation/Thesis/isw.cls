@@ -45,15 +45,6 @@
 \DeclareOption{online}{\toggletrue{online}}
 \DeclareOption{print}{\togglefalse{online}}
 
-% Different thing than "draft/final"
-\newbool{thesisfinal}
-\DeclareOption{thesisdraft}{\boolfalse{thesisfinal}}
-\DeclareOption{thesisfinal}{\booltrue{thesisfinal}}
-
-% Declare option draft and final
-\DeclareOption{draft}{\setlength{\overfullrule}{5pt}}
-\DeclareOption{final}{\booltrue{thesisfinal}}
-
 % Option for automatically colored table rows
 \newbool{alternatingrowcolors}
 \DeclareOption{coloredtables}{\booltrue{alternatingrowcolors}}
@@ -116,7 +107,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 % Default options
-\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,thesisdraft}
+\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,draft}
 
 % Process options (finally)
 \ProcessOptions\relax
@@ -166,59 +157,79 @@
     marginparsep=0.5cm,
 }{geometry}
 
+% Configuration of hyperref
+\PassOptionsToPackage{%
+%    anchorcolor=MainColor, % set color of anchors 
+    backref=false, % do bibliographical back references
+    baseurl={http://www.isw.uni-stuttgart.de/}, % set base URL for document
+    bookmarks=true, % make bookmarks
+    bookmarksnumbered=true, % put section numbers in bookmarks
+    bookmarksopen=false, % open up bookmark tree
+    bookmarksopenlevel=1, % level to which bookmarks are open
+    bookmarkstype=toc, % to specity which 'toc' file to mimic
+    breaklinks=true, % allow links to break ove rlines
+    CJKbookmarks=false, % to produce CJK bookmarks
+%    citebordercolor=SecondaryColor, % color of border around citation links
+%    citecolor=PrimaryColor, % color of citation links
+    colorlinks=true, % color links
+    debug=false, % provide details of anchors defined; same as verbose
+    destlabel=false, % destinations are named by the fist \label after the anchor creation
+%    filebordercolor=SecondaryColor, %  color of border aroundfile links
+%    filecolor=PrimaryColor, % color of file links
+    frenchlinks=false, % use small caps instead of color for links
+    hyperfigures=false, % make figures hyper links
+    hyperfootnotes=true, % set up hyperlinked footnotes
+    hyperindex=true, % set up hyperlinked indices
+    hypertexnames=true, % use guessable names for links
+    implicit=true, % redefine LaTeX internals
+%    linkbordercolor=SecondaryColor, % color of border aroudn links
+%    linkcolor=PrimaryColor, % color of links
+    linktocpage=false, % mage page number, not text, be link on TOC, LOF, and LOT
+%    menubordercolor=SecondaryColor, % color of border around menu links
+%    menucolor=PrimaryColor, % color for menu links
+%    nativepdf=false, % an alias for dvips
+    naturalnames=false, % use LaTeX-computed names for links
+    nesting=false, % allow nesting of links
+    pageanchor=true, % put an anchor on every page
+    pagebackref=false, % backreference by page number
+    pdfborder={0, 0, 1}, % width of PDF link border
+    pdfcenterwindow=false, % position the document window in the center of the screen
+%    pdfdirection={}, % direction setting
+    pdfdisplaydoctitle=true, % display document title instead of file name in title bar
+%    pdfduplex={}, % paper handling option for print dialog
+    pdffitwindow=false, % resize document window to fit document size
+%    pdfhighlight=/I, % se highlighting of PDF loinks
+%    pdfinfo={}, % alternative way of setting document information
+%    pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
+%    pdflang=\relax, % PDF langauge identifier (RFC 3066)
+    pdfstartpage=1, % page at which PDF document opens
+    pdfpagemode=UseOutlines, % set default mode of PDF display
+    pdfstartview=Fit, % starting view of PDF document
+    pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+    raiselinks=false, % raise up links (for HyperTeX backend)
+%    runbordercolor=SecondaryColor, % color of border around 'run' links
+%    runcolor=PrimarColor, % color of 'run' links
+    setpagesize=true, % set page size by special driver commands
+    unicode=false, % Unicode encoded pdf strings
+%    urlbordercolor=SecondaryColor, % color of border around URL links
+%    urlcolor=PrimaryColor, % color of URL links
+    verbose=false, % be chatty
+}{hyperref}
+
 % Depending on online we will define options to hyperref
-\iftoggle{online}{%
-    % Online options
+\iftoggle{online}{% Online options
+}{% Print options
     \PassOptionsToPackage{%
-        anchorcolor=blue,%
-        bookmarksopen=true,%
-        colorlinks=true,%
-        urlcolor=blue,%
-    }{hyperref}
-    % Print options
-}{%
-    \PassOptionsToPackage{%
-        hidelinks=true,%
+        hidelinks=true,
     }{hyperref}
 }
 
 % Pass option final or draft to hyperref depending on thesisfinal
-\ifbool{thesisfinal}{
-    \PassOptionsToPackage{final}{hyperref}
-}{
+\ifdraft{
     \PassOptionsToPackage{draft}{hyperref}
+}{
+    \PassOptionsToPackage{final}{hyperref}
 }
-
-% Configuration of hyperref
-\PassOptionsToPackage{%
-    % Lesezeichen erzeugen
-    bookmarks=true,
-    % Lesezeichen ausgeklappt
-    bookmarksopen=false,
-    % Level bis zu welchen Bookmarks geofffnet sind
-    bookmarksopenlevel=1,
-    % Anzeige der Kapitelzahlen am Anfang der Namen der Lesezeichen
-    bookmarksnumbered=true,
-    % Seite, welche automatisch geoeffnet werden soll
-    % praktisch, wenn z.B. im Inhaltsverzeichnis gestartet
-    % werden soll oder eine Seite bearbeitet wird.
-    pdfstartpage=1,
-%   % Miniaturansicht nicht anzeigen
-    pdfpagemode=UseOutlines,
-    % Startansicht des PDF-Dokuments
-    pdfstartview=Fit,
-    % URL des PDF-Dokuments (oder Hintergrundinformationen)
-    baseurl={http://www.isw.uni-stuttgart.de/},
-    % Display document title instead of file name in title bar
-    pdfdisplaydoctitle=true,
-    % Setzt die StandardAnsicht fuer das Dokument auf
-    % TwoColumnRight: Zweiseitig,Fortlaufen,mit Cover-Up-Page
-    % TwoColumnLeft: Zweiseitig,Fortlaufen,ohne Cover-Up-Page
-    pdfpagelayout=TwoColumnRight,
-%    pdfhighlight=/N,
-    % ermoeglicht einen Umbruch von URLs
-    breaklinks=true,
-}{hyperref}
 
 % Necessary options for package xcolor
 \PassOptionsToPackage{
@@ -275,10 +286,10 @@
 \PassOptionsToPackage{%
     chapter, %
 }{minted}
-\ifbool{thesisfinal}{%
-    \PassOptionsToPackage{final}{minted}
-}{
+\ifdraft{
     \PassOptionsToPackage{draft}{minted}
+}{
+    \PassOptionsToPackage{final}{minted}
 }
 
 \PassOptionsToPackage{
@@ -690,44 +701,46 @@
     %
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
-%        \vspace*{0.5cm}%
-        \chapter*{Ekl\"arung des Autors}%
-        \vspace{1\baselineskip}
-        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisType\space mit dem Titel%
-        \vspace{1\baselineskip}
-        \begin{center}
-            \selectfont\sffamily
-            \@title\\%
-            \ifdefempty{\@subtitle}{}{
-                \vspace{0.15cm}
-                \@subtitle\\%
-            }
-        \end{center}
-        \vspace{1\baselineskip}
-        \begin{enumerate}%
-            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
-            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-            \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-            \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-            \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-        \end{enumerate}%
-        \vfill%\vspace{2\baselineskip}%
-        %
-        \begin{center}%
-            \selectfont\sffamily%
-            \small%
-            \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-                \rule{\linewidth}{0.5pt}%
-                    & \rule{\linewidth}{0pt}%
-                    & \rule{\linewidth}{0.5pt}%
-                    \\[-1.5ex]%
-                Autor%
-                    & %
-                    & Datum \\%
-            \end{tabu}%
-        \end{center}%
-        \vfill%
-        \cleardoublepage%
+        \foreignlanguage{ngerman}{%
+    %        \vspace*{0.5cm}%
+            \chapter*{Ekl\"arung des Autors}%
+            \vspace{1\baselineskip}
+            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisType\space mit dem Titel%
+            \vspace{1\baselineskip}
+            \begin{center}
+                \selectfont\sffamily
+                \@title\\%
+                \ifdefempty{\@subtitle}{}{
+                    \vspace{0.15cm}
+                    \@subtitle\\%
+                }
+            \end{center}
+            \vspace{1\baselineskip}
+            \begin{enumerate}%
+                \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
+                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+                \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+                \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+                \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+            \end{enumerate}%
+            \vfill%\vspace{2\baselineskip}%
+            %
+            \begin{center}%
+                \selectfont\sffamily%
+                \small%
+                \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+                    \rule{\linewidth}{0.5pt}%
+                        & \rule{\linewidth}{0pt}%
+                        & \rule{\linewidth}{0.5pt}%
+                        \\[-1.5ex]%
+                    Autor%
+                        & %
+                        & Datum \\%
+                \end{tabu}%
+            \end{center}%
+            \vfill%
+            \cleardoublepage%
+        }%
     }
 }
 
@@ -748,6 +761,7 @@
     \renewcommand{\appendixname}{Appendix}
     \renewcommand{\appendixpagename}{Appendices}
     \renewcommand{\abstractname}{Abstract}
+    \renewcommand{\contentsname}{Table of Contents}
     %    \renewcommand{\@dedicationname}{Dedication}
     %
     \ifdefstring{\@thesis}{description-bsc}{%
@@ -885,6 +899,23 @@
 \colorlet{SecondaryColorDark}{SecondaryColor!100}
 \colorlet{SecondaryColorVeryDark}{SecondaryColor!200}
 
+% And set the colors we have defined to also apply for hyperref
+\hypersetup{%
+    anchorcolor=MainColor, % set color of anchors 
+    citebordercolor=SecondaryColor, % color of border around citation links
+    citecolor=PrimaryColor, % color of citation links
+    filebordercolor=SecondaryColor, %  color of border aroundfile links
+    filecolor=PrimaryColor, % color of file links
+    linkbordercolor=SecondaryColor, % color of border aroudn links
+    linkcolor=PrimaryColor, % color of links
+    menubordercolor=SecondaryColor, % color of border around menu links
+    menucolor=PrimaryColor, % color for menu links
+    runbordercolor=SecondaryColor, % color of border around 'run' links
+    runcolor=PrimarColor, % color of 'run' links
+    urlbordercolor=SecondaryColor, % color of border around URL links
+    urlcolor=PrimaryColor, % color of URL links
+}%
+
 % Colors for tables
 % \arrayrulecolor cannot be set in the preamble but in the document itself. That's why we are, further down, "extending" the mainmatter command to set the arrayrulecolor to Primarycolor
 %\arrayrulecolor{PrimaryColor}
@@ -959,7 +990,7 @@
 \setlength{\belowbottomsep}{0pt}
 
 % Set the overfullrule to 5pt if we are in thesisdraft mode
-\ifbool{thesisfinal}{}{%
+\ifoptiondraft{
     \overfullrule=5pt
 }
 
@@ -1103,7 +1134,7 @@
 %        \fbox{%
             \begin{minipage}[t][1cm][c]{0.5\linewidth}
                 \centering
-                \ifbool{thesisfinal}{}{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
+                \ifoptiondraft{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
             \end{minipage}
 %        }%
         \vspace*{1cm}\par%
@@ -1152,7 +1183,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract of the thesis %
-\newenvironment{thesisabstract}{%
+\newenvironment{abstract}{%
     \chapter*{\abstractname}%
     \addcontentsline{toc}{chapter}{\abstractname}%
 }{%
@@ -1174,6 +1205,23 @@
 %\iftoggle{oneside}{\clearpage}{\cleardoublepage}%
 %}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter intro environment %
+\newenvironment{intro}{%4
+    \hfill
+    \begin{minipage}{0.9\linewidth}%
+        \null\hfill\tikz \draw[color=PrimaryColor, line width=0.75pt, baseline=(current bounding box.center)] (0,0) -- (0.8\linewidth,0);%
+        \begin{spacing}{1.15}%
+            \setlength{\parskip}{0pt}
+            \setlength{\parindent}{15pt}
+            \slshape%
+}{%
+            \normalfont%
+        \end{spacing}%
+        \tikz \draw[color=PrimaryColor, line width=0.75pt] (0,0.5\baselineskip) -- (0.8\linewidth,0.5\baselineskip);\hfill%
+    \end{minipage}%
+    \vspace*{\baselineskip}
+}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Code for fancy chapters heading %
@@ -1239,7 +1287,12 @@
             pdftitle={\@title},
             pdfsubject={\@ThesisPretext},
             pdfkeywords={\@keywords},
-        }
+        }%
+        \iflanguage{ngerman}{%
+            \hypersetup{pdflang=de}%
+        }{%
+            \hypersetup{pdflang=en}%
+        }%
         % Select the proper language
         \pagenumbering{Roman}
         \pagenumbering{arabic}
