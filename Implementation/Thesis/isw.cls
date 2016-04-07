@@ -1007,9 +1007,9 @@
 \setlength{\belowbottomsep}{0pt}
 
 % Set the overfullrule to 5pt if we are in thesisdraft mode
-\ifoptiondraft{
+\ifdraft{
     \overfullrule=5pt
-}
+}{}
 
 % Minitoc is not working proplery yet
 %\ifbool{minitoc}{%
@@ -1153,7 +1153,7 @@
 %        \fbox{%
             \begin{minipage}[t][1cm][c]{0.5\linewidth}
                 \centering
-                \ifoptiondraft{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}
+                \ifdraft{\color{red}{\bfseries\ttfamily\Huge\@localDraft}}{}
             \end{minipage}
 %        }%
         \vspace*{1cm}\par%
