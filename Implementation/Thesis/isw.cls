@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{0.5.3}
+\def\fileversion{0.5.4}
 \def\filedate{2016/04/08}
 
 % Definition of the actual class interface
@@ -700,6 +700,13 @@
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
+    \ifdefstring{\@thesis}{rep}{
+        \def\@ThesisName{Report}
+        \def\@ThesisType{document}
+        \def\@localSubmittedBy{von}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
+    }{}
     \ifdefstring{\@ThesisType}{document}{%
         \def\@ThesisPretext{}
     }{%
@@ -835,6 +842,13 @@
     \ifdefstring{\@thesis}{fsd}{
         \def\@ThesisName{Functional Specification}
         \def\@ThesisType{document}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
+    }{}
+    \ifdefstring{\@thesis}{rep}{
+        \def\@ThesisName{Report}
+        \def\@ThesisType{document}
+        \def\@localSubmittedBy{by}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
@@ -1160,14 +1174,16 @@
         \vspace*{1cm}\par%
 %        \fbox{%
             \begin{minipage}[c][3cm][c]{0.7\linewidth}%
-                \begin{tabu} to \linewidth {X[1,l] X[4,l]}
-                {\@localExaminer:}
-                    & \@examiner \\
-                {\@localSupervisor:}
-                    & {\renewcommand{\and}{\par}\@supervisor} \\
-                {\@localSubmittedOn:}
-                    & {\usekomafont{date}{\printdate{\@date}}\par}
-                \end{tabu}
+                \ifdefstring{\@ThesisType}{document}{}{%
+                    \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
+                    {\@localExaminer:}%
+                        & \@examiner \\%
+                    {\@localSupervisor:}%
+                        & {\renewcommand{\and}{\par}\@supervisor} \\%
+                    {\@localSubmittedOn:}%
+                        & {\usekomafont{date}{\printdate{\@date}}\par}%
+                    \end{tabu}%
+                }%
             \end{minipage}%
 %        }%
         \vfill
