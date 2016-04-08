@@ -393,7 +393,7 @@
 %\RequirePackage{fncychap}
 
 % A package providing an interface to sectioning commands for selection from various title styles. E.g., marginal titles and to change the font of all headings with a single command, also providing simple one-step page styles. Also includes a package to change the page styles when there are floats in a page. You may assign headers/footers to individual floats, too.
-\RequirePackage[explicit]{titlesec}
+%\RequirePackage[explicit]{titlesec}
 
 % The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors. It allows a user to select a document-wide target color model and offers complete tools for conversion between eight color models. Additionally, there is a command for alternating row colors plus repeated non-aligned material (like horizontal lines) in tables. Colors can be mixed like \color{red!30!green!40!blue}.
 \RequirePackage{xcolor}
@@ -1010,9 +1010,10 @@
 \addtokomafont{headsepline}{\color{MainColorVeryDark}}
 \addtokomafont{footsepline}{\color{MainColorDark}}
 \addtokomafont{footbotline}{\color{MainColorVeryDark}}
-\addtokomafont{chapter}{\normalfont\sffamily\Huge}
-\addtokomafont{part}{\normalfont\sffamily\Huge}
-\addtokomafont{disposition}{\color{PrimaryColor}}
+%\addtokomafont{disposition}{\color{PrimaryColor}}
+%\addtokomafont{sectioning}{\color{PrimaryColor}}
+\addtokomafont{chapter}{\normalfont\sffamily\Huge\color{PrimaryColor}}
+\addtokomafont{part}{\normalfont\sffamily\Huge\color{PrimaryColor}}
 
 %% Tables
 % Stretch the padding between table rows globally
@@ -1260,90 +1261,29 @@
 }%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Code for titlesec               %
-%\titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]%
-\titleformat%
-%command
-{\chapter}%
-% shape
-%[]%
-% format
-{}%
-% label
-{%
-    \setlength{\fboxrule}{2pt}
-    \makebox[\linewidth][r]{%
-        \rotatebox{90}{%
-            \makebox[2cm][l]{%
-                \resizebox{2.5cm}{!}{%
-                    \color{PrimaryColor}\normalfont\Large\scshape\space\chaptername\space%
+% Komascript sectioning styles    %
+\renewcommand*{\raggedchapter}{\RaggedLeft}
+\renewcommand{\chapterlinesformat}[3]{%
+    % \ifstr{str}{}{empty}{non-empty}
+    \ifstr{#2}{}{}{%
+        \setlength{\fboxrule}{2pt}
+        \makebox[\linewidth][r]{%
+            \rotatebox{90}{%
+                \makebox[2cm][l]{%
+                    \resizebox{2.5cm}{!}{%
+                        \color{PrimaryColor}\normalfont\Large\scshape\space\chaptername\space%
+                    }%
                 }%
+            } % Leave this white space here or the "CHAPTER" will move into the gray box
+            \resizebox{!}{2.5cm}{%
+                \fboxsep=6pt%
+                \fontsize{85}{100}\selectfont\sffamily\color{PrimaryColor}\colorbox{MainColor!80}{\thechapter}%
             }%
-        } % Leave this white space here or the "CHAPTER" will move into the gray box
-        \resizebox{!}{2.5cm}{%
-            \fboxsep=6pt%
-            \fontsize{85}{100}\selectfont\sffamily\color{PrimaryColor}\colorbox{MainColor!80}{\thechapter}%
-        }%
+        }\\*%
     }%
-}%
-% sep
-{0pt}%
-% before-code
-{%
-    \RaggedLeft%
-    \usekomafont{disposition}\usekomafont{chapter}%
-    \\*%
     \addvspace{20\p@}%
-    #1%
+    #3%
 }
-%\makeatletter
-%\ChNameVar{\color{PrimaryColor}\normalfont\Large\scshape} % sets the style for name
-%\ChNumVar{\fontsize{85}{100}\selectfont\sffamily\color{white}}
-%\ChTitleVar{\usekomafont{disposition}\usekomafont{chapter}\raggedleft}
-%\ChRuleWidth{2pt}
-%\ChNameAsIs
-%\renewcommand{\DOCH}{%
-%    \setlength{\fboxrule}{\RW}
-%    \makebox[\linewidth][r]{
-%%        \rotatebox{90}{
-%%            \makebox[2cm][l]{
-%%                \resizebox{2.5cm}{!}{
-%%                    \CNV\FmN{\space\@chapapp}\space
-%%                }
-%%            }
-%%        }
-%        \tikz \node[%
-%            draw,%
-%            fill=PrimaryColor,%
-%            circle,%
-%            postaction={%
-%                decorate,%
-%                decoration={%
-%                    text along path,%
-%                    raise=4pt,%
-%                    text color=PrimaryColor,%
-%                    text align={align=center},
-%                    text={\FmN{\space\@chapapp}\space},%
-%                    reverse path%
-%                }%
-%            }%
-%        ] {%
-%            \CNoV\thechapter%
-%        };%
-%%        \resizebox{!}{2.5cm}{\fboxsep=6pt
-%%            \CNoV\colorbox{PrimaryColor}{\thechapter}
-%%        }
-%    }%
-%    \par\nobreak
-%    \vskip 20\p@
-%}
-%\renewcommand{\DOTI}[1]{%
-%    \CTV\FmTi{#1}\par\nobreak
-%    \vskip 40\p@}
-%\renewcommand{\DOTIS}[1]{%
-%    \CTV\FmTi{#1}\par\nobreak
-%    \vskip -20\p@}
-%\makeatother
 
 
 
