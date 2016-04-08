@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.5.1}
-\def\filedate{2016/04/05}
+\def\fileversion{0.5.3}
+\def\filedate{2016/04/08}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -449,6 +449,7 @@
 \ifbool{minted}{}{%
     \RequirePackage{listings}
     \lstset{
+        basicstyle=\footnotesize,        % basic style that applies to everything
         backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
         breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
         breaklines=true,                 % sets automatic line breaking
@@ -625,7 +626,7 @@
     \def\@localDraft{Entwurf}
     \def\@localExaminer{Pr\"ufer}
     \def\@localSupervisor{Betreuer}
-    \def\@localLogoSuffix{-deutsch}
+    \def\@localLogoSuffix{-de}
     \def\@localSubmittedBy{eingereicht von}
     \def\@localFrom{aus}
     \def\@localSubmittedOn{Eingereicht am}
@@ -762,7 +763,7 @@
     \def\@localDraft{Draft}
     \def\@localExaminer{Examiner}
     \def\@localSupervisor{Supervisor}
-    \def\@localLogoSuffix{-english}
+    \def\@localLogoSuffix{-en}
     \def\@localSubmittedBy{submitted by}
     \def\@localFrom{from}
     \def\@localSubmittedOn{Submitted on}
