@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{0.5.5}
+\def\fileversion{0.5.7}
 \def\filedate{2016/04/08}
 
 % Definition of the actual class interface
@@ -107,7 +107,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 % Default options
-\ExecuteOptions{bachelor,language=english,a4paper,twoside=true,open=right,draft}
+\ExecuteOptions{bachelor,english,langauge=english,a4paper,twoside=true,open=right,draft}
 
 % Process options (finally)
 \ProcessOptions\relax
@@ -322,6 +322,8 @@
 %
 \RequirePackage{scrlayer-scrpage}
 
+\RequirePackage{xspace}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ALL FURTHER PACKAGES                                                         %
@@ -389,21 +391,12 @@
 % The package is distributed with the bigdelim and bigstrut packages, which can be used to advantage with \multirow cells.
 \RequirePackage{multirow}
 
-% Each style can be mod­i­fied us­ing a set of sim­ple com­mands. Op­tion­ally one can mod­ify the for­mat­ting rou­tines in or­der to cre­ate ad­di­tional chap­ter head­ings. This pack­age was pre­vi­ously known as Fan­cyChap­ter.
-%\RequirePackage{fncychap}
-
-% A package providing an interface to sectioning commands for selection from various title styles. E.g., marginal titles and to change the font of all headings with a single command, also providing simple one-step page styles. Also includes a package to change the page styles when there are floats in a page. You may assign headers/footers to individual floats, too.
-%\RequirePackage[explicit]{titlesec}
-
 % The package starts from the basic facilities of the color package, and provides easy driver-independent access to several kinds of color tints, shades, tones, and mixes of arbitrary colors. It allows a user to select a document-wide target color model and offers complete tools for conversion between eight color models. Additionally, there is a command for alternating row colors plus repeated non-aligned material (like horizontal lines) in tables. Colors can be mixed like \color{red!30!green!40!blue}.
 \RequirePackage{xcolor}
 % Defines the 16 colors from Ethan Schoonover's Solarized palette
 \RequirePackage{xcolor-solarized}
 
-%
-\RequirePackage{setspace}
-
-% The bm package defines a command \bm which makes its argument bold. The argument may be any maths object from a single symbol to an expression. This is closely related to the specification of the \boldsymbol command in AMS-LaTeX, but \bm is rather more careful in the way it does things. 
+% The bm package defines a command \bm which makes its argument bold. The argument may be any maths object from a single symbol to an expression. This is closely related to the specification of the \boldsymbol command in AMS-LaTeX, but \bm is rather more careful in the way it does things.
 \RequirePackage{bm}
 
 % The package is intended for setting rich text into titling capitals (in which the first character of words are capitalized). It automatically accounts for diacritical marks (like umlauts), national symbols (like “ae”), punctuation, and font changing commands that alter the appearance or size of the text. It allows a list of predesignated words to be protected as lower-cased, and also allows for titling exceptions of various sorts.
@@ -416,7 +409,7 @@
 %% Longtable allows you to write tables that continue to the next page. You can write captions within the table (typically at the start of the table), and headers and trailers for pages of table. Longtable arranges that the columns on successive pages have the same widths. This last contrasts with the superficially similar supertabular package.
 %% Longtable (unlike supertabular) modifies the output routine, and consequently won't work in a multicolumn environment (or in other circumstances where the output routine has been critically altered); it also fails in twocolumn pages.
 %% This package is part of the tools bundle in the LaTeX required distribution.
-%\RequirePackage{longtable}
+\RequirePackage{longtable}
 
 % The package allows rows and columns to be coloured, and even individual cells.
 \RequirePackage{colortbl}
@@ -590,17 +583,6 @@
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage{cleveref}
-
-% This package helps you keep track of all the labels you define, by putting the name of new labels into the margin whenever the \label command is used.
-% The package allows you to do the same thing for other commands. The only one for which this is obviously useful is the \cite command, but it's easy to do it for others, such as the \ref or \begin commands
-%\RequirePackage{showlabels}
-%\renewcommand{\showlabelfont}{\small}
-%\renewcommand{\showlabelsetlabel}[1]{%
-%    \fboxsep2pt%
-%    \fbox{%
-%        \parbox[t]{2.25cm}{\showlabelfont #1}%
-%    }
-%}
 
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author’s glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
@@ -1010,8 +992,8 @@
 \addtokomafont{headsepline}{\color{MainColorVeryDark}}
 \addtokomafont{footsepline}{\color{MainColorDark}}
 \addtokomafont{footbotline}{\color{MainColorVeryDark}}
-%\addtokomafont{disposition}{\color{PrimaryColor}}
-%\addtokomafont{sectioning}{\color{PrimaryColor}}
+\addtokomafont{disposition}{\color{PrimaryColor}}
+\addtokomafont{sectioning}{\color{PrimaryColor}}
 \addtokomafont{chapter}{\normalfont\sffamily\Huge\color{PrimaryColor}}
 \addtokomafont{part}{\normalfont\sffamily\Huge\color{PrimaryColor}}
 
@@ -1247,7 +1229,7 @@
 \newenvironment{intro}{%4
     \hfill
     \begin{minipage}{0.9\linewidth}%
-        \null\hfill\tikz \draw[color=PrimaryColor, line width=0.75pt, baseline=(current bounding box.center)] (0,0) -- (0.8\linewidth,0);%
+        \null\hfill\tikz[baseline=(current bounding box.center)] \draw[color=PrimaryColor, line width=0.75pt] (0,0) -- (0.8\linewidth,0);%
         \begin{spacing}{1.15}%
             \setlength{\parskip}{0pt}
             \setlength{\parindent}{15pt}
@@ -1271,7 +1253,7 @@
             \rotatebox{90}{%
                 \makebox[2cm][l]{%
                     \resizebox{2.5cm}{!}{%
-                        \color{PrimaryColor}\normalfont\Large\scshape\space\chaptername\space%
+                        \color{PrimaryColor}\normalfont\Large\scshape\space\chapapp\space%
                     }%
                 }%
             } % Leave this white space here or the "CHAPTER" will move into the gray box

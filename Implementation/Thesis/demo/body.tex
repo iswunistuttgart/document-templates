@@ -25,6 +25,125 @@ This thesis template tries to fill the gap between content and layout by providi
 With this thesis template you write a simple, nicely typeset thesis without the hassle of needing to configure it such that it suits the needs of your department (it should have applied all the necessary style guidelines already).
 
 
+\subsubsection{Packages Loaded}
+
+All the packages loaded and pre-configured by this class are listed below in their order of loading.
+
+\begin{itemize}
+    \item \lstinline!xparse!
+    \item \lstinline!etoolbox!
+    \item \lstinline!ifthen!
+    \item \lstinline!ifdraft!
+    \item \lstinline!xkeyval!
+    \item \lstinline!xparse!
+    \item \lstinline!scrbook!
+    \item \lstinline!babel!
+    \item \lstinline!scrlayer-scrpages!
+    \item \lstinline!xspace!
+    \item \lstinline!isodate!
+    \item \lstinline!lmodern!
+    \item \lstinline!amsmath!
+    \item \lstinline!amssymb!
+    \item \lstinline!float!
+    \item \lstinline!setspace!
+    \item \lstinline!geometry!
+    \item \lstinline!epsfig!
+    \item \lstinline!graphicx!
+    \item \lstinline!tikz!
+    \item \lstinline!pgfplots!
+    \item \lstinline!tikz-3dplot!
+    \item \lstinline!multirow!
+    \item \lstinline!xcolor!
+    \item \lstinline!xcolor-solarized!
+    \item \lstinline!bm!
+    \item \lstinline!titlecaps!
+    \item \lstinline!multicol!
+    \item \lstinline!colortbl!
+    \item \lstinline!tabu!
+    \item \lstinline!booktabs!
+    \item \lstinline!ragged2e!
+    \item \lstinline!nicefrac!
+    \item \lstinline!cancel!
+    \item \lstinline!siunitx!
+    \item \lstinline!marginnote!
+    \item \lstinline!listings!
+    \item \lstinline!paralist!
+    \item \lstinline!caption!
+    \item \lstinline!subcaption!
+    \item \lstinline!appendix!
+    \item \lstinline!todonotes!
+    \item \lstinline!etex!
+    \item \lstinline!ucs!
+    \item \lstinline!lastpage!
+    \item \lstinline!empheq!
+    \item \lstinline!rotating!
+    \item \lstinline!enumitem!
+    \item \lstinline!amsthm!
+    \item \lstinline!minibox!
+    \item \lstinline!nth!
+    \item \lstinline!acronym!
+    \item \lstinline!flushend!
+    \item \lstinline!natbib!
+    \item \lstinline!dcolumn!
+    \item \lstinline!eurosym!
+    \item \lstinline!url!
+    \item \lstinline!hyperref!
+    \item \lstinline!cleverref!
+    \item \lstinline!glossaries!
+    \item \lstinline!scrhack!
+\end{itemize}
+
+
+\subsubsection{Class Options}
+
+\begin{longtabu} to \linewidth {X[1,L] X[5,L]}%
+    \caption{A brief, to be extended, summary of class options. Defaults are given in \textsl{slanted text}.}
+    \label{tbl:user-documentation:class-options}\\
+    
+        \toprule%
+        Option & Comment \\ \midrule%
+    \endhead%
+        \bottomrule
+        \multicolumn{2}{r}{\footnotesize\textsl{Continued on next page}}%
+    \endfoot%
+        \bottomrule
+    \endlastfoot%s
+    online & Renders document for online viewing i.e., highlights anchors \\
+    print & Renders document for offline viewing i.e., no highlighted anchors \\
+    {\textsl{draft}} & Set document into draft mode \\
+    final & Set document into final mode (last thing to be done before handing it in) \\
+    coloredtables & Automatically colors the table rows in alternating colors \\
+    {\textsl{english}} & Set document's main language to English \\
+    german & Set document's main language to German \\
+    {\textsl{a4paper}} & Typeset A4 paper size \\
+    a5paper & Typeset A5 paper size \\
+    letter & Typeset letter paper size \\
+    oneside & One-sided printing \\
+    {\textsl{twoside}} & Two-sided printing \\
+    bachelorproject & Typeset a bachelor's project thesis \\
+    bpa & Typeset a bachelor project thesis \\
+    description-bachelor & Typeset a bachelor's thesis' description \\
+    description-bsc & Typeset a bachelor's thesis' description \\
+    {\textsl{bachelor}} & Typeset a bachelor's thesis \\
+    ba & Typeset a bachelor's thesis \\
+    description-master & Typeset a master's thesis' description \\
+    description-msc & Typeset a master's thesis' description \\
+    study & Typeset a master's study thesis \\
+    sa & Typeset a master's study thesis \\
+    master & Typeset a master's thesis \\
+    msc & Typeset a master's thesis \\
+    diplom & Typeset a diploma thesis \\
+    da & Typeset a diploma thesis \\
+    doctorate & Typeset a doctoral thesis \\
+    phd & Typeset a doctoral thesis \\
+    report & Typeset a report \\
+    requirement & Typeset a product requirements document \\
+    requirements & Typeset a product requirements document \\
+    specification & Typeset a functional specification document \\
+    specifications & Typeset a functional specification document \\
+\end{longtabu}
+
+
 \subsection{How to Get Started}\label{sec:user-documentation:get-started}
 
 In order to get your thesis started, there is a few things necessary to set up.
@@ -184,7 +303,7 @@ Further down you will find several commented commands, namely
 
 \section{Typography}\label{sec:style-guide:typography}
 
-According to the definition on Wikipedia, typography can be defined as follows.%
+According to the definition on Wikipedia, typography can be defined as:
 
 \begin{quotation}
 Typography is the art and technique of arranging type to make written language readable, appealing, and legible when displayed. The arrangement of type involves selecting typefaces, point size, line length, line-spacing (leading), letter-spacing (tracking), and adjusting the space within letters pairs (kerning).
@@ -647,3 +766,21 @@ Referencing may be done using \lstinline!\ref{label}! even though usage of \lsti
 \paragraph{Paragraph}
 
 \subparagraph{Subparagraph}
+
+
+\chapter{ToDos and Known Bugs}
+
+\begin{intro}
+    This is a collaborative lists of ToDos and known bugs in this thesis.%
+\end{intro}
+
+\section{ToDos}
+
+This is the comprehensive list of ToDos \todo{Deal with todo list}.
+
+\begin{itemize}
+    \item Make opening page of environment ``Appendix'' obey to style rules.
+    \item Ensure that in the appendix, chapters don't read ``Chapter'' but ``Appendix'' \textsl{(Fixed in version 0.5.6; XTL)}
+    \item Brief chapter intros have weird distances between upper rule and text and lower rule and text (see this chapter as an example).
+\end{itemize}
+
