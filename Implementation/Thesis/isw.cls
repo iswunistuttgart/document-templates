@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.5.7}
-\def\filedate{2016/04/08}
+\def\fileversion{0.6.0}
+\def\filedate{2016/04/12}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -174,8 +174,10 @@
     colorlinks=true, % color links
     debug=false, % provide details of anchors defined; same as verbose
     destlabel=false, % destinations are named by the fist \label after the anchor creation
+    draft=false, % do not do any hyperlinking
 %    filebordercolor=SecondaryColor, %  color of border aroundfile links
 %    filecolor=PrimaryColor, % color of file links
+    final=true, % all hypertext options are turned on
     frenchlinks=false, % use small caps instead of color for links
     hyperfigures=false, % make figures hyper links
     hyperfootnotes=true, % set up hyperlinked footnotes
@@ -223,13 +225,6 @@
     \PassOptionsToPackage{%
         hidelinks=true,
     }{hyperref}
-}
-
-% Pass option final or draft to hyperref depending on thesisfinal
-\ifdraft{
-    \PassOptionsToPackage{draft}{hyperref}
-}{
-    \PassOptionsToPackage{final}{hyperref}
 }
 
 % Necessary options for package xcolor
@@ -1009,6 +1004,12 @@
     \overfullrule=5pt
 }{}
 
+% Itemize environments: PrimaryColor'ed boxes
+\setlist[itemize,1]{label={\protect\tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor,fill=PrimaryColor] (0, 0ex) rectangle (0.6ex, 0.6ex);}}
+\setlist[itemize,2]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, fill=PrimaryColor] (0,0) circle (0.3ex);}}
+\setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
+\setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) circle (0.3ex);}}
+
 % Minitoc is not working proplery yet
 %\ifbool{minitoc}{%
 %    \mtcsetdepth{minitoc}{2}% ~ \setcounter{minitocdepth}{2}
@@ -1401,6 +1402,34 @@
 
 \newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
 
+%% Common English abbreviations
+% w.r.t. => with respect to [in Bezug zu/auf]
+\newcommand{\textWrt}{w.\@r.\@t.\@\xspace}
+% w.l.o.g. => without loss of generality [o.B.d.A => ohne Beschraenkung der Allgemeinheit]
+\newcommand{\textWlog}{w.\@l.\@o.\@g.\@\xspace}
+
+%% Common German abbreviations
+% o.B.d.A => ohne Beschraenkung der Allgemeinheit
+\newcommand{\textObda}{o.\@B.\@d.\@A.\@\xspace}
+% z.B. => zum Beispiel
+\newcommand{\textZb}{z.\@B.\@\xspace}
+% o.ae. => oder aehnliche(s)
+\newcommand{\textOae}{o.@\@a.\@\xspace}
+% o.a. => oder andere
+%\newcommand{\textOae}{o.\@a.\@\xspace}
+% u.a. => unter anderem
+\newcommand{\textUa}{u.\@a.\@\xspace}
+
+%% Latin abbreviations
+
+% i.e. => id est => that is [das ist/heisst]
+\newcommand{\textIe}{i.\@e.\@,\xspace}
+% cf. => confer => refer to [siehe]
+\newcommand{\textCf}{cf.\@\xspace}
+% e.g. => exemplari grati => for example [zum Beispiel]
+\newcommand{\textEg}{e.\@g.\@,\xspace}
+% vs. => versus => against [gegen]
+\newcommand{\textVs}{vs.\@\xspace}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
