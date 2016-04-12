@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{0.6.0}
+\def\fileversion{0.6.1}
 \def\filedate{2016/04/12}
 
 % Definition of the actual class interface
@@ -147,14 +147,15 @@
 
 % Default options to the geometry paackage
 \PassOptionsToPackage{%
-    paper=a4paper,
-    top=3cm,
-    bottom=4cm,
-    outer=3.5cm,
-    inner=2.5cm,
-    heightrounded,
-    marginparwidth=2.5cm,
-    marginparsep=0.5cm,
+    paper=a4paper,              % 
+    top=3cm,                    % 
+    bottom=4cm,                 % 
+    outer=3.5cm,                % 
+    inner=2.5cm,                % 
+    heightrounded,              % 
+    marginparwidth=2.5cm,       % 
+    marginparsep=0.5cm,         % 
+    footnotesep=2\baselineskip, % 
 }{geometry}
 
 % Configuration of hyperref
@@ -301,6 +302,10 @@
     spaces
 }{url}
 
+\PassOptionsToPackage{
+    final, % 
+}{graphicx}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -433,6 +438,10 @@
 % This package provides the command \marginnote that may be used instead of \marginpar at almost every place where \marginpar cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package.
 \RequirePackage{marginnote}
 
+% A collection of ways to change the typesetting of footnotes. The package provides means of changing the layout of the footnotes themselves (including setting them in ‘paragraphs’ — the para option), a way to number footnotes per page (the perpage option), to make footnotes disappear in a ‘moving’ argument (stable option) and to deal with multiple references to footnotes from the same place (multiple option). The package also has a range of techniques for labelling footnotes with symbols rather than numbers.
+% Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
+\RequirePackage[hang,multiple]{footmisc}
+
 % Typeset source code listings using LaTeX. The package enables the user to typeset programs (programming code) within LaTeX; the source code is read directly by TeX—no front-end processor is needed. Keywords, comments and strings can be typeset using different styles (default is bold for keywords, italic for comments and no special style for strings). Support for hyperref is provided. To use, \usepackage{listings}, identify the language of the object to typeset, using a construct like: \lstset{language=Python}, then use environment lstlisting for inline code. External files may be formatted using \lstinputlisting to process a given file in the form appropriate for the current language. Short (in-line) listings are also available, using either \lstinline|...| or |...| (after defining the | token with the \lstMakeShortInline command).
 \ifbool{minted}{}{%
     \RequirePackage{listings}
@@ -526,6 +535,19 @@
 
 % Reference last page for Page N of M type footers. Reference the number of pages in your LaTeX document through the introduction of a new label which can be referenced like \pageref{LastPage} to give a reference to the last page of a document. It is particularly useful in the page footer that says: Page N of M.
 \RequirePackage{lastpage}
+
+% Mathtools provides a series of packages designed to enhance the appearance of documents containing a lot of mathematics. The main backbone is amsmath, so those unfamiliar with this required part of the LaTeX system will probably not find the packages very useful.
+% Mathtools provides many useful tools for mathematical typesetting. It is based on amsmath and fixes various deficiencies of amsmath and standard LaTeX. It provides:
+% * Extensible symbols, such as brackets, arrows, harpoons, etc.;
+% * Various symbols such as \coloneqq (:=);
+% * Easy creation of new tag forms;
+% * Showing equation numbers only for referenced equations;
+% * Extensible arrows, harpoons and hookarrows;
+% * Starred versions of the amsmath matrix environments for specifying the column alignment;
+% * More building blocks: multlined, cases-like environments, new gathered environments;
+% * Maths versions of \makebox, \llap, \rlap etc.;
+% * Cramped math styles; and more...
+\RequirePackage{mathtools}
 
 % EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The package provides a visual markup extension to amsmath. The user-friendly interface allows the user to put a set of equations inside a box thus enhancing the \boxed feature of amsmath. As a side effect it's also possible to add material on both sides of the equations thus providing (and surpassing) the functionality of the cases package. Users of ntheorem will probably want to have a look at it as well, since the problem with end-of-theorem marks in gather and other environments can be circumvented using empheq.
 \RequirePackage{empheq}
@@ -970,6 +992,9 @@
 %\fancyfoot[CO]{}
 %\fancyfoot[RO]{\sffamily\thepage}
 \lofoot{\copyright\,\the\year\space\@departmentshort, \@university}
+%% Footnote
+\renewcommand{\footnoterule}{\kern-3pt {\color{MainColor}{\hrule width 2in}} \kern 2.6pt}
+\renewcommand{\thefootnote}{\textcolor{PrimaryColor}{\arabic{footnote}}}
 
 % Make sure the ToC only shows entries down till subsubsection
 \setcounter{tocdepth}{2}
@@ -1400,7 +1425,8 @@
     \input{demo/#1}
 }
 
-\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+% Colored rule command: \crule{Width}{Height} for a "MainColor" colored rule, or \crule[Color]{Width}{Height} for a "Color" colored rule
+\newcommand\crule[3][MainColor]{\textcolor{#1}{\rule{#2}{#3}}}
 
 %% Common English abbreviations
 % w.r.t. => with respect to [in Bezug zu/auf]
