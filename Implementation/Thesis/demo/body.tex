@@ -66,6 +66,7 @@ All the packages loaded and pre-configured by this class are listed below in the
     \item \lstinline!cancel!
     \item \lstinline!siunitx!
     \item \lstinline!marginnote!
+    \item \lstinline!footmisc!
     \item \lstinline!listings!
     \item \lstinline!paralist!
     \item \lstinline!caption!
@@ -75,6 +76,7 @@ All the packages loaded and pre-configured by this class are listed below in the
     \item \lstinline!etex!
     \item \lstinline!ucs!
     \item \lstinline!lastpage!
+    \item \lstinline!mathtools!
     \item \lstinline!empheq!
     \item \lstinline!rotating!
     \item \lstinline!enumitem!
@@ -491,8 +493,13 @@ One of these, apparently, is the \lstinline|align| environment which can be used
     \end{align}
 \end{lstlisting}
 
+Do not leave an empty line in your source code \textsl{before} or \textsl{after} the \lstinline!align!-environment.
+Doing so might create an unwanted page-break -- use it only to create a page-break in case you happen to run into too wide spread paragraphs.
+If you end a paragraph with a math-environment, then it is fine to leave an empty line after such environments but not if you continue the next text block with words like \textsl{where}, \textsl{in which}, or \textsl{with}.
+In this case you have to think of the math-environment as being a sub-clause.
+Textual sub-clauses are not separated by a newline from the main clause thus a math-environment must not be separated either.
 
-
+The same concept applies for \lstinline!itemize! or \lstinline!enumerate!-environments.
 
 
 
