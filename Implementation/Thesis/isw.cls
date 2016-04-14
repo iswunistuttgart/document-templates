@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{0.6.2}
+\def\fileversion{0.6.3}
 \def\filedate{2016/04/14}
 
 % Definition of the actual class interface
@@ -725,46 +725,43 @@
     %
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
-        \foreignlanguage{ngerman}{%
-    %        \vspace*{0.5cm}%
-            \chapter*{Ekl\"arung des Autors}%
-            \vspace{1\baselineskip}
-            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
-            \vspace{1\baselineskip}
-            \begin{center}
-                \selectfont\sffamily
-                \@title\\%
-                \ifdefempty{\@subtitle}{}{
-                    \vspace{0.15cm}
-                    \@subtitle\\%
-                }
-            \end{center}
-            \vspace{1\baselineskip}
-            \begin{enumerate}%
-                \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
-                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-                \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-                \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-                \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-            \end{enumerate}%
-            \vfill%\vspace{2\baselineskip}%
-            %
-            \begin{center}%
-                \selectfont\sffamily%
-                \small%
-                \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-                    \rule{\linewidth}{0.5pt}%
-                        & \rule{\linewidth}{0pt}%
-                        & \rule{\linewidth}{0.5pt}%
-                        \\[-1.5ex]%
-                    Autor%
-                        & %
-                        & Datum \\%
-                \end{tabu}%
-            \end{center}%
-            \vfill%
-            \cleardoublepage%
-        }%
+        \chapter*{Ekl\"arung des Autors}%
+        \vspace{1\baselineskip}
+        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
+        \vspace{1\baselineskip}
+        \begin{center}
+            \selectfont\sffamily
+            \@title\\%
+            \ifdefempty{\@subtitle}{}{
+                \vspace{0.15cm}
+                \@subtitle\\%
+            }
+        \end{center}
+        \vspace{1\baselineskip}
+        \begin{enumerate}%
+            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
+            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+            \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+            \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+            \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+        \end{enumerate}%
+        \vfill%\vspace{2\baselineskip}%
+        %
+        \begin{center}%
+            \selectfont\sffamily%
+            \small%
+            \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+                \rule{\linewidth}{0.5pt}%
+                    & \rule{\linewidth}{0pt}%
+                    & \rule{\linewidth}{0.5pt}%
+                    \\[-1.5ex]%
+                Datum%
+                    & %
+                    & Autor \\%
+            \end{tabu}%
+        \end{center}%
+        \vfill%
+        \cleardoublepage%
     }
 }
 
@@ -870,44 +867,45 @@
     %
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
-        %        \vspace*{0.5cm}%
-        \chapter*{Ekl\"arung des Autors}%
-        \vspace{1\baselineskip}
-        Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
-        \vspace{1\baselineskip}
-        \begin{center}
-            \selectfont\sffamily
-            \@title\\%
-            \ifdefempty{\@subtitle}{}{
-                \vspace{0.15cm}
-                \@subtitle\\%
-            }
-        \end{center}
-        \vspace{1\baselineskip}
-        \begin{enumerate}%
-            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
-            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-            \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-            \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-            \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-        \end{enumerate}%
-        \vfill%\vspace{2\baselineskip}%
-        %
-        \begin{center}%
-            \selectfont\sffamily%
-            \small%
-            \begin{tabu} to \linewidth {X[5,L] X[1] X[5,R]}%
-                \rule{\linewidth}{0.5pt}%
-                    & \rule{\linewidth}{0pt}%
-                    & \rule{\linewidth}{0.5pt}%
-                    \\[-1.5ex]%
-                Autor%
-                    & %
-                    & Datum
-            \end{tabu}%
-        \end{center}%
-        \vfill%
-        \cleardoublepage%
+        \begin{otherlanguage}{ngerman}%
+            \chapter*{Ekl\"arung des Autors}%
+            \vspace{1\baselineskip}
+            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
+            \vspace{1\baselineskip}
+            \begin{center}
+                \selectfont\sffamily
+                \@title\\%
+                \ifdefempty{\@subtitle}{}{
+                    \vspace{0.15cm}
+                    \@subtitle\\%
+                }
+            \end{center}
+            \vspace{1\baselineskip}
+            \begin{enumerate}%
+                \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
+                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+                \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+                \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+                \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+            \end{enumerate}%
+            \vfill%\vspace{2\baselineskip}%
+            %
+            \begin{center}%
+                \selectfont\sffamily%
+                \small%
+                \begin{tabu} to \linewidth {X[5,L] X[1] X[5,R]}%
+                    \rule{\linewidth}{0.5pt}%
+                        & \rule{\linewidth}{0pt}%
+                        & \rule{\linewidth}{0.5pt}%
+                        \\[-1.5ex]%
+                    Datum %
+                        & %
+                        & Autor
+                \end{tabu}%
+            \end{center}%
+            \vfill%
+            \cleardoublepage%
+        \end{otherlanguage}%
     }
 }
 
@@ -1186,7 +1184,7 @@
 %        }%
         \vspace*{1cm}\par%
 %        \fbox{%
-            \begin{minipage}[c][3cm][c]{0.7\linewidth}%
+            \begin{minipage}[c][3cm][c]{0.75\linewidth}%
                 \ifdefstring{\@ThesisType}{document}{}{%
                     \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
                     {\@localExaminer:}%
