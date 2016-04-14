@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.6.1}
-\def\filedate{2016/04/12}
+\def\fileversion{0.6.2}
+\def\filedate{2016/04/14}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -305,6 +305,10 @@
 \PassOptionsToPackage{
     final, % 
 }{graphicx}
+
+\PassOptionsToPackage{
+    final, %
+}{listings}
 
 
 
