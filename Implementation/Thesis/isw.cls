@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.6.3}
-\def\filedate{2016/04/14}
+\def\fileversion{0.6.5}
+\def\filedate{2016/04/18}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -636,6 +636,7 @@
     \def\@localMajor{Studiengang}
     \def\@localPartner{In Kooperation mit}
     \def\@localKeywords{Stichw\"orter}
+    \def\@localDeclarationOfAuthorship{Erkl{\"a}rung des Autors}
     %
     \renewcommand{\appendixtocname}{Anh\"ange}
     \renewcommand{\appendixname}{Anhang}
@@ -725,7 +726,7 @@
     %
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
-        \chapter*{Ekl\"arung des Autors}%
+        \chapter*{\@localDeclarationOfAuthorship}%
         \vspace{1\baselineskip}
         Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
         \vspace{1\baselineskip}
@@ -739,8 +740,8 @@
         \end{center}
         \vspace{1\baselineskip}
         \begin{enumerate}%
-            \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
-            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+            \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+            \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
             \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
             \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
             \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
@@ -777,6 +778,7 @@
     \def\@localMajor{Major}
     \def\@localPartner{In cooperation with}
     \def\@localKeywords{Keywords}
+    \def\@localDeclarationOfAuthorship{Declaration of Authorship}
     %
     \renewcommand{\appendixtocname}{Appendices}
     \renewcommand{\appendixname}{Appendix}
@@ -868,7 +870,7 @@
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
         \begin{otherlanguage}{ngerman}%
-            \chapter*{Ekl\"arung des Autors}%
+            \chapter*{\@localDeclarationOfAuthorship}%
             \vspace{1\baselineskip}
             Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
             \vspace{1\baselineskip}
@@ -882,8 +884,8 @@
             \end{center}
             \vspace{1\baselineskip}
             \begin{enumerate}%
-                \item Dass ich meine Arbeit bzw. bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbstst\"andig verfasst habe.%
-                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss{} aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+                \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
                 \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
                 \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
                 \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
@@ -1109,7 +1111,7 @@
 % Sets the table head row color
 \newcommand{\tableheadcolor}{\rowcolor{TableHeader}}
 % Command to apply styles for a table head column
-\newcommand{\thead}[1]{{\color{MainColorLight}{\bfseries{#1}}}}
+\newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
 % Command to open a table header
 \newcommand{\theadbegin}{\toprule\tableheadcolor}
 % And command to close a table header
@@ -1333,6 +1335,19 @@
 % COMMANDS                                                                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% NOTE: In the following, command arguments are specified as follows
+% * Required arguments (given in {} curly brackets) are listed with numeric labels e.g., 1) for the first required argument
+% * Optional arguments (given in [] square bracktes) are listed with lowercase alpha label e.g., a) for the first optional argument.
+
+% Execute command if file #1 is newer than #2
+% 1) Path to "new" file
+% 2) Path to file to check timestamp against
+% 3) command to execute
+\newcommand{\executeiffilenewer}[3]{%
+    \ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+    {\pdffilemoddate{#2}}>0%
+    {\immediate\write18{#3}}\fi%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % MATH RELATED COMMANDS %
@@ -1399,19 +1414,34 @@
 %%%%%%%%%%%%%%%%%%%
 % FIGURE COMMANDS %
 %%%%%%%%%%%%%%%%%%%
+% Create two new lengths for TikZ images: figurewidth and figureheight
 \newlength{\figurewidth}
 \newlength{\figureheight}
+% Set the default lenghts of above defined lengths
 \setlength{\figurewidth}{0.75\linewidth}
 \setlength{\figureheight}{0.55\linewidth}
-% Easily include a TikZ image with only three arguments
+
+% Easily include a TikZ image with only three arguments (one required, two optional)
+% a) Width of rendered image
+% b) Height of rendered image
 % 1) Path to the file
-% 2) Width of rendered image
-% 3) Height of rendered image
-\newcommand{\includetikz}[3]{%
-    \setlength{\figurewidth}{#2}
-    \setlength{\figureheight}{#3}
-    \tikzsetnextfilename{figures/#1}
-    \include{figures/#1.tikz}
+%\newcommand{\includetikz}[3]{%
+\DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.55\linewidth} m}{%
+    \setlength{\figurewidth}{#1}%
+    \setlength{\figureheight}{#2}%
+    \tikzsetnextfilename{figures/#3}%
+    \input{figures/#1.tikz}%
+}
+
+% Easily include SVG files with only one required argument (and one optional argument)
+% a) Width of the file
+% 1) Path to the file
+\DeclareDocumentCommand{\includesvg}{O{0.75\linewidth} m}{%
+    \def\svgwidth{#1}
+    \executeiffilenewer{#2.svg}{#2.pdf}{
+        inkscape -z -D --file=#1.svg --export-pdf=#2.pdf             --export-latex
+    }
+    \input{#2.pdf_tex}
 }
 
 
@@ -1441,12 +1471,17 @@
 \newcommand{\textObda}{o.\@B.\@d.\@A.\@\xspace}
 % z.B. => zum Beispiel
 \newcommand{\textZb}{z.\@B.\@\xspace}
-% o.ae. => oder aehnliche(s)
-\newcommand{\textOae}{o.@\@a.\@\xspace}
+% o.\"a. => oder aehnliche(s)
+\newcommand{\textOae}{o.\@\"a.\@\xspace}
 % o.a. => oder andere
-%\newcommand{\textOae}{o.\@a.\@\xspace}
+\newcommand{\textOa}{o.\@a.\@\xspace}
 % u.a. => unter anderem
 \newcommand{\textUa}{u.\@a.\@\xspace}
+% bzw. => beziehungweise
+\newcommand{\textBzw}{bzw.\@\xspace}
+% Overwrite the original \ss with a proper x-spaced ss
+\let\oldss\ss
+\renewcommand{\ss}{{\oldss}\xspace}
 
 %% Latin abbreviations
 
@@ -1458,6 +1493,7 @@
 \newcommand{\textEg}{e.\@g.\@,\xspace}
 % vs. => versus => against [gegen]
 \newcommand{\textVs}{vs.\@\xspace}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
