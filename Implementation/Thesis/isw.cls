@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{0.6.5}
-\def\filedate{2016/04/18}
+\def\filedate{2016/04/20}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -240,24 +240,16 @@
 % Configure amsmath
 \PassOptionsToPackage{
     centertags, % (default) center tags vertically
-%    tbtags,     % 'Top-or-bottom tags': For a split equation, place equation
-    % numbers level with the last (resp. first) line, if numbers
-    % are on the right (resp. left).
-    sumlimits,  %(default) Place the subscripts and superscripts of summation
-    % symbols above and below
-%    nosumlimits,  % Always place the subscripts and superscripts of
-    % summation-type symbols to the side, even in displayed
-    % equations.
+%    tbtags,     % 'Top-or-bottom tags': For a split equation, place equation numbers level with the last (resp. first) line, if numbers are on the right (resp. left).
+    sumlimits,  % (default) Place the subscripts and superscripts of summation symbols above and below
+%    nosumlimits,  % Always place the subscripts and superscripts of summation-type symbols to the side, even in displayed equations.
     intlimits,   % Like sumlimits, but for integral symbols.
     %nointlimits, % (default) Opposite of intlimits.
-    namelimits,  % (default) Like sumlimits, but for certain 'operator names'
-    % such as det, inf, lim, max, min, that traditionally have
-    % subscripts placed underneath when they occur in a displayed
-    % equation.
+    namelimits,  % (default) Like sumlimits, but for certain 'operator names' such as det, inf, lim, max, min, that traditionally have subscripts placed underneath when they occur in a displayed equation.
 %    nonamelimits, % Opposite of namelimits.
-    leqno,     % Place equation numbers on the left.
-%    reqno,     % Place equation numbers on the right.
-%    fleqn,     % Position equations at a fixed indent from the left margin rather than centered in the text column.
+%    leqno,     % Place equation numbers on the left.
+    reqno,     % Place equation numbers on the right.
+    fleqn,     % Position equations at a fixed indent from the left margin rather than centered in the text column.
 }{amsmath}
 
 % Only few configuration options to cleveref
@@ -432,6 +424,11 @@
 
 % Typeset in-line fractions in a "nice" way. The package typesets fractions “nicely” — in the form ‘a/b’ (i.e., staggered with a slash between them, rather than directly one over the other). The package is distributed as part of a bundle including the units package. Nicefrac’s facilities are provided, in a cleaner way, by the (experimental) xfrac package, but see also the faktor package for quotient spaces and the like.
 \RequirePackage{nicefrac}
+
+% fouridx – Left sub- and superscripts in maths mode
+% The package enables left subscripts and superscripts in maths mode. The sub- and superscripts are raised for optimum fitting to the symbol indexed, in such a way that left and right sub- and superscripts are set on the same level, as appropriate.
+% The package provides an alternative to the use of the \sideset command in the amsmath package.
+\RequirePackage{fouridx}
 
 % Place lines through maths formulae. A package to draw diagonal lines (“cancelling” a term) and arrows with limits (cancelling a term “to a value”) through parts of maths formulae.
 \RequirePackage{cancel}
@@ -1360,7 +1357,7 @@
 % Norm
 % \norm{a_i} renders || a_i ||_2 
 % \norm[1]{a_i} renders || a_i ||_1
-\newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{#1}}}
+\newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{\scriptscriptstyle{#1}}}}
 
 % Power
 % \pow{x} renders x^2
@@ -1383,6 +1380,14 @@
 % \transp{A} renders A^T
 \newcommand{\transp}[1]{\ensuremath{{#1}^{\mathrm{T}}}}
 
+% Element inverse (usually used for matrix inverse)
+% \inv{A} renders A^{-1}
+\newcommand{\inv}[1]{\ensuremath{#1^{-1}}}
+
+% Arcus tangent 2
+% \atanTwo{y}{x} renders atan2(y, x)
+\newcommand{\atantwo}[2]{\ensuremath{\operatorname{atan2}\left(#1, #2 \right)}}
+
 % Range of numbers
 % \irange{m} renders i = 1, ..., m
 % \irange{m}{j} renders j = 1, ..., m
@@ -1398,6 +1403,9 @@
         \ensuremath{\runner = 1, \ldots, \ending}
     }
 }
+
+% Proper math subscripts for textual indices like "std" or "coeff". Do not use for variable indices like "i" or "j"
+\newcommand{\ms}[1]{\ensuremath{\scriptscriptstyle{\text{#1}}}}
 
 
 
