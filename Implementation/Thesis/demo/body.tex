@@ -95,10 +95,10 @@ All the packages loaded and pre-configured by this class are listed below in the
     \item \lstinline!scrhack!
 \end{itemize}
 
-
+-
 \subsubsection{Class Options}
 
-\begin{longtabu} to \linewidth {X[1,L] X[5,L]}%
+\begin{longtabu} to \linewidth {X[1,L] X[3,L]}%
     \caption{A brief, to be extended, summary of class options. Defaults are given in \textsl{slanted text}.}
     \label{tbl:user-documentation:class-options}\\
     
@@ -126,7 +126,7 @@ All the packages loaded and pre-configured by this class are listed below in the
     bpa & Typeset a bachelor project thesis \\
     description-bachelor & Typeset a bachelor's thesis' description \\
     description-bsc & Typeset a bachelor's thesis' description \\
-    {\textsl{bachelor}} & Typeset a bachelor's thesis \\
+    bachelor & Typeset a bachelor's thesis \\
     ba & Typeset a bachelor's thesis \\
     description-master & Typeset a master's thesis' description \\
     description-msc & Typeset a master's thesis' description \\
@@ -138,7 +138,7 @@ All the packages loaded and pre-configured by this class are listed below in the
     da & Typeset a diploma thesis \\
     doctorate & Typeset a doctoral thesis \\
     phd & Typeset a doctoral thesis \\
-    report & Typeset a report \\
+    {\textsl{report}} & Typeset a report \\
     requirement & Typeset a product requirements document \\
     requirements & Typeset a product requirements document \\
     specification & Typeset a functional specification document \\
@@ -789,5 +789,7 @@ This is the comprehensive list of ToDos \todo{Deal with todo list}.
     \item Make opening page of environment ``Appendix'' obey to style rules.
     \item Ensure that in the appendix, chapters don't read ``Chapter'' but ``Appendix'' \textsl{(Fixed in version 0.5.6; XTL)}
     \item Brief chapter intros have weird distances between upper rule and text and lower rule and text (see this chapter as an example).
+    \item Create a beautiful cover page which can be then created using \lstinline!\coverpage! before the front matter is created
+    \item Add partner logo to front matter
 \end{itemize}
 

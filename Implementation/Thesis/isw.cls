@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{0.7.0}
+\def\fileversion{0.8.0}
 \def\filedate{2016/04/20}
 
 % Definition of the actual class interface
@@ -80,28 +80,28 @@
 \DeclareOption{oneside}{\toggletrue{oneside}\PassOptionsToPackage{twoside=false}{scrreprt}}
 
 % The actual thesis type
-\def\@thesis{ba}
-\DeclareOption{description-bsc}{\def\@thesis{description-bsc}}
-\DeclareOption{description-bachelor}{\def\@thesis{description-bsc}}
-\DeclareOption{description-msc}{\def\@thesis{description-msc}}
-\DeclareOption{description-master}{\def\@thesis{description-msc}}
-\DeclareOption{bachelor}{\def\@thesis{ba}}
-\DeclareOption{bsc}{\def\@thesis{ba}}
-\DeclareOption{master}{\def\@thesis{ma}}
-\DeclareOption{msc}{\def\@thesis{ma}}
-\DeclareOption{study}{\def\@thesis{sa}}
-\DeclareOption{sa}{\def\@thesis{sa}}
-\DeclareOption{diplom}{\def\@thesis{da}}
-\DeclareOption{da}{\def\@thesis{da}}
-\DeclareOption{bachelorproject}{\def\@thesis{bpa}}
-\DeclareOption{bpa}{\def\@thesis{bpa}}
-\DeclareOption{doctorate}{\def\@thesis{phd}}
-\DeclareOption{phd}{\def\@thesis{phd}}
-\DeclareOption{report}{\def\@thesis{rep}}
-\DeclareOption{requirement}{\def\@thesis{prd}}
-\DeclareOption{requirements}{\def\@thesis{prd}}
-\DeclareOption{specification}{\def\@thesis{fsd}}
-\DeclareOption{specifications}{\def\@thesis{fsd}}
+\def\@document{report}
+\DeclareOption{description-bsc}{\def\@document{description-bsc}}
+\DeclareOption{description-bachelor}{\def\@document{description-bsc}}
+\DeclareOption{description-msc}{\def\@document{description-msc}}
+\DeclareOption{description-master}{\def\@document{description-msc}}
+\DeclareOption{bachelor}{\def\@document{ba}}
+\DeclareOption{bsc}{\def\@document{ba}}
+\DeclareOption{master}{\def\@document{ma}}
+\DeclareOption{msc}{\def\@document{ma}}
+\DeclareOption{study}{\def\@document{sa}}
+\DeclareOption{sa}{\def\@document{sa}}
+\DeclareOption{diplom}{\def\@document{da}}
+\DeclareOption{da}{\def\@document{da}}
+\DeclareOption{bachelorproject}{\def\@document{bpa}}
+\DeclareOption{bpa}{\def\@document{bpa}}
+\DeclareOption{doctorate}{\def\@document{phd}}
+\DeclareOption{phd}{\def\@document{phd}}
+\DeclareOption{report}{\def\@document{rep}}
+\DeclareOption{requirement}{\def\@document{prd}}
+\DeclareOption{requirements}{\def\@document{prd}}
+\DeclareOption{specification}{\def\@document{fsd}}
+\DeclareOption{specifications}{\def\@document{fsd}}
 
 % Pass any other options not known to the scrreprt package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -206,10 +206,10 @@
 %    pdfinfo={}, % alternative way of setting document information
 %    pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
 %    pdflang=\relax, % PDF langauge identifier (RFC 3066)
-    pdfstartpage=1, % page at which PDF document opens
     pdfpagemode=UseOutlines, % set default mode of PDF display
-    pdfstartview=Fit, % starting view of PDF document
     pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+    pdfstartpage=1, % page at which PDF document opens
+    pdfstartview=Fit, % starting view of PDF document
     raiselinks=false, % raise up links (for HyperTeX backend)
 %    runbordercolor=SecondaryColor, % color of border around 'run' links
 %    runcolor=PrimarColor, % color of 'run' links
@@ -641,74 +641,74 @@
     \renewcommand{\abstractname}{Zusammenfassung}
     %    \renewcommand{\@dedicationname}{Widmung}
     %
-    \ifdefstring{\@thesis}{description-bsc}{%
+    \ifdefstring{\@document}{description-bsc}{%
         \def\@ThesisName{Projektexpos\'e}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
-    \ifdefstring{\@thesis}{description-msc}{%
+    \ifdefstring{\@document}{description-msc}{%
         \def\@ThesisName{Projektexpos\'e}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
-    \ifdefstring{\@thesis}{ba}{%
+    \ifdefstring{\@document}{ba}{%
         \def\@ThesisName{Bachelorarbeit}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
-    \ifdefstring{\@thesis}{ma}{%
+    \ifdefstring{\@document}{ma}{%
         \def\@ThesisName{Masterarbeit}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
-    \ifdefstring{\@thesis}{sa}{%
+    \ifdefstring{\@document}{sa}{%
         \def\@ThesisName{Studienarbeit}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
-    \ifdefstring{\@thesis}{da}{%
+    \ifdefstring{\@document}{da}{%
         \def\@ThesisName{Diplomarbeit}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
-    \ifdefstring{\@thesis}{bpa}{%
+    \ifdefstring{\@document}{bpa}{%
         \def\@ThesisName{Bachelor Projektarbeit}
-        \def\@ThesisType{stuent}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
-    \ifdefstring{\@thesis}{phd}{%
+    \ifdefstring{\@document}{phd}{%
         \def\@ThesisName{Dissertation}
-        \def\@ThesisType{phd}
+        \def\@DocumentType{phd}
         \def\@DegreeLong{Doktor-Ingenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
-    \ifdefstring{\@thesis}{prd}{
+    \ifdefstring{\@document}{prd}{
         \def\@ThesisName{Lastenheft}
-        \def\@ThesisType{document}
+        \def\@DocumentType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \ifdefstring{\@thesis}{fsd}{
+    \ifdefstring{\@document}{fsd}{
         \def\@ThesisName{Pflichtenheft}
-        \def\@ThesisType{document}
+        \def\@DocumentType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \ifdefstring{\@thesis}{rep}{
+    \ifdefstring{\@document}{rep}{
         \def\@ThesisName{Report}
-        \def\@ThesisType{document}
+        \def\@DocumentType{document}
         \def\@localSubmittedBy{von}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \ifdefstring{\@ThesisType}{document}{%
+    \ifdefstring{\@DocumentType}{document}{%
         \def\@ThesisPretext{}
     }{%
         \def\@ThesisPretext{%
@@ -784,74 +784,74 @@
     \renewcommand{\contentsname}{Table of Contents}
     %    \renewcommand{\@dedicationname}{Dedication}
     %
-    \ifdefstring{\@thesis}{description-bsc}{%
+    \ifdefstring{\@document}{description-bsc}{%
         \def\@ThesisName{Project Description}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
-    \ifdefstring{\@thesis}{description-msc}{%
+    \ifdefstring{\@document}{description-msc}{%
         \def\@ThesisName{Project Description}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
-    \ifdefstring{\@thesis}{ba}{%
+    \ifdefstring{\@document}{ba}{%
         \def\@ThesisName{Bachelor's Thesis}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
-    \ifdefstring{\@thesis}{ma}{%
+    \ifdefstring{\@document}{ma}{%
         \def\@ThesisName{Master's Thesis}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Master of Science}
         \def\@DegreeShort{M.Sc.}
     }{}
-    \ifdefstring{\@thesis}{sa}{%
+    \ifdefstring{\@document}{sa}{%
         \def\@ThesisName{Student Research Project}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
-    \ifdefstring{\@thesis}{da}{%
+    \ifdefstring{\@document}{da}{%
         \def\@ThesisName{Diploma Thesis}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Diplomingenieur}
         \def\@DegreeShort{Dipl.-Ing.}
     }{}
-    \ifdefstring{\@thesis}{bpa}{%
+    \ifdefstring{\@document}{bpa}{%
         \def\@ThesisName{Bachelor's Project Report}
-        \def\@ThesisType{student}
+        \def\@DocumentType{student}
         \def\@DegreeLong{Bachelor of Science}
         \def\@DegreeShort{B.Sc.}
     }{}
-    \ifdefstring{\@thesis}{phd}{%
+    \ifdefstring{\@document}{phd}{%
         \def\@ThesisName{Doctoral Thesis}
-        \def\@ThesisType{phd}
+        \def\@DocumentType{phd}
         \def\@DegreeLong{Doktor-Ingenieur}
         \def\@DegreeShort{Dr.-Ing.}
     }{}
-    \ifdefstring{\@thesis}{prd}{
+    \ifdefstring{\@document}{prd}{
         \def\@ThesisName{Product Requirements Document}
-        \def\@ThesisType{document}
+        \def\@DocumentType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \ifdefstring{\@thesis}{fsd}{
+    \ifdefstring{\@document}{fsd}{
         \def\@ThesisName{Functional Specification}
-        \def\@ThesisType{document}
+        \def\@DocumentType{document}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \ifdefstring{\@thesis}{rep}{
+    \ifdefstring{\@document}{rep}{
         \def\@ThesisName{Report}
-        \def\@ThesisType{document}
+        \def\@DocumentType{document}
         \def\@localSubmittedBy{by}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
-    \ifdefstring{\@ThesisType}{document}{%
+    \ifdefstring{\@DocumentType}{document}{%
         \def\@ThesisPretext{}
     }{%
         \def\@ThesisPretext{A \@ThesisName\space presented to the faculty %\\%
@@ -1123,11 +1123,11 @@
     \begin{titlepage}%
         \thispagestyle{empty}%
         \centering%
-        \vspace*{0.25cm}\par%
+%        \vspace*{0.25cm}\par%
 %        \fbox{%
             \begin{minipage}[t][1cm][c]{0.9\linewidth}%
                 \centering
-                \ifdefstring{\@ThesisType}{phd}{}{%
+                \ifdefstring{\@DocumentType}{phd}{}{%
                     \huge\@ThesisName\par%
                 }
             \end{minipage}\par%
@@ -1165,7 +1165,10 @@
                 \centering%
                 \@localSubmittedBy\par%
                 \vspace{0.5cm}\par%
+                \let\oldAnd\and%
+                \renewcommand{\and}{\unskip,\xspace}%
                 {\usekomafont{author}{\@author}}\par%
+                \renewcommand{\and}{\oldAnd}%
                 \vspace{0.5cm}\par%
                 \ifdefempty{\@placeofbirth}{%
                     \par%
@@ -1184,29 +1187,37 @@
         \vspace*{1cm}\par%
 %        \fbox{%
             \begin{minipage}[c][3cm][c]{0.75\linewidth}%
-                \ifdefstring{\@ThesisType}{document}{}{%
+                \ifdefstring{\@DocumentType}{document}{}{%
                     \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
                     {\@localExaminer:}%
                         & \@examiner \\%
                     {\@localSupervisor:}%
                         & {\renewcommand{\and}{\par}\@supervisor} \\%
                     {\@localSubmittedOn:}%
-                        & {\usekomafont{date}{\printdate{\@date}}\par}%
+                        & {\usekomafont{date}{\@date}\par}%
                     \end{tabu}%
                 }%
             \end{minipage}%
 %        }%
         \vfill
 %        \fbox{%
-            \begin{minipage}[t][1.5cm][t]{0.7\linewidth}
-                \@department, \@university.
+            \begin{minipage}[t]{0.7\linewidth}
+                \@department, \@university.\par%
+                \let\oldAnd\and%
+                \renewcommand{\and}{\par}%
+                \ifdefempty{\@partner}{}{%
+                    \vspace*{0.3cm}\par%
+                    \@partner%
+                }%
+                \renewcommand{\and}{\oldAnd}%
             \end{minipage}
 %        }%
         \vfill
 %        \fbox{%
             \begin{minipage}[t][1cm][t]{0.2\linewidth}
+                \centering
                 \printdayoff
-                \printdate{\@date}
+                \@date
                 \printdayon
             \end{minipage}%
 %        }%
@@ -1233,8 +1244,11 @@
     \chapter*{\abstractname}%
     \addcontentsline{toc}{chapter}{\abstractname}%
 }{%
-\vfill
-\textbf{\@localKeywords:} \@keywords
+\vfill%
+\let\oldAnd\and%
+\renewcommand{\and}{\unskip,\xspace}%
+\textbf{\color{PrimaryColor}\@localKeywords:}~\@keywords%
+\renewcommand{\and}{\oldAnd}
 \iftoggle{oneside}{\clearpage}{\cleardoublepage}%
 }
 
@@ -1302,12 +1316,15 @@
 % Set the hyperref document information
 \makeatletter{
     \AtBeginDocument{
+        \let\oldAnd\and%
+        \renewcommand{\and}{, }%
         \hypersetup{
             pdfauthor={\@author},
             pdftitle={\@title},
             pdfsubject={\@ThesisPretext},
             pdfkeywords={\@keywords},
         }%
+        \renewcommand{\and}{\oldAnd}%
         \iflanguage{ngerman}{%
             \hypersetup{pdflang=de}%
         }{%
