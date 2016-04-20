@@ -1507,11 +1507,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % INPUT THE DEPARTMENTAL INFORMATION                                           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{config/department}
+% Add German names of the department and university
+\addto{\captionsngerman}{%
+    \university{Universit\"at Stuttgart}
+    \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+    \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+    \departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+    \departmentshort{ISW}
+}
+
+% Add English names of the department and university
+\addto{\captionsenglish}{%
+    \university{University of Stuttgart}
+    \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+    \department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+    \departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+    \departmentshort{ISW}
+}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% DONE WITH THE CLASS DEFINITION                                               %
+% DONE WITH THE CLASS DEFINITIONS                                              %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \endinput
