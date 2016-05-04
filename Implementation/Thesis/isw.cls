@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.8.0}
-\def\filedate{2016/04/20}
+\def\fileversion{0.8.1}
+\def\filedate{2016/05/04s}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -157,6 +157,11 @@
     marginparsep=0.5cm,         % 
     footnotesep=2\baselineskip, % 
 }{geometry}
+
+% Configuration for font encoding package
+\PassOptionsToPackage{%
+    T1,%
+}{fontenc}
 
 % Configuration of hyperref
 \PassOptionsToPackage{%
@@ -319,6 +324,8 @@
 \RequirePackage{scrlayer-scrpage}
 
 \RequirePackage{xspace}
+
+\RequirePackage{fontenc}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1464,7 +1471,7 @@
 \DeclareDocumentCommand{\includesvg}{O{0.75\linewidth} m}{%
     \def\svgwidth{#1}
     \executeiffilenewer{#2.svg}{#2.pdf}{
-        inkscape -z -D --file=#1.svg --export-pdf=#2.pdf             --export-latex
+        inkscape -z -D --file=#2.svg --export-pdf=#2.pdf             --export-latex
     }
     \input{#2.pdf_tex}
 }
@@ -1507,6 +1514,8 @@
 % Overwrite the original \ss with a proper x-spaced ss
 \let\oldss\ss
 \renewcommand{\ss}{{\oldss}\xspace}
+% E. h. => Ehrenhalber
+\newcommand{\textEh}{E.\@\xspace h.\@\xspace}
 
 %% Latin abbreviations
 
@@ -1518,7 +1527,16 @@
 \newcommand{\textEg}{e.\@g.\@,\xspace}
 % vs. => versus => against [gegen]
 \newcommand{\textVs}{vs.\@\xspace}
+% h. c. => honoris causa
+\newcommand{\textHc}{h.\@\xspace c.\@\xspace}
+% h. c. mult. => honoris causa mult.
+\newcommand{\textHcMult}{h.\@\xspace c.\@\xspace mult.\@\xspace}
 
+
+%% Titles
+\newcommand{\textDiplIng}{Dipl.-Ing.\@\xspace}
+\newcommand{\textProf}{Prof.\@\xspace}
+\newcommand{\textJuniorProf}{Junior-Prof.\@\xspace}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
