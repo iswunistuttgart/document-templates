@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.8.1}
-\def\filedate{2016/05/04s}
+\def\fileversion{0.8.2}
+\def\filedate{2016/05/06}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -102,6 +102,9 @@
 \DeclareOption{requirements}{\def\@document{prd}}
 \DeclareOption{specification}{\def\@document{fsd}}
 \DeclareOption{specifications}{\def\@document{fsd}}
+\DeclareOption{project-plan}{\def\@document{pp}}
+\DeclareOption{developer-guide}{\def\@document{dg}}
+\DeclareOption{user-guide}{\def\@document{ug}}
 
 % Pass any other options not known to the scrreprt package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -699,21 +702,44 @@
     \ifdefstring{\@document}{prd}{
         \def\@ThesisName{Lastenheft}
         \def\@DocumentType{document}
+        \def\@localSubmittedBy{erstellt von}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
     \ifdefstring{\@document}{fsd}{
         \def\@ThesisName{Pflichtenheft}
         \def\@DocumentType{document}
+        \def\@localSubmittedBy{erstellt von}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
     \ifdefstring{\@document}{rep}{
         \def\@ThesisName{Report}
         \def\@DocumentType{document}
-        \def\@localSubmittedBy{von}
+        \def\@localSubmittedBy{erstellt von}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
+    }{}
+    \ifdefstring{\@document}{pp}{
+        \def\@ThesisName{Projektplan}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{erstellt von}
+        \def\@DegreeLong{}
+        \def\@DegreeSort{}
+    }{}
+    \ifdefstring{\@document}{ug}{
+        \def\@ThesisName{Benutzerhandbuch}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{erstellt von}
+        \def\@DegreeLong{}
+        \def\@DegreeSort{}
+    }{}
+    \ifdefstring{\@document}{dg}{
+        \def\@ThesisName{Entwicklerhandbuch}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{erstellt von}
+        \def\@DegreeLong{}
+        \def\@DegreeSort{}
     }{}
     \ifdefstring{\@DocumentType}{document}{%
         \def\@ThesisPretext{}
@@ -842,21 +868,44 @@
     \ifdefstring{\@document}{prd}{
         \def\@ThesisName{Product Requirements Document}
         \def\@DocumentType{document}
+        \def\@localSubmittedBy{authored by}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
     \ifdefstring{\@document}{fsd}{
         \def\@ThesisName{Functional Specification}
         \def\@DocumentType{document}
+        \def\@localSubmittedBy{authored by}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
     }{}
     \ifdefstring{\@document}{rep}{
         \def\@ThesisName{Report}
         \def\@DocumentType{document}
-        \def\@localSubmittedBy{by}
+        \def\@localSubmittedBy{authored by}
         \def\@DegreeLong{}
         \def\@DegreeShort{}
+    }{}
+    \ifdefstring{\@document}{pp}{
+        \def\@ThesisName{Project Plan}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{authored by}
+        \def\@DegreeLong{}
+        \def\@DegreeSort{}
+    }{}
+    \ifdefstring{\@document}{ug}{
+        \def\@ThesisName{User Guide}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{authored by}
+        \def\@DegreeLong{}
+        \def\@DegreeSort{}
+    }{}
+    \ifdefstring{\@document}{dg}{
+        \def\@ThesisName{Developer Guide}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{authored by}
+        \def\@DegreeLong{}
+        \def\@DegreeSort{}
     }{}
     \ifdefstring{\@DocumentType}{document}{%
         \def\@ThesisPretext{}
@@ -1497,6 +1546,8 @@
 \newcommand{\textWrt}{w.\@r.\@t.\@\xspace}
 % w.l.o.g. => without loss of generality [o.B.d.A => ohne Beschraenkung der Allgemeinheit]
 \newcommand{\textWlog}{w.\@l.\@o.\@g.\@\xspace}
+% a.k.a. => also known as [aka => Auch bekannt als]
+\newcommand{\textAka}{a.\@k.\@a.\@\xspace}
 
 %% Common German abbreviations
 % o.B.d.A => ohne Beschraenkung der Allgemeinheit
