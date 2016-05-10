@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.8.2}
-\def\filedate{2016/05/06}
+\def\fileversion{0.8.3}
+\def\filedate{2016/05/10}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -161,11 +161,6 @@
     footnotesep=2\baselineskip, % 
 }{geometry}
 
-% Configuration for font encoding package
-\PassOptionsToPackage{%
-    T1,%
-}{fontenc}
-
 % Configuration of hyperref
 \PassOptionsToPackage{%
 %    anchorcolor=MainColor, % set color of anchors 
@@ -323,12 +318,14 @@
 \PassOptionsToPackage{english,ngerman}{babel}
 \RequirePackage{babel}
 
-%
+% 
 \RequirePackage{scrlayer-scrpage}
 
+% 
 \RequirePackage{xspace}
 
-\RequirePackage{fontenc}
+% 
+\RequirePackage{fontspec}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -592,7 +589,10 @@
 
 % The bundle provides a package that implements both author-year and numbered references, as well as much detailed of support for other bibliography use. Also Provided are versions of the standard BibTeX styles that are compatible with natbib—plainnat, unsrtnat, abbrnat. The bibliography styles produced by custom-bib are designed from the start to be compatible with natbib.
 \RequirePackage{natbib}
-\bibliographystyle{ieeetr}
+\bibliographystyle{babunsrt}
+
+% This package enables to generate multilingual bibliographies in cooperation with babel. Two approaches are possible: Each citation may be written in another language, or the whole bibliography can be typeset in a language chosen by the user. In addition, the package supports commands to change the typography of the bibliographies.
+\usepackage[fixlanguage]{babelbib}
 
 % The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
 % This package is part of the tools bundle in the LaTeX required distribution.
@@ -620,7 +620,10 @@
 
 % Set the language as defined in the language option to the class
 \AtBeginDocument{
+    % Set the thesis language
     \expandafter\selectlanguage\expandafter{\@thesisLanguage}
+    % Set the bibliography language
+    \expandafter\selectbiblanguage\expandafter{\@thesisLanguage}
 }
 
 
@@ -1517,8 +1520,12 @@
 % Easily include SVG files with only one required argument (and one optional argument)
 % a) Width of the file
 % 1) Path to the file
-\DeclareDocumentCommand{\includesvg}{O{0.75\linewidth} m}{%
-    \def\svgwidth{#1}
+\DeclareDocumentCommand{\includesvg}{o m}{%
+    \IfNoValueTF{#1}{%
+        \def\svgwidth{0.75\linewidth}
+    }{%
+        \def\svgwidth{#1}
+    }
     \executeiffilenewer{#2.svg}{#2.pdf}{
         inkscape -z -D --file=#2.svg --export-pdf=#2.pdf             --export-latex
     }
@@ -1562,9 +1569,6 @@
 \newcommand{\textUa}{u.\@a.\@\xspace}
 % bzw. => beziehungweise
 \newcommand{\textBzw}{bzw.\@\xspace}
-% Overwrite the original \ss with a proper x-spaced ss
-\let\oldss\ss
-\renewcommand{\ss}{{\oldss}\xspace}
 % E. h. => Ehrenhalber
 \newcommand{\textEh}{E.\@\xspace h.\@\xspace}
 
