@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.8.3}
-\def\filedate{2016/05/10}
+\def\fileversion{0.8.5}
+\def\filedate{2016/06/16}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -31,8 +31,6 @@
 % Process 'key=value' schemes
 \RequirePackage{xkeyval}
 
-%
-\RequirePackage{xparse}
 
 
 
@@ -1440,11 +1438,76 @@
 % \pow[3]{x} renders x^3
 \newcommand{\pow}[2][2]{\ensuremath{{#2}^{#1}}}
 
+% Differential operator (upface d)
+\DeclareMathOperator{\dif}{d \!}
+% Derivative operator (upface D)
+\DeclareMathOperator{\Dif}{D \!}
+
+% Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
+\providecommand{\pd}[3][]{\ensuremath{
+\ifinner
+    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
+\else
+    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
+\fi
+}}
+
+
+% \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter t means "text style"
+\providecommand{\tpd}[3][]{\ensuremath{\mathinner{
+    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
+}}}
+% \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter d means "display style"
+\providecommand{\dpd}[3][]{\ensuremath{\mathinner{
+    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
+}}}
+
+% mixed derivative - analogous to the partial derivative command
+% \md{f}{5}{x}{2}{y}{3}
+\providecommand{\md}[6]{\ensuremath{
+\ifinner
+    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
+\else
+    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
+\fi
+}}
+
+% \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter t means "text style"
+\providecommand{\tmd}[6]{\ensuremath{\mathinner{
+    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
+}}}
+% \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter d means "display style"
+\providecommand{\dmd}[6]{\ensuremath{\mathinner{
+    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
+}}}
+
+
+% ordinary derivative - analogous to the partial derivative command
+\providecommand{\od}[3][]{\ensuremath{
+\ifinner
+    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
+\else
+    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
+\fi
+}}
+
+\providecommand{\tod}[3][]{\ensuremath{\mathinner{
+    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
+}}}
+\providecommand{\dod}[3][]{\ensuremath{\mathinner{
+    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
+}}}
+
+
 % Partial differential
-\newcommand{\pd}[1]{\partial\mspace{1mu}{#1}}
+%\newcommand{\pd}[1]{\partial\mspace{1mu}{#1}}
 
 % Totial differential
-\newcommand{\td}[1]{\,\mathrm{d}{#1}}
+\newcommand{\td}[1]{\dif{#1}}
 
 % Real value
 \renewcommand{\Re}{\operatorname{Re}}
@@ -1454,15 +1517,21 @@
 
 % Transpose items
 % \transp{A} renders A^T
-\newcommand{\transp}[1]{\ensuremath{{#1}^{\mathrm{T}}}}
+\newcommand{\transp}[1]{\ensuremath{{#1}^{\intercal}}}
 
 % Element inverse (usually used for matrix inverse)
 % \inv{A} renders A^{-1}
 \newcommand{\inv}[1]{\ensuremath{#1^{-1}}}
 
+% Declare atant a math operator rendering atan2
+\DeclareMathOperator{\arctantwo}{atan2}
+
 % Arcus tangent 2
-% \atanTwo{y}{x} renders atan2(y, x)
-\newcommand{\atantwo}[2]{\ensuremath{\operatorname{atan2}\left(#1, #2 \right)}}
+% \atantwo{y}{x} renders atan2(y, x)
+%\newcommand{\atantwo}[2]{\ensuremath{\operatorname{atan2}\left(#1, #2 \right)}}
+\NewDocumentCommand{\arctant}{m m}{%
+    \ensuremath{\arctantwo \left( #1, #2 \right)}%
+}%
 
 % Range of numbers
 % \irange{m} renders i = 1, ..., m
@@ -1477,11 +1546,27 @@
         \ensuremath{\runner = 1, \delta, \ldots, \ending}
     }{%
         \ensuremath{\runner = 1, \ldots, \ending}
-    }
-}
+    }%
+}%
 
 % Proper math subscripts for textual indices like "std" or "coeff". Do not use for variable indices like "i" or "j"
 \newcommand{\ms}[1]{\ensuremath{\scriptscriptstyle{\text{#1}}}}
+
+% Rotation matrix R with optional index
+% \rot{\gamma} renders \bm{R} (\gamma)
+% \rot[x]{\gamma} renders \bm{R}_x (\gamma)
+\NewDocumentCommand{\rot}{o m}{%
+    \IfValueTF{#1}{%
+        \ensuremath{\bm{R}_{#1} \left( #2 \right)}
+    }{%
+        \ensuremath{\bm{R} \left( #2 \right)}
+    }%
+}
+
+%\newcommand{\rot}[2]{\ensuremath{\bm{R}_{#1}\left( #2 \right)}}
+\newcommand{\rotx}[1]{\ensuremath{\rot[x]{#1}}}
+\newcommand{\roty}[1]{\ensuremath{\rot[y]{#1}}}
+\newcommand{\rotz}[1]{\ensuremath{\rot[z]{#1}}}
 
 
 
@@ -1505,16 +1590,16 @@
 \setlength{\figurewidth}{0.75\linewidth}
 \setlength{\figureheight}{0.55\linewidth}
 
-% Easily include a TikZ image with only three arguments (one required, two optional)
+% Easily include a TikZ image with only three arguments (one required, two optional) - default aspect ratio for a tikz image is 4:3 (0.75 x 0.5625 \linewidth) [width x height]
 % a) Width of rendered image
 % b) Height of rendered image
 % 1) Path to the file
 %\newcommand{\includetikz}[3]{%
-\DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.55\linewidth} m}{%
+\DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.5625\linewidth} m}{%
     \setlength{\figurewidth}{#1}%
     \setlength{\figureheight}{#2}%
-    \tikzsetnextfilename{figures/#3}%
-    \input{figures/#1.tikz}%
+    \tikzsetnextfilename{#3}%
+    \input{#3.tikz}%
 }
 
 % Easily include SVG files with only one required argument (and one optional argument)
