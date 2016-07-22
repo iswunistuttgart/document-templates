@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.8.5}
-\def\filedate{2016/06/16}
+\def\fileversion{0.9.0-a}
+\def\filedate{2016/07/22}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -30,6 +30,12 @@
 
 % Process 'key=value' schemes
 \RequirePackage{xkeyval}
+
+% The package provides a LaTeX interface to the micro-typographic extensions that were introduced by pdfTeX and have since also propagated to X∃TeX and LuaTeX: most prominently, character protrusion and font expansion, furthermore the adjustment of interword spacing and additional kerning, as well as hyphenatable letterspacing (tracking) and the possibility to disable all or selected ligatures.
+% These features may be applied to customisable sets of fonts, and all micro-typographic aspects of the fonts can be configured in a straight-forward and flexible way. Settings for various fonts are provided.
+% Note that character protrusion requires pdfTeX, LuaTeX, or X∃TeX. Font expansion works with pdfTeX or LuaTeX. The package will by default enable protrusion and expansion if they can safely be assumed to work. Disabling ligatures requires pdfTeX or LuaTeX, while the adjustment of interword spacing and of kerning only works with pdfTeX. Letterspacing is available with pdfTeX or LuaTeX.
+% The alternative package `letterspace', which also works with plain TeX, provides the user commands for letterspacing only, omitting support for all other extensions.
+%\RequirePackage{microtype}
 
 
 
@@ -316,14 +322,20 @@
 \PassOptionsToPackage{english,ngerman}{babel}
 \RequirePackage{babel}
 
-% 
+% The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one. 
 \RequirePackage{scrlayer-scrpage}
 
-% 
+% The xspace package provides a single command that looks at what comes after it in the command stream, and decides whether to insert a space to replace one "eaten" by the TeX command decoder. The decision is based on what came after any space, not on whether there was a space (which is unknowable): so if the next thing proves to be punctuation, the chances are there was no space, but if it's a letter, there's probably a need for space. This technique is not perfect, but works in a large proportion of cases.
+% The package is part of the latex-tools bundle in the LaTeX required distribution. 
 \RequirePackage{xspace}
 
-% 
+% Fontspec is a package for X∃LaTeX and LuaLaTeX. It provides an automatic and unified interface to feature-rich AAT and OpenType fonts through the NFSS in LaTeX running on X∃TeX or LuaTeX engines.
+% The package requires the l3kernel and xparse bundles from the LaTeX 3 development team. 
 \RequirePackage{fontspec}
+
+% The package supports the Text Companion fonts, which provide many text symbols (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen), in the TS1 encoding.
+% Note that the package has been adopted as part of the LaTeX distribution; the reference here is to the original package, which is now little used (if at all). 
+\RequirePackage{textcomp}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -350,6 +362,8 @@
 
 % Additional math symbolys for a list see http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf
 \RequirePackage{amssymb}
+
+\RequirePackage{dsfont}
 
 % Improves the interface for defining floating objects such as figures and tables. Introduces the boxed float, the ruled float and the plaintop float. You can define your own floats and improve the behaviour of the old ones. The package also provides the H float modifier option of the obsolete here package. You can select this as automatic default with \floatplacement{figure}{H}.
 \RequirePackage{float}
@@ -488,15 +502,18 @@
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
 
+%Set the font size relative to the current font size. The basic command of the package is \relsize, whose argument is a number of \magsteps to change size; from this are defined commands \larger, \smaller, \textlarger, etc.
+\RequirePackage{relsize}
+
 % The caption package provides many ways to customise the captions in floating environments like figure and table, and cooperates with many other packages. Facilities include rotating captions, sideways captions, continued captions (for tables or figures that come in several parts). A list of compatibility notes, for other packages, is provided in the documentation. The package also provides the “caption outside float” facility, in the same way that simpler packages like capt-of do. The package supersedes caption2.
 \RequirePackage{caption}
 %%% Setup captions of all floats (figures and captions)
 \captionsetup{
-    format=hang,
-    labelsep=colon,
-    textformat=simple,
-    justification=RaggedRight,
-    singlelinecheck=on,
+    format=hang, % 
+    labelsep=colon, % 
+    textformat=simple, % 
+    justification=justified, % 
+    singlelinecheck=off, % 
     font={}, % Affects the whole figure caption
     labelfont={footnotesize, bf, color=PrimaryColor}, % Affects only the label name and its number
     textfont={sl}, % Affects only the actual float caption
@@ -510,6 +527,7 @@
 \captionsetup[figure]{
     position=below, %
 }
+%%% Setup captions of subfigures
 \captionsetup[subfigure]{%
     position=below, % 
     belowskip=2pt, % 
@@ -1421,22 +1439,26 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-% MATH RELATED COMMANDS %
+% MATH COMMANDS         %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Absolute value
 % \abs{x} renders |x|
-\newcommand{\abs}[1]{\ensuremath{\vert {#1} \vert}}
+\newcommand{\abs}[1]{\vert {#1} \vert}
 
 % Norm
 % \norm{a_i} renders || a_i ||_2 
 % \norm[1]{a_i} renders || a_i ||_1
-\newcommand{\norm}[2][2]{\ensuremath{\Vert {#2} \Vert_{\scriptscriptstyle{#1}}}}
+\newcommand{\norm}[2][2]{\Vert {#2} \Vert_{\smaller[2]{#1}}}
 
 % Power
 % \pow{x} renders x^2
 % \pow[3]{x} renders x^3
-\newcommand{\pow}[2][2]{\ensuremath{{#2}^{#1}}}
+\newcommand{\pow}[2][2]{{#2}^{#1}}
+
+% Skew-symmetric matrix
+% \skewm{x} renders x with a tilde on it
+\newcommand{\skewm}[1]{\tilde{#1}}
 
 % Differential operator (upface d)
 \DeclareMathOperator{\dif}{d \!}
@@ -1444,63 +1466,63 @@
 \DeclareMathOperator{\Dif}{D \!}
 
 % Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
-\providecommand{\pd}[3][]{\ensuremath{
-\ifinner
-    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
-\else
-    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
-\fi
-}}
+\providecommand{\pd}[3][]{%
+\ifinner%
+    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+\else%
+    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+\fi%
+}
 
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter t means "text style"
-\providecommand{\tpd}[3][]{\ensuremath{\mathinner{
-    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
-}}}
+\providecommand{\tpd}[3][]{\mathinner{%
+    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+}}%
 % \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter d means "display style"
-\providecommand{\dpd}[3][]{\ensuremath{\mathinner{
-    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}
-}}}
+\providecommand{\dpd}[3][]{\mathinner{%
+    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+}}%
 
 % mixed derivative - analogous to the partial derivative command
 % \md{f}{5}{x}{2}{y}{3}
-\providecommand{\md}[6]{\ensuremath{
-\ifinner
-    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
-\else
-    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
-\fi
-}}
+\providecommand{\md}[6]{%
+\ifinner%
+    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+\else%
+    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+\fi%
+}%
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter t means "text style"
-\providecommand{\tmd}[6]{\ensuremath{\mathinner{
-    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
-}}}
+\providecommand{\tmd}[6]{\mathinner{%
+    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+}}%
 % \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter d means "display style"
-\providecommand{\dmd}[6]{\ensuremath{\mathinner{
-    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}
-}}}
+\providecommand{\dmd}[6]{\mathinner{%
+    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+}}%
 
 
 % ordinary derivative - analogous to the partial derivative command
-\providecommand{\od}[3][]{\ensuremath{
-\ifinner
-    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
-\else
-    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
-\fi
-}}
+\providecommand{\od}[3][]{%
+\ifinner%
+    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+\else%
+    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+\fi%
+}%
 
-\providecommand{\tod}[3][]{\ensuremath{\mathinner{
-    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
-}}}
-\providecommand{\dod}[3][]{\ensuremath{\mathinner{
-    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}
-}}}
+\providecommand{\tod}[3][]{\mathinner{%
+    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+}}%
+\providecommand{\dod}[3][]{\mathinner{%
+    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+}}%
 
 
 % Partial differential
@@ -1517,11 +1539,16 @@
 
 % Transpose items
 % \transp{A} renders A^T
-\newcommand{\transp}[1]{\ensuremath{{#1}^{\intercal}}}
+\newcommand{\transp}[1]{{#1}^{\intercal}}
 
 % Element inverse (usually used for matrix inverse)
 % \inv{A} renders A^{-1}
-\newcommand{\inv}[1]{\ensuremath{#1^{-1}}}
+\newcommand{\inv}[1]{{#1}^{-1}}
+
+% Unit axis coordinate vector
+% \evec{x} renders \bm{e}_{x} => e_x
+% \evec{z} renders \bm{e}_{z} => e_z
+\newcommand{\evec}[1]{\bm{e}_{#1}}
 
 % Declare atant a math operator rendering atan2
 \DeclareMathOperator{\arctantwo}{atan2}
@@ -1530,7 +1557,7 @@
 % \atantwo{y}{x} renders atan2(y, x)
 %\newcommand{\atantwo}[2]{\ensuremath{\operatorname{atan2}\left(#1, #2 \right)}}
 \NewDocumentCommand{\arctant}{m m}{%
-    \ensuremath{\arctantwo \left( #1, #2 \right)}%
+    \arctantwo \left( #1, #2 \right)%
 }%
 
 % Range of numbers
@@ -1539,34 +1566,41 @@
 % \irange[3]{m} renders i = 1, 3, ..., m
 % \irange[3]{m}{j} renders j = 1, 3, ..., m
 \NewDocumentCommand{\irange}{o m g}{%
-    \def\runner{\IfValueTF{#3}{#3}{i}}
-    \def\delta{#1}
-    \def\ending{#2}
+    \def\runner{\IfValueTF{#3}{#3}{i}}%
+    \def\delta{#1}%
+    \def\ending{#2}%
     \IfValueTF{#1}{%
-        \ensuremath{\runner = 1, \delta, \ldots, \ending}
+        {\runner = 1, \delta, \ldots, \ending}%
     }{%
-        \ensuremath{\runner = 1, \ldots, \ending}
+        {\runner = 1, \ldots, \ending}%
     }%
 }%
 
-% Proper math subscripts for textual indices like "std" or "coeff". Do not use for variable indices like "i" or "j"
-\newcommand{\ms}[1]{\ensuremath{\scriptscriptstyle{\text{#1}}}}
+% Well-scaled math subscripts
+\newcommand{\ms}[1]{{\mbox{\textscale{0.6}{#1}}}}
 
-% Rotation matrix R with optional index
+% Proper math subscripts for textual indices like "std" or "coeff". Do not use for variable indices like "i" or "j"
+%\newcommand{\mc}[1]{\mbox{{\textscale{2}{#1}}}}
+\newcommand{\mc}[1]{{\ms{\text{#1}}}}
+
+% Rotation matrix without argument
+\newcommand{\rotm}{R}
+
+% Rotation matrix R with argument with optional index
 % \rot{\gamma} renders \bm{R} (\gamma)
 % \rot[x]{\gamma} renders \bm{R}_x (\gamma)
 \NewDocumentCommand{\rot}{o m}{%
     \IfValueTF{#1}{%
-        \ensuremath{\bm{R}_{#1} \left( #2 \right)}
+        {\bm{\rotm}_{#1} \left( #2 \right)}
     }{%
-        \ensuremath{\bm{R} \left( #2 \right)}
+        {\bm{\rotm} \left( #2 \right)}
     }%
 }
 
-%\newcommand{\rot}[2]{\ensuremath{\bm{R}_{#1}\left( #2 \right)}}
-\newcommand{\rotx}[1]{\ensuremath{\rot[x]{#1}}}
-\newcommand{\roty}[1]{\ensuremath{\rot[y]{#1}}}
-\newcommand{\rotz}[1]{\ensuremath{\rot[z]{#1}}}
+%\newcommand{\rot}[2]{\bm{R}_{#1}\left( #2 \right)}
+\newcommand{\rotx}[1]{\rot[x]{#1}}
+\newcommand{\roty}[1]{\rot[y]{#1}}
+\newcommand{\rotz}[1]{\rot[z]{#1}}
 
 
 
@@ -1598,8 +1632,8 @@
 \DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.5625\linewidth} m}{%
     \setlength{\figurewidth}{#1}%
     \setlength{\figureheight}{#2}%
-    \tikzsetnextfilename{#3}%
-    \input{#3.tikz}%
+%	\tikzsetnextfilename{#3}%
+	\input{#3.tikz}%
 }
 
 % Easily include SVG files with only one required argument (and one optional argument)
