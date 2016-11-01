@@ -100,11 +100,11 @@
 \DeclareOption{offprint}{\def\@document{off}}
 
 % Pass any other options not known to the scrbook package
-%\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 %\DeclareOption*{\PassOptionsToClass{\CurrentOption}{babel}}
 
 % Default options
-\ExecuteOptions{report,ngerman,draft,a4paper,twoside,open=right}
+\ExecuteOptions{report,ngerman,draft,a4paper,twoside,cleardoublepage=empty,open=right}
 
 % Process options (finally)
 \ProcessOptions\relax
@@ -122,9 +122,9 @@
     chapterprefix=false, %
     numbers=noenddot, % All the numbers (after part, section, etc.) are without ending period
     numbers=noendperiod, % All the numbers (after part, section, etc.) are without ending period
-    open=right, %
-    cleardoublepage=empty, %
-    twoside=true, %
+%    open=right, %
+%    cleardoublepage=empty, %
+%    twoside=true, %
 %    captions=tableheading, %
 %    captions=nooneline, %
     toc=bibliography, % The bibliography will be represented by an entry at the table of contents, but will not be numbered.
@@ -136,9 +136,9 @@
 % Options to scrlayer-scrpage
 \PassOptionsToPackage{
     automark, % 
-    headsepline=0.3pt, %
-    headtopline=0.6pt, %
-    footsepline=0.3pt, %
+    headsepline=0.2pt, %
+    headtopline=0pt, %
+    footsepline=0.2pt, %
     draft=false, % To remove rulers inserted by the package
 }{scrlayer-scrpage}
 
