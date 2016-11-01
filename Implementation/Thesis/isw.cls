@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.9.0-a}
-\def\filedate{2016/07/22}
+\def\fileversion{0.9.0}
+\def\filedate{2016/11/01}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -53,9 +53,16 @@
 \newbool{alternatingrowcolors}
 \DeclareOption{coloredtables}{\booltrue{alternatingrowcolors}}
 
-% Allow user to choose whether they want a mini-toc at the beginning of every chapter
-%\newbool{minitoc}
-%\DeclareOption{minitoc}{\booltrue{minitoc}}
+% Language
+\def\@iswthesislang{german}
+\DeclareOption{german}{\def\@iswthesislang{german}}
+\DeclareOption{ngerman}{\def\@iswthesislang{german}}
+\DeclareOption{english}{\def\@iswthesislang{english}}
+\DeclareOption{american}{\def\@iswthesislang{english}}
+\DeclareOption{language=german}{\def\@iswthesislang{german}}
+\DeclareOption{language=ngerman}{\def\@iswthesislang{german}}
+\DeclareOption{language=english}{\def\@iswthesislang{english}}
+\DeclareOption{language=american}{\def\@iswthesislang{english}}
 
 % Allow the user to switch from listings to minted (if they have the proper environment)
 \newbool{minted}
@@ -64,27 +71,8 @@
 \DeclareOption{code=minted}{\booltrue{minted}}
 \DeclareOption{code=listing}{\boolfalse{minted}}
 
-% Define the arguments for the language
-\def\@thesisLanguage{english}
-%\DeclareOption{american}{\def\@thesisLanguage{american}}
-\DeclareOption{english}{\def\@thesisLanguage{english}}
-\DeclareOption{german}{\def\@thesisLanguage{ngerman}}
-%\DeclareOption{language=american}{\def\@thesisLanguage{american}}
-\DeclareOption{language=english}{\def\@thesisLanguage{english}}
-\DeclareOption{language=german}{\def\@thesisLanguage{ngerman}}
-
-% Allow some paper sizes
-\DeclareOption{a4paper}{\PassOptionsToPackage{paper=a4}{typearea}\PassOptionsToPackage{paper=a4paper}{geometry}}
-\DeclareOption{a5paper}{\PassOptionsToPackage{paper=a5}{typearea}\PassOptionsToPackage{paper=a5paper}{geometry}}
-\DeclareOption{letter}{\PassOptionsToPackage{paper=letter}{typearea}\PassOptionsToPackage{paper=letterpaper}{geometry}}
-
-% Allow to set oneside or twoside
-\newtoggle{oneside}
-\DeclareOption{twoside}{\togglefalse{oneside}\PassOptionsToPackage{twoside=true}{scrreprt}}
-\DeclareOption{oneside}{\toggletrue{oneside}\PassOptionsToPackage{twoside=false}{scrreprt}}
-
 % The actual thesis type
-\def\@document{report}
+\def\@document{rep}
 \DeclareOption{description-bsc}{\def\@document{description-bsc}}
 \DeclareOption{description-bachelor}{\def\@document{description-bsc}}
 \DeclareOption{description-msc}{\def\@document{description-msc}}
@@ -109,12 +97,14 @@
 \DeclareOption{project-plan}{\def\@document{pp}}
 \DeclareOption{developer-guide}{\def\@document{dg}}
 \DeclareOption{user-guide}{\def\@document{ug}}
+\DeclareOption{offprint}{\def\@document{off}}
 
-% Pass any other options not known to the scrreprt package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+% Pass any other options not known to the scrbook package
+%\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+%\DeclareOption*{\PassOptionsToClass{\CurrentOption}{babel}}
 
 % Default options
-\ExecuteOptions{bachelor,english,langauge=english,a4paper,twoside=true,open=right,draft}
+\ExecuteOptions{report,ngerman,draft,a4paper,twoside,open=right}
 
 % Process options (finally)
 \ProcessOptions\relax
@@ -125,7 +115,7 @@
 % DEFINE DEFAULT OPTIONS PASSED TO CLASSES AND PACKGES                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Default options to the scrreprt class (the main class of this class)
+% Default options to the scrbook class (the main class of this class)
 \PassOptionsToClass{%
 %    fontsize=11pt, % Obvious option, eh? Fontsize may only be between 10pt...12pt
     parskip=half-, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
@@ -315,14 +305,14 @@
 % LOAD ALL PACKAGES NECESSARY FOR SETTING UP THE CLASS                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Load the scrreprt class
+% Load the scrbook class
 \LoadClass{scrbook}
 
 % Load the language class
-\PassOptionsToPackage{english,ngerman}{babel}
+\PassOptionsToPackage{english,german,ngerman}{babel}
 \RequirePackage{babel}
 
-% The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one. 
+% The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one.
 \RequirePackage{scrlayer-scrpage}
 
 % The xspace package provides a single command that looks at what comes after it in the command stream, and decides whether to insert a space to replace one "eaten" by the TeX command decoder. The decision is based on what came after any space, not on whether there was a space (which is unknowable): so if the next thing proves to be punctuation, the chances are there was no space, but if it's a letter, there's probably a need for space. This technique is not perfect, but works in a large proportion of cases.
@@ -343,10 +333,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Tune the output format of dates according to language. This package provides ten output formats of the commands \today, \printdate, \printdatε-TeX, and \daterange (partly language dependent). Formats available are: ISO (yyyy-mm-dd), numeric (e.g.,dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX (yyyy/mm/dd), original (e.g., dd. mmm yyyy), short original (e.g., dd. mmm yy), as well as numerical formats with Roman numerals for the month. The commands \printdate and \printdatε-TeX print any date. The command \daterange prints a date range and leaves out unnecessary year or month entries. This package supports German (old and new rules), Austrian, US English, British English, French, Danish, Swedish, and Norwegian.
-\PassOptionsToPackage{english,ngerman}{isodate}
+\PassOptionsToPackage{english,german,ngerman}{isodate}
 \RequirePackage{isodate}
-\daymonthsepgerman{}%
-\monthyearsepgerman{}{}%
+%\daymonthsepgerman{}%
+%\monthyearsepgerman{}{}%
+%\daymonthsepngerman{}%
+%\monthyearsepngerman{}{}%
 
 %\PassOptionsToPackage{english,ngerman}{todonotes}
 
@@ -476,10 +468,11 @@
         frame=tb,                        % add a frame at the top and bottom
         numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
         numbersep=5pt,                   % how far the line-numbers are from the code
-        numberstyle=\tiny\color{MainColorDark}, % the style that is used for the line-numbers
+        numberstyle=\tiny\color{PrimaryColor}, % the style that is used for the line-numbers
         numberfirstline=true,            % number the first line regardless of stepnumber
-        rulecolor=\color{MainColorVeryDark}, % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+        rulecolor=\color{PrimaryColor}, % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
         stepnumber=5,                    % the step between two line-numbers. If it's 1, each line will be numbered
+        columns=fixed,                   % selects the column alignment
     }
     \lstloadlanguages{[Visual]C++,[95]Fortran,HTML,Java,make,Mathematica,Matlab,MuPAD,Octave,Pascal,Perl,Python,Ruby,sh,SQL,[LaTeX]TeX,XML,XSLT}
 }
@@ -516,7 +509,7 @@
     singlelinecheck=off, % 
     font={}, % Affects the whole figure caption
     labelfont={footnotesize, bf, color=PrimaryColor}, % Affects only the label name and its number
-    textfont={sl}, % Affects only the actual float caption
+    textfont={}, % Affects only the actual float caption
 }
 %%% Setup captions of tables
 \captionsetup[table]{
@@ -637,9 +630,9 @@
 % Set the language as defined in the language option to the class
 \AtBeginDocument{
     % Set the thesis language
-    \expandafter\selectlanguage\expandafter{\@thesisLanguage}
+    \expandafter\selectlanguage\expandafter{\@iswthesislang}
     % Set the bibliography language
-    \expandafter\selectbiblanguage\expandafter{\@thesisLanguage}
+    \expandafter\selectbiblanguage\expandafter{\@iswthesislang}
 }
 
 
@@ -759,6 +752,13 @@
         \def\@localSubmittedBy{erstellt von}
         \def\@DegreeLong{}
         \def\@DegreeSort{}
+    }{}
+    \ifdefstring{\@document}{off}{%
+        \def\@ThesisName{Umdruck}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{betreut von}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
     }{}
     \ifdefstring{\@DocumentType}{document}{%
         \def\@ThesisPretext{}
@@ -926,6 +926,13 @@
         \def\@DegreeLong{}
         \def\@DegreeSort{}
     }{}
+    \ifdefstring{\@document}{off}{%
+        \def\@ThesisName{Offprint}
+        \def\@DocumentType{document}
+        \def\@localSubmittedBy{supervised by}
+        \def\@DegreeLong{}
+        \def\@DegreeShort{}
+    }{}
     \ifdefstring{\@DocumentType}{document}{%
         \def\@ThesisPretext{}
     }{%
@@ -941,45 +948,45 @@
     %
     \renewcommand{\DeclarationOfAuthorship}{%
         \thispagestyle{empty}%
-        \begin{otherlanguage}{ngerman}%
-            \chapter*{\@localDeclarationOfAuthorship}%
-            \vspace{1\baselineskip}
-            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
-            \vspace{1\baselineskip}
-            \begin{center}
-                \selectfont\sffamily
-                \@title\\%
-                \ifdefempty{\@subtitle}{}{
-                    \vspace{0.15cm}
-                    \@subtitle\\%
-                }
-            \end{center}
-            \vspace{1\baselineskip}
-            \begin{enumerate}%
-                \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
-                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-                \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-                \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-                \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-            \end{enumerate}%
-            \vfill%\vspace{2\baselineskip}%
-            %
-            \begin{center}%
-                \selectfont\sffamily%
-                \small%
-                \begin{tabu} to \linewidth {X[5,L] X[1] X[5,R]}%
-                    \rule{\linewidth}{0.5pt}%
-                        & \rule{\linewidth}{0pt}%
-                        & \rule{\linewidth}{0.5pt}%
-                        \\[-1.5ex]%
-                    Datum %
-                        & %
-                        & Autor
-                \end{tabu}%
-            \end{center}%
-            \vfill%
-            \cleardoublepage%
-        \end{otherlanguage}%
+%        \begin{otherlanguage}{ngerman}%
+%            \chapter*{\@localDeclarationOfAuthorship}%
+%            \vspace{1\baselineskip}
+%            Hiermit versichere ich, \@author, Autor der vorliegenden \@ThesisName\space mit dem Titel%
+%            \vspace{1\baselineskip}
+%            \begin{center}
+%                \selectfont\sffamily
+%                \@title\\%
+%                \ifdefempty{\@subtitle}{}{
+%                    \vspace{0.15cm}
+%                    \@subtitle\\%
+%                }
+%            \end{center}
+%            \vspace{1\baselineskip}
+%            \begin{enumerate}%
+%                \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+%                \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+%                \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+%                \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+%                \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+%            \end{enumerate}%
+%            \vfill%\vspace{2\baselineskip}%
+%            %
+%            \begin{center}%
+%                \selectfont\sffamily%
+%                \small%
+%                \begin{tabu} to \linewidth {X[5,L] X[1] X[5,R]}%
+%                    \rule{\linewidth}{0.5pt}%
+%                        & \rule{\linewidth}{0pt}%
+%                        & \rule{\linewidth}{0.5pt}%
+%                        \\[-1.5ex]%
+%                    Datum %
+%                        & %
+%                        & Autor
+%                \end{tabu}%
+%            \end{center}%
+%            \vfill%
+%            \cleardoublepage%
+%        \end{otherlanguage}%
     }
 }
 
@@ -989,18 +996,19 @@
 % COLORS                                                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\definecolor{MainColor}{HTML}{BDBDBD}
-\definecolor{MainColorLight}{HTML}{D8D8D8}
-\definecolor{MainColorVeryLight}{HTML}{E6E6E6}
-\definecolor{MainColorDark}{HTML}{A4A4A4}
-\definecolor{MainColorVeryDark}{HTML}{848484}
+\definecolor{MainColor}{HTML}{323232}
+\colorlet{MainColorVeryLight}{MainColor!25}
+\colorlet{MainColorLight}{MainColor!50}
+\colorlet{MainColorDark}{MainColor!150}
+\colorlet{MainColorVeryDark}{MainColor!200}
 
 \definecolor{PrimaryColor}{HTML}{004191}
-\definecolor{SecondaryColor}{HTML}{00BEFF}
 \colorlet{PrimaryColorVeryLight}{PrimaryColor!25}
 \colorlet{PrimaryColorLight}{PrimaryColor!50}
 \colorlet{PrimaryColorDark}{PrimaryColor!150}
 \colorlet{PrimaryColorVeryDark}{PrimaryColor!200}
+
+\definecolor{SecondaryColor}{HTML}{00BEFF}
 \colorlet{SecondaryColorVeryLight}{SecondaryColor!25}
 \colorlet{SecondaryColorLight}{SecondaryColor!50}
 \colorlet{SecondaryColorDark}{SecondaryColor!100}
@@ -1024,16 +1032,15 @@
 }%
 
 % Colors for tables
-% \arrayrulecolor cannot be set in the preamble but in the document itself. That's why we are, further down, "extending" the mainmatter command to set the arrayrulecolor to Primarycolor
-%\arrayrulecolor{PrimaryColor}
+% \arrayrulecolor cannot be set in the preamble but in the document itself. That's why we are, further down, "extending" the mainmatter command to set the arrayrulecolor to PrimaryColor
 \colorlet{ArrayRuleColor}{PrimaryColor}
 \AtBeginDocument{%
     \arrayrulecolor{ArrayRuleColor}%
 }
-\colorlet{TableHeader}{PrimaryColor}
-\colorlet{TableRowEven}{MainColorDark!33}
-\colorlet{TableRowOdd}{MainColorLight!50}
-\colorlet{TableCellHighlight}{SecondaryColor}
+\colorlet{TableHeader}{PrimaryColor!75}
+\colorlet{TableRowEven}{MainColorVeryLight!18}
+\colorlet{TableRowOdd}{MainColorLight!18}
+\colorlet{TableCellHighlight}{SecondaryColorLight}
 
 
 
@@ -1047,8 +1054,8 @@
 \setcounter{tocdepth}{2}
 
 % Styles for header and footer lines
-\setheadtopline{0.5pt}
-\setheadsepline{0.6pt}
+\setheadtopline{0pt}
+\setheadsepline{0.2pt}
 %\renewcommand{\headrulewidth}{0.4pt}
 %\renewcommand{\footrulewidth}{0.2pt}
 %\renewcommand{\chaptermark}[1]{\markboth{\thechapter\space#1}{}}
@@ -1069,29 +1076,43 @@
 %\fancyfoot[RO]{\sffamily\thepage}
 \lofoot{\copyright\,\the\year\space\@departmentshort, \@university}
 %% Footnote
-\renewcommand{\footnoterule}{\kern-3pt {\color{MainColor}{\hrule width 2in}} \kern 2.6pt}
+\renewcommand{\footnoterule}{\kern-3pt {\color{MainColorLight}{\hrule width 2in}} \kern 2.6pt}
 \renewcommand{\thefootnote}{\textcolor{PrimaryColor}{\arabic{footnote}}}
 
 % Make sure the ToC only shows entries down till subsubsection
 \setcounter{tocdepth}{2}
 
-% Setting or adding to some koma fonts
-\setkomafont{title}{\sffamily\Huge}
-\setkomafont{subtitle}{\sffamily\large}
-\setkomafont{author}{\sffamily\huge}
-\setkomafont{date}{\normalfont\normalsize}
-\setkomafont{pageheadfoot}{\color{MainColorVeryDark}\sffamily}
-\setkomafont{pagefoot}{\sffamily\small}
+
+% Line above the header
+\addtokomafont{headtopline}{\color{PrimaryColor}}
+% Line below the header
+\addtokomafont{headsepline}{\color{PrimaryColor}}
+% Line above the footer
+\addtokomafont{footsepline}{\color{MainColor}}
+% Line below the footer
+\addtokomafont{footbotline}{\color{MainColor}}
+
+% Setting title to be written in main color, sans-serif, and Huge
+\setkomafont{title}{\color{MainColor}\sffamily\Huge}
+% Setting subtitle to be written in main color, sans-serif, and large
+\setkomafont{subtitle}{\color{MainColor}\sffamily\large}
+% Setting author to be written in main color, sans-serif, and huge
+\setkomafont{author}{\color{MainColor}\sffamily\huge}
+% Setting date to be written in main color, normal font, and normal size
+\setkomafont{date}{\color{MainColor}\normalfont\normalsize}
+% Page header and footer should be written in the main color and sans-serif
+\setkomafont{pageheadfoot}{\color{MainColor}\sffamily}
+% Page footer should be written in the main color, sans-serif and small font size
+\setkomafont{pagefoot}{\color{MainColor}\sffamily\small}
+% Create a new font for "place of birth"
 \newkomafont{placeofbirth}{\normalfont\normalsize}
-\addtokomafont{pagenumber}{\sffamily\color{MainColorVeryDark}}
-\addtokomafont{headtopline}{\color{MainColor}}
-\addtokomafont{headsepline}{\color{MainColorVeryDark}}
-\addtokomafont{footsepline}{\color{MainColorDark}}
-\addtokomafont{footbotline}{\color{MainColorVeryDark}}
+% Make page numbers printed in MainColor
+\addtokomafont{pagenumber}{\color{MainColor}\sffamily}
+
 \addtokomafont{disposition}{\color{PrimaryColor}}
 \addtokomafont{sectioning}{\color{PrimaryColor}}
-\addtokomafont{chapter}{\normalfont\sffamily\Huge\color{PrimaryColor}}
-\addtokomafont{part}{\normalfont\sffamily\Huge\color{PrimaryColor}}
+\addtokomafont{chapter}{\color{PrimaryColor}\normalfont\sffamily\Huge}
+\addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
 
 %% Tables
 % Stretch the padding between table rows globally
@@ -1111,18 +1132,6 @@
 \setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
 \setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) circle (0.3ex);}}
 
-% Minitoc is not working proplery yet
-%\ifbool{minitoc}{%
-%    \mtcsetdepth{minitoc}{2}% ~ \setcounter{minitocdepth}{2}
-%    \mtcsetfont{minitoc}{*}{\usekomafont{chapterentry}}
-%    \mtcsetfont{minitoc}{section}{\usekomafont{chapterentry}\bfseries} 
-%    \mtcsetfont{minitoc}{subsection}{\usekomafont{chapterentry}} 
-%    \mtcsettitle{minitoc}{\relax}% remove “Contents”
-%    \mtcsetoffset{minitoc}{-3.5em}% don’t know the appropriate length
-%    \mtcsetrules{minitoc}{off}
-%    \mtcsetpagenumbers{minitoc}{on}% default anyway
-%    %\mtcsetfeature{minitoc}{before|after|open|close|pagestyle}{command} 
-%}{}
 
 
 
@@ -1324,7 +1333,6 @@
 \renewcommand{\and}{\unskip,\xspace}%
 \textbf{\color{PrimaryColor}\@localKeywords:}~\@keywords%
 \renewcommand{\and}{\oldAnd}
-\iftoggle{oneside}{\clearpage}{\cleardoublepage}%
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1375,7 +1383,7 @@
             } % Leave this white space here or the "CHAPTER" will move into the gray box
             \resizebox{!}{2.5cm}{%
                 \fboxsep=6pt%
-                \fontsize{85}{100}\selectfont\sffamily\color{PrimaryColor}\colorbox{MainColor!80}{\thechapter}%
+                \fontsize{85}{100}\selectfont\color{PrimaryColor}\sffamily\colorbox{MainColorVeryLight}{\thechapter}%
             }%
         }\\*%
     }%
@@ -1602,6 +1610,10 @@
 \newcommand{\roty}[1]{\rot[y]{#1}}
 \newcommand{\rotz}[1]{\rot[z]{#1}}
 
+% Operator names for Imaginary and Real unit
+\newcommand{\Imop}{\operatorname{Im}}
+\newcommand{\Reop}{\operatorname{Re}}
+
 
 
 %%%%%%%%%%%%%%%%%
@@ -1665,7 +1677,7 @@
 }
 
 % Colored rule command: \crule{Width}{Height} for a "MainColor" colored rule, or \crule[Color]{Width}{Height} for a "Color" colored rule
-\newcommand\crule[3][MainColor]{\textcolor{#1}{\rule{#2}{#3}}}
+\newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}
 
 %% Common English abbreviations
 % w.r.t. => with respect to [in Bezug zu/auf]
@@ -1690,9 +1702,15 @@
 \newcommand{\textBzw}{bzw.\@\xspace}
 % E. h. => Ehrenhalber
 \newcommand{\textEh}{E.\@\xspace h.\@\xspace}
+% d.h. => das heisst
+\newcommand{\textDh}{d.\@\xspace h.\@\xspace}
+% o.g. => oben genannt
+\newcommand{\textOg}{o.g.\@\xspace}
 
 %% Latin abbreviations
 
+% etc. => et cetera
+\newcommand{\textEtc}{etc.\@\xspace}
 % i.e. => id est => that is [das ist/heisst]
 \newcommand{\textIe}{i.\@e.\@,\xspace}
 % cf. => confer => refer to [siehe]
@@ -1711,6 +1729,7 @@
 \newcommand{\textDiplIng}{Dipl.-Ing.\@\xspace}
 \newcommand{\textProf}{Prof.\@\xspace}
 \newcommand{\textJuniorProf}{Junior-Prof.\@\xspace}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
