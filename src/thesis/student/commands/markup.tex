@@ -1,0 +1,59 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document properties
+
+% Examiner
+\newcommand{\examiner}[1]{\gdef\@examiner{#1}}
+\newcommand{\@examiner}{\@latex@warning@no@line{No \noexpand\examiner given}}
+
+% Name of the university
+\newcommand{\university}[1]{\gdef\@university{#1}}
+\newcommand{\@university}{\@latex@warning@no@line{No \noexpand\university given}}
+
+% Long name of the department
+\newcommand{\department}[1]{\gdef\@department{#1}}
+\newcommand{\@department}{\@latex@warning@no@line{No \noexpand\department given}}
+
+% Short name of the department
+\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
+\gdef\@departmentshort{}
+
+% Address of the department
+\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
+\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
+
+% Student's matriculation number
+\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
+\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
+
+% Name of the student's supervisor(s)
+\newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
+\newcommand{\@supervisor}{\@latex@warning@no@line{No \noexpand\supervisor given}}
+
+% Name of the student's major
+\newcommand{\major}[1]{\gdef\@major{#1}}
+\newcommand{\@major}{\@latex@warning@no@line{No \noexpand\major given}}
+
+% Name of the faculty
+\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
+\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
+
+% Name of the partner company/department/faculty/etc
+\newcommand{\partner}[1]{\gdef\@partner{#1}}
+\gdef\@partner{}
+
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+
+% Place of birth
+\newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
+\gdef\@placeofbirth{}
+
+% Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
+\newcommand{\universitylogo}{logo/university}
+
+% Path to the department logo
+\newcommand{\departmentlogo}{logo/department}
+
+% Path to the partner's logo
+\newcommand{\partnerlogo}{}

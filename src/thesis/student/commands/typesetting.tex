@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TYPESETTING COMMANDS                                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\DeclarationOfAuthorship}{Declaration of Authorship undefined for current language\cleardoublepage}
+
+% Input content from the content/ folder
+\newcommand{\content}[1]{%
+    \input{content/#1}
+}
+
+% Input content from the demo/ folder
+\newcommand{\demo}[1]{%
+    \input{demo/#1}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Provide commands for easier (and more beautiful table creation)
+
+% Set the correct order of colors for tables with a head
+\newcommand{\tablecolorwithhead}{\rowcolors{1}{TableRowEven}{TableRowOdd}}
+% Set the correct order of colors for tables without a head
+\newcommand{\tablecolorwithouthead}{\rowcolors{1}{TableRowOdd}{TableRowEven}}
+% Sets the table head row color
+\newcommand{\tableheadcolor}{\rowcolor{TableHeader}}
+% Command to apply styles for a table head column
+\newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
+% Command to open a table header
+\newcommand{\theadbegin}{\toprule\tableheadcolor}
+% And command to close a table header
+\newcommand{\theadend}{\midrule}
+
+% Colored rule command: \crule{Width}{Height} for a "MainColor" colored rule, or \crule[Color]{Width}{Height} for a "Color" colored rule
+\newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}

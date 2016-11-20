@@ -1,0 +1,17 @@
+% Load the language class
+\RequirePackage{babel}
+
+% The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one.
+\RequirePackage{scrlayer-scrpage}
+
+% The xspace package provides a single command that looks at what comes after it in the command stream, and decides whether to insert a space to replace one "eaten" by the TeX command decoder. The decision is based on what came after any space, not on whether there was a space (which is unknowable): so if the next thing proves to be punctuation, the chances are there was no space, but if it's a letter, there's probably a need for space. This technique is not perfect, but works in a large proportion of cases.
+% The package is part of the latex-tools bundle in the LaTeX required distribution. 
+\RequirePackage{xspace}
+
+% Fontspec is a package for X∃LaTeX and LuaLaTeX. It provides an automatic and unified interface to feature-rich AAT and OpenType fonts through the NFSS in LaTeX running on X∃TeX or LuaTeX engines.
+% The package requires the l3kernel and xparse bundles from the LaTeX 3 development team. 
+\RequirePackage{fontspec}
+
+% The package supports the Text Companion fonts, which provide many text symbols (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen), in the TS1 encoding.
+% Note that the package has been adopted as part of the LaTeX distribution; the reference here is to the original package, which is now little used (if at all). 
+\RequirePackage{textcomp}

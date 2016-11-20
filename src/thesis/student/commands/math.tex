@@ -1,0 +1,170 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MATH COMMANDS                                                              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Absolute value
+% \abs{x} renders |x|
+\newcommand{\abs}[1]{\vert {#1} \vert}
+
+% Norm
+% \norm{a_i} renders || a_i ||_2 
+% \norm[1]{a_i} renders || a_i ||_1
+\newcommand{\norm}[2][2]{\Vert {#2} \Vert_{\smaller[2]{#1}}}
+
+% Power
+% \pow{x} renders x^2
+% \pow[3]{x} renders x^3
+\newcommand{\pow}[2][2]{{#2}^{#1}}
+
+% Skew-symmetric matrix
+% \skewm{x} renders x with a tilde on it
+\newcommand{\skewm}[1]{\tilde{#1}}
+
+% Differential operator (upface d)
+\DeclareMathOperator{\dif}{d \!}
+% Derivative operator (upface D)
+\DeclareMathOperator{\Dif}{D \!}
+
+% Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
+\providecommand{\pd}[3][]{%
+\ifinner%
+    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+\else%
+    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+\fi%
+}
+
+
+% \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter t means "text style"
+\providecommand{\tpd}[3][]{\mathinner{%
+    \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+}}%
+% \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter d means "display style"
+\providecommand{\dpd}[3][]{\mathinner{%
+    \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+}}%
+
+% mixed derivative - analogous to the partial derivative command
+% \md{f}{5}{x}{2}{y}{3}
+\providecommand{\md}[6]{%
+\ifinner%
+    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+\else%
+    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+\fi%
+}%
+
+% \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter t means "text style"
+\providecommand{\tmd}[6]{\mathinner{%
+    \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+}}%
+% \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
+% The first letter d means "display style"
+\providecommand{\dmd}[6]{\mathinner{%
+    \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+}}%
+
+
+% ordinary derivative - analogous to the partial derivative command
+\providecommand{\od}[3][]{%
+\ifinner%
+    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+\else%
+    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+\fi%
+}%
+
+\providecommand{\tod}[3][]{\mathinner{%
+    \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+}}%
+\providecommand{\dod}[3][]{\mathinner{%
+    \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+}}%
+
+
+% Partial differential
+%\newcommand{\pd}[1]{\partial\mspace{1mu}{#1}}
+
+% Totial differential
+\newcommand{\td}[1]{\dif{#1}}
+
+% Real value
+\renewcommand{\Re}{\operatorname{Re}}
+
+% Imaginary value
+\renewcommand{\Im}{\operatorname{Im}}
+
+% Transpose items
+% \transp{A} renders A^T
+\newcommand{\transp}[1]{{#1}^{\intercal}}
+
+% Element inverse (usually used for matrix inverse)
+% \inv{A} renders A^{-1}
+\newcommand{\inv}[1]{{#1}^{-1}}
+
+% Unit axis coordinate vector
+% \evec{x} renders \bm{e}_{x} => e_x
+% \evec{z} renders \bm{e}_{z} => e_z
+\newcommand{\evec}[1]{\bm{e}_{#1}}
+
+% Declare atant a math operator rendering atan2
+\DeclareMathOperator{\arctantwo}{atan2}
+
+% Arcus tangent 2
+% \atantwo{y}{x} renders atan2(y, x)
+%\newcommand{\atantwo}[2]{\ensuremath{\operatorname{atan2}\left(#1, #2 \right)}}
+\NewDocumentCommand{\arctant}{m m}{%
+    \arctantwo \left( #1, #2 \right)%
+}%
+
+% Range of numbers
+% \irange{m} renders i = 1, ..., m
+% \irange{m}{j} renders j = 1, ..., m
+% \irange[3]{m} renders i = 1, 3, ..., m
+% \irange[3]{m}{j} renders j = 1, 3, ..., m
+\NewDocumentCommand{\irange}{o m g}{%
+    \def\runner{\IfValueTF{#3}{#3}{i}}%
+    \def\delta{#1}%
+    \def\ending{#2}%
+    \IfValueTF{#1}{%
+        {\runner = 1, \delta, \ldots, \ending}%
+    }{%
+        {\runner = 1, \ldots, \ending}%
+    }%
+}%
+
+% Well-scaled math subscripts
+\newcommand{\ms}[1]{{\mbox{\textscale{0.6}{#1}}}}
+
+% Proper math subscripts for textual indices like "std" or "coeff". Do not use for variable indices like "i" or "j"
+%\newcommand{\mc}[1]{\mbox{{\textscale{2}{#1}}}}
+\newcommand{\mc}[1]{{\ms{\text{#1}}}}
+
+% Rotation matrix without argument
+\newcommand{\rotm}{R}
+
+% Rotation matrix R with argument with optional index
+% \rot{\gamma} renders \bm{R} (\gamma)
+% \rot[x]{\gamma} renders \bm{R}_x (\gamma)
+\NewDocumentCommand{\rot}{o m}{%
+    \IfValueTF{#1}{%
+        {\bm{\rotm}_{#1} \left( #2 \right)}
+    }{%
+        {\bm{\rotm} \left( #2 \right)}
+    }%
+}
+
+%\newcommand{\rot}[2]{\bm{R}_{#1}\left( #2 \right)}
+\newcommand{\rotx}[1]{\rot[x]{#1}}
+\newcommand{\roty}[1]{\rot[y]{#1}}
+\newcommand{\rotz}[1]{\rot[z]{#1}}
+
+% Operator names for Imaginary and Real unit
+\newcommand{\Imop}{\operatorname{Im}}
+\newcommand{\Reop}{\operatorname{Re}}
+
+% Imaginary unit i
+\DeclareMathOperator{\imagu}{\mathrm{i}}
