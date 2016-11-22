@@ -86,7 +86,7 @@
 %%  Defaults for packages used                                                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/packages-defaults}
+\input{student/packages-options}
 
 
 
@@ -97,7 +97,8 @@
 
 \LoadClass{scrbook}
 
-\input{student/packages-required}
+% The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one.
+\RequirePackage{scrlayer-scrpage}
 
 
 
@@ -118,7 +119,7 @@
 %% Load All Other Packages                                                    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/packages-other}
+\input{student/packages-main}
 
 \input{student/packages-tikz}
 
@@ -160,13 +161,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\addto{\captionsenglish}{%
-    \input{student/localization/english}%
-}
-
-\addto{\captionsngerman}{%
-    \input{student/localization/german}%
-}
+\input{student/localization}
 
 
 

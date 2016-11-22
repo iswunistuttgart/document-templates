@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Komascript sectioning styles    %
+\renewcommand*{\raggedchapter}{\RaggedLeft}
+\renewcommand{\chapterlinesformat}[3]{%
+    % \ifstr{str}{}{empty}{non-empty}
+    \ifstr{#2}{}{}{%
+        \setlength{\fboxrule}{2pt}
+        \makebox[\linewidth][r]{%
+            \rotatebox{90}{%
+                \makebox[2cm][l]{%
+                    \resizebox{2.5cm}{!}{%
+                        \color{PrimaryColor}\normalfont\Large\scshape\space\chapapp\space%
+                    }%
+                }%
+            } % Leave this white space here or the "CHAPTER" will move into the gray box
+            \resizebox{!}{2.5cm}{%
+                \fboxsep=6pt%
+                \fontsize{85}{100}\selectfont\color{PrimaryColor}\sffamily\colorbox{MainColorVeryLight}{\thechapter}%
+            }%
+        }\\*%
+    }%
+    \addvspace{20\p@}%
+    #3%
+}
+
+
+% Execute command if file #1 is newer than #2
+% 1) Path to "new" file
+% 2) Path to file to check timestamp against
+% 3) command to execute
+\newcommand{\executeiffilenewer}[3]{%
+    \ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+    {\pdffilemoddate{#2}}>0%
+    {\immediate\write18{#3}}\fi%
+}

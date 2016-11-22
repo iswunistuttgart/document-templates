@@ -1,3 +1,18 @@
+% Load the language class
+\RequirePackage{babel}
+
+% The xspace package provides a single command that looks at what comes after it in the command stream, and decides whether to insert a space to replace one "eaten" by the TeX command decoder. The decision is based on what came after any space, not on whether there was a space (which is unknowable): so if the next thing proves to be punctuation, the chances are there was no space, but if it's a letter, there's probably a need for space. This technique is not perfect, but works in a large proportion of cases.
+% The package is part of the latex-tools bundle in the LaTeX required distribution. 
+\RequirePackage{xspace}
+
+% Fontspec is a package for X∃LaTeX and LuaLaTeX. It provides an automatic and unified interface to feature-rich AAT and OpenType fonts through the NFSS in LaTeX running on X∃TeX or LuaTeX engines.
+% The package requires the l3kernel and xparse bundles from the LaTeX 3 development team. 
+\RequirePackage{fontspec}
+
+% The package supports the Text Companion fonts, which provide many text symbols (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen), in the TS1 encoding.
+% Note that the package has been adopted as part of the LaTeX distribution; the reference here is to the original package, which is now little used (if at all). 
+\RequirePackage{textcomp}
+
 % Tune the output format of dates according to language. This package provides ten output formats of the commands \today, \printdate, \printdatε-TeX, and \daterange (partly language dependent). Formats available are: ISO (yyyy-mm-dd), numeric (e.g.,dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX (yyyy/mm/dd), original (e.g., dd. mmm yyyy), short original (e.g., dd. mmm yy), as well as numerical formats with Roman numerals for the month. The commands \printdate and \printdatε-TeX print any date. The command \daterange prints a date range and leaves out unnecessary year or month entries. This package supports German (old and new rules), Austrian, US English, British English, French, Danish, Swedish, and Norwegian.
 \RequirePackage{isodate}
 
