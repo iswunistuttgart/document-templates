@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{0.9.0}
-\def\filedate{2016/11/01}
+\def\fileversion{1.0.0-dev}
+\def\filedate{2016/11/22}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -14,23 +14,7 @@
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
-%  The pack­age is a tool­box of pro­gram­ming fa­cil­i­ties geared pri­mar­ily to­wards LaTeX class and pack­age au­thors. It pro­vides LaTeX fron­tends to some of the new prim­i­tives pro­vided by e-TeX as well as some generic tools which are not strictly re­lated to e-TeX but match the pro­file of this pack­age. Note that the ini­tial ver­sions of this pack­age were re­leased un­der the name ela­tex.
-% The pack­age pro­vides func­tions that seem to of­fer al­ter­na­tive ways of im­ple­ment­ing some LaTeX ker­nel com­mands; nev­er­the­less, the pack­age will not mod­ify any part of the LaTeX ker­nel. 
-\RequirePackage{etoolbox}
-
-% The package defines commands that switch according to the prevailing ‘draft’ or ‘final’ options; each command takes two arguments, the first for the ‘true’, the second for the ‘false’ case. Commands are:
-%   \ifdraft determines whether we're operating in draft (‘true’) or final mode;
-%   \ifoptiondraft determines whether a ‘draft’ option has been given; and
-%   \ifoptionfinal determines whether a ‘final’ option has been given.
-\RequirePackage{ifdraft}
-
-% This pack­age of­fers sup­port for pack­age au­thors who want to use op­tions in key-value for­mat for their pack­age op­tions.
-% The pack­age is part of the oberdiek bun­dle.
-\RequirePackage{kvoptions}
-\SetupKeyvalOptions{%
-    family=thesis, %
-    prefix=thesis@, %
-}
+\input{student/packages-head}
 
 
 
@@ -39,6 +23,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Class Configuration                                                       %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Configure the kvoptions-package
+\SetupKeyvalOptions{%
+    family=thesis, %
+    prefix=thesis@, %
+}
 
 % Declare debug options
 \DeclareBoolOption{debug}
