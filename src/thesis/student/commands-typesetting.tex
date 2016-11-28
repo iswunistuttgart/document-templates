@@ -13,6 +13,11 @@
     \input{demo/#1}
 }
 
+% Use for bi-lingual documents
+\NewDocumentCommand{\trans}{m m}{%
+  \IfLanguageName{english}{#1}{\IfLanguageName{ngerman}{#2}{#1}}%
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Provide commands for easier (and more beautiful table creation)

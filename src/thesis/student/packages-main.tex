@@ -1,6 +1,10 @@
 % Load the language class
 \RequirePackage{babel}
 
+% This pack­age pro­vides ex­pand­able checks for the cur­rent lan­guage based on macro \lan­gua­ge­name or hy­phen­ation pat­terns.
+% The pack­age is part of the oberdiek bun­dle.
+\RequirePackage{iflang}
+
 % The xspace package provides a single command that looks at what comes after it in the command stream, and decides whether to insert a space to replace one "eaten" by the TeX command decoder. The decision is based on what came after any space, not on whether there was a space (which is unknowable): so if the next thing proves to be punctuation, the chances are there was no space, but if it's a letter, there's probably a need for space. This technique is not perfect, but works in a large proportion of cases.
 % The package is part of the latex-tools bundle in the LaTeX required distribution. 
 \RequirePackage{xspace}
@@ -60,6 +64,7 @@
 \RequirePackage{pgfplots}
 % The pack­age pro­vides straight­for­ward ways to de­fine three-di­men­sional co­or­di­nate frames through which to plot in TikZ. The user can spec­ify the ori­en­ta­tion of the main co­or­di­nate frame, and use stan­dard TikZ com­mands and co­or­di­nates to ren­der their tikz­fig­ure. A sec­ondary co­or­di­nate frame is pro­vided to al­low ro­ta­tions and trans­la­tions with re­spect to the main co­or­di­nate frame. In ad­di­tion, the pack­age can also han­dle plot­ting user-spec­i­fied func­tions in spher­i­cal po­lar co­or­di­nates, where both the ra­dius and fill color can be ex­pressed as para­met­ric func­tions of po­lar an­gles. 
 \RequirePackage{tikz-3dplot}
+\RequirePackage{tikzscale}
 \pgfplotsset{compat=newest}
 
 
