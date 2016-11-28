@@ -1,0 +1,128 @@
+\tikzset{%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3D orientation styles
+%
+  isometric/.style={%
+    x={(-0.710\linewidth,-0.410\linewidth)},%
+    y={(0.710\linewidth,-0.410\linewidth)},%
+    z={(0\linewidth,0.820\linewidth)},%
+  },%
+%
+%
+  dimetric/.style={%
+    y={(0.935\linewidth,-0.118\linewidth)},%
+    x={(-0.354\linewidth,-0.312\linewidth)},%
+    z={(0\linewidth,0.943\linewidth)},%
+  },%
+%
+%
+  trimetric/.style={%
+    x={(-0.378\linewidth,-0.507\linewidth)},%
+    y={(0.926\linewidth,-0.207\linewidth)},%
+    z={(0\linewidth,0.837\linewidth)},%
+  },%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General arrow type
+  >=stealth,%
+%
+% Make every line wider than the usual 4pt
+  every path/.style={%
+    line width=0.33mm,%
+  },%
+%
+% Make every node...
+  every node/.style={%
+    text=Black,%
+  },%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General annotations
+  annotation/.style={%
+    color=MainColor,%
+    draw=MainColor!80,%
+    text=MainColor!120,%
+  },%
+%
+% Text annotations
+  annotation-text/.style={%
+    annotation,%
+    draw=none,%
+  },%
+%
+% Path annotations
+  annotation-path/.style={%
+    annotation,%
+    dashed,%
+  },%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Coordinate axis
+  coord-axis/.style={%
+    -{stealth},%
+    color=MainColor!60,%
+    text=MainColor!60,%
+  },%
+%
+% Name of coordinate axis
+  coord-axis-name/.style={%
+    annotation-text,%
+    text=MainColor!60,%
+    outer sep=0pt,%
+    inner sep=0.6ex,%
+  },%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grid lines
+  grid-lines/.style={%
+    color=MainColor!40,%
+    draw opacity=0.25,%
+  },%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mindmap related styles
+% Block of mindmap
+  mind-block/.style={%
+    fill=MainColor!20,%
+    draw=MainColor,%
+    text=Black,%
+    shape=rectangle,%
+    rounded corners=1ex,%
+    text centered,%
+    minimum height=0.05\linewidth,%
+    text width=0.125\linewidth,%
+    fill opacity=0.6,%
+  },%
+%
+% Arrow between blocks
+  mind-arrow/.style={%
+    -{stealth},%
+    shorten >=0.25ex,%
+    draw=MainColor,%
+  },%
+%
+% Vector (double line) between block
+  mind-vector/.style={%
+    mind-arrow,%
+    double,%
+    double distance=0.0025\linewidth,%
+  },%
+%
+% Block fitting nodes
+  mind-fit/.style={%
+    thick,%
+    dash pattern=on 1ex off 1.33ex on 0.66ex off 1.33ex,%
+    rounded corners=1.5ex,%
+    inner sep=0.010\linewidth,%
+    fill=BlackColor,%
+    draw=BlackColor,%
+    fill opacity=0.05,%
+  },%
+}%
+%
