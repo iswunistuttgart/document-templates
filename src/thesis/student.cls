@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/11/22}
+\def\filedate{2016/11/28}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -17,6 +17,30 @@
 \input{student/packages-head}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CRUCIAL COMMANDS                                                           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Deprecate commands
+\DeclareRobustCommand{\deprecate}[2]{%
+  % #1 is the deprecated command
+  % #2 is the new command to use
+  % Issue a message at first usage
+  \PackageWarning{student-thesis}{%
+    Deprecated command \@backslashchar#1;\MessageBreak%
+    \protect#2\space should be used instead\MessageBreak%
+  }%
+  % globally redefine "\#1" to "\deprecate@#1"
+  \global\expandafter\let\csname#1\expandafter\endcsname%
+                         \csname deprecated@#1\endcsname%
+  % issue the old command
+  \csname#1\endcsname%
+}
+
+\newcommand{\@deprecate}[2]{%
+  \expandafter\let\csname deprecated@#1\expandafter\endcsname\csname#1\endcsname%
+  \@namedef{#1}{\deprecate{#1}{#2}}%
+}
 
 
 
@@ -46,29 +70,32 @@
 \DeclareOption{master-description}{\def\thesis@type{description-master}}
 \DeclareOption{study}{\def\thesis@type{study}}
 
+\DeclareBoolOption[true]{twoside}
+\DeclareComplementaryOption{oneside}{twoside}
+
 % Allow user to choose language
 \def\thesis@lang{ngerman}
 \DeclareOption{ngerman}{\def\thesis@lang{ngerman}}
 \DeclareOption{german}{\def\thesis@lang{ngerman}}
 \DeclareOption{english}{\def\thesis@lang{english}}
 
+% Default options
+\ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
-% Default options
-\ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
-
 % Process options passed to the class
 \ProcessKeyvalOptions{thesis}
 
+\ifthesis@twoside%
+  \PassOptionsToClass{twoside}{scrbook}%
+\else%
+  \PassOptionsToClass{oneside}{scrbook}%
+\fi%
+
 % Process options (finally)
 \ProcessOptions\relax
-
-\wlog{thesis lang is \thesis@lang}
-\wlog{thesis type is \thesis@type}
-
-
 
 
 
@@ -77,7 +104,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{student/packages-options}
-
 
 
 
@@ -118,6 +144,10 @@
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONFIGURE PACKAGES                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -125,8 +155,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{student/colors}
-
-
 
 
 
@@ -138,15 +166,11 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define commands                                                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{student/commands}
-
-
 
 
 
@@ -158,17 +182,13 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Configure layout                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{student/layout}
 
-%\input{student/titlepage}
-
-
+\input{student/titlepage}
 
 
 
@@ -199,6 +219,8 @@
 \AtBeginDocument{%
     \input{student/atbegindocument}
 }
+
+
 
 
 
