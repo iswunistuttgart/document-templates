@@ -189,7 +189,7 @@
 \RequirePackage{nth}
 
 % Show label, ref, cite and bib keys. The showkeys package modifies the \label, \ref, \pageref, \cite and \bibitem commands so that the ‘internal’ key is printed, without affecting the appearance of the rest of the text, so far as is possible (the keys typically appear in the margin). The package is part of the tools bundle in the LaTeX required distribution.
-%\ifbool{thesisfinal}{}{\RequirePackage{showkeys}}
+\ifdraft{\RequirePackage{showkeys}}{}
 
 % Expand acronyms at least once. This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks. The package requires the suffix package, which in turn requires that it runs under e-TeX.
 \RequirePackage{acronym}

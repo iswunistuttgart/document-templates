@@ -1,31 +1,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract
 \newenvironment{abstract}{%
-    \chapter*{\abstractname}%
-    \addcontentsline{toc}{chapter}{\abstractname}%
+  \chapter*{\abstractname}%
+  \addcontentsline{toc}{chapter}{\abstractname}%
 }{%
-    \vfill%
-    \let\oldAnd\and%
-    \renewcommand{\and}{\unskip,\xspace}%
-    \textbf{\color{PrimaryColor}\thesis@locale@keywords:}~\@keywords%
-    \renewcommand{\and}{\oldAnd}
+  \vfill%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  \textbf{\color{PrimaryColor}\thesis@locale@keywords:}~\@keywords%
+  \renewcommand{\and}{\oldAnd}
 }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Chapter intro environment
 \newenvironment{intro}{%4
-    \hfill
-    \begin{minipage}{0.9\linewidth}%
-        \null\hfill\tikz[baseline=(current bounding box.center)] \draw[color=PrimaryColor, line width=0.75pt] (0,0) -- (0.8\linewidth,0);%
-        \begin{spacing}{1.15}%
-            \setlength{\parskip}{0pt}
-            \setlength{\parindent}{15pt}
-            \slshape%
+  \hfill
+  \begin{minipage}{0.9\linewidth}%
+    \null\hfill\tikz[baseline=(current bounding box.center)] \draw[color=PrimaryColor, line width=0.75pt] (0,0) -- (0.8\linewidth,0);%
+    \begin{spacing}{1.15}%
+      \setlength{\parskip}{0pt}
+      \setlength{\parindent}{15pt}
+      \slshape%
 }{%
-            \normalfont%
-        \end{spacing}%
-        \tikz \draw[color=PrimaryColor, line width=0.75pt] (0,0.5\baselineskip) -- (0.8\linewidth,0.5\baselineskip);\hfill%
-    \end{minipage}%
-    \vspace*{\baselineskip}
+      \normalfont%
+    \end{spacing}%
+    \tikz \draw[color=PrimaryColor, line width=0.75pt] (0,0.5\baselineskip) -- (0.8\linewidth,0.5\baselineskip);\hfill%
+  \end{minipage}%
+  \vspace*{\baselineskip}
 }%

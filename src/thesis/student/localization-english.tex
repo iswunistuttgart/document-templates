@@ -25,60 +25,60 @@
 %\renewcommand{\@dedicationname}{Dedication}
 %
 \ifdefstring{\thesis@type}{description-bachelor}{%
-    \def\thesis@name{Project Description}
-    \def\thesis@degree@long{Bachelor of Science}
-    \def\thesis@degree@short{B.Sc.}
+  \def\thesis@name{Project Description}
+  \def\thesis@degree@long{Bachelor of Science}
+  \def\thesis@degree@short{B.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{description-master}{%
-    \def\thesis@name{Project Description}
-    \def\thesis@degree@long{Master of Science}
-    \def\thesis@degree@short{M.Sc.}
+  \def\thesis@name{Project Description}
+  \def\thesis@degree@long{Master of Science}
+  \def\thesis@degree@short{M.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{bachelor}{%
-    \def\thesis@name{Bachelor's Thesis}
-    \def\thesis@degree@long{Bachelor of Science}
-    \def\thesis@degree@short{B.Sc.}
+  \def\thesis@name{Bachelor's Thesis}
+  \def\thesis@degree@long{Bachelor of Science}
+  \def\thesis@degree@short{B.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{master}{%
-    \def\thesis@name{Master's Thesis}
-    \def\thesis@degree@long{Master of Science}
-    \def\thesis@degree@short{M.Sc.}
+  \def\thesis@name{Master's Thesis}
+  \def\thesis@degree@long{Master of Science}
+  \def\thesis@degree@short{M.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{study}{%
-    \def\thesis@name{Student Research Project}
-    \def\thesis@degree@long{Diplomingenieur}
-    \def\thesis@degree@short{Dipl.-Ing.}
+  \def\thesis@name{Student Research Project}
+  \def\thesis@degree@long{Diplomingenieur}
+  \def\thesis@degree@short{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\thesis@type}{diploma}{%
-    \def\thesis@name{Diploma Thesis}
-    \def\thesis@degree@long{Diplomingenieur}
-    \def\thesis@degree@short{Dipl.-Ing.}
+  \def\thesis@name{Diploma Thesis}
+  \def\thesis@degree@long{Diplomingenieur}
+  \def\thesis@degree@short{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\thesis@type}{bachelor-project}{%
-    \def\thesis@name{Bachelor's Project Report}
-    \def\thesis@degree@long{Bachelor of Science}
-    \def\thesis@degree@short{B.Sc.}
+  \def\thesis@name{Bachelor's Project Report}
+  \def\thesis@degree@long{Bachelor of Science}
+  \def\thesis@degree@short{B.Sc.}
 }{}
 %
 \def\thesis@pretext{%
-    A \thesis@name\space presented to the faculty %\\%
-    \@faculty, \@university,%
-    \ifdefempty{\thesis@degree@long}{}{%
-        \space in partial fulfillment of the requirements for the degree of %\\%
-        {\thesis@degree@long}\space (\thesis@degree@short)%
-    }%
+  A \thesis@name\space presented to the faculty %\\%
+  \@faculty, \@university,%
+  \ifdefempty{\thesis@degree@long}{}{%
+    \space in partial fulfillment of the requirements for the degree of %\\%
+    {\thesis@degree@long}\space (\thesis@degree@short)%
+  }%
 }%
 %
 %
 \renewcommand{\DeclarationOfAuthorship}{%
-    \thispagestyle{empty}%
-    \begin{otherlanguage}{ngerman}%
-        \DeclarationOfAuthorship%
-    \end{otherlanguage}%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
 }

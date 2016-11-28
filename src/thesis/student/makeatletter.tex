@@ -1,27 +1,26 @@
 % Set the hyperref document information
 \AtBeginDocument{
-    \let\oldAnd\and%
-    \renewcommand{\and}{, }%
-    \hypersetup{
-        pdfauthor={\@author},
-        pdftitle={\@title},
-%        pdfsubject={\@isw@thesis},
-        pdfkeywords={\@keywords},
-    }%
-    \renewcommand{\and}{\oldAnd}%
-    \iflanguage{ngerman}{%
-        \hypersetup{pdflang=de}%
-    }{%
-        \hypersetup{pdflang=en}%
-    }%
-    % Select the proper language
-    \pagenumbering{Roman}
-    \pagenumbering{arabic}
-    \pagestyle{scrheadings}
-    
-%    \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}}
+  \let\oldAnd\and%
+  \renewcommand{\and}{, }%
+  \hypersetup{
+    pdfauthor={\@author},
+    pdftitle={\@title},
+%    pdfsubject={\@isw@thesis},
+    pdfkeywords={\@keywords},
+  }%
+  \renewcommand{\and}{\oldAnd}%
+  \iflanguage{ngerman}{%
+    \hypersetup{pdflang=de}%
+  }{%
+    \hypersetup{pdflang=en}%
+  }%
+  % Select the proper language
+  \pagenumbering{Roman}
+  \pagenumbering{arabic}
+  \pagestyle{scrheadings}
+  
+%  \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}}
 }
-
 
 % Reset the table row counter for even-odd coloring after every table
 \preto\tabular{\global\rownum=\z@}

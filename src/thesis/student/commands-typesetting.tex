@@ -1,16 +1,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% TYPESETTING COMMANDS                                                       %%
+%% TYPESETTING COMMANDS                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\DeclarationOfAuthorship}{Declaration of Authorship undefined for current language\cleardoublepage}
 
 % Input content from the content/ folder
 \newcommand{\content}[1]{%
-    \input{content/#1}
+  \input{content/#1}
 }
 
 % Input content from the demo/ folder
 \newcommand{\demo}[1]{%
-    \input{demo/#1}
+  \input{demo/#1}
 }
 
 % Use for bi-lingual documents
@@ -37,3 +37,13 @@
 
 % Colored rule command: \crule{Width}{Height} for a "MainColor" colored rule, or \crule[Color]{Width}{Height} for a "Color" colored rule
 \newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}
+
+% Execute command if file #1 is newer than #2
+% 1) Path to "new" file
+% 2) Path to file to check timestamp against
+% 3) command to execute
+\newcommand{\executeiffilenewer}[3]{%
+  \ifnum\pdfstrcmp{\pdffilemoddate{#1}}%
+  {\pdffilemoddate{#2}}>0%
+  {\immediate\write18{#3}}\fi%
+}

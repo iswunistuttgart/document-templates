@@ -24,93 +24,93 @@
 %\renewcommand{\@dedicationname}{Widmung}
 %
 \ifdefstring{\thesis@type}{description-bachelor}{%
-    \def\thesis@name{Projektexpos\'e}
-    \def\thesis@degree@long{Bachelor of Science}
-    \def\thesis@degree@short{B.Sc.}
+  \def\thesis@name{Projektexpos\'e}
+  \def\thesis@degree@long{Bachelor of Science}
+  \def\thesis@degree@short{B.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{description-master}{%
-    \def\thesis@name{Projektexpos\'e}
-    \def\thesis@degree@long{Master of Science}
-    \def\thesis@degree@short{M.Sc.}
+  \def\thesis@name{Projektexpos\'e}
+  \def\thesis@degree@long{Master of Science}
+  \def\thesis@degree@short{M.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{bachelor}{%
-    \def\thesis@name{Bachelorarbeit}
-    \def\thesis@degree@long{Bachelor of Science}
-    \def\thesis@degree@short{B.Sc.}
+  \def\thesis@name{Bachelorarbeit}
+  \def\thesis@degree@long{Bachelor of Science}
+  \def\thesis@degree@short{B.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{master}{%
-    \def\thesis@name{Masterarbeit}
-    \def\thesis@degree@long{Master of Science}
-    \def\thesis@degree@short{M.Sc.}
+  \def\thesis@name{Masterarbeit}
+  \def\thesis@degree@long{Master of Science}
+  \def\thesis@degree@short{M.Sc.}
 }{}
 %
 \ifdefstring{\thesis@type}{study}{%
-    \def\thesis@name{Studienarbeit}
-    \def\thesis@degree@long{Diplomingenieur}
-    \def\thesis@degree@short{Dipl.-Ing.}
+  \def\thesis@name{Studienarbeit}
+  \def\thesis@degree@long{Diplomingenieur}
+  \def\thesis@degree@short{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\thesis@type}{diploma}{%
-    \def\thesis@name{Diplomarbeit}
-    \def\thesis@degree@long{Diplomingenieur}
-    \def\thesis@degree@short{Dipl.-Ing.}
+  \def\thesis@name{Diplomarbeit}
+  \def\thesis@degree@long{Diplomingenieur}
+  \def\thesis@degree@short{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\thesis@type}{bachelor-project}{%
-    \def\thesis@name{Bachelor Projektarbeit}
-    \def\thesis@degree@long{Bachelor of Science}
-    \def\thesis@degree@short{B.Sc.}
+  \def\thesis@name{Bachelor Projektarbeit}
+  \def\thesis@degree@long{Bachelor of Science}
+  \def\thesis@degree@short{B.Sc.}
 }{}
 %
 \def\thesis@pretext{%
-    Eine \thesis@name\space zur Vorlage an der Fakult\"at %
-    \@faculty, \@university,%
-    \ifdefempty{\thesis@degree@long}{}{%
-        \space zur Erlangung des akademischen Grades %\\%
-        {\thesis@degree@long}\space (\thesis@degree@short)%
-    }%
+  Eine \thesis@name\space zur Vorlage an der Fakult\"at %
+  \@faculty, \@university%
+  \ifdefempty{\thesis@degree@long}{.}{,%
+    \space zur Erlangung des akademischen Grades %\\%
+    {\thesis@degree@long}\space (\thesis@degree@short)%
+  }%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
-    \thispagestyle{empty}%
-    \chapter*{\thesis@locale@declaration}%
-    \vspace{1\baselineskip}
-    Hiermit versichere ich, \@author, Autor der vorliegenden \thesis@name\space mit dem Titel%
-    \vspace{1\baselineskip}
-    \begin{center}
-        \selectfont\sffamily
-        \@title\\%
-        \ifdefempty{\@subtitle}{}{
-            \vspace{0.15cm}
-            \@subtitle\\%
-        }
-    \end{center}
-    \vspace{1\baselineskip}
-    \begin{enumerate}%
-        \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
-        \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-        \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-        \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-        \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-    \end{enumerate}%
-    \vfill%\vspace{2\baselineskip}%
-    %
-    \begin{center}%
-        \selectfont\sffamily%
-        \small%
-        \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-            \rule{\linewidth}{0.5pt}%
-                & \rule{\linewidth}{0pt}%
-                & \rule{\linewidth}{0.5pt}%
-                \\[-1.5ex]%
-            Datum%
-                & %
-                & Autor \\%
-        \end{tabu}%
-    \end{center}%
-    \vfill%
-    \cleardoublepage%
+  \thispagestyle{empty}%
+  \chapter*{\thesis@locale@declaration}%
+  \vspace{1\baselineskip}
+  Hiermit versichere ich, \@author, Autor der vorliegenden \thesis@name\space mit dem Titel%
+  \vspace{1\baselineskip}
+  \begin{center}
+    \selectfont\sffamily
+    \@title\\%
+    \ifdefempty{\@subtitle}{}{
+      \vspace{0.15cm}
+      \@subtitle\\%
+    }
+  \end{center}
+  \vspace{1\baselineskip}
+  \begin{enumerate}%
+    \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+  \end{enumerate}%
+  \vfill%\vspace{2\baselineskip}%
+  %
+  \begin{center}%
+    \selectfont\sffamily%
+    \small%
+    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+      \rule{\linewidth}{0.5pt}%
+        & \rule{\linewidth}{0pt}%
+        & \rule{\linewidth}{0.5pt}%
+        \\[-1.5ex]%
+      Datum%
+        & %
+        & Autor \\%
+    \end{tabu}%
+  \end{center}%
+  \vfill%
+  \cleardoublepage%
 }

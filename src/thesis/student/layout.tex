@@ -16,50 +16,38 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header and footer lines
 % Thickness of header top line
-\setheadtopline{0pt}
+\setheadtopline{1pt}
 % Thickness of header separator line
-\setheadsepline{0.2pt}
+\setheadsepline{1pt}
+% Thickness of footer separator line
+\setfootsepline{1pt}
+% Thickness of footer bottom line
+\setfootbotline{1pt}
 % Line above the header
-\addtokomafont{headtopline}{\color{PrimaryColor}}
+\addtokomafont{headtopline}{\color{MainColor}}
 % Line below the header
 \addtokomafont{headsepline}{\color{PrimaryColor}}
 % Line above the footer
-\addtokomafont{footsepline}{\color{MainColor}}
+\addtokomafont{footsepline}{\color{PrimaryColor}}
 % Line below the footer
 \addtokomafont{footbotline}{\color{MainColor}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Styles for header
-%\fancyhead[LE]{\nouppercase{\sffamily\leftmark}}
-%\fancyhead[CE]{}
-%\fancyhead[RE]{}
-%\fancyhead[LO]{\nouppercase{\sffamily\rightmark}}
-%\fancyhead[CO]{}
-%\fancyhead[RO]{}
+%% HEADER STYLES
+% None, as the pre-defined ones are fine!
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Styles for footer
-%\fancyfoot[LE]{\sffamily\thepage}
-%\fancyfoot[CE]{}
-%\fancyfoot[RE]{\sffamily\@author}
-%\fancyfoot[LO]{\sffamily\@author}
-%\fancyfoot[CO]{}
-%\fancyfoot[RO]{\sffamily\thepage}
+%% FOOTER STYES
 \lofoot{\copyright\,\the\year\space\@departmentshort, \@university}
+\refoot{\@author}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Footnote
 \renewcommand{\footnoterule}{\kern-3pt {\color{MainColorLight}{\hrule width 2in}} \kern 2.6pt}
 \renewcommand{\thefootnote}{\textcolor{PrimaryColor}{\arabic{footnote}}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ToC definition
-% Make sure the ToC only shows entries down till subsubsection
-\setcounter{tocdepth}{2}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -113,32 +101,32 @@
 % Captions of all floats
 % Setup captions of all floats (figures and captions)
 \captionsetup{
-    format=hang, % 
-    labelsep=colon, % 
-    textformat=simple, % 
-    justification=justified, % 
-    singlelinecheck=off, % 
-    font={}, % Affects the whole figure caption
-    labelfont={footnotesize, bf, color=PrimaryColor}, % Affects only the label name and its number
-    textfont={}, % Affects only the actual float caption
-    subrefformat=parens, % 
+  format=hang,% 
+  labelsep=colon,% 
+  textformat=simple,% 
+  justification=justified,% 
+  singlelinecheck=off,% 
+  font={},% Affects the whole figure caption
+  labelfont={footnotesize, bf, color=PrimaryColor},% Affects only the label name and its number
+  textfont={},% Affects only the actual float caption
+  subrefformat=parens,% 
 }
 % Setup captions of tables
 \captionsetup[table]{
-    position=above, %
-    belowskip=2pt, % 
+  position=above,%
+  belowskip=2pt,%
 }
 % Setup captions of figures
 \captionsetup[figure]{
-    position=below, %
+  position=below,%
 }
 % Setup captions of subfigures
 \captionsetup[subfigure]{%
-    position=below, % 
-    belowskip=2pt, % 
+  position=below,% 
+  belowskip=2pt,% 
 }
 % Setup captions of subfigures
 \captionsetup[subfigure]{
-    labelformat=parens,
-    textfont={sl},
+  labelformat=parens,
+  textfont={sl},
 }
