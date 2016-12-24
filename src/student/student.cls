@@ -14,7 +14,7 @@
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
-\input{student/packages-head}
+\input{includes/packages-head}
 
 
 
@@ -103,7 +103,7 @@
 %%  Defaults for packages used                                                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/packages-options}
+\input{includes/packages-options}
 
 
 
@@ -135,12 +135,12 @@
 %% Load All Other Packages                                                    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/packages-main}
+\input{includes/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
-\input{student/tikz-packages}
+\input{includes/tikz-packages}
 
 
 
@@ -154,7 +154,7 @@
 %% Define colors                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/colors}
+\input{includes/colors}
 
 
 
@@ -162,7 +162,7 @@
 %% Define environments                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/environments}
+\input{includes/environments}
 
 
 
@@ -170,7 +170,7 @@
 %% Define commands                                                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/commands}
+\input{includes/commands}
 
 
 
@@ -178,7 +178,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/localization}
+\input{includes/localization}
 
 
 
@@ -186,9 +186,9 @@
 %% Configure layout                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/layout}
+\input{includes/layout}
 
-\input{student/titlepage}
+\input{includes/titlepage}
 
 
 
@@ -213,11 +213,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \makeatletter%
-    \input{student/makeatletter}
+    \input{includes/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
-    \input{student/atbegindocument}
+    \input{includes/atbegindocument}
 }
 
 
