@@ -57,3 +57,15 @@
 
 % Path to the partner's logo
 \newcommand{\partnerlogo}{}
+
+% Short name of author(s)
+\newcommand{\shortauthor}[1]{\gdef\@shortauthor{#1}}
+\gdef\@shortauthor{}
+
+% Running author
+\newcommand{\runauthor}{%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  \@shortauthor%
+  \renewcommand{\and}{\oldAnd}%
+}

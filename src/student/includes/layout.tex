@@ -16,13 +16,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header and footer lines
 % Thickness of header top line
-\setheadtopline{1pt}
+\setheadtopline{0pt}
 % Thickness of header separator line
 \setheadsepline{1pt}
 % Thickness of footer separator line
 \setfootsepline{1pt}
 % Thickness of footer bottom line
-\setfootbotline{1pt}
+\setfootbotline{0pt}
 % Line above the header
 \addtokomafont{headtopline}{\color{MainColor}}
 % Line below the header
@@ -35,13 +35,26 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% HEADER STYLES
-% None, as the pre-defined ones are fine!
+% Even pages (left pages) from outside to inside
+\lehead*[]{\leftmark}
+\cehead*[]{}
+\rehead*[]{}
+% Odd pages (right pages) from inside to outside
+\lohead*[]{}
+\cohead*[]{}
+\rohead*[]{\rightmark}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FOOTER STYES
-\lofoot{\copyright\,\the\year\space\@departmentshort, \@university}
-\refoot{\@author}
+% Even pages (left pages) from outside to inside
+\lefoot*[]{\pagemark}
+\cefoot*[]{}
+\refoot*[]{}
+% Odd pages (right pages) from inside to outside
+\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\cofoot*[]{}
+\rofoot*[\pagemark]{\pagemark}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
