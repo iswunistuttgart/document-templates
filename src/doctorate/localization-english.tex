@@ -1,0 +1,48 @@
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr\@. 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+
+
+\def\ThesisLocaleDraft{Draft}
+\def\ThesisLocaleExaminer{Examiner}
+\def\ThesisLocaleSupervisor{Supervisor}
+\def\ThesisLocaleLogosuffix{-en}
+\def\ThesisLocaleSubmittedby{submitted by}
+\def\ThesisLocaleFrom{from}
+\def\ThesisLocaleSubmittedon{Submitted on}
+\def\ThesisLocaleMajor{Major}
+\def\ThesisLocalePartner{In cooperation with}
+\def\ThesisLocaleKeywords{Keywords}
+\def\ThesisLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \def\DocumentName{Dissertation}
+  \def\ThesisDegreeLong{Doktoringenieur}
+  \def\ThesisDegreeShort{Dr.-Ing.}
+}{}
+%
+\def\ThesisPretext{%
+  A \DocumentName\space presented to the faculty %
+  \@faculty, \@university,%
+  \ifdefempty{\ThesisDegreeLong}{.}{,%
+    \space in partial fulfillment of the requirements for the degree of %
+    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
