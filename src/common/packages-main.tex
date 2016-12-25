@@ -1,8 +1,8 @@
 % Load the language class
 \RequirePackage{babel}
 
-% This pack­age pro­vides ex­pand­able checks for the cur­rent lan­guage based on macro \lan­gua­ge­name or hy­phen­ation pat­terns.
-% The pack­age is part of the oberdiek bun­dle.
+% This package provides expandable checks for the current language based on macro \languagename or hyphenation patterns.
+% The package is part of the oberdiek bundle.
 \RequirePackage{iflang}
 
 % The xspace package provides a single command that looks at what comes after it in the command stream, and decides whether to insert a space to replace one "eaten" by the TeX command decoder. The decision is based on what came after any space, not on whether there was a space (which is unknowable): so if the next thing proves to be punctuation, the chances are there was no space, but if it's a letter, there's probably a need for space. This technique is not perfect, but works in a large proportion of cases.
@@ -32,37 +32,37 @@
 % Additional math symbols
 \RequirePackage{dsfont}
 
-% Adds in­fix ex­pres­sions to per­form arith­metic on the ar­gu­ments of the LaTeX com­mands \set­counter, \ad­dto­counter, \setlength, and \ad­dtolength. Since many pack­ages start their arith­metic by stor­ing an ar­gu­ment in a reg­is­ter, the pack­age has wide ap­pli­ca­bil­ity.
-% This pack­age is part of the la­tex-tools bun­dle in the LaTeX re­quired dis­tri­bu­tion. 
+% Adds infix expressions to perform arithmetic on the arguments of the LaTeX commands \setcounter, \addtocounter, \setlength, and \addtolength. Since many packages start their arithmetic by storing an argument in a register, the package has wide applicability.
+% This package is part of the latex-tools bundle in the LaTeX required distribution. 
 \RequirePackage{calc}
 
 % Improves the interface for defining floating objects such as figures and tables. Introduces the boxed float, the ruled float and the plaintop float. You can define your own floats and improve the behaviour of the old ones. The package also provides the H float modifier option of the obsolete here package. You can select this as automatic default with \floatplacement{figure}{H}.
 \RequirePackage{float}
 
-% Pro­vides sup­port for set­ting the spac­ing be­tween lines in a doc­u­ment. Pack­age op­tions in­clude sin­glespac­ing, one­half­s­pac­ing, and dou­blespac­ing. Al­ter­na­tively the spac­ing can be changed as re­quired with the \sin­glespac­ing, \one­half­s­pac­ing, and \dou­blespac­ing com­mands. Other size spac­ings also avail­able. 
+% Provides support for setting the spacing between lines in a document. Package options include singlespacing, onehalfspacing, and doublespacing. Alternatively the spacing can be changed as required with the \singlespacing, \onehalfspacing, and \doublespacing commands. Other size spacings also available. 
 \RequirePackage{setspace}
 
-% The pack­age pro­vides an easy and flex­i­ble user in­ter­face to cus­tomize page lay­out, im­ple­ment­ing auto-cen­ter­ing and auto-bal­anc­ing mech­a­nisms so that the users have only to give the least de­scrip­tion for the page lay­out. For ex­am­ple, if you want to set each mar­gin 2cm with­out header space, what you need is just \usep­a­ck­age[mar­gin=2cm,no­head]{ge­om­e­try}.
-% The pack­age knows about all the stan­dard pa­per sizes, so that the user need not know what the nom­i­nal ‘real’ di­men­sions of the pa­per are, just its stan­dard name (such as a4, let­ter, etc.).
-% An im­por­tant fea­ture is the pack­age’s abil­ity to com­mu­ni­cate the pa­per size it's set up to the out­put (whether via DVI \spe­cials or via di­rect in­ter­ac­tion with pdf(La)TeX). 
+% The package provides an easy and flexible user interface to customize page layout, implementing auto-centering and auto-balancing mechanisms so that the users have only to give the least description for the page layout. For example, if you want to set each margin 2cm without header space, what you need is just \usepackage[margin=2cm,nohead]{geometry}.
+% The package knows about all the standard paper sizes, so that the user need not know what the nominal ‘real’ dimensions of the paper are, just its standard name (such as a4, letter, etc.).
+% An important feature is the package’s ability to communicate the paper size it's set up to the output (whether via DVI \specials or via direct interaction with pdf(La)TeX). 
 \RequirePackage{geometry}
 
-% This pack­age was de­vel­oped as a gen­eral so­lu­tion to the prob­lem of in­clud­ing graph­ics in LaTeX 2.09; as such there are ob­so­lete copies to be found on the web (though no longer on the archive). Th­ese old ver­sions should not be used with cur­rent LaTeX.
-% The cur­rent ‘pre­ferred’ so­lu­tion is the LaTeX graph­icx pack­age, but the graph­ics bun­dle does con­tain a ver­sion of eps­fig for use with cur­rent LaTeX. 
+% This package was developed as a general solution to the problem of including graphics in LaTeX 2.09; as such there are obsolete copies to be found on the web (though no longer on the archive). These old versions should not be used with current LaTeX.
+% The current ‘preferred’ solution is the LaTeX graphicx package, but the graphics bundle does contain a version of epsfig for use with current LaTeX. 
 \RequirePackage{epsfig}
 
-% The pack­age builds upon the graph­ics pack­age, pro­vid­ing a key-value in­ter­face for op­tional ar­gu­ments to the \in­clude­graph­ics com­mand. This in­ter­face pro­vides fa­cil­i­ties that go far be­yond what the graph­ics pack­age of­fers on its own.
-% For ex­tended doc­u­men­ta­tion, see ep­s­la­tex.
-% The pack­age is part of the la­tex-graph­ics bun­dle, which is one of the col­lec­tions in the LaTeX ‘re­quired’ set of pack­ages. 
+% The package builds upon the graphics package, providing a key-value interface for optional arguments to the \includegraphics command. This interface provides facilities that go far beyond what the graphics package offers on its own.
+% For extended documentation, see epslatex.
+% The package is part of the latex-graphics bundle, which is one of the collections in the LaTeX ‘required’ set of packages. 
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{images/}}
 
 %
 \RequirePackage{tikz}
-% PGFPlots draws high-qual­ity func­tion plots in nor­mal or log­a­rith­mic scal­ing with a user-friendly in­ter­face di­rectly in TeX. The user sup­plies axis la­bels, leg­end en­tries and the plot co­or­di­nates for one or more plots and PGFPlots ap­plies axis scal­ing, com­putes any log­a­rithms and axis ticks and draws the plots, sup­port­ing line plots, scat­ter plots, piece­wise con­stant plots, bar plots, area plots, mesh-- and sur­face plots and some more.
-% Pgf­plots is based on PGF/TikZ (PGF); it runs equally for LaTeX/TeX/ConTeXt. 
+% PGFPlots draws high-quality function plots in normal or logarithmic scaling with a user-friendly interface directly in TeX. The user supplies axis labels, legend entries and the plot coordinates for one or more plots and PGFPlots applies axis scaling, computes any logarithms and axis ticks and draws the plots, supporting line plots, scatter plots, piecewise constant plots, bar plots, area plots, mesh-- and surface plots and some more.
+% Pgfplots is based on PGF/TikZ (PGF); it runs equally for LaTeX/TeX/ConTeXt. 
 \RequirePackage{pgfplots}
-% The pack­age pro­vides straight­for­ward ways to de­fine three-di­men­sional co­or­di­nate frames through which to plot in TikZ. The user can spec­ify the ori­en­ta­tion of the main co­or­di­nate frame, and use stan­dard TikZ com­mands and co­or­di­nates to ren­der their tikz­fig­ure. A sec­ondary co­or­di­nate frame is pro­vided to al­low ro­ta­tions and trans­la­tions with re­spect to the main co­or­di­nate frame. In ad­di­tion, the pack­age can also han­dle plot­ting user-spec­i­fied func­tions in spher­i­cal po­lar co­or­di­nates, where both the ra­dius and fill color can be ex­pressed as para­met­ric func­tions of po­lar an­gles. 
+% The package provides straightforward ways to define three-dimensional coordinate frames through which to plot in TikZ. The user can specify the orientation of the main coordinate frame, and use standard TikZ commands and coordinates to render their tikzfigure. A secondary coordinate frame is provided to allow rotations and translations with respect to the main coordinate frame. In addition, the package can also handle plotting user-specified functions in spherical polar coordinates, where both the radius and fill color can be expressed as parametric functions of polar angles. 
 \RequirePackage{tikz-3dplot}
 \RequirePackage{tikzscale}
 \pgfplotsset{compat=newest}
@@ -84,7 +84,7 @@
 \RequirePackage{titlecaps}
 \Addlcwords{the,a,an,and,but,for,or,nor,to,with,without}
 
-% The ti­tling pack­age pro­vides con­trol over the type­set­ting of the \maketi­tle com­mand and \thanks com­mands, and makes the \ti­tle, \au­thor and \date in­for­ma­tion per­ma­nently avail­able. Mul­ti­ple ti­tles are al­lowed in a sin­gle doc­u­ment. New ti­tling el­e­ments can be added and a ti­tlepage ti­tle can be cen­tered on a phys­i­cal page. 
+% The titling package provides control over the typesetting of the \maketitle command and \thanks commands, and makes the \title, \author and \date information permanently available. Multiple titles are allowed in a single document. New titling elements can be added and a titlepage title can be centered on a physical page. 
 \RequirePackage{titling}
 
 % Intermix single and multiple columns. Multicol defines a multicols environment which typesets text in multiple columns (up to a maximum of 10), and (by default) balances the end of each column at the end of the environment. The package enables you to switch between any (permitted) number of columns at will: there is no imposed "clear page" operation, as there is in unadorned LaTeX at a switch between \onecolumn and \twocolumn sections. The multicolumn environment can also be used inside a box, thus allowing multicolumned insets in text. Multicol patches the output routine, and may clash with other packages that do the same (e.g., longtable); furthermore, there is no provision for single column floats inside a multicolumn environment, so figures and tables must be coded in-line (using, for example, the H modifier of the float package). The package is part of the tools bundle in the LaTeX required distribution.
@@ -98,10 +98,10 @@
 % The package allows rows and columns to be coloured, and even individual cells.
 \RequirePackage{colortbl}
 
-% The pack­age pro­vides an en­vi­ron­ment, tabu, which will make any sort of tab­u­lar (that doesn't need to split across pages), and an en­vi­ron­ment longtabu which pro­vides the fa­cil­i­ties of tabu in a mod­i­fied longtable en­vi­ron­ment. (Note that this lat­ter of­fers an en­hance­ment of ltxtable.)
-% The pack­age re­quires the ar­ray pack­age, and needs e-TeX to run (since ar­ray.sty is present in ev­ery con­form­ing dis­tri­bu­tion of LaTeX, and since ev­ery pub­licly avail­able LaTeX for­mat is built us­ing e-TeX, the re­quire­ments are pro­vided by de­fault on any rea­son­able sys­tem). The pack­age also re­quires xcolor for coloured rules in ta­bles, and col­ortbl for coloured cells. The longtabu en­vi­ron­ment fur­ther re­quires that longtable be loaded. The pack­age it­self does not load any of these pack­ages for the user.
-% The tabu en­vi­ron­ment may be used in place of tab­u­lar, tab­u­lar* and tab­u­larx en­vi­ron­ments, as well as the ar­ray en­vi­ron­ment in maths mode. It over­loads tab­u­larx's X-col­umn spec­i­fi­ca­tion, al­low­ing a width spec­i­fi­ca­tion, align­ment (l, r, c and j) and col­umn type in­di­ca­tion (p, m and b).
-% \be­gin{tabu} to <di­men> spec­i­fies a tar­get width, and \be­gin{tabu} spread <di­men> en­larges the en­vi­ron­ment’s “nat­u­ral” width.
+% The package provides an environment, tabu, which will make any sort of tabular (that doesn't need to split across pages), and an environment longtabu which provides the facilities of tabu in a modified longtable environment. (Note that this latter offers an enhancement of ltxtable.)
+% The package requires the array package, and needs e-TeX to run (since array.sty is present in every conforming distribution of LaTeX, and since every publicly available LaTeX format is built using e-TeX, the requirements are provided by default on any reasonable system). The package also requires xcolor for coloured rules in tables, and colortbl for coloured cells. The longtabu environment further requires that longtable be loaded. The package itself does not load any of these packages for the user.
+% The tabu environment may be used in place of tabular, tabular* and tabularx environments, as well as the array environment in maths mode. It overloads tabularx's X-column specification, allowing a width specification, alignment (l, r, c and j) and column type indication (p, m and b).
+% \begin{tabu} to <dimen> specifies a target width, and \begin{tabu} spread <dimen> enlarges the environment’s “natural” width.
 \RequirePackage{tabu}
 
 % The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
