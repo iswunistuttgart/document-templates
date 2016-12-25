@@ -3,7 +3,9 @@
 \newenvironment{abstract}{%
   \chapter*{\abstractname}%
   \addcontentsline{toc}{chapter}{\abstractname}%
+  \begin{spacing}{1.25}%
 }{%
+  \end{spacing}%
   \vfill%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
