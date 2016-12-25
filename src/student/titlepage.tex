@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
-
 \renewcommand{\maketitle}{%
   \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
   \begin{titlepage}%
@@ -8,7 +7,7 @@
     \centering%
     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
       \centering
-      \huge\thesis@name\par%
+      \huge\DocumentName\par%
     \end{minipage}\par%
     \vspace*{0.75cm}\par%
     \begin{minipage}[t][3cm][c]{0.9\linewidth}%
@@ -26,13 +25,13 @@
     \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
       \centering
       \begin{spacing}{1.25}
-        {\thesis@pretext\par}%
+        {\ThesisPretext\par}%
       \end{spacing}
     \end{minipage}
     \vspace*{1.5cm}\par%
     \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
       \centering%
-      \thesis@locale@submittedby\par%
+      \ThesisLocaleSubmittedby\par%
       \vspace{0.5cm}\par%
       \let\oldAnd\and%
       \renewcommand{\and}{\unskip,\xspace}%
@@ -42,24 +41,24 @@
       \ifdefempty{\@placeofbirth}{%
         \par%
       }{%
-        \thesis@locale@from\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
+        \ThesisLocaleFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
       }%
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[t][1cm][c]{0.5\linewidth}
       \centering
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\thesis@locale@draft}}{}
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\ThesisLocaleDraft}}{}
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[c][3cm][c]{0.75\linewidth}%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
       \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
-        {\thesis@locale@examiner:}%
+        {\ThesisLocaleExaminer:}%
           & \@examiner\\%
-        {\thesis@locale@supervisor:}%
+        {\ThesisLocaleSupervisor:}%
           & {\@supervisor}\\%
-        {\thesis@locale@submittedon:}%
+        {\ThesisLocaleSubmittedon:}%
 %          & \space{\usekomafont{date}{\@date}}\\%
           & {\@date}\\%
       \end{tabu}%
@@ -67,7 +66,7 @@
     \end{minipage}%
     \vfill
     \begin{minipage}[t]{0.7\linewidth}
-      \centering
+      \centering%
       \@department, \@university.\par%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
@@ -79,11 +78,11 @@
     \end{minipage}
     \vfill
     \begin{minipage}[t][1cm][t]{0.2\linewidth}
-      \centering
-      \printdayoff
-      \@date
-      \printdayon
+      \centering%
+      \printdayoff%
+      \@date%
+      \printdayon%
     \end{minipage}%
   \end{titlepage}%
   \restoregeometry%
-}
+}%

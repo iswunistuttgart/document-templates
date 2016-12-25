@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/11/28}
+\def\filedate{2016/12/25}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -14,7 +14,8 @@
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
-\input{includes/packages-head}
+\input{common/packages-head}
+\input{student/packages-head}
 
 
 
@@ -50,8 +51,8 @@
 
 % Configure the kvoptions-package
 \SetupKeyvalOptions{%
-    family=thesis, %
-    prefix=thesis@, %
+    family=ISW, %
+    prefix=Document, %
 }
 
 % Declare debug options
@@ -62,22 +63,22 @@
 \DeclareComplementaryOption{online}{print}
 
 % Declare the document type
-\def\thesis@type{bachelor}
-\DeclareOption{bachelor}{\def\thesis@type{bachelor}}
-\DeclareOption{bachelor-description}{\def\thesis@type{description-bachelor}}
-\DeclareOption{bachelor-project}{\def\thesis@type{bachelor-project}}
-\DeclareOption{master}{\def\thesis@type{master}}
-\DeclareOption{master-description}{\def\thesis@type{description-master}}
-\DeclareOption{study}{\def\thesis@type{study}}
+\def\DocumentType{bachelor}
+\DeclareOption{bachelor}{\def\DocumentType{bachelor}}
+\DeclareOption{bachelor-description}{\def\DocumentType{description-bachelor}}
+\DeclareOption{bachelor-project}{\def\DocumentType{bachelor-project}}
+\DeclareOption{master}{\def\DocumentType{master}}
+\DeclareOption{master-description}{\def\DocumentType{description-master}}
+\DeclareOption{study}{\def\DocumentType{study}}
 
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
 
 % Allow user to choose language
 \def\thesis@lang{ngerman}
-\DeclareOption{ngerman}{\def\thesis@lang{ngerman}}
-\DeclareOption{german}{\def\thesis@lang{ngerman}}
-\DeclareOption{english}{\def\thesis@lang{english}}
+\DeclareOption{ngerman}{\def\DocumentLang{ngerman}}
+\DeclareOption{german}{\def\DocumentLang{ngerman}}
+\DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
 \ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
@@ -88,7 +89,7 @@
 % Process options passed to the class
 \ProcessKeyvalOptions{thesis}
 
-\ifthesis@twoside%
+\ifDocumenttwoside%
   \PassOptionsToClass{twoside}{scrbook}%
 \else%
   \PassOptionsToClass{oneside}{scrbook}%
@@ -103,7 +104,8 @@
 %%  Defaults for packages used                                                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/packages-options}
+\input{common/packages-options}
+\input{student/packages-options}
 
 
 
@@ -122,7 +124,7 @@
 %% Load Debug Packages                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Debug options
-\ifthesis@debug
+\ifDocumentdebug
     \usepackage{showframe}
 % Non-debug options
 \else
@@ -135,12 +137,14 @@
 %% Load All Other Packages                                                    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/packages-main}
+\input{common/packages-main}
+\input{student/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
-\input{includes/tikz-packages}
+\input{common/tikz-packages}
+\input{student/tikz-packages}
 
 
 
@@ -154,7 +158,8 @@
 %% Define colors                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/colors}
+\input{common/colors}
+\input{student/colors}
 
 
 
@@ -162,7 +167,8 @@
 %% Define environments                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/environments}
+\input{common/environments}
+\input{student/environments}
 
 
 
@@ -170,7 +176,8 @@
 %% Define commands                                                            %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/commands}
+\input{common/commands}
+\input{student/commands}
 
 
 
@@ -178,7 +185,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/localization}
+\input{student/localization}
 
 
 
@@ -186,9 +193,9 @@
 %% Configure layout                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/layout}
+\input{student/layout}
 
-\input{includes/titlepage}
+\input{student/titlepage}
 
 
 
@@ -213,14 +220,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \makeatletter%
-    \input{includes/makeatletter}
+  \input{common/makeatletter}
+  \input{student/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
-    \input{includes/atbegindocument}
+  \input{common/atbegindocument}
+  \input{student/atbegindocument}
 }
-
-
 
 
 
