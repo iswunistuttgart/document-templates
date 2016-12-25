@@ -31,7 +31,7 @@
     \vspace*{1.5cm}\par%
     \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
       \centering%
-      \ThesisLocaleSubmittedby\par%
+      \DocumentLocaleSubmittedby\par%
       \vspace{0.5cm}\par%
       \let\oldAnd\and%
       \renewcommand{\and}{\unskip,\xspace}%
@@ -41,24 +41,24 @@
       \ifdefempty{\@placeofbirth}{%
         \par%
       }{%
-        \ThesisLocaleFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
+        \DocumentLocaleFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
       }%
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[t][1cm][c]{0.5\linewidth}
       \centering
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\ThesisLocaleDraft}}{}
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[c][3cm][c]{0.75\linewidth}%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
       \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
-        {\ThesisLocaleExaminer:}%
+        {\DocumentLocaleExaminer:}%
           & \@examiner\\%
-        {\ThesisLocaleSupervisor:}%
+        {\DocumentLocaleSupervisor:}%
           & {\@supervisor}\\%
-        {\ThesisLocaleSubmittedon:}%
+        {\DocumentLocaleSubmittedon:}%
 %          & \space{\usekomafont{date}{\@date}}\\%
           & {\@date}\\%
       \end{tabu}%
@@ -85,4 +85,6 @@
     \end{minipage}%
   \end{titlepage}%
   \restoregeometry%
+  \cleardoublepage%
+  \setcounter{page}{1}%
 }%
