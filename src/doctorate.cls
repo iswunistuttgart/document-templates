@@ -4,13 +4,13 @@
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{student}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
+\ProvidesClass{doctorate}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
 
 % Typeout a notice
 \typeout{}
 \typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
-\typeout{      Document class for student theses}
+\typeout{      Document class for doctoral theses}
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
@@ -27,7 +27,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{student-thesis}{%
+  \PackageWarning{doctorate}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -75,7 +75,7 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a5paper, twoside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -199,6 +199,8 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
     \originalmainmatter%
+    \setstretch{1.25}%
+    \setlength{\parindent}{2ex}%
     \arrayrulecolor{ArrayRuleColor}%
 }%
 
