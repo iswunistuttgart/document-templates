@@ -75,7 +75,7 @@
 \DeclareComplementaryOption{oneside}{twoside}
 
 % Allow user to choose language
-\def\thesis@lang{ngerman}
+\def\DocumentLang{ngerman}
 \DeclareOption{ngerman}{\def\DocumentLang{ngerman}}
 \DeclareOption{german}{\def\DocumentLang{ngerman}}
 \DeclareOption{english}{\def\DocumentLang{english}}
