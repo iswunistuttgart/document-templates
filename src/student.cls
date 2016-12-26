@@ -51,8 +51,8 @@
 
 % Configure the kvoptions-package
 \SetupKeyvalOptions{%
-    family=ISW, %
-    prefix=Document, %
+  family=ISW, %
+  prefix=Document, %
 }
 
 % Declare debug options
@@ -125,10 +125,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Debug options
 \ifDocumentdebug
-    \usepackage{showframe}
+  \usepackage{showframe}
 % Non-debug options
 \else
-    
+  
 \fi
 
 
@@ -205,13 +205,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
-    \originalmainmatter%
-    \arrayrulecolor{ArrayRuleColor}%
+  \originalmainmatter%
+  \arrayrulecolor{ArrayRuleColor}%
 }%
 
 % Set the overfullrule to 5pt if we are in thesisdraft mode
 \ifdraft{
-    \overfullrule=5pt
+  \overfullrule=5pt
 }{}
 
 
