@@ -1,0 +1,152 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Counter definition
+% Set counter for the section numbering
+\setcounter{secnumdepth}{3}
+% Set counter of what to show in the Toc and what not
+\setcounter{tocdepth}{2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Numbering of equations, figures, and tables according to their chapter
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+\counterwithout{footnote}{chapter}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header and footer lines
+% Thickness of header top line
+\setheadtopline{0pt}
+% Thickness of header separator line
+\setheadsepline{1pt}
+% Thickness of footer separator line
+\setfootsepline{1pt}
+% Thickness of footer bottom line
+\setfootbotline{0pt}
+% Line above the header
+\addtokomafont{headtopline}{\color{MainColor}}
+% Line below the header
+\addtokomafont{headsepline}{\color{PrimaryColor}}
+% Line above the footer
+\addtokomafont{footsepline}{\color{PrimaryColor}}
+% Line below the footer
+\addtokomafont{footbotline}{\color{MainColor}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER STYLES
+% Even pages (left pages) from outside to inside
+\lehead*[]{\leftmark}
+\cehead*[]{}
+\rehead*[]{}
+% Odd pages (right pages) from inside to outside
+\lohead*[]{}
+\cohead*[]{}
+\rohead*[]{\rightmark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FOOTER STYES
+% Even pages (left pages) from outside to inside
+\lefoot*[\pagemark]{\pagemark}
+\cefoot*[]{}
+\refoot*[]{}
+% Odd pages (right pages) from inside to outside
+\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\cofoot*[]{}
+\rofoot*[\pagemark]{\pagemark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Footnote
+\renewcommand{\footnoterule}{\kern-3pt {\color{MainColorLight}{\hrule width 2in}} \kern 2.6pt}
+\renewcommand{\thefootnote}{\textcolor{PrimaryColor}{\arabic{footnote}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Komafont definitions
+% Setting title to be written in main color, sans-serif, and Huge
+\setkomafont{title}{\color{MainColor}\sffamily\Huge}
+% Setting subtitle to be written in main color, sans-serif, and large
+\setkomafont{subtitle}{\color{MainColor}\sffamily\large}
+% Setting author to be written in main color, sans-serif, and huge
+\setkomafont{author}{\color{MainColor}\sffamily\huge}
+% Setting date to be written in main color, normal font, and normal size
+\setkomafont{date}{\color{MainColor}\normalfont\normalsize}
+% Page header and footer should be written in the main color and sans-serif
+\setkomafont{pageheadfoot}{\color{MainColor}\sffamily}
+% Page footer should be written in the main color, sans-serif and small font size
+\setkomafont{pagefoot}{\color{MainColor}\sffamily\small}
+% Create a new font for "place of birth"
+\newkomafont{placeofbirth}{\normalfont\normalsize}
+% Make page numbers printed in MainColor
+\addtokomafont{pagenumber}{\color{MainColor}\sffamily}
+
+\addtokomafont{disposition}{\color{PrimaryColor}}
+\addtokomafont{sectioning}{\color{PrimaryColor}}
+\addtokomafont{chapter}{\color{PrimaryColor}\normalfont\sffamily\Huge}
+\addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DICTUM (Part and chapter prefix)
+\renewcommand{\dictumwidth}{0.8\linewidth}
+\setkomafont{dictum}{\slshape}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Tables
+% Stretch the padding between table rows globally
+\renewcommand{\arraystretch}{1.4}
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\setlength{\belowbottomsep}{0pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Itemize Environments: PrimaryColor'ed boxes
+% Level one
+\setlist[itemize,1]{label={\protect\tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor,fill=PrimaryColor] (0, 0ex) rectangle (0.6ex, 0.6ex);}}
+% Level 2
+\setlist[itemize,2]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, fill=PrimaryColor] (0,0) circle (0.3ex);}}
+% Level 3
+\setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
+% Level 4
+\setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) circle (0.3ex);}}
+% Level 5 ... oo - WHY? Who is using more than four levels of items?
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Captions of all floats
+% Setup captions of all floats (figures and captions)
+\captionsetup{
+  format=hang,% 
+  labelsep=colon,% 
+  textformat=simple,% 
+  justification=justified,% 
+  singlelinecheck=off,% 
+  font={},% Affects the whole figure caption
+  labelfont={footnotesize, bf, color=PrimaryColor},% Affects only the label name and its number
+  textfont={},% Affects only the actual float caption
+  subrefformat=parens,% 
+}
+% Setup captions of tables
+\captionsetup[table]{
+  position=above,%
+  belowskip=2pt,%
+}
+% Setup captions of figures
+\captionsetup[figure]{
+  position=below,%
+}
+% Setup captions of subfigures
+\captionsetup[subfigure]{%
+  position=below,% 
+  belowskip=2pt,% 
+}
+% Setup captions of subfigures
+\captionsetup[subfigure]{
+  labelformat=parens,
+  textfont={sl},
+}
