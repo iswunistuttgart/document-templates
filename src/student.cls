@@ -193,6 +193,7 @@
 %% Configure layout                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{common/layout}
 \input{student/layout}
 
 \input{student/titlepage}

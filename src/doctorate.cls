@@ -51,8 +51,8 @@
 
 % Configure the kvoptions-package
 \SetupKeyvalOptions{%
-    family=ISW, %
-    prefix=Document, %
+  family=ISW,%
+  prefix=Document,%
 }
 
 % Declare debug options
@@ -119,7 +119,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Debug options
 \ifDocumentdebug
-    \usepackage{showframe}
+  \usepackage{showframe}
 % Non-debug options
 \else
     
@@ -187,6 +187,7 @@
 %% Configure layout                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{common/layout}
 \input{doctorate/layout}
 
 \input{doctorate/titlepage}
@@ -198,15 +199,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
-    \originalmainmatter%
-    \setstretch{1.25}%
-    \setlength{\parindent}{2ex}%
-    \arrayrulecolor{ArrayRuleColor}%
+  \originalmainmatter%
+  \setstretch{1.25}%
+  \setlength{\parindent}{2ex}%
+  \arrayrulecolor{ArrayRuleColor}%
 }%
 
-% Set the overfullrule to 5pt if we are in thesisdraft mode
+% Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
-    \overfullrule=5pt
+  \overfullrule=5pt
 }{}
 
 
