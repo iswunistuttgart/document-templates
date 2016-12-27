@@ -4,6 +4,7 @@
 import glob
 import os
 import re
+import shutil
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 os.chdir(dir_path)
@@ -39,13 +40,16 @@ def process_line(the_line):
     return the_line
 
 for file in glob.glob("src/*.cls"):
-    source = open(file, 'r')
-    target = open(file.replace('src/', ''), 'w')
+    src_class = open(file, 'r')
+    tar_class = open(file.replace('src/', 'dist/'), 'w')
+    src_template = file.replace('.cls', '.tex')
+    tar_template = src_template.replace('src/', 'dist/')
 
     try :
-        target.write(''.join(process_file(source)) + '\n')
+        tar_class.write(''.join(process_file(src_class)) + '\n')
+        shutil.copyfile(src_template, tar_template)
     except Exception as e:
         print(e)
     finally:
-        target.close()
-        source.close()
+        src_class.close()
+        tar_class.close()
