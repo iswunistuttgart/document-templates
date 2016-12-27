@@ -127,6 +127,9 @@
 % This package provides the command \marginnote that may be used instead of \marginpar at almost every place where \marginpar cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package.
 \RequirePackage{marginnote}
 
+% This package provides a command much like hyperref’s \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn’t allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
+\RequirePackage{breakurl}
+
 % A collection of ways to change the typesetting of footnotes. The package provides means of changing the layout of the footnotes themselves (including setting them in ‘paragraphs’ — the para option), a way to number footnotes per page (the perpage option), to make footnotes disappear in a ‘moving’ argument (stable option) and to deal with multiple references to footnotes from the same place (multiple option). The package also has a range of techniques for labelling footnotes with symbols rather than numbers.
 % Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
 \RequirePackage{footmisc}
