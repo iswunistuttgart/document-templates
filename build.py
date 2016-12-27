@@ -14,7 +14,7 @@ p = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')
 def process_file(the_file):
     lines = []
 
-    for idx, line in enumerate(the_file):
+    for line in the_file:
         lines.append(process_line(line))
 
     return lines
@@ -25,12 +25,13 @@ def process_line(the_line):
     m = p.search(the_line)
 
     if m :
+        print('match ' + m.group('incfile'))
         inc_file = m.group('incfile')
 
-        inc_path = os.path.join(dir_path, inc_file + '.tex')
+        inc_path = os.path.join(dir_path, 'src', inc_file + '.tex')
 
         if os.path.isfile(inc_path):
-            f = open(inc_path, 'r', encoding="utf-8")
+            f = open(inc_path, 'r')
 
             try:
                 return ''.join(process_file(f)) + '\n'
