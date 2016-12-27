@@ -562,9 +562,6 @@
 % This package provides the command \marginnote that may be used instead of \marginpar at almost every place where \marginpar cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package.
 \RequirePackage{marginnote}
 
-% This package provides a command much like hyperref's \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn't allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
-\RequirePackage{breakurl}
-
 % A collection of ways to change the typesetting of footnotes. The package provides means of changing the layout of the footnotes themselves (including setting them in 'paragraphs' - the para option), a way to number footnotes per page (the perpage option), to make footnotes disappear in a 'moving' argument (stable option) and to deal with multiple references to footnotes from the same place (multiple option). The package also has a range of techniques for labelling footnotes with symbols rather than numbers.
 % Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
 \RequirePackage{footmisc}
@@ -663,6 +660,9 @@
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
 % The package depends on the author's kvoptions, ltxcmdsand refcount packages.
 \RequirePackage{hyperref}
+
+% This package provides a command much like hyperref's \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn't allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
+\RequirePackage{breakurl}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage{cleveref}
@@ -1407,8 +1407,8 @@
 \department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
 \departmentaddress{Seidenstr\@. 36, D-70174 Stuttgart, Germany}
 \departmentshort{ISW}
-
-
+%
+%
 \def\DocumentLocaleDraft{Draft}
 \def\DocumentLocaleExaminer{Examiner}
 \def\DocumentLocaleSupervisor{Supervisor}
@@ -1450,7 +1450,7 @@
     \DeclarationOfAuthorship%
   \end{otherlanguage}%
 }
-
+%
 }
 
 \addto\captionsngerman{%
@@ -1459,8 +1459,8 @@
 \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 \departmentaddress{Seidenstr\@. 36, 70174 Stuttgart}
 \departmentshort{ISW}
-
-
+%
+%
 \def\DocumentLocaleDraft{Entwurf}
 \def\DocumentLocaleExaminer{Pr\"ufer}
 \def\DocumentLocaleSupervisor{Betreuer}
@@ -1538,7 +1538,7 @@
   \renewcommand{\and}{\oldAnd}%
   \cleardoublepage%
 }
-
+%
 }
 
 \addto\captionsgerman{%
@@ -1547,8 +1547,8 @@
 \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
 \departmentaddress{Seidenstr\@. 36, 70174 Stuttgart}
 \departmentshort{ISW}
-
-
+%
+%
 \def\DocumentLocaleDraft{Entwurf}
 \def\DocumentLocaleExaminer{Pr\"ufer}
 \def\DocumentLocaleSupervisor{Betreuer}
@@ -1626,7 +1626,7 @@
   \renewcommand{\and}{\oldAnd}%
   \cleardoublepage%
 }
-
+%
 }
 
 
