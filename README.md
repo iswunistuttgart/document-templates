@@ -2,6 +2,16 @@
 
 This is the repository for LaTeX document templates for student theses, reports, and other documents.
 
+If you are just interested in finding the most recent class that you want to use, then look no further but at this list
+  * Use `student.cls` for student theses
+  * Use `doctorate.cls` for doctoral theses
+
+Simply copy the respective files from `dist/` to a directory of your choice and start writing your document!
+
+
+
+---
+
 ## Folder Structure
 
 The folder structure may not be apparent at first sight, thus we shall briefly introduce the folders in use
