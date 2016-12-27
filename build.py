@@ -25,7 +25,6 @@ def process_line(the_line):
     m = p.search(the_line)
 
     if m :
-        print('match ' + m.group('incfile'))
         inc_file = m.group('incfile')
 
         inc_path = os.path.join(dir_path, 'src', inc_file + '.tex')
