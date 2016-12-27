@@ -210,6 +210,12 @@
   \overfullrule=5pt
 }{}
 
+% No single lines of text of the following paragraph on the current page's bottom
+\clubpenalty-9000
+% No single lines of text of the previous paragraph on a new page's top
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
