@@ -43,17 +43,17 @@
 \RequirePackage{setspace}
 
 % The package provides an easy and flexible user interface to customize page layout, implementing auto-centering and auto-balancing mechanisms so that the users have only to give the least description for the page layout. For example, if you want to set each margin 2cm without header space, what you need is just \usepackage[margin=2cm,nohead]{geometry}.
-% The package knows about all the standard paper sizes, so that the user need not know what the nominal ‘real’ dimensions of the paper are, just its standard name (such as a4, letter, etc.).
-% An important feature is the package’s ability to communicate the paper size it's set up to the output (whether via DVI \specials or via direct interaction with pdf(La)TeX). 
+% The package knows about all the standard paper sizes, so that the user need not know what the nominal 'real' dimensions of the paper are, just its standard name (such as a4, letter, etc.).
+% An important feature is the package's ability to communicate the paper size it's set up to the output (whether via DVI \specials or via direct interaction with pdf(La)TeX). 
 \RequirePackage{geometry}
 
 % This package was developed as a general solution to the problem of including graphics in LaTeX 2.09; as such there are obsolete copies to be found on the web (though no longer on the archive). These old versions should not be used with current LaTeX.
-% The current ‘preferred’ solution is the LaTeX graphicx package, but the graphics bundle does contain a version of epsfig for use with current LaTeX. 
+% The current 'preferred' solution is the LaTeX graphicx package, but the graphics bundle does contain a version of epsfig for use with current LaTeX. 
 \RequirePackage{epsfig}
 
 % The package builds upon the graphics package, providing a key-value interface for optional arguments to the \includegraphics command. This interface provides facilities that go far beyond what the graphics package offers on its own.
 % For extended documentation, see epslatex.
-% The package is part of the latex-graphics bundle, which is one of the collections in the LaTeX ‘required’ set of packages. 
+% The package is part of the latex-graphics bundle, which is one of the collections in the LaTeX 'required' set of packages. 
 \RequirePackage{graphicx}
 \graphicspath{{figures/}{images/}}
 
@@ -68,7 +68,7 @@
 \pgfplotsset{compat=newest}
 
 
-% The package has a lot of flexibility, including an option for specifying an entry at the “natural” width of its text.
+% The package has a lot of flexibility, including an option for specifying an entry at the "natural" width of its text.
 % The package is distributed with the bigdelim and bigstrut packages, which can be used to advantage with \multirow cells.
 \RequirePackage{multirow}
 
@@ -80,7 +80,7 @@
 % The bm package defines a command \bm which makes its argument bold. The argument may be any maths object from a single symbol to an expression. This is closely related to the specification of the \boldsymbol command in AMS-LaTeX, but \bm is rather more careful in the way it does things.
 \RequirePackage{bm}
 
-% The package is intended for setting rich text into titling capitals (in which the first character of words are capitalized). It automatically accounts for diacritical marks (like umlauts), national symbols (like “ae”), punctuation, and font changing commands that alter the appearance or size of the text. It allows a list of predesignated words to be protected as lower-cased, and also allows for titling exceptions of various sorts.
+% The package is intended for setting rich text into titling capitals (in which the first character of words are capitalized). It automatically accounts for diacritical marks (like umlauts), national symbols (like "ae"), punctuation, and font changing commands that alter the appearance or size of the text. It allows a list of predesignated words to be protected as lower-cased, and also allows for titling exceptions of various sorts.
 \RequirePackage{titlecaps}
 \Addlcwords{the,a,an,and,but,for,or,nor,to,with,without}
 
@@ -101,7 +101,7 @@
 % The package provides an environment, tabu, which will make any sort of tabular (that doesn't need to split across pages), and an environment longtabu which provides the facilities of tabu in a modified longtable environment. (Note that this latter offers an enhancement of ltxtable.)
 % The package requires the array package, and needs e-TeX to run (since array.sty is present in every conforming distribution of LaTeX, and since every publicly available LaTeX format is built using e-TeX, the requirements are provided by default on any reasonable system). The package also requires xcolor for coloured rules in tables, and colortbl for coloured cells. The longtabu environment further requires that longtable be loaded. The package itself does not load any of these packages for the user.
 % The tabu environment may be used in place of tabular, tabular* and tabularx environments, as well as the array environment in maths mode. It overloads tabularx's X-column specification, allowing a width specification, alignment (l, r, c and j) and column type indication (p, m and b).
-% \begin{tabu} to <dimen> specifies a target width, and \begin{tabu} spread <dimen> enlarges the environment’s “natural” width.
+% \begin{tabu} to <dimen> specifies a target width, and \begin{tabu} spread <dimen> enlarges the environment's "natural" width.
 \RequirePackage{tabu}
 
 % The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation. Guidelines are given as to what constitutes a good table in this context. From version 1.61, the package offers longtable compatibility.
@@ -110,7 +110,7 @@
 % The package defines new commands \Centering, \RaggedLeft, and \RaggedRight and new environments Center, FlushLeft, and FlushRight, which set ragged text and are easily configurable to allow hyphenation (the corresponding commands in LaTeX, all of whose names are lower-case, prevent hyphenation altogether).
 \RequirePackage{ragged2e}
 
-% Typeset in-line fractions in a "nice" way. The package typesets fractions “nicely” — in the form ‘a/b’ (i.e., staggered with a slash between them, rather than directly one over the other). The package is distributed as part of a bundle including the units package. Nicefrac’s facilities are provided, in a cleaner way, by the (experimental) xfrac package, but see also the faktor package for quotient spaces and the like.
+% Typeset in-line fractions in a "nice" way. The package typesets fractions "nicely" — in the form 'a/b' (i.e., staggered with a slash between them, rather than directly one over the other). The package is distributed as part of a bundle including the units package. Nicefrac's facilities are provided, in a cleaner way, by the (experimental) xfrac package, but see also the faktor package for quotient spaces and the like.
 \RequirePackage{nicefrac}
 
 % fouridx – Left sub- and superscripts in maths mode
@@ -118,7 +118,7 @@
 % The package provides an alternative to the use of the \sideset command in the amsmath package.
 \RequirePackage{fouridx}
 
-% Place lines through maths formulae. A package to draw diagonal lines (“cancelling” a term) and arrows with limits (cancelling a term “to a value”) through parts of maths formulae.
+% Place lines through maths formulae. A package to draw diagonal lines ("cancelling" a term) and arrows with limits (cancelling a term "to a value") through parts of maths formulae.
 \RequirePackage{cancel}
 
 % A comprehensive (SI) units package. Typesetting values with units requires care to ensure that the combined mathematical meaning of the value plus unit combination is clear. In particular, the SI units system lays down a consistent set of units with rules on how they are to be used. However, different countries and publishers have differing conventions on the exact appearance of numbers (and units). A number of LaTeX packages have been developed to provide consistent application of the various rules: SIunits, sistyle, unitsdef and units are the leading examples. The numprint package provides a large number of number-related functions, while dcolumn and rccol provide tools for typesetting tabular numbers. The siunitx package takes the best from the existing packages, and adds new features and a consistent interface. A number of new ideas have been incorporated, to fill gaps in the existing provision. The package also provides backward-compatibility with SIunits, sistyle, unitsdef and units. The aim is to have one package to handle all of the possible unit-related needs of LaTeX users. The package relies on LaTeX 3 support from the l3kernel and l3packages bundles.
@@ -127,26 +127,26 @@
 % This package provides the command \marginnote that may be used instead of \marginpar at almost every place where \marginpar cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package.
 \RequirePackage{marginnote}
 
-% This package provides a command much like hyperref’s \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn’t allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
+% This package provides a command much like hyperref's \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn't allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
 \RequirePackage{breakurl}
 
-% A collection of ways to change the typesetting of footnotes. The package provides means of changing the layout of the footnotes themselves (including setting them in ‘paragraphs’ — the para option), a way to number footnotes per page (the perpage option), to make footnotes disappear in a ‘moving’ argument (stable option) and to deal with multiple references to footnotes from the same place (multiple option). The package also has a range of techniques for labelling footnotes with symbols rather than numbers.
+% A collection of ways to change the typesetting of footnotes. The package provides means of changing the layout of the footnotes themselves (including setting them in 'paragraphs' — the para option), a way to number footnotes per page (the perpage option), to make footnotes disappear in a 'moving' argument (stable option) and to deal with multiple references to footnotes from the same place (multiple option). The package also has a range of techniques for labelling footnotes with symbols rather than numbers.
 % Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
 \RequirePackage{footmisc}
 
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
 
-%Set the font size relative to the current font size. The basic command of the package is \relsize, whose argument is a number of \magsteps to change size; from this are defined commands \larger, \smaller, \textlarger, etc.
+% Set the font size relative to the current font size. The basic command of the package is \relsize, whose argument is a number of \magsteps to change size; from this are defined commands \larger, \smaller, \textlarger, etc.
 \RequirePackage{relsize}
 
-% The caption package provides many ways to customise the captions in floating environments like figure and table, and cooperates with many other packages. Facilities include rotating captions, sideways captions, continued captions (for tables or figures that come in several parts). A list of compatibility notes, for other packages, is provided in the documentation. The package also provides the “caption outside float” facility, in the same way that simpler packages like capt-of do. The package supersedes caption2.
+% The caption package provides many ways to customise the captions in floating environments like figure and table, and cooperates with many other packages. Facilities include rotating captions, sideways captions, continued captions (for tables or figures that come in several parts). A list of compatibility notes, for other packages, is provided in the documentation. The package also provides the "caption outside float" facility, in the same way that simpler packages like capt-of do. The package supersedes caption2.
 \RequirePackage{caption}
 % The package provides a means of using facilities analagous to those of the caption package, when writing captions for subfigures and the like.
 % The package is distributed with caption.
 \RequirePackage{subcaption}
 
-% The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/section appendices. The word ‘Appendix’ or similar can be prepended to the appendix number for article class documents. The word ‘Appendices’ or similar can be added to the table of contents before the appendices are listed. The word ‘Appendices’ or similar can be typeset as a \part-like heading (page) in the body. An appendices environment is provided which can be used instead of the \appendix command.
+% The appendix package provides various ways of formatting the titles of appendices. Also (sub)appendices environments are provided that can be used, for example, for per chapter/section appendices. The word 'Appendix' or similar can be prepended to the appendix number for article class documents. The word 'Appendices' or similar can be added to the table of contents before the appendices are listed. The word 'Appendices' or similar can be typeset as a \part-like heading (page) in the body. An appendices environment is provided which can be used instead of the \appendix command.
 \RequirePackage{appendix}
 
 % The package lets the user mark things to do later, in a simple and visually appealing way. The package takes several options to enable customization/finetuning of the visual appearance.
@@ -155,7 +155,7 @@
 % An extended version of TeX, from the NTS project An extended version of TeX (which is capable of running as if it were TeX unmodified). E-TeX has been specified by the LaTeX team as the engine for the development of LaTeX 2e, in the immediate future; as a result, LaTeX programmers may (in all current TeX distributions) assume e-TeX functionality. Development versions of e-TeX are to be found in the TeX live source repository.
 \RequirePackage{etex}
 
-% Extended UTF-8 input encoding support for LaTeX. The bundle provides the ucs package, and utf8x.def, together with a large number of support files. The utf8x.def definition file for use with inputenc covers a wider range of Unicode characters than does utf8.def in the LaTeX distribution. The package provides facilities for efficient use of its large sets of Unicode characters. Glyph production may be controlled by various options, which permits use of non-ASCII characters when coding mathematical formulae. Note that the bundle previously had an alias “unicode”; that alias has now been withdrawn, and no package of that name now exists.
+% Extended UTF-8 input encoding support for LaTeX. The bundle provides the ucs package, and utf8x.def, together with a large number of support files. The utf8x.def definition file for use with inputenc covers a wider range of Unicode characters than does utf8.def in the LaTeX distribution. The package provides facilities for efficient use of its large sets of Unicode characters. Glyph production may be controlled by various options, which permits use of non-ASCII characters when coding mathematical formulae. Note that the bundle previously had an alias "unicode"; that alias has now been withdrawn, and no package of that name now exists.
 \RequirePackage{ucs}
 
 % Reference last page for Page N of M type footers. Reference the number of pages in your LaTeX document through the introduction of a new label which can be referenced like \pageref{LastPage} to give a reference to the last page of a document. It is particularly useful in the page footer that says: Page N of M.
@@ -182,7 +182,7 @@
 % If you need to use the facilities of the float in the same document, load rotating.sty via rotfloat, which smooths the path between the rotating and float packages.
 \RequirePackage{rotating}
 
-% Control layout of itemize, enumerate, description. This package provides user control over the layout of the three basic list environments: enumerate, itemize and description. It supersedes both enumerate and mdwlist (providing well-structured replacements for all their funtionality), and in addition provides functions to compute the layout of labels, and to ‘clone’ the standard environments, to create new environments with counters of their own.
+% Control layout of itemize, enumerate, description. This package provides user control over the layout of the three basic list environments: enumerate, itemize and description. It supersedes both enumerate and mdwlist (providing well-structured replacements for all their funtionality), and in addition provides functions to compute the layout of labels, and to 'clone' the standard environments, to create new environments with counters of their own.
 \RequirePackage{enumitem}
 
 % Typesetting theorems (AMS style). The package facilitates the kind of theorem setup typically needed in American Mathematical Society publications. The package offers the theorem setup of the AMS document classes (amsart, amsbook, etc.) encapsulated in LaTeX package form so that it can be used with other document classes. Amsthm is part of the (required) AMS-LaTeX distribution, so should be present in any LaTeX distribution.
@@ -194,7 +194,7 @@
 % Generate English ordinal numbers. The command \nth{<number>} generates English ordinal numbers of the form 1st, 2nd, 3rd, 4th, etc. LaTeX package options may specify that the ordinal mark be superscripted, and that negative numbers may be treated; Plain TeX users have no access to package options, so need to redefine macros for these changes.
 \RequirePackage{nth}
 
-% Show label, ref, cite and bib keys. The showkeys package modifies the \label, \ref, \pageref, \cite and \bibitem commands so that the ‘internal’ key is printed, without affecting the appearance of the rest of the text, so far as is possible (the keys typically appear in the margin). The package is part of the tools bundle in the LaTeX required distribution.
+% Show label, ref, cite and bib keys. The showkeys package modifies the \label, \ref, \pageref, \cite and \bibitem commands so that the 'internal' key is printed, without affecting the appearance of the rest of the text, so far as is possible (the keys typically appear in the margin). The package is part of the tools bundle in the LaTeX required distribution.
 \ifdraft{\RequirePackage{showkeys}}{}
 
 % Expand acronyms at least once. This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks. The package requires the suffix package, which in turn requires that it runs under e-TeX.
@@ -203,7 +203,7 @@
 % Defines commands \counterwithin (which sets up a counter to be reset when another is incremented) and \counterwithout (which unsets such a relationship).
 \RequirePackage{chngcntr}
 
-% LaTeX’s built-in two-column code finishes off a document exactly where the text stops; this will typically leave an isolated left-hand column, or a right-hand column shorter than the left-hand one. This package modifies the LaTeX output routine to make the two columns as nearly of the same length as possible.
+% LaTeX's built-in two-column code finishes off a document exactly where the text stops; this will typically leave an isolated left-hand column, or a right-hand column shorter than the left-hand one. This package modifies the LaTeX output routine to make the two columns as nearly of the same length as possible.
 % Only used with two-column layout (or, in general, multicols)
 \RequirePackage{flushend}
 
@@ -221,16 +221,16 @@
 % The European currency symbol for the Euro implemented in METAFONT, using the official European Commission dimensions, and providing several shapes (normal, slanted, bold, outline). The package also includes a LaTeX package which defines the macro, pre-compiled tfm files, and documentation.
 \RequirePackage{eurosym}
 
-% The command \url is a form of verbatim command that allows linebreaks at certain characters or combinations of characters, accepts reconfiguration, and can usually be used in the argument to another command. (The \urldef command provides robust commands that serve in cases when \url doesn't work in an argument.) The command is intended for email addresses, hypertext links, directories/paths, etc., which normally have no spaces, so by default the package ignores spaces in its argument. However, a package option “allows spaces”, which is useful for operating systems where spaces are a common part of file names.
+% The command \url is a form of verbatim command that allows linebreaks at certain characters or combinations of characters, accepts reconfiguration, and can usually be used in the argument to another command. (The \urldef command provides robust commands that serve in cases when \url doesn't work in an argument.) The command is intended for email addresses, hypertext links, directories/paths, etc., which normally have no spaces, so by default the package ignores spaces in its argument. However, a package option "allows spaces", which is useful for operating systems where spaces are a common part of file names.
 \RequirePackage{url}
 
-% The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y’s dvipsone); for Y&Y’s dviwindo; for PDF control within pdfTeX and dvipdfm; for TeX4ht; and for VTeX’s pdf and HTML backends.
+% The hyperref package is used to handle cross-referencing commands in LaTeX to produce hypertext links in the document. The package provides backends for the \special set defined for HyperTeX DVI processors; for embedded pdfmark commands for processing by Acrobat Distiller (dvips and Y&Y's dvipsone); for Y&Y's dviwindo; for PDF control within pdfTeX and dvipdfm; for TeX4ht; and for VTeX's pdf and HTML backends.
 % The package is distributed with the backref and nameref packages, which make use of the facilities of hyperref.
-% The package depends on the author’s kvoptions, ltxcmdsand refcount packages.
+% The package depends on the author's kvoptions, ltxcmdsand refcount packages.
 \RequirePackage{hyperref}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage{cleveref}
 
-% Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author’s glossary package (which is now obsolete), and a conversion tool is provided.
+% Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author's glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
