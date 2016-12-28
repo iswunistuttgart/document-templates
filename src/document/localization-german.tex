@@ -1,0 +1,85 @@
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr\@. 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\def\DocumentLocaleDraft{Entwurf}
+\def\DocumentLocaleExaminer{Pr\"ufer}
+\def\DocumentLocaleSupervisor{Betreuer}
+\def\DocumentLocaleLogosuffix{-de}
+\def\DocumentLocaleSubmittedby{eingereicht von}
+\def\DocumentLocaleFrom{aus}
+\def\DocumentLocaleSubmittedon{Eingereicht am}
+\def\DocumentLocaleMajor{Studiengang}
+\def\DocumentLocalePartner{In Kooperation mit}
+\def\DocumentLocaleKeywords{Stichw\"orter}
+\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{diploma}{%
+  \def\DocumentName{Dissertation}
+  \def\ThesisDegreeLong{Doktoringenieur}
+  \def\ThesisDegreeShort{Dr.-Ing.}
+}{}
+%
+\def\ThesisPretext{%
+  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
+  \@faculty, \@university%
+  \ifdefempty{\ThesisDegreeLong}{.}{,%
+    \space zur Erlangung des akademischen Grades %
+    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
+  }.%
+}%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \chapter*{\DocumentLocaledeclaration}%
+  \vspace{1\baselineskip}%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
+  \vspace{1\baselineskip}
+  \begin{center}
+    \selectfont\sffamily
+    \@title\\%
+    \ifdefempty{\@subtitle}{}{
+      \vspace{0.15cm}
+      \@subtitle\\%
+    }
+  \end{center}
+  \vspace{1\baselineskip}
+  \begin{enumerate}%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+  \end{enumerate}%
+  \vfill%\vspace{2\baselineskip}%
+  %
+  \begin{center}%
+    \selectfont\sffamily%
+    \small%
+    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+      \rule{\linewidth}{0.5pt}%
+        & \rule{\linewidth}{0pt}%
+        & \rule{\linewidth}{0.5pt}%
+        \\[-1.5ex]%
+      Datum%
+        & %
+        & Autor \\%
+    \end{tabu}%
+  \end{center}%
+  \vfill%
+  \renewcommand{\and}{\oldAnd}%
+  \cleardoublepage%
+}
+%
