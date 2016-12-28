@@ -4,7 +4,7 @@
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{doctorate}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
+\ProvidesClass{iswartcl}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
 
 % Typeout a notice
 \typeout{}
@@ -40,7 +40,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{doctorate}{%
+  \PackageWarning{document}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -76,7 +76,7 @@
 \DeclareComplementaryOption{online}{print}
 
 % Declare the document type
-\def\DocumentType{doctorate}
+\def\DocumentType{document}
 
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -94,7 +94,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 % Process options passed to the class
-\ProcessKeyvalOptions{thesis}
+\ProcessKeyvalOptions{ISW}
 
 \ifDocumenttwoside%
   \PassOptionsToClass{twoside}{scrbook}%

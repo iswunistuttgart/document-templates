@@ -4,13 +4,13 @@
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{student}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
+\ProvidesClass{iswdctrt}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
 
 % Typeout a notice
 \typeout{}
 \typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
-\typeout{      Document class for student theses}
+\typeout{      Document class for doctoral theses}
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
@@ -40,7 +40,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{student}{%
+  \PackageWarning{doctorate}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -64,8 +64,8 @@
 
 % Configure the kvoptions-package
 \SetupKeyvalOptions{%
-  family=ISW, %
-  prefix=Document, %
+  family=ISW,%
+  prefix=Document,%
 }
 
 % Declare debug options
@@ -76,13 +76,7 @@
 \DeclareComplementaryOption{online}{print}
 
 % Declare the document type
-\def\DocumentType{bachelor}
-\DeclareOption{bachelor}{\def\DocumentType{bachelor}}
-\DeclareOption{bachelor-description}{\def\DocumentType{description-bachelor}}
-\DeclareOption{bachelor-project}{\def\DocumentType{bachelor-project}}
-\DeclareOption{master}{\def\DocumentType{master}}
-\DeclareOption{master-description}{\def\DocumentType{description-master}}
-\DeclareOption{study}{\def\DocumentType{study}}
+\def\DocumentType{doctorate}
 
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -94,13 +88,13 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a5paper, twoside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 % Process options passed to the class
-\ProcessKeyvalOptions{thesis}
+\ProcessKeyvalOptions{ISW}
 
 \ifDocumenttwoside%
   \PassOptionsToClass{twoside}{scrbook}%
@@ -430,7 +424,7 @@
   \usepackage{showframe}
 % Non-debug options
 \else
-  
+    
 \fi
 
 
@@ -1434,46 +1428,10 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
-\ifdefstring{\DocumentType}{description-bachelor}{%
-  \def\DocumentName{Project Description}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{description-master}{%
-  \def\DocumentName{Project Description}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{bachelor}{%
-  \def\DocumentName{Bachelor's Thesis}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{master}{%
-  \def\DocumentName{Master's Thesis}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{study}{%
-  \def\DocumentName{Student Research Project}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
-}{}
-%
-\ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Diploma Thesis}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
-}{}
-%
-\ifdefstring{\DocumentType}{bachelor-project}{%
-  \def\DocumentName{Bachelor's Project Report}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+\ifdefstring{\DocumentType}{doctorate}{%
+  \def\DocumentName{Dissertation}
+  \def\ThesisDegreeLong{Doktoringenieur}
+  \def\ThesisDegreeShort{Dr.-Ing.}
 }{}
 %
 \def\ThesisPretext{%
@@ -1522,46 +1480,10 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{description-bachelor}{%
-  \def\DocumentName{Projektexpos\'e}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{description-master}{%
-  \def\DocumentName{Projektexpos\'e}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{bachelor}{%
-  \def\DocumentName{Bachelorarbeit}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{master}{%
-  \def\DocumentName{Masterarbeit}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{study}{%
-  \def\DocumentName{Studienarbeit}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
-}{}
-%
 \ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Diplomarbeit}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
-}{}
-%
-\ifdefstring{\DocumentType}{bachelor-project}{%
-  \def\DocumentName{Bachelor Projektarbeit}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+  \def\DocumentName{Dissertation}
+  \def\ThesisDegreeLong{Doktoringenieur}
+  \def\ThesisDegreeShort{Dr.-Ing.}
 }{}
 %
 \def\ThesisPretext{%
@@ -1591,7 +1513,7 @@
   \end{center}
   \vspace{1\baselineskip}
   \begin{enumerate}%
-    \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
     \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
     \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
     \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
@@ -1646,46 +1568,10 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{description-bachelor}{%
-  \def\DocumentName{Projektexpos\'e}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{description-master}{%
-  \def\DocumentName{Projektexpos\'e}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{bachelor}{%
-  \def\DocumentName{Bachelorarbeit}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{master}{%
-  \def\DocumentName{Masterarbeit}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
-}{}
-%
-\ifdefstring{\DocumentType}{study}{%
-  \def\DocumentName{Studienarbeit}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
-}{}
-%
 \ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Diplomarbeit}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
-}{}
-%
-\ifdefstring{\DocumentType}{bachelor-project}{%
-  \def\DocumentName{Bachelor Projektarbeit}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+  \def\DocumentName{Dissertation}
+  \def\ThesisDegreeLong{Doktoringenieur}
+  \def\ThesisDegreeShort{Dr.-Ing.}
 }{}
 %
 \def\ThesisPretext{%
@@ -1715,7 +1601,7 @@
   \end{center}
   \vspace{1\baselineskip}
   \begin{enumerate}%
-    \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
     \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
     \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
     \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
@@ -2005,13 +1891,21 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
   \originalmainmatter%
+  \setstretch{1.25}%
+  \setlength{\parindent}{2ex}%
   \arrayrulecolor{ArrayRuleColor}%
 }%
 
-% Set the overfullrule to 5pt if we are in thesisdraft mode
+% Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
   \overfullrule=5pt
 }{}
+
+% No single lines of text of the following paragraph on the current page's bottom
+\clubpenalty=9000
+% No single lines of text of the previous paragraph on a new page's top
+\widowpenalty=10000
+\displaywidowpenalty=10000
 
 
 
@@ -2064,12 +1958,6 @@
 
 
 }
-
-% No single lines of text of the following paragraph on the current page's bottom
-\clubpenalty=9000
-% No single lines of text of the previous paragraph on a new page's top
-\widowpenalty=10000
-\displaywidowpenalty=10000
 
 
 
