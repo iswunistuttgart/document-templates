@@ -4,18 +4,18 @@
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{student}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
+\ProvidesClass{iswartcl}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
 
 % Typeout a notice
 \typeout{}
 \typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
-\typeout{      Document class for student theses}
+\typeout{      Document class for doctoral theses}
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
 \input{common/packages-head}
-\input{student/packages-head}
+\input{document/packages-head}
 
 
 
@@ -27,7 +27,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{student}{%
+  \PackageWarning{document}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -51,8 +51,8 @@
 
 % Configure the kvoptions-package
 \SetupKeyvalOptions{%
-  family=ISW, %
-  prefix=Document, %
+  family=ISW,%
+  prefix=Document,%
 }
 
 % Declare debug options
@@ -63,13 +63,7 @@
 \DeclareComplementaryOption{online}{print}
 
 % Declare the document type
-\def\DocumentType{bachelor}
-\DeclareOption{bachelor}{\def\DocumentType{bachelor}}
-\DeclareOption{bachelor-description}{\def\DocumentType{description-bachelor}}
-\DeclareOption{bachelor-project}{\def\DocumentType{bachelor-project}}
-\DeclareOption{master}{\def\DocumentType{master}}
-\DeclareOption{master-description}{\def\DocumentType{description-master}}
-\DeclareOption{study}{\def\DocumentType{study}}
+\def\DocumentType{document}
 
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -81,13 +75,13 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a5paper, twoside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 % Process options passed to the class
-\ProcessKeyvalOptions{thesis}
+\ProcessKeyvalOptions{ISW}
 
 \ifDocumenttwoside%
   \PassOptionsToClass{twoside}{scrbook}%
@@ -105,7 +99,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-options}
-\input{student/packages-options}
+\input{document/packages-options}
 
 
 
@@ -128,7 +122,7 @@
   \usepackage{showframe}
 % Non-debug options
 \else
-  
+    
 \fi
 
 
@@ -138,13 +132,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-main}
-\input{student/packages-main}
+\input{document/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}
-\input{student/tikz-packages}
+\input{document/tikz-packages}
 
 
 
@@ -159,7 +153,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/colors}
-\input{student/colors}
+\input{document/colors}
 
 
 
@@ -168,7 +162,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/environments}
-\input{student/environments}
+\input{document/environments}
 
 
 
@@ -177,7 +171,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/commands}
-\input{student/commands}
+\input{document/commands}
 
 
 
@@ -185,7 +179,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/localization}
+\input{document/localization}
 
 
 
@@ -194,9 +188,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/layout}
-\input{student/layout}
+\input{document/layout}
 
-\input{student/titlepage}
+\input{document/titlepage}
 
 
 
@@ -206,13 +200,21 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
   \originalmainmatter%
+  \setstretch{1.25}%
+  \setlength{\parindent}{2ex}%
   \arrayrulecolor{ArrayRuleColor}%
 }%
 
-% Set the overfullrule to 5pt if we are in thesisdraft mode
+% Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
   \overfullrule=5pt
 }{}
+
+% No single lines of text of the following paragraph on the current page's bottom
+\clubpenalty=9000
+% No single lines of text of the previous paragraph on a new page's top
+\widowpenalty=10000
+\displaywidowpenalty=10000
 
 
 
@@ -222,19 +224,13 @@
 
 \makeatletter%
   \input{common/makeatletter}
-  \input{student/makeatletter}
+  \input{document/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
   \input{common/atbegindocument}
-  \input{student/atbegindocument}
+  \input{document/atbegindocument}
 }
-
-% No single lines of text of the following paragraph on the current page's bottom
-\clubpenalty=9000
-% No single lines of text of the previous paragraph on a new page's top
-\widowpenalty=10000
-\displaywidowpenalty=10000
 
 
 
