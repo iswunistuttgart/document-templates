@@ -2,13 +2,24 @@
 
 This is the repository for LaTeX document templates for student theses, reports, and other documents.
 
-If you are just interested in finding the most recent class that you want to use, then look no further but at this list
-  * Use `student.cls` for student theses
-  * Use `doctorate.cls` for doctoral theses
+If you are just interested in finding the most recent class that you want to use, then look no further but table [1].
 
-Simply copy the respective files from `dist/` to a directory of your choice and start writing your document!
+| Class | Purpose | Version |
+|-------|---------|---------|
+| iswartcl | General documents | n/a |
+| iswdctrt | Doctoral theses | 1.0.0-rc1 |
+| iswstud | Student theses | 1.0.0-rc1 |
+| iswbeamer | Presentations | n/a |
 
+Simply copy the respective files (`.cls` and `.tex`) from `dist/` to a directory of your choice and start writing your document inside the given `.tex` file!
 
+## Development Team
+
+ISW LaTeX Templates was created by [Philipp Tempel](http://www.isw.uni-stuttgart.de/institut/mitarbeiter/Tempel/?__locale=en) who both uses and continues to develop the template.
+
+## Contributing
+
+Before sending a pull request, be sure to check out the [Contribution Guidelines](CONTRIBUTING.md) first.
 
 ---
 
@@ -33,11 +44,3 @@ Working/development directory for the document template in LaTeX.
 
 #### Presentation
 Working/development directory for the presentation template in LaTeX.
-
-## Development Team
-
-ISW LaTeX Templates was created by [Philipp Tempel](http://www.isw.uni-stuttgart.de/institut/mitarbeiter/Tempel/?__locale=en) who both uses and continues to develop the template.
-
-## Contributing
-
-Before sending a pull request, be sure to check out the [Contribution Guidelines](CONTRIBUTING.md) first.
