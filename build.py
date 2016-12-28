@@ -9,7 +9,7 @@ import shutil
 path_base = os.path.dirname(os.path.realpath(__file__))
 dir_src = os.path.join(path_base, 'src')
 dir_dist = os.path.join(path_base, 'dist')
-files = ['doctorate', 'student']
+files = ['iswstud', 'iswartcl', 'iswdctrt']
 
 p = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')
 
