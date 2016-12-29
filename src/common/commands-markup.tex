@@ -1,0 +1,53 @@
+% Name of the university
+\newcommand{\university}[1]{\gdef\@university{#1}}
+\newcommand{\@university}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
+
+% Long name of the department
+\newcommand{\department}[1]{\gdef\@department{#1}}
+\newcommand{\@department}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
+
+% Short name of the department
+\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
+\gdef\@departmentshort{}
+
+% Address of the department
+\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
+\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
+
+% Name of the faculty
+\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
+\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
+
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+
+% Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
+\newcommand{\universitylogo}{logo/university}
+
+% Path to the department logo
+\newcommand{\departmentlogo}{logo/department}
+
+% Path to the partner's logo
+\newcommand{\partnerlogo}{}
+
+% Short name of author(s)
+\newcommand{\shortauthor}[1]{\gdef\@shortauthor{#1}}
+\gdef\@shortauthor{}
+
+% Running author
+\newcommand{\runauthor}{%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  \@shortauthor%
+  \renewcommand{\and}{\oldAnd}%
+}
+
+% Short name of title
+\newcommand{\shorttitle}[1]{\gdef\@shorttitle{#1}}
+\gdef\@shorttitle{}
+
+% Running title
+\newcommand{\runauthor}{%
+  \@shorttitle%
+}
