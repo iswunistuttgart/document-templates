@@ -64,8 +64,16 @@
 
 % Declare the document type
 \def\DocumentType{document}
+\DeclareOption{document}{\def\DocumentType{document}}
+\DeclareOption{exam}{\def\DocumentType{exam}}
+\DeclareOption{exercise}{\def\DocumentType{exercise}}
+\DeclareOption{offprint}{\def\DocumentType{offprint}}
+\DeclareOption{report}{\def\DocumentType{report}}
 
-\DeclareBoolOption[true]{twoside}
+% Declare the document type
+\def\DocumentType{document}
+
+\DeclareBoolOption[false]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
 
 % Allow user to choose language
@@ -75,7 +83,7 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{ngerman, draft, paper=a5paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a5paper, oneside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -207,7 +215,8 @@
 
 % Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
-  \overfullrule=5pt
+  \input{common/ifdraft.tex}
+  \input{document/ifdraft.tex}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom

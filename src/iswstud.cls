@@ -211,7 +211,8 @@
 
 % Set the overfullrule to 5pt if we are in thesisdraft mode
 \ifdraft{
-  \overfullrule=5pt
+  \input{common/ifdraft}
+  \input{student/ifdraft}
 }{}
 
 
