@@ -76,15 +76,12 @@
 \DeclareComplementaryOption{online}{print}
 
 % Declare the document type
-\def\DocumentType{document}
-\DeclareOption{document}{\def\DocumentType{document}}
+\def\DocumentType{regular}
+\DeclareOption{regular}{\def\DocumentType{regular}}
 \DeclareOption{exam}{\def\DocumentType{exam}}
 \DeclareOption{exercise}{\def\DocumentType{exercise}}
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
-
-% Declare the document type
-\def\DocumentType{document}
 
 \DeclareBoolOption[false]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -1427,13 +1424,7 @@
 %
 %
 \def\DocumentLocaleDraft{Draft}
-\def\DocumentLocaleExaminer{Examiner}
-\def\DocumentLocaleSupervisor{Supervisor}
 \def\DocumentLocaleLogosuffix{-en}
-\def\DocumentLocaleSubmittedby{submitted by}
-\def\DocumentLocaleFrom{from}
-\def\DocumentLocaleSubmittedon{Submitted on}
-\def\DocumentLocaleMajor{Major}
 \def\DocumentLocalePartner{In cooperation with}
 \def\DocumentLocaleKeywords{Keywords}
 \def\DocumentLocaleDeclaration{Declaration of Authorship}
@@ -1445,28 +1436,25 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
-\ifdefstring{\DocumentType}{doctorate}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
 }{}
 %
-\def\ThesisPretext{%
-  A \DocumentName\space presented to the faculty %
-  \@faculty, \@university,%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space in partial fulfillment of the requirements for the degree of %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
-}%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
 %
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
 %
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
 %
 }
 
@@ -1479,13 +1467,7 @@
 %
 %
 \def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleExaminer{Pr\"ufer}
-\def\DocumentLocaleSupervisor{Betreuer}
 \def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocaleSubmittedby{eingereicht von}
-\def\DocumentLocaleFrom{aus}
-\def\DocumentLocaleSubmittedon{Eingereicht am}
-\def\DocumentLocaleMajor{Studiengang}
 \def\DocumentLocalePartner{In Kooperation mit}
 \def\DocumentLocaleKeywords{Stichw\"orter}
 \def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
@@ -1497,64 +1479,25 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
 }{}
 %
-\def\ThesisPretext{%
-  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \@faculty, \@university%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space zur Erlangung des akademischen Grades %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
-}%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Pr\"ufung}
+}{}
 %
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\DocumentLocaledeclaration}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Aufgaben zur Vorlesung}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Umdruck}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Bericht}
+}{}
 %
 }
 
@@ -1567,13 +1510,7 @@
 %
 %
 \def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleExaminer{Pr\"ufer}
-\def\DocumentLocaleSupervisor{Betreuer}
 \def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocaleSubmittedby{eingereicht von}
-\def\DocumentLocaleFrom{aus}
-\def\DocumentLocaleSubmittedon{Eingereicht am}
-\def\DocumentLocaleMajor{Studiengang}
 \def\DocumentLocalePartner{In Kooperation mit}
 \def\DocumentLocaleKeywords{Stichw\"orter}
 \def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
@@ -1585,64 +1522,25 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
 }{}
 %
-\def\ThesisPretext{%
-  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \@faculty, \@university%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space zur Erlangung des akademischen Grades %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
-}%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Pr\"ufung}
+}{}
 %
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\DocumentLocaledeclaration}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Aufgaben zur Vorlesung}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Umdruck}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Bericht}
+}{}
 %
 }
 
@@ -1816,9 +1714,54 @@
     \thispagestyle{empty}%
     \centering%
     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
-      \centering
+      \centering%
       \huge\DocumentName\par%
     \end{minipage}\par%
+    \vspace*{0.75cm}\par%
+    \begin{minipage}[t][3cm][c]{0.9\linewidth}%
+      \centering%
+      {\usekomafont{title}{\@title}\par}%
+    \end{minipage}\par%
+    \vspace*{0.1cm}\par%
+    \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
+      \centering%
+      \ifdefempty{\@subtitle}{}{%
+        \usekomafont{subtitle}{\@subtitle}%
+      }%
+    \end{minipage}\par%
+    \vfill%
+    \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
+      \centering%
+      \let\oldAnd\and%
+      \renewcommand{\and}{\unskip,\xspace}%
+      {\usekomafont{author}{\@author}}\par%
+      \renewcommand{\and}{\oldAnd}%
+      \vspace{0.5cm}\par%
+    \end{minipage}
+    \vfill%
+    \begin{minipage}[t][1cm][c]{0.5\linewidth}
+      \centering%
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
+    \end{minipage}
+    \vfill%
+    \begin{minipage}[t]{0.7\linewidth}
+      \centering%
+      \@department, \@university.\par%
+      \let\oldAnd\and%
+      \renewcommand{\and}{\par}%
+      \ifdefempty{\@partner}{}{%
+        \vspace*{0.3cm}\par%
+        \@partner%
+      }%
+      \renewcommand{\and}{\oldAnd}%
+    \end{minipage}
+    \vfill
+    \begin{minipage}[t][1cm][t]{0.2\linewidth}
+      \centering%
+      \printdayoff%
+      \@date%
+      \printdayon%
+    \end{minipage}%
   \end{titlepage}%
   \restoregeometry%
   \cleardoublepage%

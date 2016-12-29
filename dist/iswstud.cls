@@ -1922,7 +1922,7 @@
     \thispagestyle{empty}%
     \centering%
     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
-      \centering
+      \centering%
       \huge\DocumentName\par%
     \end{minipage}\par%
     \vspace*{0.75cm}\par%
@@ -1939,7 +1939,7 @@
     \end{minipage}\par%
     \vspace*{1.5cm}\par%
     \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
-      \centering
+      \centering%
       \begin{spacing}{1.25}
         {\ThesisPretext\par}%
       \end{spacing}
@@ -1962,7 +1962,7 @@
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[t][1cm][c]{0.5\linewidth}
-      \centering
+      \centering%
       \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
     \end{minipage}
     \vspace*{1cm}\par%
