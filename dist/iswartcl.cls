@@ -838,6 +838,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract
 \renewenvironment{abstract}{%
+  \thispagestyle{plain}%
   \section*{\abstractname}%
   \addcontentsline{toc}{section}{\abstractname}%
   \begin{spacing}{1.175}%
@@ -914,7 +915,7 @@
 \gdef\@shorttitle{}
 
 % Running title
-\newcommand{\runauthor}{%
+\newcommand{\runtitle}{%
   \@shorttitle%
 }
 
@@ -1699,6 +1700,30 @@
 %\addtokomafont{section}{\color{PrimaryColor}\normalfont\sffamily}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER STYLES
+% Even pages (left pages) from outside to inside
+\lehead*[]{\leftmark}
+\rehead*[ ]{\runtitle}
+\rehead[foobar]{\runtitle}
+% Odd pages (right pages) from inside to outside
+\lohead*[]{\runtitle}
+\cohead*[]{}
+\rohead*[]{\rightmark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FOOTER STYES
+% Even pages (left pages) from outside to inside
+\lefoot*[\pagemark]{\pagemark}
+\cefoot*[]{}
+\refoot*[]{}
+% Odd pages (right pages) from inside to outside
+\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\cofoot*[]{}
+\rofoot*[\pagemark]{\pagemark}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
@@ -1710,7 +1735,7 @@
       \centering%
       \huge\DocumentName\par%
     \end{minipage}\par%
-    \vspace*{0.75cm}\par%
+    \vfill\par%
     \begin{minipage}[t][3cm][c]{0.9\linewidth}%
       \centering%
       {\usekomafont{title}{\@title}\par}%
@@ -1751,9 +1776,9 @@
     \vfill
     \begin{minipage}[t][1cm][t]{0.2\linewidth}
       \centering%
-      \printdayoff%
+%      \printdayoff%
       \@date%
-      \printdayon%
+%      \printdayon%
     \end{minipage}%
   \end{titlepage}%
   \restoregeometry%
@@ -1772,6 +1797,7 @@
   \setstretch{1.25}%
   \setlength{\parindent}{2ex}%
   \arrayrulecolor{ArrayRuleColor}%
+  \cleardoublepage%
 }%
 
 % Set the overfullrule to 5pt if we are in draft mode

@@ -906,7 +906,7 @@
 \gdef\@shorttitle{}
 
 % Running title
-\newcommand{\runauthor}{%
+\newcommand{\runtitle}{%
   \@shorttitle%
 }
 
