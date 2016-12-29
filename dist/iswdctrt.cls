@@ -342,20 +342,6 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% scrbook
-\PassOptionsToClass{
-%  abstract=on, %
-  chapterprefix=false, %
-  parskip=half-, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
-%  fontsize=14pt,
-  open=right,
-  toc=bibliography, % The bibliography will be represented by an entry at the table of contents, but will not be numbered.
-  toc=listof, % The lists of floating environments i.e., the list of figures and the list of tables, will be represented by entries at the table of contents, but will not be numbered.
-  version=last, %
-}{scrbook}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % showkeys
 \PassOptionsToPackage{
   % to stop the redefinition of \ref and \pageref, and related commands from the varioref package
@@ -410,7 +396,18 @@
   hyperref,     % 
 }{xcolor}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% scrbook
+\PassOptionsToClass{
+%  abstract=on, %
+  chapterprefix=false, %
+  parskip=half-, % half a line vertical space between paragraphs; there must be at least 1 em free space in the last line of a paragraph
+%  fontsize=14pt,
+  open=right,
+  toc=bibliography, % The bibliography will be represented by an entry at the table of contents, but will not be numbered.
+  toc=listof, % The lists of floating environments i.e., the list of figures and the list of tables, will be represented by entries at the table of contents, but will not be numbered.
+  version=last, %
+}{scrbook}
 
 
 
@@ -813,22 +810,6 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Abstract
-\newenvironment{abstract}{%
-  \chapter*{\abstractname}%
-  \addcontentsline{toc}{chapter}{\abstractname}%
-  \begin{spacing}{1.175}%
-}{%
-  \end{spacing}%
-  \vfill%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  \textbf{\color{PrimaryColor}\DocumentLocaleKeywords:}~\@keywords%
-  \renewcommand{\and}{\oldAnd}
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Chapter intro environment
 \newenvironment{intro}{%4
   \hfill
@@ -849,7 +830,20 @@
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\newenvironment{abstract}{%
+  \chapter*{\abstractname}%
+  \addcontentsline{toc}{chapter}{\abstractname}%
+  \begin{spacing}{1.175}%
+}{%
+  \end{spacing}%
+  \vfill%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  \textbf{\color{PrimaryColor}\DocumentLocaleKeywords:}~\@keywords%
+  \renewcommand{\and}{\oldAnd}
+}
 
 
 
@@ -1296,31 +1290,6 @@
 % LLC => Limited liability company
 \newcommand{\textLlc}{LLC}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% KOMASCRIPT SECTIONING STYLES                                               %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewcommand*{\raggedchapter}{\RaggedLeft}
-\renewcommand{\chapterlinesformat}[3]{%
-  % Use ifstr as follows: \ifstr{str}{}{empty}{non-empty}
-  \ifstr{#2}{}{}{%
-    \setlength{\fboxrule}{2pt}
-    \makebox[\linewidth][r]{%
-      \rotatebox{90}{%
-        \makebox[2cm][l]{%
-          \resizebox{2.5cm}{!}{%
-            \color{PrimaryColor}\normalfont\Large\scshape\space\chapapp\space%
-          }%
-        }%
-      } % Leave this white space here or the "CHAPTER" will move into the gray box
-      \resizebox{!}{2.5cm}{%
-        \fboxsep=6pt%
-        \fontsize{85}{100}\selectfont\color{PrimaryColor}\sffamily\colorbox{MainColorVeryVeryLight}{\thechapter}%
-      }%
-    }\\*%
-  }%
-  \addvspace{20\p@}%
-  #3%
-}
 
 
 % NOTE: In the following, command arguments are specified as follows
@@ -1407,6 +1376,31 @@
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% KOMASCRIPT SECTIONING STYLES                                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand*{\raggedchapter}{\RaggedLeft}
+\renewcommand{\chapterlinesformat}[3]{%
+  % Use ifstr as follows: \ifstr{str}{}{empty}{non-empty}
+  \ifstr{#2}{}{}{%
+    \setlength{\fboxrule}{2pt}
+    \makebox[\linewidth][r]{%
+      \rotatebox{90}{%
+        \makebox[2cm][l]{%
+          \resizebox{2.5cm}{!}{%
+            \color{PrimaryColor}\normalfont\Large\scshape\space\chapapp\space%
+          }%
+        }%
+      } % Leave this white space here or the "CHAPTER" will move into the gray box
+      \resizebox{!}{2.5cm}{%
+        \fboxsep=6pt%
+        \fontsize{85}{100}\selectfont\color{PrimaryColor}\sffamily\colorbox{MainColorVeryVeryLight}{\thechapter}%
+      }%
+    }\\*%
+  }%
+  \addvspace{20\p@}%
+  #3%
+}
 
 
 
@@ -1660,14 +1654,6 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Numbering of equations, figures, and tables according to their chapter
-\numberwithin{equation}{chapter}
-\numberwithin{figure}{chapter}
-\numberwithin{table}{chapter}
-\counterwithout{footnote}{chapter}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header and footer lines
 % Thickness of header top line
 \setheadtopline{0pt}
@@ -1738,7 +1724,6 @@
 
 \addtokomafont{disposition}{\color{PrimaryColor}}
 \addtokomafont{sectioning}{\color{PrimaryColor}}
-\addtokomafont{chapter}{\color{PrimaryColor}\normalfont\sffamily\Huge}
 \addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
 
 
@@ -1804,11 +1789,22 @@
   textfont={sl},
 }
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % New Column Types
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Numbering of equations, figures, and tables according to their chapter
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+\counterwithout{footnote}{chapter}
+
+
+\addtokomafont{chapter}{\color{PrimaryColor}\normalfont\sffamily\Huge}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
