@@ -145,7 +145,6 @@
 %  pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
 %  pdflang=\relax, % PDF langauge identifier (RFC 3066)
   pdfpagemode=UseOutlines, % set default mode of PDF display
-  pdfpagelayout=TwoColumnRight, % set layout of PDF pages
   pdfstartpage=1, % page at which PDF document opens
   pdfstartview=Fit, % starting view of PDF document
   raiselinks=false, % raise up links (for HyperTeX backend)
@@ -157,6 +156,16 @@
 %  urlcolor=PrimaryColor, % color of URL links
   verbose=false, % be chatty
 }{hyperref}
+
+\ifDocumentwoside
+  \PassOptionsToPackage{%
+    pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+  }{hyperref}%
+\else
+  \PassOptionsToPackage{%
+    pdfpagelayout=OneColumn, % set layout of PDF pages
+  }{hyperref}%
+\fi
 
 % Depending on online we will define options to hyperref
 \ifDocumentprint
