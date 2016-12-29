@@ -7,3 +7,28 @@
 
 
 %\addtokomafont{section}{\color{PrimaryColor}\normalfont\sffamily}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER STYLES
+% Even pages (left pages) from outside to inside
+\lehead*[]{\leftmark}
+\rehead*[ ]{\runtitle}
+\rehead[foobar]{\runtitle}
+% Odd pages (right pages) from inside to outside
+\lohead*[]{\runtitle}
+\cohead*[]{}
+\rohead*[]{\rightmark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FOOTER STYES
+% Even pages (left pages) from outside to inside
+\lefoot*[\pagemark]{\pagemark}
+\cefoot*[]{}
+\refoot*[]{}
+% Odd pages (right pages) from inside to outside
+\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\cofoot*[]{}
+\rofoot*[\pagemark]{\pagemark}

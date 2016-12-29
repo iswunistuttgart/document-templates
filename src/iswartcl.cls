@@ -207,6 +207,7 @@
   \setstretch{1.25}%
   \setlength{\parindent}{2ex}%
   \arrayrulecolor{ArrayRuleColor}%
+  \cleardoublepage%
 }%
 
 % Set the overfullrule to 5pt if we are in draft mode
