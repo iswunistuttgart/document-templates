@@ -1097,6 +1097,9 @@
   \arctantwo \left( #1, #2 \right)%
 }%
 
+% Math operator for the trace of matrix
+\DeclareMathOperator{\trace}{tr}%
+
 % Range of numbers
 % \irange{m} renders i = 1, ..., m
 % \irange{m}{j} renders j = 1, ..., m
@@ -1156,6 +1159,9 @@
 
 % Imaginary unit i
 \DeclareMathOperator{\imagu}{\mathrm{i}}
+\DeclareDocumentCommand{\imgu}{}{%
+  {\imagu\mkern1mu}%
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1912,6 +1918,11 @@
   textfont={sl},
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% New Column Types
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
