@@ -6,13 +6,7 @@
 %
 %
 \def\DocumentLocaleDraft{Draft}
-\def\DocumentLocaleExaminer{Examiner}
-\def\DocumentLocaleSupervisor{Supervisor}
 \def\DocumentLocaleLogosuffix{-en}
-\def\DocumentLocaleSubmittedby{submitted by}
-\def\DocumentLocaleFrom{from}
-\def\DocumentLocaleSubmittedon{Submitted on}
-\def\DocumentLocaleMajor{Major}
 \def\DocumentLocalePartner{In cooperation with}
 \def\DocumentLocaleKeywords{Keywords}
 \def\DocumentLocaleDeclaration{Declaration of Authorship}
@@ -24,26 +18,23 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
-\ifdefstring{\DocumentType}{doctorate}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
 }{}
 %
-\def\ThesisPretext{%
-  A \DocumentName\space presented to the faculty %
-  \@faculty, \@university,%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space in partial fulfillment of the requirements for the degree of %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
-}%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
 %
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
 %
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
 %

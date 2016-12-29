@@ -63,15 +63,12 @@
 \DeclareComplementaryOption{online}{print}
 
 % Declare the document type
-\def\DocumentType{document}
-\DeclareOption{document}{\def\DocumentType{document}}
+\def\DocumentType{regular}
+\DeclareOption{regular}{\def\DocumentType{regular}}
 \DeclareOption{exam}{\def\DocumentType{exam}}
 \DeclareOption{exercise}{\def\DocumentType{exercise}}
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
-
-% Declare the document type
-\def\DocumentType{document}
 
 \DeclareBoolOption[false]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
@@ -83,7 +80,7 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{ngerman, draft, paper=a5paper, oneside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
