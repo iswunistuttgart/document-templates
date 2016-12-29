@@ -1768,8 +1768,8 @@
 
 % Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
-  \input{common/ifdraft.tex}
-  \input{document/ifdraft.tex}
+\overfullrule=5pt
+
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
