@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/12/25}
+\def\filedate{2016/12/29}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -27,7 +27,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{student}{%
+  \PackageWarning{iswstud}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
