@@ -668,7 +668,7 @@
 \RequirePackage{hyperref}
 
 % This package provides a command much like hyperref's \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn't allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
-\RequirePackage{breakurl}
+% \RequirePackage{breakurl}
 
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage{cleveref}
@@ -856,7 +856,59 @@
 % * Required arguments (given in {} curly brackets) are listed with numeric labels e.g., 1) for the first required argument
 % * Optional arguments (given in [] square bracktes) are listed with lowercase alpha label e.g., a) for the first optional argument.
 
+% Name of the university
+\newcommand{\university}[1]{\gdef\@university{#1}}
+\newcommand{\@university}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
 
+% Long name of the department
+\newcommand{\department}[1]{\gdef\@department{#1}}
+\newcommand{\@department}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
+
+% Short name of the department
+\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
+\gdef\@departmentshort{}
+
+% Address of the department
+\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
+\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
+
+% Name of the faculty
+\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
+\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
+
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+
+% Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
+\newcommand{\universitylogo}{logo/university}
+
+% Path to the department logo
+\newcommand{\departmentlogo}{logo/department}
+
+% Path to the partner's logo
+\newcommand{\partnerlogo}{}
+
+% Short name of author(s)
+\newcommand{\shortauthor}[1]{\gdef\@shortauthor{#1}}
+\gdef\@shortauthor{}
+
+% Running author
+\newcommand{\runauthor}{%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  \@shortauthor%
+  \renewcommand{\and}{\oldAnd}%
+}
+
+% Short name of title
+\newcommand{\shorttitle}[1]{\gdef\@shorttitle{#1}}
+\gdef\@shorttitle{}
+
+% Running title
+\newcommand{\runauthor}{%
+  \@shorttitle%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TYPESETTING COMMANDS                             %%
@@ -1303,22 +1355,6 @@
 \newcommand{\examiner}[1]{\gdef\@examiner{#1}}
 \newcommand{\@examiner}{No \texttt{\textbackslash examiner} given\@latex@warning@no@line{No \noexpand\examiner given}}
 
-% Name of the university
-\newcommand{\university}[1]{\gdef\@university{#1}}
-\newcommand{\@university}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
-
-% Long name of the department
-\newcommand{\department}[1]{\gdef\@department{#1}}
-\newcommand{\@department}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
-
-% Short name of the department
-\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
-\gdef\@departmentshort{}
-
-% Address of the department
-\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
-\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
-
 % Student's matriculation number
 \newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
 \newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
@@ -1331,42 +1367,14 @@
 \newcommand{\major}[1]{\gdef\@major{#1}}
 \newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
 
-% Name of the faculty
-\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
-\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
-
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
 \gdef\@partner{}
-
-% List of keywords
-\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
-\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
 % Place of birth
 \newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
 \gdef\@placeofbirth{}
 
-% Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
-\newcommand{\universitylogo}{logo/university}
-
-% Path to the department logo
-\newcommand{\departmentlogo}{logo/department}
-
-% Path to the partner's logo
-\newcommand{\partnerlogo}{}
-
-% Short name of author(s)
-\newcommand{\shortauthor}[1]{\gdef\@shortauthor{#1}}
-\gdef\@shortauthor{}
-
-% Running author
-\newcommand{\runauthor}{%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  \@shortauthor%
-  \renewcommand{\and}{\oldAnd}%
-}
 
 
 
