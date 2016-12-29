@@ -7,14 +7,6 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Numbering of equations, figures, and tables according to their chapter
-\numberwithin{equation}{chapter}
-\numberwithin{figure}{chapter}
-\numberwithin{table}{chapter}
-\counterwithout{footnote}{chapter}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header and footer lines
 % Thickness of header top line
 \setheadtopline{0pt}
@@ -85,7 +77,6 @@
 
 \addtokomafont{disposition}{\color{PrimaryColor}}
 \addtokomafont{sectioning}{\color{PrimaryColor}}
-\addtokomafont{chapter}{\color{PrimaryColor}\normalfont\sffamily\Huge}
 \addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
 
 
@@ -150,6 +141,7 @@
   labelformat=parens,
   textfont={sl},
 }
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % New Column Types

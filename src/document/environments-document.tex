@@ -1,0 +1,17 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\renewenvironment{abstract}{%
+  \section*{\abstractname}%
+  \addcontentsline{toc}{section}{\abstractname}%
+  \begin{spacing}{1.175}%
+}{%
+  \end{spacing}%
+  \vfill%
+  \ifdefempty{\@keywords}{}{%
+    \let\oldAnd\and%
+    \renewcommand{\and}{\unskip,\xspace}%
+    \textbf{\color{PrimaryColor}\DocumentLocaleKeywords:}~\@keywords%
+    \renewcommand{\and}{\oldAnd}%
+  }%
+  \cleardoublepage%
+}

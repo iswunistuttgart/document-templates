@@ -83,15 +83,15 @@
 \ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
 
 \ifDocumenttwoside%
-  \PassOptionsToClass{twoside}{scrbook}%
+  \PassOptionsToClass{twoside}{scrartcl}%
 \else%
-  \PassOptionsToClass{oneside}{scrbook}%
+  \PassOptionsToClass{oneside}{scrartcl}%
 \fi%
 
 % Process options (finally)
@@ -112,7 +112,7 @@
 %% Load Necessary Packages                                                    %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\LoadClass{scrbook}
+\LoadClass{scrartcl}
 
 % The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one.
 \RequirePackage{scrlayer-scrpage}
@@ -202,9 +202,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some cleanup tasks                                                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\let\originalmainmatter\mainmatter%
-\renewcommand{\mainmatter}{%
-  \originalmainmatter%
+%\let\originalmainmatter\mainmatter%
+\newcommand{\mainmatter}{%
   \setstretch{1.25}%
   \setlength{\parindent}{2ex}%
   \arrayrulecolor{ArrayRuleColor}%
