@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/12/25}
+\def\filedate{2016/12/29}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -40,7 +40,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{student}{%
+  \PackageWarning{iswstud}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -264,7 +264,6 @@
 %  pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
 %  pdflang=\relax, % PDF langauge identifier (RFC 3066)
   pdfpagemode=UseOutlines, % set default mode of PDF display
-  pdfpagelayout=TwoColumnRight, % set layout of PDF pages
   pdfstartpage=1, % page at which PDF document opens
   pdfstartview=Fit, % starting view of PDF document
   raiselinks=false, % raise up links (for HyperTeX backend)
@@ -276,6 +275,16 @@
 %  urlcolor=PrimaryColor, % color of URL links
   verbose=false, % be chatty
 }{hyperref}
+
+\ifDocumenttwoside
+  \PassOptionsToPackage{%
+    pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+  }{hyperref}%
+\else
+  \PassOptionsToPackage{%
+    pdfpagelayout=OneColumn, % set layout of PDF pages
+  }{hyperref}%
+\fi
 
 % Depending on online we will define options to hyperref
 \ifDocumentprint
@@ -2010,7 +2019,8 @@
 
 % Set the overfullrule to 5pt if we are in thesisdraft mode
 \ifdraft{
-  \overfullrule=5pt
+\overfullrule=5pt
+
 }{}
 
 

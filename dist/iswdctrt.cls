@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/12/25}
+\def\filedate{2016/12/29}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -40,7 +40,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{doctorate}{%
+  \PackageWarning{iswdctrt}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -88,7 +88,7 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{ngerman, draft, paper=a5paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -258,7 +258,6 @@
 %  pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
 %  pdflang=\relax, % PDF langauge identifier (RFC 3066)
   pdfpagemode=UseOutlines, % set default mode of PDF display
-  pdfpagelayout=TwoColumnRight, % set layout of PDF pages
   pdfstartpage=1, % page at which PDF document opens
   pdfstartview=Fit, % starting view of PDF document
   raiselinks=false, % raise up links (for HyperTeX backend)
@@ -270,6 +269,16 @@
 %  urlcolor=PrimaryColor, % color of URL links
   verbose=false, % be chatty
 }{hyperref}
+
+\ifDocumenttwoside
+  \PassOptionsToPackage{%
+    pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+  }{hyperref}%
+\else
+  \PassOptionsToPackage{%
+    pdfpagelayout=OneColumn, % set layout of PDF pages
+  }{hyperref}%
+\fi
 
 % Depending on online we will define options to hyperref
 \ifDocumentprint
@@ -1898,7 +1907,8 @@
 
 % Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
-  \overfullrule=5pt
+\overfullrule=5pt
+
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom

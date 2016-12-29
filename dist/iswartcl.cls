@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/12/25}
+\def\filedate{2016/12/29}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -40,7 +40,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{document}{%
+  \PackageWarning{iswartcl}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -77,8 +77,16 @@
 
 % Declare the document type
 \def\DocumentType{document}
+\DeclareOption{document}{\def\DocumentType{document}}
+\DeclareOption{exam}{\def\DocumentType{exam}}
+\DeclareOption{exercise}{\def\DocumentType{exercise}}
+\DeclareOption{offprint}{\def\DocumentType{offprint}}
+\DeclareOption{report}{\def\DocumentType{report}}
 
-\DeclareBoolOption[true]{twoside}
+% Declare the document type
+\def\DocumentType{document}
+
+\DeclareBoolOption[false]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
 
 % Allow user to choose language
@@ -88,7 +96,7 @@
 \DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
-\ExecuteOptions{ngerman, draft, paper=a5paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
 % Pass any other options not known to the scrbook package
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -258,7 +266,6 @@
 %  pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
 %  pdflang=\relax, % PDF langauge identifier (RFC 3066)
   pdfpagemode=UseOutlines, % set default mode of PDF display
-  pdfpagelayout=TwoColumnRight, % set layout of PDF pages
   pdfstartpage=1, % page at which PDF document opens
   pdfstartview=Fit, % starting view of PDF document
   raiselinks=false, % raise up links (for HyperTeX backend)
@@ -270,6 +277,16 @@
 %  urlcolor=PrimaryColor, % color of URL links
   verbose=false, % be chatty
 }{hyperref}
+
+\ifDocumenttwoside
+  \PassOptionsToPackage{%
+    pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+  }{hyperref}%
+\else
+  \PassOptionsToPackage{%
+    pdfpagelayout=OneColumn, % set layout of PDF pages
+  }{hyperref}%
+\fi
 
 % Depending on online we will define options to hyperref
 \ifDocumentprint
@@ -1802,80 +1819,6 @@
       \centering
       \huge\DocumentName\par%
     \end{minipage}\par%
-    \vspace*{0.75cm}\par%
-    \begin{minipage}[t][3cm][c]{0.9\linewidth}%
-      \centering%
-      {\usekomafont{title}{\@title}\par}%
-    \end{minipage}\par%
-    \vspace*{0.1cm}\par%
-    \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
-      \centering%
-      \ifdefempty{\@subtitle}{}{%
-        \usekomafont{subtitle}{\@subtitle}%
-      }%
-    \end{minipage}\par%
-    \vspace*{1.5cm}\par%
-    \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
-      \centering
-      \begin{spacing}{1.25}
-        {\ThesisPretext\par}%
-      \end{spacing}
-    \end{minipage}
-    \vspace*{1.5cm}\par%
-    \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
-      \centering%
-      \DocumentLocaleSubmittedby\par%
-      \vspace{0.5cm}\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\unskip,\xspace}%
-      {\usekomafont{author}{\@author}}\par%
-      \renewcommand{\and}{\oldAnd}%
-      \vspace{0.5cm}\par%
-      \ifdefempty{\@placeofbirth}{%
-        \par%
-      }{%
-        \DocumentLocaleFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
-      }%
-    \end{minipage}
-    \vspace*{1cm}\par%
-    \begin{minipage}[t][1cm][c]{0.5\linewidth}
-      \centering
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
-    \end{minipage}
-    \vspace*{1cm}\par%
-    \begin{minipage}[c][3cm][c]{0.75\linewidth}%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
-        {\DocumentLocaleExaminer:}%
-          & \@examiner\\%
-        {\DocumentLocaleSupervisor:}%
-          & {\@supervisor}\\%
-        {\DocumentLocaleSubmittedon:}%
-%          & \space{\usekomafont{date}{\@date}}\\%
-          & {\@date}\\%
-      \end{tabu}%
-    \renewcommand{\and}{\oldAnd}%
-    \end{minipage}%
-    \vfill
-    \begin{minipage}[t]{0.7\linewidth}
-      \centering%
-      \@department, \@university.\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \ifdefempty{\@partner}{}{%
-        \vspace*{0.3cm}\par%
-        \@partner%
-      }%
-      \renewcommand{\and}{\oldAnd}%
-    \end{minipage}
-    \vfill
-    \begin{minipage}[t][1cm][t]{0.2\linewidth}
-      \centering%
-      \printdayoff%
-      \@date%
-      \printdayon%
-    \end{minipage}%
   \end{titlepage}%
   \restoregeometry%
   \cleardoublepage%
@@ -1898,7 +1841,8 @@
 
 % Set the overfullrule to 5pt if we are in draft mode
 \ifdraft{
-  \overfullrule=5pt
+  \input{common/ifdraft.tex}
+  \input{document/ifdraft.tex}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
