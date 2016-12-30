@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2016/12/29}
+\def\filedate{2016/12/30}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1000,9 +1000,9 @@
 % \norm[1]{a_i} renders || a_i ||_1
 \DeclareDocumentCommand{\norm}{o m}{%
   \IfNoValueTF{#1}{%
-    \Vert {#2} \Vert
+    \left\Vert {#2} \right\Vert
   }{%
-    \Vert {#2} \Vert_{\smaller[2]{#1}}
+    \left\Vert {#2} \right\Vert_{\smaller[2]{#1}}
   }
 }
 
@@ -1132,7 +1132,7 @@
 % \evec{z} renders \vect{e}_{z} => e_z
 % \evec[k]{x} => \vect{k}_{x} => k_x
 \DeclareDocumentCommand{\evec}{O{e} m}{%
-  \vect{#1}_{#2}%
+  \vect{#1}_{\mc{#2}}%
 }
 
 % Declare atant a math operator rendering atan2
