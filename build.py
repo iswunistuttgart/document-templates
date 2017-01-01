@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-import glob
 import os
 import re
 import shutil
+import datetime
+import time
 
 path_base = os.path.dirname(os.path.realpath(__file__))
 dir_src = os.path.join(path_base, 'src')
 dir_dist = os.path.join(path_base, 'dist')
 files = ['iswstud', 'iswartcl', 'iswdctrt']
 
-p = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')
+
+p_incfile = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')
+p_time = re.compile('\{\{TIMESTAMP\}\}')
+
 
 def process_file(the_file):
     lines = []
@@ -24,10 +28,11 @@ def process_file(the_file):
 def process_line(the_line):
     global p, path_base
 
-    m = p.search(the_line)
+    m_incfile = p_incfile.search(the_line)
+    m_time = p_time.search(the_line)
 
-    if m :
-        inc_file = m.group('incfile')
+    if m_incfile :
+        inc_file = m_incfile.group('incfile')
 
         path_inc_file = os.path.join(path_base, 'src', inc_file + '.tex')
 
@@ -38,6 +43,8 @@ def process_line(the_line):
                 return ''.join(process_file(f)) + '\n'
             finally:
                 f.close()
+    elif m_time:
+        return the_line.replace('{{TIMESTAMP}}', datetime.datetime.utcnow().replace(microsecond=0).isoformat())
 
     return the_line
 
