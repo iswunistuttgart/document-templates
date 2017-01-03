@@ -1025,6 +1025,8 @@
 % \diag renders diag for a matrix as diagonal of the elements
 \DeclareMathOperator{\diag}{diag}
 
+
+% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
 \DeclareMathOperator{\dif}{d \!}
 % Derivative operator (upface D)
@@ -1032,13 +1034,8 @@
 
 % Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
 \providecommand{\pd}[3][]{%
-\ifinner%
-  \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
-\else%
-  \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
-\fi%
+  \frac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
 }
-
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter t means "text style"
@@ -1054,11 +1051,7 @@
 % mixed derivative - analogous to the partial derivative command
 % \md{f}{5}{x}{2}{y}{3}
 \providecommand{\md}[6]{%
-\ifinner%
-  \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
-\else%
-  \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
-\fi%
+  \frac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
 }%
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
@@ -1072,14 +1065,9 @@
   \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
 }}%
 
-
 % ordinary derivative - analogous to the partial derivative command
 \providecommand{\od}[3][]{%
-\ifinner%
-  \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
-\else%
-  \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
-\fi%
+  \frac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
 }%
 
 \providecommand{\tod}[3][]{\mathinner{%
