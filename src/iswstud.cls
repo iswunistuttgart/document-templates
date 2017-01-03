@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{{{TIMESTAMP}}}
+\def\filedate{2017/01/03}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -209,7 +209,6 @@
   \arrayrulecolor{ArrayRuleColor}%
 }%
 
-% Set the overfullrule to 5pt if we are in thesisdraft mode
 \ifdraft{
   \input{common/ifdraft}
   \input{student/ifdraft}

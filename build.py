@@ -14,7 +14,7 @@ files = ['iswstud', 'iswartcl', 'iswdctrt']
 
 
 p_incfile = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')
-p_time = re.compile('\{\{TIMESTAMP\}\}')
+p_time = re.compile('\\\\filedate\\{(?P<filedate>.*)\\}')
 
 
 def process_file(the_file):
@@ -44,7 +44,7 @@ def process_line(the_line):
             finally:
                 f.close()
     elif m_time:
-        return the_line.replace('{{TIMESTAMP}}', datetime.datetime.utcnow().replace(microsecond=0).isoformat())
+        return the_line.replace(m_time.group('filedate'), datetime.datetime.utcnow().strftime('%Y/%m/%d'))
 
     return the_line
 
