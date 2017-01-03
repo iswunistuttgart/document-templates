@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017-01-01T15:48:43}
+\def\filedate{2017/01/03}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -2033,9 +2033,10 @@
   \arrayrulecolor{ArrayRuleColor}%
 }%
 
-% Set the overfullrule to 5pt if we are in thesisdraft mode
 \ifdraft{
+% Set the overfullrule to 5pt if we are in draft mode
 \overfullrule=5pt
+
 
 }{}
 
@@ -2063,10 +2064,9 @@
     \hypersetup{pdflang=en}%
   }%
   % Select the proper language
-  \pagenumbering{Roman}
-  \pagenumbering{arabic}
-  \pagestyle{scrheadings}
-  
+  \pagenumbering{Roman}%
+  \pagenumbering{arabic}%
+  \pagestyle{scrheadings}%
 %  \addtocontents{toc}{\protect\setcounter{isw@savetocdepth}{\protect\value{tocdepth}}}
 }
 
