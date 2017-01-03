@@ -1172,13 +1172,13 @@
 }
 
 % Rotation matrix R with argument with optional index
-% \rot{\gamma} renders \bm{R} (\gamma)
-% \rot[x]{\gamma} renders \bm{R}_x (\gamma)
+% \rot{\gamma} renders \matr{R} (\gamma)
+% \rot[x]{\gamma} renders \matr{R}_x (\gamma)
 \NewDocumentCommand{\rot}{o m}{%
   \IfValueTF{#1}{%
-    {\bm{\rotm}_{#1} \left( #2 \right)}
+    \rotm_{#1} \left( #2 \right)%
   }{%
-    {\bm{\rotm} \left( #2 \right)}
+    \rotm \left( #2 \right)%
   }%
 }
 
