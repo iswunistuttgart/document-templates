@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/01/03}
+\def\filedate{2017/01/07}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -355,6 +355,7 @@
 % SIUnitX
 \PassOptionsToPackage{
   per-mode=symbol, %
+  binary-units=true, %
 }{siunitx}
 
 
