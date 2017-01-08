@@ -987,7 +987,7 @@
 % Absolute value
 % \abs{x} renders |x|
 \DeclareDocumentCommand{\abs}{m}{%
-  \vert {#1} \vert%
+  \left\vert {#1} \right\vert%
 }
 
 % Norm
@@ -1124,7 +1124,7 @@
 % Arcus tangent 2
 % \atantwo{y}{x} renders atan2(y, x)
 \NewDocumentCommand{\arctant}{m m}{%
-  \arctantwo \left( #1, #2 \right)%
+  \arctantwo \! \left( #1, \, #2 \right)%
 }%
 
 % Math operator for the trace of matrix
@@ -1192,6 +1192,20 @@
 \DeclareDocumentCommand{\imgu}{}{%
   {\imagu\mkern1mu}%
 }
+
+% Inverse hyperbolic functions i.e., more precisely, inverse hyperbolic math
+% operators
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arccosh}{arcCosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arcCsch}
+\DeclareMathOperator{\arccoth}{arcCoth} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
