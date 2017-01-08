@@ -159,7 +159,7 @@
 % Arcus tangent 2
 % \atantwo{y}{x} renders atan2(y, x)
 \NewDocumentCommand{\arctant}{m m}{%
-  \arctantwo \left( #1, #2 \right)%
+  \arctantwo \! \left( #1, \, #2 \right)%
 }%
 
 % Math operator for the trace of matrix
