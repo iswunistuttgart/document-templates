@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/01/07}
+\def\filedate{2017/01/08}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -121,17 +121,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Amsmath
 \PassOptionsToPackage{
-  centertags, % (default) center tags vertically
-%  tbtags,   % 'Top-or-bottom tags': For a split equation, place equation numbers level with the last (resp. first) line, if numbers are on the right (resp. left).
-  sumlimits,  % (default) Place the subscripts and superscripts of summation symbols above and below
-%  nosumlimits,  % Always place the subscripts and superscripts of summation-type symbols to the side, even in displayed equations.
-  intlimits,   % Like sumlimits, but for integral symbols.
-%nointlimits, % (default) Opposite of intlimits.
-  namelimits,  % (default) Like sumlimits, but for certain 'operator names' such as det, inf, lim, max, min, that traditionally have subscripts placed underneath when they occur in a displayed equation.
-%  nonamelimits, % Opposite of namelimits.
-%  leqno,   % Place equation numbers on the left.
-  reqno,   % Place equation numbers on the right.
-  fleqn,   % Position equations at a fixed indent from the left margin rather than centered in the text column.
+  centertags,% (default) center tags vertically
+%  tbtags,% 'Top-or-bottom tags': For a split equation, place equation numbers level with the last (resp. first) line, if numbers are on the right (resp. left).
+  sumlimits,% (default) Place the subscripts and superscripts of summation symbols above and below
+%  nosumlimits,% Always place the subscripts and superscripts of summation-type symbols to the side, even in displayed equations.
+  intlimits,% Like sumlimits, but for integral symbols.
+%  nointlimits,% (default) Opposite of intlimits.
+  namelimits,% (default) Like sumlimits, but for certain 'operator names' such as det, inf, lim, max, min, that traditionally have subscripts placed underneath when they occur in a displayed equation.
+%  nonamelimits,% Opposite of namelimits.
+%  leqno,% Place equation numbers on the left.
+  reqno,% Place equation numbers on the right.
+  fleqn,% Position equations at a fixed indent from the left margin rather than centered in the text column.
 }{amsmath}
 
 
@@ -146,9 +146,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Babel
 \PassOptionsToPackage{%
-  english,  %
-  german,   %
-  ngerman,  %
+  english,%
+  german,%
+  ngerman,%
 }{babel}
 
 
@@ -162,7 +162,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Cleveref
 \PassOptionsToPackage{
-  capitalise
+  capitalise,%
 }{cleveref}
 
 
@@ -217,72 +217,72 @@
 % Hyperref
 % Configuration of hyperref
 \PassOptionsToPackage{%
-%  anchorcolor=MainColor, % set color of anchors 
-  backref=false, % do bibliographical back references
-  baseurl={http://www.isw.uni-stuttgart.de/}, % set base URL for document
-  bookmarks=true, % make bookmarks
-  bookmarksnumbered=true, % put section numbers in bookmarks
-  bookmarksopen=false, % open up bookmark tree
-  bookmarksopenlevel=1, % level to which bookmarks are open
-  bookmarkstype=toc, % to specity which 'toc' file to mimic
-  breaklinks=true, % allow links to break ove rlines
-  CJKbookmarks=false, % to produce CJK bookmarks
-%  citebordercolor=SecondaryColor, % color of border around citation links
-%  citecolor=PrimaryColor, % color of citation links
-  colorlinks=true, % color links
-  debug=false, % provide details of anchors defined; same as verbose
-  destlabel=false, % destinations are named by the fist \label after the anchor creation
-%  draft=false, % do not do any hyperlinking
-%  filebordercolor=SecondaryColor, %  color of border aroundfile links
-%  filecolor=PrimaryColor, % color of file links
-%  final=true, % all hypertext options are turned on
-  frenchlinks=false, % use small caps instead of color for links
-  hyperfigures=false, % make figures hyper links
-  hyperfootnotes=true, % set up hyperlinked footnotes
-  hyperindex=true, % set up hyperlinked indices
-  hypertexnames=true, % use guessable names for links
-  implicit=true, % redefine LaTeX internals
-%  linkbordercolor=SecondaryColor, % color of border aroudn links
-%  linkcolor=PrimaryColor, % color of links
-  linktocpage=false, % mage page number, not text, be link on TOC, LOF, and LOT
-  linktoc=all, % Color all links in TOC
-%  menubordercolor=SecondaryColor, % color of border around menu links
-%  menucolor=PrimaryColor, % color for menu links
-%  nativepdf=false, % an alias for dvips
-  naturalnames=false, % use LaTeX-computed names for links
-  nesting=false, % allow nesting of links
-  pageanchor=true, % put an anchor on every page
-  pagebackref=false, % backreference by page number
-  pdfborder={0, 0, 1}, % width of PDF link border
-  pdfcenterwindow=false, % position the document window in the center of the screen
-%  pdfdirection={}, % direction setting
-  pdfdisplaydoctitle=true, % display document title instead of file name in title bar
-%  pdfduplex={}, % paper handling option for print dialog
-  pdffitwindow=false, % resize document window to fit document size
-%  pdfhighlight=/I, % se highlighting of PDF loinks
-%  pdfinfo={}, % alternative way of setting document information
-%  pdfkeywords={}, % text for PDF Keywords field (set later on in MakeAtL)
-%  pdflang=\relax, % PDF langauge identifier (RFC 3066)
-  pdfpagemode=UseOutlines, % set default mode of PDF display
-  pdfstartpage=1, % page at which PDF document opens
-  pdfstartview=Fit, % starting view of PDF document
-  raiselinks=false, % raise up links (for HyperTeX backend)
-%  runbordercolor=SecondaryColor, % color of border around 'run' links
-%  runcolor=PrimarColor, % color of 'run' links
-  setpagesize=true, % set page size by special driver commands
-  unicode=false, % Unicode encoded pdf strings
-%  urlbordercolor=SecondaryColor, % color of border around URL links
-%  urlcolor=PrimaryColor, % color of URL links
-  verbose=false, % be chatty
+%  anchorcolor=MainColor,% set color of anchors 
+  backref=false,% do bibliographical back references
+  baseurl={http://www.isw.uni-stuttgart.de/},% set base URL for document
+  bookmarks=true,% make bookmarks
+  bookmarksnumbered=true,% put section numbers in bookmarks
+  bookmarksopen=false,% open up bookmark tree
+  bookmarksopenlevel=1,% level to which bookmarks are open
+  bookmarkstype=toc,% to specity which 'toc' file to mimic
+  breaklinks=true,% allow links to break ove rlines
+  CJKbookmarks=false,% to produce CJK bookmarks
+%  citebordercolor=SecondaryColor,% color of border around citation links
+%  citecolor=PrimaryColor,% color of citation links
+  colorlinks=true,% color links
+  debug=false,% provide details of anchors defined; same as verbose
+  destlabel=false,% destinations are named by the fist \label after the anchor creation
+%  draft=false,% do not do any hyperlinking
+%  filebordercolor=SecondaryColor,%  color of border aroundfile links
+%  filecolor=PrimaryColor,% color of file links
+%  final=true,% all hypertext options are turned on
+  frenchlinks=false,% use small caps instead of color for links
+  hyperfigures=false,% make figures hyper links
+  hyperfootnotes=true,% set up hyperlinked footnotes
+  hyperindex=true,% set up hyperlinked indices
+  hypertexnames=true,% use guessable names for links
+  implicit=true,% redefine LaTeX internals
+%  linkbordercolor=SecondaryColor,% color of border aroudn links
+%  linkcolor=PrimaryColor,% color of links
+  linktocpage=false,% mage page number, not text, be link on TOC, LOF, and LOT
+  linktoc=all,% Color all links in TOC
+%  menubordercolor=SecondaryColor,% color of border around menu links
+%  menucolor=PrimaryColor,% color for menu links
+%  nativepdf=false,% an alias for dvips
+  naturalnames=false,% use LaTeX-computed names for links
+  nesting=false,% allow nesting of links
+  pageanchor=true,% put an anchor on every page
+  pagebackref=false,% backreference by page number
+  pdfborder={0, 0, 1},% width of PDF link border
+  pdfcenterwindow=false,% position the document window in the center of the screen
+%  pdfdirection={},% direction setting
+  pdfdisplaydoctitle=true,% display document title instead of file name in title bar
+%  pdfduplex={},% paper handling option for print dialog
+  pdffitwindow=false,% resize document window to fit document size
+%  pdfhighlight=/I,% se highlighting of PDF loinks
+%  pdfinfo={},% alternative way of setting document information
+%  pdfkeywords={},% text for PDF Keywords field (set later on in MakeAtL)
+%  pdflang=\relax,% PDF langauge identifier (RFC 3066)
+  pdfpagemode=UseOutlines,% set default mode of PDF display
+  pdfstartpage=1,% page at which PDF document opens
+  pdfstartview=Fit,% starting view of PDF document
+  raiselinks=false,% raise up links (for HyperTeX backend)
+%  runbordercolor=SecondaryColor,% color of border around 'run' links
+%  runcolor=PrimarColor,% color of 'run' links
+  setpagesize=true,% set page size by special driver commands
+  unicode=false,% Unicode encoded pdf strings
+%  urlbordercolor=SecondaryColor,% color of border around URL links
+%  urlcolor=PrimaryColor,% color of URL links
+  verbose=false,% be chatty
 }{hyperref}
 
 \ifDocumenttwoside
   \PassOptionsToPackage{%
-    pdfpagelayout=TwoColumnRight, % set layout of PDF pages
+    pdfpagelayout=TwoColumnRight,% set layout of PDF pages
   }{hyperref}%
 \else
   \PassOptionsToPackage{%
-    pdfpagelayout=OneColumn, % set layout of PDF pages
+    pdfpagelayout=OneColumn,% set layout of PDF pages
   }{hyperref}%
 \fi
 
@@ -302,7 +302,7 @@
   }{hyperref}%
 }{ % Final case
   \PassOptionsToPackage{%
-    draft=false,
+    draft=false,%
     final=true,%
   }{hyperref}%
 }
@@ -321,11 +321,11 @@
 % Listings
 \ifdraft{ % Draft case
   \PassOptionsToPackage{
-    draft, %
+    draft,%
   }{listings}%
 }{ % Final case
   \PassOptionsToPackage{
-    final, %
+    final,%
   }{listings}%
 }
 
@@ -333,10 +333,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % natbib
 \PassOptionsToPackage{
-  square,
-  comma,
-  sort&compress,
-  numbers
+  square,%
+  comma,%
+  sort&compress,%
+  numbers,%
 }{natbib}
 
 
@@ -351,56 +351,57 @@
 % showkeys
 \PassOptionsToPackage{
   % to stop the redefinition of \ref and \pageref, and related commands from the varioref package
-  notref,
+  notref,%
   % to stop the redefinition of \cite and related commands from the harvard and natbib packages.
-  notcite
+  notcite,%
 }{showkeys}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SIUnitX
 \PassOptionsToPackage{
-  per-mode=symbol, %
-  binary-units=true, %
+  per-mode=symbol,%
+  binary-units=true,%
 }{siunitx}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % scrlayer-scrpage
 \PassOptionsToPackage{
-  automark, % 
-  headsepline=0.2pt, %
-  headtopline=0pt, %
-  footsepline=0.2pt, %
-  draft=false, % To remove rulers inserted by the package
+  automark,% 
+  headsepline=0.2pt,%
+  headtopline=0pt,%
+  footsepline=0.2pt,%
+  draft=false,% To remove rulers inserted by the package
 }{scrlayer-scrpage}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Todnotes
 \PassOptionsToPackage{
-  obeyFinal,
-  colorinlistoftodos
+  obeyFinal,%
+  colorinlistoftodos,%
+  textsize=footnotesize,%
 }{todonotes}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Url
 \PassOptionsToPackage{
-  obeyspaces,
-  hyphens,
-  spaces
+  obeyspaces,%
+  hyphens,%
+  spaces%
 }{url}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % xcolor
 \PassOptionsToPackage{
-  usenames,     % 
-  dvipsnames,   % 
-  svgnames,     % 
-  table,      % 
-  hyperref,     % 
+  usenames,% 
+  dvipsnames,% 
+  svgnames,% 
+  table,% 
+  hyperref,% 
 }{xcolor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
