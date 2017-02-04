@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/01/08}
+\def\filedate{2017/02/04}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -479,6 +479,9 @@
 
 % Additional math symbols
 \RequirePackage{dsfont}
+
+% A package which allows the user to set tensor-style super- and subscripts with offsets between successive indices. It supports the typesetting of tensors with mixed upper and lower indices with spacing, also typset preposed indices. This is a complete revision and extension of the original ‘tensor’ package by Mike Piff.
+\RequirePackage{tensor}
 
 % Adds infix expressions to perform arithmetic on the arguments of the LaTeX commands \setcounter, \addtocounter, \setlength, and \addtolength. Since many packages start their arithmetic by storing an argument in a register, the package has wide applicability.
 % This package is part of the latex-tools bundle in the LaTeX required distribution. 
@@ -988,9 +991,15 @@
 }
 
 % Vector
-\DeclareDocumentCommand{\vect}{m}{%
-%  \vec{#1}%
-  \bm{#1}%
+% \vect{q} => \bm{q}
+% \vect[P]{q} => \tensor*[^{P}]{\vect{q}}
+\DeclareDocumentCommand{\vect}{o m}{%
+  \IfValueTF{#1}{%
+    \tensor*[^{#1}]{\vect{#2}}{}%
+  }{%
+%    \vec{#2}%
+    \bm{#2}%
+  }%
 }
 
 % Absolute value
@@ -1003,10 +1012,10 @@
 % \norm{a_i} renders || a_i ||_2 
 % \norm[1]{a_i} renders || a_i ||_1
 \DeclareDocumentCommand{\norm}{o m}{%
-  \IfNoValueTF{#1}{%
-    \left\Vert {#2} \right\Vert
-  }{%
+  \IfValueTF{#1}{%
     \left\Vert {#2} \right\Vert_{\smaller[2]{#1}}
+  }{%
+    \left\Vert {#2} \right\Vert
   }
 }
 
@@ -1171,8 +1180,8 @@
 }
 
 % Rotation matrix R with argument with optional index
-% \rot{\gamma} renders \matr{R} (\gamma)
-% \rot[x]{\gamma} renders \matr{R}_x (\gamma)
+% \rot{\gamma} => \rotm (\gamma)
+% \rot[x]{\gamma} => \rotm_{x} (\gamma)
 \NewDocumentCommand{\rot}{o m}{%
   \IfValueTF{#1}{%
     \rotm_{#1} \left( #2 \right)%
@@ -1181,13 +1190,16 @@
   }%
 }
 
-%\newcommand{\rot}[2]{\bm{R}_{#1}\left( #2 \right)}
+% Rotation matrices about specific axes
+% \rotx{\alpha} => \rot[x]{\alpha}
 \DeclareDocumentCommand{\rotx}{m}{%
   \rot[x]{#1}
 }
+% \roty{\beta} => \rot[y]{\beta}
 \DeclareDocumentCommand{\roty}{m}{%
   \rot[y]{#1}
 }
+% \rotz{\gamma} => \rot[z]{\gamma}
 \DeclareDocumentCommand{\rotz}{m}{%
   \rot[z]{#1}
 }
