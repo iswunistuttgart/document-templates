@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/01/08}
+\def\filedate{2017/02/07}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1515,6 +1515,7 @@
   \end{otherlanguage}%
 }
 %
+
 }
 
 \addto\captionsngerman{%
@@ -1597,7 +1598,7 @@
 %
 \renewcommand{\DeclarationOfAuthorship}{%
   \thispagestyle{empty}%
-  \chapter*{\DocumentLocaledeclaration}%
+  \chapter*{\DocumentLocaleDeclaration}%
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
@@ -1639,6 +1640,7 @@
   \cleardoublepage%
 }
 %
+
 }
 
 \addto\captionsgerman{%
@@ -1721,7 +1723,7 @@
 %
 \renewcommand{\DeclarationOfAuthorship}{%
   \thispagestyle{empty}%
-  \chapter*{\DocumentLocaledeclaration}%
+  \chapter*{\DocumentLocaleDeclaration}%
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
@@ -1763,6 +1765,7 @@
   \cleardoublepage%
 }
 %
+
 }
 
 
