@@ -14,43 +14,52 @@
 }
 
 % Vector
-\DeclareDocumentCommand{\vect}{m}{%
-%  \vec{#1}%
-  \bm{#1}%
+% \vect{q} => \bm{q}
+% \vect[P]{q} => \tensor*[^{P}]{\vect{q}}
+\DeclareDocumentCommand{\vect}{o m}{%
+  \IfValueTF{#1}{%
+    \tensor*[^{#1}]{\vect{#2}}{}%
+  }{%
+%    \vec{#2}%
+    \bm{#2}%
+  }%
 }
 
 % Absolute value
-% \abs{x} renders |x|
+% \abs{x} => |x|
 \DeclareDocumentCommand{\abs}{m}{%
   \left\vert {#1} \right\vert%
 }
 
 % Norm
-% \norm{a_i} renders || a_i ||_2 
-% \norm[1]{a_i} renders || a_i ||_1
+% \norm{a_i} => || a_i ||_{\smaller[2]{2}
+% \norm[1]{a_i} => || a_i ||_{\smaller[2]{1}}
 \DeclareDocumentCommand{\norm}{o m}{%
-  \IfNoValueTF{#1}{%
-    \left\Vert {#2} \right\Vert
-  }{%
-    \left\Vert {#2} \right\Vert_{\smaller[2]{#1}}
-  }
+  \left\Vert {#2} \right\Vert
+  \IfValueT{#1}{_{\smaller[2]{#1}}}
 }
 
 % Power
-% \pow{x} renders x^2
-% \pow[3]{x} renders x^3
+% \pow{x} => {x}^{2}
+% \pow[3]{x} => {x}^{3}
 \DeclareDocumentCommand{\pow}{O{2} m}{%
   {#2}^{#1}%
 }
 
 % Skew-symmetric matrix
-% \skewm{x} renders x with a tilde on it
+% \skewm{x} => \left[ x \right]_{\times}
 \DeclareDocumentCommand{\skewm}{m}{%
   \left[ #1 \right]_{\times}
 }
 
+% Cross product
+% \crosp{#1}{#2} => {#1} \times {#2}
+\DeclareDocumentCommand{\crossp}{m m}{%
+  {#1} \times {#2}
+}
+
 % Diagonal
-% \diag renders diag for a matrix as diagonal of the elements
+% \diag => diag for a matrix as diagonal of the elements
 \DeclareMathOperator{\diag}{diag}
 
 
@@ -116,7 +125,7 @@
 \renewcommand{\Im}{\operatorname{Im}}
 
 % Transpose items
-% \transp{A} renders A^T
+% \transp{A} => A^T
 \DeclareDocumentCommand{\transp}{m}{%
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
@@ -134,7 +143,7 @@
 }
 
 % Element inverse (usually used for matrix inverse)
-% \inv{A} renders A^{-1}
+% \inv{A} => A^{-1}
 \DeclareDocumentCommand{\inv}{m}{%
   {#1}^{-1}%
 }
@@ -147,7 +156,7 @@
 
 % Unit axis coordinate vector
 % \evec{x} => \vect{e}_{x} => e_x
-% \evec{z} renders \vect{e}_{z} => e_z
+% \evec{z} => \vect{e}_{z} => e_z
 % \evec[k]{x} => \vect{k}_{x} => k_x
 \DeclareDocumentCommand{\evec}{O{e} m}{%
   \vect{#1}_{\mc{#2}}%
@@ -157,7 +166,7 @@
 \DeclareMathOperator{\arctantwo}{atan2}
 
 % Arcus tangent 2
-% \atantwo{y}{x} renders atan2(y, x)
+% \atantwo{y}{x} => atan2(y, x)
 \NewDocumentCommand{\arctant}{m m}{%
   \arctantwo \! \left( #1, \, #2 \right)%
 }%
@@ -166,10 +175,10 @@
 \DeclareMathOperator{\trace}{tr}%
 
 % Range of numbers
-% \irange{m} renders i = 1, ..., m
-% \irange{m}{j} renders j = 1, ..., m
-% \irange[3]{m} renders i = 1, 3, ..., m
-% \irange[3]{m}{j} renders j = 1, 3, ..., m
+% \irange{m} => i = 1, ..., m
+% \irange{m}{j} => j = 1, ..., m
+% \irange[3]{m} => i = 1, 3, ..., m
+% \irange[3]{m}{j} => j = 1, 3, ..., m
 \NewDocumentCommand{\irange}{o m g}{%
   \def\runner{\IfValueTF{#3}{#3}{i}}%
 %  \def\delta{#1}%
@@ -197,8 +206,8 @@
 }
 
 % Rotation matrix R with argument with optional index
-% \rot{\gamma} renders \matr{R} (\gamma)
-% \rot[x]{\gamma} renders \matr{R}_x (\gamma)
+% \rot{\gamma} => \rotm (\gamma)
+% \rot[x]{\gamma} => \rotm_{x} (\gamma)
 \NewDocumentCommand{\rot}{o m}{%
   \IfValueTF{#1}{%
     \rotm_{#1} \left( #2 \right)%
@@ -207,13 +216,16 @@
   }%
 }
 
-%\newcommand{\rot}[2]{\bm{R}_{#1}\left( #2 \right)}
+% Rotation matrices about specific axes
+% \rotx{\alpha} => \rot[x]{\alpha}
 \DeclareDocumentCommand{\rotx}{m}{%
   \rot[x]{#1}
 }
+% \roty{\beta} => \rot[y]{\beta}
 \DeclareDocumentCommand{\roty}{m}{%
   \rot[y]{#1}
 }
+% \rotz{\gamma} => \rot[z]{\gamma}
 \DeclareDocumentCommand{\rotz}{m}{%
   \rot[z]{#1}
 }
@@ -241,3 +253,213 @@
 \DeclareMathOperator{\arcsech}{arcsech}
 \DeclareMathOperator{\arccsch}{arcCsch}
 \DeclareMathOperator{\arccoth}{arcCoth} 
+
+
+%% Trigonometric functions with parentheses around argument
+% \ptrig{\sin}{\beta} => \sin{ \left( \beta \right) }
+\DeclareDocumentCommand{\ptrig}{ s m m }{%
+  #2{%
+    \IfBooleanTF{#1}{%
+      ( #3 )
+    }{%
+      \left( #3 \right )%
+    }%
+  }%
+}
+
+% Parentheses around sine
+\DeclareDocumentCommand{\psin}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\sin}{#2}%
+  }{%
+    \prtrig{\sin}{#2}%
+  }%
+}
+
+% Parentheses around cosine
+\DeclareDocumentCommand{\pcos}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\cos}{#2}%
+  }{%
+    \prtrig{\cos}{#2}%
+  }%
+}
+
+% Parentheses around tangent
+\DeclareDocumentCommand{\ptan}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\tan}{#2}%
+  }{%
+    \prtrig{\tan}{#2}%
+  }%
+}
+
+% Parentheses around secant
+\DeclareDocumentCommand{\psec}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\sec}{#2}%
+  }{%
+    \prtrig{\sec}{#2}%
+  }%
+}
+
+% Parentheses around cosecant
+\DeclareDocumentCommand{\pcsc}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\csc}{#2}%
+  }{%
+    \prtrig{\csc}{#2}%
+  }%
+}
+
+% Parentheses around cotangent
+\DeclareDocumentCommand{\pcot}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\cot}{#2}%
+  }{%
+    \prtrig{\cot}{#2}%
+  }%
+}
+
+
+%% Inverse trigonometric functions with parentheses around argument
+% Parentheses around arcus sine
+\DeclareDocumentCommand{\parcsin}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\arcsin}{#2}%
+  }{%
+    \prtrig{\arcsin}{#2}%
+  }%
+}
+
+% Parentheses around arcus cosine
+\DeclareDocumentCommand{\parccos}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\arccos}{#2}%
+  }{%
+    \prtrig{\arccos}{#2}%
+  }%
+}
+
+% Parentheses around arcus 
+\DeclareDocumentCommand{\parctan}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\arctan}{#2}%
+  }{%
+    \prtrig{\arctan}{#2}%
+  }%
+}
+
+% Parentheses around arcus 
+\DeclareDocumentCommand{\parcsec}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\arcsec}{#2}%
+  }{%
+    \prtrig{\arcsec}{#2}%
+  }%
+}
+
+% Parentheses around arcus 
+\DeclareDocumentCommand{\parccsc}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\arccsc}{#2}%
+  }{%
+    \prtrig{\arccsc}{#2}%
+  }%
+}
+
+% Parentheses around arcus 
+\DeclareDocumentCommand{\parccot}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\arccot}{#2}%
+  }{%
+    \prtrig{\arccot}{#2}%
+  }%
+}
+
+
+%% Hyperbolic trigonometric functions with parentheses around argument
+% Parentheses around sin hyperbolic
+\DeclareDocumentCommand{\psinh}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\sinh}{#2}%
+  }{%
+    \prtrig{\sinh}{#2}%
+  }%
+}
+
+% Parentheses around cosine hyperbolic
+\DeclareDocumentCommand{\pcosh}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\cosh}{#2}%
+  }{%
+    \prtrig{\cosh}{#2}%
+  }%
+}
+
+% Parentheses around cosine hyperbolic
+\DeclareDocumentCommand{\ptanh}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\tanh}{#2}%
+  }{%
+    \prtrig{\tanh}{#2}%
+  }%
+}
+
+% Parentheses around cosine hyperbolic
+\DeclareDocumentCommand{\pcoth}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\coth}{#2}%
+  }{%
+    \prtrig{\coth}{#2}%
+  }%
+}
+
+
+%% Exponential and logarithmic functions with parentheses around argument
+% Parentheses around exp
+\DeclareDocumentCommand{\pexp}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\exp}{#2}%
+  }{%
+    \prtrig{\exp}{#2}%
+  }%
+}
+
+% Parentheses around logarithm base 10
+\DeclareDocumentCommand{\plog}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\log}{#2}%
+  }{%
+    \prtrig{\log}{#2}%
+  }%
+}
+
+% Parentheses around logarithm base 2
+\DeclareDocumentCommand{\pln}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\ln}{#2}%
+  }{%
+    \prtrig{\ln}{#2}%
+  }%
+}
+
+% Parentheses around logarithm base e
+\DeclareDocumentCommand{\plg}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \prtig*{\lg}{#2}%
+  }{%
+    \prtrig{\lg}{#2}%
+  }%
+}
+
+% Declare a nice "function of" short hand
+% T \of{s} => T \! \left( s \right)
+\DeclareDocumentCommand{\of}{ s m }{%
+  \!%
+  \IfBooleanTF{#1}{%
+    ( #2 )%
+  }{%
+    \left( #2 \right)%
+  }%
+}
