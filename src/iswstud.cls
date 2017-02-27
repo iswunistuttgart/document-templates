@@ -185,6 +185,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{common/localization}
 \input{student/localization}
 
 

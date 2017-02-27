@@ -179,6 +179,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{common/localization}
 \input{doctorate/localization}
 
 

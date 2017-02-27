@@ -15,7 +15,12 @@
 
 % Use for bi-lingual documents
 \NewDocumentCommand{\trans}{m m}{%
-  \IfLanguageName{english}{#1}{\IfLanguageName{ngerman}{#2}{#1}}%
+  \IfLanguageFamilyEnglish{%
+    #1%
+  }{}
+  \IfLanguageFamilyGerman{%
+    #2%
+  }{}%
 }
 
 

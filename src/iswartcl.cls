@@ -184,6 +184,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\input{common/localization}
 \input{document/localization}
 
 

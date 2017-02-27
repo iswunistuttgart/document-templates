@@ -1,5 +1,11 @@
 % Set the hyperref document information
 \AtBeginDocument{
+  \makeatletter
+    % Set the thesis language
+    \expandafter\selectlanguage\expandafter{\DocumentLang}
+    % Set the bibliography language
+    \expandafter\selectbiblanguage\expandafter{\DocumentLang}
+  \makeatother
   \let\oldAnd\and%
   \renewcommand{\and}{, }%
   \hypersetup{
@@ -9,7 +15,7 @@
     pdfkeywords={\@keywords},
   }%
   \renewcommand{\and}{\oldAnd}%
-  \iflanguage{ngerman}{%
+  \IfLanguageFamilyGerman{%
     \hypersetup{pdflang=de}%
   }{%
     \hypersetup{pdflang=en}%
