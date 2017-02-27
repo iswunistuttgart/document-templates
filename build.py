@@ -40,7 +40,7 @@ def process_line(the_line):
             f = open(path_inc_file, 'r')
 
             try:
-                return ''.join(process_file(f)) + '\n'
+                return ''.join(process_file(f))
             finally:
                 f.close()
     elif m_time:
@@ -55,7 +55,7 @@ for file in files:
     tar_template = os.path.join(dir_dist, file + '.tex')
 
     try :
-        tar_class.write(''.join(process_file(src_class)) + '\n')
+        tar_class.write(''.join(process_file(src_class)))
         shutil.copyfile(src_template, tar_template)
     except Exception as e:
         print(e)
