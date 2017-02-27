@@ -1931,6 +1931,11 @@
 \addtokomafont{disposition}{\color{PrimaryColor}}
 \addtokomafont{sectioning}{\color{PrimaryColor}}
 \addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
+% We'll make paragraphs have medium font-weight
+\addtokomafont{paragraph}{\mdseries}
+% And have sub-paragraphs have medium font-weight with a smaller font size
+% compared to paragraphs
+\addtokomafont{subparagraph}{\mdseries\small}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
