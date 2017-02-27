@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/02/07}
+\def\filedate{2017/02/27}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -27,8 +27,6 @@
 % This package offers support for package authors who want to use options in key-value format for their package options.
 % The package is part of the oberdiek bundle.
 \RequirePackage{kvoptions}
-
-
 
 
 
@@ -402,7 +400,6 @@
   table,% 
   hyperref,% 
 }{xcolor}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % scrartcl
 \PassOptionsToClass{
@@ -415,7 +412,6 @@
   toc=listof, % The lists of floating environments i.e., the list of figures and the list of tables, will be represented by entries at the table of contents, but will not be numbered.
   version=last, %
 }{scrartcl}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -686,8 +682,6 @@
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author's glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
 
-
-
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
@@ -705,8 +699,6 @@
 \usetikzlibrary{positioning}
 \usetikzlibrary{quotes}
 \usetikzlibrary{shadows}
-
-
 
 
 
@@ -811,12 +803,9 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define environments                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -837,9 +826,6 @@
   \vspace*{\baselineskip}
 }%
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract
 \renewenvironment{abstract}{%
@@ -858,8 +844,6 @@
   }%
   \cleardoublepage%
 }
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -923,7 +907,6 @@
 \newcommand{\runtitle}{%
   \@shorttitle%
 }
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TYPESETTING COMMANDS                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -973,7 +956,6 @@
   {\pdffilemoddate{#2}}>0%
   {\immediate\write18{#3}}\fi%
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% MATH COMMANDS                                                              %%
@@ -1441,7 +1423,6 @@
   }%
 }
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FLOAT COMMANDS                                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1481,7 +1462,6 @@
   }
   \input{#2.pdf_tex}
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TEXT COMMANDS                                                              %%
@@ -1579,9 +1559,6 @@
 \newcommand{\textLtd}{Ltd\@.\xspace}
 % LLC => Limited liability company
 \newcommand{\textLlc}{LLC}
-
-
-
 % NOTE: In the following, command arguments are specified as follows
 % * Required arguments (given in {} curly brackets) are listed with numeric labels e.g., 1) for the first required argument
 % * Optional arguments (given in [] square bracktes) are listed with lowercase alpha label e.g., a) for the first optional argument.
@@ -1612,13 +1589,6 @@
 % Place of birth
 \newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
 \gdef\@placeofbirth{}
-
-
-
-
-
-
-
 
 
 
@@ -1672,7 +1642,6 @@
   \def\DocumentName{Report}
 }{}
 %
-
 }
 
 \addto\captionsngerman{%
@@ -1716,7 +1685,6 @@
   \def\DocumentName{Bericht}
 }{}
 %
-
 }
 
 \addto\captionsgerman{%
@@ -1760,9 +1728,7 @@
   \def\DocumentName{Bericht}
 }{}
 %
-
 }
-
 
 
 
@@ -1920,7 +1886,6 @@
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Numbering of equations, figures, and tables according to their chapter
 \numberwithin{equation}{section}
@@ -1955,7 +1920,6 @@
 \lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
@@ -2020,7 +1984,6 @@
 
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some cleanup tasks                                                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2035,8 +1998,6 @@
 \ifdraft{
 % Set the overfullrule to 5pt if we are in draft mode
 \overfullrule=5pt
-
-
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
@@ -2077,8 +2038,6 @@
 
 % Reset the table row counter for even-odd coloring after every table
 \preto\tabular{\global\rownum=\z@}
-
-
 \makeatother
 
 \AtBeginDocument{%
@@ -2092,8 +2051,6 @@
 
 % Adjust rule color of arrays i.e., tables
 \arrayrulecolor{ArrayRuleColor}%
-
-
 }
 
 
@@ -2103,4 +2060,3 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \endinput
-
