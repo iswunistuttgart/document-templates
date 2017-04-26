@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/04/21}
+\def\filedate{2017/04/26}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1493,15 +1493,15 @@
 %% Common German abbreviations
 
 % o.B.d.A => ohne Beschraenkung der Allgemeinheit
-\newcommand{\textObda}{o.\@B.\@d.\@A.\@\xspace}
+\newcommand{\textObda}{o.\@ B.\@ d.\@ A.\@\xspace}
 % z.B. => zum Beispiel
-\newcommand{\textZb}{z.\@B.\@\xspace}
+\newcommand{\textZb}{z.\@ B.\@\xspace}
 % o.\"a. => oder aehnliche(s)
-\newcommand{\textOae}{o.\@\"a.\@\xspace}
+\newcommand{\textOae}{o.\@ \"a.\@\xspace}
 % o.a. => oder andere
-\newcommand{\textOa}{o.\@a.\@\xspace}
+\newcommand{\textOa}{o.\@ a.\@\xspace}
 % u.a. => unter anderem
-\newcommand{\textUa}{u.\@a.\@\xspace}
+\newcommand{\textUa}{u.\@ a.\@\xspace}
 % bzw. => beziehungweise
 \newcommand{\textBzw}{bzw.\@\xspace}
 % E. h. => Ehrenhalber
@@ -1509,7 +1509,11 @@
 % d.h. => das heisst
 \newcommand{\textDh}{d.\@\xspace h.\@\xspace}
 % o.g. => oben genannt
-\newcommand{\textOg}{o.g.\@\xspace}
+\newcommand{\textOg}{o.\@ g.\@\xspace}
+% ggf. => gegebenenfalls
+\newcommand{\textGgf}{ggf.\@\xspace}
+% ca. => circa
+\newcommand{\textCa}{ca.\@\xspace}
 
 
 
