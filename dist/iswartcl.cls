@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/04/26}
+\def\filedate{2017/05/27}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1481,11 +1481,11 @@
 %% Common English abbreviations
 
 % w.r.t. => with respect to [in Bezug zu/auf]
-\newcommand{\textWrt}{w.\@r.\@t.\@\xspace}
+\newcommand{\textWrt}{w.r.t.\@\xspace}
 % w.l.o.g. => without loss of generality [o.B.d.A => ohne Beschraenkung der Allgemeinheit]
-\newcommand{\textWlog}{w.\@l.\@o.\@g.\@\xspace}
+\newcommand{\textWlog}{w.l.o.g.\@\xspace}
 % a.k.a. => also known as [aka => Auch bekannt als]
-\newcommand{\textAka}{a.\@k.\@a.\@\xspace}
+\newcommand{\textAka}{a.k.a.\@\xspace}
 
 
 
@@ -1493,23 +1493,23 @@
 %% Common German abbreviations
 
 % o.B.d.A => ohne Beschraenkung der Allgemeinheit
-\newcommand{\textObda}{o.\@ B.\@ d.\@ A.\@\xspace}
+\newcommand{\textObda}{o.\@~B.\@~d.\@~A.\@\xspace}
 % z.B. => zum Beispiel
-\newcommand{\textZb}{z.\@ B.\@\xspace}
+\newcommand{\textZb}{z.\@~B.\@\xspace}
 % o.\"a. => oder aehnliche(s)
-\newcommand{\textOae}{o.\@ \"a.\@\xspace}
+\newcommand{\textOae}{o.\@~\"a.\@\xspace}
 % o.a. => oder andere
-\newcommand{\textOa}{o.\@ a.\@\xspace}
+\newcommand{\textOa}{o.\@~a.\@\xspace}
 % u.a. => unter anderem
-\newcommand{\textUa}{u.\@ a.\@\xspace}
+\newcommand{\textUa}{u.\@~a.\@\xspace}
 % bzw. => beziehungweise
 \newcommand{\textBzw}{bzw.\@\xspace}
 % E. h. => Ehrenhalber
-\newcommand{\textEh}{E.\@\xspace h.\@\xspace}
+\newcommand{\textEh}{E.\@\xspace~h.\@\xspace}
 % d.h. => das heisst
-\newcommand{\textDh}{d.\@\xspace h.\@\xspace}
+\newcommand{\textDh}{d.\@\xspace~h.\@\xspace}
 % o.g. => oben genannt
-\newcommand{\textOg}{o.\@ g.\@\xspace}
+\newcommand{\textOg}{o.\@~g.\@\xspace}
 % ggf. => gegebenenfalls
 \newcommand{\textGgf}{ggf.\@\xspace}
 % ca. => circa
@@ -1522,17 +1522,19 @@
 % etc. => et cetera
 \newcommand{\textEtc}{etc.\@\xspace}
 % i.e. => id est => that is [das ist/heisst]
-\newcommand{\textIe}{i.\@e.\@,\xspace}
+\newcommand{\textIe}{i.e.\@,\xspace}
 % cf. => confer => refer to [siehe]
 \newcommand{\textCf}{cf.\@\xspace}
 % e.g. => exemplari grati => for example [zum Beispiel]
-\newcommand{\textEg}{e.\@g.\@,\xspace}
+\newcommand{\textEg}{e.g.\@,\xspace}
 % vs. => versus => against [gegen]
 \newcommand{\textVs}{vs.\@\xspace}
 % h. c. => honoris causa
-\newcommand{\textHc}{h.\@\xspace c.\@\xspace}
+\newcommand{\textHc}{h.c.\@\xspace}
 % h. c. mult. => honoris causa mult.
-\newcommand{\textHcMult}{h.\@\xspace c.\@\xspace mult.\@\xspace}
+\newcommand{\textHcMult}{h.\@\xspace~c.\@\xspace~mult.\@\xspace}
+% et al. => honoris causa mult.
+\newcommand{\textEtAl}{et~al.\@\xspace}
 
 
 
