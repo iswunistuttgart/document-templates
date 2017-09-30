@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/05/27}
+\def\filedate{2017/09/30}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -182,9 +182,9 @@
 % Geometry
 \PassOptionsToPackage{%
 %  paper=a4paper,%
-  top=3cm,%
-  bottom=4cm,%
-  outer=4cm,%
+  top=2.5cm,%
+  bottom=3cm,%
+  outer=3cm,%
   inner=2cm,%
   heightrounded,%
   marginparwidth=2.5cm,%
@@ -214,7 +214,6 @@
 % Hyperref
 % Configuration of hyperref
 \PassOptionsToPackage{%
-%  anchorcolor=MainColor,% set color of anchors 
   backref=false,% do bibliographical back references
   baseurl={http://www.isw.uni-stuttgart.de/},% set base URL for document
   bookmarks=true,% make bookmarks
@@ -224,14 +223,10 @@
   bookmarkstype=toc,% to specity which 'toc' file to mimic
   breaklinks=true,% allow links to break ove rlines
   CJKbookmarks=false,% to produce CJK bookmarks
-%  citebordercolor=SecondaryColor,% color of border around citation links
-%  citecolor=PrimaryColor,% color of citation links
   colorlinks=true,% color links
   debug=false,% provide details of anchors defined; same as verbose
   destlabel=false,% destinations are named by the fist \label after the anchor creation
 %  draft=false,% do not do any hyperlinking
-%  filebordercolor=SecondaryColor,%  color of border aroundfile links
-%  filecolor=PrimaryColor,% color of file links
 %  final=true,% all hypertext options are turned on
   frenchlinks=false,% use small caps instead of color for links
   hyperfigures=false,% make figures hyper links
@@ -239,12 +234,8 @@
   hyperindex=true,% set up hyperlinked indices
   hypertexnames=true,% use guessable names for links
   implicit=true,% redefine LaTeX internals
-%  linkbordercolor=SecondaryColor,% color of border aroudn links
-%  linkcolor=PrimaryColor,% color of links
   linktocpage=false,% mage page number, not text, be link on TOC, LOF, and LOT
   linktoc=all,% Color all links in TOC
-%  menubordercolor=SecondaryColor,% color of border around menu links
-%  menucolor=PrimaryColor,% color for menu links
 %  nativepdf=false,% an alias for dvips
   naturalnames=false,% use LaTeX-computed names for links
   nesting=false,% allow nesting of links
@@ -264,12 +255,8 @@
   pdfstartpage=1,% page at which PDF document opens
   pdfstartview=Fit,% starting view of PDF document
   raiselinks=false,% raise up links (for HyperTeX backend)
-%  runbordercolor=SecondaryColor,% color of border around 'run' links
-%  runcolor=PrimarColor,% color of 'run' links
   setpagesize=true,% set page size by special driver commands
   unicode=false,% Unicode encoded pdf strings
-%  urlbordercolor=SecondaryColor,% color of border around URL links
-%  urlcolor=PrimaryColor,% color of URL links
   verbose=false,% be chatty
 }{hyperref}
 
@@ -682,7 +669,7 @@
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author's glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
 
-% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
+% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMA-Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \usetikzlibrary{angles}
@@ -714,28 +701,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main colors
-%\definecolor{MainColor}{HTML}{323232}
-\definecolor{MainColor}{RGB}{62,68,76}
-%\definecolor{MainColor}{cmyk}{50,35,25,70}
-%\definecolor{PrimaryColor}{HTML}{004191}
-\definecolor{PrimaryColor}{RGB}{0,81,158}
-%\definecolor{PrimaryColor}{cmyk}{100,70,0,0}
-%\definecolor{SecondaryColor}{HTML}{00BEFF}
-\definecolor{SecondaryColor}{RGB}{0,190,255}
-%\definecolor{SecondaryColor}{cmyk}{70,0,0,0}
-\definecolor{TertiaryColor}{RGB}{231, 81, 18}
+\definecolor{PrimaryColor}{cmyk}{50,35,25,70}
+\definecolor{PrimaryAccent}{cmyk}{100,70,0,0}
+\definecolor{SecondaryAccent}{cmyk}{70,0,0,0}
+\definecolor{TertiaryAccent}{cmyk}{0,80,100,0}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Shades of main colors
-\colorlet{MainColorVeryVeryLight}{MainColor!40}
-\colorlet{MainColorVeryLight}{MainColor!60}
-\colorlet{MainColorLight}{MainColor!80}
-\colorlet{MainColorDark}{MainColor!120}
-\colorlet{MainColorVeryDark}{MainColor!140}
-\colorlet{MainColorVeryVeryDark}{MainColor!160}
-
 \colorlet{PrimaryColorVeryVeryLight}{PrimaryColor!40}
 \colorlet{PrimaryColorVeryLight}{PrimaryColor!60}
 \colorlet{PrimaryColorLight}{PrimaryColor!80}
@@ -743,19 +717,80 @@
 \colorlet{PrimaryColorVeryDark}{PrimaryColor!140}
 \colorlet{PrimaryColorVeryVeryDark}{PrimaryColor!160}
 
-\colorlet{SecondaryColorVeryVeryLight}{SecondaryColor!40}
-\colorlet{SecondaryColorVeryLight}{SecondaryColor!60}
-\colorlet{SecondaryColorLight}{SecondaryColor!80}
-\colorlet{SecondaryColorDark}{SecondaryColor!120}
-\colorlet{SecondaryColorVeryDark}{SecondaryColor!140}
-\colorlet{SecondaryColorVeryVeryDark}{SecondaryColor!160}
+\colorlet{PrimaryAccentVeryVeryLight}{PrimaryAccent!40}
+\colorlet{PrimaryAccentVeryLight}{PrimaryAccent!60}
+\colorlet{PrimaryAccentLight}{PrimaryAccent!80}
+\colorlet{PrimaryAccentDark}{PrimaryAccent!120}
+\colorlet{PrimaryAccentVeryDark}{PrimaryAccent!140}
+\colorlet{PrimaryAccentVeryVeryDark}{PrimaryAccent!160}
 
-\colorlet{TertiaryColorVeryVeryLight}{TertiaryColor!40}
-\colorlet{TertiaryColorVeryLight}{TertiaryColor!60}
-\colorlet{TertiaryColorLight}{TertiaryColor!80}
-\colorlet{TertiaryColorDark}{TertiaryColor!120}
-\colorlet{TertiaryColorVeryDark}{TertiaryColor!140}
-\colorlet{TertiaryColorVeryVeryDark}{TertiaryColor!160}
+\colorlet{SecondaryAccentVeryVeryLight}{SecondaryAccent!40}
+\colorlet{SecondaryAccentVeryLight}{SecondaryAccent!60}
+\colorlet{SecondaryAccentLight}{SecondaryAccent!80}
+\colorlet{SecondaryAccentDark}{SecondaryAccent!120}
+\colorlet{SecondaryAccentVeryDark}{SecondaryAccent!140}
+\colorlet{SecondaryAccentVeryVeryDark}{SecondaryAccent!160}
+
+\colorlet{TertiaryAccentVeryVeryLight}{TertiaryAccent!40}
+\colorlet{TertiaryAccentVeryLight}{TertiaryAccent!60}
+\colorlet{TertiaryAccentLight}{TertiaryAccent!80}
+\colorlet{TertiaryAccentDark}{TertiaryAccent!120}
+\colorlet{TertiaryAccentVeryDark}{TertiaryAccent!140}
+\colorlet{TertiaryAccentVeryVeryDark}{TertiaryAccent!160}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Line above header
+\colorlet{headtopline}{PrimaryColor!60}
+% Line below header
+\colorlet{headsepline}{PrimaryColor}
+% Line above footer
+\colorlet{footsepline}{PrimaryColor!60}
+% Line below footer
+\colorlet{footbotline}{PrimaryColor}
+% Line above footnotes
+\colorlet{footnoterule}{PrimaryColor}
+% Footnote number
+\colorlet{thefootnote}{PrimaryColor}
+
+% Setting title to be written in main color, sans-serif, and Huge
+\colorlet{title}{PrimaryColor}
+% Setting subtitle to be written in main color, sans-serif, and large
+\colorlet{subtitle}{PrimaryColor}
+% Setting author to be written in main color, sans-serif, and huge
+\colorlet{author}{PrimaryColor}
+% Setting date to be written in main color, normal font, and normal size
+\colorlet{date}{PrimaryColor}
+% Page header and footer should be written in the main color and sans-serif
+\colorlet{pageheadfoot}{PrimaryColor}
+% Page footer should be written in the main color, sans-serif and small font size
+\colorlet{pagefoot}{PrimaryColor}
+% Create a new font for "place of birth"
+\colorlet{placeofbirth}{black}
+% Make page numbers printed in PrimaryColor
+\colorlet{pagenumber}{PrimaryColor}
+
+% Colors for document headings from part over sectioning down to paragraphs
+\colorlet{part}{PrimaryColor}
+\colorlet{chapter}{part}
+\colorlet{disposition}{chapter}
+\colorlet{sectioning}{disposition}
+\colorlet{section}{sectioning}
+\colorlet{subsection}{sectioning}
+\colorlet{subsubsection}{sectioning}
+\colorlet{paragraph}{black}
+\colorlet{subparagraph}{black}
+% Color of dictum
+\colorlet{dictum}{black}
+
+\colorlet{itemizei}{PrimaryColor}
+\colorlet{itemizeii}{PrimaryColor}
+\colorlet{itemizeiii}{PrimaryColor}
+\colorlet{itemizeiv}{PrimaryColor}
+
+% Color of float object's caption i.e., "Table" or "Figure"
+\colorlet{captionlabel}{PrimaryColor}
 
 
 
@@ -763,43 +798,42 @@
 % Make hyperref use these colors
 \hypersetup{%
   % set color of anchors 
-  anchorcolor=MainColor,%
+  anchorcolor=PrimaryColor,%
   % color of border around citation links
-  citebordercolor=SecondaryColor,%
+  citebordercolor=SecondaryAccent,%
   % color of citation links
-  citecolor=PrimaryColor,%
+  citecolor=PrimaryAccent,%
   %  color of border aroundfile links
-  filebordercolor=SecondaryColor,%
+  filebordercolor=SecondaryAccent,%
   % color of file links
-  filecolor=PrimaryColor,%
+  filecolor=PrimaryAccent,%
   % color of border aroudn links
-  linkbordercolor=SecondaryColor,%
+  linkbordercolor=SecondaryAccent,%
   % color of links
-  linkcolor=PrimaryColor,%
+  linkcolor=PrimaryAccent,%
   % color of border around menu links
-  menubordercolor=SecondaryColor,%
+  menubordercolor=SecondaryAccent,%
   % color for menu links
-  menucolor=PrimaryColor,%
+  menucolor=PrimaryAccent,%
   % color of border around 'run' links
-  runbordercolor=SecondaryColor,%
+  runbordercolor=SecondaryAccent,%
   % color of 'run' links
   runcolor=PrimarColor,%
   % color of border around URL links
-  urlbordercolor=SecondaryColor,%
+  urlbordercolor=SecondaryAccent,%
   % color of URL links
-  urlcolor=PrimaryColor,%
+  urlcolor=PrimaryAccent,%
 }%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Colors for tables
-% \arrayrulecolor cannot be set in the preamble but in the document itself. That's why we are, further down, "extending" the mainmatter command to set the arrayrulecolor to PrimaryColor
 \colorlet{ArrayRuleColor}{PrimaryColor}
 \colorlet{TableHeader}{PrimaryColor}
-\colorlet{TableRowEven}{MainColorVeryVeryLight}
-\colorlet{TableRowOdd}{MainColorVeryLight}
-\colorlet{TableCellHighlight}{SecondaryColorVeryLight}
+\colorlet{TableRowEven}{LightGray}
+\colorlet{TableRowOdd}{LightGray!50}
+\colorlet{TableCellHighlight}{SecondaryAccentVeryLight}
 
 
 
@@ -944,7 +978,7 @@
 % And command to close a table header
 \newcommand{\theadend}{\midrule}
 
-% Colored rule command: \crule{Width}{Height} for a "MainColor" colored rule, or \crule[Color]{Width}{Height} for a "Color" colored rule
+% Colored rule command: \crule{Width}{Height} for a "PrimaryColor" colored rule, or \crule[Color]{Width}{Height} for a "Color" colored rule
 \newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}
 
 % Execute command if file #1 is newer than #2
@@ -1756,19 +1790,19 @@
 % Thickness of header top line
 \setheadtopline{0pt}
 % Thickness of header separator line
-\setheadsepline{1pt}
+\setheadsepline{0.66pt}
 % Thickness of footer separator line
-\setfootsepline{1pt}
+\setfootsepline{0.66pt}
 % Thickness of footer bottom line
 \setfootbotline{0pt}
-% Line above the header
-\addtokomafont{headtopline}{\color{MainColor}}
-% Line below the header
-\addtokomafont{headsepline}{\color{PrimaryColor}}
-% Line above the footer
-\addtokomafont{footsepline}{\color{PrimaryColor}}
-% Line below the footer
-\addtokomafont{footbotline}{\color{MainColor}}
+% Line above header
+\addtokomafont{headtopline}{\color{headtopline}}
+% Line below header
+\addtokomafont{headsepline}{\color{headsepline}}
+% Line above footer
+\addtokomafont{footsepline}{\color{footsepline}}
+% Line below footer
+\addtokomafont{footbotline}{\color{footbotline}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1797,43 +1831,55 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Footnote
-\renewcommand{\footnoterule}{\kern-3pt {\color{MainColorLight}{\hrule width 2in}} \kern 2.6pt}
-\renewcommand{\thefootnote}{\textcolor{PrimaryColor}{\arabic{footnote}}}
+\renewcommand{\footnoterule}{\kern-3pt{\color{footnoterule}{\hrule width 2in}}\kern2.6pt}
+\renewcommand{\thefootnote}{\textcolor{thefootnote}{\arabic{footnote}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Komafont definitions
 % Setting title to be written in main color, sans-serif, and Huge
-\setkomafont{title}{\color{MainColor}\sffamily\Huge}
+\setkomafont{title}{\color{title}\Huge}
 % Setting subtitle to be written in main color, sans-serif, and large
-\setkomafont{subtitle}{\color{MainColor}\sffamily\large}
+\setkomafont{subtitle}{\color{subtitle}\Large}
 % Setting author to be written in main color, sans-serif, and huge
-\setkomafont{author}{\color{MainColor}\sffamily\huge}
+\setkomafont{author}{\color{author}\huge}
 % Setting date to be written in main color, normal font, and normal size
-\setkomafont{date}{\color{MainColor}\normalfont\normalsize}
+\setkomafont{date}{\color{date}\normalfont\normalsize}
 % Page header and footer should be written in the main color and sans-serif
-\setkomafont{pageheadfoot}{\color{MainColor}\sffamily}
+\setkomafont{pageheadfoot}{\color{pageheadfoot}}
 % Page footer should be written in the main color, sans-serif and small font size
-\setkomafont{pagefoot}{\color{MainColor}\sffamily\small}
+\setkomafont{pagefoot}{\color{pagefoot}\small}
 % Create a new font for "place of birth"
-\newkomafont{placeofbirth}{\normalfont\normalsize}
-% Make page numbers printed in MainColor
-\addtokomafont{pagenumber}{\color{MainColor}\sffamily}
+\newkomafont{placeofbirth}{\color{placeofbirth}\normalfont\normalsize}
+% Make page numbers printed in PrimaryColor
+\addtokomafont{pagenumber}{\color{pagenumber}}
 
-\addtokomafont{disposition}{\color{PrimaryColor}}
-\addtokomafont{sectioning}{\color{PrimaryColor}}
-\addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
+% All headings
+\addtokomafont{disposition}{\color{disposition}}
+
+% Formatting part heading
+\addtokomafont{part}{\color{part}\sffamily\Huge}
+% All sections (section, subsection, subsubsection)
+\addtokomafont{sectioning}{\color{sectioning}\mdseries}
+% Adjustment to sections
+\addtokomafont{section}{\color{section}}
+% Adjustments to subsection
+\addtokomafont{subsection}{\color{subsection}}
+% Adjustments to subsubsections
+\addtokomafont{subsubsection}{\color{subsubsection}}
 % We'll make paragraphs have medium font-weight
-\addtokomafont{paragraph}{\mdseries}
+\addtokomafont{paragraph}{\color{paragraph}\mdseries}
 % And have sub-paragraphs have medium font-weight with a smaller font size
 % compared to paragraphs
-\addtokomafont{subparagraph}{\mdseries\small}
+\addtokomafont{subparagraph}{\color{subparagraph}\mdseries\small}
+% Font of label in a description list
+% \addtokomafont{descriptionlabel}{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DICTUM (Part and chapter prefix)
 \renewcommand{\dictumwidth}{0.8\linewidth}
-\setkomafont{dictum}{\slshape}
+\setkomafont{dictum}{\color{dictum}\slshape}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1846,15 +1892,15 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Itemize Environments: PrimaryColor'ed boxes
+% Itemize Environments
 % Level one
-\setlist[itemize,1]{label={\protect\tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor,fill=PrimaryColor] (0, 0ex) rectangle (0.6ex, 0.6ex);}}
+\setlist[itemize,1]{label={\protect\tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizei, draw=itemizei, fill=itemizei] (0, 0ex) rectangle (0.6ex, 0.6ex);}}
 % Level 2
-\setlist[itemize,2]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, fill=PrimaryColor] (0,0) circle (0.3ex);}}
+\setlist[itemize,2]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizeiii, draw=itemizeiii, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
 % Level 3
-\setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
+\setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizeii, draw=itemizeii, fill=itemizeii] (0,0) circle (0.3ex);}}
 % Level 4
-\setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) circle (0.3ex);}}
+\setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizeiv, draw=itemizeiv, line width=0.15ex] (0,0) circle (0.3ex);}}
 % Level 5 ... oo - WHY? Who is using more than four levels of items?
 
 
@@ -1868,7 +1914,7 @@
   justification=justified,% 
   singlelinecheck=off,% 
   font={},% Affects the whole figure caption
-  labelfont={footnotesize, bf, color=PrimaryColor},% Affects only the label name and its number
+  labelfont={footnotesize, bf, color=captionlabel},% Affects only the label name and its number
   textfont={},% Affects only the actual float caption
   subrefformat=parens,% 
 }
@@ -1906,9 +1952,6 @@
 \counterwithout{footnote}{section}
 
 
-%\addtokomafont{section}{\color{PrimaryColor}\normalfont\sffamily}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% HEADER STYLES
@@ -1922,6 +1965,7 @@
 \rohead*[]{\rightmark}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FOOTER STYES
 % Even pages (left pages) from outside to inside
@@ -1932,6 +1976,7 @@
 \lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
