@@ -11,19 +11,19 @@
 % Thickness of header top line
 \setheadtopline{0pt}
 % Thickness of header separator line
-\setheadsepline{1pt}
+\setheadsepline{0.66pt}
 % Thickness of footer separator line
-\setfootsepline{1pt}
+\setfootsepline{0.66pt}
 % Thickness of footer bottom line
 \setfootbotline{0pt}
-% Line above the header
-\addtokomafont{headtopline}{\color{MainColor}}
-% Line below the header
-\addtokomafont{headsepline}{\color{PrimaryColor}}
-% Line above the footer
-\addtokomafont{footsepline}{\color{PrimaryColor}}
-% Line below the footer
-\addtokomafont{footbotline}{\color{MainColor}}
+% Line above header
+\addtokomafont{headtopline}{\color{headtopline}}
+% Line below header
+\addtokomafont{headsepline}{\color{headsepline}}
+% Line above footer
+\addtokomafont{footsepline}{\color{footsepline}}
+% Line below footer
+\addtokomafont{footbotline}{\color{footbotline}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,43 +52,55 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Footnote
-\renewcommand{\footnoterule}{\kern-3pt {\color{MainColorLight}{\hrule width 2in}} \kern 2.6pt}
-\renewcommand{\thefootnote}{\textcolor{PrimaryColor}{\arabic{footnote}}}
+\renewcommand{\footnoterule}{\kern-3pt{\color{footnoterule}{\hrule width 2in}}\kern2.6pt}
+\renewcommand{\thefootnote}{\textcolor{thefootnote}{\arabic{footnote}}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Komafont definitions
 % Setting title to be written in main color, sans-serif, and Huge
-\setkomafont{title}{\color{MainColor}\sffamily\Huge}
+\setkomafont{title}{\color{title}\Huge}
 % Setting subtitle to be written in main color, sans-serif, and large
-\setkomafont{subtitle}{\color{MainColor}\sffamily\large}
+\setkomafont{subtitle}{\color{subtitle}\Large}
 % Setting author to be written in main color, sans-serif, and huge
-\setkomafont{author}{\color{MainColor}\sffamily\huge}
+\setkomafont{author}{\color{author}\huge}
 % Setting date to be written in main color, normal font, and normal size
-\setkomafont{date}{\color{MainColor}\normalfont\normalsize}
+\setkomafont{date}{\color{date}\normalfont\normalsize}
 % Page header and footer should be written in the main color and sans-serif
-\setkomafont{pageheadfoot}{\color{MainColor}\sffamily}
+\setkomafont{pageheadfoot}{\color{pageheadfoot}}
 % Page footer should be written in the main color, sans-serif and small font size
-\setkomafont{pagefoot}{\color{MainColor}\sffamily\small}
+\setkomafont{pagefoot}{\color{pagefoot}\small}
 % Create a new font for "place of birth"
-\newkomafont{placeofbirth}{\normalfont\normalsize}
-% Make page numbers printed in MainColor
-\addtokomafont{pagenumber}{\color{MainColor}\sffamily}
+\newkomafont{placeofbirth}{\color{placeofbirth}\normalfont\normalsize}
+% Make page numbers printed in PrimaryColor
+\addtokomafont{pagenumber}{\color{pagenumber}}
 
-\addtokomafont{disposition}{\color{PrimaryColor}}
-\addtokomafont{sectioning}{\color{PrimaryColor}}
-\addtokomafont{part}{\color{PrimaryColor}\normalfont\sffamily\Huge}
+% All headings
+\addtokomafont{disposition}{\color{disposition}}
+
+% Formatting part heading
+\addtokomafont{part}{\color{part}\sffamily\Huge}
+% All sections (section, subsection, subsubsection)
+\addtokomafont{sectioning}{\color{sectioning}\mdseries}
+% Adjustment to sections
+\addtokomafont{section}{\color{section}}
+% Adjustments to subsection
+\addtokomafont{subsection}{\color{subsection}}
+% Adjustments to subsubsections
+\addtokomafont{subsubsection}{\color{subsubsection}}
 % We'll make paragraphs have medium font-weight
-\addtokomafont{paragraph}{\mdseries}
+\addtokomafont{paragraph}{\color{paragraph}\mdseries}
 % And have sub-paragraphs have medium font-weight with a smaller font size
 % compared to paragraphs
-\addtokomafont{subparagraph}{\mdseries\small}
+\addtokomafont{subparagraph}{\color{subparagraph}\mdseries\small}
+% Font of label in a description list
+% \addtokomafont{descriptionlabel}{}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DICTUM (Part and chapter prefix)
 \renewcommand{\dictumwidth}{0.8\linewidth}
-\setkomafont{dictum}{\slshape}
+\setkomafont{dictum}{\color{dictum}\slshape}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,15 +113,15 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Itemize Environments: PrimaryColor'ed boxes
+% Itemize Environments
 % Level one
-\setlist[itemize,1]{label={\protect\tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor,fill=PrimaryColor] (0, 0ex) rectangle (0.6ex, 0.6ex);}}
+\setlist[itemize,1]{label={\protect\tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizei, draw=itemizei, fill=itemizei] (0, 0ex) rectangle (0.6ex, 0.6ex);}}
 % Level 2
-\setlist[itemize,2]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, fill=PrimaryColor] (0,0) circle (0.3ex);}}
+\setlist[itemize,2]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizeiii, draw=itemizeiii, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
 % Level 3
-\setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) rectangle (0.6ex, 0.6ex);}}
+\setlist[itemize,3]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizeii, draw=itemizeii, fill=itemizeii] (0,0) circle (0.3ex);}}
 % Level 4
-\setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=PrimaryColor, draw=PrimaryColor, line width=0.15ex] (0,0) circle (0.3ex);}}
+\setlist[itemize,4]{label={\protect \tikz[baseline=-\the\dimexpr\fontdimen22\textfont2\relax] \draw[color=itemizeiv, draw=itemizeiv, line width=0.15ex] (0,0) circle (0.3ex);}}
 % Level 5 ... oo - WHY? Who is using more than four levels of items?
 
 
@@ -123,7 +135,7 @@
   justification=justified,% 
   singlelinecheck=off,% 
   font={},% Affects the whole figure caption
-  labelfont={footnotesize, bf, color=PrimaryColor},% Affects only the label name and its number
+  labelfont={footnotesize, bf, color=captionlabel},% Affects only the label name and its number
   textfont={},% Affects only the actual float caption
   subrefformat=parens,% 
 }

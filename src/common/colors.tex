@@ -1,27 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main colors
-%\definecolor{MainColor}{HTML}{323232}
-\definecolor{MainColor}{RGB}{62,68,76}
-%\definecolor{MainColor}{cmyk}{50,35,25,70}
-%\definecolor{PrimaryColor}{HTML}{004191}
-\definecolor{PrimaryColor}{RGB}{0,81,158}
-%\definecolor{PrimaryColor}{cmyk}{100,70,0,0}
-%\definecolor{SecondaryColor}{HTML}{00BEFF}
-\definecolor{SecondaryColor}{RGB}{0,190,255}
-%\definecolor{SecondaryColor}{cmyk}{70,0,0,0}
-\definecolor{TertiaryColor}{RGB}{231, 81, 18}
+\definecolor{PrimaryColor}{cmyk}{50,35,25,70}
+\definecolor{PrimaryAccent}{cmyk}{100,70,0,0}
+\definecolor{SecondaryAccent}{cmyk}{70,0,0,0}
+\definecolor{TertiaryAccent}{cmyk}{0,80,100,0}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Shades of main colors
-\colorlet{MainColorVeryVeryLight}{MainColor!40}
-\colorlet{MainColorVeryLight}{MainColor!60}
-\colorlet{MainColorLight}{MainColor!80}
-\colorlet{MainColorDark}{MainColor!120}
-\colorlet{MainColorVeryDark}{MainColor!140}
-\colorlet{MainColorVeryVeryDark}{MainColor!160}
-
 \colorlet{PrimaryColorVeryVeryLight}{PrimaryColor!40}
 \colorlet{PrimaryColorVeryLight}{PrimaryColor!60}
 \colorlet{PrimaryColorLight}{PrimaryColor!80}
@@ -29,19 +16,80 @@
 \colorlet{PrimaryColorVeryDark}{PrimaryColor!140}
 \colorlet{PrimaryColorVeryVeryDark}{PrimaryColor!160}
 
-\colorlet{SecondaryColorVeryVeryLight}{SecondaryColor!40}
-\colorlet{SecondaryColorVeryLight}{SecondaryColor!60}
-\colorlet{SecondaryColorLight}{SecondaryColor!80}
-\colorlet{SecondaryColorDark}{SecondaryColor!120}
-\colorlet{SecondaryColorVeryDark}{SecondaryColor!140}
-\colorlet{SecondaryColorVeryVeryDark}{SecondaryColor!160}
+\colorlet{PrimaryAccentVeryVeryLight}{PrimaryAccent!40}
+\colorlet{PrimaryAccentVeryLight}{PrimaryAccent!60}
+\colorlet{PrimaryAccentLight}{PrimaryAccent!80}
+\colorlet{PrimaryAccentDark}{PrimaryAccent!120}
+\colorlet{PrimaryAccentVeryDark}{PrimaryAccent!140}
+\colorlet{PrimaryAccentVeryVeryDark}{PrimaryAccent!160}
 
-\colorlet{TertiaryColorVeryVeryLight}{TertiaryColor!40}
-\colorlet{TertiaryColorVeryLight}{TertiaryColor!60}
-\colorlet{TertiaryColorLight}{TertiaryColor!80}
-\colorlet{TertiaryColorDark}{TertiaryColor!120}
-\colorlet{TertiaryColorVeryDark}{TertiaryColor!140}
-\colorlet{TertiaryColorVeryVeryDark}{TertiaryColor!160}
+\colorlet{SecondaryAccentVeryVeryLight}{SecondaryAccent!40}
+\colorlet{SecondaryAccentVeryLight}{SecondaryAccent!60}
+\colorlet{SecondaryAccentLight}{SecondaryAccent!80}
+\colorlet{SecondaryAccentDark}{SecondaryAccent!120}
+\colorlet{SecondaryAccentVeryDark}{SecondaryAccent!140}
+\colorlet{SecondaryAccentVeryVeryDark}{SecondaryAccent!160}
+
+\colorlet{TertiaryAccentVeryVeryLight}{TertiaryAccent!40}
+\colorlet{TertiaryAccentVeryLight}{TertiaryAccent!60}
+\colorlet{TertiaryAccentLight}{TertiaryAccent!80}
+\colorlet{TertiaryAccentDark}{TertiaryAccent!120}
+\colorlet{TertiaryAccentVeryDark}{TertiaryAccent!140}
+\colorlet{TertiaryAccentVeryVeryDark}{TertiaryAccent!160}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Line above header
+\colorlet{headtopline}{PrimaryColor!60}
+% Line below header
+\colorlet{headsepline}{PrimaryColor}
+% Line above footer
+\colorlet{footsepline}{PrimaryColor!60}
+% Line below footer
+\colorlet{footbotline}{PrimaryColor}
+% Line above footnotes
+\colorlet{footnoterule}{PrimaryColor}
+% Footnote number
+\colorlet{thefootnote}{PrimaryColor}
+
+% Setting title to be written in main color, sans-serif, and Huge
+\colorlet{title}{PrimaryColor}
+% Setting subtitle to be written in main color, sans-serif, and large
+\colorlet{subtitle}{PrimaryColor}
+% Setting author to be written in main color, sans-serif, and huge
+\colorlet{author}{PrimaryColor}
+% Setting date to be written in main color, normal font, and normal size
+\colorlet{date}{PrimaryColor}
+% Page header and footer should be written in the main color and sans-serif
+\colorlet{pageheadfoot}{PrimaryColor}
+% Page footer should be written in the main color, sans-serif and small font size
+\colorlet{pagefoot}{PrimaryColor}
+% Create a new font for "place of birth"
+\colorlet{placeofbirth}{black}
+% Make page numbers printed in PrimaryColor
+\colorlet{pagenumber}{PrimaryColor}
+
+% Colors for document headings from part over sectioning down to paragraphs
+\colorlet{part}{PrimaryColor}
+\colorlet{chapter}{part}
+\colorlet{disposition}{chapter}
+\colorlet{sectioning}{disposition}
+\colorlet{section}{sectioning}
+\colorlet{subsection}{sectioning}
+\colorlet{subsubsection}{sectioning}
+\colorlet{paragraph}{black}
+\colorlet{subparagraph}{black}
+% Color of dictum
+\colorlet{dictum}{black}
+
+\colorlet{itemizei}{PrimaryColor}
+\colorlet{itemizeii}{PrimaryColor}
+\colorlet{itemizeiii}{PrimaryColor}
+\colorlet{itemizeiv}{PrimaryColor}
+
+% Color of float object's caption i.e., "Table" or "Figure"
+\colorlet{captionlabel}{PrimaryColor}
 
 
 
@@ -49,40 +97,39 @@
 % Make hyperref use these colors
 \hypersetup{%
   % set color of anchors 
-  anchorcolor=MainColor,%
+  anchorcolor=PrimaryColor,%
   % color of border around citation links
-  citebordercolor=SecondaryColor,%
+  citebordercolor=SecondaryAccent,%
   % color of citation links
-  citecolor=PrimaryColor,%
+  citecolor=PrimaryAccent,%
   %  color of border aroundfile links
-  filebordercolor=SecondaryColor,%
+  filebordercolor=SecondaryAccent,%
   % color of file links
-  filecolor=PrimaryColor,%
+  filecolor=PrimaryAccent,%
   % color of border aroudn links
-  linkbordercolor=SecondaryColor,%
+  linkbordercolor=SecondaryAccent,%
   % color of links
-  linkcolor=PrimaryColor,%
+  linkcolor=PrimaryAccent,%
   % color of border around menu links
-  menubordercolor=SecondaryColor,%
+  menubordercolor=SecondaryAccent,%
   % color for menu links
-  menucolor=PrimaryColor,%
+  menucolor=PrimaryAccent,%
   % color of border around 'run' links
-  runbordercolor=SecondaryColor,%
+  runbordercolor=SecondaryAccent,%
   % color of 'run' links
   runcolor=PrimarColor,%
   % color of border around URL links
-  urlbordercolor=SecondaryColor,%
+  urlbordercolor=SecondaryAccent,%
   % color of URL links
-  urlcolor=PrimaryColor,%
+  urlcolor=PrimaryAccent,%
 }%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Colors for tables
-% \arrayrulecolor cannot be set in the preamble but in the document itself. That's why we are, further down, "extending" the mainmatter command to set the arrayrulecolor to PrimaryColor
 \colorlet{ArrayRuleColor}{PrimaryColor}
 \colorlet{TableHeader}{PrimaryColor}
-\colorlet{TableRowEven}{MainColorVeryVeryLight}
-\colorlet{TableRowOdd}{MainColorVeryLight}
-\colorlet{TableCellHighlight}{SecondaryColorVeryLight}
+\colorlet{TableRowEven}{LightGray}
+\colorlet{TableRowOdd}{LightGray!50}
+\colorlet{TableCellHighlight}{SecondaryAccentVeryLight}
