@@ -7,7 +7,7 @@
     \centering%
     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
       \centering%
-      \huge\DocumentName\par%
+      \huge\documentname\par%
     \end{minipage}\par%
     \vspace*{0.75cm}\par%
     \begin{minipage}[t][3cm][c]{0.9\linewidth}%
@@ -25,13 +25,13 @@
     \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
       \centering%
       \begin{spacing}{1.25}
-        {\ThesisPretext\par}%
+        {\thesispretext\par}%
       \end{spacing}
     \end{minipage}
     \vspace*{1.5cm}\par%
     \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
       \centering%
-      \DocumentLocaleSubmittedby\par%
+      \submittedbyname\par%
       \vspace{0.5cm}\par%
       \let\oldAnd\and%
       \renewcommand{\and}{\unskip,\xspace}%
@@ -41,24 +41,24 @@
       \ifdefempty{\@placeofbirth}{%
         \par%
       }{%
-        \DocumentLocaleFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
+        \fromname\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
       }%
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[t][1cm][c]{0.5\linewidth}
       \centering%
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[c][3cm][c]{0.75\linewidth}%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
       \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
-        {\DocumentLocaleExaminer:}%
+        {\examinername:}%
           & \@examiner\\%
-        {\DocumentLocaleSupervisor:}%
+        {\supervisorname:}%
           & {\@supervisor}\\%
-        {\DocumentLocaleSubmittedon:}%
+        {\submittedonname:}%
 %          & \space{\usekomafont{date}{\@date}}\\%
           & {\@date}\\%
       \end{tabu}%
@@ -67,7 +67,7 @@
     \vfill
     \begin{minipage}[t]{0.7\linewidth}
       \centering%
-      \@department, \@university.\par%
+      \AuthorDepartment, \AuthorUniversity.\par%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
       \ifdefempty{\@partner}{}{%

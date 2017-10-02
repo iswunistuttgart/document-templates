@@ -1,21 +1,10 @@
 \documentclass[%
-  english,%
   oneside,%
+  ngerman,%
+  USenglish,%
 ]{iswartcl}
 
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% START external command definitions
-% Tell LaTeX to create a list of indices
-\makeindex
-% Comes along with the glossaries package. Can be removed if you do not use
-% glossaries anywhere in your document
-\makeglossaries
-% END external command definitions
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -24,16 +13,16 @@
 % Set author(s) names
 \author{Philipp Tempel \and Second Author}
 % Short author names
-\shortauthor{Ph.\@ Tempel \and S.\@ Author}
+% \shortauthor{Ph.\@ Tempel \and S.\@ Author}
 
 % Set the date this document is printed/published
 % Avoid typing in manually, either use `\today` or `\printdate{yyyy-mm-dd}`
-\date{\today}
+\date{\printdate{2017-10-02}}
 
 % Title of document
 \title{This is the Long Long Title of My Document Which is Going to Deal with Something Cool}
 % Define a short title if the main title is too long and truncated in parts of the document
-\shorttitle{This is the Shorter Title of My Document}
+% \shorttitle{This is the Shorter Title of My Document}
 % END setting document properties
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -59,6 +48,13 @@
 \begin{document}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START frontmatter
+\frontmatter
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START title page in main language
 \maketitle
@@ -68,37 +64,11 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% START title page in other language
-\begin{otherlanguage}{ngerman}
- \maketitle
-\end{otherlanguage}
-% END title page in other language
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START abstract in main language
-\begin{abstract}
-  \Blindtext[3]
-  
-  \keywords{Sed \and aliquet \and tellus \and eget \and est}
-\end{abstract}
+% \begin{abstract}
+%   \Blindtext
+% \end{abstract}
 % END abstract in main language
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% START abstract in other language
-\begin{otherlanguage}{ngerman}
-  \begin{abstract}
-    \Blindtext[3]
-       
-    \keywords{Sed \and aliquet \and tellus \and eget \and est}
-  \end{abstract}
-\end{otherlanguage}
-% END abstract in other language
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -116,7 +86,7 @@
 \listoftables
 
 % List of todos (only printed in non-final mode)
-\listoftodos
+% \listoftodos
 
 % END list of floats
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -124,9 +94,15 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START mainmatter
+\mainmatter
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START actual document content
 
-\Blinddocument
+% \Blinddocument
 
 % END actual document content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

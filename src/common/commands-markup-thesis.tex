@@ -17,8 +17,9 @@
 \newcommand{\major}[1]{\gdef\@major{#1}}
 \newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
 
-% Empty keywords
-\newcommand{\@keywords}{}
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}

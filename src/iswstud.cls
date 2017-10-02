@@ -74,12 +74,6 @@
 \DeclareBoolOption[true]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
 
-% Allow user to choose language
-\def\DocumentLang{ngerman}
-\DeclareOption{ngerman}{\def\DocumentLang{ngerman}}
-\DeclareOption{german}{\def\DocumentLang{ngerman}}
-\DeclareOption{english}{\def\DocumentLang{english}}
-
 % Default options
 \ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
 

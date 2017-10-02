@@ -1,61 +1,63 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
-\renewcommand{\maketitle}{%
-  \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
-  \begin{titlepage}%
-    \thispagestyle{empty}%
-    \centering%
-    \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+\ifDocumentbigtitle
+  \renewcommand{\maketitle}{%
+    \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+    \begin{titlepage}%
+      \thispagestyle{empty}%
       \centering%
-      \huge\DocumentName\par%
-    \end{minipage}\par%
-    \vfill\par%
-    \begin{minipage}[t][3cm][c]{0.9\linewidth}%
-      \centering%
-      {\usekomafont{title}{\@title}\par}%
-    \end{minipage}\par%
-    \vspace*{0.1cm}\par%
-    \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
-      \centering%
-      \ifdefempty{\@subtitle}{}{%
-        \usekomafont{subtitle}{\@subtitle}%
-      }%
-    \end{minipage}\par%
-    \vfill%
-    \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
-      \centering%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\unskip,\xspace}%
-      {\usekomafont{author}{\@author}}\par%
-      \renewcommand{\and}{\oldAnd}%
-      \vspace{0.5cm}\par%
-    \end{minipage}
-    \vfill%
-    \begin{minipage}[t][1cm][c]{0.5\linewidth}
-      \centering%
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
-    \end{minipage}
-    \vfill%
-    \begin{minipage}[t]{0.7\linewidth}
-      \centering%
-      \@department, \@university.\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \ifdefempty{\@partner}{}{%
-        \vspace*{0.3cm}\par%
-        \@partner%
-      }%
-      \renewcommand{\and}{\oldAnd}%
-    \end{minipage}
-    \vfill
-    \begin{minipage}[t][1cm][t]{0.2\linewidth}
-      \centering%
-%      \printdayoff%
-      \@date%
-%      \printdayon%
-    \end{minipage}%
-  \end{titlepage}%
-  \restoregeometry%
-  \cleardoublepage%
-  \setcounter{page}{1}%
-}%
+      \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+        \centering%
+        \huge\DocumentName\par%
+      \end{minipage}\par%
+      \vfill\par%
+      \begin{minipage}[t][3cm][c]{0.9\linewidth}%
+        \centering%
+        {\usekomafont{title}{\@title}\par}%
+      \end{minipage}\par%
+      \vspace*{0.1cm}\par%
+      \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
+        \centering%
+        \ifdefempty{\@subtitle}{}{%
+          \usekomafont{subtitle}{\@subtitle}%
+        }%
+      \end{minipage}\par%
+      \vfill%
+      \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
+        \centering%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\unskip,\xspace}%
+        {\usekomafont{author}{\@author}}\par%
+        \renewcommand{\and}{\oldAnd}%
+        \vspace{0.5cm}\par%
+      \end{minipage}
+      \vfill%
+      \begin{minipage}[t][1cm][c]{0.5\linewidth}
+        \centering%
+        \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
+      \end{minipage}
+      \vfill%
+      \begin{minipage}[t]{0.7\linewidth}
+        \centering%
+        \AuthorDepartment, \AuthorUniversity.\par%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\par}%
+        \ifdefempty{\@partner}{}{%
+          \vspace*{0.3cm}\par%
+          \@partner%
+        }%
+        \renewcommand{\and}{\oldAnd}%
+      \end{minipage}
+      \vfill
+      \begin{minipage}[t][1cm][t]{0.2\linewidth}
+        \centering%
+  %      \printdayoff%
+        \@date%
+  %      \printdayon%
+      \end{minipage}%
+    \end{titlepage}%
+    \restoregeometry%
+    \cleardoublepage%
+    \setcounter{page}{1}%
+  }%
+\fi

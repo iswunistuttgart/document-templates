@@ -45,7 +45,7 @@
 \cefoot*[]{}
 \refoot*[]{}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
 
@@ -63,7 +63,7 @@
 % Setting subtitle to be written in main color, sans-serif, and large
 \setkomafont{subtitle}{\color{subtitle}\Large}
 % Setting author to be written in main color, sans-serif, and huge
-\setkomafont{author}{\color{author}\huge}
+\addtokomafont{author}{\color{author}}
 % Setting date to be written in main color, normal font, and normal size
 \setkomafont{date}{\color{date}\normalfont\normalsize}
 % Page header and footer should be written in the main color and sans-serif

@@ -5,17 +5,17 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Draft}
-\def\DocumentLocaleExaminer{Examiner}
-\def\DocumentLocaleSupervisor{Supervisor}
-\def\DocumentLocaleLogosuffix{-en}
-\def\DocumentLocaleSubmittedby{submitted by}
-\def\DocumentLocaleFrom{from}
-\def\DocumentLocaleSubmittedon{Submitted on}
-\def\DocumentLocaleMajor{Major}
-\def\DocumentLocalePartner{In cooperation with}
-\def\DocumentLocaleKeywords{Keywords}
-\def\DocumentLocaleDeclaration{Declaration of Authorship}
+\newcommand{\draftname}{Draft}
+\newcommand{\examinername}{Examiner}
+\newcommand{\supervisorname}{Supervisor}
+\newcommand{\logosuffixname}{en}
+\newcommand{\submittedbyname}{submitted by}
+\newcommand{\fromname}{from}
+\newcommand{\submittedonname}{Submitted on}
+\newcommand{\majorname}{Major}
+\newcommand{\partnername}{In cooperation with}
+\newcommand{\keywordsname}{Keywords}
+\newcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -25,17 +25,17 @@
 %\renewcommand{\@dedicationname}{Dedication}
 %
 \ifdefstring{\DocumentType}{doctorate}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+  \newcommand{\documentname}{Dissertation}
+  \newcommand{\degreenamelong}{Doktoringenieur}
+  \newcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\def\ThesisPretext{%
-  A \DocumentName\space presented to the faculty %
-  \@faculty, \@university,%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
+\newcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity,%
+  \ifdefempty{\degreenamelong}{.}{,%
     \space in partial fulfillment of the requirements for the degree of %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
+    {\degreenamelong}\space (\degreenameshort)%
   }.%
 }%
 %

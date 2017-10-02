@@ -1,26 +1,22 @@
 % Name of the university
-\newcommand{\university}[1]{\gdef\@university{#1}}
-\newcommand{\@university}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
+\newcommand{\university}[1]{\gdef\AuthorUniversity{#1}}
+\newcommand{\AuthorUniversity}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
 
 % Long name of the department
-\newcommand{\department}[1]{\gdef\@department{#1}}
-\newcommand{\@department}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
+\newcommand{\department}[1]{\gdef\AuthorDepartment{#1}}
+\newcommand{\AuthorDepartment}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
 
 % Short name of the department
-\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
-\gdef\@departmentshort{}
+\newcommand{\departmentshort}[1]{\gdef\AuthorDepartmentShort{#1}}
+\gdef\AuthorDepartmentShort{}
 
 % Address of the department
-\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
-\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
+\newcommand{\departmentaddress}[1]{\gdef\AuthorDepartmentAddress{#1}}
+\newcommand{\AuthorDepartmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
 
 % Name of the faculty
-\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
-\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
-
-% List of keywords
-\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
-\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+\newcommand{\faculty}[1]{\gdef\AuthorFaculty{#1}}
+\newcommand{\AuthorFaculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
 \newcommand{\universitylogo}{logo/university}

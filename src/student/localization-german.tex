@@ -1,21 +1,21 @@
-\university{Universit\"at Stuttgart}
-\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
-\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
-\departmentshort{ISW}
+\gdef\AuthorUniversity{Universit\"at Stuttgart}
+\gdef\AuthorFaculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\gdef\AuthorDepartment{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\gdef\AuthorDepartmentAddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\gdef\AuthorDepartmentShort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleExaminer{Pr\"ufer}
-\def\DocumentLocaleSupervisor{Betreuer}
-\def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocaleSubmittedby{eingereicht von}
-\def\DocumentLocaleFrom{aus}
-\def\DocumentLocaleSubmittedon{Eingereicht am}
-\def\DocumentLocaleMajor{Studiengang}
-\def\DocumentLocalePartner{In Kooperation mit}
-\def\DocumentLocaleKeywords{Stichw\"orter}
-\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleExaminer{Pr\"ufer}
+\gdef\DocumentLocaleSupervisor{Betreuer}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocaleSubmittedby{eingereicht von}
+\gdef\DocumentLocaleFrom{aus}
+\gdef\DocumentLocaleSubmittedon{Eingereicht am}
+\gdef\DocumentLocaleMajor{Studiengang}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -68,7 +68,7 @@
 %
 \def\ThesisPretext{%
   Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \@faculty, \@university%
+  \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{\ThesisDegreeLong}{.}{,%
     \space zur Erlangung des akademischen Grades %
     {\ThesisDegreeLong}\space (\ThesisDegreeShort)%

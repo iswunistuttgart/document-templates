@@ -58,6 +58,9 @@
 % Declare debug options
 \DeclareBoolOption{debug}
 
+% Allow user to choose a "big title page"
+\DeclareBoolOption[false]{bigtitle}
+
 % Declare print and online style (complementary)
 \DeclareBoolOption{print}
 \DeclareComplementaryOption{online}{print}
@@ -72,12 +75,6 @@
 
 \DeclareBoolOption[false]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
-
-% Allow user to choose language
-\def\DocumentLang{ngerman}
-\DeclareOption{ngerman}{\def\DocumentLang{ngerman}}
-\DeclareOption{german}{\def\DocumentLang{ngerman}}
-\DeclareOption{english}{\def\DocumentLang{english}}
 
 % Default options
 \ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}

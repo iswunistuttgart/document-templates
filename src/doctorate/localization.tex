@@ -1,11 +1,13 @@
-\addto\captionsenglish{%
-  \input{doctorate/localization-english}%
-}
+\@ifpackageloaded{babel}{%
+  \addto\captionsenglish{%
+    \input{doctorate/localization-english}%
+  }%
 
-\addto\captionsngerman{%
-  \input{doctorate/localization-german}%
-}
+  \addto\captionsngerman{%
+    \input{doctorate/localization-german}%
+  }%
 
-\addto\captionsgerman{%
-  \input{doctorate/localization-german}%
-}
+  \addto\captionsgerman{%
+    \input{doctorate/localization-german}%
+  }%
+}{}%

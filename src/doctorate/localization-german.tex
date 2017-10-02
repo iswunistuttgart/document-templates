@@ -5,17 +5,17 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleExaminer{Pr\"ufer}
-\def\DocumentLocaleSupervisor{Betreuer}
-\def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocaleSubmittedby{eingereicht von}
-\def\DocumentLocaleFrom{aus}
-\def\DocumentLocaleSubmittedon{Eingereicht am}
-\def\DocumentLocaleMajor{Studiengang}
-\def\DocumentLocalePartner{In Kooperation mit}
-\def\DocumentLocaleKeywords{Stichw\"orter}
-\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\newcommand{\draftname}{Entwurf}
+\newcommand{\examinername}{Pr\"ufer}
+\newcommand{\supervisorname}{Betreuer}
+\newcommand{\logosuffixname}{-de}
+\newcommand{\submittedbyname}{eingereicht von}
+\newcommand{\fromname}{aus}
+\newcommand{\submittedonname}{Eingereicht am}
+\newcommand{\majorname}{Studiengang}
+\newcommand{\partnername}{In Kooperation mit}
+\newcommand{\keywordsname}{Stichw\"orter}
+\newcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -24,18 +24,18 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{doctorate}{%
+  \newcommand{\documentname}{Dissertation}
+  \newcommand{\degreenamelong}{Doktoringenieur}
+  \newcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\def\ThesisPretext{%
-  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \@faculty, \@university%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
+\newcommand{\thesispretext}{%
+  Eine \documentname\space zur Vorlage an der Fakult\"at %
+  \facultyname, \universityname%
+  \ifdefempty{\degreelongname}{.}{,%
     \space zur Erlangung des akademischen Grades %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
+    {\degreenamelong}\space (\degreenameshort)%
   }.%
 }%
 %
@@ -45,7 +45,7 @@
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
   \vspace{1\baselineskip}
   \begin{center}
     \selectfont\sffamily
