@@ -15,7 +15,7 @@
 \typeout{}
 
 \input{common/packages-head}
-\input{document/packages-head}
+\input{article/packages-head}
 
 
 
@@ -104,7 +104,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-options}
-\input{document/packages-options}
+\input{article/packages-options}
 
 
 
@@ -137,13 +137,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-main}
-\input{document/packages-main}
+\input{article/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMA-Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}
-\input{document/tikz-packages}
+\input{article/tikz-packages}
 
 
 
@@ -158,7 +158,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/colors}
-\input{document/colors}
+\input{article/colors}
 
 
 
@@ -167,7 +167,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/environments}
-\input{document/environments}
+\input{article/environments}
 
 
 
@@ -176,7 +176,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/commands}
-\input{document/commands}
+\input{article/commands}
 
 
 
@@ -184,7 +184,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{document/localization}
+\input{article/localization}
 
 
 
@@ -193,9 +193,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/layout}
-\input{document/layout}
+\input{article/layout}
 
-\input{document/titlepage}
+\input{article/titlepage}
 
 
 
@@ -212,7 +212,7 @@
 
 \ifdraft{
   \input{common/ifdraft}
-  \input{document/ifdraft}
+  \input{article/ifdraft}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
@@ -229,12 +229,12 @@
 
 \makeatletter%
   \input{common/makeatletter}
-  \input{document/makeatletter}
+  \input{article/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
   \input{common/atbegindocument}
-  \input{document/atbegindocument}
+  \input{article/atbegindocument}
 }
 
 
