@@ -16,3 +16,15 @@
   }%
   \cleardoublepage%
 }
+
+\newenvironment{problemstatement}{%before
+  \section*{Aufgabenstellung}
+}{%after
+  \par%
+  \vfill%
+  \renewcommand{\arraystretch}{1}%
+  \noindent\begin{tabular}{@{} p{0.75\linewidth} @{}}
+    \\ \midrule \\[-0.75\baselineskip]
+    \@examiner
+  \end{tabular}
+}

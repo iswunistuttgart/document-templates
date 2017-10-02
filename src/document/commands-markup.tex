@@ -1,26 +1,68 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Document properties
+% General document properties
 
-% Examiner
-\newcommand{\examiner}[1]{\gdef\@examiner{#1}}
-\newcommand{\@examiner}{No \texttt{\textbackslash examiner} given\@latex@warning@no@line{No \noexpand\examiner given}}
 
-% Student's matriculation number
-\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
-\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Type: problem-statement
+\ifdefstring{\DocumentType}{problem-statement}{%
+  % Examiner
+  \newcommand{\examiner}[1]{\gdef\@examiner{#1}}
+  \newcommand{\@examiner}{No \texttt{\textbackslash examiner} given\@latex@warning@no@line{No \noexpand\examiner given}}
 
-% Name of the student's supervisor(s)
-\newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
-\newcommand{\@supervisor}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}
+  % Student's matriculation number
+  \newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
+  \newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
 
-% Name of the student's major
-\newcommand{\major}[1]{\gdef\@major{#1}}
-\newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
+  % Name of the student's supervisor(s)
+  \newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
+  \newcommand{\@supervisor}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}
 
-% Name of the partner company/department/faculty/etc
-\newcommand{\partner}[1]{\gdef\@partner{#1}}
-\gdef\@partner{}
+  % Name of the student's major
+  \newcommand{\major}[1]{\gdef\@major{#1}}
+  \newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
 
-% Place of birth
-\newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
-\gdef\@placeofbirth{}
+  % German work title of the thesis
+  \newcommand{\worktitleDE}[1]{\gdef\@worktitleDE{#1}}
+  \newcommand{\@worktitleDE}{No \texttt{\textbackslash worktitleDE} given\@latex@warning@no@line{No \noexpand\worktitleDE given}}
+
+  % English work title of the thesis
+  \newcommand{\worktitleEN}[1]{\gdef\@worktitleEN{#1}}
+  \newcommand{\@worktitleEN}{No \texttt{\textbackslash worktitleEN} given\@latex@warning@no@line{No \noexpand\worktitleEN given}}
+
+  % Start date of the student thesis
+  \newcommand{\datestart}[1]{\gdef\@datestart{#1}}
+  \newcommand{\@datestart}{No \texttt{\textbackslash datestart} given\@latex@warning@no@line{No \noexpand\datestart given}}
+
+  \newcommand{\maketimes]{%
+    \section*{Erlaubte Bearbeitungsdauer nach Anmeldung}
+
+    \begin{table}
+      \centering
+      \begin{tabular}{ll} \toprule
+        \textbf{Arbeit}
+          & \textbf{Bearbeitungsumfang}
+          \\ \midrule
+        Bachelorarbeit
+          & 5 Monate \SI{360}{\hour}
+          & \\
+        Studienarbeit
+          & 6 Monate \SI{360}{\hour}
+          & \\
+        Masterarbeit
+          & 6 Monate \SI{900}{\hour}
+          & \\ \bottomrule
+      \end{tabular}
+    \end{table}
+
+    \section*{Hinweis}
+
+    Alle ausgegebenen studentischen Arbeiten m\"ussen nach oben genannten Zeiten abgegeben werden. Eine Verl\"angerung ist nur nach R\"ucksprache mit \emph{Herrn Seyfarth} m\"oglich.
+    Die Anlage \textBzgl der Geheimhaltung und \"Ubertragung der Nutzungsrechte ist vor Beginn der Arbeit vom Studierenden zu unterschreiben.
+
+    \clearpage%
+  }%
+
+  \newcommand{\makenda}{%
+    \section*{Anlage zu }
+  }
+}{}%

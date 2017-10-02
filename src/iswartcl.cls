@@ -69,9 +69,14 @@
 \DeclareOption{exercise}{\def\DocumentType{exercise}}
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
+\DeclareOption{problem-statement}{\def\DocumentType{problem-statement}}
 
+% Exclusively switch between one-sided and two-sided documents
 \DeclareBoolOption[false]{twoside}
 \DeclareComplementaryOption{oneside}{twoside}
+
+% User may choose to ensure hyperef is correctly set up
+\DeclareBoolOption[false]{hypersetup}
 
 % Allow user to choose language
 \def\DocumentLang{ngerman}

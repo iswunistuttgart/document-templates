@@ -1,19 +1,21 @@
 % Set the hyperref document information
 \AtBeginDocument{
-  \let\oldAnd\and%
-  \renewcommand{\and}{, }%
-  \hypersetup{
-    pdfauthor={\theauthor},
-    pdftitle={\thetitle},
-%    pdfsubject={\@isw@thesis},
-    pdfkeywords={\@keywords},
-  }%
-  \renewcommand{\and}{\oldAnd}%
-  \iflanguage{ngerman}{%
-    \hypersetup{pdflang=de}%
-  }{%
-    \hypersetup{pdflang=en}%
-  }%
+  \ifDocumenthypersetup
+    \let\oldAnd\and%
+    \renewcommand{\and}{, }%
+    \hypersetup{
+      pdfauthor={\theauthor},
+      pdftitle={\thetitle},
+  %    pdfsubject={\@isw@thesis},
+      pdfkeywords={\@keywords},
+    }%
+    \renewcommand{\and}{\oldAnd}%
+    \iflanguage{ngerman}{%
+      \hypersetup{pdflang=de}%
+    }{%
+      \hypersetup{pdflang=en}%
+    }%
+  \fi
   % Select the proper language
   \pagenumbering{Roman}%
   \pagenumbering{arabic}%
