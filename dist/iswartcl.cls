@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/09/30}
+\def\filedate{2017/10/03}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -69,6 +69,9 @@
 % Declare debug options
 \DeclareBoolOption{debug}
 
+% Allow user to choose a "big title page"
+\DeclareBoolOption[false]{bigtitle}
+
 % Declare print and online style (complementary)
 \DeclareBoolOption{print}
 \DeclareComplementaryOption{online}{print}
@@ -81,15 +84,6 @@
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
 
-\DeclareBoolOption[false]{twoside}
-\DeclareComplementaryOption{oneside}{twoside}
-
-% Allow user to choose language
-\def\DocumentLang{ngerman}
-\DeclareOption{ngerman}{\def\DocumentLang{ngerman}}
-\DeclareOption{german}{\def\DocumentLang{ngerman}}
-\DeclareOption{english}{\def\DocumentLang{english}}
-
 % Default options
 \ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
@@ -98,12 +92,6 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-\ifDocumenttwoside%
-  \PassOptionsToClass{twoside}{scrartcl}%
-\else%
-  \PassOptionsToClass{oneside}{scrartcl}%
-\fi%
 
 % Process options (finally)
 \ProcessOptions\relax
@@ -143,9 +131,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Babel
 \PassOptionsToPackage{%
-  english,%
-  german,%
-  ngerman,%
+  % english,%
+  % german,%
+  % ngerman,%
 }{babel}
 
 
@@ -260,31 +248,37 @@
   verbose=false,% be chatty
 }{hyperref}
 
-\ifDocumenttwoside
+% Set layout of PDF document in case it is twosided
+\if@twoside%
   \PassOptionsToPackage{%
-    pdfpagelayout=TwoColumnRight,% set layout of PDF pages
+    pdfpagelayout=TwoColumnRight,%
   }{hyperref}%
+% Set layout of PDF document in case it is onesided
 \else
   \PassOptionsToPackage{%
-    pdfpagelayout=OneColumn,% set layout of PDF pages
+    pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
 
 % Depending on online we will define options to hyperref
-\ifDocumentprint
-  
-\else
-  \PassOptionsToPackage{%
-    hidelinks=true,%
-  }{hyperref}%
-\fi%
+% \ifDocumentprint
+%   \PassOptionsToPackage{%
+%     colorlinks=false,%
+%   }{hyperref}
+% \else
+%   %
+% \fi%
 
-\ifdraft{ % Draft case
+% We need to explicitely tell hyperref that we are in draft or final mode
+% @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode
+% Draft case
+\ifdraft{%
   \PassOptionsToPackage{%
     final=false,%
     draft=true,%
   }{hyperref}%
-}{ % Final case
+% Final case
+}{%
   \PassOptionsToPackage{%
     draft=false,%
     final=true,%
@@ -295,9 +289,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Isodate
 \PassOptionsToPackage{%
-  english,%
-  german,%
-  ngerman,%
+  % english,%
+  % german,%
+  % ngerman,%
 }{isodate}
 
 
@@ -584,7 +578,7 @@
 \RequirePackage{todonotes}
 
 % An extended version of TeX, from the NTS project An extended version of TeX (which is capable of running as if it were TeX unmodified). E-TeX has been specified by the LaTeX team as the engine for the development of LaTeX 2e, in the immediate future; as a result, LaTeX programmers may (in all current TeX distributions) assume e-TeX functionality. Development versions of e-TeX are to be found in the TeX live source repository.
-\RequirePackage{etex}
+% \RequirePackage{etex}
 
 % Extended UTF-8 input encoding support for LaTeX. The bundle provides the ucs package, and utf8x.def, together with a large number of support files. The utf8x.def definition file for use with inputenc covers a wider range of Unicode characters than does utf8.def in the LaTeX distribution. The package provides facilities for efficient use of its large sets of Unicode characters. Glyph production may be controlled by various options, which permits use of non-ASCII characters when coding mathematical formulae. Note that the bundle previously had an alias "unicode"; that alias has now been withdrawn, and no package of that name now exists.
 \RequirePackage{ucs}
@@ -873,11 +867,12 @@
   \ifdefempty{\@keywords}{}{%
     \let\oldAnd\and%
     \renewcommand{\and}{\unskip,\xspace}%
-    \textbf{\color{PrimaryColor}\DocumentLocaleKeywords:}~\@keywords%
+    \textbf{\color{PrimaryColor}\keywordsname:}~\@keywords%
     \renewcommand{\and}{\oldAnd}%
   }%
   \cleardoublepage%
 }
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -889,28 +884,24 @@
 % * Optional arguments (given in [] square bracktes) are listed with lowercase alpha label e.g., a) for the first optional argument.
 
 % Name of the university
-\newcommand{\university}[1]{\gdef\@university{#1}}
-\newcommand{\@university}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
+\newcommand{\university}[1]{\gdef\AuthorUniversity{#1}}
+\newcommand{\AuthorUniversity}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
 
 % Long name of the department
-\newcommand{\department}[1]{\gdef\@department{#1}}
-\newcommand{\@department}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
+\newcommand{\department}[1]{\gdef\AuthorDepartment{#1}}
+\newcommand{\AuthorDepartment}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
 
 % Short name of the department
-\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
-\gdef\@departmentshort{}
+\newcommand{\departmentshort}[1]{\gdef\AuthorDepartmentShort{#1}}
+\gdef\AuthorDepartmentShort{}
 
 % Address of the department
-\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
-\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
+\newcommand{\departmentaddress}[1]{\gdef\AuthorDepartmentAddress{#1}}
+\newcommand{\AuthorDepartmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
 
 % Name of the faculty
-\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
-\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
-
-% List of keywords
-\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
-\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+\newcommand{\faculty}[1]{\gdef\AuthorFaculty{#1}}
+\newcommand{\AuthorFaculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
 \newcommand{\universitylogo}{logo/university}
@@ -941,6 +932,7 @@
 \newcommand{\runtitle}{%
   \@shorttitle%
 }
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TYPESETTING COMMANDS                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -958,7 +950,15 @@
 
 % Use for bi-lingual documents
 \NewDocumentCommand{\trans}{m m}{%
-  \IfLanguageName{english}{#1}{\IfLanguageName{ngerman}{#2}{#1}}%
+  \IfLanguageName{english}{%
+    #1%
+  }{%
+    \IfLanguageName{german}{%
+      #2%
+    }{%
+      #1%
+    }%
+  }%
 }
 
 
@@ -1460,27 +1460,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FLOAT COMMANDS                                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Create two new lengths for TikZ images: figurewidth and figureheight
-\newlength{\figurewidth}
-\newlength{\figureheight}
-% Set the default lenghts of above defined lengths with aspect ratio 16:9 to width
-% of 75% of line width (and height accordingly)
-\setlength{\figurewidth}{0.75\linewidth}
-\setlength{\figureheight}{0.421875\linewidth}
-
-% Easily include a TikZ image with only three arguments (one required, two optional) - default aspect ratio for a tikz image is 4:3 (0.75 x 0.5625 \linewidth) [width x height]
-% a) Width of rendered image
-% b) Height of rendered image
-% 1) Path to the file
-%\newcommand{\includetikz}[3]{%
-% \DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.5625\linewidth} m}{%
-%   \setlength{\figurewidth}{#1}%
-%   \setlength{\figureheight}{#2}%
-% %  \tikzsetnextfilename{#3}%
-%   \input{#3.tikz}%
-% }
-% Deprecate `\includetikz` in favor of `\includegraphics` with the `tikzscale` package
-\deprecate{includetikz}{\includegraphics}
 
 % Easily include SVG files with only one required argument (and one optional argument)
 % a) Width of the file
@@ -1623,6 +1602,9 @@
 \newcommand{\major}[1]{\gdef\@major{#1}}
 \newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
 
+% Empty keywords
+\newcommand{\@keywords}{}
+
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
 \gdef\@partner{}
@@ -1631,6 +1613,13 @@
 \newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
 \gdef\@placeofbirth{}
 
+\newcommand{\frontmatter}{%
+  %
+}
+
+% \newcommand{\mainmatter}{%
+%   \cleardoublepageemtpy%
+% }
 
 
 
@@ -1642,7 +1631,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\addto\captionsenglish{%
+\@ifpackageloaded{babel}{%
 \university{University of Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
@@ -1650,11 +1639,11 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Draft}
-\def\DocumentLocaleLogosuffix{-en}
-\def\DocumentLocalePartner{In cooperation with}
-\def\DocumentLocaleKeywords{Keywords}
-\def\DocumentLocaleDeclaration{Declaration of Authorship}
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -1683,9 +1672,8 @@
   \def\DocumentName{Report}
 }{}
 %
-}
-
-\addto\captionsngerman{%
+  
+  \addto\captionsngerman{%
 \university{Universit\"at Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
@@ -1693,11 +1681,11 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocalePartner{In Kooperation mit}
-\def\DocumentLocaleKeywords{Stichw\"orter}
-\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -1726,9 +1714,9 @@
   \def\DocumentName{Bericht}
 }{}
 %
-}
+  }%
 
-\addto\captionsgerman{%
+  \addto\captionsgerman{%
 \university{Universit\"at Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
@@ -1736,11 +1724,11 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocalePartner{In Kooperation mit}
-\def\DocumentLocaleKeywords{Stichw\"orter}
-\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -1769,7 +1757,8 @@
   \def\DocumentName{Bericht}
 }{}
 %
-}
+  }%
+}{}%
 
 
 
@@ -1788,13 +1777,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header and footer lines
 % Thickness of header top line
-\setheadtopline{0pt}
+% \setheadtopline{0pt}
+\KOMAoptions{headtopline=false}
 % Thickness of header separator line
-\setheadsepline{0.66pt}
+% \setheadsepline{0.66pt}
+\KOMAoptions{headsepline=0.66pt}
 % Thickness of footer separator line
-\setfootsepline{0.66pt}
+% \setfootsepline{0.66pt}
+\KOMAoptions{footsepline=0.66pt}
 % Thickness of footer bottom line
-\setfootbotline{0pt}
+% \setfootbotline{0pt}
+\KOMAoptions{footbotline=false}
 % Line above header
 \addtokomafont{headtopline}{\color{headtopline}}
 % Line below header
@@ -1824,7 +1817,7 @@
 \cefoot*[]{}
 \refoot*[]{}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
 
@@ -1842,7 +1835,7 @@
 % Setting subtitle to be written in main color, sans-serif, and large
 \setkomafont{subtitle}{\color{subtitle}\Large}
 % Setting author to be written in main color, sans-serif, and huge
-\setkomafont{author}{\color{author}\huge}
+\addtokomafont{author}{\color{author}}
 % Setting date to be written in main color, normal font, and normal size
 \setkomafont{date}{\color{date}\normalfont\normalsize}
 % Page header and footer should be written in the main color and sans-serif
@@ -1973,71 +1966,73 @@
 \cefoot*[]{}
 \refoot*[]{}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
-\cofoot*[]{}
+\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
+\cofoot*[]{\includegraphics[height=1.5\baselineskip]{\universitylogo\DocumentLocaleLogosuffix}}
 \rofoot*[\pagemark]{\pagemark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
-\renewcommand{\maketitle}{%
-  \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
-  \begin{titlepage}%
-    \thispagestyle{empty}%
-    \centering%
-    \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+\ifDocumentbigtitle
+  \renewcommand{\maketitle}{%
+    \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+    \begin{titlepage}%
+      \thispagestyle{empty}%
       \centering%
-      \huge\DocumentName\par%
-    \end{minipage}\par%
-    \vfill\par%
-    \begin{minipage}[t][3cm][c]{0.9\linewidth}%
-      \centering%
-      {\usekomafont{title}{\@title}\par}%
-    \end{minipage}\par%
-    \vspace*{0.1cm}\par%
-    \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
-      \centering%
-      \ifdefempty{\@subtitle}{}{%
-        \usekomafont{subtitle}{\@subtitle}%
-      }%
-    \end{minipage}\par%
-    \vfill%
-    \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
-      \centering%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\unskip,\xspace}%
-      {\usekomafont{author}{\@author}}\par%
-      \renewcommand{\and}{\oldAnd}%
-      \vspace{0.5cm}\par%
-    \end{minipage}
-    \vfill%
-    \begin{minipage}[t][1cm][c]{0.5\linewidth}
-      \centering%
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
-    \end{minipage}
-    \vfill%
-    \begin{minipage}[t]{0.7\linewidth}
-      \centering%
-      \@department, \@university.\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \ifdefempty{\@partner}{}{%
-        \vspace*{0.3cm}\par%
-        \@partner%
-      }%
-      \renewcommand{\and}{\oldAnd}%
-    \end{minipage}
-    \vfill
-    \begin{minipage}[t][1cm][t]{0.2\linewidth}
-      \centering%
-%      \printdayoff%
-      \@date%
-%      \printdayon%
-    \end{minipage}%
-  \end{titlepage}%
-  \restoregeometry%
-  \cleardoublepage%
-  \setcounter{page}{1}%
-}%
+      \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+        \centering%
+        \huge\DocumentName\par%
+      \end{minipage}\par%
+      \vfill\par%
+      \begin{minipage}[t][3cm][c]{0.9\linewidth}%
+        \centering%
+        {\usekomafont{title}{\@title}\par}%
+      \end{minipage}\par%
+      \vspace*{0.1cm}\par%
+      \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
+        \centering%
+        \ifdefempty{\@subtitle}{}{%
+          \usekomafont{subtitle}{\@subtitle}%
+        }%
+      \end{minipage}\par%
+      \vfill%
+      \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
+        \centering%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\unskip,\xspace}%
+        {\usekomafont{author}{\@author}}\par%
+        \renewcommand{\and}{\oldAnd}%
+        \vspace{0.5cm}\par%
+      \end{minipage}
+      \vfill%
+      \begin{minipage}[t][1cm][c]{0.5\linewidth}
+        \centering%
+        \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
+      \end{minipage}
+      \vfill%
+      \begin{minipage}[t]{0.7\linewidth}
+        \centering%
+        \AuthorDepartment, \AuthorUniversity.\par%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\par}%
+        \ifdefempty{\@partner}{}{%
+          \vspace*{0.3cm}\par%
+          \@partner%
+        }%
+        \renewcommand{\and}{\oldAnd}%
+      \end{minipage}
+      \vfill
+      \begin{minipage}[t][1cm][t]{0.2\linewidth}
+        \centering%
+  %      \printdayoff%
+        \@date%
+  %      \printdayon%
+      \end{minipage}%
+    \end{titlepage}%
+    \restoregeometry%
+    \cleardoublepage%
+    \setcounter{page}{1}%
+  }%
+\fi
 
 
 
@@ -2077,15 +2072,14 @@
   \hypersetup{
     pdfauthor={\theauthor},
     pdftitle={\thetitle},
-%    pdfsubject={\@isw@thesis},
     pdfkeywords={\@keywords},
   }%
   \renewcommand{\and}{\oldAnd}%
-  \iflanguage{ngerman}{%
-    \hypersetup{pdflang=de}%
-  }{%
-    \hypersetup{pdflang=en}%
-  }%
+  % \IfLanguageName{ngerman}{%
+  %   \hypersetup{pdflang=de}%
+  % }{%
+  %   \hypersetup{pdflang=en}%
+  % }%
   % Select the proper language
   \pagenumbering{Roman}%
   \pagenumbering{arabic}%
@@ -2101,9 +2095,9 @@
 % Set thesis and bibliography language
 \makeatletter
   % Set the thesis language
-  \expandafter\selectlanguage\expandafter{\DocumentLang}
+  % \expandafter\selectlanguage\expandafter{\DocumentLang}
   % Set the bibliography language
-  \expandafter\selectbiblanguage\expandafter{\DocumentLang}
+  % \expandafter\selectbiblanguage\expandafter{\DocumentLang}
 \makeatother
 
 % Adjust rule color of arrays i.e., tables

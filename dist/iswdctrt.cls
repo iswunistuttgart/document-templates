@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-dev}
-\def\filedate{2017/09/30}
+\def\filedate{2017/10/03}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -69,39 +69,26 @@
 % Declare debug options
 \DeclareBoolOption{debug}
 
-% Declare print and online style (complementary)
-\DeclareBoolOption{print}
-\DeclareComplementaryOption{online}{print}
+% Declare whether thesis was accepted and ready for print (use draft/final to
+% switch between draft and final version of either the submission or publishing
+% version
+\DeclareBoolOption[false]{accepted}
+
+% Gender of the author
+\DeclareBoolOption{female}
+\DeclareComplementaryOption{male}{female}
 
 % Declare the document type
 \def\DocumentType{doctorate}
 
-\DeclareBoolOption[true]{twoside}
-\DeclareComplementaryOption{oneside}{twoside}
-
-% Allow user to choose language
-\def\DocumentLang{ngerman}
-\DeclareOption{ngerman}{\def\DocumentLang{ngerman}}
-\DeclareOption{german}{\def\DocumentLang{ngerman}}
-\DeclareOption{english}{\def\DocumentLang{english}}
-
-% Default options
-\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
-
 % Pass any other options not known to the scrbook package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrbook}}
+
+% Execute default options
+\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-\ifDocumenttwoside%
-  \PassOptionsToClass{twoside}{scrbook}%
-\else%
-  \PassOptionsToClass{oneside}{scrbook}%
-\fi%
-
-% Process options (finally)
-\ProcessOptions\relax
 
 
 
@@ -138,9 +125,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Babel
 \PassOptionsToPackage{%
-  english,%
-  german,%
-  ngerman,%
+  % english,%
+  % german,%
+  % ngerman,%
 }{babel}
 
 
@@ -255,31 +242,37 @@
   verbose=false,% be chatty
 }{hyperref}
 
-\ifDocumenttwoside
+% Set layout of PDF document in case it is twosided
+\if@twoside%
   \PassOptionsToPackage{%
-    pdfpagelayout=TwoColumnRight,% set layout of PDF pages
+    pdfpagelayout=TwoColumnRight,%
   }{hyperref}%
+% Set layout of PDF document in case it is onesided
 \else
   \PassOptionsToPackage{%
-    pdfpagelayout=OneColumn,% set layout of PDF pages
+    pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
 
 % Depending on online we will define options to hyperref
-\ifDocumentprint
-  
-\else
-  \PassOptionsToPackage{%
-    hidelinks=true,%
-  }{hyperref}%
-\fi%
+% \ifDocumentprint
+%   \PassOptionsToPackage{%
+%     colorlinks=false,%
+%   }{hyperref}
+% \else
+%   %
+% \fi%
 
-\ifdraft{ % Draft case
+% We need to explicitely tell hyperref that we are in draft or final mode
+% @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode
+% Draft case
+\ifdraft{%
   \PassOptionsToPackage{%
     final=false,%
     draft=true,%
   }{hyperref}%
-}{ % Final case
+% Final case
+}{%
   \PassOptionsToPackage{%
     draft=false,%
     final=true,%
@@ -290,9 +283,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Isodate
 \PassOptionsToPackage{%
-  english,%
-  german,%
-  ngerman,%
+  % english,%
+  % german,%
+  % ngerman,%
 }{isodate}
 
 
@@ -580,7 +573,7 @@
 \RequirePackage{todonotes}
 
 % An extended version of TeX, from the NTS project An extended version of TeX (which is capable of running as if it were TeX unmodified). E-TeX has been specified by the LaTeX team as the engine for the development of LaTeX 2e, in the immediate future; as a result, LaTeX programmers may (in all current TeX distributions) assume e-TeX functionality. Development versions of e-TeX are to be found in the TeX live source repository.
-\RequirePackage{etex}
+% \RequirePackage{etex}
 
 % Extended UTF-8 input encoding support for LaTeX. The bundle provides the ucs package, and utf8x.def, together with a large number of support files. The utf8x.def definition file for use with inputenc covers a wider range of Unicode characters than does utf8.def in the LaTeX distribution. The package provides facilities for efficient use of its large sets of Unicode characters. Glyph production may be controlled by various options, which permits use of non-ASCII characters when coding mathematical formulae. Note that the bundle previously had an alias "unicode"; that alias has now been withdrawn, and no package of that name now exists.
 \RequirePackage{ucs}
@@ -867,9 +860,10 @@
   \vfill%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
-  \textbf{\color{PrimaryColor}\DocumentLocaleKeywords:}~\@keywords%
+  \textbf{\color{PrimaryColor}\keywordsname:}~\@keywords%
   \renewcommand{\and}{\oldAnd}
 }
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -881,28 +875,24 @@
 % * Optional arguments (given in [] square bracktes) are listed with lowercase alpha label e.g., a) for the first optional argument.
 
 % Name of the university
-\newcommand{\university}[1]{\gdef\@university{#1}}
-\newcommand{\@university}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
+\newcommand{\university}[1]{\gdef\AuthorUniversity{#1}}
+\newcommand{\AuthorUniversity}{No \texttt{\textbackslash university} given\@latex@warning@no@line{No \noexpand\university given}}
 
 % Long name of the department
-\newcommand{\department}[1]{\gdef\@department{#1}}
-\newcommand{\@department}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
+\newcommand{\department}[1]{\gdef\AuthorDepartment{#1}}
+\newcommand{\AuthorDepartment}{No \texttt{\textbackslash department} given\@latex@warning@no@line{No \noexpand\department given}}
 
 % Short name of the department
-\newcommand{\departmentshort}[1]{\gdef\@departmentshort{#1}}
-\gdef\@departmentshort{}
+\newcommand{\departmentshort}[1]{\gdef\AuthorDepartmentShort{#1}}
+\gdef\AuthorDepartmentShort{}
 
 % Address of the department
-\newcommand{\departmentaddress}[1]{\gdef\@departmentAddress{#1}}
-\newcommand{\@departmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
+\newcommand{\departmentaddress}[1]{\gdef\AuthorDepartmentAddress{#1}}
+\newcommand{\AuthorDepartmentAddress}{\@latex@warning@no@line{No \noexpand\departmentaddress given}}
 
 % Name of the faculty
-\newcommand{\faculty}[1]{\gdef\@faculty{#1}}
-\newcommand{\@faculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
-
-% List of keywords
-\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
-\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+\newcommand{\faculty}[1]{\gdef\AuthorFaculty{#1}}
+\newcommand{\AuthorFaculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
 \newcommand{\universitylogo}{logo/university}
@@ -933,6 +923,7 @@
 \newcommand{\runtitle}{%
   \@shorttitle%
 }
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TYPESETTING COMMANDS                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -950,7 +941,15 @@
 
 % Use for bi-lingual documents
 \NewDocumentCommand{\trans}{m m}{%
-  \IfLanguageName{english}{#1}{\IfLanguageName{ngerman}{#2}{#1}}%
+  \IfLanguageName{english}{%
+    #1%
+  }{%
+    \IfLanguageName{german}{%
+      #2%
+    }{%
+      #1%
+    }%
+  }%
 }
 
 
@@ -1452,27 +1451,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FLOAT COMMANDS                                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Create two new lengths for TikZ images: figurewidth and figureheight
-\newlength{\figurewidth}
-\newlength{\figureheight}
-% Set the default lenghts of above defined lengths with aspect ratio 16:9 to width
-% of 75% of line width (and height accordingly)
-\setlength{\figurewidth}{0.75\linewidth}
-\setlength{\figureheight}{0.421875\linewidth}
-
-% Easily include a TikZ image with only three arguments (one required, two optional) - default aspect ratio for a tikz image is 4:3 (0.75 x 0.5625 \linewidth) [width x height]
-% a) Width of rendered image
-% b) Height of rendered image
-% 1) Path to the file
-%\newcommand{\includetikz}[3]{%
-% \DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.5625\linewidth} m}{%
-%   \setlength{\figurewidth}{#1}%
-%   \setlength{\figureheight}{#2}%
-% %  \tikzsetnextfilename{#3}%
-%   \input{#3.tikz}%
-% }
-% Deprecate `\includetikz` in favor of `\includegraphics` with the `tikzscale` package
-\deprecate{includetikz}{\includegraphics}
 
 % Easily include SVG files with only one required argument (and one optional argument)
 % a) Width of the file
@@ -1599,21 +1577,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties
 
-% Examiner
-\newcommand{\examiner}[1]{\gdef\@examiner{#1}}
-\newcommand{\@examiner}{No \texttt{\textbackslash examiner} given\@latex@warning@no@line{No \noexpand\examiner given}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document properties
 
 % Student's matriculation number
 \newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
 \newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
 
-% Name of the student's supervisor(s)
-\newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
-\newcommand{\@supervisor}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}
-
 % Name of the student's major
 \newcommand{\major}[1]{\gdef\@major{#1}}
 \newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
+
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
@@ -1622,6 +1599,14 @@
 % Place of birth
 \newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
 \gdef\@placeofbirth{}
+
+% Name of the first examiner
+\newcommand{\mainexaminer}[1]{\gdef\@mainexaminer{#1}}
+\newcommand{\@mainexaminer}{No \texttt{\textbackslash mainexaminer} given\@latex@warning@no@line{No \noexpand\mainexaminer given}}
+
+% Name(s) of the second examiner(s)
+\newcommand{\secondexaminer}[1]{\gdef\@secondexaminer{#1}}
+\newcommand{\@secondexaminer}{No \texttt{\textbackslash secondexaminer} given\@latex@warning@no@line{No \noexpand\secondexaminer given}}
 
 
 
@@ -1659,7 +1644,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\addto\captionsenglish{%
+\@ifpackageloaded{babel}{%
 \university{University of Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
@@ -1667,37 +1652,45 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Draft}
-\def\DocumentLocaleExaminer{Examiner}
-\def\DocumentLocaleSupervisor{Supervisor}
-\def\DocumentLocaleLogosuffix{-en}
-\def\DocumentLocaleSubmittedby{submitted by}
-\def\DocumentLocaleFrom{from}
-\def\DocumentLocaleSubmittedon{Submitted on}
-\def\DocumentLocaleMajor{Major}
-\def\DocumentLocalePartner{In cooperation with}
-\def\DocumentLocaleKeywords{Keywords}
-\def\DocumentLocaleDeclaration{Declaration of Authorship}
+\newcommand{\draftname}{Draft}
+\newcommand{\mainexaminername}{First Examiner}
+\newcommand{\secondexaminername}{Second Examiner}
+\newcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \newcommand{\submittedbyname}{Submitted by}
+\else%
+  \newcommand{\submittedbyname}{By}
+\fi%
+\newcommand{\fromname}{from}
+\newcommand{\submittedonname}{Submitted on}
+\newcommand{\examinationonname}{Defended on}
+\newcommand{\majorname}{Major}
+\newcommand{\partnername}{In cooperation with}
+\newcommand{\keywordsname}{Keywords}
+\newcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
 \renewcommand{\appendixpagename}{Appendices}
-\renewcommand{\abstractname}{Abstract}
+\newcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
 \ifdefstring{\DocumentType}{doctorate}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+  \newcommand{\documentname}{Dissertation}
+  \newcommand{\degreenamelong}{Doktoringenieur}
+  \newcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\def\ThesisPretext{%
-  A \DocumentName\space presented to the faculty %
-  \@faculty, \@university,%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space in partial fulfillment of the requirements for the degree of %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
+\newcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
   }.%
 }%
 %
@@ -1709,9 +1702,481 @@
   \end{otherlanguage}%
 }
 %
-}
 
-\addto\captionsngerman{%
+  \addto\captionsenglish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionsUSenglish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionsamerican{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionsUKenglish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionsbritish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionscanadian{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionsaustralian{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+  \addto\captionsnewzealand{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{Submitted by}
+\else%
+  \renewcommand{\submittedbyname}{By}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
+  }.%
+}%
+%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \begin{otherlanguage}{ngerman}%
+    \DeclarationOfAuthorship%
+  \end{otherlanguage}%
+}
+%
+  }
+
+  \addto\captionsaustrian{%
 \university{Universit\"at Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
@@ -1719,17 +2184,22 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleExaminer{Pr\"ufer}
-\def\DocumentLocaleSupervisor{Betreuer}
-\def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocaleSubmittedby{eingereicht von}
-\def\DocumentLocaleFrom{aus}
-\def\DocumentLocaleSubmittedon{Eingereicht am}
-\def\DocumentLocaleMajor{Studiengang}
-\def\DocumentLocalePartner{In Kooperation mit}
-\def\DocumentLocaleKeywords{Stichw\"orter}
-\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\renewcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{Hauptberichter}
+\renewcommand{\secondexaminername}{Mitberichter}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -1738,28 +2208,47 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\def\ThesisPretext{%
-  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \@faculty, \@university%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space zur Erlangung des akademischen Grades %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
   \thispagestyle{empty}%
-  \chapter*{\DocumentLocaleDeclaration}%
+  \chapter*{\declarationname}%
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
   \vspace{1\baselineskip}
   \begin{center}
     \selectfont\sffamily
@@ -1797,9 +2286,8 @@
   \cleardoublepage%
 }
 %
-}
-
-\addto\captionsgerman{%
+  }%
+  \addto\captionsgerman{%
 \university{Universit\"at Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
@@ -1807,17 +2295,22 @@
 \departmentshort{ISW}
 %
 %
-\def\DocumentLocaleDraft{Entwurf}
-\def\DocumentLocaleExaminer{Pr\"ufer}
-\def\DocumentLocaleSupervisor{Betreuer}
-\def\DocumentLocaleLogosuffix{-de}
-\def\DocumentLocaleSubmittedby{eingereicht von}
-\def\DocumentLocaleFrom{aus}
-\def\DocumentLocaleSubmittedon{Eingereicht am}
-\def\DocumentLocaleMajor{Studiengang}
-\def\DocumentLocalePartner{In Kooperation mit}
-\def\DocumentLocaleKeywords{Stichw\"orter}
-\def\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\renewcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{Hauptberichter}
+\renewcommand{\secondexaminername}{Mitberichter}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -1826,28 +2319,47 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
-\ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Dissertation}
-  \def\ThesisDegreeLong{Doktoringenieur}
-  \def\ThesisDegreeShort{Dr.-Ing.}
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\def\ThesisPretext{%
-  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \@faculty, \@university%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space zur Erlangung des akademischen Grades %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
   \thispagestyle{empty}%
-  \chapter*{\DocumentLocaleDeclaration}%
+  \chapter*{\declarationname}%
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
   \vspace{1\baselineskip}
   \begin{center}
     \selectfont\sffamily
@@ -1885,7 +2397,342 @@
   \cleardoublepage%
 }
 %
+  }%
+  \addto\captionsgermanb{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{Hauptberichter}
+\renewcommand{\secondexaminername}{Mitberichter}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
+}%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \chapter*{\declarationname}%
+  \vspace{1\baselineskip}%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
+  \vspace{1\baselineskip}
+  \begin{center}
+    \selectfont\sffamily
+    \@title\\%
+    \ifdefempty{\@subtitle}{}{
+      \vspace{0.15cm}
+      \@subtitle\\%
+    }
+  \end{center}
+  \vspace{1\baselineskip}
+  \begin{enumerate}%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+  \end{enumerate}%
+  \vfill%\vspace{2\baselineskip}%
+  %
+  \begin{center}%
+    \selectfont\sffamily%
+    \small%
+    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+      \rule{\linewidth}{0.5pt}%
+        & \rule{\linewidth}{0pt}%
+        & \rule{\linewidth}{0.5pt}%
+        \\[-1.5ex]%
+      Datum%
+        & %
+        & Autor \\%
+    \end{tabu}%
+  \end{center}%
+  \vfill%
+  \renewcommand{\and}{\oldAnd}%
+  \cleardoublepage%
 }
+%
+  }%
+  \addto\captionsnaustrian{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{Hauptberichter}
+\renewcommand{\secondexaminername}{Mitberichter}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
+}%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \chapter*{\declarationname}%
+  \vspace{1\baselineskip}%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
+  \vspace{1\baselineskip}
+  \begin{center}
+    \selectfont\sffamily
+    \@title\\%
+    \ifdefempty{\@subtitle}{}{
+      \vspace{0.15cm}
+      \@subtitle\\%
+    }
+  \end{center}
+  \vspace{1\baselineskip}
+  \begin{enumerate}%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+  \end{enumerate}%
+  \vfill%\vspace{2\baselineskip}%
+  %
+  \begin{center}%
+    \selectfont\sffamily%
+    \small%
+    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+      \rule{\linewidth}{0.5pt}%
+        & \rule{\linewidth}{0pt}%
+        & \rule{\linewidth}{0.5pt}%
+        \\[-1.5ex]%
+      Datum%
+        & %
+        & Autor \\%
+    \end{tabu}%
+  \end{center}%
+  \vfill%
+  \renewcommand{\and}{\oldAnd}%
+  \cleardoublepage%
+}
+%
+  }%
+  \addto\captionsngerman{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\renewcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{Hauptberichter}
+\renewcommand{\secondexaminername}{Mitberichter}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{doctorate}{%
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
+}{}
+%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
+}%
+%
+\renewcommand{\DeclarationOfAuthorship}{%
+  \thispagestyle{empty}%
+  \chapter*{\declarationname}%
+  \vspace{1\baselineskip}%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
+  \vspace{1\baselineskip}
+  \begin{center}
+    \selectfont\sffamily
+    \@title\\%
+    \ifdefempty{\@subtitle}{}{
+      \vspace{0.15cm}
+      \@subtitle\\%
+    }
+  \end{center}
+  \vspace{1\baselineskip}
+  \begin{enumerate}%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
+    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
+    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
+    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
+  \end{enumerate}%
+  \vfill%\vspace{2\baselineskip}%
+  %
+  \begin{center}%
+    \selectfont\sffamily%
+    \small%
+    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
+      \rule{\linewidth}{0.5pt}%
+        & \rule{\linewidth}{0pt}%
+        & \rule{\linewidth}{0.5pt}%
+        \\[-1.5ex]%
+      Datum%
+        & %
+        & Autor \\%
+    \end{tabu}%
+  \end{center}%
+  \vfill%
+  \renewcommand{\and}{\oldAnd}%
+  \cleardoublepage%
+}
+%
+  }%
+
+}{}%
 
 
 
@@ -1904,13 +2751,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header and footer lines
 % Thickness of header top line
-\setheadtopline{0pt}
+% \setheadtopline{0pt}
+\KOMAoptions{headtopline=false}
 % Thickness of header separator line
-\setheadsepline{0.66pt}
+% \setheadsepline{0.66pt}
+\KOMAoptions{headsepline=0.66pt}
 % Thickness of footer separator line
-\setfootsepline{0.66pt}
+% \setfootsepline{0.66pt}
+\KOMAoptions{footsepline=0.66pt}
 % Thickness of footer bottom line
-\setfootbotline{0pt}
+% \setfootbotline{0pt}
+\KOMAoptions{footbotline=false}
 % Line above header
 \addtokomafont{headtopline}{\color{headtopline}}
 % Line below header
@@ -1940,7 +2791,7 @@
 \cefoot*[]{}
 \refoot*[]{}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\@departmentshort, \@university}
+\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
 
@@ -1958,7 +2809,7 @@
 % Setting subtitle to be written in main color, sans-serif, and large
 \setkomafont{subtitle}{\color{subtitle}\Large}
 % Setting author to be written in main color, sans-serif, and huge
-\setkomafont{author}{\color{author}\huge}
+\addtokomafont{author}{\color{author}}
 % Setting date to be written in main color, normal font, and normal size
 \setkomafont{date}{\color{date}\normalfont\normalsize}
 % Page header and footer should be written in the main color and sans-serif
@@ -2076,13 +2927,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
-  \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+  \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
   \begin{titlepage}%
     \thispagestyle{empty}%
     \centering%
     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
       \centering%
-      \huge\DocumentName\par%
+      \huge\documentname\par%
     \end{minipage}\par%
     \vspace*{0.75cm}\par%
     \begin{minipage}[t][3cm][c]{0.9\linewidth}%
@@ -2100,13 +2951,13 @@
     \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
       \centering%
       \begin{spacing}{1.25}
-        {\ThesisPretext\par}%
+        {\thesispretext\par}%
       \end{spacing}
     \end{minipage}
     \vspace*{1.5cm}\par%
     \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
       \centering%
-      \DocumentLocaleSubmittedby\par%
+      \submittedbyname\par%
       \vspace{0.5cm}\par%
       \let\oldAnd\and%
       \renewcommand{\and}{\unskip,\xspace}%
@@ -2116,40 +2967,45 @@
       \ifdefempty{\@placeofbirth}{%
         \par%
       }{%
-        \DocumentLocaleFrom\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
+        \fromname\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
       }%
     \end{minipage}
     \vspace*{1cm}\par%
     \begin{minipage}[t][1cm][c]{0.5\linewidth}
       \centering%
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\DocumentLocaleDraft}}{}
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
     \end{minipage}
     \vspace*{1cm}\par%
-    \begin{minipage}[c][3cm][c]{0.75\linewidth}%
+    \begin{minipage}[c][3cm][c]{0.90\linewidth}%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
-      \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
-        {\DocumentLocaleExaminer:}%
-          & \@examiner\\%
-        {\DocumentLocaleSupervisor:}%
-          & {\@supervisor}\\%
-        {\DocumentLocaleSubmittedon:}%
-%          & \space{\usekomafont{date}{\@date}}\\%
+      \renewcommand*{\arraystretch}{1.6}
+      \begin{tabu} to \linewidth {X[1,l] X[2,l]}%
+        {\mainexaminername:}%
+          & \@mainexaminer\\%
+        {\secondexaminername:}%
+          & {\@secondexaminer}\\%
+        \ifDocumentaccepted%
+          {\examinationonname:}%
+        \else%
+          {\submittedonname:}%
+        \fi%
+          % & {\usekomafont{date}{\@date}}\\%
           & {\@date}\\%
       \end{tabu}%
     \renewcommand{\and}{\oldAnd}%
     \end{minipage}%
     \vfill
-    \begin{minipage}[t]{0.7\linewidth}
+    \begin{minipage}[t]{0.80\linewidth}
       \centering%
-      \@department, \@university.\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \ifdefempty{\@partner}{}{%
-        \vspace*{0.3cm}\par%
-        \@partner%
-      }%
-      \renewcommand{\and}{\oldAnd}%
+      \AuthorDepartment\space der \AuthorUniversity.\par%
+      % \let\oldAnd\and%
+      % \renewcommand{\and}{\par}%
+      % \ifdefempty{\@partner}{}{%
+      %   \vspace*{0.3cm}\par%
+      %   \@partner%
+      % }%
+      % \renewcommand{\and}{\oldAnd}%
     \end{minipage}
     \vfill
     \begin{minipage}[t][1cm][t]{0.2\linewidth}
@@ -2202,15 +3058,14 @@
   \hypersetup{
     pdfauthor={\theauthor},
     pdftitle={\thetitle},
-%    pdfsubject={\@isw@thesis},
     pdfkeywords={\@keywords},
   }%
   \renewcommand{\and}{\oldAnd}%
-  \iflanguage{ngerman}{%
-    \hypersetup{pdflang=de}%
-  }{%
-    \hypersetup{pdflang=en}%
-  }%
+  % \IfLanguageName{ngerman}{%
+  %   \hypersetup{pdflang=de}%
+  % }{%
+  %   \hypersetup{pdflang=en}%
+  % }%
   % Select the proper language
   \pagenumbering{Roman}%
   \pagenumbering{arabic}%
@@ -2226,9 +3081,9 @@
 % Set thesis and bibliography language
 \makeatletter
   % Set the thesis language
-  \expandafter\selectlanguage\expandafter{\DocumentLang}
+  % \expandafter\selectlanguage\expandafter{\DocumentLang}
   % Set the bibliography language
-  \expandafter\selectbiblanguage\expandafter{\DocumentLang}
+  % \expandafter\selectbiblanguage\expandafter{\DocumentLang}
 \makeatother
 
 % Adjust rule color of arrays i.e., tables

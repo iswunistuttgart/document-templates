@@ -1,6 +1,10 @@
 \documentclass[%
   bachelor,%
-  english,%,
+  draft,%
+  ngerman,%
+  american,%,
+  % accepted,%
+  female,%
 ]{iswstud}
 
 
@@ -25,19 +29,27 @@
 \author{Philipp Tempel}
 % Short author names
 \shortauthor{Ph.\@ Tempel}
+% Place of birth of author
+\placeofbirth{Stuttgart}
 
 % Set the date this document is printed/published
 % Avoid typing in manually, either use `\today` or `\printdate{yyyy-mm-dd}`
 \date{\today}
+
 
 % Title of document
 \title{This is the Long Long Title of My Thesis Which is Going to Deal with Something Cool}
 % Define a short title if the main title is too long and truncated in parts of the document
 \shorttitle{This is the Shorter Title of My Thesis}
 % Theses can also have subtitles
-\subtitle{An extra explanation of the thesis title goes here}
+\subtitle{An extra, voluntary addition to the thesis title goes here}
 % Define a partnering institute or company here (or multiple separated by `\and`)
 \partner{Fraunhofer Institute for Manufacturing Engineering and Automation IPA \and Fraunhofer Institute for Production Systems and Design Technology IPK}
+
+% Your examiner i.e., one of the professors of your thesis
+\examiner{Juniorprof.~Dr.-Ing.~Andreas Pott}
+% Supervisor(s) of your thesis, multiple separated with `\and`
+\supervisor{Dipl.-Ing.~Philipp Tempel}
 % END setting document properties
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -104,6 +116,8 @@
 \begin{otherlanguage}{ngerman}
   \begin{abstract}
     \Blindtext[3]
+
+    \draftname
        
     \keywords{Sed \and aliquet \and tellus \and eget \and est}
   \end{abstract}
