@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-dev}
+\def\fileversion{1.0.0-rc1}
 \def\filedate{2017/10/03}
 
 % Definition of the actual class interface
@@ -168,17 +168,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Geometry
-\PassOptionsToPackage{%
-%  paper=a4paper,%
-  top=2.5cm,%
-  bottom=3cm,%
-  outer=3cm,%
-  inner=2cm,%
-  heightrounded,%
-  marginparwidth=2.5cm,%
-  marginparsep=0.5cm,%
-  footnotesep=2\baselineskip,%
-}{geometry}
+% \PassOptionsToPackage{%
+%   paper=a4paper,%
+%   % top=2.5cm,%
+%   % bottom=3cm,%
+%   % outer=4cm,%
+%   % inner=3cm,%
+%   heightrounded,%
+%   marginparwidth=2.5cm,%
+%   marginparsep=0.5cm,%
+%   footnotesep=2\baselineskip,%
+% }{geometry}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -259,15 +259,6 @@
     pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
-
-% Depending on online we will define options to hyperref
-% \ifDocumentprint
-%   \PassOptionsToPackage{%
-%     colorlinks=false,%
-%   }{hyperref}
-% \else
-%   %
-% \fi%
 
 % We need to explicitely tell hyperref that we are in draft or final mode
 % @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode
@@ -392,7 +383,11 @@
   toc=bibliography, % The bibliography will be represented by an entry at the table of contents, but will not be numbered.
   toc=listof, % The lists of floating environments i.e., the list of figures and the list of tables, will be represented by entries at the table of contents, but will not be numbered.
   version=last, %
+  usegeometry,% use geometry package and pass the calculate page dimensions to it
+  a4paper,% set papersize to a4
+  DIV=12,% typearea(w:157.50 h:222.75) margins(t:24.75 b:17.50)
 }{scrartcl}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1586,39 +1581,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties
 
-% Examiner
-\newcommand{\examiner}[1]{\gdef\@examiner{#1}}
-\newcommand{\@examiner}{No \texttt{\textbackslash examiner} given\@latex@warning@no@line{No \noexpand\examiner given}}
 
-% Student's matriculation number
-\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
-\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
-
-% Name of the student's supervisor(s)
-\newcommand{\supervisor}[1]{\gdef\@supervisor{#1}}
-\newcommand{\@supervisor}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}
-
-% Name of the student's major
-\newcommand{\major}[1]{\gdef\@major{#1}}
-\newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
-
-% Empty keywords
+% Empty keywords (i.e., not available here)
 \newcommand{\@keywords}{}
 
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
 \gdef\@partner{}
 
-% Place of birth
-\newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
-\gdef\@placeofbirth{}
-
 \newcommand{\frontmatter}{%
   %
 }
 
 % \newcommand{\mainmatter}{%
-%   \cleardoublepageemtpy%
+%   \cleardoublepage%
 % }
 
 
@@ -1815,9 +1791,9 @@
 % Even pages (left pages) from outside to inside
 \lefoot*[\pagemark]{\pagemark}
 \cefoot*[]{}
-\refoot*[]{}
+\refoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
+\lofoot*[]{}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
 
@@ -1951,9 +1927,9 @@
 % Even pages (left pages) from outside to inside
 \lehead*[]{\leftmark}
 \cehead*[]{}
-\rehead*[ ]{\runtitle}
+\rehead*[]{\rightmark}
 % Odd pages (right pages) from inside to outside
-\lohead*[]{\runtitle}
+\lohead*[]{\leftmark}
 \cohead*[]{}
 \rohead*[]{\rightmark}
 
@@ -1962,19 +1938,86 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FOOTER STYES
 % Even pages (left pages) from outside to inside
-\lefoot*[\pagemark]{\pagemark}
-\cefoot*[]{}
+\lefoot*[]{}
+\cefoot*[]{--\pagemark--}
 \refoot*[]{}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
-\cofoot*[]{\includegraphics[height=1.5\baselineskip]{\universitylogo\DocumentLocaleLogosuffix}}
-\rofoot*[\pagemark]{\pagemark}
+\lofoot*[]{}
+\cofoot*[]{--\pagemark--}
+\rofoot*[]{}
+% \AuthorUniversity\\\copyright\,\the\year\space\AuthorDepartmentShort
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header and footer lines
+% Thickness of header top line
+% \setheadtopline{0pt}
+\KOMAoptions{headtopline=false}
+% Thickness of header separator line
+% \setheadsepline{0.66pt}
+\KOMAoptions{headsepline=0.66pt}
+% Thickness of footer separator line
+% \setfootsepline{0.66pt}
+\KOMAoptions{footsepline=0.66pt}
+% Thickness of footer bottom line
+% \setfootbotline{0pt}
+\KOMAoptions{footbotline=false}
+% Line above header
+\addtokomafont{headtopline}{\color{headtopline}}
+% Line below header
+\addtokomafont{headsepline}{\color{headsepline}}
+% Line above footer
+\addtokomafont{footsepline}{\color{footsepline}}
+% Line below footer
+\addtokomafont{footbotline}{\color{footbotline}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Footnote
+\renewcommand{\footnoterule}{\kern-3pt{\color{footnoterule}{\hrule width 2in}}\kern2.6pt}
+\renewcommand{\thefootnote}{\textcolor{thefootnote}{\arabic{footnote}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Komafont definitions
+% Setting title to be written in main color, sans-serif, and Huge
+\setkomafont{title}{\color{title}\Huge}
+% Setting subtitle to be written in main color, sans-serif, and large
+\setkomafont{subtitle}{\color{subtitle}\normalsize}
+% Setting author to be written in main color, sans-serif, and huge
+\addtokomafont{author}{\Large}
+% Setting date to be written in main color, normal font, and normal size
+% \setkomafont{date}{\color{date}\normalfont\normalsize}
+% Page header and footer should be written in the main color and sans-serif
+% \setkomafont{pageheadfoot}{\color{pageheadfoot}}
+% Page footer should be written in the main color, sans-serif and small font size
+% \setkomafont{pagefoot}{\color{pagefoot}\small}
+% Make page numbers printed in PrimaryColor
+% \addtokomafont{pagenumber}{\color{pagenumber}}
+
+% All headings
+% \addtokomafont{disposition}{\color{disposition}}
+
+% % All sections (section, subsection, subsubsection)
+\setkomafont{sectioning}{\color{sectioning}\sffamily\mdseries\scshape}
+% % Adjustment to sections
+% \addtokomafont{section}{\color{section}}
+% % Adjustments to subsection
+% \addtokomafont{subsection}{\color{subsection}}
+% % Adjustments to subsubsections
+% \addtokomafont{subsubsection}{\color{subsubsection}}
+% % We'll make paragraphs have medium font-weight
+% \addtokomafont{paragraph}{\color{paragraph}\mdseries}
+% % And have sub-paragraphs have medium font-weight with a smaller font size
+% % compared to paragraphs
+% \addtokomafont{subparagraph}{\color{subparagraph}\mdseries\small}
+% % Font of label in a description list
+% % \addtokomafont{descriptionlabel}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \ifDocumentbigtitle
   \renewcommand{\maketitle}{%
-    \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+    \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
     \begin{titlepage}%
       \thispagestyle{empty}%
       \centering%
@@ -2032,19 +2075,68 @@
     \cleardoublepage%
     \setcounter{page}{1}%
   }%
-\fi
+\else%
+  \renewcommand{\maketitle}{%
+    \begin{center}
+      \thispagestyle{empty}%
+      \centering%
+      \ifdefempty{\DocumentName}{}{%
+        \begin{minipage}[t][2\baselineskip][c]{0.9\linewidth}%
+          \centering%
+          \huge\DocumentName\par%
+        \end{minipage}\par%
+      }%
+      \begin{minipage}[t][6\baselineskip][c]{0.9\linewidth}%
+        \centering%
+        {\usekomafont{title}{\@title}\par}%
+      \end{minipage}\par%
+      \begin{minipage}[t][3\baselineskip][c]{0.7\linewidth}%
+        \centering%
+        \ifdefempty{\@subtitle}{}{%
+          \usekomafont{subtitle}{\@subtitle}%
+        }%
+      \end{minipage}\par%
+      \vspace*{1\baselineskip}\par%
+      \begin{minipage}[t][2\baselineskip][c]{0.9\linewidth}%
+        \centering%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\unskip,\xspace}%
+        {\usekomafont{author}{\@author}}\par%
+        \renewcommand{\and}{\oldAnd}%
+        \vspace{0.5cm}\par%
+      \end{minipage}\par%
+      \begin{minipage}[t][4\baselineskip][t]{0.65\linewidth}%
+        \centering%
+        \AuthorDepartment, \AuthorUniversity.\par%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\par}%
+        \ifdefempty{\@partner}{}{%
+          \partnername\par%
+          \vspace*{0.3cm}\par%
+          \@partner%
+        }%
+        \renewcommand{\and}{\oldAnd}%
+      \end{minipage}%
+    \end{center}%
+    % \cleardoublepage%
+    \setcounter{page}{1}%
+  }
+\fi%
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some cleanup tasks                                                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\let\originalmainmatter\mainmatter%
-\newcommand{\mainmatter}{%
-  \setstretch{1.25}%
-  \setlength{\parindent}{2ex}%
-  \arrayrulecolor{ArrayRuleColor}%
-  \cleardoublepage%
+\newcommand{\mainmatter}{}%
+\let\originalmainmatter\mainmatter%
+\renewcommand{\mainmatter}{%
+\originalmainmatter%
+\setlength{\parindent}{2ex}%
+\arrayrulecolor{ArrayRuleColor}%
+\setstretch{1.25}%
+\originalmainmatter%
+\setstretch{1.25}%
 }%
 
 \ifdraft{

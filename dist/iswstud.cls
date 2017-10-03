@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-dev}
+\def\fileversion{1.0.0-rc1}
 \def\filedate{2017/10/03}
 
 % Definition of the actual class interface
@@ -171,17 +171,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Geometry
-\PassOptionsToPackage{%
-%  paper=a4paper,%
-  top=2.5cm,%
-  bottom=3cm,%
-  outer=3cm,%
-  inner=2cm,%
-  heightrounded,%
-  marginparwidth=2.5cm,%
-  marginparsep=0.5cm,%
-  footnotesep=2\baselineskip,%
-}{geometry}
+% \PassOptionsToPackage{%
+%   paper=a4paper,%
+%   % top=2.5cm,%
+%   % bottom=3cm,%
+%   % outer=4cm,%
+%   % inner=3cm,%
+%   heightrounded,%
+%   marginparwidth=2.5cm,%
+%   marginparsep=0.5cm,%
+%   footnotesep=2\baselineskip,%
+% }{geometry}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,15 +262,6 @@
     pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
-
-% Depending on online we will define options to hyperref
-% \ifDocumentprint
-%   \PassOptionsToPackage{%
-%     colorlinks=false,%
-%   }{hyperref}
-% \else
-%   %
-% \fi%
 
 % We need to explicitely tell hyperref that we are in draft or final mode
 % @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode
@@ -395,6 +386,9 @@
   toc=bibliography, % The bibliography will be represented by an entry at the table of contents, but will not be numbered.
   toc=listof, % The lists of floating environments i.e., the list of figures and the list of tables, will be represented by entries at the table of contents, but will not be numbered.
   version=last, %
+  usegeometry,% use geometry package and pass the calculate page dimensions to it
+  a4paper,% set papersize to a4
+  DIV=12,% typearea(w:157.50 h:222.75) margins(t:24.75 b:17.50)
 }{scrbook}
 
 
@@ -1589,14 +1583,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties
 
-% Student's matriculation number
-\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
-\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
-
-% Name of the student's major
-\newcommand{\major}[1]{\gdef\@major{#1}}
-\newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
-
 % List of keywords
 \newcommand{\keywords}[1]{\gdef\@keywords{#1}}
 \newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
@@ -1616,6 +1602,14 @@
 % Name(s) of the second examiner(s)
 \newcommand{\supervisor}[1]{\gdef\@secondexaminer{#1}}
 \newcommand{\@secondexaminer}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}
+
+% Name of the student's major
+\newcommand{\major}[1]{\gdef\AuthorMajor{#1}}
+\newcommand{\AuthorMajor}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
+
+% Student's matriculation number
+\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
+\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
 
 
 
@@ -1639,7 +1633,7 @@
       } % Leave this white space here or the "CHAPTER" will move into the gray box
       \resizebox{!}{2.5cm}{%
         \fboxsep=6pt%
-        \fontsize{85}{100}\selectfont\color{white}\sffamily\colorbox{PrimaryColor!50}{\thechapter}%
+        \fontsize{85}{100}\selectfont\color{white}\sffamily\colorbox{PrimaryColor!20}{\thechapter}%
       }%
     }\\*%
   }%
@@ -1811,14 +1805,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -1900,14 +1900,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -1989,14 +1995,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2078,14 +2090,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2167,14 +2185,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2256,14 +2280,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2345,14 +2375,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2434,14 +2470,20 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2464,7 +2506,7 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\mainexaminername}{Pr\"ufer}
 \renewcommand{\secondexaminername}{Betreuer}
 \renewcommand{\logosuffixname}{-de}
 \ifDocumentaccepted%
@@ -2535,26 +2577,14 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
+  \space\AuthorFaculty\space der \AuthorUniversity\space%
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi%
-  \space Abhandlung
+  \fi\space Abhandlung\\%
+  zur Erlangung der W\"urde des\\%
+  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -2611,7 +2641,7 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\mainexaminername}{Pr\"ufer}
 \renewcommand{\secondexaminername}{Betreuer}
 \renewcommand{\logosuffixname}{-de}
 \ifDocumentaccepted%
@@ -2682,26 +2712,14 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
+  \space\AuthorFaculty\space der \AuthorUniversity\space%
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi%
-  \space Abhandlung
+  \fi\space Abhandlung\\%
+  zur Erlangung der W\"urde des\\%
+  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -2758,7 +2776,7 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\mainexaminername}{Pr\"ufer}
 \renewcommand{\secondexaminername}{Betreuer}
 \renewcommand{\logosuffixname}{-de}
 \ifDocumentaccepted%
@@ -2829,26 +2847,14 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
+  \space\AuthorFaculty\space der \AuthorUniversity\space%
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi%
-  \space Abhandlung
+  \fi\space Abhandlung\\%
+  zur Erlangung der W\"urde des\\%
+  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -2905,7 +2911,7 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\mainexaminername}{Pr\"ufer}
 \renewcommand{\secondexaminername}{Betreuer}
 \renewcommand{\logosuffixname}{-de}
 \ifDocumentaccepted%
@@ -2976,26 +2982,14 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
+  \space\AuthorFaculty\space der \AuthorUniversity\space%
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi%
-  \space Abhandlung
+  \fi\space Abhandlung\\%
+  zur Erlangung der W\"urde des\\%
+  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -3052,7 +3046,7 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\mainexaminername}{Pr\"ufer}
 \renewcommand{\secondexaminername}{Betreuer}
 \renewcommand{\logosuffixname}{-de}
 \ifDocumentaccepted%
@@ -3123,26 +3117,14 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
+  \space\AuthorFaculty\space der \AuthorUniversity\space%
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi%
-  \space Abhandlung
+  \fi\space Abhandlung\\%
+  zur Erlangung der W\"urde des\\%
+  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -3248,9 +3230,9 @@
 % Even pages (left pages) from outside to inside
 \lefoot*[\pagemark]{\pagemark}
 \cefoot*[]{}
-\refoot*[]{}
+\refoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
+\lofoot*[]{}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
 
@@ -3486,8 +3468,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
-  \originalmainmatter%
-  \arrayrulecolor{ArrayRuleColor}%
+\originalmainmatter%
+\setlength{\parindent}{2ex}%
+\arrayrulecolor{ArrayRuleColor}%
+\setstretch{1.25}%
+\setstretch{1.25}%
 }%
 
 \ifdraft{

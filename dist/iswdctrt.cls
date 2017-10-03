@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-dev}
+\def\fileversion{1.0.0-rc1}
 \def\filedate{2017/10/03}
 
 % Definition of the actual class interface
@@ -162,17 +162,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Geometry
-\PassOptionsToPackage{%
-%  paper=a4paper,%
-  top=2.5cm,%
-  bottom=3cm,%
-  outer=3cm,%
-  inner=2cm,%
-  heightrounded,%
-  marginparwidth=2.5cm,%
-  marginparsep=0.5cm,%
-  footnotesep=2\baselineskip,%
-}{geometry}
+% \PassOptionsToPackage{%
+%   paper=a4paper,%
+%   % top=2.5cm,%
+%   % bottom=3cm,%
+%   % outer=4cm,%
+%   % inner=3cm,%
+%   heightrounded,%
+%   marginparwidth=2.5cm,%
+%   marginparsep=0.5cm,%
+%   footnotesep=2\baselineskip,%
+% }{geometry}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -253,15 +253,6 @@
     pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
-
-% Depending on online we will define options to hyperref
-% \ifDocumentprint
-%   \PassOptionsToPackage{%
-%     colorlinks=false,%
-%   }{hyperref}
-% \else
-%   %
-% \fi%
 
 % We need to explicitely tell hyperref that we are in draft or final mode
 % @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode
@@ -386,6 +377,9 @@
   toc=bibliography, % The bibliography will be represented by an entry at the table of contents, but will not be numbered.
   toc=listof, % The lists of floating environments i.e., the list of figures and the list of tables, will be represented by entries at the table of contents, but will not be numbered.
   version=last, %
+  usegeometry,% use geometry package and pass the calculate page dimensions to it
+  a4paper,% set papersize to a4
+  DIV=12,% typearea(w:157.50 h:222.75) margins(t:24.75 b:17.50)
 }{scrbook}
 
 
@@ -398,7 +392,6 @@
 
 % The package is part of the Koma-Script bundle, that provides an end user interface above scrlayer, to define and manage page styles, controlling page headers and footers. The end user interface is as much compatible to that of the earlier scrpage2 package, that users should easily be able to switch from the older package to the new, more powerful, one.
 \RequirePackage{scrlayer-scrpage}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1580,14 +1573,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties
 
-% Student's matriculation number
-\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
-\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
-
-% Name of the student's major
-\newcommand{\major}[1]{\gdef\@major{#1}}
-\newcommand{\@major}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
-
 % List of keywords
 \newcommand{\keywords}[1]{\gdef\@keywords{#1}}
 \newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
@@ -1630,7 +1615,7 @@
       } % Leave this white space here or the "CHAPTER" will move into the gray box
       \resizebox{!}{2.5cm}{%
         \fboxsep=6pt%
-        \fontsize{85}{100}\selectfont\color{white}\sffamily\colorbox{PrimaryColor!50}{\thechapter}%
+        \fontsize{85}{100}\selectfont\color{white}\sffamily\colorbox{PrimaryColor!20}{\thechapter}%
       }%
     }\\*%
   }%
@@ -2789,9 +2774,9 @@
 % Even pages (left pages) from outside to inside
 \lefoot*[\pagemark]{\pagemark}
 \cefoot*[]{}
-\refoot*[]{}
+\refoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
 % Odd pages (right pages) from inside to outside
-\lofoot*[]{\copyright\,\the\year\space\AuthorDepartmentShort, \AuthorUniversity}
+\lofoot*[]{}
 \cofoot*[]{}
 \rofoot*[\pagemark]{\pagemark}
 
@@ -3027,10 +3012,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
-  \originalmainmatter%
-  \setstretch{1.25}%
-  \setlength{\parindent}{2ex}%
-  \arrayrulecolor{ArrayRuleColor}%
+\originalmainmatter%
+\setlength{\parindent}{2ex}%
+\arrayrulecolor{ArrayRuleColor}%
+\setstretch{1.25}%
+\setstretch{1.25}%
 }%
 
 \ifdraft{
