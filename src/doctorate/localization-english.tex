@@ -5,13 +5,18 @@
 \departmentshort{ISW}
 %
 %
-\newcommand{\draftname}{Draft}
-\newcommand{\examinername}{Examiner}
-\newcommand{\supervisorname}{Supervisor}
+% \newcommand{\draftname}{Draft}
+\newcommand{\mainexaminername}{First Examiner}
+\newcommand{\secondexaminername}{Second Examiner}
 \newcommand{\logosuffixname}{en}
-\newcommand{\submittedbyname}{submitted by}
+\ifDocumentaccepted%
+  \newcommand{\submittedbyname}{Submitted by}
+\else%
+  \newcommand{\submittedbyname}{By}
+\fi%
 \newcommand{\fromname}{from}
 \newcommand{\submittedonname}{Submitted on}
+\newcommand{\examinationonname}{Defended on}
 \newcommand{\majorname}{Major}
 \newcommand{\partnername}{In cooperation with}
 \newcommand{\keywordsname}{Keywords}
@@ -20,7 +25,7 @@
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
 \renewcommand{\appendixpagename}{Appendices}
-\renewcommand{\abstractname}{Abstract}
+\newcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
@@ -33,9 +38,12 @@
 \newcommand{\thesispretext}{%
   A \documentname\space presented to the faculty %
   \AuthorFaculty, \AuthorUniversity,%
-  \ifdefempty{\degreenamelong}{.}{,%
-    \space in partial fulfillment of the requirements for the degree of %
-    {\degreenamelong}\space (\degreenameshort)%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
   }.%
 }%
 %

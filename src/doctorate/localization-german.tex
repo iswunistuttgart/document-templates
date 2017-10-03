@@ -5,17 +5,22 @@
 \departmentshort{ISW}
 %
 %
-\newcommand{\draftname}{Entwurf}
-\newcommand{\examinername}{Pr\"ufer}
-\newcommand{\supervisorname}{Betreuer}
-\newcommand{\logosuffixname}{-de}
-\newcommand{\submittedbyname}{eingereicht von}
-\newcommand{\fromname}{aus}
-\newcommand{\submittedonname}{Eingereicht am}
-\newcommand{\majorname}{Studiengang}
-\newcommand{\partnername}{In Kooperation mit}
-\newcommand{\keywordsname}{Stichw\"orter}
-\newcommand{\declarationname}{Erkl{\"a}rung des Autors}
+% \newcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{Hauptberichter}
+\renewcommand{\secondexaminername}{Mitberichter}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -25,23 +30,42 @@
 %\renewcommand{\@dedicationname}{Widmung}
 %
 \ifdefstring{\DocumentType}{doctorate}{%
-  \newcommand{\documentname}{Dissertation}
-  \newcommand{\degreenamelong}{Doktoringenieur}
-  \newcommand{\degreenameshort}{Dr.-Ing.}
+  \renewcommand{\documentname}{Dissertation}
+  \renewcommand{\degreenamelong}{Doktoringenieur}
+  \renewcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\newcommand{\thesispretext}{%
-  Eine \documentname\space zur Vorlage an der Fakult\"at %
-  \facultyname, \universityname%
-  \ifdefempty{\degreelongname}{.}{,%
-    \space zur Erlangung des akademischen Grades %
-    {\degreenamelong}\space (\degreenameshort)%
-  }.%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
   \thispagestyle{empty}%
-  \chapter*{\DocumentLocaleDeclaration}%
+  \chapter*{\declarationname}%
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
-  \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+  \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
   \begin{titlepage}%
     \thispagestyle{empty}%
     \centering%
@@ -47,34 +47,39 @@
     \vspace*{1cm}\par%
     \begin{minipage}[t][1cm][c]{0.5\linewidth}
       \centering%
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge DRAFT}}{}
     \end{minipage}
     \vspace*{1cm}\par%
-    \begin{minipage}[c][3cm][c]{0.75\linewidth}%
+    \begin{minipage}[c][3cm][c]{0.90\linewidth}%
       \let\oldAnd\and%
       \renewcommand{\and}{\par}%
-      \begin{tabu} to \linewidth {X[1,l] X[4,l]}%
-        {\examinername:}%
-          & \@examiner\\%
-        {\supervisorname:}%
-          & {\@supervisor}\\%
-        {\submittedonname:}%
-%          & \space{\usekomafont{date}{\@date}}\\%
+      \renewcommand*{\arraystretch}{1.6}
+      \begin{tabu} to \linewidth {X[1,l] X[2,l]}%
+        {\mainexaminername:}%
+          & \@mainexaminer\\%
+        {\secondexaminername:}%
+          & {\@secondexaminer}\\%
+        \ifDocumentaccepted%
+          {\examinationonname:}%
+        \else%
+          {\submittedonname:}%
+        \fi%
+          % & {\usekomafont{date}{\@date}}\\%
           & {\@date}\\%
       \end{tabu}%
     \renewcommand{\and}{\oldAnd}%
     \end{minipage}%
     \vfill
-    \begin{minipage}[t]{0.7\linewidth}
+    \begin{minipage}[t]{0.80\linewidth}
       \centering%
-      \AuthorDepartment, \AuthorUniversity.\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \ifdefempty{\@partner}{}{%
-        \vspace*{0.3cm}\par%
-        \@partner%
-      }%
-      \renewcommand{\and}{\oldAnd}%
+      \AuthorDepartment\space der \AuthorUniversity.\par%
+      % \let\oldAnd\and%
+      % \renewcommand{\and}{\par}%
+      % \ifdefempty{\@partner}{}{%
+      %   \vspace*{0.3cm}\par%
+      %   \@partner%
+      % }%
+      % \renewcommand{\and}{\oldAnd}%
     \end{minipage}
     \vfill
     \begin{minipage}[t][1cm][t]{0.2\linewidth}

@@ -62,23 +62,29 @@
 % \DeclareBoolOption{print}
 % \DeclareComplementaryOption{online}{print}
 
-% Declare whether thesis was accepted and ready for print
+% Declare whether thesis was accepted and ready for print (use draft/final to
+% switch between draft and final version of either the submission or publishing
+% version
 \DeclareBoolOption[false]{accepted}
+
+% Gender of the author
+\DeclareBoolOption{female}
+\DeclareComplementaryOption{male}{female}
+
+% \DeclareStringOption{gender}
+% \DeclareStringOption[male]{gender}[male]
 
 % Declare the document type
 \def\DocumentType{doctorate}
 
-% Default options
-\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
-
 % Pass any other options not known to the scrbook package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrbook}}
+
+% Execute default options
+\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-% Process options (finally)
-\ProcessOptions\relax
 
 
 
