@@ -6,7 +6,7 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\mainexaminername}{Pr\"ufer}
 \renewcommand{\secondexaminername}{Betreuer}
 \renewcommand{\logosuffixname}{-de}
 \ifDocumentaccepted%
@@ -77,26 +77,14 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
+  \space\AuthorFaculty\space der \AuthorUniversity\space%
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi%
-  \space Abhandlung
+  \fi\space Abhandlung\\%
+  zur Erlangung der W\"urde des\\%
+  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%

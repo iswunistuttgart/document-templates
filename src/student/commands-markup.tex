@@ -10,3 +10,11 @@
 % Name(s) of the second examiner(s)
 \newcommand{\supervisor}[1]{\gdef\@secondexaminer{#1}}
 \newcommand{\@secondexaminer}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}
+
+% Name of the student's major
+\newcommand{\major}[1]{\gdef\AuthorMajor{#1}}
+\newcommand{\AuthorMajor}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
+
+% Student's matriculation number
+\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
+\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
