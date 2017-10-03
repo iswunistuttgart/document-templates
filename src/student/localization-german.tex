@@ -1,21 +1,26 @@
-\gdef\AuthorUniversity{Universit\"at Stuttgart}
-\gdef\AuthorFaculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
-\gdef\AuthorDepartment{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-\gdef\AuthorDepartmentAddress{Seidenstr.\@ 36, 70174 Stuttgart}
-\gdef\AuthorDepartmentShort{ISW}
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
 %
 %
-\gdef\DocumentLocaleDraft{Entwurf}
-\gdef\DocumentLocaleExaminer{Pr\"ufer}
-\gdef\DocumentLocaleSupervisor{Betreuer}
-\gdef\DocumentLocaleLogosuffix{-de}
-\gdef\DocumentLocaleSubmittedby{eingereicht von}
-\gdef\DocumentLocaleFrom{aus}
-\gdef\DocumentLocaleSubmittedon{Eingereicht am}
-\gdef\DocumentLocaleMajor{Studiengang}
-\gdef\DocumentLocalePartner{In Kooperation mit}
-\gdef\DocumentLocaleKeywords{Stichw\"orter}
-\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+\renewcommand{\draftname}{Entwurf}
+\renewcommand{\mainexaminername}{P\"rufer}
+\renewcommand{\secondexaminername}{Betreuer}
+\renewcommand{\logosuffixname}{-de}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{vorgelegt von}
+\else%
+  \renewcommand{\submittedbyname}{von}
+\fi%
+\renewcommand{\fromname}{aus}
+\renewcommand{\submittedonname}{Eingereicht am}
+\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
+\renewcommand{\majorname}{Studiengang}
+\renewcommand{\partnername}{In Kooperation mit}
+\renewcommand{\keywordsname}{Stichw\"orter}
+\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -25,63 +30,82 @@
 %\renewcommand{\@dedicationname}{Widmung}
 %
 \ifdefstring{\DocumentType}{description-bachelor}{%
-  \def\DocumentName{Projektexpos\'e}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+ \renewcommand{\documentname}{Projektexpos\'e}
+ \renewcommand{\degreenamelong}{Bachelor of Science}
+ \renewcommand{\degreenameshort}{B.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{description-master}{%
-  \def\DocumentName{Projektexpos\'e}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
+  \renewcommand{\documentname}{Projektexpos\'e}
+  \renewcommand{\degreenamelong}{Master of Science}
+  \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{bachelor}{%
-  \def\DocumentName{Bachelorarbeit}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+  \renewcommand{\documentname}{Bachelorarbeit}
+  \renewcommand{\degreenamelong}{Bachelor of Science}
+  \renewcommand{\degreenameshort}{B.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{master}{%
-  \def\DocumentName{Masterarbeit}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
+  \renewcommand{\documentname}{Masterarbeit}
+  \renewcommand{\degreenamelong}{Master of Science}
+  \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{study}{%
-  \def\DocumentName{Studienarbeit}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
+  \renewcommand{\documentname}{Studienarbeit}
+  \renewcommand{\degreenamelong}{Diplomingenieur}
+  \renewcommand{\degreenameshort}{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Diplomarbeit}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
+  \renewcommand{\documentname}{Diplomarbeit}
+  \renewcommand{\degreenamelong}{Diplomingenieur}
+  \renewcommand{\degreenameshort}{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\DocumentType}{bachelor-project}{%
-  \def\DocumentName{Bachelor Projektarbeit}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+  \renewcommand{\documentname}{Bachelor Projektarbeit}
+  \renewcommand{\degreenamelong}{Bachelor of Science}
+  \renewcommand{\degreenameshort}{B.Sc.}
 }{}
 %
-\def\ThesisPretext{%
-  Eine \DocumentName\space zur Vorlage an der Fakult\"at %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space zur Erlangung des akademischen Grades %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
-  }.%
+\renewcommand{\thesispretext}{%
+  \ifDocumentaccepted%
+    Von der Fakult\"at%
+  \else%
+    Der Fakult\"at%
+  \fi%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong%
+    \ifDocumentfemale%
+      in%
+    \else%
+      s%
+    \fi%
+  \space%
+  (\degreenameshort)
+  \ifDocumentaccepted%
+    genehmigte%
+  \else%
+    vorgelegte%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
   \thispagestyle{empty}%
-  \chapter*{\DocumentLocaleDeclaration}%
+  \chapter*{\declarationname}%
   \vspace{1\baselineskip}%
   \let\oldAnd\and%
   \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \DocumentName\space mit dem Titel%
+  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
   \vspace{1\baselineskip}
   \begin{center}
     \selectfont\sffamily
@@ -93,7 +117,7 @@
   \end{center}
   \vspace{1\baselineskip}
   \begin{enumerate}%
-    \item Dass ich meine Arbeit \textBzw bei einer Gruppenarbeit den entsprechend gekennzeichneten Anteil der Arbeit selbst\"andig verfasst habe.%
+    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
     \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
     \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
     \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%

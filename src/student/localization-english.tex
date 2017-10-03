@@ -1,21 +1,26 @@
-\gdef\AuthorUniversity{University of Stuttgart}
-\gdef\AuthorFaculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
-\gdef\AuthorDepartment{Institute for Control Engineering of Machine Tools and Manufacturing Units}
-\gdef\AuthorDepartmentAddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
-\gdef\AuthorDepartmentShort{ISW}
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
 %
 %
-\gdef\DocumentLocaleDraft{Draft}
-\gdef\DocumentLocaleExaminer{Examiner}
-\gdef\DocumentLocaleSupervisor{Supervisor}
-\gdef\DocumentLocaleLogosuffix{-en}
-\gdef\DocumentLocaleSubmittedby{submitted by}
-\gdef\DocumentLocaleFrom{from}
-\gdef\DocumentLocaleSubmittedon{Submitted on}
-\gdef\DocumentLocaleMajor{Major}
-\gdef\DocumentLocalePartner{In cooperation with}
-\gdef\DocumentLocaleKeywords{Keywords}
-\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+\renewcommand{\draftname}{Draft}
+\renewcommand{\mainexaminername}{First Examiner}
+\renewcommand{\secondexaminername}{Second Examiner}
+\renewcommand{\logosuffixname}{en}
+\ifDocumentaccepted%
+  \renewcommand{\submittedbyname}{submitted by}
+\else%
+  \renewcommand{\submittedbyname}{by}
+\fi%
+\renewcommand{\fromname}{from}
+\renewcommand{\submittedonname}{Submitted on}
+\renewcommand{\examinationonname}{Defended on}
+\renewcommand{\majorname}{Major}
+\renewcommand{\partnername}{In cooperation with}
+\renewcommand{\keywordsname}{Keywords}
+\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -25,53 +30,50 @@
 %\renewcommand{\@dedicationname}{Dedication}
 %
 \ifdefstring{\DocumentType}{description-bachelor}{%
-  \def\DocumentName{Project Description}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+  \renewcommand{\documentname}{Project Description}
+  \renewcommand{\degreenamelong}{Bachelor of Science}
+  \renewcommand{\degreenameshort}{B.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{description-master}{%
-  \def\DocumentName{Project Description}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
+  \renewcommand{\documentname}{Project Description}
+  \renewcommand{\degreenamelong}{Master of Science}
+  \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{bachelor}{%
-  \def\DocumentName{Bachelor's Thesis}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
+  \renewcommand{\documentname}{Bachelor's Thesis}
+  \renewcommand{\degreenamelong}{Bachelor of Science}
+  \renewcommand{\degreenameshort}{B.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{master}{%
-  \def\DocumentName{Master's Thesis}
-  \def\ThesisDegreeLong{Master of Science}
-  \def\ThesisDegreeShort{M.Sc.}
+  \renewcommand{\documentname}{Master's Thesis}
+  \renewcommand{\degreenamelong}{Master of Science}
+  \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{study}{%
-  \def\DocumentName{Student Research Project}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
+  \renewcommand{\documentname}{Student Research Project}
+  \renewcommand{\degreenamelong}{Diplomingenieur}
+  \renewcommand{\degreenameshort}{Dipl.-Ing.}
 }{}
 %
 \ifdefstring{\DocumentType}{diploma}{%
-  \def\DocumentName{Diploma Thesis}
-  \def\ThesisDegreeLong{Diplomingenieur}
-  \def\ThesisDegreeShort{Dipl.-Ing.}
+  \renewcommand{\documentname}{Diploma Thesis}
+  \renewcommand{\degreenamelong}{Diplomingenieur}
+  \renewcommand{\degreenameshort}{Dipl.-Ing.}
 }{}
 %
-\ifdefstring{\DocumentType}{bachelor-project}{%
-  \def\DocumentName{Bachelor's Project Report}
-  \def\ThesisDegreeLong{Bachelor of Science}
-  \def\ThesisDegreeShort{B.Sc.}
-}{}
-%
-\def\ThesisPretext{%
-  A \DocumentName\space presented to the faculty %
-  \AuthorFaculty, \AuthorUniversity,%
-  \ifdefempty{\ThesisDegreeLong}{.}{,%
-    \space in partial fulfillment of the requirements for the degree of %
-    {\ThesisDegreeLong}\space (\ThesisDegreeShort)%
+\renewcommand{\thesispretext}{%
+  A \documentname\space presented to the faculty %
+  \AuthorFaculty, \AuthorUniversity%
+  \ifdefempty{%
+    \degreenamelong%
+  }{%
+    .%
+  }{, in partial fulfillment of the requirements for the degree of %
+    \degreenamelong\space (\degreenameshort)%
   }.%
 }%
 %

@@ -2,3 +2,11 @@
 % Document properties
 
 \input{common/commands-markup-thesis}
+
+% Name of the first examiner
+\newcommand{\examiner}[1]{\gdef\@mainexaminer{#1}}
+\newcommand{\@mainexaminer}{No \texttt{\textbackslash examiner} given\@latex@warning@no@line{No \noexpand\examiner given}}
+
+% Name(s) of the second examiner(s)
+\newcommand{\supervisor}[1]{\gdef\@secondexaminer{#1}}
+\newcommand{\@secondexaminer}{No \texttt{\textbackslash supervisor} given\@latex@warning@no@line{No \noexpand\supervisor given}}

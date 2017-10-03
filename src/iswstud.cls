@@ -51,16 +51,21 @@
 
 % Configure the kvoptions-package
 \SetupKeyvalOptions{%
-  family=ISW, %
-  prefix=Document, %
+  family=ISW,%
+  prefix=Document,%
 }
 
 % Declare debug options
 \DeclareBoolOption{debug}
 
-% Declare print and online style (complementary)
-\DeclareBoolOption{print}
-\DeclareComplementaryOption{online}{print}
+% Declare whether thesis was accepted and ready for print (use draft/final to
+% switch between draft and final version of either the submission or publishing
+% version
+\DeclareBoolOption[false]{accepted}
+
+% Gender of the author
+\DeclareBoolOption{female}
+\DeclareComplementaryOption{male}{female}
 
 % Declare the document type
 \def\DocumentType{bachelor}
@@ -71,16 +76,16 @@
 \DeclareOption{master-description}{\def\DocumentType{description-master}}
 \DeclareOption{study}{\def\DocumentType{study}}
 
-% Default options
-\ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
-
 % Pass any other options not known to the scrbook package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrbook}}
+
+% Execute default options
+\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
 
-% Process options (finally)
+
 \ProcessOptions\relax
 
 
