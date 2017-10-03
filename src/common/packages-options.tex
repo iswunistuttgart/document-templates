@@ -157,20 +157,24 @@
 \fi
 
 % Depending on online we will define options to hyperref
-\ifDocumentprint
-  
-\else
-  \PassOptionsToPackage{%
-    hidelinks=true,%
-  }{hyperref}%
-\fi%
+% \ifDocumentprint
+%   \PassOptionsToPackage{%
+%     colorlinks=false,%
+%   }{hyperref}
+% \else
+%   %
+% \fi%
 
-\ifdraft{ % Draft case
+% We need to explicitely tell hyperref that we are in draft or final mode
+% @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode
+% Draft case
+\ifdraft{%
   \PassOptionsToPackage{%
     final=false,%
     draft=true,%
   }{hyperref}%
-}{ % Final case
+% Final case
+}{%
   \PassOptionsToPackage{%
     draft=false,%
     final=true,%
