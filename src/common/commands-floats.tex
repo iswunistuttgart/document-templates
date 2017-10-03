@@ -1,27 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FLOAT COMMANDS                                                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Create two new lengths for TikZ images: figurewidth and figureheight
-\newlength{\figurewidth}
-\newlength{\figureheight}
-% Set the default lenghts of above defined lengths with aspect ratio 16:9 to width
-% of 75% of line width (and height accordingly)
-\setlength{\figurewidth}{0.75\linewidth}
-\setlength{\figureheight}{0.421875\linewidth}
-
-% Easily include a TikZ image with only three arguments (one required, two optional) - default aspect ratio for a tikz image is 4:3 (0.75 x 0.5625 \linewidth) [width x height]
-% a) Width of rendered image
-% b) Height of rendered image
-% 1) Path to the file
-%\newcommand{\includetikz}[3]{%
-% \DeclareDocumentCommand{\includetikz}{O{0.75\linewidth} O{0.5625\linewidth} m}{%
-%   \setlength{\figurewidth}{#1}%
-%   \setlength{\figureheight}{#2}%
-% %  \tikzsetnextfilename{#3}%
-%   \input{#3.tikz}%
-% }
-% Deprecate `\includetikz` in favor of `\includegraphics` with the `tikzscale` package
-\deprecate{includetikz}{\includegraphics}
 
 % Easily include SVG files with only one required argument (and one optional argument)
 % a) Width of the file
