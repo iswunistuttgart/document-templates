@@ -58,10 +58,6 @@
 % Declare debug options
 \DeclareBoolOption{debug}
 
-% Declare print and online style (complementary)
-% \DeclareBoolOption{print}
-% \DeclareComplementaryOption{online}{print}
-
 % Declare whether thesis was accepted and ready for print (use draft/final to
 % switch between draft and final version of either the submission or publishing
 % version
@@ -70,9 +66,6 @@
 % Gender of the author
 \DeclareBoolOption{female}
 \DeclareComplementaryOption{male}{female}
-
-% \DeclareStringOption{gender}
-% \DeclareStringOption[male]{gender}[male]
 
 % Declare the document type
 \def\DocumentType{doctorate}
