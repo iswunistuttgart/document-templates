@@ -64,17 +64,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Geometry
-\PassOptionsToPackage{%
-%  paper=a4paper,%
-  top=2.5cm,%
-  bottom=3cm,%
-  outer=3cm,%
-  inner=2cm,%
-  heightrounded,%
-  marginparwidth=2.5cm,%
-  marginparsep=0.5cm,%
-  footnotesep=2\baselineskip,%
-}{geometry}
+% \PassOptionsToPackage{%
+%   paper=a4paper,%
+%   % top=2.5cm,%
+%   % bottom=3cm,%
+%   % outer=4cm,%
+%   % inner=3cm,%
+%   heightrounded,%
+%   marginparwidth=2.5cm,%
+%   marginparsep=0.5cm,%
+%   footnotesep=2\baselineskip,%
+% }{geometry}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,15 +155,6 @@
     pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
-
-% Depending on online we will define options to hyperref
-% \ifDocumentprint
-%   \PassOptionsToPackage{%
-%     colorlinks=false,%
-%   }{hyperref}
-% \else
-%   %
-% \fi%
 
 % We need to explicitely tell hyperref that we are in draft or final mode
 % @see https://en.wikibooks.org/wiki/LaTeX/Print_version#Problems_with_draft_mode

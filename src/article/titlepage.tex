@@ -2,7 +2,7 @@
 % Titlepage creation %
 \ifDocumentbigtitle
   \renewcommand{\maketitle}{%
-    \newgeometry{inner=1cm, outer=1cm, top=1cm, bottom=1cm}%
+    \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
     \begin{titlepage}%
       \thispagestyle{empty}%
       \centering%
@@ -60,4 +60,50 @@
     \cleardoublepage%
     \setcounter{page}{1}%
   }%
-\fi
+\else%
+  \renewcommand{\maketitle}{%
+    \begin{center}
+      \thispagestyle{empty}%
+      \centering%
+      \ifdefempty{\DocumentName}{}{%
+        \begin{minipage}[t][2\baselineskip][c]{0.9\linewidth}%
+          \centering%
+          \huge\DocumentName\par%
+        \end{minipage}\par%
+      }%
+      \begin{minipage}[t][6\baselineskip][c]{0.9\linewidth}%
+        \centering%
+        {\usekomafont{title}{\@title}\par}%
+      \end{minipage}\par%
+      \begin{minipage}[t][3\baselineskip][c]{0.7\linewidth}%
+        \centering%
+        \ifdefempty{\@subtitle}{}{%
+          \usekomafont{subtitle}{\@subtitle}%
+        }%
+      \end{minipage}\par%
+      \vspace*{1\baselineskip}\par%
+      \begin{minipage}[t][2\baselineskip][c]{0.9\linewidth}%
+        \centering%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\unskip,\xspace}%
+        {\usekomafont{author}{\@author}}\par%
+        \renewcommand{\and}{\oldAnd}%
+        \vspace{0.5cm}\par%
+      \end{minipage}\par%
+      \begin{minipage}[t][4\baselineskip][t]{0.65\linewidth}%
+        \centering%
+        \AuthorDepartment, \AuthorUniversity.\par%
+        \let\oldAnd\and%
+        \renewcommand{\and}{\par}%
+        \ifdefempty{\@partner}{}{%
+          \partnername\par%
+          \vspace*{0.3cm}\par%
+          \@partner%
+        }%
+        \renewcommand{\and}{\oldAnd}%
+      \end{minipage}%
+    \end{center}%
+    % \cleardoublepage%
+    \setcounter{page}{1}%
+  }
+\fi%
