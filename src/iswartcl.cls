@@ -190,12 +190,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some cleanup tasks                                                         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\let\originalmainmatter\mainmatter%
-\newcommand{\mainmatter}{%
-  \setstretch{1.25}%
-  \setlength{\parindent}{2ex}%
-  \arrayrulecolor{ArrayRuleColor}%
-  \cleardoublepage%
+\newcommand{\mainmatter}{}%
+\let\originalmainmatter\mainmatter%
+\renewcommand{\mainmatter}{%
+  \input{common/mainmatter}
+  \input{article/mainmatter}
 }%
 
 \ifdraft{

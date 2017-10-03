@@ -195,8 +195,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
-  \originalmainmatter%
-  \arrayrulecolor{ArrayRuleColor}%
+  \input{common/mainmatter}
+  \input{student/mainmatter}
 }%
 
 \ifdraft{

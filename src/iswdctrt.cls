@@ -100,7 +100,6 @@
 \RequirePackage{scrlayer-scrpage}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load Debug Packages                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -186,10 +185,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
-  \originalmainmatter%
-  \setstretch{1.25}%
-  \setlength{\parindent}{2ex}%
-  \arrayrulecolor{ArrayRuleColor}%
+  \input{common/mainmatter}
+  \input{doctorate/mainmatter}
 }%
 
 \ifdraft{
