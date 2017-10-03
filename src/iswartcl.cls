@@ -73,9 +73,6 @@
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
 
-\DeclareBoolOption[false]{twoside}
-\DeclareComplementaryOption{oneside}{twoside}
-
 % Default options
 \ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
@@ -84,12 +81,6 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-\ifDocumenttwoside%
-  \PassOptionsToClass{twoside}{scrartcl}%
-\else%
-  \PassOptionsToClass{oneside}{scrartcl}%
-\fi%
 
 % Process options (finally)
 \ProcessOptions\relax

@@ -71,9 +71,6 @@
 \DeclareOption{master-description}{\def\DocumentType{description-master}}
 \DeclareOption{study}{\def\DocumentType{study}}
 
-\DeclareBoolOption[true]{twoside}
-\DeclareComplementaryOption{oneside}{twoside}
-
 % Default options
 \ExecuteOptions{bachelor, ngerman, draft, a4paper, twoside, cleardoublepage=empty, open=right}
 
@@ -82,12 +79,6 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-\ifDocumenttwoside%
-  \PassOptionsToClass{twoside}{scrbook}%
-\else%
-  \PassOptionsToClass{oneside}{scrbook}%
-\fi%
 
 % Process options (finally)
 \ProcessOptions\relax

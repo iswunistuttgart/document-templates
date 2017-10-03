@@ -59,14 +59,14 @@
 \DeclareBoolOption{debug}
 
 % Declare print and online style (complementary)
-\DeclareBoolOption{print}
-\DeclareComplementaryOption{online}{print}
+% \DeclareBoolOption{print}
+% \DeclareComplementaryOption{online}{print}
+
+% Declare whether thesis was accepted and ready for print
+\DeclareBoolOption[false]{accepted}
 
 % Declare the document type
 \def\DocumentType{doctorate}
-
-\DeclareBoolOption[true]{twoside}
-\DeclareComplementaryOption{oneside}{twoside}
 
 % Default options
 \ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
@@ -76,12 +76,6 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-\ifDocumenttwoside%
-  \PassOptionsToClass{twoside}{scrbook}%
-\else%
-  \PassOptionsToClass{oneside}{scrbook}%
-\fi%
 
 % Process options (finally)
 \ProcessOptions\relax

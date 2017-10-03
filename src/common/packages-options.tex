@@ -144,13 +144,15 @@
   verbose=false,% be chatty
 }{hyperref}
 
-\ifDocumenttwoside
+% Set layout of PDF document in case it is twosided
+\if@twoside%
   \PassOptionsToPackage{%
-    pdfpagelayout=TwoColumnRight,% set layout of PDF pages
+    pdfpagelayout=TwoColumnRight,%
   }{hyperref}%
+% Set layout of PDF document in case it is onesided
 \else
   \PassOptionsToPackage{%
-    pdfpagelayout=OneColumn,% set layout of PDF pages
+    pdfpagelayout=OneColumn,%
   }{hyperref}%
 \fi
 
