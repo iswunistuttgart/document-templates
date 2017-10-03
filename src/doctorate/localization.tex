@@ -1,11 +1,45 @@
 \@ifpackageloaded{babel}{%
-  \input{doctorate/localization-english}%
+  \input{doctorate/localization-init}%
 
+  \addto\captionsenglish{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionsUSenglish{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionsamerican{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionsUKenglish{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionsbritish{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionscanadian{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionsaustralian{%
+    \input{doctorate/localization-english}%
+  }
+  \addto\captionsnewzealand{%
+    \input{doctorate/localization-english}%
+  }
+
+  \addto\captionsaustrian{%
+    \input{doctorate/localization-german}%
+  }%
+  \addto\captionsgerman{%
+    \input{doctorate/localization-german}%
+  }%
+  \addto\captionsgermanb{%
+    \input{doctorate/localization-german}%
+  }%
+  \addto\captionsnaustrian{%
+    \input{doctorate/localization-german}%
+  }%
   \addto\captionsngerman{%
     \input{doctorate/localization-german}%
   }%
 
-  \addto\captionsgerman{%
-    \input{doctorate/localization-german}%
-  }%
 }{}%

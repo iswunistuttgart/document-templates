@@ -5,37 +5,37 @@
 \departmentshort{ISW}
 %
 %
-\renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\newcommand{\draftname}{Draft}
+\newcommand{\mainexaminername}{First Examiner}
+\newcommand{\secondexaminername}{Second Examiner}
+\newcommand{\logosuffixname}{en}
 \ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
+  \newcommand{\submittedbyname}{Submitted by}
 \else%
-  \renewcommand{\submittedbyname}{By}
+  \newcommand{\submittedbyname}{By}
 \fi%
-\renewcommand{\fromname}{from}
-\renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
-\renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
+\newcommand{\fromname}{from}
+\newcommand{\submittedonname}{Submitted on}
+\newcommand{\examinationonname}{Defended on}
+\newcommand{\majorname}{Major}
+\newcommand{\partnername}{In cooperation with}
+\newcommand{\keywordsname}{Keywords}
+\newcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
 \renewcommand{\appendixpagename}{Appendices}
-\renewcommand{\abstractname}{Abstract}
+\newcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
 \ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
+  \newcommand{\documentname}{Dissertation}
+  \newcommand{\degreenamelong}{Doktoringenieur}
+  \newcommand{\degreenameshort}{Dr.-Ing.}
 }{}
 %
-\renewcommand{\thesispretext}{%
+\newcommand{\thesispretext}{%
   A \documentname\space presented to the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
