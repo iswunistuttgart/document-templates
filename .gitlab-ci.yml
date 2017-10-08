@@ -4,7 +4,7 @@ isw_cls:
   script:
     - python build.py
   artifacts:
-    name: "isw_latextemplates_${CI_COMMIT_REF_NAME}"
+    name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     paths:
       - 'dist/*.cls'
       - 'dist/*.tex'
