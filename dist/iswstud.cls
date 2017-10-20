@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc1}
+\def\fileversion{1.0.0-rc2}
 \def\filedate{2017/10/20}
 
 % Definition of the actual class interface
@@ -1023,7 +1023,7 @@
 % \norm[1]{a_i} => || a_i ||_{\smaller[2]{1}}
 \DeclareDocumentCommand{\norm}{o m}{%
   \left\Vert {#2} \right\Vert
-  \IfValueT{#1}{_{\text{\smaller[2]{$#1$}}}}
+  \IfValueT{#1}{_{\mathsmaller[2]{#1}}}
 }
 
 % Power
@@ -3257,12 +3257,10 @@
 \addtokomafont{pagenumber}{\color{pagenumber}}
 
 % All headings
-\addtokomafont{disposition}{\color{disposition}}
+\addtokomafont{disposition}{\color{disposition}\rmfamily\bfseries}
 
-% Formatting part heading
-\addtokomafont{part}{\color{part}\sffamily\Huge}
 % All sections (section, subsection, subsubsection)
-\addtokomafont{sectioning}{\color{sectioning}\mdseries}
+\addtokomafont{sectioning}{\color{sectioning}}
 % Adjustment to sections
 \addtokomafont{section}{\color{section}}
 % Adjustments to subsection
@@ -3355,8 +3353,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Adjust chapter heading
-% \addtokomafont{chapter}{\color{chapter}\sffamily\huge}
+% Formatting part heading
+\addtokomafont{part}{\color{part}\Huge}
+% Formatting chapter heading
 \addtokomafont{chapter}{\color{chapter}\normalfont\Huge}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

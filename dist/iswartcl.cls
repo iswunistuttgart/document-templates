@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc1}
+\def\fileversion{1.0.0-rc2}
 \def\filedate{2017/10/20}
 
 % Definition of the actual class interface
@@ -10,7 +10,7 @@
 \typeout{}
 \typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
-\typeout{      Document class for doctoral theses}
+\typeout{      Document class for documents}
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
@@ -1024,7 +1024,7 @@
 % \norm[1]{a_i} => || a_i ||_{\smaller[2]{1}}
 \DeclareDocumentCommand{\norm}{o m}{%
   \left\Vert {#2} \right\Vert
-  \IfValueT{#1}{_{\text{\smaller[2]{$#1$}}}}
+  \IfValueT{#1}{_{\mathsmaller[2]{#1}}}
 }
 
 % Power
@@ -1818,12 +1818,10 @@
 \addtokomafont{pagenumber}{\color{pagenumber}}
 
 % All headings
-\addtokomafont{disposition}{\color{disposition}}
+\addtokomafont{disposition}{\color{disposition}\rmfamily\bfseries}
 
-% Formatting part heading
-\addtokomafont{part}{\color{part}\sffamily\Huge}
 % All sections (section, subsection, subsubsection)
-\addtokomafont{sectioning}{\color{sectioning}\mdseries}
+\addtokomafont{sectioning}{\color{sectioning}}
 % Adjustment to sections
 \addtokomafont{section}{\color{section}}
 % Adjustments to subsection
