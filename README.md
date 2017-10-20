@@ -6,10 +6,9 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | n/a |
+| iswartcl | General documents | 1.0.0-rc1 |
 | iswdctrt | Doctoral theses | 1.0.0-rc1 |
 | iswstud | Student theses | 1.0.0-rc1 |
-| iswbeamer | Presentations | n/a |
 
 Simply copy the respective files (`.cls` and `.tex`) from `dist/` to a directory of your choice and start writing your document inside the given `.tex` file!
 
@@ -21,26 +20,42 @@ ISW LaTeX Templates was created by [Philipp Tempel](http://www.isw.uni-stuttgart
 
 Before sending a pull request, be sure to check out the [Contribution Guidelines](CONTRIBUTING.md) first.
 
----
+## Requirements
 
-## Folder Structure
+### LaTeX Distribution
 
-The folder structure may not be apparent at first sight, thus we shall briefly introduce the folders in use
+You need an up-to-date version of a LaTeX distribution on your current operating system. It is generally advised *against* MikTeX, and advised *for* using [TeXlive](https://www.tug.org/texlive/).
 
-### Backlog
+### Compiler Engine
 
-Local folder for backlog storing of files like other university's or department's templates. Folder shall not contain any commited data and exists solely for the purpose of local i.e., development backlog.
+As the trend in development of LaTeX related packages and classes is to move away from pdflatex towards xelatex or lualatex, we are not providing support for pdflatex anymore. As such, you will need to compile your document using either XeLaTeX or luaLaTeX (preferably luaLaTeX as the classes are  more thoroughly tested against luaLaTeX).
 
-### Documentation
+## Usage
 
-All documentation for packages used by the LaTeX class ```isw.cls``` can be found in `Documentation`. Though documentation can be found on CTAN, too, it is hosted here for better packaging of the file
+You can use these document classes for a magnitude of documents such as your bachelor's or master's thesis, a simple document, or a doctoral thesis. Please read on to find out more on the general structure of a document in either type.
+ 
 
-### Implementation
+### Doctoral Thesis
 
-Actual implementation of the templates for ```thesis``` and ```presentation```.
+Doctoral theses may be typeset in your language of preference (as long as it is either English or German, no other language is officially supported by the document class).
 
-#### Thesis
-Working/development directory for the document template in LaTeX.
 
-#### Presentation
-Working/development directory for the presentation template in LaTeX.
+#### English Doctoral Thesis
+
+To have your thesis type set in English, you need the following document class header
+
+```latex
+\documentclass[%
+  ngerman,% to allow an alternative titlepage and abstract in German
+  english,% main document language needs to be loaded last
+]{iswdctrt}
+```
+
+#### German Doctoral Thesis
+
+```latex
+\documentclass[%
+  english,% to allow an alternative titlepage and abstract in English
+  ngerman,% main document language needs to be loaded last
+]{iswdctrt}
+```
