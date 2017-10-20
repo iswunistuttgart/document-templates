@@ -36,7 +36,7 @@
 % \norm[1]{a_i} => || a_i ||_{\smaller[2]{1}}
 \DeclareDocumentCommand{\norm}{o m}{%
   \left\Vert {#2} \right\Vert
-  \IfValueT{#1}{_{\smaller[2]{#1}}}
+  \IfValueT{#1}{_{\text{\smaller[2]{$#1$}}}}
 }
 
 % Power
