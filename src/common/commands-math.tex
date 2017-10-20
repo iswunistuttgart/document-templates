@@ -200,34 +200,28 @@
   {\ms{\text{#1}}}
 }
 
-% Rotation matrix without argument
-\DeclareDocumentCommand{\rotm}{}{%
-  \matr{R}%
+% Rotation matrix entry
+\DeclareDocumentCommand{\rotscal}{}{%
+  R%
 }
 
-% Rotation matrix R with argument with optional index
-% \rot{\gamma} => \rotm (\gamma)
-% \rot[x]{\gamma} => \rotm_{x} (\gamma)
-\NewDocumentCommand{\rot}{o m}{%
-  \IfValueTF{#1}{%
-    \rotm_{#1} \left( #2 \right)%
-  }{%
-    \rotm \left( #2 \right)%
-  }%
+% Rotation matrix
+\DeclareDocumentCommand{\rotmatr}{}{%
+  \matr{\rotscal}%
 }
 
 % Rotation matrices about specific axes
-% \rotx{\alpha} => \rot[x]{\alpha}
+% \rotx{\alpha} => \rotmatr_{x} \of{\alpha}
 \DeclareDocumentCommand{\rotx}{m}{%
-  \rot[x]{#1}
+  \rotmatr_{x} \of{#1}%
 }
-% \roty{\beta} => \rot[y]{\beta}
+% \roty{\beta} => \rotmatr_{y} \of{\beta}
 \DeclareDocumentCommand{\roty}{m}{%
-  \rot[y]{#1}
+  \rotmatr_{y} \of{#1}%
 }
-% \rotz{\gamma} => \rot[z]{\gamma}
+% \rotz{\gamma} => \rotmatr_{z} \of{\gamma}
 \DeclareDocumentCommand{\rotz}{m}{%
-  \rot[z]{#1}
+  \rotmatr_{z} \of{#1}%
 }
 
 % Operator names for Imaginary and Real unit
