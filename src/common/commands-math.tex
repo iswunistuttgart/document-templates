@@ -168,7 +168,7 @@
 % Arcus tangent 2
 % \atantwo{y}{x} => atan2(y, x)
 \NewDocumentCommand{\arctant}{m m}{%
-  \arctantwo \! \left( #1, \, #2 \right)%
+  \arctantwo \! \of{#1, #2}%
 }%
 
 % Math operator for the trace of matrix
@@ -250,13 +250,13 @@
 
 
 %% Trigonometric functions with parentheses around argument
-% \ptrig{\sin}{\beta} => \sin{ \left( \beta \right) }
+% \ptrig{\sin}{\beta} => \sin \of{ \beta }
 \DeclareDocumentCommand{\ptrig}{ s m m }{%
   #2{%
     \IfBooleanTF{#1}{%
-      ( #3 )
+      \of*{#3}%
     }{%
-      \left( #3 \right )%
+      \of{#3}%
     }%
   }%
 }
@@ -448,12 +448,15 @@
 }
 
 % Declare a nice "function of" short hand
-% T \of{s} => T \! \left( s \right)
-\DeclareDocumentCommand{\of}{ s m }{%
-  \!%
+% @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
+% T \of{x} => T \parentheses{x}
+% T \of*{x} => T \parentheses*{x}
+% T \of[\big]{x} => T \parentheses[\big]{x}
+\DeclarePairedDelimiter\parentheses{\lparen}{\rparen}
+\DeclareDocumentCommand{\of}{ s O{} m }{%
   \IfBooleanTF{#1}{%
-    ( #2 )%
+    \parentheses*[#2]{#3}%
   }{%
-    \left( #2 \right)%
+    \parentheses{#3}%
   }%
 }
