@@ -1014,17 +1014,11 @@
 
 % Absolute value
 % \abs{x} => |x|
-\DeclareDocumentCommand{\abs}{m}{%
-  \left\vert {#1} \right\vert%
-}
+\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{#1}
 
 % Norm
-% \norm{a_i} => || a_i ||_{\smaller[2]{2}
-% \norm[1]{a_i} => || a_i ||_{\smaller[2]{1}}
-\DeclareDocumentCommand{\norm}{o m}{%
-  \left\Vert {#2} \right\Vert
-  \IfValueT{#1}{_{\mathsmaller[2]{#1}}}
-}
+% \norm{a_i} => \lVert a_i \rVert
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}
 
 % Power
 % \pow{x} => {x}^{2}
