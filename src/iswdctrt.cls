@@ -8,7 +8,7 @@
 
 % Typeout a notice
 \typeout{}
-\typeout{ISW - Institute for Control Engineering of Machine Tools}
+\typeout{ISW Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
 \typeout{      Document class for doctoral theses}
 \typeout{      Version \fileversion\space(\filedate) }
@@ -78,6 +78,7 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
+\ProcessOptions*
 
 
 
@@ -100,6 +101,7 @@
 \RequirePackage{scrlayer-scrpage}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load Debug Packages                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -120,7 +122,7 @@
 \input{common/packages-main}
 \input{doctorate/packages-main}
 
-% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
+% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMAScript was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of packages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}

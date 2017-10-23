@@ -61,29 +61,24 @@
 % Allow user to choose a "big title page"
 \DeclareBoolOption[false]{bigtitle}
 
-% Declare print and online style (complementary)
-\DeclareBoolOption{print}
-\DeclareComplementaryOption{online}{print}
-
 % Declare the document type
 \def\DocumentType{regular}
 \DeclareOption{regular}{\def\DocumentType{regular}}
 \DeclareOption{exam}{\def\DocumentType{exam}}
 \DeclareOption{exercise}{\def\DocumentType{exercise}}
+\DeclareOption{assignment}{\def\DocumentType{assignment}}
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
 
-% Default options
-\ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
+% Pass any other options not known to the scrartcl package
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 
-% Pass any other options not known to the scrbook package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
+% Execute default options
+\ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-% Process options (finally)
-\ProcessOptions\relax
+\ProcessOptions*
 
 
 

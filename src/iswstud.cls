@@ -84,9 +84,7 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-
-\ProcessOptions\relax
+\ProcessOptions*
 
 
 
@@ -204,6 +202,12 @@
   \input{student/ifdraft}
 }{}
 
+% No single lines of text of the following paragraph on the current page's bottom
+\clubpenalty=9000
+% No single lines of text of the previous paragraph on a new page's top
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -219,12 +223,6 @@
   \input{common/atbegindocument}
   \input{student/atbegindocument}
 }
-
-% No single lines of text of the following paragraph on the current page's bottom
-\clubpenalty=9000
-% No single lines of text of the previous paragraph on a new page's top
-\widowpenalty=10000
-\displaywidowpenalty=10000
 
 
 
