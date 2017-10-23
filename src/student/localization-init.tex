@@ -66,14 +66,20 @@
 }{}
 %
 \newcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %

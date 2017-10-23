@@ -77,14 +77,20 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong\space%
+  (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi\space Abhandlung\\%
-  zur Erlangung der W\"urde des\\%
-  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
