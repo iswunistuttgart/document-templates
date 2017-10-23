@@ -2000,10 +2000,10 @@
 % % Adjustments to subsubsections
 % \addtokomafont{subsubsection}{\color{subsubsection}}
 % % We'll make paragraphs have medium font-weight
-% \addtokomafont{paragraph}{\color{paragraph}\mdseries}
+\setkomafont{paragraph}{\color{paragraph}\bfseries}
 % % And have sub-paragraphs have medium font-weight with a smaller font size
 % % compared to paragraphs
-% \addtokomafont{subparagraph}{\color{subparagraph}\mdseries\small}
+\setkomafont{subparagraph}{\color{subparagraph}\bfseries\small}
 % % Font of label in a description list
 % % \addtokomafont{descriptionlabel}{}
 
