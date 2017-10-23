@@ -56,6 +56,9 @@
 % \diag => diag for a matrix as diagonal of the elements
 \DeclareMathOperator{\diag}{diag}
 
+% Mathemtical sign operator
+\DeclareMathOperator{\sign}{sign}
+
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
@@ -124,6 +127,13 @@
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
   {#1}^{\mkern-5mu\mathsf{T}}%
+}
+
+% Transformation matrix from one system to another
+% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}
+% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}
+\DeclareDocumentCommand{\trafom}{ O{T} m m}{%
+  \tensor[^#3]{\matr{#1}}{_#2}
 }
 
 % Conjugate complex
