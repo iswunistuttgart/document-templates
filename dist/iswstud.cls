@@ -1253,7 +1253,7 @@
 % Parentheses around sine
 \DeclareDocumentCommand{\psin}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\sin}{#2}%
+    \prtrig*{\sin}{#2}%
   }{%
     \prtrig{\sin}{#2}%
   }%
@@ -1262,7 +1262,7 @@
 % Parentheses around cosine
 \DeclareDocumentCommand{\pcos}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\cos}{#2}%
+    \prtrig*{\cos}{#2}%
   }{%
     \prtrig{\cos}{#2}%
   }%
@@ -1271,7 +1271,7 @@
 % Parentheses around tangent
 \DeclareDocumentCommand{\ptan}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\tan}{#2}%
+    \prtrig*{\tan}{#2}%
   }{%
     \prtrig{\tan}{#2}%
   }%
@@ -1280,7 +1280,7 @@
 % Parentheses around secant
 \DeclareDocumentCommand{\psec}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\sec}{#2}%
+    \prtrig*{\sec}{#2}%
   }{%
     \prtrig{\sec}{#2}%
   }%
@@ -1289,7 +1289,7 @@
 % Parentheses around cosecant
 \DeclareDocumentCommand{\pcsc}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\csc}{#2}%
+    \prtrig*{\csc}{#2}%
   }{%
     \prtrig{\csc}{#2}%
   }%
@@ -1298,7 +1298,7 @@
 % Parentheses around cotangent
 \DeclareDocumentCommand{\pcot}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\cot}{#2}%
+    \prtrig*{\cot}{#2}%
   }{%
     \prtrig{\cot}{#2}%
   }%
@@ -1309,7 +1309,7 @@
 % Parentheses around arcus sine
 \DeclareDocumentCommand{\parcsin}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\arcsin}{#2}%
+    \prtrig*{\arcsin}{#2}%
   }{%
     \prtrig{\arcsin}{#2}%
   }%
@@ -1318,7 +1318,7 @@
 % Parentheses around arcus cosine
 \DeclareDocumentCommand{\parccos}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\arccos}{#2}%
+    \prtrig*{\arccos}{#2}%
   }{%
     \prtrig{\arccos}{#2}%
   }%
@@ -1327,7 +1327,7 @@
 % Parentheses around arcus 
 \DeclareDocumentCommand{\parctan}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\arctan}{#2}%
+    \prtrig*{\arctan}{#2}%
   }{%
     \prtrig{\arctan}{#2}%
   }%
@@ -1336,7 +1336,7 @@
 % Parentheses around arcus 
 \DeclareDocumentCommand{\parcsec}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\arcsec}{#2}%
+    \prtrig*{\arcsec}{#2}%
   }{%
     \prtrig{\arcsec}{#2}%
   }%
@@ -1345,7 +1345,7 @@
 % Parentheses around arcus 
 \DeclareDocumentCommand{\parccsc}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\arccsc}{#2}%
+    \prtrig*{\arccsc}{#2}%
   }{%
     \prtrig{\arccsc}{#2}%
   }%
@@ -1354,7 +1354,7 @@
 % Parentheses around arcus 
 \DeclareDocumentCommand{\parccot}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\arccot}{#2}%
+    \prtrig*{\arccot}{#2}%
   }{%
     \prtrig{\arccot}{#2}%
   }%
@@ -1365,7 +1365,7 @@
 % Parentheses around sin hyperbolic
 \DeclareDocumentCommand{\psinh}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\sinh}{#2}%
+    \prtrig*{\sinh}{#2}%
   }{%
     \prtrig{\sinh}{#2}%
   }%
@@ -1374,7 +1374,7 @@
 % Parentheses around cosine hyperbolic
 \DeclareDocumentCommand{\pcosh}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\cosh}{#2}%
+    \prtrig*{\cosh}{#2}%
   }{%
     \prtrig{\cosh}{#2}%
   }%
@@ -1383,7 +1383,7 @@
 % Parentheses around cosine hyperbolic
 \DeclareDocumentCommand{\ptanh}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\tanh}{#2}%
+    \prtrig*{\tanh}{#2}%
   }{%
     \prtrig{\tanh}{#2}%
   }%
@@ -1392,7 +1392,7 @@
 % Parentheses around cosine hyperbolic
 \DeclareDocumentCommand{\pcoth}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\coth}{#2}%
+    \prtrig*{\coth}{#2}%
   }{%
     \prtrig{\coth}{#2}%
   }%
@@ -1403,7 +1403,7 @@
 % Parentheses around exp
 \DeclareDocumentCommand{\pexp}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\exp}{#2}%
+    \prtrig*{\exp}{#2}%
   }{%
     \prtrig{\exp}{#2}%
   }%
@@ -1412,7 +1412,7 @@
 % Parentheses around logarithm base 10
 \DeclareDocumentCommand{\plog}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\log}{#2}%
+    \prtrig*{\log}{#2}%
   }{%
     \prtrig{\log}{#2}%
   }%
@@ -1421,7 +1421,7 @@
 % Parentheses around logarithm base 2
 \DeclareDocumentCommand{\pln}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\ln}{#2}%
+    \prtrig*{\ln}{#2}%
   }{%
     \prtrig{\ln}{#2}%
   }%
@@ -1430,7 +1430,7 @@
 % Parentheses around logarithm base e
 \DeclareDocumentCommand{\plg}{ s m }{%
   \IfBooleanTF{#1}{%
-    \prtig*{\lg}{#2}%
+    \prtrig*{\lg}{#2}%
   }{%
     \prtrig{\lg}{#2}%
   }%
