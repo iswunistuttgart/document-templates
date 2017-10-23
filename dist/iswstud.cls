@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-rc2}
-\def\filedate{2017/10/20}
+\def\filedate{2017/10/23}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -95,9 +95,7 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-
-\ProcessOptions\relax
+\ProcessOptions*
 
 
 
@@ -1043,6 +1041,9 @@
 % \diag => diag for a matrix as diagonal of the elements
 \DeclareMathOperator{\diag}{diag}
 
+% Mathemtical sign operator
+\DeclareMathOperator{\sign}{sign}
+
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
@@ -1111,6 +1112,13 @@
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
   {#1}^{\mkern-5mu\mathsf{T}}%
+}
+
+% Transformation matrix from one system to another
+% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}
+% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}
+\DeclareDocumentCommand{\trafom}{ O{T} m m}{%
+  \tensor[^#3]{\matr{#1}}{_#2}
 }
 
 % Conjugate complex
@@ -1707,14 +1715,20 @@
 }{}
 %
 \newcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
-    \degreenamelong\space (\degreenameshort)%
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
+    \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
   }.%
 }%
 %
@@ -2568,14 +2582,20 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong\space%
+  (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi\space Abhandlung\\%
-  zur Erlangung der W\"urde des\\%
-  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -2703,14 +2723,20 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong\space%
+  (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi\space Abhandlung\\%
-  zur Erlangung der W\"urde des\\%
-  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -2838,14 +2864,20 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong\space%
+  (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi\space Abhandlung\\%
-  zur Erlangung der W\"urde des\\%
-  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -2973,14 +3005,20 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong\space%
+  (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi\space Abhandlung\\%
-  zur Erlangung der W\"urde des\\%
-  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -3108,14 +3146,20 @@
   \else%
     Der Fakult\"at%
   \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space%
+  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
+    \ifDocumentfemale%
+      r%
+    \else%
+      s%
+    \fi%
+  \space\degreenamelong\space%
+  (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%
   \else%
     vorgelegte%
-  \fi\space Abhandlung\\%
-  zur Erlangung der W\"urde des\\%
-  \degreenamelong\space \AuthorMajor\space (\degreenameshort)%
+  \fi%
+  \space Abhandlung
 }%
 %
 \renewcommand{\DeclarationOfAuthorship}{%
@@ -3470,6 +3514,12 @@
 \overfullrule=5pt
 }{}
 
+% No single lines of text of the following paragraph on the current page's bottom
+\clubpenalty=9000
+% No single lines of text of the previous paragraph on a new page's top
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3515,12 +3565,6 @@
 % Adjust rule color of arrays i.e., tables
 \arrayrulecolor{ArrayRuleColor}%
 }
-
-% No single lines of text of the following paragraph on the current page's bottom
-\clubpenalty=9000
-% No single lines of text of the previous paragraph on a new page's top
-\widowpenalty=10000
-\displaywidowpenalty=10000
 
 
 

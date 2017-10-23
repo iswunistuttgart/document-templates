@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-rc2}
-\def\filedate{2017/10/20}
+\def\filedate{2017/10/23}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -8,7 +8,7 @@
 
 % Typeout a notice
 \typeout{}
-\typeout{ISW - Institute for Control Engineering of Machine Tools}
+\typeout{ISW Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
 \typeout{      Document class for doctoral theses}
 \typeout{      Version \fileversion\space(\filedate) }
@@ -89,6 +89,7 @@
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
+\ProcessOptions*
 
 
 
@@ -394,6 +395,7 @@
 \RequirePackage{scrlayer-scrpage}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load Debug Packages                                                        %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -651,7 +653,7 @@
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author's glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
 
-% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
+% Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMAScript was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of packages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \usetikzlibrary{angles}
@@ -1033,6 +1035,9 @@
 % \diag => diag for a matrix as diagonal of the elements
 \DeclareMathOperator{\diag}{diag}
 
+% Mathemtical sign operator
+\DeclareMathOperator{\sign}{sign}
+
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
@@ -1101,6 +1106,13 @@
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
   {#1}^{\mkern-5mu\mathsf{T}}%
+}
+
+% Transformation matrix from one system to another
+% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}
+% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}
+\DeclareDocumentCommand{\trafom}{ O{T} m m}{%
+  \tensor[^#3]{\matr{#1}}{_#2}
 }
 
 % Conjugate complex
@@ -1659,13 +1671,19 @@
 }{}
 %
 \newcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -1718,13 +1736,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -1777,13 +1801,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -1836,13 +1866,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -1895,13 +1931,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -1954,13 +1996,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -2013,13 +2061,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -2072,13 +2126,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%
@@ -2131,13 +2191,19 @@
 }{}
 %
 \renewcommand{\thesispretext}{%
-  A \documentname\space presented to the faculty %
+  A \documentname\space %
+  \ifDocumentaccepted%
+    accepted by
+  \else%
+    presented to
+  \fi%
+  the faculty %
   \AuthorFaculty, \AuthorUniversity%
   \ifdefempty{%
     \degreenamelong%
   }{%
     .%
-  }{, in partial fulfillment of the requirements for the degree of %
+  }{,\\in partial fulfillment of the requirements for the degree of\\%
     \degreenamelong\space (\degreenameshort)%
   }.%
 }%

@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-rc2}
-\def\filedate{2017/10/20}
+\def\filedate{2017/10/23}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -72,29 +72,24 @@
 % Allow user to choose a "big title page"
 \DeclareBoolOption[false]{bigtitle}
 
-% Declare print and online style (complementary)
-\DeclareBoolOption{print}
-\DeclareComplementaryOption{online}{print}
-
 % Declare the document type
 \def\DocumentType{regular}
 \DeclareOption{regular}{\def\DocumentType{regular}}
 \DeclareOption{exam}{\def\DocumentType{exam}}
 \DeclareOption{exercise}{\def\DocumentType{exercise}}
+\DeclareOption{assignment}{\def\DocumentType{assignment}}
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
 
-% Default options
-\ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
+% Pass any other options not known to the scrartcl package
+\DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 
-% Pass any other options not known to the scrbook package
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
+% Execute default options
+\ExecuteOptions{ngerman, draft, paper=a4paper, oneside, cleardoublepage=empty, open=right}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
-
-% Process options (finally)
-\ProcessOptions\relax
+\ProcessOptions*
 
 
 
@@ -1044,6 +1039,9 @@
 % \diag => diag for a matrix as diagonal of the elements
 \DeclareMathOperator{\diag}{diag}
 
+% Mathemtical sign operator
+\DeclareMathOperator{\sign}{sign}
+
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
@@ -1112,6 +1110,13 @@
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
   {#1}^{\mkern-5mu\mathsf{T}}%
+}
+
+% Transformation matrix from one system to another
+% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}
+% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}
+\DeclareDocumentCommand{\trafom}{ O{T} m m}{%
+  \tensor[^#3]{\matr{#1}}{_#2}
 }
 
 % Conjugate complex
@@ -1987,7 +1992,7 @@
 % \addtokomafont{disposition}{\color{disposition}}
 
 % % All sections (section, subsection, subsubsection)
-\setkomafont{sectioning}{\color{sectioning}\sffamily\mdseries\scshape}
+%\setkomafont{sectioning}{\color{sectioning}\sffamily\mdseries}
 % % Adjustment to sections
 % \addtokomafont{section}{\color{section}}
 % % Adjustments to subsection
