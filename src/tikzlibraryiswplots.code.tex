@@ -1,0 +1,462 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Additional TikZ Libraries to Load                                          %%
+
+\usetikzlibrary{colorbrewer}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+
+\pgfplotsset{compat=1.9}
+
+%% END Additional TikZ Libraries to Load                                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lengths and Dimensions                                                     %%
+
+\newlength{\iswmarkersize}
+\newcommand{\iswmarkercount}{}
+
+\newlength{\hatchspread}
+\newlength{\hatchthickness}
+\newlength{\hatchshift}
+\newcommand{\hatchcolor}{}
+
+\newlength{\dotsdim}
+
+
+%% END Lengths and Dimensions                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Custom Patterns                                                            %%
+
+%% END Custom Patterns                                                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter%
+\tikzset{%
+  nomorepostactions/.code={\let\tikz@postactions=\pgfutil@empty},%
+  evenly marked/.style 2 args={decoration={markings,%
+    mark=between positions 0 and 1 step (1/\iswmarkercount)*\pgfdecoratedpathlength with{%
+        \tikzset{#2,every mark}\tikz@options%
+        \pgfuseplotmark{#1}%
+      },%
+    },%
+    postaction={decorate},%
+    /pgfplots/legend image post style={%
+        mark=#1,mark options={#2},every path/.append style={nomorepostactions},%
+    },%
+  },%
+}%
+\makeatother%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Plot Cycle Lists                                                           %%
+
+\pgfplotscreateplotcyclelist{isw linestyles}{%
+  {%
+    solid,%
+  },%
+  {%
+    dashed,%
+  },%
+  {%
+    loosely dashed,%
+  },%
+  {%
+    densely dashed,%
+  },%
+  {%
+    dotted,%
+  },%
+  {%
+    densely dotted,%
+  },%
+  {%
+    loosely dotted,%
+  },%
+  {%
+    dashdotted,%
+  },%
+  {%
+    loosely dashdotted,%
+  },%
+  {%
+    densely dashdotted,%
+  },%
+}%
+
+\pgfplotscreateplotcyclelist{isw barstyles}{%
+  {%
+    draw=black,%
+    fill=none,%
+    pattern=north east lines,%
+  },%
+  {%
+    draw=black,%
+    fill=none,%
+    pattern=north west lines,%
+  },%
+  {%
+    draw=black,%
+    fill=none,%
+    pattern=crosshatch,%
+  },%
+  {%
+    draw=black,%
+    fill=none,%
+    pattern=dots,%
+  },%
+  {%
+    draw=black,%
+    fill=none,%
+    pattern=crosshatch dots,%
+  },%
+  {%
+    draw=black,%
+    fill=Black!25,%
+    pattern=north east lines,%
+  },%
+  {%
+    draw=black,%
+    fill=Black!25,%
+    pattern=north west lines,%
+  },%
+  {%
+    draw=black,%
+    fill=Black!25,%
+    pattern=crosshatch,%
+  },%
+  {%
+    draw=black,%
+    fill=Black!25,%
+    pattern=dots,%
+  },%
+  {%
+    draw=black,%
+    fill=Black!25,%
+    pattern=crosshatch dots,%
+  },%
+}%
+
+\pgfplotscreateplotcyclelist{isw linestyles evenly marked}{%
+  {%
+    solid,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      *%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    dashed,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      square*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    densely dashed,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      otimes*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    loosely dashed,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      triangle*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    dotted,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      diamond*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    loosely dotted,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      *%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    densely dotted,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      square*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    dashdotted,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      otimes*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    loosely dashdotted,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      star%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+  {%
+    densely dashdotted,%
+    mark size=\iswmarkersize,%
+    evenly marked={%
+      diamond*%
+    }{%
+      solid,%
+      draw=black,%
+      fill=none,%
+      fill opacity=0,%
+    },%
+  },%
+}%
+
+%% END Plot Cycle Lists                                                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PGF Styles                                                                 %%
+\pgfplotsset{%
+  mark evenly/.style={%
+    decoration={%
+      markings,%
+      mark=between positions 0 and 1 step 0.5 with%
+      {%
+        \node[circle, inner sep=2pt, fill=blue]{};%
+      },%
+    },%
+    postaction={decorate},%
+  },%
+  mark evenly/.default=10,%
+  mark repeat*/.style={%
+    scatter,%
+    scatter src=x,%
+    scatter/@pre marker code/.code={%
+        \pgfmathtruncatemacro\usemark{%
+            or(mod(\coordindex,#1)==0, (\coordindex==(\numcoords-1))%
+        }%
+        \ifnum\usemark=0%
+            \pgfplotsset{mark=none}%
+        \fi%
+    },%
+    scatter/@post marker code/.code={},%
+  },%
+  every linear axis/.append style={
+    iswlineplot,%
+  },
+  % Base style for all plots%
+  iswbaseplot/.style={%
+    legend style={%
+      draw=black,%
+      fill=white,%
+      cells={%
+        anchor=west%
+      },%
+    },%
+    x tick label style={%
+      font=\smaller,%
+    },%
+    y tick label style={%
+      font=\smaller,%
+    },%
+    legend style={%
+      font=\smaller[2],%
+    },%
+    major grid style={%
+      dotted,%
+    },%
+    every axis/.append style={%
+      line width=0.2ex,%
+    },%
+    every axis plot/.append style={%
+      line width=0.3ex,%
+    },%
+    axis x line*=bottom,%
+  },%
+  % Basic line plot supportingup to 12 different series%
+  iswlineplot/.style={%
+    iswbaseplot,%
+    xmajorgrids=true,%
+    ymajorgrids=true,%
+    major grid style={%
+      dotted%
+    },%
+    axis x line=bottom,%
+    axis y line=left,%
+    axis lines=box,%
+    legend style={%
+      cells={%
+        anchor=west,%
+      },%
+    },%
+    cycle list name=isw linestyles,%
+  },%
+  iswlineplot evenly marked/.style={%
+    iswlineplot,%
+    cycle list name=isw linestyles evenly marked,%
+  },%
+  % Boxed version of a line plot%
+  unboxed iswlineplot/.style={%
+    iswlineplot,%
+    axis x line=bottom,%
+    axis y line=left,%
+  },%
+  % Centered version of a line plot%
+  centered iswlineplot/.style={%
+    iswlineplot,%
+    axis x line=center,%
+    axis y line=center,%
+  },%
+  % Base for all bar plots%
+  iswbarplot base/.style={%
+    iswbaseplot,%
+    ybar,%
+    bar width=4ex,%
+    % axis y line*=none,%
+    axis lines=box,%
+    cycle list name=isw barstyles,%
+  },%
+  % Basic vertical bar plot%
+  iswbarplot/.style={%
+    iswbarplot base,%
+    xmajorgrids=false,%
+    ymajorgrids=true,%
+    area legend,%
+    legend image code/.code={%
+      \draw[#1] (0em,-0.5em) rectangle (4ex,0.5em);%
+    },%
+  },%
+  % Basic horizontal bar plot%
+  horizontal iswbarplot/.style={%
+    iswbarplot base,%
+    xmajorgrids=true,%
+    ymajorgrids=false,%
+    xbar stacked,%
+    area legend,%
+    legend image code/.code={%
+      \draw[#1] (0em,-0.5em) rectangle (4ex,0.5em);%
+    },%
+  },%
+  % Provide style to remove separators of thousands%
+  disable thousands separator/.style={%
+    /pgf/number format/.cd,%
+      1000 sep={},%
+  },%
+}%
+%% END PGF Styles                                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TikZ Styles                                                                %%
+
+\tikzset{%
+  isw marker count/.code={%
+    \renewcommand{\iswmarkercount}{#1}%
+  },%
+  isw marker size/.code={%
+    \setlength{\iswmarkersize}{#1}%
+  },%
+  isw marker count=10,%
+  isw marker size=0.45ex,%
+  %
+  hatchspread/.code={%
+    \setlength{\hatchspread}{#1}%
+  },%
+  hatchthickness/.code={%
+    \setlength{\hatchthickness}{#1}%
+  },%
+  hatchshift/.code={%
+    \setlength{\hatchshift}{#1}%
+  },%
+  hatchcolor/.code={%
+    \renewcommand{\hatchcolor}{#1}%
+  },%
+  hatchspread=3pt,%
+  hatchthickness=0.4pt,%
+  hatchshift=0pt,%
+  hatchcolor=black,%
+}%
+
+%% END TikZ Styles                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
