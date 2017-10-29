@@ -1,6 +1,6 @@
 image: python:2.7-alpine
 
-isw_cls:
+compile-cls:
   script:
     - python build.py
   artifacts:
@@ -8,3 +8,5 @@ isw_cls:
     paths:
       - 'dist/*.cls'
       - 'dist/*.tex'
+  only:
+    - master
