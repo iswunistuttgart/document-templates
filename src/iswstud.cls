@@ -67,6 +67,10 @@
 \DeclareBoolOption{female}
 \DeclareComplementaryOption{male}{female}
 
+% Color space
+\DeclareBoolOption[true]{rgb}
+\DeclareComplementaryOption{cmyk}{rgb}
+
 % Declare the document type
 \def\DocumentType{bachelor}
 \DeclareOption{bachelor}{\def\DocumentType{bachelor}}

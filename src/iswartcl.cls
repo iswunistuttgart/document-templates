@@ -58,6 +58,10 @@
 % Declare debug options
 \DeclareBoolOption{debug}
 
+% Color space
+\DeclareBoolOption[true]{rgb}
+\DeclareComplementaryOption{cmyk}{rgb}
+
 % Allow user to choose a "big title page"
 \DeclareBoolOption[false]{bigtitle}
 
