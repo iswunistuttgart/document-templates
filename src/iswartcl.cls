@@ -182,6 +182,7 @@
 \input{common/layout}
 \input{article/layout}
 
+\input{common/coverpage}
 \input{article/titlepage}
 
 

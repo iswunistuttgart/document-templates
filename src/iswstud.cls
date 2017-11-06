@@ -188,6 +188,7 @@
 \input{common/layout}
 \input{student/layout}
 
+\input{common/coverpage}
 \input{student/titlepage}
 
 

@@ -182,6 +182,7 @@
 \input{common/layout}
 \input{doctorate/layout}
 
+\input{common/coverpage}
 \input{doctorate/titlepage}
 
 
