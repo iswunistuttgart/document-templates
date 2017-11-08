@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc2}
-\def\filedate{2017/11/06}
+\def\fileversion{1.0.0-rc3}
+\def\filedate{2017/11/08}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1626,8 +1626,8 @@
 \newcommand{\AuthorMajor}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
 
 % Student's matriculation number
-\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
-\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
+\newcommand{\immatriculationnumber}[1]{\gdef\@immatriculationnumber{#1}}
+\newcommand{\@immatriculationnumber}{\@latex@warning@no@line{No \noexpand\immatriculationnumber given}}
 
 
 
@@ -1683,6 +1683,7 @@
   \newcommand{\submittedbyname}{By}
 \fi%
 \newcommand{\fromname}{from}
+\newcommand{\immatriculationnumbernumbername}{Student ID}
 \newcommand{\submittedonname}{Submitted on}
 \newcommand{\examinationonname}{Defended on}
 \newcommand{\majorname}{Major}
@@ -1778,6 +1779,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -1873,6 +1875,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -1968,6 +1971,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2063,6 +2067,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2158,6 +2163,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2253,6 +2259,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2348,6 +2355,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2443,6 +2451,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2539,6 +2548,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -2680,6 +2690,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -2821,6 +2832,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -2962,6 +2974,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -3103,6 +3116,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -3539,6 +3553,8 @@
           & \@mainexaminer\\%
         {\secondexaminername:}%
           & {\@secondexaminer}\\%
+        {\immatriculationnumbernumbername:}%
+          & {\@immatriculationnumber}\\
         \ifDocumentaccepted%
           {\examinationonname:}%
         \else%
