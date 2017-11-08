@@ -6,7 +6,6 @@ compile-cls:
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     paths:
-      - 'dist/*.cls'
-      - 'dist/*.tex'
+      - dist
   only:
     - master
