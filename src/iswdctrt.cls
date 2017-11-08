@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc2}
-\def\filedate{2017/10/20}
+\def\fileversion{1.0.0-rc3}
+\def\filedate{2017/11/08}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -8,7 +8,7 @@
 
 % Typeout a notice
 \typeout{}
-\typeout{ISW Institute for Control Engineering of Machine Tools}
+\typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
 \typeout{      Document class for doctoral theses}
 \typeout{      Version \fileversion\space(\filedate) }
@@ -66,6 +66,10 @@
 % Gender of the author
 \DeclareBoolOption{female}
 \DeclareComplementaryOption{male}{female}
+
+% Color space
+\DeclareBoolOption[true]{rgb}
+\DeclareComplementaryOption{cmyk}{rgb}
 
 % Declare the document type
 \def\DocumentType{doctorate}
@@ -178,6 +182,7 @@
 \input{common/layout}
 \input{doctorate/layout}
 
+\input{common/coverpage}
 \input{doctorate/titlepage}
 
 

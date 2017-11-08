@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc2}
-\def\filedate{2017/10/20}
+\def\fileversion{1.0.0-rc3}
+\def\filedate{2017/11/08}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -57,6 +57,10 @@
 
 % Declare debug options
 \DeclareBoolOption{debug}
+
+% Color space
+\DeclareBoolOption[true]{rgb}
+\DeclareComplementaryOption{cmyk}{rgb}
 
 % Allow user to choose a "big title page"
 \DeclareBoolOption[false]{bigtitle}
@@ -178,6 +182,7 @@
 \input{common/layout}
 \input{article/layout}
 
+\input{common/coverpage}
 \input{article/titlepage}
 
 

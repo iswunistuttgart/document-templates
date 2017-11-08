@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc2}
-\def\filedate{2017/10/23}
+\def\fileversion{1.0.0-rc3}
+\def\filedate{2017/11/08}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -77,6 +77,10 @@
 % Gender of the author
 \DeclareBoolOption{female}
 \DeclareComplementaryOption{male}{female}
+
+% Color space
+\DeclareBoolOption[true]{rgb}
+\DeclareComplementaryOption{cmyk}{rgb}
 
 % Declare the document type
 \def\DocumentType{bachelor}
@@ -691,10 +695,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main colors
-\definecolor{PrimaryColor}{cmyk}{50,35,25,70}
-\definecolor{PrimaryAccent}{cmyk}{100,70,0,0}
-\definecolor{SecondaryAccent}{cmyk}{70,0,0,0}
-\definecolor{TertiaryAccent}{cmyk}{0,80,100,0}
+\ifDocumentrgb
+  \definecolor{PrimaryColor}{RGB}{62,68,76}
+  \definecolor{PrimaryAccent}{RGB}{0,81,158}
+  \definecolor{SecondaryAccent}{RGB}{0,190,255}
+  \definecolor{TertiaryAccent}{RGB}{231,81,18}
+\else
+  \definecolor{PrimaryColor}{cmyk}{50,35,25,70}
+  \definecolor{PrimaryAccent}{cmyk}{100,70,0,0}
+  \definecolor{SecondaryAccent}{cmyk}{70,0,0,0}
+  \definecolor{TertiaryAccent}{cmyk}{0,80,100,0}
+\fi
 
 
 
@@ -788,31 +799,31 @@
 % Make hyperref use these colors
 \hypersetup{%
   % set color of anchors 
-  anchorcolor=PrimaryColor,%
+  anchorcolor=Black,%
   % color of border around citation links
-  citebordercolor=SecondaryAccent,%
+  citebordercolor=Black,%
   % color of citation links
-  citecolor=PrimaryAccent,%
+  citecolor=Black,%
   %  color of border aroundfile links
-  filebordercolor=SecondaryAccent,%
+  filebordercolor=Black,%
   % color of file links
-  filecolor=PrimaryAccent,%
-  % color of border aroudn links
-  linkbordercolor=SecondaryAccent,%
+  filecolor=Black,%
+  % color of border around links
+  linkbordercolor=Black,%
   % color of links
-  linkcolor=PrimaryAccent,%
+  linkcolor=Black,%
   % color of border around menu links
-  menubordercolor=SecondaryAccent,%
+  menubordercolor=Black,%
   % color for menu links
-  menucolor=PrimaryAccent,%
+  menucolor=Black,%
   % color of border around 'run' links
-  runbordercolor=SecondaryAccent,%
+  runbordercolor=Black,%
   % color of 'run' links
-  runcolor=PrimarColor,%
+  runcolor=Black,%
   % color of border around URL links
-  urlbordercolor=SecondaryAccent,%
+  urlbordercolor=Black,%
   % color of URL links
-  urlcolor=PrimaryAccent,%
+  urlcolor=Black,%
 }%
 
 
@@ -900,6 +911,14 @@
 
 % Path to the department logo
 \newcommand{\departmentlogo}{logo/department}
+
+% Image to be shown on the coverpage
+\newcommand{\coverpageimage}[1]{\gdef\@coverpageImage{#1}}
+\newcommand{\@coverpageImage}{}
+
+% Thank you for the cover page logo
+\newcommand{\coverpagethanks}[1]{\gdef\@coverpageThanks{#1}}
+\newcommand{\@coverpageThanks}{}
 
 % Path to the partner's logo
 \newcommand{\partnerlogo}{}
@@ -1607,8 +1626,8 @@
 \newcommand{\AuthorMajor}{No \texttt{\textbackslash major} given\@latex@warning@no@line{No \noexpand\major given}}
 
 % Student's matriculation number
-\newcommand{\matriculation}[1]{\gdef\@matriculation{#1}}
-\newcommand{\@matriculation}{\@latex@warning@no@line{No \noexpand\matriculation given}}
+\newcommand{\immatriculationnumber}[1]{\gdef\@immatriculationnumber{#1}}
+\newcommand{\@immatriculationnumber}{\@latex@warning@no@line{No \noexpand\immatriculationnumber given}}
 
 
 
@@ -1664,6 +1683,7 @@
   \newcommand{\submittedbyname}{By}
 \fi%
 \newcommand{\fromname}{from}
+\newcommand{\immatriculationnumbernumbername}{Student ID}
 \newcommand{\submittedonname}{Submitted on}
 \newcommand{\examinationonname}{Defended on}
 \newcommand{\majorname}{Major}
@@ -1759,6 +1779,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -1854,6 +1875,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -1949,6 +1971,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2044,6 +2067,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2139,6 +2163,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2234,6 +2259,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2329,6 +2355,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2424,6 +2451,7 @@
   \renewcommand{\submittedbyname}{by}
 \fi%
 \renewcommand{\fromname}{from}
+\renewcommand{\immatriculationnumbernumbername}{Student ID}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\examinationonname}{Defended on}
 \renewcommand{\majorname}{Major}
@@ -2520,6 +2548,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -2661,6 +2690,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -2802,6 +2832,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -2943,6 +2974,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -3084,6 +3116,7 @@
   \renewcommand{\submittedbyname}{von}
 \fi%
 \renewcommand{\fromname}{aus}
+\renewcommand{\immatriculationnumbernumbername}{Immatrikulationsnummer}
 \renewcommand{\submittedonname}{Eingereicht am}
 \renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
 \renewcommand{\majorname}{Studiengang}
@@ -3399,6 +3432,66 @@
 % Formatting chapter heading
 \addtokomafont{chapter}{\color{chapter}\normalfont\Huge}
 
+\newcommand{\coverpage}{%
+  \noindent%
+  \thispagestyle{empty}%
+  \newgeometry{inner=0cm, outer=0cm, top=0cm, bottom=0cm}%
+  \sffamily%
+  \begin{tikzpicture}[%
+      remember picture,%
+      overlay,%
+      inner sep=0pt,%
+      outer sep=0pt,%
+      x=\paperwidth,%
+      y=\paperheight,%
+    ]%
+    % BLOCK for TITLE and SUBTITLE
+    \draw[fill=PrimaryAccent, draw=PrimaryAccent] (0, 0.1) rectangle (1, -0.25);%
+    % TITLE
+    \node[align=center, anchor=south, text width=0.9\paperwidth] at (0.5, -0.083) {\usekomafont{title}{\larger[3]\color{white}{\@title}}};%
+    % SUBTITLE
+    \node[align=center, anchor=north, text width=0.75\paperwidth] at (0.5, -0.166) {\usekomafont{subtitle}{\larger[1]\color{white}{\@subtitle}}};%
+    % GRAY BLOCK UNDERNEATH TITLE
+    \draw[fill=PrimaryColor, draw=PrimaryColor] (0, -0.25) rectangle (1, -0.7);%
+    % TYPE OF DOCUMENT
+    \node[align=center, text width=0.7\paperwidth] at (0.5, -0.3) {\color{white}{\huge\DocumentName}};%
+    % IMAGE
+    \ifdefempty{\@coverpageImage}{}{%
+      \begin{scope}%
+        \clip (0, -0.30) rectangle (1, -0.65);%
+        \node[anchor=west, inner sep=0pt, outer sep=0pt] at (0.015, -0.475) {%
+          \includegraphics[keepaspectratio, height=0.45\paperheight]{\@coverpageImage}%
+        };%
+      \end{scope}%
+    }
+    % LOGOS
+    \node[anchor=west] at (0.083, -0.875) {%
+      \includegraphics[width=0.3\paperwidth, keepaspectratio]{\universitylogo}%
+    };%
+    \node[anchor=east] at (0.917, -0.875) {%
+      \includegraphics[width=0.3\paperwidth, height=0.08\paperwidth, keepaspectratio]{\departmentlogo}%
+    };%
+    % DATE
+    \node at (0.5, -0.95) {%
+      \printdayoff%
+      \@date%
+      \printdayon%
+    };%
+    % LEFT BAR
+    \draw[fill=SecondaryAccent, draw=SecondaryAccent] (0,0.1) rectangle (0.033, -1);
+  \end{tikzpicture}%
+  \clearpage%
+  \newgeometry{inner=1.5cm, outer=1.5cm, top=1.5cm, bottom=1.5cm}%
+  \thispagestyle{empty}%
+  \vspace*{\fill}%
+  \begin{minipage}[l]{0.8\linewidth}
+    \smaller%
+    \@coverpageThanks%
+  \end{minipage}%
+  \clearpage%
+  \restoregeometry%
+  \setcounter{page}{1}%
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
 \renewcommand{\maketitle}{%
@@ -3460,6 +3553,8 @@
           & \@mainexaminer\\%
         {\secondexaminername:}%
           & {\@secondexaminer}\\%
+        {\immatriculationnumbernumbername:}%
+          & {\@immatriculationnumber}\\
         \ifDocumentaccepted%
           {\examinationonname:}%
         \else%
