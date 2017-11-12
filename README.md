@@ -8,9 +8,9 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.0.0-rc3 |
-| iswdctrt | Doctoral theses | 1.0.0-rc3 |
-| iswstud | Student theses | 1.0.0-rc3 |
+| iswartcl | General documents | 1.0.0-rc4 |
+| iswdctrt | Doctoral theses | 1.0.0-rc4 |
+| iswstud | Student theses | 1.0.0-rc4 |
 
 There are two ways to obtaining the necessary `.cls` and `.tex` files
   1. Copy the respective files from the `dist/` folder to your local working directory
@@ -32,14 +32,28 @@ Before sending a pull request, be sure to check out the [Contribution Guidelines
 
 You need an up-to-date version of a LaTeX distribution on your current operating system. It is generally advised *against* MikTeX, and advised *for* using [TeXlive](https://www.tug.org/texlive/).
 
+
 ### Compiler Engine
 
 As the trend in development of LaTeX related packages and classes is to move away from pdflatex towards xelatex or lualatex, we are not providing support for pdflatex anymore. As such, you will need to compile your document using either XeLaTeX or luaLaTeX (preferably luaLaTeX, as the classes are more thoroughly tested against luaLaTeX).
+
+Additionally, if you want to play it safe, use `latexmk` to build your document. This includes all the necessary commands to compile everything in the right order. Only requirement is access to a commandline which has `latexmk` on its path. Some LaTeX-IDEs also allow using `latexmk` instead of some weird `lualatex + makeindex + ... + dvips` combo.
+PS: The developers are solely using `latexmk`, so support for users using `latexmk` will be the best.
 
 
 ## Usage
 
 You can use these document classes for a magnitude of documents such as your bachelor's or master's thesis, a simple document, or a doctoral thesis. Please read on to find out more on the general structure of a document in either type.
+
+
+### Bibliography
+
+Right from the start, bibliography can be included as known from all other classes e.g., koma. You may also choose to use biblatex for managing your bibliography. If you want to do so, provide the `biblatex` option to the documentclass. Following that, include your bib file in the preamble using `\addbibresource{literature.bib}` and towards the end of your document, `\printbibliography` to output the bibliography.
+
+
+### Mathematics-heavy Thesis
+
+If your thesis is highly mathematical, you should pass the `mathematics` option to the documentclass. This will load some more commonly used mathematics oriented packages and define several commands that can come in handy.
  
 
 ### Doctoral Thesis
