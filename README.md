@@ -1,5 +1,7 @@
 # ISW LaTeX Templates
 
+[![pipeline status](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/badges/master/pipeline.svg)](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/commits/master)
+
 This is the repository for LaTeX document templates for student theses, reports, and other documents.
 
 If you are just interested in finding the most recent class that you want to use, then look no further but table [1].
