@@ -10,7 +10,7 @@ import time
 path_base = os.path.dirname(os.path.realpath(__file__))
 dir_src = os.path.join(path_base, 'src')
 dir_dist = os.path.join(path_base, 'dist')
-files = ['iswstud', 'iswartcl', 'iswdctrt']
+files = ['iswstud.cls', 'iswartcl.cls', 'iswdctrt.cls', 'iswstud.tex', 'iswartcl.tex', 'iswdctrt.tex', 'iswstud.latexmkrc', 'iswartcl.latexmkrc', 'iswdctrt.latexmkrc']
 
 
 p_incfile = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')
@@ -49,16 +49,13 @@ def process_line(the_line):
     return the_line
 
 for file in files:
-    src_class = open(os.path.join(dir_src, file + '.cls'), 'r')
-    tar_class = open(os.path.join(dir_dist, file + '.cls'), 'w')
-    src_template = os.path.join(dir_src, file + '.tex')
-    tar_template = os.path.join(dir_dist, file + '.tex')
+    src_file = open(os.path.join(dir_src, file), 'r')
+    dest_file = open(os.path.join(dir_dist, file), 'w')
 
     try :
-        tar_class.write(''.join(process_file(src_class)))
-        shutil.copyfile(src_template, tar_template)
+        dest_file.write(''.join(process_file(src_file)))
     except Exception as e:
         print(e)
     finally:
-        src_class.close()
-        tar_class.close()
+        src_file.close()
+        dest_file.close()
