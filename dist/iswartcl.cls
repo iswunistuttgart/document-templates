@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc3}
-\def\filedate{2017/11/08}
+\def\fileversion{1.0.0-rc4}
+\def\filedate{2017/11/12}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -66,6 +66,16 @@
   prefix=Document,%
 }
 
+% Declare the document type
+\def\DocumentType{regular}
+\DeclareOption{regular}{\def\DocumentType{regular}}
+\DeclareOption{exam}{\def\DocumentType{exam}}
+\DeclareOption{exercise}{\def\DocumentType{exercise}}
+\DeclareOption{assignment}{\def\DocumentType{assignment}}
+\DeclareOption{offprint}{\def\DocumentType{offprint}}
+\DeclareOption{report}{\def\DocumentType{report}}
+
+% Input more common options
 % Declare debug options
 \DeclareBoolOption{debug}
 
@@ -76,14 +86,28 @@
 % Allow user to choose a "big title page"
 \DeclareBoolOption[false]{bigtitle}
 
-% Declare the document type
-\def\DocumentType{regular}
-\DeclareOption{regular}{\def\DocumentType{regular}}
-\DeclareOption{exam}{\def\DocumentType{exam}}
-\DeclareOption{exercise}{\def\DocumentType{exercise}}
-\DeclareOption{assignment}{\def\DocumentType{assignment}}
-\DeclareOption{offprint}{\def\DocumentType{offprint}}
-\DeclareOption{report}{\def\DocumentType{report}}
+% Gender of the author
+\DeclareBoolOption{female}
+\DeclareComplementaryOption{male}{female}
+
+% Let user choose between biblatex and natbib as bibliography backend
+\DeclareBoolOption{biblatex}
+\DeclareComplementaryOption{natbib}{biblatex}
+
+% Users may choose to make use of TikZ for plotting
+\DeclareBoolOption{tikz}
+
+
+
+% If the user needs more mathematical classes, they can make use of the
+% mathematics option
+\DeclareBoolOption{mathematics}
+
+% Declare whether thesis was accepted and ready for print (use draft/final to
+% switch between draft and final version of either the submission or publishing
+% version
+\DeclareBoolOption[false]{accepted}
+
 
 % Pass any other options not known to the scrartcl package
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrartcl}}
@@ -484,10 +508,12 @@
 % PGFPlots draws high-quality function plots in normal or logarithmic scaling with a user-friendly interface directly in TeX. The user supplies axis labels, legend entries and the plot coordinates for one or more plots and PGFPlots applies axis scaling, computes any logarithms and axis ticks and draws the plots, supporting line plots, scatter plots, piecewise constant plots, bar plots, area plots, mesh-- and surface plots and some more.
 % Pgfplots is based on PGF/TikZ (PGF); it runs equally for LaTeX/TeX/ConTeXt. 
 \RequirePackage{pgfplots}
-% The package provides straightforward ways to define three-dimensional coordinate frames through which to plot in TikZ. The user can specify the orientation of the main coordinate frame, and use standard TikZ commands and coordinates to render their tikzfigure. A secondary coordinate frame is provided to allow rotations and translations with respect to the main coordinate frame. In addition, the package can also handle plotting user-specified functions in spherical polar coordinates, where both the radius and fill color can be expressed as parametric functions of polar angles. 
-\RequirePackage{tikz-3dplot}
 \RequirePackage{tikzscale}
 \pgfplotsset{compat=newest}
+\ifDocumenttikz
+  % The package provides straightforward ways to define three-dimensional coordinate frames through which to plot in TikZ. The user can specify the orientation of the main coordinate frame, and use standard TikZ commands and coordinates to render their tikzfigure. A secondary coordinate frame is provided to allow rotations and translations with respect to the main coordinate frame. In addition, the package can also handle plotting user-specified functions in spherical polar coordinates, where both the radius and fill color can be expressed as parametric functions of polar angles. 
+  \RequirePackage{tikz-3dplot}
+\fi
 
 
 % The package has a lot of flexibility, including an option for specifying an entry at the "natural" width of its text.
@@ -532,16 +558,34 @@
 % The package defines new commands \Centering, \RaggedLeft, and \RaggedRight and new environments Center, FlushLeft, and FlushRight, which set ragged text and are easily configurable to allow hyphenation (the corresponding commands in LaTeX, all of whose names are lower-case, prevent hyphenation altogether).
 \RequirePackage{ragged2e}
 
-% Typeset in-line fractions in a "nice" way. The package typesets fractions "nicely" - in the form 'a/b' (i.e., staggered with a slash between them, rather than directly one over the other). The package is distributed as part of a bundle including the units package. Nicefrac's facilities are provided, in a cleaner way, by the (experimental) xfrac package, but see also the faktor package for quotient spaces and the like.
-\RequirePackage{nicefrac}
+\ifDocumentmathematics
+  % Typeset in-line fractions in a "nice" way. The package typesets fractions "nicely" - in the form 'a/b' (i.e., staggered with a slash between them, rather than directly one over the other). The package is distributed as part of a bundle including the units package. Nicefrac's facilities are provided, in a cleaner way, by the (experimental) xfrac package, but see also the faktor package for quotient spaces and the like.
+  \RequirePackage{nicefrac}
 
-% fouridx - Left sub- and superscripts in maths mode
-% The package enables left subscripts and superscripts in maths mode. The sub- and superscripts are raised for optimum fitting to the symbol indexed, in such a way that left and right sub- and superscripts are set on the same level, as appropriate.
-% The package provides an alternative to the use of the \sideset command in the amsmath package.
-\RequirePackage{fouridx}
+  % fouridx - Left sub- and superscripts in maths mode
+  % The package enables left subscripts and superscripts in maths mode. The sub- and superscripts are raised for optimum fitting to the symbol indexed, in such a way that left and right sub- and superscripts are set on the same level, as appropriate.
+  % The package provides an alternative to the use of the \sideset command in the amsmath package.
+  \RequirePackage{fouridx}
 
-% Place lines through maths formulae. A package to draw diagonal lines ("cancelling" a term) and arrows with limits (cancelling a term "to a value") through parts of maths formulae.
-\RequirePackage{cancel}
+  % Place lines through maths formulae. A package to draw diagonal lines ("cancelling" a term) and arrows with limits (cancelling a term "to a value") through parts of maths formulae.
+  \RequirePackage{cancel}
+
+  % Mathtools provides a series of packages designed to enhance the appearance of documents containing a lot of mathematics. The main backbone is amsmath, so those unfamiliar with this required part of the LaTeX system will probably not find the packages very useful.
+  % Mathtools provides many useful tools for mathematical typesetting. It is based on amsmath and fixes various deficiencies of amsmath and standard LaTeX. It provides:
+  % * Extensible symbols, such as brackets, arrows, harpoons, etc.;
+  % * Various symbols such as \coloneqq (:=);
+  % * Easy creation of new tag forms;
+  % * Showing equation numbers only for referenced equations;
+  % * Extensible arrows, harpoons and hookarrows;
+  % * Starred versions of the amsmath matrix environments for specifying the column alignment;
+  % * More building blocks: multlined, cases-like environments, new gathered environments;
+  % * Maths versions of \makebox, \llap, \rlap etc.;
+  % * Cramped math styles; and more...
+  \RequirePackage{mathtools}
+
+  % EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The package provides a visual markup extension to amsmath. The user-friendly interface allows the user to put a set of equations inside a box thus enhancing the \boxed feature of amsmath. As a side effect it's also possible to add material on both sides of the equations thus providing (and surpassing) the functionality of the cases package. Users of ntheorem will probably want to have a look at it as well, since the problem with end-of-theorem marks in gather and other environments can be circumvented using empheq.
+  \RequirePackage{empheq}
+\fi
 
 % A comprehensive (SI) units package. Typesetting values with units requires care to ensure that the combined mathematical meaning of the value plus unit combination is clear. In particular, the SI units system lays down a consistent set of units with rules on how they are to be used. However, different countries and publishers have differing conventions on the exact appearance of numbers (and units). A number of LaTeX packages have been developed to provide consistent application of the various rules: SIunits, sistyle, unitsdef and units are the leading examples. The numprint package provides a large number of number-related functions, while dcolumn and rccol provide tools for typesetting tabular numbers. The siunitx package takes the best from the existing packages, and adds new features and a consistent interface. A number of new ideas have been incorporated, to fill gaps in the existing provision. The package also provides backward-compatibility with SIunits, sistyle, unitsdef and units. The aim is to have one package to handle all of the possible unit-related needs of LaTeX users. The package relies on LaTeX 3 support from the l3kernel and l3packages bundles.
 \RequirePackage{siunitx}
@@ -571,30 +615,8 @@
 % The package lets the user mark things to do later, in a simple and visually appealing way. The package takes several options to enable customization/finetuning of the visual appearance.
 \RequirePackage{todonotes}
 
-% An extended version of TeX, from the NTS project An extended version of TeX (which is capable of running as if it were TeX unmodified). E-TeX has been specified by the LaTeX team as the engine for the development of LaTeX 2e, in the immediate future; as a result, LaTeX programmers may (in all current TeX distributions) assume e-TeX functionality. Development versions of e-TeX are to be found in the TeX live source repository.
-% \RequirePackage{etex}
-
-% Extended UTF-8 input encoding support for LaTeX. The bundle provides the ucs package, and utf8x.def, together with a large number of support files. The utf8x.def definition file for use with inputenc covers a wider range of Unicode characters than does utf8.def in the LaTeX distribution. The package provides facilities for efficient use of its large sets of Unicode characters. Glyph production may be controlled by various options, which permits use of non-ASCII characters when coding mathematical formulae. Note that the bundle previously had an alias "unicode"; that alias has now been withdrawn, and no package of that name now exists.
-\RequirePackage{ucs}
-
 % Reference last page for Page N of M type footers. Reference the number of pages in your LaTeX document through the introduction of a new label which can be referenced like \pageref{LastPage} to give a reference to the last page of a document. It is particularly useful in the page footer that says: Page N of M.
 \RequirePackage{lastpage}
-
-% Mathtools provides a series of packages designed to enhance the appearance of documents containing a lot of mathematics. The main backbone is amsmath, so those unfamiliar with this required part of the LaTeX system will probably not find the packages very useful.
-% Mathtools provides many useful tools for mathematical typesetting. It is based on amsmath and fixes various deficiencies of amsmath and standard LaTeX. It provides:
-% * Extensible symbols, such as brackets, arrows, harpoons, etc.;
-% * Various symbols such as \coloneqq (:=);
-% * Easy creation of new tag forms;
-% * Showing equation numbers only for referenced equations;
-% * Extensible arrows, harpoons and hookarrows;
-% * Starred versions of the amsmath matrix environments for specifying the column alignment;
-% * More building blocks: multlined, cases-like environments, new gathered environments;
-% * Maths versions of \makebox, \llap, \rlap etc.;
-% * Cramped math styles; and more...
-\RequirePackage{mathtools}
-
-% EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The package provides a visual markup extension to amsmath. The user-friendly interface allows the user to put a set of equations inside a box thus enhancing the \boxed feature of amsmath. As a side effect it's also possible to add material on both sides of the equations thus providing (and surpassing) the functionality of the cases package. Users of ntheorem will probably want to have a look at it as well, since the problem with end-of-theorem marks in gather and other environments can be circumvented using empheq.
-\RequirePackage{empheq}
 
 % A package built on the standard LaTeX graphics package to perform all the different sorts of rotation one might like, including complete figures and tables with their captions.% 
 % If you want continuous text (i.e., more than one page) set in landscape mode, use the lscape package instead. The rotating packages only deals in rotated boxes (or floats, which are % themselves boxes), and boxes always stay on one page.
@@ -626,12 +648,24 @@
 % Only used with two-column layout (or, in general, multicols)
 \RequirePackage{flushend}
 
-% The bundle provides a package that implements both author-year and numbered references, as well as much detailed of support for other bibliography use. Also Provided are versions of the standard BibTeX styles that are compatible with natbib-plainnat, unsrtnat, abbrnat. The bibliography styles produced by custom-bib are designed from the start to be compatible with natbib.
-\RequirePackage{natbib}
-\bibliographystyle{babunsrt}
-
-% This package enables to generate multilingual bibliographies in cooperation with babel. Two approaches are possible: Each citation may be written in another language, or the whole bibliography can be typeset in a language chosen by the user. In addition, the package supports commands to change the typography of the bibliographies.
-\usepackage{babelbib}
+\ifDocumentbiblatex
+  \RequirePackage{csquotes}
+  \RequirePackage[
+      backend=biber,%
+      style=ieee,%
+      sortlocale=auto,%
+      natbib=true,%
+      url=false,%
+      doi=true,%
+      eprint=false,%
+  ]{biblatex}
+\else
+  % The bundle provides a package that implements both author-year and numbered references, as well as much detailed of support for other bibliography use. Also Provided are versions of the standard BibTeX styles that are compatible with natbib-plainnat, unsrtnat, abbrnat. The bibliography styles produced by custom-bib are designed from the start to be compatible with natbib.
+  \RequirePackage{natbib}
+  \bibliographystyle{babunsrt}
+  % This package enables to generate multilingual bibliographies in cooperation with babel. Two approaches are possible: Each citation may be written in another language, or the whole bibliography can be typeset in a language chosen by the user. In addition, the package supports commands to change the typography of the bibliographies.
+  \RequirePackage{babelbib}
+\fi
 
 % The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
 % This package is part of the tools bundle in the LaTeX required distribution.
@@ -1000,6 +1034,8 @@
   {\immediate\write18{#3}}\fi%
 }
 
+% Only load if option mathematics given
+\ifDocumentmathematics
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% MATH COMMANDS                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1039,14 +1075,13 @@
 % \pow{x} => {x}^{2}
 % \pow[3]{x} => {x}^{3}
 \DeclareDocumentCommand{\pow}{O{2} m}{%
-  {#2}^{#1}%
+  #2^{#1}%
 }
 
 % Skew-symmetric matrix
-% \skewm{x} => \left[ x \right]_{\times}
-\DeclareDocumentCommand{\skewm}{m}{%
-  \left[ #1 \right]_{\times}
-}
+% \skewm{x} => [ x ]_{\times}
+% \skewm[\Bigg]{x} => \Bigg[ x \Bigg]_{\times}
+\DeclarePairedDelimiterX{\skewm}[1]{[}{]}{#1}
 
 % Cross product
 % \crosp{#1}{#2} => {#1} \times {#2}
@@ -1139,19 +1174,19 @@
 }
 
 % Conjugate complex
-\DeclareDocumentCommand{\conj}{o m}{%
-  {#2}^{\overline{#1}}
+\DeclareDocumentCommand{\conj}{ m }{%
+  \overline{#1}
 }
 
 % Hermitian conjugate of matrix
-\DeclareDocumentCommand{\hermconj}{m m}{%
+\DeclareDocumentCommand{\hermconj}{ m m }{%
   {#1}^{\mkern-5mu\mathsf{H}}
 }
 
 % Element inverse (usually used for matrix inverse)
 % \inv{A} => A^{-1}
 \DeclareDocumentCommand{\inv}{m}{%
-  {#1}^{-1}%
+  #1^{-1}%
 }
 
 % Dot-product
@@ -1187,8 +1222,6 @@
 % \irange[3]{m}{j} => j = 1, 3, ..., m
 \NewDocumentCommand{\irange}{o m g}{%
   \def\runner{\IfValueTF{#3}{#3}{i}}%
-%  \def\delta{#1}%
-%  \def\ending{#2}%
   \IfValueTF{#1}{%
     {\runner = 1, #1, \ldots, #2}%
   }{%
@@ -1466,6 +1499,9 @@
     \parentheses{#3}%
   }%
 }
+
+\fi
+% END Only load if option mathematics given
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FLOAT COMMANDS                                                             %%
