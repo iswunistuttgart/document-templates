@@ -26,6 +26,8 @@ ISW LaTeX Templates was created by [Philipp Tempel](http://www.isw.uni-stuttgart
 
 Before sending a pull request, be sure to check out the [Contribution Guidelines](CONTRIBUTING.md) first.
 
+Our repository hosted on our public [GitHub repo](http://github.com/iswunistuttgart/latex-templates) is a mirror of the original code hosted on our [local GitLab repo](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/). If you check the `.gitlab-ci.yml` file, you can see there is a `git --mirror` command, which will automatically push the master branch to GitHub.
+
 ## Requirements
 
 ### LaTeX Distribution
