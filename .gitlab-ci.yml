@@ -17,4 +17,5 @@ mirror2github:
     - git push --mirror https://${CI_GITHUB_USERNAME}:${CI_GITHUB_PASSWORD}@github.com/iswunistuttgart/latex-templates.git
   tags:
     - shell
-
+  only:
+    - master
