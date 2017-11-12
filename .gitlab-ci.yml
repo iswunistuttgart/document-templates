@@ -8,8 +8,6 @@ compile-cls:
       - dist
   tags:
     - docker
-  only:
-    - master
 
 mirror2github:
   stage: deploy
