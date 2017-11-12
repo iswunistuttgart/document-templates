@@ -55,16 +55,6 @@
   prefix=Document,%
 }
 
-% Declare debug options
-\DeclareBoolOption{debug}
-
-% Color space
-\DeclareBoolOption[true]{rgb}
-\DeclareComplementaryOption{cmyk}{rgb}
-
-% Allow user to choose a "big title page"
-\DeclareBoolOption[false]{bigtitle}
-
 % Declare the document type
 \def\DocumentType{regular}
 \DeclareOption{regular}{\def\DocumentType{regular}}
@@ -73,6 +63,10 @@
 \DeclareOption{assignment}{\def\DocumentType{assignment}}
 \DeclareOption{offprint}{\def\DocumentType{offprint}}
 \DeclareOption{report}{\def\DocumentType{report}}
+
+% Input more common options
+\input{common/class-options}
+
 
 % Pass any other options not known to the scrartcl package
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrartcl}}

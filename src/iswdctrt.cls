@@ -55,24 +55,11 @@
   prefix=Document,%
 }
 
-% Declare debug options
-\DeclareBoolOption{debug}
-
-% Declare whether thesis was accepted and ready for print (use draft/final to
-% switch between draft and final version of either the submission or publishing
-% version
-\DeclareBoolOption[false]{accepted}
-
-% Gender of the author
-\DeclareBoolOption{female}
-\DeclareComplementaryOption{male}{female}
-
-% Color space
-\DeclareBoolOption[true]{rgb}
-\DeclareComplementaryOption{cmyk}{rgb}
-
 % Declare the document type
 \def\DocumentType{doctorate}
+
+% Input more common options
+\input{common/class-options}
 
 % Pass any other options not known to the scrbook package
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrbook}}
