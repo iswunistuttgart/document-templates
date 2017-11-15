@@ -928,10 +928,10 @@
 \newcommand{\AuthorFaculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
-\newcommand{\universitylogo}{logo/university}
+\newcommand{\universitylogo}{images/logo/university}
 
 % Path to the department logo
-\newcommand{\departmentlogo}{logo/department}
+\newcommand{\departmentlogo}{images/logo/department}
 
 % Image to be shown on the coverpage
 \newcommand{\coverpageimage}[1]{\gdef\@coverpageImage{#1}}
@@ -3035,7 +3035,7 @@
     % GRAY BLOCK UNDERNEATH TITLE
     \draw[fill=PrimaryColor, draw=PrimaryColor] (0, -0.25) rectangle (1, -0.7);%
     % TYPE OF DOCUMENT
-    \node[align=center, text width=0.7\paperwidth] at (0.5, -0.275} {\color{white}{\huge\DocumentName}};%
+    \node[align=center, text width=0.7\paperwidth] at (0.5, -0.275) {\color{white}{\huge\DocumentName}};%
     % IMAGE
     \ifdefempty{\@coverpageImage}{}{%
       \begin{scope}%
@@ -3044,13 +3044,17 @@
           \includegraphics[keepaspectratio, height=0.45\paperheight]{\@coverpageImage}%
         };%
       \end{scope}%
-    }
-    % LOGOS
-    \node[anchor=west] at (0.083, -0.875) {%
-      \includegraphics[width=0.3\paperwidth, keepaspectratio]{\universitylogo}%
     };%
-    \node[anchor=east] at (0.917, -0.875) {%
-      \includegraphics[width=0.3\paperwidth, height=0.08\paperwidth, keepaspectratio]{\departmentlogo}%
+    % LOGOS
+    \ifdefempty{\universitylogo}{}{%
+      \node[anchor=west] at (0.083, -0.875) {%
+        \includegraphics[width=0.3\paperwidth, keepaspectratio]{\universitylogo}%
+      };%
+    };%
+    \ifdefempty{\departmentlogo}{}{%
+      \node[anchor=east] at (0.917, -0.875) {%
+        \includegraphics[width=0.3\paperwidth, height=0.08\paperwidth, keepaspectratio]{\departmentlogo}%
+      };%
     };%
     % DATE
     \node at (0.5, -0.95) {%
