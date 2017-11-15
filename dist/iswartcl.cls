@@ -976,6 +976,10 @@
   \@shorttitle%
 }
 
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TYPESETTING COMMANDS                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1633,9 +1637,6 @@
 % Document properties
 
 
-% Empty keywords (i.e., not available here)
-\newcommand{\@keywords}{}
-
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
 \gdef\@partner{}
@@ -1659,6 +1660,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \@ifpackageloaded{babel}{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\newcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+
+  \addto\captionsenglish{%
 \university{University of Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
 \department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
@@ -1699,7 +1742,470 @@
   \def\DocumentName{Report}
 }{}
 %
-  
+  }
+  \addto\captionsUSenglish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+  \addto\captionsamerican{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+  \addto\captionsUKenglish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+  \addto\captionsbritish{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+  \addto\captionscanadian{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+  \addto\captionsaustralian{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+  \addto\captionsnewzealand{%
+\university{University of Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institute for Control Engineering of Machine Tools and Manufacturing Units}
+\departmentaddress{Seidenstr.\@ 36, D-70174 Stuttgart, Germany}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Draft}
+\gdef\DocumentLocaleLogosuffix{-en}
+\gdef\DocumentLocalePartner{In cooperation with}
+\gdef\DocumentLocaleKeywords{Keywords}
+\gdef\DocumentLocaleDeclaration{Declaration of Authorship}
+%
+\renewcommand{\appendixtocname}{Appendices}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\appendixpagename}{Appendices}
+\renewcommand{\abstractname}{Abstract}
+\renewcommand{\contentsname}{Table of Contents}
+%\renewcommand{\@dedicationname}{Dedication}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Exam}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Exercise}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Offprint}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Report}
+}{}
+%
+  }
+
+  \addto\captionsaustrian{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Pr\"ufung}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Aufgaben zur Vorlesung}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Umdruck}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Bericht}
+}{}
+%
+  }%
+  \addto\captionsgerman{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Pr\"ufung}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Aufgaben zur Vorlesung}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Umdruck}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Bericht}
+}{}
+%
+  }%
+  \addto\captionsgermanb{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Pr\"ufung}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Aufgaben zur Vorlesung}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Umdruck}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Bericht}
+}{}
+%
+  }%
+  \addto\captionsnaustrian{%
+\university{Universit\"at Stuttgart}
+\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
+\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
+\departmentshort{ISW}
+%
+%
+\gdef\DocumentLocaleDraft{Entwurf}
+\gdef\DocumentLocaleLogosuffix{-de}
+\gdef\DocumentLocalePartner{In Kooperation mit}
+\gdef\DocumentLocaleKeywords{Stichw\"orter}
+\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
+%
+\renewcommand{\appendixtocname}{Anh\"ange}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixpagename}{Anh\"ange}
+\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+%\renewcommand{\@dedicationname}{Widmung}
+%
+\ifdefstring{\DocumentType}{regular}{%
+  \def\DocumentName{}
+}{}
+%
+\ifdefstring{\DocumentType}{exam}{%
+  \def\DocumentName{Pr\"ufung}
+}{}
+%
+\ifdefstring{\DocumentType}{exercise}{%
+  \def\DocumentName{Aufgaben zur Vorlesung}
+}{}
+%
+\ifdefstring{\DocumentType}{offprint}{%
+  \def\DocumentName{Umdruck}
+}{}
+%
+\ifdefstring{\DocumentType}{report}{%
+  \def\DocumentName{Bericht}
+}{}
+%
+  }%
   \addto\captionsngerman{%
 \university{Universit\"at Stuttgart}
 \faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
@@ -1743,48 +2249,6 @@
 %
   }%
 
-  \addto\captionsgerman{%
-\university{Universit\"at Stuttgart}
-\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
-\department{Institut f\"ur Steuerungstechnik der Werkzeugmaschinen und Fertigungseinrichtungen}
-\departmentaddress{Seidenstr.\@ 36, 70174 Stuttgart}
-\departmentshort{ISW}
-%
-%
-\gdef\DocumentLocaleDraft{Entwurf}
-\gdef\DocumentLocaleLogosuffix{-de}
-\gdef\DocumentLocalePartner{In Kooperation mit}
-\gdef\DocumentLocaleKeywords{Stichw\"orter}
-\gdef\DocumentLocaleDeclaration{Erkl{\"a}rung des Autors}
-%
-\renewcommand{\appendixtocname}{Anh\"ange}
-\renewcommand{\appendixname}{Anhang}
-\renewcommand{\appendixpagename}{Anh\"ange}
-\renewcommand{\abstractname}{Zusammenfassung}
-\renewcommand{\contentsname}{Inhaltsverzeichnis}
-%\renewcommand{\@dedicationname}{Widmung}
-%
-\ifdefstring{\DocumentType}{regular}{%
-  \def\DocumentName{}
-}{}
-%
-\ifdefstring{\DocumentType}{exam}{%
-  \def\DocumentName{Pr\"ufung}
-}{}
-%
-\ifdefstring{\DocumentType}{exercise}{%
-  \def\DocumentName{Aufgaben zur Vorlesung}
-}{}
-%
-\ifdefstring{\DocumentType}{offprint}{%
-  \def\DocumentName{Umdruck}
-}{}
-%
-\ifdefstring{\DocumentType}{report}{%
-  \def\DocumentName{Bericht}
-}{}
-%
-  }%
 }{}%
 
 
@@ -2277,9 +2741,9 @@
   \let\oldAnd\and%
   \renewcommand{\and}{, }%
   \hypersetup{
-    pdfauthor={\theauthor},
-    pdftitle={\thetitle},
-    pdfkeywords={\@keywords},
+    pdfauthor={\theauthor},%
+    pdftitle={\thetitle},%
+    pdfkeywords={\@keywords},%
   }%
   \renewcommand{\and}{\oldAnd}%
   % \IfLanguageName{ngerman}{%

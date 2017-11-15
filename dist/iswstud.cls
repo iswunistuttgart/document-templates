@@ -972,6 +972,10 @@
   \@shorttitle%
 }
 
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TYPESETTING COMMANDS                             %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1630,10 +1634,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties
-
-% List of keywords
-\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
-\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}
 
 % Name of the partner company/department/faculty/etc
 \newcommand{\partner}[1]{\gdef\@partner{#1}}
@@ -3752,9 +3752,9 @@
   \let\oldAnd\and%
   \renewcommand{\and}{, }%
   \hypersetup{
-    pdfauthor={\theauthor},
-    pdftitle={\thetitle},
-    pdfkeywords={\@keywords},
+    pdfauthor={\theauthor},%
+    pdftitle={\thetitle},%
+    pdfkeywords={\@keywords},%
   }%
   \renewcommand{\and}{\oldAnd}%
   % \IfLanguageName{ngerman}{%
