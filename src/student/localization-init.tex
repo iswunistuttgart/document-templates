@@ -54,10 +54,16 @@
   \newcommand{\degreenameshort}{M.Sc.}
 }{}
 %
-\ifdefstring{\DocumentType}{study}{%
+\ifdefstring{\DocumentType}{study-dipl}{%
   \newcommand{\documentname}{Student Research Project}
   \newcommand{\degreenamelong}{Diplomingenieur}
   \newcommand{\degreenameshort}{Dipl.-Ing.}
+}{}
+%
+\ifdefstring{\DocumentType}{study}{%
+  \newcommand{\documentname}{Student Research Project}
+  \newcommand{\degreenamelong}{Master of Science}
+  \newcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{diploma}{%

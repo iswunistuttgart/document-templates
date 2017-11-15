@@ -54,10 +54,16 @@
   \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
-\ifdefstring{\DocumentType}{study}{%
+\ifdefstring{\DocumentType}{study-dipl}{%
   \renewcommand{\documentname}{Student Research Project}
   \renewcommand{\degreenamelong}{Diplomingenieur}
   \renewcommand{\degreenameshort}{Dipl.-Ing.}
+}{}
+%
+\ifdefstring{\DocumentType}{study}{%
+  \renewcommand{\documentname}{Student Research Project}
+  \renewcommand{\degreenamelong}{Master of Science}
+  \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{diploma}{%
