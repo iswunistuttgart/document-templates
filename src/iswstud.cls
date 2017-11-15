@@ -62,6 +62,7 @@
 \DeclareOption{bachelor-project}{\def\DocumentType{bachelor-project}}
 \DeclareOption{master}{\def\DocumentType{master}}
 \DeclareOption{master-description}{\def\DocumentType{description-master}}
+\DeclareOption{study-diploma}{\def\DocumentType{study-dipl}}
 \DeclareOption{study}{\def\DocumentType{study}}
 
 % Input more common options
@@ -71,7 +72,7 @@
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
 % Execute default options
-\ExecuteOptions{ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
+\ExecuteOptions{bachelor, ngerman, draft, paper=a4paper, twoside, cleardoublepage=empty, open=right}
 
 % Process options passed to the class
 \ProcessKeyvalOptions{ISW}
