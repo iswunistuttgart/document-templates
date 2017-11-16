@@ -1,11 +1,20 @@
-image: python:2.7-alpine
-
 compile-cls:
+  image: python:2.7-alpine
   script:
     - python build.py
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     paths:
       - dist
+  tags:
+    - docker
   only:
     - master
+
+mirror2github:
+  stage: deploy
+  script:
+    - git push --mirror https://${CI_GITHUB_USERNAME}:${CI_GITHUB_PASSWORD}@github.com/iswunistuttgart/latex-templates.git
+  tags:
+    - shell
+

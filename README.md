@@ -1,20 +1,26 @@
 # ISW LaTeX Templates
 
+[![pipeline status](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/badges/master/pipeline.svg)](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/commits/master)
+
 This is the repository for LaTeX document templates for student theses, reports, and other documents.
 
 If you are just interested in finding the most recent class that you want to use, then look no further but table [1].
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.0.0-rc1 |
-| iswdctrt | Doctoral theses | 1.0.0-rc1 |
-| iswstud | Student theses | 1.0.0-rc1 |
+| iswartcl | General documents | 1.0.0-rc3 |
+| iswdctrt | Doctoral theses | 1.0.0-rc3 |
+| iswstud | Student theses | 1.0.0-rc3 |
 
-Simply copy the respective files (`.cls` and `.tex`) from `dist/` to a directory of your choice and start writing your document inside the given `.tex` file!
+There are two ways to obtaining the necessary `.cls` and `.tex` files
+  1. Copy the respective files from the `dist/` folder to your local working directory
+  2. Download the build artifacts from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) and unpack them to your local working directory
+
+In the long run this will be the on the only way to obtaining the files
 
 ## Development Team
 
-ISW LaTeX Templates was created by [Philipp Tempel](http://www.isw.uni-stuttgart.de/institut/mitarbeiter/Tempel/?__locale=en) who both uses and continues to develop the template.
+ISW LaTeX Templates was created by [Philipp Tempel](http://www.isw.uni-stuttgart.de/institut/mitarbeiter/Tempel/) who both uses and continues to develop the templates.
 
 ## Contributing
 
@@ -28,7 +34,8 @@ You need an up-to-date version of a LaTeX distribution on your current operating
 
 ### Compiler Engine
 
-As the trend in development of LaTeX related packages and classes is to move away from pdflatex towards xelatex or lualatex, we are not providing support for pdflatex anymore. As such, you will need to compile your document using either XeLaTeX or luaLaTeX (preferably luaLaTeX as the classes are  more thoroughly tested against luaLaTeX).
+As the trend in development of LaTeX related packages and classes is to move away from pdflatex towards xelatex or lualatex, we are not providing support for pdflatex anymore. As such, you will need to compile your document using either XeLaTeX or luaLaTeX (preferably luaLaTeX, as the classes are more thoroughly tested against luaLaTeX).
+
 
 ## Usage
 
