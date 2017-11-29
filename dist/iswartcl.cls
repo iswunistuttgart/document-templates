@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc4}
-\def\filedate{2017/11/15}
+\def\fileversion{1.0.0-rc5}
+\def\filedate{2017/11/29}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -2084,7 +2084,7 @@
     % GRAY BLOCK UNDERNEATH TITLE
     \draw[fill=PrimaryColor, draw=PrimaryColor] (0, -0.25) rectangle (1, -0.7);%
     % TYPE OF DOCUMENT
-    \node[align=center, text width=0.7\paperwidth] at (0.5, -0.275} {\color{white}{\huge\DocumentName}};%
+    \node[align=center, text width=0.7\paperwidth] at (0.5, -0.275) {\color{white}{\huge\DocumentName}};%
     % IMAGE
     \ifdefempty{\@coverpageImage}{}{%
       \begin{scope}%
