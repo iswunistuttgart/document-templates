@@ -1,0 +1,25 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% KOMASCRIPT SECTIONING STYLES                                               %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand*{\raggedchapter}{\RaggedLeft}
+\renewcommand{\chapterlinesformat}[3]{%
+  % Use ifstr as follows: \ifstr{str}{}{empty}{non-empty}
+  \ifstr{#2}{}{}{%
+    \setlength{\fboxrule}{2pt}
+    \makebox[\linewidth][r]{%
+      \rotatebox{90}{%
+        \makebox[2cm][l]{%
+          \resizebox{2.5cm}{!}{%
+            \color{PrimaryColor}\normalfont\Large\scshape\space\chapapp\space%
+          }%
+        }%
+      } % Leave this white space here or the "CHAPTER" will move into the gray box
+      \resizebox{!}{2.5cm}{%
+        \fboxsep=6pt%
+        \fontsize{85}{100}\selectfont\color{white}\sffamily\colorbox{PrimaryColor!20}{\thechapter}%
+      }%
+    }\\*%
+  }%
+  \addvspace{20\p@}%
+  #3%
+}

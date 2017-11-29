@@ -1,16 +1,16 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc5}
-\def\filedate{2017/11/29}
+\def\fileversion{1.0.0-rc4}
+\def\filedate{2017/11/15}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iswdctrt}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
+\ProvidesClass{iswbook}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
 
 % Typeout a notice
 \typeout{}
 \typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
-\typeout{      Document class for doctoral theses}
+\typeout{      Document class for books}
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
@@ -38,7 +38,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{iswdctrt}{%
+  \PackageWarning{iswbook}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -67,7 +67,7 @@
 }
 
 % Declare the document type
-\def\DocumentType{doctorate}
+\def\DocumentType{book}
 
 % Input more common options
 % Declare debug options
@@ -891,10 +891,10 @@
 }{%
   \end{spacing}%
   \vfill%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  \textbf{\color{PrimaryColor}\keywordsname:}~\@keywords%
-  \renewcommand{\and}{\oldAnd}
+  % \let\oldAnd\and%
+  % \renewcommand{\and}{\unskip,\xspace}%
+  % \textbf{\color{PrimaryColor}\keywordsname:}~\@keywords%
+  % \renewcommand{\and}{\oldAnd}
 }
 
 
@@ -1625,25 +1625,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document properties
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Document properties
-
-% Name of the partner company/department/faculty/etc
-\newcommand{\partner}[1]{\gdef\@partner{#1}}
-\gdef\@partner{}
-
-% Place of birth
-\newcommand{\placeofbirth}[1]{\gdef\@placeofbirth{#1}}
-\gdef\@placeofbirth{}
-
-% Name of the first examiner
-\newcommand{\mainexaminer}[1]{\gdef\@mainexaminer{#1}}
-\newcommand{\@mainexaminer}{No \texttt{\textbackslash mainexaminer} given\@latex@warning@no@line{No \noexpand\mainexaminer given}}
-
-% Name(s) of the second examiner(s)
-\newcommand{\secondexaminer}[1]{\gdef\@secondexaminer{#1}}
-\newcommand{\@secondexaminer}{No \texttt{\textbackslash secondexaminer} given\@latex@warning@no@line{No \noexpand\secondexaminer given}}
-
 
 
 
@@ -1689,21 +1670,10 @@
 %
 %
 \newcommand{\draftname}{Draft}
-\newcommand{\mainexaminername}{First Examiner}
-\newcommand{\secondexaminername}{Second Examiner}
 \newcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \newcommand{\submittedbyname}{Submitted by}
-\else%
-  \newcommand{\submittedbyname}{By}
-\fi%
 \newcommand{\fromname}{from}
 \newcommand{\submittedonname}{Submitted on}
-\newcommand{\examinationonname}{Defended on}
-\newcommand{\majorname}{Major}
-\newcommand{\partnername}{In cooperation with}
 \newcommand{\keywordsname}{Keywords}
-\newcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -1711,38 +1681,6 @@
 \newcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \newcommand{\documentname}{Dissertation}
-  \newcommand{\degreenamelong}{Doktoringenieur}
-  \newcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\newcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
 
   \addto\captionsenglish{%
@@ -1754,21 +1692,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -1776,38 +1703,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionsUSenglish{%
@@ -1819,21 +1714,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -1841,38 +1725,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionsamerican{%
@@ -1884,21 +1736,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -1906,38 +1747,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionsUKenglish{%
@@ -1949,21 +1758,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -1971,38 +1769,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionsbritish{%
@@ -2014,21 +1780,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -2036,38 +1791,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionscanadian{%
@@ -2079,21 +1802,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -2101,38 +1813,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionsaustralian{%
@@ -2144,21 +1824,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -2166,38 +1835,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
   \addto\captionsnewzealand{%
@@ -2209,21 +1846,10 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\mainexaminername}{First Examiner}
-\renewcommand{\secondexaminername}{Second Examiner}
 \renewcommand{\logosuffixname}{en}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{Submitted by}
-\else%
-  \renewcommand{\submittedbyname}{By}
-\fi%
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
-\renewcommand{\examinationonname}{Defended on}
-\renewcommand{\majorname}{Major}
-\renewcommand{\partnername}{In cooperation with}
 \renewcommand{\keywordsname}{Keywords}
-\renewcommand{\declarationname}{Declaration of Authorship}
 %
 \renewcommand{\appendixtocname}{Appendices}
 \renewcommand{\appendixname}{Appendix}
@@ -2231,38 +1857,6 @@
 \renewcommand{\abstractname}{Abstract}
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  A \documentname\space %
-  \ifDocumentaccepted%
-    accepted by
-  \else%
-    presented to
-  \fi%
-  the faculty %
-  \AuthorFaculty, \AuthorUniversity%
-  \ifdefempty{%
-    \degreenamelong%
-  }{%
-    .%
-  }{,\\in partial fulfillment of the requirements for the degree of\\%
-    \degreenamelong\space (\degreenameshort)%
-  }.%
-}%
-%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \begin{otherlanguage}{ngerman}%
-    \DeclarationOfAuthorship%
-  \end{otherlanguage}%
-}
 %
   }
 
@@ -2275,21 +1869,10 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{Hauptberichter}
-\renewcommand{\secondexaminername}{Mitberichter}
 \renewcommand{\logosuffixname}{-de}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{vorgelegt von}
-\else%
-  \renewcommand{\submittedbyname}{von}
-\fi%
 \renewcommand{\fromname}{aus}
 \renewcommand{\submittedonname}{Eingereicht am}
-\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
-\renewcommand{\majorname}{Studiengang}
-\renewcommand{\partnername}{In Kooperation mit}
 \renewcommand{\keywordsname}{Stichw\"orter}
-\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -2297,84 +1880,6 @@
 \renewcommand{\abstractname}{Zusammenfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  \ifDocumentaccepted%
-    Von der Fakult\"at%
-  \else%
-    Der Fakult\"at%
-  \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
-  \ifDocumentaccepted%
-    genehmigte%
-  \else%
-    vorgelegte%
-  \fi%
-  \space Abhandlung
-}%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\declarationname}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
 %
   }%
   \addto\captionsgerman{%
@@ -2386,21 +1891,10 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{Hauptberichter}
-\renewcommand{\secondexaminername}{Mitberichter}
 \renewcommand{\logosuffixname}{-de}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{vorgelegt von}
-\else%
-  \renewcommand{\submittedbyname}{von}
-\fi%
 \renewcommand{\fromname}{aus}
 \renewcommand{\submittedonname}{Eingereicht am}
-\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
-\renewcommand{\majorname}{Studiengang}
-\renewcommand{\partnername}{In Kooperation mit}
 \renewcommand{\keywordsname}{Stichw\"orter}
-\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -2408,84 +1902,6 @@
 \renewcommand{\abstractname}{Zusammenfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  \ifDocumentaccepted%
-    Von der Fakult\"at%
-  \else%
-    Der Fakult\"at%
-  \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
-  \ifDocumentaccepted%
-    genehmigte%
-  \else%
-    vorgelegte%
-  \fi%
-  \space Abhandlung
-}%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\declarationname}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
 %
   }%
   \addto\captionsgermanb{%
@@ -2497,21 +1913,10 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{Hauptberichter}
-\renewcommand{\secondexaminername}{Mitberichter}
 \renewcommand{\logosuffixname}{-de}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{vorgelegt von}
-\else%
-  \renewcommand{\submittedbyname}{von}
-\fi%
 \renewcommand{\fromname}{aus}
 \renewcommand{\submittedonname}{Eingereicht am}
-\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
-\renewcommand{\majorname}{Studiengang}
-\renewcommand{\partnername}{In Kooperation mit}
 \renewcommand{\keywordsname}{Stichw\"orter}
-\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -2519,84 +1924,6 @@
 \renewcommand{\abstractname}{Zusammenfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  \ifDocumentaccepted%
-    Von der Fakult\"at%
-  \else%
-    Der Fakult\"at%
-  \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
-  \ifDocumentaccepted%
-    genehmigte%
-  \else%
-    vorgelegte%
-  \fi%
-  \space Abhandlung
-}%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\declarationname}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
 %
   }%
   \addto\captionsnaustrian{%
@@ -2608,21 +1935,10 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{Hauptberichter}
-\renewcommand{\secondexaminername}{Mitberichter}
 \renewcommand{\logosuffixname}{-de}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{vorgelegt von}
-\else%
-  \renewcommand{\submittedbyname}{von}
-\fi%
 \renewcommand{\fromname}{aus}
 \renewcommand{\submittedonname}{Eingereicht am}
-\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
-\renewcommand{\majorname}{Studiengang}
-\renewcommand{\partnername}{In Kooperation mit}
 \renewcommand{\keywordsname}{Stichw\"orter}
-\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -2630,84 +1946,6 @@
 \renewcommand{\abstractname}{Zusammenfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  \ifDocumentaccepted%
-    Von der Fakult\"at%
-  \else%
-    Der Fakult\"at%
-  \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
-  \ifDocumentaccepted%
-    genehmigte%
-  \else%
-    vorgelegte%
-  \fi%
-  \space Abhandlung
-}%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\declarationname}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
 %
   }%
   \addto\captionsngerman{%
@@ -2719,21 +1957,10 @@
 %
 %
 \renewcommand{\draftname}{Entwurf}
-\renewcommand{\mainexaminername}{Hauptberichter}
-\renewcommand{\secondexaminername}{Mitberichter}
 \renewcommand{\logosuffixname}{-de}
-\ifDocumentaccepted%
-  \renewcommand{\submittedbyname}{vorgelegt von}
-\else%
-  \renewcommand{\submittedbyname}{von}
-\fi%
 \renewcommand{\fromname}{aus}
 \renewcommand{\submittedonname}{Eingereicht am}
-\renewcommand{\examinationonname}{Tag der m\"undlichen Pr\"ufung}
-\renewcommand{\majorname}{Studiengang}
-\renewcommand{\partnername}{In Kooperation mit}
 \renewcommand{\keywordsname}{Stichw\"orter}
-\renewcommand{\declarationname}{Erkl{\"a}rung des Autors}
 %
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
@@ -2741,84 +1968,6 @@
 \renewcommand{\abstractname}{Zusammenfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
-%
-\ifdefstring{\DocumentType}{doctorate}{%
-  \renewcommand{\documentname}{Dissertation}
-  \renewcommand{\degreenamelong}{Doktoringenieur}
-  \renewcommand{\degreenameshort}{Dr.-Ing.}
-}{}
-%
-\renewcommand{\thesispretext}{%
-  \ifDocumentaccepted%
-    Von der Fakult\"at%
-  \else%
-    Der Fakult\"at%
-  \fi%
-  \space\AuthorFaculty\space der \AuthorUniversity\space zur Erlangung der W\"urde eine%
-    \ifDocumentfemale%
-      r%
-    \else%
-      s%
-    \fi%
-  \space\degreenamelong%
-    \ifDocumentfemale%
-      in%
-    \else%
-      s%
-    \fi%
-  \space%
-  (\degreenameshort)
-  \ifDocumentaccepted%
-    genehmigte%
-  \else%
-    vorgelegte%
-  \fi%
-  \space Abhandlung
-}%
-%
-\renewcommand{\DeclarationOfAuthorship}{%
-  \thispagestyle{empty}%
-  \chapter*{\declarationname}%
-  \vspace{1\baselineskip}%
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
-  Hiermit versichere ich, \theauthor, Autor der vorliegenden \documentname\space mit dem Titel%
-  \vspace{1\baselineskip}
-  \begin{center}
-    \selectfont\sffamily
-    \@title\\%
-    \ifdefempty{\@subtitle}{}{
-      \vspace{0.15cm}
-      \@subtitle\\%
-    }
-  \end{center}
-  \vspace{1\baselineskip}
-  \begin{enumerate}%
-    \item Dass ich meine Arbeit selbst\"andig verfasst habe.%
-    \item Dass ich keine anderen als die angegebenen Quellen benutzt und alle w\"ortlich oder sinngem\"a\ss aus anderen Werken \"ubernommenen Aussagen als solche gekennzeichnet habe.%
-    \item Dass die eingereichte Arbeit weder vollst\"andig noch in wesentlichen Teilen Gegenstand eines anderen Pr\"ufungsverfahrens gewesen ist.%
-    \item Dass ich die Arbeit weder vollst\"andig noch in Teilen bereits ver\"offentlicht habe.%
-    \item Dass das elektronische Exemplar mit den anderen Exemplaren \"ubereinstimmt.%
-  \end{enumerate}%
-  \vfill%\vspace{2\baselineskip}%
-  %
-  \begin{center}%
-    \selectfont\sffamily%
-    \small%
-    \begin{tabu} to \linewidth {X[5,R] X[1] X[5,L]}%
-      \rule{\linewidth}{0.5pt}%
-        & \rule{\linewidth}{0pt}%
-        & \rule{\linewidth}{0.5pt}%
-        \\[-1.5ex]%
-      Datum%
-        & %
-        & Autor \\%
-    \end{tabu}%
-  \end{center}%
-  \vfill%
-  \renewcommand{\and}{\oldAnd}%
-  \cleardoublepage%
-}
 %
   }%
 
@@ -3081,99 +2230,99 @@
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Titlepage creation %
-\renewcommand{\maketitle}{%
-  \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
-  \begin{titlepage}%
-    \thispagestyle{empty}%
-    \centering%
-    \begin{minipage}[t][1cm][c]{0.9\linewidth}%
-      \centering%
-      \huge\documentname\par%
-    \end{minipage}\par%
-    \vspace*{0.75cm}\par%
-    \begin{minipage}[t][3cm][c]{0.9\linewidth}%
-      \centering%
-      {\usekomafont{title}{\@title}\par}%
-    \end{minipage}\par%
-    \vspace*{0.1cm}\par%
-    \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
-      \centering%
-      \ifdefempty{\@subtitle}{}{%
-        \usekomafont{subtitle}{\@subtitle}%
-      }%
-    \end{minipage}\par%
-    \vspace*{1.5cm}\par%
-    \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
-      \centering%
-      \begin{spacing}{1.25}
-        {\thesispretext\par}%
-      \end{spacing}
-    \end{minipage}
-    \vspace*{1.5cm}\par%
-    \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
-      \centering%
-      \submittedbyname\par%
-      \vspace{0.5cm}\par%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\unskip,\xspace}%
-      {\usekomafont{author}{\@author}}\par%
-      \renewcommand{\and}{\oldAnd}%
-      \vspace{0.5cm}\par%
-      \ifdefempty{\@placeofbirth}{%
-        \par%
-      }{%
-        \fromname\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
-      }%
-    \end{minipage}
-    \vspace*{1cm}\par%
-    \begin{minipage}[t][1cm][c]{0.5\linewidth}
-      \centering%
-      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
-    \end{minipage}
-    \vspace*{1cm}\par%
-    \begin{minipage}[c][3cm][c]{0.90\linewidth}%
-      \let\oldAnd\and%
-      \renewcommand{\and}{\par}%
-      \renewcommand*{\arraystretch}{1.6}
-      \begin{tabu} to \linewidth {X[1,l] X[2,l]}%
-        {\mainexaminername:}%
-          & \@mainexaminer\\%
-        {\secondexaminername:}%
-          & {\@secondexaminer}\\%
-        \ifDocumentaccepted%
-          {\examinationonname:}%
-        \else%
-          {\submittedonname:}%
-        \fi%
-          % & {\usekomafont{date}{\@date}}\\%
-          & {\@date}\\%
-      \end{tabu}%
-    \renewcommand{\and}{\oldAnd}%
-    \end{minipage}%
-    \vfill
-    \begin{minipage}[t]{0.80\linewidth}
-      \centering%
-      \AuthorDepartment\space der \AuthorUniversity.\par%
-      % \let\oldAnd\and%
-      % \renewcommand{\and}{\par}%
-      % \ifdefempty{\@partner}{}{%
-      %   \vspace*{0.3cm}\par%
-      %   \@partner%
-      % }%
-      % \renewcommand{\and}{\oldAnd}%
-    \end{minipage}
-    \vfill
-    \begin{minipage}[t][1cm][t]{0.2\linewidth}
-      \centering%
-      \printdayoff%
-      \@date%
-      \printdayon%
-    \end{minipage}%
-  \end{titlepage}%
-  \restoregeometry%
-  \cleardoublepage%
-  \setcounter{page}{1}%
-}%
+% \renewcommand{\maketitle}{%
+%   \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
+%   \begin{titlepage}%
+%     \thispagestyle{empty}%
+%     \centering%
+%     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+%       \centering%
+%       \huge\documentname\par%
+%     \end{minipage}\par%
+%     \vspace*{0.75cm}\par%
+%     \begin{minipage}[t][3cm][c]{0.9\linewidth}%
+%       \centering%
+%       {\usekomafont{title}{\@title}\par}%
+%     \end{minipage}\par%
+%     \vspace*{0.1cm}\par%
+%     \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
+%       \centering%
+%       \ifdefempty{\@subtitle}{}{%
+%         \usekomafont{subtitle}{\@subtitle}%
+%       }%
+%     \end{minipage}\par%
+%     \vspace*{1.5cm}\par%
+%     \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
+%       \centering%
+%       \begin{spacing}{1.25}
+%         {\thesispretext\par}%
+%       \end{spacing}
+%     \end{minipage}
+%     \vspace*{1.5cm}\par%
+%     \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
+%       \centering%
+%       \submittedbyname\par%
+%       \vspace{0.5cm}\par%
+%       \let\oldAnd\and%
+%       \renewcommand{\and}{\unskip,\xspace}%
+%       {\usekomafont{author}{\@author}}\par%
+%       \renewcommand{\and}{\oldAnd}%
+%       \vspace{0.5cm}\par%
+%       \ifdefempty{\@placeofbirth}{%
+%         \par%
+%       }{%
+%         \fromname\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
+%       }%
+%     \end{minipage}
+%     \vspace*{1cm}\par%
+%     \begin{minipage}[t][1cm][c]{0.5\linewidth}
+%       \centering%
+%       \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
+%     \end{minipage}
+%     \vspace*{1cm}\par%
+%     \begin{minipage}[c][3cm][c]{0.90\linewidth}%
+%       \let\oldAnd\and%
+%       \renewcommand{\and}{\par}%
+%       \renewcommand*{\arraystretch}{1.6}
+%       \begin{tabu} to \linewidth {X[1,l] X[2,l]}%
+%         {\mainexaminername:}%
+%           & \@mainexaminer\\%
+%         {\secondexaminername:}%
+%           & {\@secondexaminer}\\%
+%         \ifDocumentaccepted%
+%           {\examinationonname:}%
+%         \else%
+%           {\submittedonname:}%
+%         \fi%
+%           % & {\usekomafont{date}{\@date}}\\%
+%           & {\@date}\\%
+%       \end{tabu}%
+%     \renewcommand{\and}{\oldAnd}%
+%     \end{minipage}%
+%     \vfill
+%     \begin{minipage}[t]{0.80\linewidth}
+%       \centering%
+%       \AuthorDepartment\space der \AuthorUniversity.\par%
+%       % \let\oldAnd\and%
+%       % \renewcommand{\and}{\par}%
+%       % \ifdefempty{\@partner}{}{%
+%       %   \vspace*{0.3cm}\par%
+%       %   \@partner%
+%       % }%
+%       % \renewcommand{\and}{\oldAnd}%
+%     \end{minipage}
+%     \vfill
+%     \begin{minipage}[t][1cm][t]{0.2\linewidth}
+%       \centering%
+%       \printdayoff%
+%       \@date%
+%       \printdayon%
+%     \end{minipage}%
+%   \end{titlepage}%
+%   \restoregeometry%
+%   \cleardoublepage%
+%   \setcounter{page}{1}%
+% }%
 
 
 

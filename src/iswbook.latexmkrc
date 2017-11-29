@@ -1,4 +1,4 @@
-@default_files = ("iswartcl.tex", "iswbook.tex", "iswdctrt.tex", "iswstud.tex");
+@default_files = ("iswbook.tex");
 # Use lualatex
 $pdflatex = 'lualatex --shell-escape --synctex=1 %O %S';
 # Always create PDFs

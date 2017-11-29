@@ -31,9 +31,9 @@
 %\renewcommand{\@dedicationname}{Widmung}
 %
 \ifdefstring{\DocumentType}{description-bachelor}{%
- \renewcommand{\documentname}{Projektexpos\'e}
- \renewcommand{\degreenamelong}{Bachelor of Science}
- \renewcommand{\degreenameshort}{B.Sc.}
+  \renewcommand{\documentname}{Projektexpos\'e}
+  \renewcommand{\degreenamelong}{Bachelor of Science}
+  \renewcommand{\degreenameshort}{B.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{description-master}{%
@@ -54,10 +54,16 @@
   \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
-\ifdefstring{\DocumentType}{study}{%
+\ifdefstring{\DocumentType}{study-dipl}{%
   \renewcommand{\documentname}{Studienarbeit}
   \renewcommand{\degreenamelong}{Diplomingenieur}
   \renewcommand{\degreenameshort}{Dipl.-Ing.}
+}{}
+%
+\ifdefstring{\DocumentType}{study}{%
+  \renewcommand{\documentname}{Studienarbeit}
+  \renewcommand{\degreenamelong}{Master of Science}
+  \renewcommand{\degreenameshort}{M.Sc.}
 }{}
 %
 \ifdefstring{\DocumentType}{diploma}{%
@@ -84,7 +90,8 @@
     \else%
       s%
     \fi%
-  \space\degreenamelong\space%
+  \space\degreenamelong%
+  \space\AuthorMajor\space%
   (\degreenameshort)
   \ifDocumentaccepted%
     genehmigte%

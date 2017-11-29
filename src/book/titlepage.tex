@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Titlepage creation %
+% \renewcommand{\maketitle}{%
+%   \newgeometry{inner=1.50cm, outer=1.50cm, top=1.50cm, bottom=1.50cm}%
+%   \begin{titlepage}%
+%     \thispagestyle{empty}%
+%     \centering%
+%     \begin{minipage}[t][1cm][c]{0.9\linewidth}%
+%       \centering%
+%       \huge\documentname\par%
+%     \end{minipage}\par%
+%     \vspace*{0.75cm}\par%
+%     \begin{minipage}[t][3cm][c]{0.9\linewidth}%
+%       \centering%
+%       {\usekomafont{title}{\@title}\par}%
+%     \end{minipage}\par%
+%     \vspace*{0.1cm}\par%
+%     \begin{minipage}[t][1.5cm][c]{0.7\linewidth}%
+%       \centering%
+%       \ifdefempty{\@subtitle}{}{%
+%         \usekomafont{subtitle}{\@subtitle}%
+%       }%
+%     \end{minipage}\par%
+%     \vspace*{1.5cm}\par%
+%     \begin{minipage}[t][1.5cm][t]{0.75\linewidth}%
+%       \centering%
+%       \begin{spacing}{1.25}
+%         {\thesispretext\par}%
+%       \end{spacing}
+%     \end{minipage}
+%     \vspace*{1.5cm}\par%
+%     \begin{minipage}[t][2.5cm][c]{0.8\linewidth}
+%       \centering%
+%       \submittedbyname\par%
+%       \vspace{0.5cm}\par%
+%       \let\oldAnd\and%
+%       \renewcommand{\and}{\unskip,\xspace}%
+%       {\usekomafont{author}{\@author}}\par%
+%       \renewcommand{\and}{\oldAnd}%
+%       \vspace{0.5cm}\par%
+%       \ifdefempty{\@placeofbirth}{%
+%         \par%
+%       }{%
+%         \fromname\space{\usekomafont{placeofbirth}{\@placeofbirth}}\par%
+%       }%
+%     \end{minipage}
+%     \vspace*{1cm}\par%
+%     \begin{minipage}[t][1cm][c]{0.5\linewidth}
+%       \centering%
+%       \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
+%     \end{minipage}
+%     \vspace*{1cm}\par%
+%     \begin{minipage}[c][3cm][c]{0.90\linewidth}%
+%       \let\oldAnd\and%
+%       \renewcommand{\and}{\par}%
+%       \renewcommand*{\arraystretch}{1.6}
+%       \begin{tabu} to \linewidth {X[1,l] X[2,l]}%
+%         {\mainexaminername:}%
+%           & \@mainexaminer\\%
+%         {\secondexaminername:}%
+%           & {\@secondexaminer}\\%
+%         \ifDocumentaccepted%
+%           {\examinationonname:}%
+%         \else%
+%           {\submittedonname:}%
+%         \fi%
+%           % & {\usekomafont{date}{\@date}}\\%
+%           & {\@date}\\%
+%       \end{tabu}%
+%     \renewcommand{\and}{\oldAnd}%
+%     \end{minipage}%
+%     \vfill
+%     \begin{minipage}[t]{0.80\linewidth}
+%       \centering%
+%       \AuthorDepartment\space der \AuthorUniversity.\par%
+%       % \let\oldAnd\and%
+%       % \renewcommand{\and}{\par}%
+%       % \ifdefempty{\@partner}{}{%
+%       %   \vspace*{0.3cm}\par%
+%       %   \@partner%
+%       % }%
+%       % \renewcommand{\and}{\oldAnd}%
+%     \end{minipage}
+%     \vfill
+%     \begin{minipage}[t][1cm][t]{0.2\linewidth}
+%       \centering%
+%       \printdayoff%
+%       \@date%
+%       \printdayon%
+%     \end{minipage}%
+%   \end{titlepage}%
+%   \restoregeometry%
+%   \cleardoublepage%
+%   \setcounter{page}{1}%
+% }%

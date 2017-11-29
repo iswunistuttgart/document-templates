@@ -1,21 +1,21 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc5}
-\def\filedate{2017/11/29}
+\def\fileversion{1.0.0-rc4}
+\def\filedate{2017/11/12}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{iswdctrt}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
+\ProvidesClass{iswbook}[\filedate\space Version \fileversion\space by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>]
 
 % Typeout a notice
 \typeout{}
 \typeout{ISW - Institute for Control Engineering of Machine Tools}
 \typeout{      and Manufacturing Units, University Stuttgart}
-\typeout{      Document class for doctoral theses}
+\typeout{      Document class for books}
 \typeout{      Version \fileversion\space(\filedate) }
 \typeout{}
 
 \input{common/packages-head}
-\input{doctorate/packages-head}
+\input{book/packages-head}
 
 
 
@@ -27,7 +27,7 @@
   % #1 is the deprecated command
   % #2 is the new command to use
   % Issue a message at first usage
-  \PackageWarning{iswdctrt}{%
+  \PackageWarning{iswbook}{%
     Deprecated command \@backslashchar#1;\MessageBreak%
     \protect#2\space should be used instead\MessageBreak%
   }%
@@ -56,7 +56,7 @@
 }
 
 % Declare the document type
-\def\DocumentType{doctorate}
+\def\DocumentType{book}
 
 % Input more common options
 \input{common/class-options}
@@ -78,7 +78,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-options}
-\input{doctorate/packages-options}
+\input{book/packages-options}
 
 
 
@@ -111,28 +111,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-main}
-\input{doctorate/packages-main}
+\input{book/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMAScript was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of packages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}
-\input{doctorate/tikz-packages}
+\input{book/tikz-packages}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONFIGURE PACKAGES                                                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define colors                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/colors}
-\input{doctorate/colors}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% CONFIGURE PACKAGES          												  %%
-%% (needs color information)                                                  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\input{common/packages-post}
+\input{book/colors}
 
 
 
@@ -141,7 +141,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/environments}
-\input{doctorate/environments}
+\input{book/environments}
 
 
 
@@ -150,7 +150,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/commands}
-\input{doctorate/commands}
+\input{book/commands}
 
 
 
@@ -158,7 +158,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{doctorate/localization}
+\input{book/localization}
 
 
 
@@ -167,10 +167,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/layout}
-\input{doctorate/layout}
+\input{book/layout}
 
 \input{common/coverpage}
-\input{doctorate/titlepage}
+\input{book/titlepage}
 
 
 
@@ -180,12 +180,12 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
   \input{common/mainmatter}
-  \input{doctorate/mainmatter}
+  \input{book/mainmatter}
 }%
 
 \ifdraft{
   \input{common/ifdraft}
-  \input{doctorate/ifdraft}
+  \input{book/ifdraft}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
@@ -202,12 +202,12 @@
 
 \makeatletter%
   \input{common/makeatletter}
-  \input{doctorate/makeatletter}
+  \input{book/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
   \input{common/atbegindocument}
-  \input{doctorate/atbegindocument}
+  \input{book/atbegindocument}
 }
 
 

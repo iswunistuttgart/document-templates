@@ -19,10 +19,10 @@
 \newcommand{\AuthorFaculty}{\@latex@warning@no@line{No \noexpand\faculty given}}
 
 % Path to the university logo can be redefined using e.g., \renewcommand{\universitylogo}{logos/utrecht}
-\newcommand{\universitylogo}{logo/university}
+\newcommand{\universitylogo}{images/logo/university}
 
 % Path to the department logo
-\newcommand{\departmentlogo}{logo/department}
+\newcommand{\departmentlogo}{images/logo/department}
 
 % Image to be shown on the coverpage
 \newcommand{\coverpageimage}[1]{\gdef\@coverpageImage{#1}}
@@ -55,3 +55,7 @@
 \newcommand{\runtitle}{%
   \@shorttitle%
 }
+
+% List of keywords
+\newcommand{\keywords}[1]{\gdef\@keywords{#1}}
+\newcommand{\@keywords}{\@latex@warning@no@line{No \noexpand\keywords given}}

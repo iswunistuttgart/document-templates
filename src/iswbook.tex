@@ -1,12 +1,8 @@
 \documentclass[%
-  bachelor,%
   draft,%
-  english,%
-  ngerman,% last language set will be the main document language
-  % accepted,%
-  female,%
-  study,%
-]{iswstud}
+  ngerman,%
+  english,% last language set will be the main document language
+]{iswbook}
 
 
 
@@ -27,34 +23,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START setting document properties
 % Set author(s) names
-\author{Maria Musterfrau}
+\author{Philipp Tempel}
 % Short author names
-\shortauthor{M.\@ Musterfrau}
-% Student's immatriculation number 
-\immatriculationnumber{1234567}
-% Place of birth of author
-\placeofbirth{Stuttgart}
-% Your study major
-\major{Technische Kybernetik}
+\shortauthor{Ph.\@ Tempel}
 
 % Set the date this document is printed/published
 % Avoid typing in manually, either use `\today` or `\printdate{yyyy-mm-dd}`
 \date{\today}
 
-
 % Title of document
-\title{Dies ist der Sehr Lange Titel meiner Super Tollen Abschlussarbeit}
-% Define a short title if the main title is too long and truncated in parts of the document
-\shorttitle{Dies ist der Kurze Title meiner Arbeit}
-% Theses can also have subtitles
-\subtitle{Unter Umst\"anden brauchen manche Abschlussarbeiten auch einen Untertitel}
-% Define a partnering institute or company here (or multiple separated by `\and`)
-\partner{Fraunhofer-Institut für Produktionstechnik und Automatisierung IPA \and Institut für Produktionsanlagen und Konstruktionstechnik}
+\title{This is the Long Long Title of My Thesis Which is Going to Deal with Something Cool}
 
-% Your examiner i.e., one of the professors of your thesis
-\examiner{\textJuniorProf~\textDrIng~Andreas Pott}
-% Supervisor(s) of your thesis, multiple separated with `\and`
-\supervisor{\textDiplIng~Philipp Tempel}
 % END setting document properties
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -86,6 +65,7 @@
 \frontmatter
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START title page in main language
 \maketitle
@@ -96,19 +76,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START title page in other language
-\begin{otherlanguage}{english}
-  % Title of document in "otherlanguage"
-  \title{This is the Long Long Title of My Thesis Which is Going to Deal with Something Cool}
-  % Define a short title if the main title is too long and truncated in parts of the document  in "otherlanguage"
-  \shorttitle{This is the Shorter Title of My Thesis}
-  % Theses can also have subtitles  in "otherlanguage"
-  \subtitle{An extra, voluntary addition to the thesis title goes here}
-  % Define a partnering institute or company here (or multiple separated by `\and`)  in "otherlanguage"
-  \partner{Fraunhofer Institute for Manufacturing Engineering and Automation IPA \and Fraunhofer Institute for Production Systems and Design Technology IPK}
-  % Your study major in "otherlanguage"
-  \major{Technische Kybernetik}
-
-  \maketitle
+\begin{otherlanguage}{ngerman}
+ \maketitle
 \end{otherlanguage}
 % END title page in other language
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -129,11 +98,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % START abstract in other language
-\begin{otherlanguage}{english}
+\begin{otherlanguage}{ngerman}
   \begin{abstract}
     \Blindtext[3]
-
-    \draftname
        
     \keywords{Sed \and aliquet \and tellus \and eget \and est}
   \end{abstract}
