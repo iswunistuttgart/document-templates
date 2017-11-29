@@ -121,6 +121,9 @@
 
 
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Defaults for packages used                                                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -709,14 +712,6 @@
 \usetikzlibrary{quotes}
 \usetikzlibrary{shadows}
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% CONFIGURE PACKAGES                                                         %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define colors                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -864,6 +859,19 @@
 \colorlet{TableRowOdd}{LightGray!50}
 \colorlet{TableCellHighlight}{SecondaryAccentVeryLight}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONFIGURE PACKAGES          												  %%
+%% (needs color information)                                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Modify enumerates behaviour with setting the format for referencing and colors. The original labels are kept with this order. Referencing now returns the complete list state, e.g. `2.b.iv.A` in a reference to list level 4
+% Requires package enumitem which is loaded anyways
+\setlist[enumerate,1]{label={\color{PrimaryColor}\arabic*.}, ref = \arabic*}
+\setlist[enumerate,2]{label={\color{PrimaryColor}\alph*)}, ref = \theenumi.\alph*}
+\setlist[enumerate,3]{label={\color{PrimaryColor}\roman*.}, ref = \theenumii.\roman*}
+\setlist[enumerate,4]{label={\color{PrimaryColor}\Alph*.}, ref = \theenumiii.\Alph*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
