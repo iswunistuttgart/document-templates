@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc5}
-\def\filedate{2017/11/29}
+\def\fileversion{1.0.0-rc6}
+\def\filedate{2018/01/06}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -139,7 +139,7 @@
 %  nonamelimits,% Opposite of namelimits.
 %  leqno,% Place equation numbers on the left.
   reqno,% Place equation numbers on the right.
-  fleqn,% Position equations at a fixed indent from the left margin rather than centered in the text column.
+%  fleqn,% Position equations at a fixed indent from the left margin rather than centered in the text column.
 }{amsmath}
 
 
@@ -1214,7 +1214,7 @@
 % Arcus tangent 2
 % \atantwo{y}{x} => atan2(y, x)
 \NewDocumentCommand{\arctant}{m m}{%
-  \arctantwo \! \of{#1, #2}%
+  \arctantwo \of{#1, #2}%
 }%
 
 % Math operator for the trace of matrix
@@ -1294,8 +1294,8 @@
 
 
 %% Trigonometric functions with parentheses around argument
-% \ptrig{\sin}{\beta} => \sin \of{ \beta }
-\DeclareDocumentCommand{\ptrig}{ s m m }{%
+% \prtrig{\sin}{\beta} => \sin \of{ \beta }
+\DeclareDocumentCommand{\prtrig}{ s m m }{%
   #2{%
     \IfBooleanTF{#1}{%
       \of*{#3}%
