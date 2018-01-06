@@ -173,7 +173,7 @@
 % Arcus tangent 2
 % \atantwo{y}{x} => atan2(y, x)
 \NewDocumentCommand{\arctant}{m m}{%
-  \arctantwo \! \of{#1, #2}%
+  \arctantwo \of{#1, #2}%
 }%
 
 % Math operator for the trace of matrix
@@ -253,8 +253,8 @@
 
 
 %% Trigonometric functions with parentheses around argument
-% \ptrig{\sin}{\beta} => \sin \of{ \beta }
-\DeclareDocumentCommand{\ptrig}{ s m m }{%
+% \prtrig{\sin}{\beta} => \sin \of{ \beta }
+\DeclareDocumentCommand{\prtrig}{ s m m }{%
   #2{%
     \IfBooleanTF{#1}{%
       \of*{#3}%
