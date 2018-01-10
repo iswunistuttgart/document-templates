@@ -60,6 +60,10 @@
 % This package is only included for demo purposes
 \usepackage[math]{blindtext}
 
+% Add your bibliography file here.
+\addbibresource{Bibliography.bib}
+%\addbibresource{S:/Path/To/SecondSource.bib} % Import from multiple locations like this
+
 % END user defined content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -157,7 +161,10 @@
 % END actual document content
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% TODO: remove \nocite{*} for correct citation behavior
+\nocite{*}
 
+\printbibliography
 
 \end{document}
 % END document

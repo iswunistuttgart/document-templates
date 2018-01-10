@@ -1,0 +1,13 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex macros configuration for requirements of Fraunhofer IPA
+
+\DeclareNameAlias{sortname}{last-first}
+
+% space between entries in bibliography
+\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+
+% remove ISSN but not ISBN
+\AtEveryBibitem{\clearfield{issn}}
+\AtEveryCitekey{\clearfield{issn}}

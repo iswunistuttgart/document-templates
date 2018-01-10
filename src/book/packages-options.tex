@@ -13,3 +13,25 @@
   a4paper,% set papersize to a4
   DIV=12,% typearea(w:157.50 h:222.75) margins(t:24.75 b:17.50)
 }{scrbook}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex
+\PassOptionsToPackage{%
+	backend=biber,
+	%bibencoding=ascii,%
+	language=auto,%
+	style=ieee,%numeric-comp,%
+	sorting=none, % wie unsrt in bibtex: Nummern nach Zitierreihenfolge vergeben
+	%style=authoryear-comp, % Author 1999, 2010
+	%bibstyle=authoryear, dashed=true, % dashed: substitute rep. author with ---
+	%sorting=nyt, % name, year, title
+	maxbibnames=10, % default: 3, et al.
+	isbn=false,               %_ISBN ausblenden
+	%url = false,
+	doi=true,               %_DOI ausblenden
+	%uniquename=full,
+	giveninits=true,          %Only first letter of given names -> increase chances for homogeneous bibliography
+	%backref=true,%
+	natbib=true % natbib compatibility mode (\citep and \citet still work)
+}{biblatex}
