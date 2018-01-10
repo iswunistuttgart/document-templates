@@ -10,7 +10,7 @@ import time
 path_base = os.path.dirname(os.path.realpath(__file__))
 dir_src = os.path.join(path_base, 'src')
 dir_dist = os.path.join(path_base, 'dist')
-files = ['iswstud.cls', 'iswartcl.cls', 'iswbook.cls', 'iswdctrt.cls', 'iswstud.tex', 'iswartcl.tex', 'iswbook.tex', 'iswdctrt.tex', 'iswstud.latexmkrc', 'iswartcl.latexmkrc', 'iswbook.latexmkrc', 'iswdctrt.latexmkrc']
+files = ['iswstud.cls', 'iswartcl.cls', 'iswbook.cls', 'iswdctrt.cls', 'iswstud.tex', 'iswartcl.tex', 'iswbook.tex', 'iswdctrt.tex', 'iswstud.latexmkrc', 'iswartcl.latexmkrc', 'iswbook.latexmkrc', 'iswdctrt.latexmkrc', 'iswipads.bbx', 'Bibliography.bib']
 
 
 p_incfile = re.compile('\\\\(input|include)\\{(?P<incfile>.*)\\}')

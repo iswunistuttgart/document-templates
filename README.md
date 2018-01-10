@@ -8,9 +8,9 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.0.0-rc4 |
-| iswdctrt | Doctoral theses | 1.0.0-rc4 |
-| iswstud | Student theses | 1.0.0-rc4 |
+| iswartcl | General documents | 1.0.0-rc7 |
+| iswdctrt | Doctoral theses | 1.0.0-rc7 |
+| iswstud | Student theses | 1.0.0-rc7 |
 
 There are two ways to obtaining the necessary `.cls` and `.tex` files
   1. Copy the respective files from the `dist/` folder to your local working directory
@@ -50,7 +50,7 @@ You can use these document classes for a magnitude of documents such as your bac
 
 ### Bibliography
 
-Right from the start, bibliography can be included as known from all other classes e.g., koma. You may also choose to use biblatex for managing your bibliography. If you want to do so, provide the `biblatex` option to the documentclass. Following that, include your bib file in the preamble using `\addbibresource{literature.bib}` and towards the end of your document, `\printbibliography` to output the bibliography.
+Right from the start, bibliography can be included via `biblatex` as known from all other classes e.g., koma. Include your bib file in the preamble using `\addbibresource{literature.bib}` and towards the end of your document, `\printbibliography` to output the bibliography. The style is already loaded in the respective class.
 
 
 ### Mathematics-heavy Thesis
