@@ -13,7 +13,7 @@ compile-cls:
 mirror2github:
   stage: deploy
   script:
-    - git push --mirror https://philipptempel:6feeb59236f40796aa7f379fe92c58a44bd3a40a@github.com/iswunistuttgart/latex-templates.git
+    - git push --mirror https://philipptempel:${CI_GITHUB_PASSWORD}@github.com/iswunistuttgart/latex-templates.git
   tags:
     - shell
   only:
