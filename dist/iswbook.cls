@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc6}
-\def\filedate{2018/01/06}
+\def\fileversion{1.0.1}
+\def\filedate{2018/01/22}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -84,14 +84,8 @@
 \DeclareBoolOption{female}
 \DeclareComplementaryOption{male}{female}
 
-% Let user choose between biblatex and natbib as bibliography backend
-\DeclareBoolOption{biblatex}
-\DeclareComplementaryOption{natbib}{biblatex}
-
 % Users may choose to make use of TikZ for plotting
 \DeclareBoolOption{tikz}
-
-
 
 % If the user needs more mathematical classes, they can make use of the
 % mathematics option
@@ -405,6 +399,27 @@
 }{scrbook}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex
+\PassOptionsToPackage{%
+	backend=biber,
+	%bibencoding=ascii,%
+	language=auto,%
+	style=ieee,%numeric-comp,%
+	sorting=none, % wie unsrt in bibtex: Nummern nach Zitierreihenfolge vergeben
+	%style=authoryear-comp, % Author 1999, 2010
+	%bibstyle=authoryear, dashed=true, % dashed: substitute rep. author with ---
+	%sorting=nyt, % name, year, title
+	maxbibnames=10, % default: 3, et al.
+	isbn=false,               %_ISBN ausblenden
+	%url = false,
+	doi=true,               %_DOI ausblenden
+	%uniquename=full,
+	giveninits=true,          %Only first letter of given names -> increase chances for homogeneous bibliography
+	%backref=true,%
+	natbib=true % natbib compatibility mode (\citep and \citet still work)
+}{biblatex}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Load Necessary Packages                                                    %%
@@ -641,24 +656,12 @@
 % Only used with two-column layout (or, in general, multicols)
 \RequirePackage{flushend}
 
-\ifDocumentbiblatex
-  \RequirePackage{csquotes}
-  \RequirePackage[
-      backend=biber,%
-      style=ieee,%
-      sortlocale=auto,%
-      natbib=true,%
-      url=false,%
-      doi=true,%
-      eprint=false,%
-  ]{biblatex}
-\else
-  % The bundle provides a package that implements both author-year and numbered references, as well as much detailed of support for other bibliography use. Also Provided are versions of the standard BibTeX styles that are compatible with natbib-plainnat, unsrtnat, abbrnat. The bibliography styles produced by custom-bib are designed from the start to be compatible with natbib.
-  \RequirePackage{natbib}
-  \bibliographystyle{babunsrt}
-  % This package enables to generate multilingual bibliographies in cooperation with babel. Two approaches are possible: Each citation may be written in another language, or the whole bibliography can be typeset in a language chosen by the user. In addition, the package supports commands to change the typography of the bibliographies.
-  \RequirePackage{babelbib}
-\fi
+% Interpretes quotation marks " and ' and correctly typesets them. Some LaTeX-Editors however provide an option for automatically replacing the correct LaTeX code for quotes, which should be preferred.
+\RequirePackage{csquotes}
+
+% Use biblatex, which is the (highly configurable) successor of bibtex and biber
+% biber is still used though to sort the bibliography in the background. 
+\RequirePackage{biblatex}
 
 % The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
 % This package is part of the tools bundle in the LaTeX required distribution.
@@ -885,16 +888,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Abstract
 \newenvironment{abstract}{%
+  \thispagestyle{plain}%
   \chapter*{\abstractname}%
   \addcontentsline{toc}{chapter}{\abstractname}%
   \begin{spacing}{1.175}%
 }{%
   \end{spacing}%
   \vfill%
-  % \let\oldAnd\and%
-  % \renewcommand{\and}{\unskip,\xspace}%
-  % \textbf{\color{PrimaryColor}\keywordsname:}~\@keywords%
-  % \renewcommand{\and}{\oldAnd}
+  \cleardoublepage%
 }
 
 

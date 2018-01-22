@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.0-rc6}
-\def\filedate{2018/01/06}
+\def\fileversion{1.0.1}
+\def\filedate{2018/01/22}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -133,7 +133,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-post}
-
+\input{doctorate/packages-post}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

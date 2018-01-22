@@ -13,3 +13,19 @@
   a4paper,% set papersize to a4
   DIV=12,% typearea(w:157.50 h:222.75) margins(t:24.75 b:17.50)
 }{scrbook}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex
+\PassOptionsToPackage{
+  style=iswbib,
+  citestyle=authoryear,
+  sorting=nyt,
+  maxcitenames=1,
+  maxbibnames=99,
+  uniquename=false,
+  backend=biber,
+  dashed=false
+}{biblatex}
+%doi=false,isbn=false,url=false
+
