@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.0-rc7}
-\def\filedate{2018/01/10}
+\def\filedate{2018/01/22}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -86,8 +86,6 @@
 
 % Users may choose to make use of TikZ for plotting
 \DeclareBoolOption{tikz}
-
-
 
 % If the user needs more mathematical classes, they can make use of the
 % mathematics option
@@ -400,19 +398,22 @@
   DIV=12,% typearea(w:157.50 h:222.75) margins(t:24.75 b:17.50)
 }{scrbook}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex
 \PassOptionsToPackage{
-	style=iswipads,
-	citestyle=authoryear,
-	sorting=nyt,
-	maxcitenames=1,
-	maxbibnames=99,
-	uniquename=false,
-	backend=biber,
-	dashed=false
+  style=iswbib,
+  citestyle=authoryear,
+  sorting=nyt,
+  maxcitenames=1,
+  maxbibnames=99,
+  uniquename=false,
+  backend=biber,
+  dashed=false
 }{biblatex}
 %doi=false,isbn=false,url=false
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
