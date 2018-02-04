@@ -4,23 +4,23 @@
 % 3D orientation styles
 %
   isometric/.style={%
-    x={(-0.710\linewidth,-0.410\linewidth)},%
-    y={(0.710\linewidth,-0.410\linewidth)},%
-    z={(0\linewidth,0.820\linewidth)},%
+    x={(-0.710cm,-0.410cm)},%
+    y={(0.710cm,-0.410cm)},%
+    z={(0cm,0.820cm)},%
   },%
 %
 %
   dimetric/.style={%
-    y={(0.935\linewidth,-0.118\linewidth)},%
-    x={(-0.354\linewidth,-0.312\linewidth)},%
-    z={(0\linewidth,0.943\linewidth)},%
+    y={(0.935cm,-0.118cm)},%
+    x={(-0.354cm,-0.312cm)},%
+    z={(0cm,0.943cm)},%
   },%
 %
 %
   trimetric/.style={%
-    x={(-0.378\linewidth,-0.507\linewidth)},%
-    y={(0.926\linewidth,-0.207\linewidth)},%
-    z={(0\linewidth,0.837\linewidth)},%
+    x={(-0.378cm,-0.507cm)},%
+    y={(0.926cm,-0.207cm)},%
+    z={(0cm,0.837cm)},%
   },%
 %
 %
@@ -48,13 +48,13 @@
   },%
 %
 % Text annotations
-  annotation-text/.style={%
+  annotation text/.style={%
     annotation,%
     draw=none,%
   },%
 %
 % Path annotations
-  annotation-path/.style={%
+  annotation path/.style={%
     annotation,%
     dashed,%
   },%
@@ -62,15 +62,15 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Coordinate axis
-  coord-axis/.style={%
+  coord axis/.style={%
     -{stealth},%
     color=PrimaryColor!60,%
     text=PrimaryColor!60,%
   },%
 %
 % Name of coordinate axis
-  coord-axis-name/.style={%
-    annotation-text,%
+  coord axis name/.style={%
+    annotation text,%
     text=PrimaryColor!60,%
     outer sep=0pt,%
     inner sep=0.6ex,%
@@ -95,8 +95,8 @@
     shape=rectangle,%
     rounded corners=1ex,%
     text centered,%
-    minimum height=0.05\linewidth,%
-    text width=0.125\linewidth,%
+    minimum height=1.5ex,%
+    text width=15em,%
     fill opacity=0.6,%
   },%
 %
@@ -111,7 +111,7 @@
   mind-vector/.style={%
     mind-arrow,%
     double,%
-    double distance=0.0025\linewidth,%
+    double distance=0.3mm,%
   },%
 %
 % Block fitting nodes
@@ -119,7 +119,7 @@
     thick,%
     dash pattern=on 1ex off 1.33ex on 0.66ex off 1.33ex,%
     rounded corners=1.5ex,%
-    inner sep=0.010\linewidth,%
+    inner sep=1ex,%
     fill=BlackColor,%
     draw=BlackColor,%
     fill opacity=0.05,%
