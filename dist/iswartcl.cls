@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.0.1}
-\def\filedate{2018/01/22}
+\def\filedate{2018/02/04}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -867,7 +867,6 @@
 %% (needs color information)                                                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 % Modify enumerates behaviour with setting the format for referencing and colors. The original labels are kept with this order. Referencing now returns the complete list state, e.g. `2.b.iv.A` in a reference to list level 4
 % Requires package enumitem which is loaded anyways
 \setlist[enumerate,1]{label={\color{PrimaryColor}\arabic*.}, ref = \arabic*}
@@ -879,7 +878,6 @@
 \DeclareFieldFormat*{url}{}
 \DeclareFieldFormat[misc]{url}{\mkbibacro{URL}\addcolon\space\url{#1}}
 \DeclareFieldFormat[electronic]{url}{\mkbibacro{URL}\addcolon\space\url{#1}}
-
 
 
 
