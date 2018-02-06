@@ -1,7 +1,10 @@
 FILES = iswartcl iswstud iswbook iswdctrt
 
 .PHONY: all
-all: $(FILES)
+all: dist $(FILES)
+
+dist: clean
+	mkdir dist/
 
 .PHONY: iswartcl
 iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
