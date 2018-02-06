@@ -132,6 +132,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/colors}
+\input{common/colors-hyperref}
 \input{book/colors}
 
 

@@ -131,6 +131,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/colors}
+\input{common/colors-hyperref}
 \input{student/colors}
 
 
