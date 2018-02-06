@@ -1,5 +1,5 @@
 compile-cls:
-  image: gcc:7
+  image: philipptempel/isw-docker-latex:latest
   stage: build
   script:
     - make clean
