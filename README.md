@@ -13,7 +13,7 @@ If you are just interested in finding the most recent class that you want to use
 | iswstud | Student theses | 1.0.1 |
 
 There are two ways to obtaining the necessary `.cls` and `.tex` files
-  1. Copy the respective files from the `dist/` folder to your local working directory
+  1. Build the files yourself after cloning this repository. Simple call `$ make all` in the root of this directory
   2. Download the build artifacts from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) and unpack them to your local working directory
 
 In the long run this will be the on the only way to obtaining the files
