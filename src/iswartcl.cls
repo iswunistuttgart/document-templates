@@ -15,7 +15,7 @@
 \typeout{}
 
 \input{common/packages-head}
-\input{article/packages-head}
+\input{iswartcl/packages-head}
 
 
 
@@ -88,7 +88,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-options}
-\input{article/packages-options}
+\input{iswartcl/packages-options}
 
 
 
@@ -121,13 +121,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-main}
-\input{article/packages-main}
+\input{iswartcl/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMA-Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}
-\input{article/tikz-packages}
+\input{iswartcl/tikz-packages}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define colors                                                              %%
@@ -135,7 +135,7 @@
 
 \input{common/colors}
 \input{common/colors-hyperref}
-\input{article/colors}
+\input{iswartcl/colors}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,7 +152,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/environments}
-\input{article/environments}
+\input{iswartcl/environments}
 
 
 
@@ -161,7 +161,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/commands}
-\input{article/commands}
+\input{iswartcl/commands}
 
 
 
@@ -169,7 +169,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{article/localization}
+\input{iswartcl/localization}
 
 
 
@@ -178,10 +178,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/layout}
-\input{article/layout}
+\input{iswartcl/layout}
 
 \input{common/coverpage}
-\input{article/titlepage}
+\input{iswartcl/titlepage}
 
 
 
@@ -192,12 +192,12 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
   \input{common/mainmatter}
-  \input{article/mainmatter}
+  \input{iswartcl/mainmatter}
 }%
 
 \ifdraft{
   \input{common/ifdraft}
-  \input{article/ifdraft}
+  \input{iswartcl/ifdraft}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
@@ -214,12 +214,12 @@
 
 \makeatletter%
   \input{common/makeatletter}
-  \input{article/makeatletter}
+  \input{iswartcl/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
   \input{common/atbegindocument}
-  \input{article/atbegindocument}
+  \input{iswartcl/atbegindocument}
 }
 
 

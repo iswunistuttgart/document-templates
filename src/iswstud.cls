@@ -15,7 +15,7 @@
 \typeout{}
 
 \input{common/packages-head}
-\input{student/packages-head}
+\input{iswstud/packages-head}
 
 
 
@@ -85,7 +85,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-options}
-\input{student/packages-options}
+\input{iswstud/packages-options}
 
 
 
@@ -118,13 +118,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-main}
-\input{student/packages-main}
+\input{iswstud/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be im- proved. With some packages this makes only sense, if KOMA- Script was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of pack- ages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}
-\input{student/tikz-packages}
+\input{iswstud/tikz-packages}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define colors                                                              %%
@@ -132,7 +132,7 @@
 
 \input{common/colors}
 \input{common/colors-hyperref}
-\input{student/colors}
+\input{iswstud/colors}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,7 +149,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/environments}
-\input{student/environments}
+\input{iswstud/environments}
 
 
 
@@ -158,7 +158,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/commands}
-\input{student/commands}
+\input{iswstud/commands}
 
 
 
@@ -166,7 +166,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{student/localization}
+\input{iswstud/localization}
 
 
 
@@ -175,10 +175,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/layout}
-\input{student/layout}
+\input{iswstud/layout}
 
 \input{common/coverpage}
-\input{student/titlepage}
+\input{iswstud/titlepage}
 
 
 
@@ -188,12 +188,12 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
   \input{common/mainmatter}
-  \input{student/mainmatter}
+  \input{iswstud/mainmatter}
 }%
 
 \ifdraft{
   \input{common/ifdraft}
-  \input{student/ifdraft}
+  \input{iswstud/ifdraft}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
@@ -210,12 +210,12 @@
 
 \makeatletter%
   \input{common/makeatletter}
-  \input{student/makeatletter}
+  \input{iswstud/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
   \input{common/atbegindocument}
-  \input{student/atbegindocument}
+  \input{iswstud/atbegindocument}
 }
 
 

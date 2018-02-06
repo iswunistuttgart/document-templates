@@ -15,7 +15,7 @@
 \typeout{}
 
 \input{common/packages-head}
-\input{book/packages-head}
+\input{iswbook/packages-head}
 
 
 
@@ -78,7 +78,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-options}
-\input{book/packages-options}
+\input{iswbook/packages-options}
 
 
 
@@ -111,13 +111,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/packages-main}
-\input{book/packages-main}
+\input{iswbook/packages-main}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMAScript was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of packages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
 
 \input{common/tikz-packages}
-\input{book/tikz-packages}
+\input{iswbook/tikz-packages}
 
 
 
@@ -133,7 +133,7 @@
 
 \input{common/colors}
 \input{common/colors-hyperref}
-\input{book/colors}
+\input{iswbook/colors}
 
 
 
@@ -142,7 +142,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/environments}
-\input{book/environments}
+\input{iswbook/environments}
 
 
 
@@ -151,7 +151,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/commands}
-\input{book/commands}
+\input{iswbook/commands}
 
 
 
@@ -159,7 +159,7 @@
 %% Localization                                                               %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{book/localization}
+\input{iswbook/localization}
 
 
 
@@ -168,10 +168,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{common/layout}
-\input{book/layout}
+\input{iswbook/layout}
 
 \input{common/coverpage}
-\input{book/titlepage}
+\input{iswbook/titlepage}
 
 
 
@@ -181,12 +181,12 @@
 \let\originalmainmatter\mainmatter%
 \renewcommand{\mainmatter}{%
   \input{common/mainmatter}
-  \input{book/mainmatter}
+  \input{iswbook/mainmatter}
 }%
 
 \ifdraft{
   \input{common/ifdraft}
-  \input{book/ifdraft}
+  \input{iswbook/ifdraft}
 }{}
 
 % No single lines of text of the following paragraph on the current page's bottom
@@ -203,12 +203,12 @@
 
 \makeatletter%
   \input{common/makeatletter}
-  \input{book/makeatletter}
+  \input{iswbook/makeatletter}
 \makeatother
 
 \AtBeginDocument{%
   \input{common/atbegindocument}
-  \input{book/atbegindocument}
+  \input{iswbook/atbegindocument}
 }
 
 
