@@ -6,6 +6,10 @@ all: dist $(FILES)
 dist: clean
 	mkdir dist/
 
+.PHONY: list-of-packages
+list-of-packages: src/*.cls
+	python find_packages.py --output packages.md src/iswartcl.cls src/iswstud.cls src/iswdctrt.cls src/iswbook.cls
+
 .PHONY: iswartcl
 iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
 
