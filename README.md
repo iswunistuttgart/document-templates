@@ -20,7 +20,7 @@ In the long run this will be the on and only way to obtaining the files.
 
 ## Packages
 
-Want to know which packages are loaded automatically by the respective class? Check our file [packages.md](packages.md) and find the respective section. There are also links to CTAN for every package (though not every package actually has a CTAN page...).
+Want to know which packages are loaded automatically by the respective class? Check our file [PACKAGES.md](PACKAGES.md) and find the respective section. There are also links to CTAN for every package (though not every package actually has a CTAN page...).
 
 ## Development Team
 
