@@ -39,6 +39,8 @@ Feature Requests submitted as GitHub Issues specifically mean *"I'd like to see 
 
 It's a great way to launch discussions on the developer side of things because both the core team and the community developer get a chance to talk about the technical side of the feature implementation. It's a great way to exchange ideas about how the logic could work in code.
 
+Please also review our [Developer's Guide](DEVELOPER.md)
+
 ## Pull Requests
 
 Your contributions to the project are very welcome. If you would like to fix a bug or propose a new feature, you can submit a Pull Request.
