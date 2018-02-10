@@ -1,7 +1,7 @@
 FILES = iswartcl iswstud iswbook iswdctrt
 
 .PHONY: all
-all: dist list-of-packages $(FILES)
+all: dist list-of-packages $(FILES) images
 
 dist: clean
 	mkdir dist/
@@ -30,6 +30,9 @@ iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl
 
 %-rc: src/%.latexmkrc
 	cp src/$*.latexmkrc dist/$*.latexmkrc
+
+images: src/images*
+	rsync -a --exclude="*-converted-to*" src/images dist/
 
 .PHONY: bbl
 bbl: bbx bib
