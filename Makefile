@@ -1,14 +1,14 @@
 FILES = iswartcl iswstud iswbook iswdctrt
 
 .PHONY: all
-all: dist $(FILES)
+all: dist list-of-packages $(FILES)
 
 dist: clean
 	mkdir dist/
 
 .PHONY: list-of-packages
 list-of-packages: src/*.cls
-	python find_packages.py --output packages.md src/iswartcl.cls src/iswstud.cls src/iswdctrt.cls src/iswbook.cls
+	python list_packages.py --output packages.md src/iswartcl.cls src/iswstud.cls src/iswdctrt.cls src/iswbook.cls
 
 .PHONY: iswartcl
 iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
@@ -42,4 +42,4 @@ bib: src/bibliography.bib
 
 .PHONY: clean
 clean:
-	rm -rf dist/*
+	rm -rf dist/
