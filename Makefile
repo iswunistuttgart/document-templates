@@ -1,15 +1,16 @@
+PY = python3
 FILES = iswartcl iswstud iswbook iswdctrt
 BUILD_DIR = dist
 
 .PHONY: all
-all: build list-of-packages $(FILES) images
+all: list-of-packages build $(FILES) images
 
-build: clean
-	mkdir $(BUILD_DIR)
+build:
+	[ -d "$(BUILD_DIR)/" ] || mkdir $(BUILD_DIR)
 
 .PHONY: list-of-packages
 list-of-packages: src/*.cls
-	python list_packages.py --output packages.md src/iswartcl.cls src/iswstud.cls src/iswdctrt.cls src/iswbook.cls
+	$(PY) list_packages.py --output packages.md src/iswartcl.cls src/iswstud.cls src/iswdctrt.cls src/iswbook.cls
 
 .PHONY: iswartcl
 iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
@@ -24,10 +25,10 @@ iswbook: iswbook-cls iswbook-tex iswbook-rc bbl
 iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl
 
 %-cls: src/%.cls src/%/* src/common/*
-	python build.py --dest=$(BUILD_DIR)/ -- $<
+	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
 
 %-tex: src/%.tex
-	python build.py --dest=$(BUILD_DIR)/ -- $<
+	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
 
 %-rc: src/%.latexmkrc
 	cp src/$*.latexmkrc $(BUILD_DIR)/$*.latexmkrc
@@ -45,5 +46,5 @@ bib: src/bibliography.bib
 	cp src/bibliography.bib $(BUILD_DIR)/bibliography.bib
 
 .PHONY: clean
-clean:
-	[ -d "$(BUILD_DIR)/" ] && rm -rf $(BUILD_DIR)/ || [ ! -d "$(BUILD_DIR)/" ]
+clean: $(BUILD_DIR)/
+	rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/

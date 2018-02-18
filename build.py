@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding=utf-8
 
 """
@@ -44,9 +44,9 @@ def process_file(f, dest='build'):
     :return void:
     """
     # Open the source file
-    ps = pathlib.Path(f)
+    ps = pathlib.Path(f).resolve()
     # Open the target file
-    pd = pathlib.Path(dest + os.sep + ps.name)
+    pd = pathlib.Path(dest + os.sep + ps.name).resolve()
 
     # Open the file
     try:
