@@ -1,8 +1,8 @@
 # Add worktree folders
+!*/.gitkeep
 wt-*
 worktree*
 src/*.pdf
-dist/*
 
 # Created by https://www.gitignore.io/api/windows
 

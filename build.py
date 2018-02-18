@@ -27,7 +27,7 @@ def build():
                         help='LaTeX class to compile')
 
     parser.add_argument('-d', '--dest', dest='destination', type=str,
-                        help='Set build destination folder.', default='dist', action='store')
+                        help='Set build destination folder.', default='build', action='store')
 
     # Parse the arguments given
     args = parser.parse_args()
@@ -36,7 +36,7 @@ def build():
     [process_file(f, dest=args.destination) for f in args.cls]
 
 
-def process_file(f, dest='dist'):
+def process_file(f, dest='build'):
     """
     Process the given file
     :param str c: Filename of the file to process

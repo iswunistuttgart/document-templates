@@ -17,7 +17,7 @@ To develop the templates, you need the following minimum setup on your local sys
 
 Currently, the compiled files are not tracked by git but are being built with every push to `master` using our GitLab server's CI. The build's artifacts i.e., all `.cls`, `.tex`, `.latexmkrc`, and other files, are then published for artifact download using GitLab CI. This requires an account on our GitLab server which is a bit cumbersome. Maybe, at a later time, the file will be available for public download via our GitLab server or will find another way of publishing it elsewhere.
 
-For building the files locally, you can make use of our awesome `Makefile` with the build target `$ make all`. This will build all `.cls` files, publish them with their dependent files to directory `dist/`, and write a list of packages of all classes to [PACKAGES.md](PACKAGES.md)
+For building the files locally, you can make use of our awesome `Makefile` with the build target `$ make all`. This will build all `.cls` files, publish them with their dependent files to directory `build/`, and write a list of packages of all classes to [PACKAGES.md](PACKAGES.md)
 
 ## Testing
 
