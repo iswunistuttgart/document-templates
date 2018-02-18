@@ -47,4 +47,4 @@ bib: src/bibliography.bib
 
 .PHONY: clean
 clean: $(BUILD_DIR)/
-	rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/
+	[ -d "$(BUILD_DIR)/" ] && rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/ || [ ! -d "$(BUILD_DIR)/" ]
