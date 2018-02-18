@@ -46,5 +46,5 @@ bib: src/bibliography.bib
 	cp src/bibliography.bib $(BUILD_DIR)/bibliography.bib
 
 .PHONY: clean
-clean: $(BUILD_DIR)/
+clean:
 	[ -d "$(BUILD_DIR)/" ] && rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/ || [ ! -d "$(BUILD_DIR)/" ]
