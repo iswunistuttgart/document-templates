@@ -1,0 +1,357 @@
+\ProvidesFile{iswbib.bbx}
+[\abx@bbxid]
+
+\RequireBibliographyStyle{standard}
+
+\DeclareFieldFormat[article]{volume}{\textbf{#1}}
+\DeclareFieldFormat[article]{number}{(#1)}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1\isdot}		% instead of {\mkbibquote{#1\isdot}} as IPA does not want quotation marks around titles
+
+\DeclareBibliographyOption[boolean]{dashed}[true]{%
+  \ifstrequal{#1}{true}
+    {\ExecuteBibliographyOptions{pagetracker}%
+     \renewbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}}
+    {\renewbibmacro*{bbx:savehash}{}}}
+
+\DeclareBibliographyOption[boolean]{mergedate}[true]{%
+  \ifcsdef{bbx@opt@mergedate@#1}
+    {\csuse{bbx@opt@mergedate@#1}}
+    {\PackageError{biblatex}
+       {Invalid option 'mergedate=#1'}
+       {Valid values are 'maximum', 'compact', 'basic', 'minimum',\MessageBreak
+        'true' (=compact), and 'false'.}}}
+
+\providebibmacro*{date+extrayear}{}
+
+\renewcommand*{\newunitpunct}{\adddot\space}
+
+\def\bbx@opt@mergedate@true{\bbx@opt@mergedate@compact}
+
+\DeclareFieldFormat{extrayear}{%
+  \iffieldnums{labelyear}{%
+    \mknumalph{#1}%
+  }{%
+    \mkbibparens{\mknumalph{#1}}%
+  }%
+}
+
+\renewbibmacro{in:}{}
+
+% merge date/issue with date label
+\def\bbx@opt@mergedate@maximum{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext{%
+         \printfield{issue}%
+         \setunit*{\addspace}%
+				 \newunitpunct
+         \iffieldsequal{year}{labelyear}
+           {\printlabeldateextra}%
+           {\printfield{labelyear}%
+            \printfield{extrayear}}}}}%
+  \renewbibmacro*{date}{}%
+  \renewbibmacro*{issue+date}{}}
+
+% merge date with date label
+\def\bbx@opt@mergedate@compact{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext{%
+				 \newunitpunct
+         \iffieldsequal{year}{labelyear}
+           {\printlabeldateextra}%
+           {\printfield{labelyear}%
+            \printfield{extrayear}}}}}%
+  \renewbibmacro*{date}{}%
+  \renewbibmacro*{issue+date}{%
+    \iffieldundef{issue}
+      {}
+      {\printtext[parens]{\printfield{issue}}}%
+    \newunit}}
+
+% merge year-only date with date label
+\def\bbx@opt@mergedate@basic{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext{%
+			   \newunitpunct
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}%
+  \renewbibmacro*{date}{%
+    \iffieldundef{month}
+      {}
+      {\printdate}}%
+  \renewbibmacro*{issue+date}{%
+    \ifboolexpr{
+      test {\iffieldundef{issue}}
+      and
+      test {\iffieldundef{month}}
+    }
+      {}
+      {\printtext[parens]{%
+         \printfield{issue}%
+         \setunit*{\addspace}%
+         \printdate}}%
+    \newunit}}
+
+% merge year-only date with year-only date label
+\def\bbx@opt@mergedate@minimum{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext{%
+			   \newunitpunct
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}%
+  \renewbibmacro*{date}{%
+    \ifboolexpr{
+      test {\iffieldundef{month}}
+      and
+      test {\iffieldundef{extrayear}}
+    }
+      {}
+      {\printdate}}%
+  \renewbibmacro*{issue+date}{%
+    \ifboolexpr{
+      test {\iffieldundef{issue}}
+      and
+      test {\iffieldundef{month}}
+      and
+      test {\iffieldundef{extrayear}}
+    }
+      {}
+      {\printtext[parens]{%
+         \printfield{issue}%
+         \setunit*{\addspace}%
+         \printdate}}%
+    \newunit}}
+
+% don't merge date/issue with date label
+\def\bbx@opt@mergedate@false{%
+  \renewbibmacro*{date+extrayear}{%
+    \iffieldundef{labelyear}
+      {}
+      {\printtext{%
+			   \newunitpunct
+         \printfield{labelyear}%
+         \printfield{extrayear}}}}%
+  \renewbibmacro*{date}{\printdate}%
+  \renewbibmacro*{issue+date}{%
+    \printtext[parens]{%
+      \printfield{issue}%
+      \setunit*{\addspace}%
+      \printdate}%
+    \newunit}}
+
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+%  \setunit*{\adddot}% DELETED
+  \setunit*{\addnbthinspace}% NEW (optional); there's also \addnbthinspace
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+
+% adapted for inproceedings entry.
+% very similar to basic entries but does not have parantheses around eventdate
+% taken from https://tex.stackexchange.com/questions/152071/remove-parentheses-for-event-date and checked for correctness
+\renewbibmacro*{event+venue+date}{%
+  \iffieldundef{eventtitle}
+    {}
+    {%
+      \bibstring{presentedat}%
+      \printfield{eventtitle}%
+    }%
+  \ifboolexpr{
+    test {\iffieldundef{venue}}
+    and
+    test {\iffieldundef{eventyear}}
+  }
+    {}
+    {\setunit*{\addspace}%
+     \printtext{%
+       \printfield{venue}%
+       \setunit*{\addcomma\space}%
+       \printeventdate}}%
+  \newunit
+}
+
+\newsavebox\ay@labelbox
+\newlength{\labwidthsameline}
+\setlength{\labwidthsameline}{9em}
+
+\newbibmacro{labelwidthbib}{%
+  \begingroup
+  \DeclareFieldFormat{bibhyperref}{##1}%
+  \csuse{blx@hook@cite}%
+  \csuse{blx@hook@citekey}%
+  \citetrackerfalse\pagetrackerfalse\backtrackerfalse
+  \global\undef\cbx@lasthash
+  \global\undef\cbx@lastyear
+  \defcounter{maxnames}{\blx@maxcitenames}%
+  \usebibmacro{cite}%							% use this, if you do not want parantheses around year in bib label
+%  \boolfalse{cbx:parens}         % use this, if you want parantheses around year in bib label [START]
+%  \usebibmacro{textcite}%
+%  \ifbool{cbx:parens}
+%     {\bibcloseparen\global\boolfalse{cbx:parens}}
+%     {}%         % use this, if you want parantheses around year in bib label [END]
+  \endgroup
+} 
+\newbibmacro{kicklabel}{% 
+  \sbox\ay@labelbox{\usebibmacro{labelwidthbib}}%
+  \global\togglefalse{blx@insert}%
+  \ifdim\wd\ay@labelbox>\labwidthsameline
+    \leavevmode\newline
+  \fi
+}
+
+% n.b. the default labeldate=year overrides merging of months and days
+\ExecuteBibliographyOptions{labeldateparts,sorting=nyt,pagetracker,mergedate}
+
+\DeclareFieldFormat{shorthandwidth}{#1}
+\setlength{\bibitemsep}{0pt}
+
+\DeclareNameAlias{author}{sortname}
+\DeclareNameAlias{editor}{sortname}
+\DeclareNameAlias{translator}{sortname}
+
+\defbibenvironment{bibliography}%
+  {\list
+    {\usebibmacro{labelwidthbib}}%
+    {\setlength{\labelwidth}{\labwidthsameline}%
+     \setlength{\leftmargin}{\labelwidth}%
+     \setlength{\labelsep}{\biblabelsep}%
+     \addtolength{\leftmargin}{\labelsep}%
+     \setlength{\itemsep}{\bibitemsep}%
+     \setlength{\parsep}{\bibparsep}%
+     \renewcommand*{\makelabel}[1]{##1\hss}}}%
+  {\endlist}%
+  {\item\usebibmacro{kicklabel}}
+
+\defbibenvironment{shorthand}
+  {\list
+     {\printfield[shorthandwidth]{shorthand}}
+     {\setlength{\labelwidth}{\shorthandwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}%
+      \renewcommand*{\makelabel}[1]{##1\hss}}}
+  {\endlist}
+  {\item}
+
+\InitializeBibliographyStyle{\global\undef\bbx@lasthash}
+
+\newbibmacro*{bbx:savehash}{%
+  \savefield{fullhash}{\bbx@lasthash}}
+
+\newbool{bbx@inset}
+\DeclareBibliographyDriver{set}{%
+  \booltrue{bbx@inset}%
+  \entryset{}{}%
+  \newunit\newblock
+  \usebibmacro{setpageref}%
+  \finentry}
+
+\renewbibmacro*{begrelated}{%
+  \booltrue{bbx@inset}}
+
+\renewbibmacro*{endrelated}{%
+  \usebibmacro*{bbx:savehash}}
+
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\usebibmacro{bbx:savehash}%
+        \printnames{author}%
+        \iffieldundef{authortype}
+          {\setunit{\printdelim{nameyeardelim}}}
+          {\setunit{\addcomma\space}}}%
+     \iffieldundef{authortype}
+       {}
+       {\usebibmacro{authorstrg}%
+        \setunit{\printdelim{nameyeardelim}}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \usebibmacro{date+extrayear}}
+
+\renewbibmacro*{editor}{%
+  \usebibmacro{bbx:editor}{editorstrg}}
+\renewbibmacro*{editor+others}{%
+  \usebibmacro{bbx:editor}{editor+othersstrg}}
+\newbibmacro*{bbx:editor}[1]{%
+  \ifboolexpr{
+    test \ifuseeditor
+    and
+    not test {\ifnameundef{editor}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{editor}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{bbx:savehash}}%
+     \usebibmacro{#1}%
+     \clearname{editor}%
+     \setunit{\printdelim{nameyeardelim}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \usebibmacro{date+extrayear}}
+
+\renewbibmacro*{translator}{%
+  \usebibmacro{bbx:translator}{translatorstrg}}
+\renewbibmacro*{translator+others}{%
+  \usebibmacro{bbx:translator}{translator+othersstrg}}
+\newbibmacro*{bbx:translator}[1]{%
+  \ifboolexpr{
+    test \ifusetranslator
+    and
+    not test {\ifnameundef{translator}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\printnames{translator}%
+        \setunit{\addcomma\space}%
+        \usebibmacro{bbx:savehash}}%
+     \usebibmacro{translator+othersstrg}%
+     \clearname{translator}%
+     \setunit{\printdelim{nameyeardelim}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \usebibmacro{date+extrayear}}
+
+\newbibmacro*{bbx:dashcheck}[2]{%
+  \ifboolexpr{
+    test {\iffieldequals{fullhash}{\bbx@lasthash}}
+    and
+    not test \iffirstonpage
+    and
+    (
+       not bool {bbx@inset}
+       or
+       test {\iffieldequalstr{entrysetcount}{1}}
+    )
+  }
+    {#1}
+    {#2}}
+
+\newbibmacro*{labeltitle}{%
+  \iffieldundef{label}
+    {\iffieldundef{shorttitle}
+       {\printfield{title}%
+        \clearfield{title}}
+       {\printfield[title]{shorttitle}}}
+    {\printfield{label}}}
+		
+\endinput

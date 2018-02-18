@@ -1,0 +1,171 @@
+\documentclass[%
+  draft,%
+  ngerman,%
+  english,% last language set will be the main document language
+  % accepted,%
+  % female,%
+]{iswdctrt}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START external command definitions
+% Tell LaTeX to create a list of indices
+\makeindex
+% Comes along with the glossaries package. Can be removed if you do not use
+% glossaries anywhere in your document
+\makeglossaries
+% END external command definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START setting document properties
+% Set author(s) names
+\author{Philipp Tempel}
+% Short author names
+\shortauthor{Ph.\@ Tempel}
+% Place of birth of author
+\placeofbirth{Stuttgart}
+
+% Set the date this document is printed/published
+% Avoid typing in manually, either use `\today` or `\printdate{yyyy-mm-dd}`
+\date{\today}
+
+% Title of document
+\title{This is the Long Long Title of My Thesis Which is Going to Deal with Something Cool}
+% Define a short title if the main title is too long and truncated in parts of the document
+\shorttitle{This is the Shorter Title of My Thesis}
+% Theses can also have subtitles
+\subtitle{An extra, voluntary addition to the thesis title goes here}
+% Define a partnering institute or company here (or multiple separated by `\and`)
+\partner{Fraunhofer Institute for Manufacturing Engineering and Automation IPA \and Fraunhofer Institute for Production Systems and Design Technology IPK}
+
+% Main examiner and second examiners
+\mainexaminer{Juniorprof.~Dr.-Ing.~Andreas~Pott}
+\secondexaminer{Prof.~Dr.-Ing.~Peter~Eberhard \and Prof.~Dr.-Ing.~Some~O.~Dude}
+% END setting document properties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START used defined content
+
+% Put all your custom code (packages, styles, macros, etc.)
+
+% This package is only included for demo purposes
+\usepackage[math]{blindtext}
+
+% Add your bibliography file here.
+\addbibresource{bibliography.bib}
+%\addbibresource{/path/to/second/source.bib} % Import from multiple locations like this
+
+% END user defined content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN document
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START frontmatter
+\frontmatter
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START title page in main language
+\maketitle
+% END title page in main language
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START title page in other language
+\begin{otherlanguage}{ngerman}
+ \maketitle
+\end{otherlanguage}
+% END title page in other language
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START abstract in main language
+\begin{abstract}
+  \Blindtext[3]
+  
+  \keywords{Sed \and aliquet \and tellus \and eget \and est}
+\end{abstract}
+% END abstract in main language
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START abstract in other language
+\begin{otherlanguage}{ngerman}
+  \begin{abstract}
+    \Blindtext[3]
+       
+    \keywords{Sed \and aliquet \and tellus \and eget \and est}
+  \end{abstract}
+\end{otherlanguage}
+% END abstract in other language
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START lists of flaots
+
+% Table of all contents
+\tableofcontents
+
+% List of all figures
+\listoffigures
+
+% List of all tables
+\listoftables
+
+% List of todos (only printed in non-final mode)
+\listoftodos
+
+% END list of floats
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START mainmatter
+\mainmatter
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START actual document content
+
+\Blinddocument
+
+% END actual document content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% TODO: remove \nocite{*} for correct citation behavior
+\nocite{*}
+
+\printbibliography
+
+\end{document}
+% END document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
