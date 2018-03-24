@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.0.2}
-\def\filedate{2018/02/18}
+\def\fileversion{1.1.0}
+\def\filedate{2018/03/24}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1241,12 +1241,13 @@
 
 % Well-scaled math subscripts
 \DeclareDocumentCommand{\ms}{m}{%
-  {\mbox{\textscale{0.6}{#1}}}%
+  {\mbox{\textscale{0.6}{\mc{#1}}}}%
 }
 
-% Proper math subscripts for textual indices like "std" or "coeff". Do not use for variable indices like "i" or "j"
+% Correct type setting of math subscripts for textual indices like "std" or "coeff".
+% Do not use for variable indices like "i" or "j"
 \DeclareDocumentCommand{\mc}{m}{%
-  {\ms{\text{#1}}}
+  \text{#1}%
 }
 
 % Rotation matrix entry
