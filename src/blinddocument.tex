@@ -1,0 +1,86 @@
+\Blinddocument
+
+\begin{figure}
+  \centering
+  \smaller[1]
+  \includegraphics[width=0.75\linewidth]{example-image-a}
+  \caption{%
+    A single figure
+  }
+  \label{fig:single-figure}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \smaller[1]
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{example-image-a}
+    \caption{%
+      Subfigured example image a.
+    }
+    \label{fig:subfigured-1x2:a}
+  \end{subfigure}%
+  \hfill%
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{example-image-b}
+    \caption{%
+      Subfigured example image b.
+    }
+    \label{fig:subfigured-1x2:b}
+  \end{subfigure}%
+  \caption{%
+    A $1 \times 2$ subfigured figure.
+  }
+  \label{fig:subfigured-1x2}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \smaller[1]
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{example-image-a}
+    \caption{%
+      Subfigured example image a.
+    }
+    \label{fig:subfigured-2x2:a}
+  \end{subfigure}%
+  \hfill%
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{example-image-b}
+    \caption{%
+      Subfigured example image b.
+    }
+    \label{fig:subfigured-2x2:b}
+  \end{subfigure}%
+  \hfill%
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{example-image-c}
+    \caption{%
+      Subfigured example image c.
+    }
+    \label{fig:subfigured-2x2:c}
+  \end{subfigure}%
+  \hfill%
+  \begin{subfigure}[t]{0.49\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{example-image}
+    \caption{%
+      Subfigured example image d.
+    }
+    \label{fig:subfigured-2x2:d}
+  \end{subfigure}%
+  \caption{%
+    A $2 \times 2$ subfigured figure comprised of \subref{fig:subfigured-2x2:a}, \subref{fig:subfigured-2x2:b}, \subref{fig:subfigured-2x2:c}, and \subref{fig:subfigured-2x2:d}.
+  }
+  \label{fig:subfigured-2x2}
+\end{figure}
+
+We have \cref{fig:single-figure} and \cref{fig:subfigured-1x2} as well as \cref{fig:subfigured-1x2:a,fig:subfigured-1x2:b}.
+Oh, did you see the $4 \times 4$ figure matrix in \cref{fig:subfigured-2x2} composed of \cref{fig:subfigured-2x2:a,fig:subfigured-2x2:b,fig:subfigured-2x2:c,fig:subfigured-2x2:d}?
+
+\Blinddocument
