@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.1.0}
-\def\filedate{2018/03/24}
+\def\filedate{2018/04/01}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -3531,10 +3531,17 @@
   textformat=simple,% 
   justification=justified,% 
   singlelinecheck=off,% 
-  font={},% Affects the whole figure caption
-  labelfont={footnotesize, bf, color=captionlabel},% Affects only the label name and its number
-  textfont={},% Affects only the actual float caption
-  subrefformat=parens,% 
+  font={% % Affects the whole figure caption
+  },%
+  labelfont={% % Affects only the label name and its number 
+    footnotesize,%
+    bf,%
+    color=captionlabel,%
+  },%
+  textfont={% % Affects only the actual float caption
+  },%
+  subrefformat=simple,% 
+  labelformat=simple,%
 }
 % Setup captions of tables
 \captionsetup[table]{
@@ -3544,17 +3551,18 @@
 % Setup captions of figures
 \captionsetup[figure]{
   position=below,%
+  belowskip=2pt,%
 }
 % Setup captions of subfigures
 \captionsetup[subfigure]{%
   position=below,% 
   belowskip=2pt,% 
-}
-% Setup captions of subfigures
-\captionsetup[subfigure]{
-  labelformat=parens,
   textfont={sl},
+  labelformat=simple,
 }
+% This will make sure that subfigure labels (both in the caption as well as in
+% references such as `\subref`) are typeset as `(\alph)`.
+\renewcommand\thesubfigure{(\alph{subfigure})}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
