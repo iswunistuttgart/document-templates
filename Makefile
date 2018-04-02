@@ -45,6 +45,15 @@ bbx: src/iswbib.bbx
 bib: src/bibliography.bib
 	cp src/bibliography.bib $(BUILD_DIR)/bibliography.bib
 
+patch: src/*.cls
+	$(PY) semver.py patch $?
+
+minor: src/*.cls
+	$(PY) semver.py minor $?
+
+major: src/*.cls
+	$(PY) semver.py major $?
+
 .PHONY: clean
 clean:
 	[ -d "$(BUILD_DIR)/" ] && rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/ || [ ! -d "$(BUILD_DIR)/" ]
