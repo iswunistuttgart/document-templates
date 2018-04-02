@@ -167,6 +167,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Find the files we need to update
-    ps = [(pathlib.Path.cwd() / 'src' / '{}.cls'.format(c)).resolve() for c in args.cls]
+    ps = [(pathlib.Path.cwd() / c).resolve() for c in args.cls]
     for p in ps:
         bump(p, args.type)
