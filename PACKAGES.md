@@ -74,7 +74,7 @@ This is a comprehensive, semi automatically generated list of packages loaded by
   * [xcolor](https://ctan.org/pkg/xcolor)
   * [xspace](https://ctan.org/pkg/xspace)
 
-## iswstud
+## iswbook
 
   * [acronym](https://ctan.org/pkg/acronym)
   * [amsmath](https://ctan.org/pkg/amsmath)
@@ -218,7 +218,7 @@ This is a comprehensive, semi automatically generated list of packages loaded by
   * [xcolor](https://ctan.org/pkg/xcolor)
   * [xspace](https://ctan.org/pkg/xspace)
 
-## iswbook
+## iswstud
 
   * [acronym](https://ctan.org/pkg/acronym)
   * [amsmath](https://ctan.org/pkg/amsmath)

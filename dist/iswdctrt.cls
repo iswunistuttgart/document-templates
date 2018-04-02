@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.0}
-\def\filedate{2018/04/01}
+\def\fileversion{1.2.1}
+\def\filedate{2018/04/02}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -198,6 +198,8 @@
   toc,%
   xindy,%
   nomain,%
+  shortcuts,%
+  nopostdot,%
 }{glossaries}
 
 
@@ -339,7 +341,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SIUnitX
 \PassOptionsToPackage{
-  per-mode=symbol,%
+  per-mode=fraction,%
   binary-units=true,%
 }{siunitx}
 
@@ -1074,7 +1076,7 @@
 }
 
 % Absolute value
-% \abs{x} => |x|
+% \abs{x} => \lvert x \rvert
 \DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{#1}
 
 % Norm
@@ -1091,7 +1093,7 @@
 % Skew-symmetric matrix
 % \skewm{x} => [ x ]_{\times}
 % \skewm[\Bigg]{x} => \Bigg[ x \Bigg]_{\times}
-\DeclarePairedDelimiterX{\skewm}[1]{[}{]}{#1}
+\DeclarePairedDelimiterX{\skewm}[1]{[}{]^{\mkern-2.5mu\times}}{#1}
 
 % Cross product
 % \crosp{#1}{#2} => {#1} \times {#2}
@@ -1109,58 +1111,75 @@
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
-\DeclareMathOperator{\dif}{d \!}
+% \DeclareMathOperator{\dif}{d \!}
+\DeclareDocumentCommand{\dif}{o}{
+  \operatorname{d}%
+  \IfValueT{#1}{%
+    _{#1}%
+  }%
+  \!%
+}
 % Derivative operator (upface D)
-\DeclareMathOperator{\Dif}{D \!}
+% \DeclareMathOperator{\Dif}{D \!}
+\DeclareDocumentCommand{\Dif}{o}{
+  \operatorname{D}%
+  \IfValueT{#1}{%
+    _{#1}%
+  }%
+  \!%
+}
 
 % Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
 \providecommand{\pd}[3][]{%
-  \frac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+  \frac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
 }
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter t means "text style"
 \providecommand{\tpd}[3][]{\mathinner{%
-  \tfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+  \tfrac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
 }}%
 % \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter d means "display style"
 \providecommand{\dpd}[3][]{\mathinner{%
-  \dfrac{\partial{^{#1}}#2}{\partial{#3^{#1}}}%
+  \dfrac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
 }}%
 
 % mixed derivative - analogous to the partial derivative command
 % \md{f}{5}{x}{2}{y}{3}
 \providecommand{\md}[6]{%
-  \frac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+  \frac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }%
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter t means "text style"
 \providecommand{\tmd}[6]{\mathinner{%
-  \tfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+  \tfrac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }}%
 % \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter d means "display style"
 \providecommand{\dmd}[6]{\mathinner{%
-  \dfrac{\partial{^{#2}}#1}{\partial{#3^{#4}}\partial{#5^{#6}}}%
+  \dfrac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }}%
 
 % ordinary derivative - analogous to the partial derivative command
 \providecommand{\od}[3][]{%
-  \frac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+  \frac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
 }%
 
 \providecommand{\tod}[3][]{\mathinner{%
-  \tfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+  \tfrac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
 }}%
 \providecommand{\dod}[3][]{\mathinner{%
-  \dfrac{\dif{^{#1}}#2}{\dif{#3^{#1}}}%
+  \dfrac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
 }}%
 
 
-% Totial differential
-\newcommand{\td}[1]{\dif{#1}}
+% Total differential
+% \td{x} => \dif{x}
+\DeclareDocumentCommand{\td}{m}{%
+  \dif{#1}
+}
 
 % Real value
 \renewcommand{\Re}{\operatorname{Re}}
@@ -1173,7 +1192,7 @@
 \DeclareDocumentCommand{\transp}{m}{%
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
-  {#1}^{\mkern-5mu\mathsf{T}}%
+  {#1}^{\mkern-2.5mu\mathsf{T}}%
 }
 
 % Transformation matrix from one system to another
@@ -1189,7 +1208,7 @@
 }
 
 % Hermitian conjugate of matrix
-\DeclareDocumentCommand{\hermconj}{ m m }{%
+\DeclareDocumentCommand{\hermconj}{ m }{%
   {#1}^{\mkern-5mu\mathsf{H}}
 }
 
@@ -1291,12 +1310,12 @@
 \DeclareMathOperator{\arcsec}{arcsec}
 \DeclareMathOperator{\arccot}{arccot}
 \DeclareMathOperator{\arccsc}{arccsc}
-\DeclareMathOperator{\arccosh}{arcCosh}
+\DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
 \DeclareMathOperator{\arctanh}{arctanh}
 \DeclareMathOperator{\arcsech}{arcsech}
-\DeclareMathOperator{\arccsch}{arcCsch}
-\DeclareMathOperator{\arccoth}{arcCoth} 
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth}
 
 
 %% Trigonometric functions with parentheses around argument
@@ -1385,7 +1404,7 @@
   }%
 }
 
-% Parentheses around arcus 
+% Parentheses around arcus tangent
 \DeclareDocumentCommand{\parctan}{ s m }{%
   \IfBooleanTF{#1}{%
     \prtrig*{\arctan}{#2}%
@@ -1394,7 +1413,7 @@
   }%
 }
 
-% Parentheses around arcus 
+% Parentheses around arcus secant
 \DeclareDocumentCommand{\parcsec}{ s m }{%
   \IfBooleanTF{#1}{%
     \prtrig*{\arcsec}{#2}%
@@ -1403,7 +1422,7 @@
   }%
 }
 
-% Parentheses around arcus 
+% Parentheses around arcus cosecant
 \DeclareDocumentCommand{\parccsc}{ s m }{%
   \IfBooleanTF{#1}{%
     \prtrig*{\arccsc}{#2}%
@@ -1412,7 +1431,7 @@
   }%
 }
 
-% Parentheses around arcus 
+% Parentheses around arcus cotangent
 \DeclareDocumentCommand{\parccot}{ s m }{%
   \IfBooleanTF{#1}{%
     \prtrig*{\arccot}{#2}%
@@ -3225,8 +3244,10 @@
 \originalmainmatter%
 \setlength{\parindent}{2ex}%
 \arrayrulecolor{ArrayRuleColor}%
+% Set line spacing to 1.25
 \setstretch{1.25}%
-\setstretch{1.25}%
+% And reverse it inside arrays
+\renewcommand{\arraystretch}{0.8}
 }%
 
 \ifdraft{
