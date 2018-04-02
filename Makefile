@@ -10,7 +10,7 @@ build:
 
 .PHONY: list-of-packages
 list-of-packages: src/*.cls
-	$(PY) list_packages.py --output packages.md src/iswartcl.cls src/iswstud.cls src/iswdctrt.cls src/iswbook.cls
+	$(PY) list_packages.py --output packages.md $?
 
 .PHONY: iswartcl
 iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
