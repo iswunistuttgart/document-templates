@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.1}
-\def\filedate{2018/04/02}
+\def\fileversion{1.2.2}
+\def\filedate{2018/04/11}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1047,10 +1047,10 @@
 
 % Vector
 % \vect{q} => \bm{q}
-% \vect[P]{q} => \tensor*[^{P}]{\vect{q}}
+% \vect[^{P}]{q} => \tensor*[^{P}]{\vect{q}}
 \DeclareDocumentCommand{\vect}{o m}{%
   \IfValueTF{#1}{%
-    \tensor*[^{#1}]{\vect{#2}}{}%
+    \tensor*[{#1}]{\vect{#2}}{}%
   }{%
 %    \vec{#2}%
     \bm{#2}%
@@ -1181,7 +1181,7 @@
 % \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}
 % \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}
 \DeclareDocumentCommand{\trafom}{ O{T} m m}{%
-  \tensor[^#3]{\matr{#1}}{_#2}
+  \tensor*[^#3]{\matr{#1}}{_#2}
 }
 
 % Conjugate complex
