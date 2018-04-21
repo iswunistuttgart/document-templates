@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.3}
+\def\fileversion{1.2.4}
 \def\filedate{2018/04/21}
 
 % Definition of the actual class interface
@@ -1034,29 +1034,38 @@
 %% MATH COMMANDS                                                              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Matrix
+%%
+% @sample \matr{M}: Matrix notation for M
+% @sample \matr[P]{M}: Matrix notation for M with pre-superscript P
+% @sample \matr[A][B]{M}: Matrix notation for M with pre-subscript A and pre-superscript B
 % @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
-% Undergraduate algebra version
-%\newcommand{\matr}[1]{\mathbf{#1}}%
-% Pure math version
-%\newcommand{\matr}[1]{#1}%
-% ISO complying version
-\DeclareDocumentCommand{\matr}{ o O{} m }{%
+%%
+\DeclareDocumentCommand{\matr}{ o o m }{%
   \IfValueTF{#1}{%
-    \prescript{#1}{#2}{\bm{#3}}%
+    \IfValueTF{#2}{%
+      \prescript{#1}{}{\bm{#3}}%
+    }{%
+      \prescript{#2}{#1}{\bm{#3}}%
+    }%
   }{%
-    \bm{#1}%
+    \bm{#3}%
   }%
 }%
 
-% Vector
-% \vect{q} => \bm{q}%
-% \vect[^{P}]{q} => \tensor*[^{P}]{\vect{q}}%
-\DeclareDocumentCommand{\vect}{ o O{} m }{%
+%%
+% @sample \vect{q}: Vector notation for q
+% @sample \vect[P]{q}: Vector notation for q with pre-superscript P
+% @sample \vect[A][B]{q}: Vector notation for q with pre-subscript A and pre-superscript B
+%%
+\DeclareDocumentCommand{\vect}{ o o m }{%
   \IfValueTF{#1}{%
-    \prescript{#1}{#2}{\bm{#3}}%
+    \IfValueTF{#2}{%
+      \prescript{#1}{}{\bm{#3}}%
+    }{%
+      \prescript{#2}{#1}{\bm{#3}}%
+    }%
   }{%
-    \bm{#2}%
+    \bm{#3}%
   }%
 }%
 
