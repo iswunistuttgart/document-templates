@@ -13,9 +13,9 @@
 \DeclareDocumentCommand{\matr}{ o o m }{%
   \IfValueTF{#1}{%
     \IfValueTF{#2}{%
-      \prescript{#1}{}{\bm{#3}}%
-    }{%
       \prescript{#2}{#1}{\bm{#3}}%
+    }{%
+      \prescript{#1}{}{\bm{#3}}%
     }%
   }{%
     \bm{#3}%
@@ -30,9 +30,9 @@
 \DeclareDocumentCommand{\vect}{ o o m }{%
   \IfValueTF{#1}{%
     \IfValueTF{#2}{%
-      \prescript{#1}{}{\bm{#3}}%
-    }{%
       \prescript{#2}{#1}{\bm{#3}}%
+    }{%
+      \prescript{#1}{}{\bm{#3}}%
     }%
   }{%
     \bm{#3}%
