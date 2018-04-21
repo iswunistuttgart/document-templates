@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.5}
+\def\fileversion{1.2.6}
 \def\filedate{2018/04/21}
 
 % Definition of the actual class interface
@@ -1067,9 +1067,9 @@
 \DeclareDocumentCommand{\matr}{ o o m }{%
   \IfValueTF{#1}{%
     \IfValueTF{#2}{%
-      \prescript{#1}{}{\bm{#3}}%
-    }{%
       \prescript{#2}{#1}{\bm{#3}}%
+    }{%
+      \prescript{#1}{}{\bm{#3}}%
     }%
   }{%
     \bm{#3}%
@@ -1084,9 +1084,9 @@
 \DeclareDocumentCommand{\vect}{ o o m }{%
   \IfValueTF{#1}{%
     \IfValueTF{#2}{%
-      \prescript{#1}{}{\bm{#3}}%
-    }{%
       \prescript{#2}{#1}{\bm{#3}}%
+    }{%
+      \prescript{#1}{}{\bm{#3}}%
     }%
   }{%
     \bm{#3}%
