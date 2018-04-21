@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.2}
-\def\filedate{2018/04/11}
+\def\fileversion{1.2.3}
+\def\filedate{2018/04/21}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1055,84 +1055,87 @@
 % Matrix
 % @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
 % Undergraduate algebra version
-%\newcommand{\matr}[1]{\mathbf{#1}}
+%\newcommand{\matr}[1]{\mathbf{#1}}%
 % Pure math version
-%\newcommand{\matr}[1]{#1}
+%\newcommand{\matr}[1]{#1}%
 % ISO complying version
-\DeclareDocumentCommand{\matr}{m}{%
-  \bm{#1}%
-}
+\DeclareDocumentCommand{\matr}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\bm{#3}}%
+  }{%
+    \bm{#1}%
+  }%
+}%
 
 % Vector
-% \vect{q} => \bm{q}
-% \vect[^{P}]{q} => \tensor*[^{P}]{\vect{q}}
-\DeclareDocumentCommand{\vect}{o m}{%
+% \vect{q} => \bm{q}%
+% \vect[^{P}]{q} => \tensor*[^{P}]{\vect{q}}%
+\DeclareDocumentCommand{\vect}{ o O{} m }{%
   \IfValueTF{#1}{%
-    \tensor*[{#1}]{\vect{#2}}{}%
+    \prescript{#1}{#2}{\bm{#3}}%
   }{%
-%    \vec{#2}%
     \bm{#2}%
   }%
-}
+}%
 
 % Absolute value
 % \abs{x} => \lvert x \rvert
-\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{#1}
+\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{#1}%
 
 % Norm
 % \norm{a_i} => \lVert a_i \rVert
-\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}%
 
 % Power
-% \pow{x} => {x}^{2}
-% \pow[3]{x} => {x}^{3}
+% \pow{x} => {x}^{2}%
+% \pow[3]{x} => {x}^{3}%
 \DeclareDocumentCommand{\pow}{O{2} m}{%
   #2^{#1}%
-}
+}%
 
 % Skew-symmetric matrix
-% \skewm{x} => [ x ]_{\times}
-% \skewm[\Bigg]{x} => \Bigg[ x \Bigg]_{\times}
-\DeclarePairedDelimiterX{\skewm}[1]{[}{]^{\mkern-2.5mu\times}}{#1}
+% \skewm{x} => [ x ]_{\times}%
+% \skewm[\Bigg]{x} => \Bigg[ x \Bigg]_{\times}%
+\DeclarePairedDelimiterX{\skewm}[1]{[}{]^{\mkern-2.5mu\times}}{#1}%
 
 % Cross product
-% \crosp{#1}{#2} => {#1} \times {#2}
+% \crosp{#1}{#2} => {#1} \times {#2}%
 \DeclareDocumentCommand{\crossp}{m m}{%
-  {#1} \times {#2}
-}
+  {#1} \times {#2}%
+}%
 
 % Diagonal
 % \diag => diag for a matrix as diagonal of the elements
-\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\diag}{diag}%
 
 % Mathemtical sign operator
-\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sign}{sign}%
 
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 % Differential operator (upface d)
-% \DeclareMathOperator{\dif}{d \!}
+% \DeclareMathOperator{\dif}{d \!}%
 \DeclareDocumentCommand{\dif}{o}{
   \operatorname{d}%
   \IfValueT{#1}{%
     _{#1}%
   }%
   \!%
-}
+}%
 % Derivative operator (upface D)
-% \DeclareMathOperator{\Dif}{D \!}
+% \DeclareMathOperator{\Dif}{D \!}%
 \DeclareDocumentCommand{\Dif}{o}{
   \operatorname{D}%
   \IfValueT{#1}{%
     _{#1}%
   }%
   \!%
-}
+}%
 
 % Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
 \providecommand{\pd}[3][]{%
   \frac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
-}
+}%
 
 % \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
 % The first letter t means "text style"
@@ -1146,7 +1149,7 @@
 }}%
 
 % mixed derivative - analogous to the partial derivative command
-% \md{f}{5}{x}{2}{y}{3}
+% \md{f}{5}{x}{2}{y}{3}%
 \providecommand{\md}[6]{%
   \frac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }%
@@ -1176,53 +1179,53 @@
 
 
 % Total differential
-% \td{x} => \dif{x}
-\DeclareDocumentCommand{\td}{m}{%
-  \dif{#1}
-}
+% \td{x} => \dif{x}%
+\DeclareDocumentCommand{\td}{ m }{%
+  \dif{#1}%
+}%
 
 % Real value
-\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Re}{\operatorname{Re}}%
 
 % Imaginary value
-\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\Im}{\operatorname{Im}}%
 
 % Transpose items
 % \transp{A} => A^T
-\DeclareDocumentCommand{\transp}{m}{%
+\DeclareDocumentCommand{\transp}{ m }{%
 %  {#1}^{\intercal}%
 %  {#1}^{\mkern-1.5mu\intercal}%
   {#1}^{\mkern-2.5mu\mathsf{T}}%
-}
+}%
 
 % Transformation matrix from one system to another
-% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}
-% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}
-\DeclareDocumentCommand{\trafom}{ O{T} m m}{%
-  \tensor*[^#3]{\matr{#1}}{_#2}
-}
+% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}%
+% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}%
+\DeclareDocumentCommand{\trafom}{ O{T} m m }{%
+  \matr[#2][#3]{#1}%
+}%
 
 % Conjugate complex
 \DeclareDocumentCommand{\conj}{ m }{%
-  \overline{#1}
-}
+  \overline{#1}%
+}%
 
 % Hermitian conjugate of matrix
 \DeclareDocumentCommand{\hermconj}{ m }{%
-  {#1}^{\mkern-5mu\mathsf{H}}
-}
+  {#1}^{\mkern-5mu\mathsf{H}}%
+}%
 
 % Element inverse (usually used for matrix inverse)
-% \inv{A} => A^{-1}
-\DeclareDocumentCommand{\inv}{m}{%
+% \inv{A} => A^{-1}%
+\DeclareDocumentCommand{\inv}{ m }{%
   #1^{-1}%
-}
+}%
 
 % Dot-product
 % \dotp{a}{b} => a \cdot b
 \DeclareDocumentCommand{\dotp}{m m}{%
-  {#1} \cdot {#2}
-}
+  {#1} \cdot {#2}%
+}%
 
 % Unit axis coordinate vector
 % \evec{x} => \vect{e}_{x} => e_x
@@ -1230,10 +1233,10 @@
 % \evec[k]{x} => \vect{k}_{x} => k_x
 \DeclareDocumentCommand{\evec}{O{e} m}{%
   \vect{#1}_{\mc{#2}}%
-}
+}%
 
 % Declare atant a math operator rendering atan2
-\DeclareMathOperator{\arctantwo}{atan2}
+\DeclareMathOperator{\arctantwo}{atan2}%
 
 % Arcus tangent 2
 % \atantwo{y}{x} => atan2(y, x)
@@ -1259,67 +1262,84 @@
 }%
 
 % Well-scaled math subscripts
-\DeclareDocumentCommand{\ms}{m}{%
+\DeclareDocumentCommand{\ms}{ m }{%
   {\mbox{\textscale{0.6}{\mc{#1}}}}%
-}
+}%
 
 % Correct type setting of math subscripts for textual indices like "std" or "coeff".
 % Do not use for variable indices like "i" or "j"
-\DeclareDocumentCommand{\mc}{m}{%
+\DeclareDocumentCommand{\mc}{ m }{%
   \text{#1}%
-}
+}%
 
 % Rotation matrix entry
-\DeclareDocumentCommand{\rotscal}{}{%
+\DeclareDocumentCommand{\rotscal}{ }{%
   R%
-}
+}%
 
-% Rotation matrix
-\DeclareDocumentCommand{\rotmatr}{}{%
-  \matr{\rotscal}%
-}
+%%
+% @sample \rotmatr: Rotation matrix
+% @sample \rotmatr[P]: Rotation matrix from coordinate system P into world system O
+% @sample \rotmatr[A][B]: Rotation matrix from coordinate system A into system B
+%%
+\DeclareDocumentCommand{\rotmatr}{ o o }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \matr[#2][#1]{\rotscal}%
+    }{%
+      \matr[][#1]{\rotscal}%
+    }%
+  }{%
+    \matr{\rotscal}%
+  }%
+}%
 
 % Rotation matrices about specific axes
-% \rotx{\alpha} => \rotmatr_{x} \of{\alpha}
-\DeclareDocumentCommand{\rotx}{m}{%
-  \rotmatr_{x} \of{#1}%
-}
-% \roty{\beta} => \rotmatr_{y} \of{\beta}
-\DeclareDocumentCommand{\roty}{m}{%
-  \rotmatr_{y} \of{#1}%
-}
-% \rotz{\gamma} => \rotmatr_{z} \of{\gamma}
-\DeclareDocumentCommand{\rotz}{m}{%
-  \rotmatr_{z} \of{#1}%
-}
+% \rotx{\alpha} => \rotmatr_{x} \of{\alpha}%
+\DeclareDocumentCommand{\rotx}{ g }{%
+  \rotmatr_{\ms{x}}%
+  \IfValueT{#1}{\of{#1}}%
+}%
+
+% \roty{\beta} => \rotmatr_{y} \of{\beta}%
+\DeclareDocumentCommand{\roty}{ g }{%
+  \rotmatr_{\ms{y}}%
+  \IfValueT{#1}{\of{#1}}%
+}%
+
+% \rotz{\gamma} => \rotmatr_{z} \of{\gamma}%
+\DeclareDocumentCommand{\rotz}{ g }{%
+  \rotmatr_{\ms{z}}%
+  \IfValueT{#1}{\of{#1}}%
+}%
 
 % Operator names for Imaginary and Real unit
-\newcommand{\Imop}{\operatorname{Im}}
-\newcommand{\Reop}{\operatorname{Re}}
+\newcommand{\Imop}{\operatorname{Im}}%
+\newcommand{\Reop}{\operatorname{Re}}%
 
 % Imaginary unit i
-\DeclareMathOperator{\imagu}{\mathrm{i}}
-\DeclareDocumentCommand{\imgu}{}{%
+\DeclareMathOperator{\imagu}{\mathrm{i}}%
+\DeclareDocumentCommand{\imgu}{ }{%
   {\imagu\mkern1mu}%
-}
+}%
 
 % Inverse hyperbolic functions i.e., more precisely, inverse hyperbolic math
 % operators
-\DeclareMathOperator{\sech}{sech}
-\DeclareMathOperator{\csch}{csch}
-\DeclareMathOperator{\arcsec}{arcsec}
-\DeclareMathOperator{\arccot}{arccot}
-\DeclareMathOperator{\arccsc}{arccsc}
-\DeclareMathOperator{\arccosh}{arccosh}
-\DeclareMathOperator{\arcsinh}{arcsinh}
-\DeclareMathOperator{\arctanh}{arctanh}
-\DeclareMathOperator{\arcsech}{arcsech}
-\DeclareMathOperator{\arccsch}{arccsch}
-\DeclareMathOperator{\arccoth}{arccoth}
+\DeclareMathOperator{\sech}{sech}%
+\DeclareMathOperator{\csch}{csch}%
+\DeclareMathOperator{\arcsec}{arcsec}%
+\DeclareMathOperator{\arccot}{arccot}%
+\DeclareMathOperator{\arccsc}{arccsc}%
+\DeclareMathOperator{\arccosh}{arccosh}%
+\DeclareMathOperator{\arcsinh}{arcsinh}%
+\DeclareMathOperator{\arctanh}{arctanh}%
+\DeclareMathOperator{\arcsech}{arcsech}%
+\DeclareMathOperator{\arccsch}{arccsch}%
+\DeclareMathOperator{\arccoth}{arccoth}%
 
 
 %% Trigonometric functions with parentheses around argument
-% \prtrig{\sin}{\beta} => \sin \of{ \beta }
+% \prtrig{\sin}{\beta} => \sin \of{ \beta }%
 \DeclareDocumentCommand{\prtrig}{ s m m }{%
   #2{%
     \IfBooleanTF{#1}{%
@@ -1328,16 +1348,16 @@
       \of{#3}%
     }%
   }%
-}
+}%
 
-% Parentheses around sine
+% P arentheses around sine
 \DeclareDocumentCommand{\psin}{ s m }{%
   \IfBooleanTF{#1}{%
     \prtrig*{\sin}{#2}%
   }{%
     \prtrig{\sin}{#2}%
   }%
-}
+}%
 
 % Parentheses around cosine
 \DeclareDocumentCommand{\pcos}{ s m }{%
@@ -1346,7 +1366,7 @@
   }{%
     \prtrig{\cos}{#2}%
   }%
-}
+}%
 
 % Parentheses around tangent
 \DeclareDocumentCommand{\ptan}{ s m }{%
@@ -1355,7 +1375,7 @@
   }{%
     \prtrig{\tan}{#2}%
   }%
-}
+}%
 
 % Parentheses around secant
 \DeclareDocumentCommand{\psec}{ s m }{%
@@ -1364,7 +1384,7 @@
   }{%
     \prtrig{\sec}{#2}%
   }%
-}
+}%
 
 % Parentheses around cosecant
 \DeclareDocumentCommand{\pcsc}{ s m }{%
@@ -1373,7 +1393,7 @@
   }{%
     \prtrig{\csc}{#2}%
   }%
-}
+}%
 
 % Parentheses around cotangent
 \DeclareDocumentCommand{\pcot}{ s m }{%
@@ -1382,7 +1402,7 @@
   }{%
     \prtrig{\cot}{#2}%
   }%
-}
+}%
 
 
 %% Inverse trigonometric functions with parentheses around argument
@@ -1393,7 +1413,7 @@
   }{%
     \prtrig{\arcsin}{#2}%
   }%
-}
+}%
 
 % Parentheses around arcus cosine
 \DeclareDocumentCommand{\parccos}{ s m }{%
@@ -1402,7 +1422,7 @@
   }{%
     \prtrig{\arccos}{#2}%
   }%
-}
+}%
 
 % Parentheses around arcus tangent
 \DeclareDocumentCommand{\parctan}{ s m }{%
@@ -1411,7 +1431,7 @@
   }{%
     \prtrig{\arctan}{#2}%
   }%
-}
+}%
 
 % Parentheses around arcus secant
 \DeclareDocumentCommand{\parcsec}{ s m }{%
@@ -1420,7 +1440,7 @@
   }{%
     \prtrig{\arcsec}{#2}%
   }%
-}
+}%
 
 % Parentheses around arcus cosecant
 \DeclareDocumentCommand{\parccsc}{ s m }{%
@@ -1429,7 +1449,7 @@
   }{%
     \prtrig{\arccsc}{#2}%
   }%
-}
+}%
 
 % Parentheses around arcus cotangent
 \DeclareDocumentCommand{\parccot}{ s m }{%
@@ -1438,7 +1458,7 @@
   }{%
     \prtrig{\arccot}{#2}%
   }%
-}
+}%
 
 
 %% Hyperbolic trigonometric functions with parentheses around argument
@@ -1449,7 +1469,7 @@
   }{%
     \prtrig{\sinh}{#2}%
   }%
-}
+}%
 
 % Parentheses around cosine hyperbolic
 \DeclareDocumentCommand{\pcosh}{ s m }{%
@@ -1458,7 +1478,7 @@
   }{%
     \prtrig{\cosh}{#2}%
   }%
-}
+}%
 
 % Parentheses around cosine hyperbolic
 \DeclareDocumentCommand{\ptanh}{ s m }{%
@@ -1467,7 +1487,7 @@
   }{%
     \prtrig{\tanh}{#2}%
   }%
-}
+}%
 
 % Parentheses around cosine hyperbolic
 \DeclareDocumentCommand{\pcoth}{ s m }{%
@@ -1476,7 +1496,7 @@
   }{%
     \prtrig{\coth}{#2}%
   }%
-}
+}%
 
 
 %% Exponential and logarithmic functions with parentheses around argument
@@ -1487,7 +1507,7 @@
   }{%
     \prtrig{\exp}{#2}%
   }%
-}
+}%
 
 % Parentheses around logarithm base 10
 \DeclareDocumentCommand{\plog}{ s m }{%
@@ -1496,7 +1516,7 @@
   }{%
     \prtrig{\log}{#2}%
   }%
-}
+}%
 
 % Parentheses around logarithm base 2
 \DeclareDocumentCommand{\pln}{ s m }{%
@@ -1505,7 +1525,7 @@
   }{%
     \prtrig{\ln}{#2}%
   }%
-}
+}%
 
 % Parentheses around logarithm base e
 \DeclareDocumentCommand{\plg}{ s m }{%
@@ -1514,21 +1534,21 @@
   }{%
     \prtrig{\lg}{#2}%
   }%
-}
+}%
 
 % Declare a nice "function of" short hand
 % @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
-% T \of{x} => T \parentheses{x}
-% T \of*{x} => T \parentheses*{x}
-% T \of[\big]{x} => T \parentheses[\big]{x}
-\DeclarePairedDelimiter\parentheses{\lparen}{\rparen}
+% T \of{x} => T \parentheses{x}%
+% T \of*{x} => T \parentheses*{x}%
+% T \of[\big]{x} => T \parentheses[\big]{x}%
+\DeclarePairedDelimiter\parentheses{\lparen}{\rparen}%
 \DeclareDocumentCommand{\of}{ s O{} m }{%
   \IfBooleanTF{#1}{%
     \parentheses*[#2]{#3}%
   }{%
     \parentheses{#3}%
   }%
-}
+}%
 
 \fi
 % END Only load if option mathematics given
@@ -3246,8 +3266,6 @@
 \arrayrulecolor{ArrayRuleColor}%
 % Set line spacing to 1.25
 \setstretch{1.25}%
-% And reverse it inside arrays
-\renewcommand{\arraystretch}{0.8}
 }%
 
 \ifdraft{
