@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.6}
-\def\filedate{2018/04/21}
+\def\fileversion{1.2.7}
+\def\filedate{2018/04/22}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -1059,6 +1059,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%
+% @sample \parens{x}: Parentheses as left-right paired delimiter for argument x
+% @sample \parens[\bigg]{x}: Explicitely set the size of the pairing parentheses to \latexinline|\bigg|
+% @sample \parens*{x}: Automatically scale the size of the pairing parentheses
+%%
+\DeclarePairedDelimiterX{\parens}[1]{\lparen}{\rparen}{
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+% This macro is just left for backwards compatability. Please use $\parens$ from now on
+\DeclarePairedDelimiterX{\parentheses}[1]{\lparen}{\rparen}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+
+%%
+% @sample \of{x, t}: Nicer and more readable "function of" argument writing
+% @sample \of[\Bigg]{x, t}: Make the pairing parentheses in size \latexinline|\bigg|
+% @sample \of*{x, t}: Automatic height adjustment of the pairing parentheses
+% @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
+%%
+\DeclarePairedDelimiter{\of}{\lparen}{\rparen}%
+
+%%
 % @sample \matr{M}: Matrix notation for M
 % @sample \matr[P]{M}: Matrix notation for M with pre-superscript P
 % @sample \matr[A][B]{M}: Matrix notation for M with pre-subscript A and pre-superscript B
@@ -1093,53 +1114,71 @@
   }%
 }%
 
-% Absolute value
-% \abs{x} => \lvert x \rvert
-\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{#1}%
+%%
+% @sample \abs{x}: Absolute value of the argument as a paired delimiter
+% @see mathtools
+%%
+\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{%
+  \ifblank{#1}{\:\cdot\:}{#1}
+}%
 
-% Norm
-% \norm{a_i} => \lVert a_i \rVert
-\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{#1}%
+%%
+% @sample \norm{x}: Norm of the argument as a paired delimiter
+% @see mathtools
+%%
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
 
-% Power
-% \pow{x} => {x}^{2}%
-% \pow[3]{x} => {x}^{3}%
-\DeclareDocumentCommand{\pow}{O{2} m}{%
+%%
+% @sample \pow{x}: Second power of the argument
+% @sample \pow[n]{x}: n-th power of the argument
+%%
+\DeclareDocumentCommand{\pow}{ O{2} m }{%
   #2^{#1}%
 }%
 
-% Skew-symmetric matrix
-% \skewm{x} => [ x ]_{\times}%
-% \skewm[\Bigg]{x} => \Bigg[ x \Bigg]_{\times}%
+%%
+% @sample \skewm{m}: Commonly used skew-symmetric cross product matrix of argument m
+%%
 \DeclarePairedDelimiterX{\skewm}[1]{[}{]^{\mkern-2.5mu\times}}{#1}%
 
-% Cross product
-% \crosp{#1}{#2} => {#1} \times {#2}%
+%%
+% @sample \crossp{a}{b}: Cross product of a and b
+%%
 \DeclareDocumentCommand{\crossp}{m m}{%
   {#1} \times {#2}%
 }%
 
-% Diagonal
-% \diag => diag for a matrix as diagonal of the elements
+%%
+% @sample \diag: Math operator for a matrix as diagonal of the following vector's elements
+%%
 \DeclareMathOperator{\diag}{diag}%
 
-% Mathemtical sign operator
+%%
+% @sample \sign: Mathematical sign (signum) operator
+%%
 \DeclareMathOperator{\sign}{sign}%
 
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
-% Differential operator (upface d)
-% \DeclareMathOperator{\dif}{d \!}%
-\DeclareDocumentCommand{\dif}{o}{
+%%
+% @sample \dif: Differential operator (upface d). Used in integrals for the integrand.
+% @sample \dif[x]: Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+%%
+\DeclareDocumentCommand{\dif}{ o }{%
   \operatorname{d}%
   \IfValueT{#1}{%
     _{#1}%
   }%
   \!%
 }%
-% Derivative operator (upface D)
-% \DeclareMathOperator{\Dif}{D \!}%
-\DeclareDocumentCommand{\Dif}{o}{
+
+%%
+% @sample \dif: Derivative operator (upface D)
+% @sample \dif[x]: Index the derivative operator with $x$. Necessary because there is a negative space after the operator.
+%%
+\DeclareDocumentCommand{\Dif}{ o }{%
   \operatorname{D}%
   \IfValueT{#1}{%
     _{#1}%
@@ -1147,126 +1186,178 @@
   \!%
 }%
 
-% Command for partial derivatives. The first argument denotes the function and the second argument denotes the variable with respect to which the derivative is taken. The optional argument denotes the order of differentiation. The style (text style/display style) is determined automatically
+%%
+% @sample \pd{f}{x}: Partial derivative of $f$ with resepect to $x$
+% @sample \pd[n]{f}{x}: n-th partial derivative of $f$ with respect to $x$
+%%
 \providecommand{\pd}[3][]{%
   \frac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
 }%
 
-% \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
-% The first letter t means "text style"
+%%
+% @sample \tpd{f}{x}: Text style partial derivative of $f$ with resepect to $x$
+% @sample \tpd[n]{f}{x}: Text style n-th partial derivative of $f$ with respect to $x$
+%%
 \providecommand{\tpd}[3][]{\mathinner{%
   \tfrac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
 }}%
-% \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
-% The first letter d means "display style"
+
+%%
+% @sample \dpd{f}{x}: Display style partial derivative of $f$ with resepect to $x$
+% @sample \dpd[n]{f}{x}: Display style n-th partial derivative of $f$ with respect to $x$
+%%
 \providecommand{\dpd}[3][]{\mathinner{%
   \dfrac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
 }}%
 
-% mixed derivative - analogous to the partial derivative command
-% \md{f}{5}{x}{2}{y}{3}%
+%%
+% @sample \md{f}{5}{x}{2}{y}{3}: Mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+%%
 \providecommand{\md}[6]{%
   \frac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }%
 
-% \tpd[2]{f}{k} denotes the second partial derivative of f with respect to k
-% The first letter t means "text style"
+%%
+% @sample \tmd{f}{5}{x}{2}{y}{3}: Text style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+%%
 \providecommand{\tmd}[6]{\mathinner{%
   \tfrac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }}%
-% \dpd[2]{f}{k} denotes the second partial derivative of f with respect to k
-% The first letter d means "display style"
+
+%%
+% @sample \dmd{f}{5}{x}{2}{y}{3}: Display style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+%%
 \providecommand{\dmd}[6]{\mathinner{%
   \dfrac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
 }}%
 
-% ordinary derivative - analogous to the partial derivative command
+%%
+% @sample \od{f}{x}: Ordinary derivative of $f$ with respect to $x$
+% @sample \od[n]{f}{x}: $n$-th order ordinary derivative of $f$ with respect to $x$
+%%
 \providecommand{\od}[3][]{%
   \frac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
 }%
 
+%%
+% @sample \od{f}{x}: Text style ordinary derivative of $f$ with respect to $x$
+% @sample \od[n]{f}{x}: Text style $n$-th order ordinary derivative of $f$ with respect to $x$
+%%
 \providecommand{\tod}[3][]{\mathinner{%
   \tfrac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
 }}%
+
+%%
+% @sample \od{f}{x}: Display style ordinary derivative of $f$ with respect to $x$
+% @sample \od[n]{f}{x}: Display style $n$-th order ordinary derivative of $f$ with respect to $x$
+%%
 \providecommand{\dod}[3][]{\mathinner{%
   \dfrac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
 }}%
 
 
-% Total differential
-% \td{x} => \dif{x}%
+%%
+% @sample \dif{x}: Total differential of $x$
+%%
 \DeclareDocumentCommand{\td}{ m }{%
   \dif{#1}%
 }%
 
-% Real value
+%%
+% @sample \Re: Operator for real value of complex number
+%%
 \renewcommand{\Re}{\operatorname{Re}}%
 
-% Imaginary value
+%%
+% @sample \Im: Operator for imaginary value of complex number
+%%
 \renewcommand{\Im}{\operatorname{Im}}%
 
-% Transpose items
-% \transp{A} => A^T
+%%
+% @sample \transp{A}: Transpose of argument $A$ e.g., matrix or vector transpose
+%%
 \DeclareDocumentCommand{\transp}{ m }{%
-%  {#1}^{\intercal}%
-%  {#1}^{\mkern-1.5mu\intercal}%
   {#1}^{\mkern-2.5mu\mathsf{T}}%
 }%
 
-% Transformation matrix from one system to another
-% \trafom{O}{P} => \tensor[^P]{\matr{T}}{_O}%
-% \trafom[Q]{O}{P} => \tensor[^P]{\matr{Q}}{_O}%
+%%
+% @sample \trafom{A}{B}: Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
+% @sample \trafom[Q]{A}{B}: Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
+%%
 \DeclareDocumentCommand{\trafom}{ O{T} m m }{%
   \matr[#2][#3]{#1}%
 }%
 
-% Conjugate complex
+%%
+% @sample \conj{m}: Conjugate complex of the argument
+%%
 \DeclareDocumentCommand{\conj}{ m }{%
   \overline{#1}%
 }%
 
-% Hermitian conjugate of matrix
+%%
+% @sample \hermconj{x}: Hermitian conjugate of matrix
+%%
 \DeclareDocumentCommand{\hermconj}{ m }{%
-  {#1}^{\mkern-5mu\mathsf{H}}%
+  {#1}^{\mkern-3.5mu\mathsf{H}}%
 }%
 
-% Element inverse (usually used for matrix inverse)
-% \inv{A} => A^{-1}%
+%%
+% @sample \inv{A}: Element inverse of A - usually used for matrix inverse
+%%
 \DeclareDocumentCommand{\inv}{ m }{%
   #1^{-1}%
 }%
 
-% Dot-product
-% \dotp{a}{b} => a \cdot b
-\DeclareDocumentCommand{\dotp}{m m}{%
+%%
+% @sample \dotp{a}{b}: Dot product of two arguments $a$ and $b$
+%%
+\DeclareDocumentCommand{\dotp}{ m m }{%
   {#1} \cdot {#2}%
 }%
 
-% Unit axis coordinate vector
-% \evec{x} => \vect{e}_{x} => e_x
-% \evec{z} => \vect{e}_{z} => e_z
-% \evec[k]{x} => \vect{k}_{x} => k_x
-\DeclareDocumentCommand{\evec}{O{e} m}{%
+%%
+% @sample \evec{x}: Unit axis coordinate vector along the $x$-axis
+% @sample \evec[\xi]{x}: Name the unit axis coordinate vector $\xi$ rather than $e$
+%%
+\DeclareDocumentCommand{\evec}{ O{e} m }{%
   \vect{#1}_{\mc{#2}}%
 }%
 
-% Declare atant a math operator rendering atan2
+%%
+% @sample \arctantwo: Math operator for the arcus tangent 2
+%%
 \DeclareMathOperator{\arctantwo}{atan2}%
 
-% Arcus tangent 2
-% \atantwo{y}{x} => atan2(y, x)
-\NewDocumentCommand{\arctant}{m m}{%
-  \arctantwo \of{#1, #2}%
+%%
+% @sample \arctant{y}{x}: Arcus tangent 2 of the two arguments
+% @sample \arctant[\bigg]{y}{x}: Arcus tangent 2 with pairing parentheses scaled to size \latexinline|\bigg|
+% @sample \arctant*{\frac{a}{b}}{x}: Arcus tangent 2 with automatically scaled pairing parentheses
+%%
+\DeclareDocumentCommand{\arctant}{ s o m m }{%
+  \arctantwo%
+  \IfBooleanTF{#1}{%
+    \of*{#3, #4}%
+  }{%
+    \IfValueTF{#2}{%
+      \of[#2]{#3, #4}%
+    }{%
+      \of{#3, #4}%
+    }
+  }%
 }%
 
-% Math operator for the trace of matrix
+%%
+% @sample \trace: Math operator for the trace of a matrix
+%%
 \DeclareMathOperator{\trace}{tr}%
 
-% Range of numbers
-% \irange{m} => i = 1, ..., m
-% \irange{m}{j} => j = 1, ..., m
-% \irange[3]{m} => i = 1, 3, ..., m
-% \irange[3]{m}{j} => j = 1, 3, ..., m
+%%
+% @sample \irange{m}: Range of numbers from $1$ to $m$
+% @sample \irange{m}{j}: Range of numbers with running variable $j$
+% @sample \irange[2]{m}: Increment running variable by $2$ with each step
+% @sample \irange[2]{m}{j}: Running variable now is $j$ and increases by $2$ each step
+%%
 \NewDocumentCommand{\irange}{o m g}{%
   \def\runner{\IfValueTF{#3}{#3}{i}}%
   \IfValueTF{#1}{%
@@ -1276,18 +1367,23 @@
   }%
 }%
 
-% Well-scaled math subscripts
+%%
+% @sample \ms{avg}: Well-scaled math subscripts of $\mc{avg}$
+%%
 \DeclareDocumentCommand{\ms}{ m }{%
   {\mbox{\textscale{0.6}{\mc{#1}}}}%
 }%
 
-% Correct type setting of math subscripts for textual indices like "std" or "coeff".
-% Do not use for variable indices like "i" or "j"
+%%
+% @sample \mc{avg}: Correct type setting of math constant for textual indices like "std" or "coeff" -- Do not use for variable indices like "i" or "j"
+%%
 \DeclareDocumentCommand{\mc}{ m }{%
   \text{#1}%
 }%
 
-% Rotation matrix entry
+%%
+% @sample \rotscal: Scalar rotation matrix which may be used as a rotation matrix element $\rotscal_{ij}$
+%%
 \DeclareDocumentCommand{\rotscal}{ }{%
   R%
 }%
@@ -1309,259 +1405,494 @@
   }%
 }%
 
-% Rotation matrices about specific axes
-% \rotx{\alpha} => \rotmatr_{x} \of{\alpha}%
-\DeclareDocumentCommand{\rotx}{ g }{%
+%%
+% @sample \rotx: Rotation matrix about $x$-axis
+% @sample \rotx{\alpha}: Rotation matrix about $x$-axis for angle $\alpha$
+% @sample \rotx[\bigg]{\alpha}: Adjust size of the pairing parentheses of $\alpha$ to be larger
+% @sample \rotx*{\alpha}: Automatically scale the pairing parentheses of $\alpha$
+%%
+\DeclareDocumentCommand{\rotx}{ s o g }{%
   \rotmatr_{\ms{x}}%
-  \IfValueT{#1}{\of{#1}}%
-}%
-
-% \roty{\beta} => \rotmatr_{y} \of{\beta}%
-\DeclareDocumentCommand{\roty}{ g }{%
-  \rotmatr_{\ms{y}}%
-  \IfValueT{#1}{\of{#1}}%
-}%
-
-% \rotz{\gamma} => \rotmatr_{z} \of{\gamma}%
-\DeclareDocumentCommand{\rotz}{ g }{%
-  \rotmatr_{\ms{z}}%
-  \IfValueT{#1}{\of{#1}}%
-}%
-
-% Operator names for Imaginary and Real unit
-\newcommand{\Imop}{\operatorname{Im}}%
-\newcommand{\Reop}{\operatorname{Re}}%
-
-% Imaginary unit i
-\DeclareMathOperator{\imagu}{\mathrm{i}}%
-\DeclareDocumentCommand{\imgu}{ }{%
-  {\imagu\mkern1mu}%
-}%
-
-% Inverse hyperbolic functions i.e., more precisely, inverse hyperbolic math
-% operators
-\DeclareMathOperator{\sech}{sech}%
-\DeclareMathOperator{\csch}{csch}%
-\DeclareMathOperator{\arcsec}{arcsec}%
-\DeclareMathOperator{\arccot}{arccot}%
-\DeclareMathOperator{\arccsc}{arccsc}%
-\DeclareMathOperator{\arccosh}{arccosh}%
-\DeclareMathOperator{\arcsinh}{arcsinh}%
-\DeclareMathOperator{\arctanh}{arctanh}%
-\DeclareMathOperator{\arcsech}{arcsech}%
-\DeclareMathOperator{\arccsch}{arccsch}%
-\DeclareMathOperator{\arccoth}{arccoth}%
-
-
-%% Trigonometric functions with parentheses around argument
-% \prtrig{\sin}{\beta} => \sin \of{ \beta }%
-\DeclareDocumentCommand{\prtrig}{ s m m }{%
-  #2{%
+  \IfValueT{#3}{%
     \IfBooleanTF{#1}{%
       \of*{#3}%
     }{%
-      \of{#3}%
+      \IfValueTF{#2}{%
+        \of[#2]{#3}%
+      }{%
+        \of{#3}%
+      }%
     }%
   }%
 }%
 
-% P arentheses around sine
-\DeclareDocumentCommand{\psin}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\sin}{#2}%
-  }{%
-    \prtrig{\sin}{#2}%
+%%
+% @sample \roty: Rotation matrix about $y$-axis
+% @sample \roty{\beta}: Rotation matrix about $y$-axis for angle $\beta$
+% @sample \roty[\bigg]{\beta}: Adjust size of the pairing parentheses of $\beta$ to be larger
+% @sample \roty*{\beta}: Automatically scale the pairing parentheses of $\beta$
+%%
+\DeclareDocumentCommand{\roty}{ s o g }{%
+  \rotmatr_{\ms{y}}%
+  \IfValueT{#3}{%
+    \IfBooleanTF{#1}{%
+      \of*{#3}%
+    }{%
+      \IfValueTF{#2}{%
+        \of[#2]{#3}%
+      }{%
+        \of{#3}%
+      }%
+    }%
   }%
 }%
 
-% Parentheses around cosine
-\DeclareDocumentCommand{\pcos}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\cos}{#2}%
-  }{%
-    \prtrig{\cos}{#2}%
+%%
+% @sample \rotz: Rotation matrix about $z$-axis
+% @sample \rotz{\gamma}: Rotation matrix about $z$-axis for angle $\gamma$
+% @sample \rotz[\bigg]{\gamma}: Adjust size of the pairing parentheses of $\gamma$ to be larger
+% @sample \rotz*{\gamma}: Automatically scale the pairing parentheses of $\gamma$
+%%
+\DeclareDocumentCommand{\rotz}{ s o g }{%
+  \rotmatr_{\ms{z}}%
+  \IfValueT{#3}{%
+    \IfBooleanTF{#1}{%
+      \of*{#3}%
+    }{%
+      \IfValueTF{#2}{%
+        \of[#2]{#3}%
+      }{%
+        \of{#3}%
+      }%
+    }%
   }%
 }%
 
-% Parentheses around tangent
-\DeclareDocumentCommand{\ptan}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\tan}{#2}%
-  }{%
-    \prtrig{\tan}{#2}%
+%%
+% @sample \imagu: Proper imaginary unit $\imagu$
+%%
+\DeclareMathOperator{\imagu}{\mathrm{i}}%
+
+%%
+% @sample \imgu: Imaginary unit as command
+%%
+\DeclareDocumentCommand{\imgu}{ }{%
+  {\imagu\mkern1mu}%
+}%
+
+%%
+% @sample \arcsec: Math operator for inverse secant
+%%
+\DeclareMathOperator{\arcsec}{arcsec}%
+
+%%
+% @sample \arccot: Math operator for inverse cotangent
+%%
+\DeclareMathOperator{\arccot}{arccot}%
+
+%%
+% @sample \arccsc: Math operator for inverse cosecant
+%%
+\DeclareMathOperator{\arccsc}{arccsc}%
+
+%%
+% @sample \sech: Math operator for hyperbolic secant
+%%
+\DeclareMathOperator{\sech}{sech}%
+
+%%
+% @sample \csch: Math operator for hyperbolic cosecant
+%%
+\DeclareMathOperator{\csch}{csch}%
+
+%%
+% @sample \arccosh: Math operator for inverse hyperbolic cosine
+%%
+\DeclareMathOperator{\arccosh}{arccosh}%
+
+%%
+% @sample \arcsinh: Math operator for inverse hyperbolic sinus
+%%
+\DeclareMathOperator{\arcsinh}{arcsinh}%
+
+%%
+% @sample \arcsech: Math operator for inverse hyperbolic secant
+%%
+\DeclareMathOperator{\arcsech}{arcsech}%
+
+%%
+% @sample \arccsch: Math operator for inverse hyperbolic cosecent
+%%
+\DeclareMathOperator{\arccsch}{arccsch}%
+
+%%
+% @sample \arctanh: Math operator for inverse hyperbolic tangent
+%%
+\DeclareMathOperator{\arctanh}{arctanh}%
+
+%%
+% @sample \arccoth: Math operator for inverse hyperbolic cotangent
+%%
+\DeclareMathOperator{\arccoth}{arccoth}%
+
+
+%%
+% @sample \prtrig{\sin}{\beta}: Typeset trigonometric function $\sin$ with its functional argument $\beta$ in parentheses
+% @sample \prtrig[\bigg]{\sin}{\beta}: Typeset trigonometric function with pairing parentheses scaled to size \latexinline|\bigg|
+% @sample \prtrig*{\sin}{\beta}: Automatic adjustment of the parentheses sizes
+%%
+\DeclareDocumentCommand{\prtrig}{ s o m m }{%
+  #3{%
+    \IfBooleanTF{#1}{%
+      \of*{#4}%
+    }{%
+      \IfValueTF{#2}{%
+        \of[#2]{#4}%
+      }{%
+        \of{#4}%
+      }%
+    }%
   }%
 }%
 
-% Parentheses around secant
-\DeclareDocumentCommand{\psec}{ s m }{%
+%%
+% @sample \psin{x}: Sine of $x$ with parentheses around $x$
+% @sample \psin[\bigg]{x}: Sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \psin*{x}: Sine of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\psin}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\sec}{#2}%
+    \prtrig*{\sin}{#3}%
   }{%
-    \prtrig{\sec}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\sin}{#3}%
+    }{%
+      \prtrig{\sin}{#3}%
+    }
   }%
 }%
 
-% Parentheses around cosecant
-\DeclareDocumentCommand{\pcsc}{ s m }{%
+%%
+% @sample \pcos{x}: Cosine of $x$ with parentheses around $x$
+% @sample \cos[\bigg]{x}: Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pcos*{x}: Cosine of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pcos}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\csc}{#2}%
+    \prtrig*{\cos}{#3}%
   }{%
-    \prtrig{\csc}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\cos}{#3}%
+    }{%
+      \prtrig{\cos}{#3}%
+    }
   }%
 }%
 
-% Parentheses around cotangent
-\DeclareDocumentCommand{\pcot}{ s m }{%
+%%
+% @sample \ptan{x}: Tanget of $x$ with parentheses around $x$
+% @sample \ptan[\bigg]{x}: Tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \ptan*{x}: Tanget of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\ptan}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\cot}{#2}%
+    \prtrig*{\tan}{#3}%
   }{%
-    \prtrig{\cot}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\tan}{#3}%
+    }{%
+      \prtrig{\tan}{#3}%
+    }
   }%
 }%
 
-
-%% Inverse trigonometric functions with parentheses around argument
-% Parentheses around arcus sine
-\DeclareDocumentCommand{\parcsin}{ s m }{%
+%%
+% @sample \psec{x}: Secant of $x$ with parentheses around $x$
+% @sample \psec[\bigg]{x}: Secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \psec*{x}: Secant of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\psec}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\arcsin}{#2}%
+    \prtrig*{\sec}{#3}%
   }{%
-    \prtrig{\arcsin}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\sec}{#3}%
+    }{%
+      \prtrig{\sec}{#3}%
+    }
   }%
 }%
 
-% Parentheses around arcus cosine
-\DeclareDocumentCommand{\parccos}{ s m }{%
+%%
+% @sample \pcsc{x}: Cosecant of $x$ with parentheses around $x$
+% @sample \pcsc[\bigg]{x}: Cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pcsc*{x}: Cosecant of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pcsc}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\arccos}{#2}%
+    \prtrig*{\csc}{#3}%
   }{%
-    \prtrig{\arccos}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\csc}{#3}%
+    }{%
+      \prtrig{\csc}{#3}%
+    }
   }%
 }%
 
-% Parentheses around arcus tangent
-\DeclareDocumentCommand{\parctan}{ s m }{%
+%%
+% @sample \pcot{x}: Cotangent of $x$ with parentheses around $x$
+% @sample \pcot[\bigg]{x}: Cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pcot*{x}: Cotangent of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pcot}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\arctan}{#2}%
+    \prtrig*{\cot}{#3}%
   }{%
-    \prtrig{\arctan}{#2}%
-  }%
-}%
-
-% Parentheses around arcus secant
-\DeclareDocumentCommand{\parcsec}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\arcsec}{#2}%
-  }{%
-    \prtrig{\arcsec}{#2}%
-  }%
-}%
-
-% Parentheses around arcus cosecant
-\DeclareDocumentCommand{\parccsc}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\arccsc}{#2}%
-  }{%
-    \prtrig{\arccsc}{#2}%
-  }%
-}%
-
-% Parentheses around arcus cotangent
-\DeclareDocumentCommand{\parccot}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\arccot}{#2}%
-  }{%
-    \prtrig{\arccot}{#2}%
-  }%
-}%
-
-
-%% Hyperbolic trigonometric functions with parentheses around argument
-% Parentheses around sin hyperbolic
-\DeclareDocumentCommand{\psinh}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\sinh}{#2}%
-  }{%
-    \prtrig{\sinh}{#2}%
-  }%
-}%
-
-% Parentheses around cosine hyperbolic
-\DeclareDocumentCommand{\pcosh}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\cosh}{#2}%
-  }{%
-    \prtrig{\cosh}{#2}%
-  }%
-}%
-
-% Parentheses around cosine hyperbolic
-\DeclareDocumentCommand{\ptanh}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\tanh}{#2}%
-  }{%
-    \prtrig{\tanh}{#2}%
-  }%
-}%
-
-% Parentheses around cosine hyperbolic
-\DeclareDocumentCommand{\pcoth}{ s m }{%
-  \IfBooleanTF{#1}{%
-    \prtrig*{\coth}{#2}%
-  }{%
-    \prtrig{\coth}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\cot}{#3}%
+    }{%
+      \prtrig{\cot}{#3}%
+    }
   }%
 }%
 
 
-%% Exponential and logarithmic functions with parentheses around argument
-% Parentheses around exp
-\DeclareDocumentCommand{\pexp}{ s m }{%
+%%
+% @sample \parcsin{x}: Inverse sine of $x$ with parentheses around $x$
+% @sample \parcsin[\bigg]{x}: Inverse sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \parcsin*{x}: Inverse sine of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\parcsin}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\exp}{#2}%
+    \prtrig*{\arcsin}{#3}%
   }{%
-    \prtrig{\exp}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\arcsin}{#3}%
+    }{%
+      \prtrig{\arcsin}{#3}%
+    }
   }%
 }%
 
-% Parentheses around logarithm base 10
-\DeclareDocumentCommand{\plog}{ s m }{%
+%%
+% @sample \parccos{x}: Inverse cosine of $x$ with parentheses around $x$
+% @sample \parccos[\bigg]{x}: Inverse cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \parccos*{x}: Inverse cosine of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\parccos}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\log}{#2}%
+    \prtrig*{\arccos}{#3}%
   }{%
-    \prtrig{\log}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\arccos}{#3}%
+    }{%
+      \prtrig{\arccos}{#3}%
+    }
   }%
 }%
 
-% Parentheses around logarithm base 2
-\DeclareDocumentCommand{\pln}{ s m }{%
+%%
+% @sample \parctan{x}: Inverse tangent of $x$ with parentheses around $x$
+% @sample \parctan[\bigg]{x}: Inverse tangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \parctan*{x}: Inverse tangent of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\parctan}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\ln}{#2}%
+    \prtrig*{\arctan}{#3}%
   }{%
-    \prtrig{\ln}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\arctan}{#3}%
+    }{%
+      \prtrig{\arctan}{#3}%
+    }
   }%
 }%
 
-% Parentheses around logarithm base e
-\DeclareDocumentCommand{\plg}{ s m }{%
+%%
+% @sample \parcsec{x}: Inverse secant of $x$ with parentheses around $x$
+% @sample \parcsec[\bigg]{x}: Inverse secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \parcsec*{x}: Inverse secant of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\parcsec}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \prtrig*{\lg}{#2}%
+    \prtrig*{\arcsec}{#3}%
   }{%
-    \prtrig{\lg}{#2}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\arcsec}{#3}%
+    }{%
+      \prtrig{\arcsec}{#3}%
+    }
   }%
 }%
 
-% Declare a nice "function of" short hand
-% @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
-% T \of{x} => T \parentheses{x}%
-% T \of*{x} => T \parentheses*{x}%
-% T \of[\big]{x} => T \parentheses[\big]{x}%
-\DeclarePairedDelimiter\parentheses{\lparen}{\rparen}%
-\DeclareDocumentCommand{\of}{ s O{} m }{%
+%%
+% @sample \parccsc{x}: Inverse cosecant of $x$ with parentheses around $x$
+% @sample \parccsc[\bigg]{x}: Inverse cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \parccsc*{x}: Inverse cosecant of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\parccsc}{ s o m }{%
   \IfBooleanTF{#1}{%
-    \parentheses*[#2]{#3}%
+    \prtrig*{\arccsc}{#3}%
   }{%
-    \parentheses{#3}%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\arccsc}{#3}%
+    }{%
+      \prtrig{\arccsc}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \parccot{x}: Inverse cotangent of $x$ with parentheses around $x$
+% @sample \parccot[\bigg]{x}: Inverse cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \parccot*{x}: Inverse cotangent of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\parccot}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\arccot}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\arccot}{#3}%
+    }{%
+      \prtrig{\arccot}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \psinh{x}: Hyperbolic sine of $x$ with parentheses around $x$
+% @sample \psinh[\bigg]{x}: Hyperbolic sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \psinh*{x}: Hyperbolic sine of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\psinh}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\sinh}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\sinh}{#3}%
+    }{%
+      \prtrig{\sinh}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \pcosh{x}: Hyperbolic cosine of $x$ with parentheses around $x$
+% @sample \pcosh[\bigg]{x}: Hyperbolic cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pcosh*{x}: Hyperbolic cosine of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pcosh}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\cosh}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\cosh}{#3}%
+    }{%
+      \prtrig{\cosh}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \ptanh{x}: Hyperbolic tangent of $x$ with parentheses around $x$
+% @sample \ptanh[\bigg]{x}: Hyperbolic tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \ptanh*{x}: Hyperbolic tangent of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\ptanh}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\tanh}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\tanh}{#3}%
+    }{%
+      \prtrig{\tanh}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \pcoth{x}: Hyperbolic cotangent of $x$ with parentheses around $x$
+% @sample \pcoth[\bigg]{x}: Hyperbolic cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pcoth*{x}: Hyperbolic cotangent of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pcoth}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\coth}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\coth}{#3}%
+    }{%
+      \prtrig{\coth}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \pexp{x}: Exponential function of $x$ with parentheses around $x$
+% @sample \pexp[\bigg]{x}: Expontential function of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pexp*{x}: Exponential function of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pexp}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\exp}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\exp}{#3}%
+    }{%
+      \prtrig{\exp}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \plog{x}: Logarithm base $10$ of $x$ with parentheses around $x$
+% @sample \plog[\bigg]{x}: Logarithm base $10$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \plog*{x}: Logarithm base $10$ of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\plog}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\log}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\log}{#3}%
+    }{%
+      \prtrig{\log}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \pln{x}: Logarithm base $2$ of $x$ with parentheses around $x$
+% @sample \pln[\bigg]{x}: Logarithm base $2$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pln*{x}: Logarithm base $2$ of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\pln}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\ln}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\ln}{#3}%
+    }{%
+      \prtrig{\ln}{#3}%
+    }
+  }%
+}%
+
+%%
+% @sample \plg{x}: Logarithm base $e$ of $x$ with parentheses around $x$
+% @sample \plg[\bigg]{x}: Logarithm base $e$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \plg*{x}: Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+%%
+\DeclareDocumentCommand{\plg}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \prtrig*{\lg}{#3}%
+  }{%
+    \IfValueTF{#2}{%
+      \prtrig[#2]{\lg}{#3}%
+    }{%
+      \prtrig{\lg}{#3}%
+    }
   }%
 }%
 

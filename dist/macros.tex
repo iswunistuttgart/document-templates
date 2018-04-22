@@ -3,7 +3,7 @@
 
 \section{iswartcl}
 
-\begin{longtable}{ p{0.24\linewidth} p{0.14\linewidth} p{0.54\linewidth} } \toprule
+\begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
       & \textbf{Result}
       & \textbf{Description}
@@ -12,6 +12,30 @@
     \midrule \multicolumn{3}{r}{\smaller{Continued on next page}} \\ \bottomrule
     \endfoot
     \endlastfoot
+  \latexinline|\parens{x}|
+      & $\parens{x}$
+      & Parentheses as left-right paired delimiter for argument x
+    \\
+  \latexinline|\parens[\bigg]{x}|
+      & $\parens[\bigg]{x}$
+      & Explicitely set the size of the pairing parentheses to \latexinline|\bigg|
+    \\
+  \latexinline|\parens*{x}|
+      & $\parens*{x}$
+      & Automatically scale the size of the pairing parentheses
+    \\
+  \latexinline|\of{x, t}|
+      & $\of{x, t}$
+      & Nicer and more readable "function of" argument writing
+    \\
+  \latexinline|\of[\Bigg]{x, t}|
+      & $\of[\Bigg]{x, t}$
+      & Make the pairing parentheses in size \latexinline|\bigg|
+    \\
+  \latexinline|\of*{x, t}|
+      & $\of*{x, t}$
+      & Automatic height adjustment of the pairing parentheses
+    \\
   \latexinline|\matr{M}|
       & $\matr{M}$
       & Matrix notation for M
@@ -36,6 +60,210 @@
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\abs{x}|
+      & $\abs{x}$
+      & Absolute value of the argument as a paired delimiter
+    \\
+  \latexinline|\norm{x}|
+      & $\norm{x}$
+      & Norm of the argument as a paired delimiter
+    \\
+  \latexinline|\pow{x}|
+      & $\pow{x}$
+      & Second power of the argument
+    \\
+  \latexinline|\pow[n]{x}|
+      & $\pow[n]{x}$
+      & n-th power of the argument
+    \\
+  \latexinline|\skewm{m}|
+      & $\skewm{m}$
+      & Commonly used skew-symmetric cross product matrix of argument m
+    \\
+  \latexinline|\crossp{a}{b}|
+      & $\crossp{a}{b}$
+      & Cross product of a and b
+    \\
+  \latexinline|\diag|
+      & $\diag$
+      & Math operator for a matrix as diagonal of the following vector's elements
+    \\
+  \latexinline|\sign|
+      & $\sign$
+      & Mathematical sign (signum) operator
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Differential operator (upface d). Used in integrals for the integrand.
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Derivative operator (upface D)
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the derivative operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\pd{f}{x}|
+      & $\pd{f}{x}$
+      & Partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\pd[n]{f}{x}|
+      & $\pd[n]{f}{x}$
+      & n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\tpd{f}{x}|
+      & $\tpd{f}{x}$
+      & Text style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\tpd[n]{f}{x}|
+      & $\tpd[n]{f}{x}$
+      & Text style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dpd{f}{x}|
+      & $\dpd{f}{x}$
+      & Display style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\dpd[n]{f}{x}|
+      & $\dpd[n]{f}{x}$
+      & Display style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\md{f}{5}{x}{2}{y}{3}|
+      & $\md{f}{5}{x}{2}{y}{3}$
+      & Mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\tmd{f}{5}{x}{2}{y}{3}|
+      & $\tmd{f}{5}{x}{2}{y}{3}$
+      & Text style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\dmd{f}{5}{x}{2}{y}{3}|
+      & $\dmd{f}{5}{x}{2}{y}{3}$
+      & Display style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Text style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Text style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Display style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Display style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dif{x}|
+      & $\dif{x}$
+      & Total differential of $x$
+    \\
+  \latexinline|\Re|
+      & $\Re$
+      & Operator for real value of complex number
+    \\
+  \latexinline|\Im|
+      & $\Im$
+      & Operator for imaginary value of complex number
+    \\
+  \latexinline|\transp{A}|
+      & $\transp{A}$
+      & Transpose of argument $A$ e.g., matrix or vector transpose
+    \\
+  \latexinline|\trafom{A}{B}|
+      & $\trafom{A}{B}$
+      & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
+    \\
+  \latexinline|\trafom[Q]{A}{B}|
+      & $\trafom[Q]{A}{B}$
+      & Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
+    \\
+  \latexinline|\conj{m}|
+      & $\conj{m}$
+      & Conjugate complex of the argument
+    \\
+  \latexinline|\hermconj{x}|
+      & $\hermconj{x}$
+      & Hermitian conjugate of matrix
+    \\
+  \latexinline|\inv{A}|
+      & $\inv{A}$
+      & Element inverse of A - usually used for matrix inverse
+    \\
+  \latexinline|\dotp{a}{b}|
+      & $\dotp{a}{b}$
+      & Dot product of two arguments $a$ and $b$
+    \\
+  \latexinline|\evec{x}|
+      & $\evec{x}$
+      & Unit axis coordinate vector along the $x$-axis
+    \\
+  \latexinline|\evec[\xi]{x}|
+      & $\evec[\xi]{x}$
+      & Name the unit axis coordinate vector $\xi$ rather than $e$
+    \\
+  \latexinline|\arctantwo|
+      & $\arctantwo$
+      & Math operator for the arcus tangent 2
+    \\
+  \latexinline|\arctant{y}{x}|
+      & $\arctant{y}{x}$
+      & Arcus tangent 2 of the two arguments
+    \\
+  \latexinline|\arctant[\bigg]{y}{x}|
+      & $\arctant[\bigg]{y}{x}$
+      & Arcus tangent 2 with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\arctant*{\frac{a}{b}}{x}|
+      & $\arctant*{\frac{a}{b}}{x}$
+      & Arcus tangent 2 with automatically scaled pairing parentheses
+    \\
+  \latexinline|\trace|
+      & $\trace$
+      & Math operator for the trace of a matrix
+    \\
+  \latexinline|\irange{m}|
+      & $\irange{m}$
+      & Range of numbers from $1$ to $m$
+    \\
+  \latexinline|\irange{m}{j}|
+      & $\irange{m}{j}$
+      & Range of numbers with running variable $j$
+    \\
+  \latexinline|\irange[2]{m}|
+      & $\irange[2]{m}$
+      & Increment running variable by $2$ with each step
+    \\
+  \latexinline|\irange[2]{m}{j}|
+      & $\irange[2]{m}{j}$
+      & Running variable now is $j$ and increases by $2$ each step
+    \\
+  \latexinline|\ms{avg}|
+      & $\ms{avg}$
+      & Well-scaled math subscripts of $\mc{avg}$
+    \\
+  \latexinline|\mc{avg}|
+      & $\mc{avg}$
+      & Correct type setting of math constant for textual indices like "std" or "coeff" -- Do not use for variable indices like "i" or "j"
+    \\
+  \latexinline|\rotscal|
+      & $\rotscal$
+      & Scalar rotation matrix which may be used as a rotation matrix element $\rotscal_{ij}$
+    \\
   \latexinline|\rotmatr|
       & $\rotmatr$
       & Rotation matrix
@@ -48,13 +276,365 @@
       & $\rotmatr[A][B]$
       & Rotation matrix from coordinate system A into system B
     \\
+  \latexinline|\rotx|
+      & $\rotx$
+      & Rotation matrix about $x$-axis
+    \\
+  \latexinline|\rotx{\alpha}|
+      & $\rotx{\alpha}$
+      & Rotation matrix about $x$-axis for angle $\alpha$
+    \\
+  \latexinline|\rotx[\bigg]{\alpha}|
+      & $\rotx[\bigg]{\alpha}$
+      & Adjust size of the pairing parentheses of $\alpha$ to be larger
+    \\
+  \latexinline|\rotx*{\alpha}|
+      & $\rotx*{\alpha}$
+      & Automatically scale the pairing parentheses of $\alpha$
+    \\
+  \latexinline|\roty|
+      & $\roty$
+      & Rotation matrix about $y$-axis
+    \\
+  \latexinline|\roty{\beta}|
+      & $\roty{\beta}$
+      & Rotation matrix about $y$-axis for angle $\beta$
+    \\
+  \latexinline|\roty[\bigg]{\beta}|
+      & $\roty[\bigg]{\beta}$
+      & Adjust size of the pairing parentheses of $\beta$ to be larger
+    \\
+  \latexinline|\roty*{\beta}|
+      & $\roty*{\beta}$
+      & Automatically scale the pairing parentheses of $\beta$
+    \\
+  \latexinline|\rotz|
+      & $\rotz$
+      & Rotation matrix about $z$-axis
+    \\
+  \latexinline|\rotz{\gamma}|
+      & $\rotz{\gamma}$
+      & Rotation matrix about $z$-axis for angle $\gamma$
+    \\
+  \latexinline|\rotz[\bigg]{\gamma}|
+      & $\rotz[\bigg]{\gamma}$
+      & Adjust size of the pairing parentheses of $\gamma$ to be larger
+    \\
+  \latexinline|\rotz*{\gamma}|
+      & $\rotz*{\gamma}$
+      & Automatically scale the pairing parentheses of $\gamma$
+    \\
+  \latexinline|\imagu|
+      & $\imagu$
+      & Proper imaginary unit $\imagu$
+    \\
+  \latexinline|\imgu|
+      & $\imgu$
+      & Imaginary unit as command
+    \\
+  \latexinline|\arcsec|
+      & $\arcsec$
+      & Math operator for inverse secant
+    \\
+  \latexinline|\arccot|
+      & $\arccot$
+      & Math operator for inverse cotangent
+    \\
+  \latexinline|\arccsc|
+      & $\arccsc$
+      & Math operator for inverse cosecant
+    \\
+  \latexinline|\sech|
+      & $\sech$
+      & Math operator for hyperbolic secant
+    \\
+  \latexinline|\csch|
+      & $\csch$
+      & Math operator for hyperbolic cosecant
+    \\
+  \latexinline|\arccosh|
+      & $\arccosh$
+      & Math operator for inverse hyperbolic cosine
+    \\
+  \latexinline|\arcsinh|
+      & $\arcsinh$
+      & Math operator for inverse hyperbolic sinus
+    \\
+  \latexinline|\arcsech|
+      & $\arcsech$
+      & Math operator for inverse hyperbolic secant
+    \\
+  \latexinline|\arccsch|
+      & $\arccsch$
+      & Math operator for inverse hyperbolic cosecent
+    \\
+  \latexinline|\arctanh|
+      & $\arctanh$
+      & Math operator for inverse hyperbolic tangent
+    \\
+  \latexinline|\arccoth|
+      & $\arccoth$
+      & Math operator for inverse hyperbolic cotangent
+    \\
+  \latexinline|\prtrig{\sin}{\beta}|
+      & $\prtrig{\sin}{\beta}$
+      & Typeset trigonometric function $\sin$ with its functional argument $\beta$ in parentheses
+    \\
+  \latexinline|\prtrig[\bigg]{\sin}{\beta}|
+      & $\prtrig[\bigg]{\sin}{\beta}$
+      & Typeset trigonometric function with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\prtrig*{\sin}{\beta}|
+      & $\prtrig*{\sin}{\beta}$
+      & Automatic adjustment of the parentheses sizes
+    \\
+  \latexinline|\psin{x}|
+      & $\psin{x}$
+      & Sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psin[\bigg]{x}|
+      & $\psin[\bigg]{x}$
+      & Sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psin*{x}|
+      & $\psin*{x}$
+      & Sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcos{x}|
+      & $\pcos{x}$
+      & Cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\cos[\bigg]{x}|
+      & $\cos[\bigg]{x}$
+      & Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcos*{x}|
+      & $\pcos*{x}$
+      & Cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptan{x}|
+      & $\ptan{x}$
+      & Tanget of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptan[\bigg]{x}|
+      & $\ptan[\bigg]{x}$
+      & Tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptan*{x}|
+      & $\ptan*{x}$
+      & Tanget of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psec{x}|
+      & $\psec{x}$
+      & Secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psec[\bigg]{x}|
+      & $\psec[\bigg]{x}$
+      & Secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psec*{x}|
+      & $\psec*{x}$
+      & Secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcsc{x}|
+      & $\pcsc{x}$
+      & Cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcsc[\bigg]{x}|
+      & $\pcsc[\bigg]{x}$
+      & Cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcsc*{x}|
+      & $\pcsc*{x}$
+      & Cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcot{x}|
+      & $\pcot{x}$
+      & Cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcot[\bigg]{x}|
+      & $\pcot[\bigg]{x}$
+      & Cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcot*{x}|
+      & $\pcot*{x}$
+      & Cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsin{x}|
+      & $\parcsin{x}$
+      & Inverse sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsin[\bigg]{x}|
+      & $\parcsin[\bigg]{x}$
+      & Inverse sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsin*{x}|
+      & $\parcsin*{x}$
+      & Inverse sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccos{x}|
+      & $\parccos{x}$
+      & Inverse cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccos[\bigg]{x}|
+      & $\parccos[\bigg]{x}$
+      & Inverse cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccos*{x}|
+      & $\parccos*{x}$
+      & Inverse cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parctan{x}|
+      & $\parctan{x}$
+      & Inverse tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parctan[\bigg]{x}|
+      & $\parctan[\bigg]{x}$
+      & Inverse tangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parctan*{x}|
+      & $\parctan*{x}$
+      & Inverse tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsec{x}|
+      & $\parcsec{x}$
+      & Inverse secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsec[\bigg]{x}|
+      & $\parcsec[\bigg]{x}$
+      & Inverse secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsec*{x}|
+      & $\parcsec*{x}$
+      & Inverse secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccsc{x}|
+      & $\parccsc{x}$
+      & Inverse cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccsc[\bigg]{x}|
+      & $\parccsc[\bigg]{x}$
+      & Inverse cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccsc*{x}|
+      & $\parccsc*{x}$
+      & Inverse cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccot{x}|
+      & $\parccot{x}$
+      & Inverse cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccot[\bigg]{x}|
+      & $\parccot[\bigg]{x}$
+      & Inverse cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccot*{x}|
+      & $\parccot*{x}$
+      & Inverse cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psinh{x}|
+      & $\psinh{x}$
+      & Hyperbolic sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psinh[\bigg]{x}|
+      & $\psinh[\bigg]{x}$
+      & Hyperbolic sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psinh*{x}|
+      & $\psinh*{x}$
+      & Hyperbolic sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcosh{x}|
+      & $\pcosh{x}$
+      & Hyperbolic cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcosh[\bigg]{x}|
+      & $\pcosh[\bigg]{x}$
+      & Hyperbolic cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcosh*{x}|
+      & $\pcosh*{x}$
+      & Hyperbolic cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptanh{x}|
+      & $\ptanh{x}$
+      & Hyperbolic tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptanh[\bigg]{x}|
+      & $\ptanh[\bigg]{x}$
+      & Hyperbolic tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptanh*{x}|
+      & $\ptanh*{x}$
+      & Hyperbolic tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcoth{x}|
+      & $\pcoth{x}$
+      & Hyperbolic cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcoth[\bigg]{x}|
+      & $\pcoth[\bigg]{x}$
+      & Hyperbolic cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcoth*{x}|
+      & $\pcoth*{x}$
+      & Hyperbolic cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pexp{x}|
+      & $\pexp{x}$
+      & Exponential function of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pexp[\bigg]{x}|
+      & $\pexp[\bigg]{x}$
+      & Expontential function of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pexp*{x}|
+      & $\pexp*{x}$
+      & Exponential function of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plog{x}|
+      & $\plog{x}$
+      & Logarithm base $10$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plog[\bigg]{x}|
+      & $\plog[\bigg]{x}$
+      & Logarithm base $10$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plog*{x}|
+      & $\plog*{x}$
+      & Logarithm base $10$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pln{x}|
+      & $\pln{x}$
+      & Logarithm base $2$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pln[\bigg]{x}|
+      & $\pln[\bigg]{x}$
+      & Logarithm base $2$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pln*{x}|
+      & $\pln*{x}$
+      & Logarithm base $2$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plg{x}|
+      & $\plg{x}$
+      & Logarithm base $e$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plg[\bigg]{x}|
+      & $\plg[\bigg]{x}$
+      & Logarithm base $e$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plg*{x}|
+      & $\plg*{x}$
+      & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
   \bottomrule
-  \caption{List of macros of the src/iswartcl.cls class}
+  \caption{List of macros of the \textinline|src/iswartcl.cls| class}
 \end{longtable}
 
 \section{iswbook}
 
-\begin{longtable}{ p{0.24\linewidth} p{0.14\linewidth} p{0.54\linewidth} } \toprule
+\begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
       & \textbf{Result}
       & \textbf{Description}
@@ -63,6 +643,30 @@
     \midrule \multicolumn{3}{r}{\smaller{Continued on next page}} \\ \bottomrule
     \endfoot
     \endlastfoot
+  \latexinline|\parens{x}|
+      & $\parens{x}$
+      & Parentheses as left-right paired delimiter for argument x
+    \\
+  \latexinline|\parens[\bigg]{x}|
+      & $\parens[\bigg]{x}$
+      & Explicitely set the size of the pairing parentheses to \latexinline|\bigg|
+    \\
+  \latexinline|\parens*{x}|
+      & $\parens*{x}$
+      & Automatically scale the size of the pairing parentheses
+    \\
+  \latexinline|\of{x, t}|
+      & $\of{x, t}$
+      & Nicer and more readable "function of" argument writing
+    \\
+  \latexinline|\of[\Bigg]{x, t}|
+      & $\of[\Bigg]{x, t}$
+      & Make the pairing parentheses in size \latexinline|\bigg|
+    \\
+  \latexinline|\of*{x, t}|
+      & $\of*{x, t}$
+      & Automatic height adjustment of the pairing parentheses
+    \\
   \latexinline|\matr{M}|
       & $\matr{M}$
       & Matrix notation for M
@@ -87,6 +691,210 @@
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\abs{x}|
+      & $\abs{x}$
+      & Absolute value of the argument as a paired delimiter
+    \\
+  \latexinline|\norm{x}|
+      & $\norm{x}$
+      & Norm of the argument as a paired delimiter
+    \\
+  \latexinline|\pow{x}|
+      & $\pow{x}$
+      & Second power of the argument
+    \\
+  \latexinline|\pow[n]{x}|
+      & $\pow[n]{x}$
+      & n-th power of the argument
+    \\
+  \latexinline|\skewm{m}|
+      & $\skewm{m}$
+      & Commonly used skew-symmetric cross product matrix of argument m
+    \\
+  \latexinline|\crossp{a}{b}|
+      & $\crossp{a}{b}$
+      & Cross product of a and b
+    \\
+  \latexinline|\diag|
+      & $\diag$
+      & Math operator for a matrix as diagonal of the following vector's elements
+    \\
+  \latexinline|\sign|
+      & $\sign$
+      & Mathematical sign (signum) operator
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Differential operator (upface d). Used in integrals for the integrand.
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Derivative operator (upface D)
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the derivative operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\pd{f}{x}|
+      & $\pd{f}{x}$
+      & Partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\pd[n]{f}{x}|
+      & $\pd[n]{f}{x}$
+      & n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\tpd{f}{x}|
+      & $\tpd{f}{x}$
+      & Text style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\tpd[n]{f}{x}|
+      & $\tpd[n]{f}{x}$
+      & Text style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dpd{f}{x}|
+      & $\dpd{f}{x}$
+      & Display style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\dpd[n]{f}{x}|
+      & $\dpd[n]{f}{x}$
+      & Display style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\md{f}{5}{x}{2}{y}{3}|
+      & $\md{f}{5}{x}{2}{y}{3}$
+      & Mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\tmd{f}{5}{x}{2}{y}{3}|
+      & $\tmd{f}{5}{x}{2}{y}{3}$
+      & Text style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\dmd{f}{5}{x}{2}{y}{3}|
+      & $\dmd{f}{5}{x}{2}{y}{3}$
+      & Display style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Text style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Text style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Display style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Display style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dif{x}|
+      & $\dif{x}$
+      & Total differential of $x$
+    \\
+  \latexinline|\Re|
+      & $\Re$
+      & Operator for real value of complex number
+    \\
+  \latexinline|\Im|
+      & $\Im$
+      & Operator for imaginary value of complex number
+    \\
+  \latexinline|\transp{A}|
+      & $\transp{A}$
+      & Transpose of argument $A$ e.g., matrix or vector transpose
+    \\
+  \latexinline|\trafom{A}{B}|
+      & $\trafom{A}{B}$
+      & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
+    \\
+  \latexinline|\trafom[Q]{A}{B}|
+      & $\trafom[Q]{A}{B}$
+      & Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
+    \\
+  \latexinline|\conj{m}|
+      & $\conj{m}$
+      & Conjugate complex of the argument
+    \\
+  \latexinline|\hermconj{x}|
+      & $\hermconj{x}$
+      & Hermitian conjugate of matrix
+    \\
+  \latexinline|\inv{A}|
+      & $\inv{A}$
+      & Element inverse of A - usually used for matrix inverse
+    \\
+  \latexinline|\dotp{a}{b}|
+      & $\dotp{a}{b}$
+      & Dot product of two arguments $a$ and $b$
+    \\
+  \latexinline|\evec{x}|
+      & $\evec{x}$
+      & Unit axis coordinate vector along the $x$-axis
+    \\
+  \latexinline|\evec[\xi]{x}|
+      & $\evec[\xi]{x}$
+      & Name the unit axis coordinate vector $\xi$ rather than $e$
+    \\
+  \latexinline|\arctantwo|
+      & $\arctantwo$
+      & Math operator for the arcus tangent 2
+    \\
+  \latexinline|\arctant{y}{x}|
+      & $\arctant{y}{x}$
+      & Arcus tangent 2 of the two arguments
+    \\
+  \latexinline|\arctant[\bigg]{y}{x}|
+      & $\arctant[\bigg]{y}{x}$
+      & Arcus tangent 2 with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\arctant*{\frac{a}{b}}{x}|
+      & $\arctant*{\frac{a}{b}}{x}$
+      & Arcus tangent 2 with automatically scaled pairing parentheses
+    \\
+  \latexinline|\trace|
+      & $\trace$
+      & Math operator for the trace of a matrix
+    \\
+  \latexinline|\irange{m}|
+      & $\irange{m}$
+      & Range of numbers from $1$ to $m$
+    \\
+  \latexinline|\irange{m}{j}|
+      & $\irange{m}{j}$
+      & Range of numbers with running variable $j$
+    \\
+  \latexinline|\irange[2]{m}|
+      & $\irange[2]{m}$
+      & Increment running variable by $2$ with each step
+    \\
+  \latexinline|\irange[2]{m}{j}|
+      & $\irange[2]{m}{j}$
+      & Running variable now is $j$ and increases by $2$ each step
+    \\
+  \latexinline|\ms{avg}|
+      & $\ms{avg}$
+      & Well-scaled math subscripts of $\mc{avg}$
+    \\
+  \latexinline|\mc{avg}|
+      & $\mc{avg}$
+      & Correct type setting of math constant for textual indices like "std" or "coeff" -- Do not use for variable indices like "i" or "j"
+    \\
+  \latexinline|\rotscal|
+      & $\rotscal$
+      & Scalar rotation matrix which may be used as a rotation matrix element $\rotscal_{ij}$
+    \\
   \latexinline|\rotmatr|
       & $\rotmatr$
       & Rotation matrix
@@ -99,13 +907,365 @@
       & $\rotmatr[A][B]$
       & Rotation matrix from coordinate system A into system B
     \\
+  \latexinline|\rotx|
+      & $\rotx$
+      & Rotation matrix about $x$-axis
+    \\
+  \latexinline|\rotx{\alpha}|
+      & $\rotx{\alpha}$
+      & Rotation matrix about $x$-axis for angle $\alpha$
+    \\
+  \latexinline|\rotx[\bigg]{\alpha}|
+      & $\rotx[\bigg]{\alpha}$
+      & Adjust size of the pairing parentheses of $\alpha$ to be larger
+    \\
+  \latexinline|\rotx*{\alpha}|
+      & $\rotx*{\alpha}$
+      & Automatically scale the pairing parentheses of $\alpha$
+    \\
+  \latexinline|\roty|
+      & $\roty$
+      & Rotation matrix about $y$-axis
+    \\
+  \latexinline|\roty{\beta}|
+      & $\roty{\beta}$
+      & Rotation matrix about $y$-axis for angle $\beta$
+    \\
+  \latexinline|\roty[\bigg]{\beta}|
+      & $\roty[\bigg]{\beta}$
+      & Adjust size of the pairing parentheses of $\beta$ to be larger
+    \\
+  \latexinline|\roty*{\beta}|
+      & $\roty*{\beta}$
+      & Automatically scale the pairing parentheses of $\beta$
+    \\
+  \latexinline|\rotz|
+      & $\rotz$
+      & Rotation matrix about $z$-axis
+    \\
+  \latexinline|\rotz{\gamma}|
+      & $\rotz{\gamma}$
+      & Rotation matrix about $z$-axis for angle $\gamma$
+    \\
+  \latexinline|\rotz[\bigg]{\gamma}|
+      & $\rotz[\bigg]{\gamma}$
+      & Adjust size of the pairing parentheses of $\gamma$ to be larger
+    \\
+  \latexinline|\rotz*{\gamma}|
+      & $\rotz*{\gamma}$
+      & Automatically scale the pairing parentheses of $\gamma$
+    \\
+  \latexinline|\imagu|
+      & $\imagu$
+      & Proper imaginary unit $\imagu$
+    \\
+  \latexinline|\imgu|
+      & $\imgu$
+      & Imaginary unit as command
+    \\
+  \latexinline|\arcsec|
+      & $\arcsec$
+      & Math operator for inverse secant
+    \\
+  \latexinline|\arccot|
+      & $\arccot$
+      & Math operator for inverse cotangent
+    \\
+  \latexinline|\arccsc|
+      & $\arccsc$
+      & Math operator for inverse cosecant
+    \\
+  \latexinline|\sech|
+      & $\sech$
+      & Math operator for hyperbolic secant
+    \\
+  \latexinline|\csch|
+      & $\csch$
+      & Math operator for hyperbolic cosecant
+    \\
+  \latexinline|\arccosh|
+      & $\arccosh$
+      & Math operator for inverse hyperbolic cosine
+    \\
+  \latexinline|\arcsinh|
+      & $\arcsinh$
+      & Math operator for inverse hyperbolic sinus
+    \\
+  \latexinline|\arcsech|
+      & $\arcsech$
+      & Math operator for inverse hyperbolic secant
+    \\
+  \latexinline|\arccsch|
+      & $\arccsch$
+      & Math operator for inverse hyperbolic cosecent
+    \\
+  \latexinline|\arctanh|
+      & $\arctanh$
+      & Math operator for inverse hyperbolic tangent
+    \\
+  \latexinline|\arccoth|
+      & $\arccoth$
+      & Math operator for inverse hyperbolic cotangent
+    \\
+  \latexinline|\prtrig{\sin}{\beta}|
+      & $\prtrig{\sin}{\beta}$
+      & Typeset trigonometric function $\sin$ with its functional argument $\beta$ in parentheses
+    \\
+  \latexinline|\prtrig[\bigg]{\sin}{\beta}|
+      & $\prtrig[\bigg]{\sin}{\beta}$
+      & Typeset trigonometric function with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\prtrig*{\sin}{\beta}|
+      & $\prtrig*{\sin}{\beta}$
+      & Automatic adjustment of the parentheses sizes
+    \\
+  \latexinline|\psin{x}|
+      & $\psin{x}$
+      & Sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psin[\bigg]{x}|
+      & $\psin[\bigg]{x}$
+      & Sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psin*{x}|
+      & $\psin*{x}$
+      & Sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcos{x}|
+      & $\pcos{x}$
+      & Cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\cos[\bigg]{x}|
+      & $\cos[\bigg]{x}$
+      & Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcos*{x}|
+      & $\pcos*{x}$
+      & Cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptan{x}|
+      & $\ptan{x}$
+      & Tanget of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptan[\bigg]{x}|
+      & $\ptan[\bigg]{x}$
+      & Tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptan*{x}|
+      & $\ptan*{x}$
+      & Tanget of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psec{x}|
+      & $\psec{x}$
+      & Secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psec[\bigg]{x}|
+      & $\psec[\bigg]{x}$
+      & Secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psec*{x}|
+      & $\psec*{x}$
+      & Secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcsc{x}|
+      & $\pcsc{x}$
+      & Cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcsc[\bigg]{x}|
+      & $\pcsc[\bigg]{x}$
+      & Cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcsc*{x}|
+      & $\pcsc*{x}$
+      & Cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcot{x}|
+      & $\pcot{x}$
+      & Cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcot[\bigg]{x}|
+      & $\pcot[\bigg]{x}$
+      & Cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcot*{x}|
+      & $\pcot*{x}$
+      & Cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsin{x}|
+      & $\parcsin{x}$
+      & Inverse sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsin[\bigg]{x}|
+      & $\parcsin[\bigg]{x}$
+      & Inverse sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsin*{x}|
+      & $\parcsin*{x}$
+      & Inverse sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccos{x}|
+      & $\parccos{x}$
+      & Inverse cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccos[\bigg]{x}|
+      & $\parccos[\bigg]{x}$
+      & Inverse cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccos*{x}|
+      & $\parccos*{x}$
+      & Inverse cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parctan{x}|
+      & $\parctan{x}$
+      & Inverse tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parctan[\bigg]{x}|
+      & $\parctan[\bigg]{x}$
+      & Inverse tangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parctan*{x}|
+      & $\parctan*{x}$
+      & Inverse tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsec{x}|
+      & $\parcsec{x}$
+      & Inverse secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsec[\bigg]{x}|
+      & $\parcsec[\bigg]{x}$
+      & Inverse secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsec*{x}|
+      & $\parcsec*{x}$
+      & Inverse secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccsc{x}|
+      & $\parccsc{x}$
+      & Inverse cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccsc[\bigg]{x}|
+      & $\parccsc[\bigg]{x}$
+      & Inverse cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccsc*{x}|
+      & $\parccsc*{x}$
+      & Inverse cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccot{x}|
+      & $\parccot{x}$
+      & Inverse cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccot[\bigg]{x}|
+      & $\parccot[\bigg]{x}$
+      & Inverse cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccot*{x}|
+      & $\parccot*{x}$
+      & Inverse cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psinh{x}|
+      & $\psinh{x}$
+      & Hyperbolic sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psinh[\bigg]{x}|
+      & $\psinh[\bigg]{x}$
+      & Hyperbolic sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psinh*{x}|
+      & $\psinh*{x}$
+      & Hyperbolic sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcosh{x}|
+      & $\pcosh{x}$
+      & Hyperbolic cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcosh[\bigg]{x}|
+      & $\pcosh[\bigg]{x}$
+      & Hyperbolic cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcosh*{x}|
+      & $\pcosh*{x}$
+      & Hyperbolic cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptanh{x}|
+      & $\ptanh{x}$
+      & Hyperbolic tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptanh[\bigg]{x}|
+      & $\ptanh[\bigg]{x}$
+      & Hyperbolic tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptanh*{x}|
+      & $\ptanh*{x}$
+      & Hyperbolic tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcoth{x}|
+      & $\pcoth{x}$
+      & Hyperbolic cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcoth[\bigg]{x}|
+      & $\pcoth[\bigg]{x}$
+      & Hyperbolic cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcoth*{x}|
+      & $\pcoth*{x}$
+      & Hyperbolic cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pexp{x}|
+      & $\pexp{x}$
+      & Exponential function of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pexp[\bigg]{x}|
+      & $\pexp[\bigg]{x}$
+      & Expontential function of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pexp*{x}|
+      & $\pexp*{x}$
+      & Exponential function of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plog{x}|
+      & $\plog{x}$
+      & Logarithm base $10$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plog[\bigg]{x}|
+      & $\plog[\bigg]{x}$
+      & Logarithm base $10$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plog*{x}|
+      & $\plog*{x}$
+      & Logarithm base $10$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pln{x}|
+      & $\pln{x}$
+      & Logarithm base $2$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pln[\bigg]{x}|
+      & $\pln[\bigg]{x}$
+      & Logarithm base $2$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pln*{x}|
+      & $\pln*{x}$
+      & Logarithm base $2$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plg{x}|
+      & $\plg{x}$
+      & Logarithm base $e$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plg[\bigg]{x}|
+      & $\plg[\bigg]{x}$
+      & Logarithm base $e$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plg*{x}|
+      & $\plg*{x}$
+      & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
   \bottomrule
-  \caption{List of macros of the src/iswbook.cls class}
+  \caption{List of macros of the \textinline|src/iswbook.cls| class}
 \end{longtable}
 
 \section{iswdctrt}
 
-\begin{longtable}{ p{0.24\linewidth} p{0.14\linewidth} p{0.54\linewidth} } \toprule
+\begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
       & \textbf{Result}
       & \textbf{Description}
@@ -114,6 +1274,30 @@
     \midrule \multicolumn{3}{r}{\smaller{Continued on next page}} \\ \bottomrule
     \endfoot
     \endlastfoot
+  \latexinline|\parens{x}|
+      & $\parens{x}$
+      & Parentheses as left-right paired delimiter for argument x
+    \\
+  \latexinline|\parens[\bigg]{x}|
+      & $\parens[\bigg]{x}$
+      & Explicitely set the size of the pairing parentheses to \latexinline|\bigg|
+    \\
+  \latexinline|\parens*{x}|
+      & $\parens*{x}$
+      & Automatically scale the size of the pairing parentheses
+    \\
+  \latexinline|\of{x, t}|
+      & $\of{x, t}$
+      & Nicer and more readable "function of" argument writing
+    \\
+  \latexinline|\of[\Bigg]{x, t}|
+      & $\of[\Bigg]{x, t}$
+      & Make the pairing parentheses in size \latexinline|\bigg|
+    \\
+  \latexinline|\of*{x, t}|
+      & $\of*{x, t}$
+      & Automatic height adjustment of the pairing parentheses
+    \\
   \latexinline|\matr{M}|
       & $\matr{M}$
       & Matrix notation for M
@@ -138,6 +1322,210 @@
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\abs{x}|
+      & $\abs{x}$
+      & Absolute value of the argument as a paired delimiter
+    \\
+  \latexinline|\norm{x}|
+      & $\norm{x}$
+      & Norm of the argument as a paired delimiter
+    \\
+  \latexinline|\pow{x}|
+      & $\pow{x}$
+      & Second power of the argument
+    \\
+  \latexinline|\pow[n]{x}|
+      & $\pow[n]{x}$
+      & n-th power of the argument
+    \\
+  \latexinline|\skewm{m}|
+      & $\skewm{m}$
+      & Commonly used skew-symmetric cross product matrix of argument m
+    \\
+  \latexinline|\crossp{a}{b}|
+      & $\crossp{a}{b}$
+      & Cross product of a and b
+    \\
+  \latexinline|\diag|
+      & $\diag$
+      & Math operator for a matrix as diagonal of the following vector's elements
+    \\
+  \latexinline|\sign|
+      & $\sign$
+      & Mathematical sign (signum) operator
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Differential operator (upface d). Used in integrals for the integrand.
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Derivative operator (upface D)
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the derivative operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\pd{f}{x}|
+      & $\pd{f}{x}$
+      & Partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\pd[n]{f}{x}|
+      & $\pd[n]{f}{x}$
+      & n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\tpd{f}{x}|
+      & $\tpd{f}{x}$
+      & Text style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\tpd[n]{f}{x}|
+      & $\tpd[n]{f}{x}$
+      & Text style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dpd{f}{x}|
+      & $\dpd{f}{x}$
+      & Display style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\dpd[n]{f}{x}|
+      & $\dpd[n]{f}{x}$
+      & Display style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\md{f}{5}{x}{2}{y}{3}|
+      & $\md{f}{5}{x}{2}{y}{3}$
+      & Mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\tmd{f}{5}{x}{2}{y}{3}|
+      & $\tmd{f}{5}{x}{2}{y}{3}$
+      & Text style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\dmd{f}{5}{x}{2}{y}{3}|
+      & $\dmd{f}{5}{x}{2}{y}{3}$
+      & Display style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Text style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Text style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Display style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Display style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dif{x}|
+      & $\dif{x}$
+      & Total differential of $x$
+    \\
+  \latexinline|\Re|
+      & $\Re$
+      & Operator for real value of complex number
+    \\
+  \latexinline|\Im|
+      & $\Im$
+      & Operator for imaginary value of complex number
+    \\
+  \latexinline|\transp{A}|
+      & $\transp{A}$
+      & Transpose of argument $A$ e.g., matrix or vector transpose
+    \\
+  \latexinline|\trafom{A}{B}|
+      & $\trafom{A}{B}$
+      & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
+    \\
+  \latexinline|\trafom[Q]{A}{B}|
+      & $\trafom[Q]{A}{B}$
+      & Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
+    \\
+  \latexinline|\conj{m}|
+      & $\conj{m}$
+      & Conjugate complex of the argument
+    \\
+  \latexinline|\hermconj{x}|
+      & $\hermconj{x}$
+      & Hermitian conjugate of matrix
+    \\
+  \latexinline|\inv{A}|
+      & $\inv{A}$
+      & Element inverse of A - usually used for matrix inverse
+    \\
+  \latexinline|\dotp{a}{b}|
+      & $\dotp{a}{b}$
+      & Dot product of two arguments $a$ and $b$
+    \\
+  \latexinline|\evec{x}|
+      & $\evec{x}$
+      & Unit axis coordinate vector along the $x$-axis
+    \\
+  \latexinline|\evec[\xi]{x}|
+      & $\evec[\xi]{x}$
+      & Name the unit axis coordinate vector $\xi$ rather than $e$
+    \\
+  \latexinline|\arctantwo|
+      & $\arctantwo$
+      & Math operator for the arcus tangent 2
+    \\
+  \latexinline|\arctant{y}{x}|
+      & $\arctant{y}{x}$
+      & Arcus tangent 2 of the two arguments
+    \\
+  \latexinline|\arctant[\bigg]{y}{x}|
+      & $\arctant[\bigg]{y}{x}$
+      & Arcus tangent 2 with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\arctant*{\frac{a}{b}}{x}|
+      & $\arctant*{\frac{a}{b}}{x}$
+      & Arcus tangent 2 with automatically scaled pairing parentheses
+    \\
+  \latexinline|\trace|
+      & $\trace$
+      & Math operator for the trace of a matrix
+    \\
+  \latexinline|\irange{m}|
+      & $\irange{m}$
+      & Range of numbers from $1$ to $m$
+    \\
+  \latexinline|\irange{m}{j}|
+      & $\irange{m}{j}$
+      & Range of numbers with running variable $j$
+    \\
+  \latexinline|\irange[2]{m}|
+      & $\irange[2]{m}$
+      & Increment running variable by $2$ with each step
+    \\
+  \latexinline|\irange[2]{m}{j}|
+      & $\irange[2]{m}{j}$
+      & Running variable now is $j$ and increases by $2$ each step
+    \\
+  \latexinline|\ms{avg}|
+      & $\ms{avg}$
+      & Well-scaled math subscripts of $\mc{avg}$
+    \\
+  \latexinline|\mc{avg}|
+      & $\mc{avg}$
+      & Correct type setting of math constant for textual indices like "std" or "coeff" -- Do not use for variable indices like "i" or "j"
+    \\
+  \latexinline|\rotscal|
+      & $\rotscal$
+      & Scalar rotation matrix which may be used as a rotation matrix element $\rotscal_{ij}$
+    \\
   \latexinline|\rotmatr|
       & $\rotmatr$
       & Rotation matrix
@@ -150,13 +1538,365 @@
       & $\rotmatr[A][B]$
       & Rotation matrix from coordinate system A into system B
     \\
+  \latexinline|\rotx|
+      & $\rotx$
+      & Rotation matrix about $x$-axis
+    \\
+  \latexinline|\rotx{\alpha}|
+      & $\rotx{\alpha}$
+      & Rotation matrix about $x$-axis for angle $\alpha$
+    \\
+  \latexinline|\rotx[\bigg]{\alpha}|
+      & $\rotx[\bigg]{\alpha}$
+      & Adjust size of the pairing parentheses of $\alpha$ to be larger
+    \\
+  \latexinline|\rotx*{\alpha}|
+      & $\rotx*{\alpha}$
+      & Automatically scale the pairing parentheses of $\alpha$
+    \\
+  \latexinline|\roty|
+      & $\roty$
+      & Rotation matrix about $y$-axis
+    \\
+  \latexinline|\roty{\beta}|
+      & $\roty{\beta}$
+      & Rotation matrix about $y$-axis for angle $\beta$
+    \\
+  \latexinline|\roty[\bigg]{\beta}|
+      & $\roty[\bigg]{\beta}$
+      & Adjust size of the pairing parentheses of $\beta$ to be larger
+    \\
+  \latexinline|\roty*{\beta}|
+      & $\roty*{\beta}$
+      & Automatically scale the pairing parentheses of $\beta$
+    \\
+  \latexinline|\rotz|
+      & $\rotz$
+      & Rotation matrix about $z$-axis
+    \\
+  \latexinline|\rotz{\gamma}|
+      & $\rotz{\gamma}$
+      & Rotation matrix about $z$-axis for angle $\gamma$
+    \\
+  \latexinline|\rotz[\bigg]{\gamma}|
+      & $\rotz[\bigg]{\gamma}$
+      & Adjust size of the pairing parentheses of $\gamma$ to be larger
+    \\
+  \latexinline|\rotz*{\gamma}|
+      & $\rotz*{\gamma}$
+      & Automatically scale the pairing parentheses of $\gamma$
+    \\
+  \latexinline|\imagu|
+      & $\imagu$
+      & Proper imaginary unit $\imagu$
+    \\
+  \latexinline|\imgu|
+      & $\imgu$
+      & Imaginary unit as command
+    \\
+  \latexinline|\arcsec|
+      & $\arcsec$
+      & Math operator for inverse secant
+    \\
+  \latexinline|\arccot|
+      & $\arccot$
+      & Math operator for inverse cotangent
+    \\
+  \latexinline|\arccsc|
+      & $\arccsc$
+      & Math operator for inverse cosecant
+    \\
+  \latexinline|\sech|
+      & $\sech$
+      & Math operator for hyperbolic secant
+    \\
+  \latexinline|\csch|
+      & $\csch$
+      & Math operator for hyperbolic cosecant
+    \\
+  \latexinline|\arccosh|
+      & $\arccosh$
+      & Math operator for inverse hyperbolic cosine
+    \\
+  \latexinline|\arcsinh|
+      & $\arcsinh$
+      & Math operator for inverse hyperbolic sinus
+    \\
+  \latexinline|\arcsech|
+      & $\arcsech$
+      & Math operator for inverse hyperbolic secant
+    \\
+  \latexinline|\arccsch|
+      & $\arccsch$
+      & Math operator for inverse hyperbolic cosecent
+    \\
+  \latexinline|\arctanh|
+      & $\arctanh$
+      & Math operator for inverse hyperbolic tangent
+    \\
+  \latexinline|\arccoth|
+      & $\arccoth$
+      & Math operator for inverse hyperbolic cotangent
+    \\
+  \latexinline|\prtrig{\sin}{\beta}|
+      & $\prtrig{\sin}{\beta}$
+      & Typeset trigonometric function $\sin$ with its functional argument $\beta$ in parentheses
+    \\
+  \latexinline|\prtrig[\bigg]{\sin}{\beta}|
+      & $\prtrig[\bigg]{\sin}{\beta}$
+      & Typeset trigonometric function with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\prtrig*{\sin}{\beta}|
+      & $\prtrig*{\sin}{\beta}$
+      & Automatic adjustment of the parentheses sizes
+    \\
+  \latexinline|\psin{x}|
+      & $\psin{x}$
+      & Sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psin[\bigg]{x}|
+      & $\psin[\bigg]{x}$
+      & Sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psin*{x}|
+      & $\psin*{x}$
+      & Sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcos{x}|
+      & $\pcos{x}$
+      & Cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\cos[\bigg]{x}|
+      & $\cos[\bigg]{x}$
+      & Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcos*{x}|
+      & $\pcos*{x}$
+      & Cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptan{x}|
+      & $\ptan{x}$
+      & Tanget of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptan[\bigg]{x}|
+      & $\ptan[\bigg]{x}$
+      & Tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptan*{x}|
+      & $\ptan*{x}$
+      & Tanget of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psec{x}|
+      & $\psec{x}$
+      & Secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psec[\bigg]{x}|
+      & $\psec[\bigg]{x}$
+      & Secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psec*{x}|
+      & $\psec*{x}$
+      & Secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcsc{x}|
+      & $\pcsc{x}$
+      & Cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcsc[\bigg]{x}|
+      & $\pcsc[\bigg]{x}$
+      & Cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcsc*{x}|
+      & $\pcsc*{x}$
+      & Cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcot{x}|
+      & $\pcot{x}$
+      & Cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcot[\bigg]{x}|
+      & $\pcot[\bigg]{x}$
+      & Cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcot*{x}|
+      & $\pcot*{x}$
+      & Cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsin{x}|
+      & $\parcsin{x}$
+      & Inverse sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsin[\bigg]{x}|
+      & $\parcsin[\bigg]{x}$
+      & Inverse sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsin*{x}|
+      & $\parcsin*{x}$
+      & Inverse sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccos{x}|
+      & $\parccos{x}$
+      & Inverse cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccos[\bigg]{x}|
+      & $\parccos[\bigg]{x}$
+      & Inverse cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccos*{x}|
+      & $\parccos*{x}$
+      & Inverse cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parctan{x}|
+      & $\parctan{x}$
+      & Inverse tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parctan[\bigg]{x}|
+      & $\parctan[\bigg]{x}$
+      & Inverse tangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parctan*{x}|
+      & $\parctan*{x}$
+      & Inverse tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsec{x}|
+      & $\parcsec{x}$
+      & Inverse secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsec[\bigg]{x}|
+      & $\parcsec[\bigg]{x}$
+      & Inverse secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsec*{x}|
+      & $\parcsec*{x}$
+      & Inverse secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccsc{x}|
+      & $\parccsc{x}$
+      & Inverse cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccsc[\bigg]{x}|
+      & $\parccsc[\bigg]{x}$
+      & Inverse cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccsc*{x}|
+      & $\parccsc*{x}$
+      & Inverse cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccot{x}|
+      & $\parccot{x}$
+      & Inverse cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccot[\bigg]{x}|
+      & $\parccot[\bigg]{x}$
+      & Inverse cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccot*{x}|
+      & $\parccot*{x}$
+      & Inverse cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psinh{x}|
+      & $\psinh{x}$
+      & Hyperbolic sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psinh[\bigg]{x}|
+      & $\psinh[\bigg]{x}$
+      & Hyperbolic sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psinh*{x}|
+      & $\psinh*{x}$
+      & Hyperbolic sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcosh{x}|
+      & $\pcosh{x}$
+      & Hyperbolic cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcosh[\bigg]{x}|
+      & $\pcosh[\bigg]{x}$
+      & Hyperbolic cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcosh*{x}|
+      & $\pcosh*{x}$
+      & Hyperbolic cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptanh{x}|
+      & $\ptanh{x}$
+      & Hyperbolic tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptanh[\bigg]{x}|
+      & $\ptanh[\bigg]{x}$
+      & Hyperbolic tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptanh*{x}|
+      & $\ptanh*{x}$
+      & Hyperbolic tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcoth{x}|
+      & $\pcoth{x}$
+      & Hyperbolic cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcoth[\bigg]{x}|
+      & $\pcoth[\bigg]{x}$
+      & Hyperbolic cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcoth*{x}|
+      & $\pcoth*{x}$
+      & Hyperbolic cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pexp{x}|
+      & $\pexp{x}$
+      & Exponential function of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pexp[\bigg]{x}|
+      & $\pexp[\bigg]{x}$
+      & Expontential function of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pexp*{x}|
+      & $\pexp*{x}$
+      & Exponential function of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plog{x}|
+      & $\plog{x}$
+      & Logarithm base $10$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plog[\bigg]{x}|
+      & $\plog[\bigg]{x}$
+      & Logarithm base $10$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plog*{x}|
+      & $\plog*{x}$
+      & Logarithm base $10$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pln{x}|
+      & $\pln{x}$
+      & Logarithm base $2$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pln[\bigg]{x}|
+      & $\pln[\bigg]{x}$
+      & Logarithm base $2$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pln*{x}|
+      & $\pln*{x}$
+      & Logarithm base $2$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plg{x}|
+      & $\plg{x}$
+      & Logarithm base $e$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plg[\bigg]{x}|
+      & $\plg[\bigg]{x}$
+      & Logarithm base $e$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plg*{x}|
+      & $\plg*{x}$
+      & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
   \bottomrule
-  \caption{List of macros of the src/iswdctrt.cls class}
+  \caption{List of macros of the \textinline|src/iswdctrt.cls| class}
 \end{longtable}
 
 \section{iswstud}
 
-\begin{longtable}{ p{0.24\linewidth} p{0.14\linewidth} p{0.54\linewidth} } \toprule
+\begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
       & \textbf{Result}
       & \textbf{Description}
@@ -165,6 +1905,30 @@
     \midrule \multicolumn{3}{r}{\smaller{Continued on next page}} \\ \bottomrule
     \endfoot
     \endlastfoot
+  \latexinline|\parens{x}|
+      & $\parens{x}$
+      & Parentheses as left-right paired delimiter for argument x
+    \\
+  \latexinline|\parens[\bigg]{x}|
+      & $\parens[\bigg]{x}$
+      & Explicitely set the size of the pairing parentheses to \latexinline|\bigg|
+    \\
+  \latexinline|\parens*{x}|
+      & $\parens*{x}$
+      & Automatically scale the size of the pairing parentheses
+    \\
+  \latexinline|\of{x, t}|
+      & $\of{x, t}$
+      & Nicer and more readable "function of" argument writing
+    \\
+  \latexinline|\of[\Bigg]{x, t}|
+      & $\of[\Bigg]{x, t}$
+      & Make the pairing parentheses in size \latexinline|\bigg|
+    \\
+  \latexinline|\of*{x, t}|
+      & $\of*{x, t}$
+      & Automatic height adjustment of the pairing parentheses
+    \\
   \latexinline|\matr{M}|
       & $\matr{M}$
       & Matrix notation for M
@@ -189,6 +1953,210 @@
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\abs{x}|
+      & $\abs{x}$
+      & Absolute value of the argument as a paired delimiter
+    \\
+  \latexinline|\norm{x}|
+      & $\norm{x}$
+      & Norm of the argument as a paired delimiter
+    \\
+  \latexinline|\pow{x}|
+      & $\pow{x}$
+      & Second power of the argument
+    \\
+  \latexinline|\pow[n]{x}|
+      & $\pow[n]{x}$
+      & n-th power of the argument
+    \\
+  \latexinline|\skewm{m}|
+      & $\skewm{m}$
+      & Commonly used skew-symmetric cross product matrix of argument m
+    \\
+  \latexinline|\crossp{a}{b}|
+      & $\crossp{a}{b}$
+      & Cross product of a and b
+    \\
+  \latexinline|\diag|
+      & $\diag$
+      & Math operator for a matrix as diagonal of the following vector's elements
+    \\
+  \latexinline|\sign|
+      & $\sign$
+      & Mathematical sign (signum) operator
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Differential operator (upface d). Used in integrals for the integrand.
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\dif|
+      & $\dif$
+      & Derivative operator (upface D)
+    \\
+  \latexinline|\dif[x]|
+      & $\dif[x]$
+      & Index the derivative operator with $x$. Necessary because there is a negative space after the operator.
+    \\
+  \latexinline|\pd{f}{x}|
+      & $\pd{f}{x}$
+      & Partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\pd[n]{f}{x}|
+      & $\pd[n]{f}{x}$
+      & n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\tpd{f}{x}|
+      & $\tpd{f}{x}$
+      & Text style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\tpd[n]{f}{x}|
+      & $\tpd[n]{f}{x}$
+      & Text style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dpd{f}{x}|
+      & $\dpd{f}{x}$
+      & Display style partial derivative of $f$ with resepect to $x$
+    \\
+  \latexinline|\dpd[n]{f}{x}|
+      & $\dpd[n]{f}{x}$
+      & Display style n-th partial derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\md{f}{5}{x}{2}{y}{3}|
+      & $\md{f}{5}{x}{2}{y}{3}$
+      & Mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\tmd{f}{5}{x}{2}{y}{3}|
+      & $\tmd{f}{5}{x}{2}{y}{3}$
+      & Text style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\dmd{f}{5}{x}{2}{y}{3}|
+      & $\dmd{f}{5}{x}{2}{y}{3}$
+      & Display style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Text style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Text style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od{f}{x}|
+      & $\od{f}{x}$
+      & Display style ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\od[n]{f}{x}|
+      & $\od[n]{f}{x}$
+      & Display style $n$-th order ordinary derivative of $f$ with respect to $x$
+    \\
+  \latexinline|\dif{x}|
+      & $\dif{x}$
+      & Total differential of $x$
+    \\
+  \latexinline|\Re|
+      & $\Re$
+      & Operator for real value of complex number
+    \\
+  \latexinline|\Im|
+      & $\Im$
+      & Operator for imaginary value of complex number
+    \\
+  \latexinline|\transp{A}|
+      & $\transp{A}$
+      & Transpose of argument $A$ e.g., matrix or vector transpose
+    \\
+  \latexinline|\trafom{A}{B}|
+      & $\trafom{A}{B}$
+      & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
+    \\
+  \latexinline|\trafom[Q]{A}{B}|
+      & $\trafom[Q]{A}{B}$
+      & Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
+    \\
+  \latexinline|\conj{m}|
+      & $\conj{m}$
+      & Conjugate complex of the argument
+    \\
+  \latexinline|\hermconj{x}|
+      & $\hermconj{x}$
+      & Hermitian conjugate of matrix
+    \\
+  \latexinline|\inv{A}|
+      & $\inv{A}$
+      & Element inverse of A - usually used for matrix inverse
+    \\
+  \latexinline|\dotp{a}{b}|
+      & $\dotp{a}{b}$
+      & Dot product of two arguments $a$ and $b$
+    \\
+  \latexinline|\evec{x}|
+      & $\evec{x}$
+      & Unit axis coordinate vector along the $x$-axis
+    \\
+  \latexinline|\evec[\xi]{x}|
+      & $\evec[\xi]{x}$
+      & Name the unit axis coordinate vector $\xi$ rather than $e$
+    \\
+  \latexinline|\arctantwo|
+      & $\arctantwo$
+      & Math operator for the arcus tangent 2
+    \\
+  \latexinline|\arctant{y}{x}|
+      & $\arctant{y}{x}$
+      & Arcus tangent 2 of the two arguments
+    \\
+  \latexinline|\arctant[\bigg]{y}{x}|
+      & $\arctant[\bigg]{y}{x}$
+      & Arcus tangent 2 with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\arctant*{\frac{a}{b}}{x}|
+      & $\arctant*{\frac{a}{b}}{x}$
+      & Arcus tangent 2 with automatically scaled pairing parentheses
+    \\
+  \latexinline|\trace|
+      & $\trace$
+      & Math operator for the trace of a matrix
+    \\
+  \latexinline|\irange{m}|
+      & $\irange{m}$
+      & Range of numbers from $1$ to $m$
+    \\
+  \latexinline|\irange{m}{j}|
+      & $\irange{m}{j}$
+      & Range of numbers with running variable $j$
+    \\
+  \latexinline|\irange[2]{m}|
+      & $\irange[2]{m}$
+      & Increment running variable by $2$ with each step
+    \\
+  \latexinline|\irange[2]{m}{j}|
+      & $\irange[2]{m}{j}$
+      & Running variable now is $j$ and increases by $2$ each step
+    \\
+  \latexinline|\ms{avg}|
+      & $\ms{avg}$
+      & Well-scaled math subscripts of $\mc{avg}$
+    \\
+  \latexinline|\mc{avg}|
+      & $\mc{avg}$
+      & Correct type setting of math constant for textual indices like "std" or "coeff" -- Do not use for variable indices like "i" or "j"
+    \\
+  \latexinline|\rotscal|
+      & $\rotscal$
+      & Scalar rotation matrix which may be used as a rotation matrix element $\rotscal_{ij}$
+    \\
   \latexinline|\rotmatr|
       & $\rotmatr$
       & Rotation matrix
@@ -201,7 +2169,359 @@
       & $\rotmatr[A][B]$
       & Rotation matrix from coordinate system A into system B
     \\
+  \latexinline|\rotx|
+      & $\rotx$
+      & Rotation matrix about $x$-axis
+    \\
+  \latexinline|\rotx{\alpha}|
+      & $\rotx{\alpha}$
+      & Rotation matrix about $x$-axis for angle $\alpha$
+    \\
+  \latexinline|\rotx[\bigg]{\alpha}|
+      & $\rotx[\bigg]{\alpha}$
+      & Adjust size of the pairing parentheses of $\alpha$ to be larger
+    \\
+  \latexinline|\rotx*{\alpha}|
+      & $\rotx*{\alpha}$
+      & Automatically scale the pairing parentheses of $\alpha$
+    \\
+  \latexinline|\roty|
+      & $\roty$
+      & Rotation matrix about $y$-axis
+    \\
+  \latexinline|\roty{\beta}|
+      & $\roty{\beta}$
+      & Rotation matrix about $y$-axis for angle $\beta$
+    \\
+  \latexinline|\roty[\bigg]{\beta}|
+      & $\roty[\bigg]{\beta}$
+      & Adjust size of the pairing parentheses of $\beta$ to be larger
+    \\
+  \latexinline|\roty*{\beta}|
+      & $\roty*{\beta}$
+      & Automatically scale the pairing parentheses of $\beta$
+    \\
+  \latexinline|\rotz|
+      & $\rotz$
+      & Rotation matrix about $z$-axis
+    \\
+  \latexinline|\rotz{\gamma}|
+      & $\rotz{\gamma}$
+      & Rotation matrix about $z$-axis for angle $\gamma$
+    \\
+  \latexinline|\rotz[\bigg]{\gamma}|
+      & $\rotz[\bigg]{\gamma}$
+      & Adjust size of the pairing parentheses of $\gamma$ to be larger
+    \\
+  \latexinline|\rotz*{\gamma}|
+      & $\rotz*{\gamma}$
+      & Automatically scale the pairing parentheses of $\gamma$
+    \\
+  \latexinline|\imagu|
+      & $\imagu$
+      & Proper imaginary unit $\imagu$
+    \\
+  \latexinline|\imgu|
+      & $\imgu$
+      & Imaginary unit as command
+    \\
+  \latexinline|\arcsec|
+      & $\arcsec$
+      & Math operator for inverse secant
+    \\
+  \latexinline|\arccot|
+      & $\arccot$
+      & Math operator for inverse cotangent
+    \\
+  \latexinline|\arccsc|
+      & $\arccsc$
+      & Math operator for inverse cosecant
+    \\
+  \latexinline|\sech|
+      & $\sech$
+      & Math operator for hyperbolic secant
+    \\
+  \latexinline|\csch|
+      & $\csch$
+      & Math operator for hyperbolic cosecant
+    \\
+  \latexinline|\arccosh|
+      & $\arccosh$
+      & Math operator for inverse hyperbolic cosine
+    \\
+  \latexinline|\arcsinh|
+      & $\arcsinh$
+      & Math operator for inverse hyperbolic sinus
+    \\
+  \latexinline|\arcsech|
+      & $\arcsech$
+      & Math operator for inverse hyperbolic secant
+    \\
+  \latexinline|\arccsch|
+      & $\arccsch$
+      & Math operator for inverse hyperbolic cosecent
+    \\
+  \latexinline|\arctanh|
+      & $\arctanh$
+      & Math operator for inverse hyperbolic tangent
+    \\
+  \latexinline|\arccoth|
+      & $\arccoth$
+      & Math operator for inverse hyperbolic cotangent
+    \\
+  \latexinline|\prtrig{\sin}{\beta}|
+      & $\prtrig{\sin}{\beta}$
+      & Typeset trigonometric function $\sin$ with its functional argument $\beta$ in parentheses
+    \\
+  \latexinline|\prtrig[\bigg]{\sin}{\beta}|
+      & $\prtrig[\bigg]{\sin}{\beta}$
+      & Typeset trigonometric function with pairing parentheses scaled to size \latexinline|\bigg|
+    \\
+  \latexinline|\prtrig*{\sin}{\beta}|
+      & $\prtrig*{\sin}{\beta}$
+      & Automatic adjustment of the parentheses sizes
+    \\
+  \latexinline|\psin{x}|
+      & $\psin{x}$
+      & Sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psin[\bigg]{x}|
+      & $\psin[\bigg]{x}$
+      & Sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psin*{x}|
+      & $\psin*{x}$
+      & Sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcos{x}|
+      & $\pcos{x}$
+      & Cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\cos[\bigg]{x}|
+      & $\cos[\bigg]{x}$
+      & Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcos*{x}|
+      & $\pcos*{x}$
+      & Cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptan{x}|
+      & $\ptan{x}$
+      & Tanget of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptan[\bigg]{x}|
+      & $\ptan[\bigg]{x}$
+      & Tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptan*{x}|
+      & $\ptan*{x}$
+      & Tanget of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psec{x}|
+      & $\psec{x}$
+      & Secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psec[\bigg]{x}|
+      & $\psec[\bigg]{x}$
+      & Secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psec*{x}|
+      & $\psec*{x}$
+      & Secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcsc{x}|
+      & $\pcsc{x}$
+      & Cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcsc[\bigg]{x}|
+      & $\pcsc[\bigg]{x}$
+      & Cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcsc*{x}|
+      & $\pcsc*{x}$
+      & Cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcot{x}|
+      & $\pcot{x}$
+      & Cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcot[\bigg]{x}|
+      & $\pcot[\bigg]{x}$
+      & Cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcot*{x}|
+      & $\pcot*{x}$
+      & Cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsin{x}|
+      & $\parcsin{x}$
+      & Inverse sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsin[\bigg]{x}|
+      & $\parcsin[\bigg]{x}$
+      & Inverse sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsin*{x}|
+      & $\parcsin*{x}$
+      & Inverse sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccos{x}|
+      & $\parccos{x}$
+      & Inverse cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccos[\bigg]{x}|
+      & $\parccos[\bigg]{x}$
+      & Inverse cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccos*{x}|
+      & $\parccos*{x}$
+      & Inverse cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parctan{x}|
+      & $\parctan{x}$
+      & Inverse tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parctan[\bigg]{x}|
+      & $\parctan[\bigg]{x}$
+      & Inverse tangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parctan*{x}|
+      & $\parctan*{x}$
+      & Inverse tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parcsec{x}|
+      & $\parcsec{x}$
+      & Inverse secant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parcsec[\bigg]{x}|
+      & $\parcsec[\bigg]{x}$
+      & Inverse secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parcsec*{x}|
+      & $\parcsec*{x}$
+      & Inverse secant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccsc{x}|
+      & $\parccsc{x}$
+      & Inverse cosecant of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccsc[\bigg]{x}|
+      & $\parccsc[\bigg]{x}$
+      & Inverse cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccsc*{x}|
+      & $\parccsc*{x}$
+      & Inverse cosecant of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\parccot{x}|
+      & $\parccot{x}$
+      & Inverse cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\parccot[\bigg]{x}|
+      & $\parccot[\bigg]{x}$
+      & Inverse cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\parccot*{x}|
+      & $\parccot*{x}$
+      & Inverse cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\psinh{x}|
+      & $\psinh{x}$
+      & Hyperbolic sine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\psinh[\bigg]{x}|
+      & $\psinh[\bigg]{x}$
+      & Hyperbolic sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\psinh*{x}|
+      & $\psinh*{x}$
+      & Hyperbolic sine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcosh{x}|
+      & $\pcosh{x}$
+      & Hyperbolic cosine of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcosh[\bigg]{x}|
+      & $\pcosh[\bigg]{x}$
+      & Hyperbolic cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcosh*{x}|
+      & $\pcosh*{x}$
+      & Hyperbolic cosine of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\ptanh{x}|
+      & $\ptanh{x}$
+      & Hyperbolic tangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\ptanh[\bigg]{x}|
+      & $\ptanh[\bigg]{x}$
+      & Hyperbolic tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\ptanh*{x}|
+      & $\ptanh*{x}$
+      & Hyperbolic tangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pcoth{x}|
+      & $\pcoth{x}$
+      & Hyperbolic cotangent of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pcoth[\bigg]{x}|
+      & $\pcoth[\bigg]{x}$
+      & Hyperbolic cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pcoth*{x}|
+      & $\pcoth*{x}$
+      & Hyperbolic cotangent of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pexp{x}|
+      & $\pexp{x}$
+      & Exponential function of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pexp[\bigg]{x}|
+      & $\pexp[\bigg]{x}$
+      & Expontential function of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pexp*{x}|
+      & $\pexp*{x}$
+      & Exponential function of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plog{x}|
+      & $\plog{x}$
+      & Logarithm base $10$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plog[\bigg]{x}|
+      & $\plog[\bigg]{x}$
+      & Logarithm base $10$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plog*{x}|
+      & $\plog*{x}$
+      & Logarithm base $10$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\pln{x}|
+      & $\pln{x}$
+      & Logarithm base $2$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\pln[\bigg]{x}|
+      & $\pln[\bigg]{x}$
+      & Logarithm base $2$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\pln*{x}|
+      & $\pln*{x}$
+      & Logarithm base $2$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\plg{x}|
+      & $\plg{x}$
+      & Logarithm base $e$ of $x$ with parentheses around $x$
+    \\
+  \latexinline|\plg[\bigg]{x}|
+      & $\plg[\bigg]{x}$
+      & Logarithm base $e$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+    \\
+  \latexinline|\plg*{x}|
+      & $\plg*{x}$
+      & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
   \bottomrule
-  \caption{List of macros of the src/iswstud.cls class}
+  \caption{List of macros of the \textinline|src/iswstud.cls| class}
 \end{longtable}
 
