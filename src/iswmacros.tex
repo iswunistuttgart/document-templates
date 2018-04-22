@@ -1,5 +1,5 @@
 \documentclass[%
-  draft,%
+  final,%
   ngerman,%
   english,% last language set will be the main document language
   tikz,%
@@ -47,7 +47,11 @@
 % Put all your custom code (packages, styles, macros, etc.)
 
 \usepackage{minted}
-\newmintinline{latex}{}
+\newmintinline{latex}{%
+  fontsize={\smaller[2]}%
+}%
+\newmintinline{text}{%
+}%
 
 % This package is only included for demo purposes
 \usepackage[math]{blindtext}
@@ -125,7 +129,6 @@
 % DOCUMENT
 \input{macros}
 
-\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
 % END blind document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
