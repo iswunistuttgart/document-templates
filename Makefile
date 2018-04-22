@@ -3,7 +3,7 @@ FILES = iswartcl iswstud iswbook iswdctrt
 BUILD_DIR = dist
 
 .PHONY: all
-all: packages macros build $(FILES) images
+all: build $(FILES) images packages macros
 
 # build directory
 build:
@@ -23,19 +23,19 @@ macros: src/*.cls
 # Building of all necessary classes
 # build iswartcl cls, tex, rc, etc
 .PHONY: iswartcl
-iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl packages macros
+iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
 
 # build iswstud cls, tex, rc, etc
 .PHONY: iswstud
-iswstud: iswstud-cls iswstud-tex iswstud-rc bbl packages macros
+iswstud: iswstud-cls iswstud-tex iswstud-rc bbl
 
 # build iswbook cls, tex, rc, etc
 .PHONY: iswbook
-iswbook: iswbook-cls iswbook-tex iswbook-rc bbl packages macros
+iswbook: iswbook-cls iswbook-tex iswbook-rc bbl
 
 # build iswdctrt cls, tex, rc, etc
 .PHONY: iswdctrt
-iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl packages macros
+iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl
 
 
 # implicit target for making `*.cls` files
