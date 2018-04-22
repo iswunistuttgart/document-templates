@@ -64,7 +64,7 @@ def process_file(f, dest='build'):
                 os.makedirs(pd.parent.absolute())
 
             # Write the content to the new target file
-            pd.write_text(''.join(cnt))
+            pd.write_text(''.join(cnt), encoding='utf-8')
     except BaseException as err:
         raise ReferenceError('Error processing file \'{}\''.format(f)) from err
 
