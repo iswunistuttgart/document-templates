@@ -146,7 +146,7 @@ def write_output(fs, mcrs, write=False):
             # Empty line between heading and list of packages
             cnt.append('')
             # Open table and tabular
-            cnt.append('\\begin{longtable}{ p{0.24\linewidth} p{0.14\linewidth} p{0.54\linewidth} } \\toprule')
+            cnt.append('\\begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \\toprule')
             cnt.append('  \\textbf{Code}\n      & \\textbf{Result}\n      & \\textbf{Description}\n    \\\\ \\midrule')
             cnt.append('    \\endhead')
             cnt.append('    \\midrule \\multicolumn{3}{r}{\smaller{Continued on next page}} \\\\ \\bottomrule')
@@ -157,7 +157,7 @@ def write_output(fs, mcrs, write=False):
             cnt.extend(['  \latexinline|{}|\n      & ${}$\n      & {}\n    \\\\'.format(m['code'], m['code'], m['description']) for m in mcrs[k]])
             # Close tabular and table
             cnt.append('  \\bottomrule')
-            cnt.append('  \\caption{{List of macros of the {} class}}'.format(fs[k]))
+            cnt.append('  \\caption{{List of macros of the \\textinline|{}| class}}'.format(fs[k]))
             cnt.append('\\end{longtable}')
             # One empty line between previous file's package list and next file
             cnt.append('')
@@ -194,3 +194,4 @@ def write_output(fs, mcrs, write=False):
 
 if __name__ == '__main__':
     create()
+
