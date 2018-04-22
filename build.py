@@ -44,9 +44,9 @@ def process_file(f, dest='build'):
     :return void:
     """
     # Open the source file
-    ps = pathlib.Path(f).resolve()
+    ps = pathlib.Path(f).absolute()
     # Open the target file
-    pd = pathlib.Path(dest + os.sep + ps.name).resolve()
+    pd = pathlib.Path(dest + os.sep + ps.name).absolute()
 
     # Open the file
     try:
@@ -54,10 +54,15 @@ def process_file(f, dest='build'):
             # Process the file
             cnt = process_lines(s)
 
+            # Check if the target directory of the current file exists
+            if not pd.parent.exists():
+                # If not, create the directory first
+                os.makedirs(pd.parent.absolute())
+
             # Write the content to the new target file
             pd.write_text(cnt)
     except BaseException as err:
-        print('Error reading file \'{}\''.format(f))
+        raise ReferenceError('Error processing file \'{}\''.format(f)) from err
 
 
 def process_lines(f):
