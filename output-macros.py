@@ -46,11 +46,11 @@ def trawl_file(f):
 
     # Open the file
     try:
-        with ps.open() as s:
+        with ps.open('r', encoding='utf-8') as s:
             # Process the file
             return trawl_lines(s)
     except BaseException as err:
-        print('Error reading file \'{}\' with reason {}'.format(f, err.__str__()))
+        raise ReferenceError('Error processing file \'{}\''.format(f)) from err
 
     return []
 
@@ -171,7 +171,7 @@ def write_output(fs, mcrs, write=False):
         p = pathlib.Path(write)
 
         # And write the content to a file
-        p.write_text(cnt)
+        p.write_text(cnt, encoding='utf-8')
     else:
         # Store the print content in here
         cnt = []
