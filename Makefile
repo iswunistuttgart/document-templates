@@ -17,7 +17,8 @@ packages: src/*.cls
 macros: src/*.cls
 	cp src/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
 	$(PY) output-macros.py --output dist/macros.tex -- $?
-	cd dist && latexmk -quiet iswmacros.tex && latexmk -quiet -c iswmacros.tex
+	cp $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/.latexmkrc
+	cd dist && latexmk -quiet iswmacros.tex && latexmk -quiet -c iswmacros.tex && rm .latexmkrc
 
 
 # Building of all necessary classes
@@ -42,7 +43,7 @@ iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl
 %-cls: src/%.cls src/%/* src/common/*
 	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
 
-# implicit target for making `*.tex` files
+# implicit target for making `*.tex` filesx
 %-tex: src/%.tex
 	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
 
