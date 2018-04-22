@@ -51,7 +51,7 @@ iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl packages macros
 	cp src/$*.latexmkrc $(BUILD_DIR)/$*.latexmkrc
 
 
-# copy the iswmacros file
+# copy the file `iswmacros`
 iswmacros: src/iswmacros.tex
 	cp src/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
 
@@ -71,10 +71,6 @@ bbx: src/iswbib.bbx
 # Copy the BIB file to build
 bib: src/bibliography.bib
 	cp src/bibliography.bib $(BUILD_DIR)/bibliography.bib
-
-
-#macros: iswbook src/iswmacros.tex
-#    cp src/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
 
 
 # Semantic Versioning
