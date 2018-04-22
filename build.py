@@ -51,7 +51,7 @@ def process_file(f, dest='build'):
 
     # Open the file
     try:
-        with ps.open('r') as s:
+        with ps.open('r', encoding='utf-8') as s:
             # Read the whole file
             lns = s.readlines()
 
@@ -106,7 +106,7 @@ def process_line(l, replace_inc=None, replace_time=None):
 
         # If the file exists, then process it
         if inc_file.exists():
-            return ''.join(process_lines(inc_file.open('r').readlines(), replace_inc, replace_time))
+            return ''.join(process_lines(inc_file.open('r', encoding='utf-8').readlines(), replace_inc, replace_time))
     # Found a filedate directive to replace
     elif time_found:
         return l.replace(time_found.group('filedate'), datetime.datetime.utcnow().strftime('%Y/%m/%d'))
