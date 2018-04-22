@@ -1,5 +1,5 @@
 compile-cls:
-  image: philipptempel/isw-docker-latex:latest
+  image: philipptempel/docker-ubuntu-tug-texlive:latest
   stage: build
   script:
     - make clean
