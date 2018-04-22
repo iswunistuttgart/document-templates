@@ -5,12 +5,8 @@
 import argparse
 # Proper regular expression building and matching
 import re
-#
-import itertools
 # OS specific things like file handling
 import os
-# Handle the current build time in the final document
-import pprint
 # Nicer way of handling paths in python
 import pathlib
 
@@ -20,12 +16,12 @@ def collect():
     This is the main function that finds all packages in the given file
     :return:
     """
-    parser = argparse.ArgumentParser(description='Build the given TeX class.')
+    parser = argparse.ArgumentParser(description='List packages of the given LaTeX class(es).')
 
     parser.add_argument('files', metavar='f', nargs='+', action='store', type=str,
                         help='LaTeX file to trawl through')
 
-    parser.add_argument('--output', dest='output', action='store', const='packages.md', default=False, type=str,
+    parser.add_argument('--output', dest='output', action='store', const=True, default=False, type=str,
                         nargs='?',
                         help='Write list to a markdown formatted file')
 
@@ -87,8 +83,6 @@ def trawl_line(l):
     :return None|str p: None if no package, otherwise package name
     """
 
-    # print(l)
-
     """
     If current line is an include/input, resolve that and scan this file
     """
@@ -104,8 +98,6 @@ def trawl_line(l):
 
         # If the file exists, then process it
         if inc_file.exists():
-            # print(inc_file)
-            # print(trawl_file(inc_file))
             return trawl_file(inc_file)
 
         return None
@@ -137,7 +129,7 @@ def write_output(fs, pks, write=False):
     """
 
     # Write to file
-    if write:
+    if type(write) is str:
         # Store the print content in here
         cnt = []
 
