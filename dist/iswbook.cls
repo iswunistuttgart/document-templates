@@ -1,6 +1,6 @@
 % Definition of class version and last release date
 \def\fileversion{1.2.6}
-\def\filedate{2018/04/22}
+\def\filedate{2018/05/01}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -27,6 +27,11 @@
 % This package offers support for package authors who want to use options in key-value format for their package options.
 % The package is part of the oberdiek bundle.
 \RequirePackage{kvoptions}
+
+% With chngcntr currently not working in TeXlive 2018, we need to add this
+% @TODO Remove once there is a chngcntr update
+\let\counterwithout\relax
+\let\counterwithin\relax
 
 
 
@@ -1035,6 +1040,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%
+% @group math
 % @sample \parens{x}: Parentheses as left-right paired delimiter for argument x
 % @sample \parens[\bigg]{x}: Explicitely set the size of the pairing parentheses to \latexinline|\bigg|
 % @sample \parens*{x}: Automatically scale the size of the pairing parentheses
@@ -1048,6 +1054,7 @@
 }%
 
 %%
+% @group math
 % @sample \of{x, t}: Nicer and more readable "function of" argument writing
 % @sample \of[\Bigg]{x, t}: Make the pairing parentheses in size \latexinline|\bigg|
 % @sample \of*{x, t}: Automatic height adjustment of the pairing parentheses
@@ -1056,6 +1063,7 @@
 \DeclarePairedDelimiter{\of}{\lparen}{\rparen}%
 
 %%
+% @group math
 % @sample \matr{M}: Matrix notation for M
 % @sample \matr[P]{M}: Matrix notation for M with pre-superscript P
 % @sample \matr[A][B]{M}: Matrix notation for M with pre-subscript A and pre-superscript B
@@ -1074,6 +1082,7 @@
 }%
 
 %%
+% @group math
 % @sample \vect{q}: Vector notation for q
 % @sample \vect[P]{q}: Vector notation for q with pre-superscript P
 % @sample \vect[A][B]{q}: Vector notation for q with pre-subscript A and pre-superscript B
@@ -1091,6 +1100,7 @@
 }%
 
 %%
+% @group math
 % @sample \abs{x}: Absolute value of the argument as a paired delimiter
 % @see mathtools
 %%
@@ -1099,6 +1109,7 @@
 }%
 
 %%
+% @group math
 % @sample \norm{x}: Norm of the argument as a paired delimiter
 % @see mathtools
 %%
@@ -1107,6 +1118,7 @@
 }%
 
 %%
+% @group math
 % @sample \pow{x}: Second power of the argument
 % @sample \pow[n]{x}: n-th power of the argument
 %%
@@ -1115,11 +1127,13 @@
 }%
 
 %%
+% @group math
 % @sample \skewm{m}: Commonly used skew-symmetric cross product matrix of argument m
 %%
 \DeclarePairedDelimiterX{\skewm}[1]{[}{]^{\mkern-2.5mu\times}}{#1}%
 
 %%
+% @group math
 % @sample \crossp{a}{b}: Cross product of a and b
 %%
 \DeclareDocumentCommand{\crossp}{m m}{%
@@ -1127,11 +1141,13 @@
 }%
 
 %%
+% @group math
 % @sample \diag: Math operator for a matrix as diagonal of the following vector's elements
 %%
 \DeclareMathOperator{\diag}{diag}%
 
 %%
+% @group math
 % @sample \sign: Mathematical sign (signum) operator
 %%
 \DeclareMathOperator{\sign}{sign}%
@@ -1139,6 +1155,7 @@
 
 % @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
+% @group math
 % @sample \dif: Differential operator (upface d). Used in integrals for the integrand.
 % @sample \dif[x]: Index the differential operator with $x$. Necessary because there is a negative space after the operator.
 %%
@@ -1151,6 +1168,7 @@
 }%
 
 %%
+% @group math
 % @sample \dif: Derivative operator (upface D)
 % @sample \dif[x]: Index the derivative operator with $x$. Necessary because there is a negative space after the operator.
 %%
@@ -1163,6 +1181,7 @@
 }%
 
 %%
+% @group math
 % @sample \pd{f}{x}: Partial derivative of $f$ with resepect to $x$
 % @sample \pd[n]{f}{x}: n-th partial derivative of $f$ with respect to $x$
 %%
@@ -1171,6 +1190,7 @@
 }%
 
 %%
+% @group math
 % @sample \tpd{f}{x}: Text style partial derivative of $f$ with resepect to $x$
 % @sample \tpd[n]{f}{x}: Text style n-th partial derivative of $f$ with respect to $x$
 %%
@@ -1179,6 +1199,7 @@
 }}%
 
 %%
+% @group math
 % @sample \dpd{f}{x}: Display style partial derivative of $f$ with resepect to $x$
 % @sample \dpd[n]{f}{x}: Display style n-th partial derivative of $f$ with respect to $x$
 %%
@@ -1187,6 +1208,7 @@
 }}%
 
 %%
+% @group math
 % @sample \md{f}{5}{x}{2}{y}{3}: Mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
 %%
 \providecommand{\md}[6]{%
@@ -1194,6 +1216,7 @@
 }%
 
 %%
+% @group math
 % @sample \tmd{f}{5}{x}{2}{y}{3}: Text style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
 %%
 \providecommand{\tmd}[6]{\mathinner{%
@@ -1201,6 +1224,7 @@
 }}%
 
 %%
+% @group math
 % @sample \dmd{f}{5}{x}{2}{y}{3}: Display style mixed $5$-th order derivative of $f$ with respect to $x$ (twofold) and $y$ (threefold).
 %%
 \providecommand{\dmd}[6]{\mathinner{%
@@ -1208,6 +1232,7 @@
 }}%
 
 %%
+% @group math
 % @sample \od{f}{x}: Ordinary derivative of $f$ with respect to $x$
 % @sample \od[n]{f}{x}: $n$-th order ordinary derivative of $f$ with respect to $x$
 %%
@@ -1216,6 +1241,7 @@
 }%
 
 %%
+% @group math
 % @sample \od{f}{x}: Text style ordinary derivative of $f$ with respect to $x$
 % @sample \od[n]{f}{x}: Text style $n$-th order ordinary derivative of $f$ with respect to $x$
 %%
@@ -1224,6 +1250,7 @@
 }}%
 
 %%
+% @group math
 % @sample \od{f}{x}: Display style ordinary derivative of $f$ with respect to $x$
 % @sample \od[n]{f}{x}: Display style $n$-th order ordinary derivative of $f$ with respect to $x$
 %%
@@ -1233,6 +1260,7 @@
 
 
 %%
+% @group math
 % @sample \dif{x}: Total differential of $x$
 %%
 \DeclareDocumentCommand{\td}{ m }{%
@@ -1240,16 +1268,19 @@
 }%
 
 %%
+% @group math
 % @sample \Re: Operator for real value of complex number
 %%
 \renewcommand{\Re}{\operatorname{Re}}%
 
 %%
+% @group math
 % @sample \Im: Operator for imaginary value of complex number
 %%
 \renewcommand{\Im}{\operatorname{Im}}%
 
 %%
+% @group math
 % @sample \transp{A}: Transpose of argument $A$ e.g., matrix or vector transpose
 %%
 \DeclareDocumentCommand{\transp}{ m }{%
@@ -1257,6 +1288,7 @@
 }%
 
 %%
+% @group math
 % @sample \trafom{A}{B}: Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
 % @sample \trafom[Q]{A}{B}: Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
 %%
@@ -1265,6 +1297,7 @@
 }%
 
 %%
+% @group math
 % @sample \conj{m}: Conjugate complex of the argument
 %%
 \DeclareDocumentCommand{\conj}{ m }{%
@@ -1272,6 +1305,7 @@
 }%
 
 %%
+% @group math
 % @sample \hermconj{x}: Hermitian conjugate of matrix
 %%
 \DeclareDocumentCommand{\hermconj}{ m }{%
@@ -1279,6 +1313,7 @@
 }%
 
 %%
+% @group math
 % @sample \inv{A}: Element inverse of A - usually used for matrix inverse
 %%
 \DeclareDocumentCommand{\inv}{ m }{%
@@ -1286,6 +1321,7 @@
 }%
 
 %%
+% @group math
 % @sample \dotp{a}{b}: Dot product of two arguments $a$ and $b$
 %%
 \DeclareDocumentCommand{\dotp}{ m m }{%
@@ -1293,6 +1329,7 @@
 }%
 
 %%
+% @group math
 % @sample \evec{x}: Unit axis coordinate vector along the $x$-axis
 % @sample \evec[\xi]{x}: Name the unit axis coordinate vector $\xi$ rather than $e$
 %%
@@ -1301,11 +1338,13 @@
 }%
 
 %%
+% @group math
 % @sample \arctantwo: Math operator for the arcus tangent 2
 %%
 \DeclareMathOperator{\arctantwo}{atan2}%
 
 %%
+% @group math
 % @sample \arctant{y}{x}: Arcus tangent 2 of the two arguments
 % @sample \arctant[\bigg]{y}{x}: Arcus tangent 2 with pairing parentheses scaled to size \latexinline|\bigg|
 % @sample \arctant*{\frac{a}{b}}{x}: Arcus tangent 2 with automatically scaled pairing parentheses
@@ -1324,11 +1363,13 @@
 }%
 
 %%
+% @group math
 % @sample \trace: Math operator for the trace of a matrix
 %%
 \DeclareMathOperator{\trace}{tr}%
 
 %%
+% @group math
 % @sample \irange{m}: Range of numbers from $1$ to $m$
 % @sample \irange{m}{j}: Range of numbers with running variable $j$
 % @sample \irange[2]{m}: Increment running variable by $2$ with each step
@@ -1344,6 +1385,7 @@
 }%
 
 %%
+% @group math
 % @sample \ms{avg}: Well-scaled math subscripts of $\mc{avg}$
 %%
 \DeclareDocumentCommand{\ms}{ m }{%
@@ -1351,6 +1393,7 @@
 }%
 
 %%
+% @group math
 % @sample \mc{avg}: Correct type setting of math constant for textual indices like "std" or "coeff" -- Do not use for variable indices like "i" or "j"
 %%
 \DeclareDocumentCommand{\mc}{ m }{%
@@ -1358,6 +1401,7 @@
 }%
 
 %%
+% @group math
 % @sample \rotscal: Scalar rotation matrix which may be used as a rotation matrix element $\rotscal_{ij}$
 %%
 \DeclareDocumentCommand{\rotscal}{ }{%
@@ -1365,6 +1409,7 @@
 }%
 
 %%
+% @group math
 % @sample \rotmatr: Rotation matrix
 % @sample \rotmatr[P]: Rotation matrix from coordinate system P into world system O
 % @sample \rotmatr[A][B]: Rotation matrix from coordinate system A into system B
@@ -1382,6 +1427,7 @@
 }%
 
 %%
+% @group math
 % @sample \rotx: Rotation matrix about $x$-axis
 % @sample \rotx{\alpha}: Rotation matrix about $x$-axis for angle $\alpha$
 % @sample \rotx[\bigg]{\alpha}: Adjust size of the pairing parentheses of $\alpha$ to be larger
@@ -1403,6 +1449,7 @@
 }%
 
 %%
+% @group math
 % @sample \roty: Rotation matrix about $y$-axis
 % @sample \roty{\beta}: Rotation matrix about $y$-axis for angle $\beta$
 % @sample \roty[\bigg]{\beta}: Adjust size of the pairing parentheses of $\beta$ to be larger
@@ -1424,6 +1471,7 @@
 }%
 
 %%
+% @group math
 % @sample \rotz: Rotation matrix about $z$-axis
 % @sample \rotz{\gamma}: Rotation matrix about $z$-axis for angle $\gamma$
 % @sample \rotz[\bigg]{\gamma}: Adjust size of the pairing parentheses of $\gamma$ to be larger
@@ -1445,11 +1493,13 @@
 }%
 
 %%
+% @group math
 % @sample \imagu: Proper imaginary unit $\imagu$
 %%
 \DeclareMathOperator{\imagu}{\mathrm{i}}%
 
 %%
+% @group math
 % @sample \imgu: Imaginary unit as command
 %%
 \DeclareDocumentCommand{\imgu}{ }{%
@@ -1457,62 +1507,74 @@
 }%
 
 %%
+% @group math
 % @sample \arcsec: Math operator for inverse secant
 %%
 \DeclareMathOperator{\arcsec}{arcsec}%
 
 %%
+% @group math
 % @sample \arccot: Math operator for inverse cotangent
 %%
 \DeclareMathOperator{\arccot}{arccot}%
 
 %%
+% @group math
 % @sample \arccsc: Math operator for inverse cosecant
 %%
 \DeclareMathOperator{\arccsc}{arccsc}%
 
 %%
+% @group math
 % @sample \sech: Math operator for hyperbolic secant
 %%
 \DeclareMathOperator{\sech}{sech}%
 
 %%
+% @group math
 % @sample \csch: Math operator for hyperbolic cosecant
 %%
 \DeclareMathOperator{\csch}{csch}%
 
 %%
+% @group math
 % @sample \arccosh: Math operator for inverse hyperbolic cosine
 %%
 \DeclareMathOperator{\arccosh}{arccosh}%
 
 %%
+% @group math
 % @sample \arcsinh: Math operator for inverse hyperbolic sinus
 %%
 \DeclareMathOperator{\arcsinh}{arcsinh}%
 
 %%
+% @group math
 % @sample \arcsech: Math operator for inverse hyperbolic secant
 %%
 \DeclareMathOperator{\arcsech}{arcsech}%
 
 %%
+% @group math
 % @sample \arccsch: Math operator for inverse hyperbolic cosecent
 %%
 \DeclareMathOperator{\arccsch}{arccsch}%
 
 %%
+% @group math
 % @sample \arctanh: Math operator for inverse hyperbolic tangent
 %%
 \DeclareMathOperator{\arctanh}{arctanh}%
 
 %%
+% @group math
 % @sample \arccoth: Math operator for inverse hyperbolic cotangent
 %%
 \DeclareMathOperator{\arccoth}{arccoth}%
 
 
 %%
+% @group math
 % @sample \prtrig{\sin}{\beta}: Typeset trigonometric function $\sin$ with its functional argument $\beta$ in parentheses
 % @sample \prtrig[\bigg]{\sin}{\beta}: Typeset trigonometric function with pairing parentheses scaled to size \latexinline|\bigg|
 % @sample \prtrig*{\sin}{\beta}: Automatic adjustment of the parentheses sizes
@@ -1532,6 +1594,7 @@
 }%
 
 %%
+% @group math
 % @sample \psin{x}: Sine of $x$ with parentheses around $x$
 % @sample \psin[\bigg]{x}: Sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \psin*{x}: Sine of $x$ with automatically height-adjusted parentheses around $x$
@@ -1549,8 +1612,9 @@
 }%
 
 %%
+% @group math
 % @sample \pcos{x}: Cosine of $x$ with parentheses around $x$
-% @sample \cos[\bigg]{x}: Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
+% @sample \pcos[\bigg]{x}: Cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pcos*{x}: Cosine of $x$ with automatically height-adjusted parentheses around $x$
 %%
 \DeclareDocumentCommand{\pcos}{ s o m }{%
@@ -1566,6 +1630,7 @@
 }%
 
 %%
+% @group math
 % @sample \ptan{x}: Tanget of $x$ with parentheses around $x$
 % @sample \ptan[\bigg]{x}: Tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \ptan*{x}: Tanget of $x$ with automatically height-adjusted parentheses around $x$
@@ -1583,6 +1648,7 @@
 }%
 
 %%
+% @group math
 % @sample \psec{x}: Secant of $x$ with parentheses around $x$
 % @sample \psec[\bigg]{x}: Secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \psec*{x}: Secant of $x$ with automatically height-adjusted parentheses around $x$
@@ -1600,6 +1666,7 @@
 }%
 
 %%
+% @group math
 % @sample \pcsc{x}: Cosecant of $x$ with parentheses around $x$
 % @sample \pcsc[\bigg]{x}: Cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pcsc*{x}: Cosecant of $x$ with automatically height-adjusted parentheses around $x$
@@ -1617,6 +1684,7 @@
 }%
 
 %%
+% @group math
 % @sample \pcot{x}: Cotangent of $x$ with parentheses around $x$
 % @sample \pcot[\bigg]{x}: Cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pcot*{x}: Cotangent of $x$ with automatically height-adjusted parentheses around $x$
@@ -1635,6 +1703,7 @@
 
 
 %%
+% @group math
 % @sample \parcsin{x}: Inverse sine of $x$ with parentheses around $x$
 % @sample \parcsin[\bigg]{x}: Inverse sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \parcsin*{x}: Inverse sine of $x$ with automatically height-adjusted parentheses around $x$
@@ -1652,6 +1721,7 @@
 }%
 
 %%
+% @group math
 % @sample \parccos{x}: Inverse cosine of $x$ with parentheses around $x$
 % @sample \parccos[\bigg]{x}: Inverse cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \parccos*{x}: Inverse cosine of $x$ with automatically height-adjusted parentheses around $x$
@@ -1669,6 +1739,7 @@
 }%
 
 %%
+% @group math
 % @sample \parctan{x}: Inverse tangent of $x$ with parentheses around $x$
 % @sample \parctan[\bigg]{x}: Inverse tangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \parctan*{x}: Inverse tangent of $x$ with automatically height-adjusted parentheses around $x$
@@ -1686,6 +1757,7 @@
 }%
 
 %%
+% @group math
 % @sample \parcsec{x}: Inverse secant of $x$ with parentheses around $x$
 % @sample \parcsec[\bigg]{x}: Inverse secant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \parcsec*{x}: Inverse secant of $x$ with automatically height-adjusted parentheses around $x$
@@ -1703,6 +1775,7 @@
 }%
 
 %%
+% @group math
 % @sample \parccsc{x}: Inverse cosecant of $x$ with parentheses around $x$
 % @sample \parccsc[\bigg]{x}: Inverse cosecant of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \parccsc*{x}: Inverse cosecant of $x$ with automatically height-adjusted parentheses around $x$
@@ -1720,6 +1793,7 @@
 }%
 
 %%
+% @group math
 % @sample \parccot{x}: Inverse cotangent of $x$ with parentheses around $x$
 % @sample \parccot[\bigg]{x}: Inverse cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \parccot*{x}: Inverse cotangent of $x$ with automatically height-adjusted parentheses around $x$
@@ -1737,6 +1811,7 @@
 }%
 
 %%
+% @group math
 % @sample \psinh{x}: Hyperbolic sine of $x$ with parentheses around $x$
 % @sample \psinh[\bigg]{x}: Hyperbolic sine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \psinh*{x}: Hyperbolic sine of $x$ with automatically height-adjusted parentheses around $x$
@@ -1754,6 +1829,7 @@
 }%
 
 %%
+% @group math
 % @sample \pcosh{x}: Hyperbolic cosine of $x$ with parentheses around $x$
 % @sample \pcosh[\bigg]{x}: Hyperbolic cosine of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pcosh*{x}: Hyperbolic cosine of $x$ with automatically height-adjusted parentheses around $x$
@@ -1771,6 +1847,7 @@
 }%
 
 %%
+% @group math
 % @sample \ptanh{x}: Hyperbolic tangent of $x$ with parentheses around $x$
 % @sample \ptanh[\bigg]{x}: Hyperbolic tanget of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \ptanh*{x}: Hyperbolic tangent of $x$ with automatically height-adjusted parentheses around $x$
@@ -1788,6 +1865,7 @@
 }%
 
 %%
+% @group math
 % @sample \pcoth{x}: Hyperbolic cotangent of $x$ with parentheses around $x$
 % @sample \pcoth[\bigg]{x}: Hyperbolic cotangent of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pcoth*{x}: Hyperbolic cotangent of $x$ with automatically height-adjusted parentheses around $x$
@@ -1805,6 +1883,7 @@
 }%
 
 %%
+% @group math
 % @sample \pexp{x}: Exponential function of $x$ with parentheses around $x$
 % @sample \pexp[\bigg]{x}: Expontential function of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pexp*{x}: Exponential function of $x$ with automatically height-adjusted parentheses around $x$
@@ -1822,6 +1901,7 @@
 }%
 
 %%
+% @group math
 % @sample \plog{x}: Logarithm base $10$ of $x$ with parentheses around $x$
 % @sample \plog[\bigg]{x}: Logarithm base $10$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \plog*{x}: Logarithm base $10$ of $x$ with automatically height-adjusted parentheses around $x$
@@ -1839,6 +1919,7 @@
 }%
 
 %%
+% @group math
 % @sample \pln{x}: Logarithm base $2$ of $x$ with parentheses around $x$
 % @sample \pln[\bigg]{x}: Logarithm base $2$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \pln*{x}: Logarithm base $2$ of $x$ with automatically height-adjusted parentheses around $x$
@@ -1856,6 +1937,7 @@
 }%
 
 %%
+% @group math
 % @sample \plg{x}: Logarithm base $e$ of $x$ with parentheses around $x$
 % @sample \plg[\bigg]{x}: Logarithm base $e$ of $x$ with pairing parentheses' heights to \latexinline|\bigg|
 % @sample \plg*{x}: Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
