@@ -58,10 +58,8 @@ def process_file(f, dest='build'):
             # Then process all lines
             cnt = process_lines(lns)
 
-            # Check if the target directory of the current file exists
-            if not pd.parent.exists():
-                # If not, create the directory first
-                os.makedirs(pd.parent.absolute())
+            # Make sure we have the directory of the containing file, too
+            pd.parent.absolute().mkdir(parents=True, exist_ok=True)
 
             # Write the content to the new target file
             pd.write_text(''.join(cnt), encoding='utf-8')
