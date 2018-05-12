@@ -8,9 +8,9 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.0.1 |
-| iswdctrt | Doctoral theses | 1.0.1 |
-| iswstud | Student theses | 1.0.1 |
+| iswartcl | General documents | 1.2.7 |
+| iswdctrt | Doctoral theses | 1.2.6 |
+| iswstud | Student theses | 1.2.6 |
 
 There are three ways to obtaining the necessary `.cls` and `.tex` files
   1. Clone the repository and obtain the files from the `dist/` directory
