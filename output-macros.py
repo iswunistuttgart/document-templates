@@ -134,7 +134,7 @@ def write_output(fs, mcrs, write=False):
         cnt = []
 
         # Add a nice file H1 heading
-        cnt.append('\chapter{List of Macros}')
+        cnt.append('\section*{List of Macros}')
         # Two empty lines
         cnt.append('')
         cnt.append('')
@@ -142,7 +142,7 @@ def write_output(fs, mcrs, write=False):
         # Loop over all files processed
         for k in range(0, len(fs)):
             # Add the file name of the processed file as H2 heading
-            cnt.append('\section{{{}}}'.format(pathlib.Path(fs[k]).stem))
+            cnt.append('\subsection*{{{}}}'.format(pathlib.Path(fs[k]).stem))
             # Empty line between heading and list of packages
             cnt.append('')
             # Open table and tabular
