@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.8}
+\def\fileversion{1.3.0}
 \def\filedate{2018/05/22}
 
 % Definition of the actual class interface
@@ -4239,7 +4239,7 @@
     \ifdefempty{\@coverpageImage}{}{%
       \begin{scope}%
         \clip (0, -0.30) rectangle (1, -0.65);%
-        \node[anchor=west, inner sep=0pt, outer sep=0pt] at (0.015, -0.475) {%
+        \node[inner sep=0pt, outer sep=0pt] at (0.5075, -0.475) {%
           \includegraphics[keepaspectratio, height=0.45\paperheight]{\@coverpageImage}%
         };%
       \end{scope}%
