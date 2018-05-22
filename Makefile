@@ -16,10 +16,10 @@ packages: $(SRC_DIR)/*.cls
 
 # create list of macros
 macros: iswmacros
-	$(PY) output-macros.py --output dist/macros.tex -- $(SRC_DIR)/*.cls
-	latexmk -norc -quiet -c -cd -r dist/iswbook.latexmkrc dist/iswmacros.tex
-	latexmk -norc -quiet    -cd -r dist/iswbook.latexmkrc dist/iswmacros.tex
-	latexmk -norc -quiet -c -cd -r dist/iswbook.latexmkrc dist/iswmacros.tex
+	$(PY) output-macros.py --output $(BUILD_DIR)/macros.tex -- $(SRC_DIR)/*.cls
+	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
+	latexmk -norc -quiet    -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
+	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
 
 
 # Building of all necessary classes
