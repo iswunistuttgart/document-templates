@@ -65,6 +65,7 @@
 }%
 
 %%
+% @group math
 % @sample \Dmatr{M}: Matrix notation for time-derivative of $M$
 % @sample \Dmatr[P]{M}: Matrix notation for time-derivative of $M$ with pre-superscript $P$
 % @sample \Dmatr[A][B]{M}: Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
@@ -83,6 +84,7 @@
 }%
 
 %%
+% @group math
 % @sample \DDmatr{M}: Matrix notation for second time-derivative of $M$
 % @sample \DDmatr[P]{M}: Matrix notation for second time-derivative of $M$ with pre-superscript $P$
 % @sample \DDmatr[A][B]{M}: Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
@@ -119,6 +121,7 @@
 }%
 
 %%
+% @group math
 % @sample \Dvect{q}: Vector notation for time-derivative of $q$
 % @sample \Dvect[P]{q}: Vector notation for time-derivative of $q$ with pre-superscript $P$
 % @sample \Dvect[A][B]{q}: Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
@@ -136,6 +139,7 @@
 }%
 
 %%
+% @group math
 % @sample \DDvect{q}: Vector notation for second time-derivative of $q$
 % @sample \DDvect[P]{q}: Vector notation for second time-derivative of $q$ with pre-superscript $P$
 % @sample \DDvect[A][B]{q}: Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
@@ -206,11 +210,11 @@
 \DeclareMathOperator{\sign}{sign}%
 
 
-% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
 % @group math
 % @sample \dif: Differential operator (upface d). Used in integrals for the integrand.
 % @sample \dif[x]: Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
 \DeclareDocumentCommand{\dif}{ o }{%
   \operatorname{d}%
@@ -333,6 +337,7 @@
 \renewcommand{\Im}{\operatorname{Im}}%
 
 %%
+% @group math
 % @sample \transp{A}: Transpose of argument $A$ e.g., matrix or vector transpose
 % @sample \transp[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
 %%
@@ -341,6 +346,7 @@
 }%
 
 %%
+% @group math
 % @sample \trafom{A}{B}: Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
 % @sample \trafom[Q]{A}{B}: Denote transformation matrix with $\matr{Q}$ instead of $\matr{T}$
 %%
@@ -349,6 +355,7 @@
 }%
 
 %%
+% @group math
 % @sample \conj{m}: Conjugate complex of the argument
 %%
 \DeclareDocumentCommand{\conj}{ m }{%
@@ -356,6 +363,7 @@
 }%
 
 %%
+% @group math
 % @sample \hermconj{x}: Hermitian conjugate of matrix
 % @sample \hermconj[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
 %%
