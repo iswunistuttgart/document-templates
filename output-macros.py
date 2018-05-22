@@ -218,7 +218,10 @@ def write_output(fs, mcrs, write=False):
         # Open the "packages.md" file for writing
         p = pathlib.Path(write)
 
-        # # And write the content to a file
+        # Make sure we have the directory of the containing file, too
+        p.parent.absolute().mkdir(parents=True, exist_ok=True)
+
+        # And write the content to a file
         p.write_text(cnt, encoding='utf-8')
     else:
         # Store the print content in here
