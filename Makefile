@@ -17,10 +17,9 @@ packages: $(SRC_DIR)/*.cls
 # create list of macros
 macros: iswmacros
 	$(PY) output-macros.py --output dist/macros.tex -- $(SRC_DIR)/*.cls
-	latexmk -quiet -c -cd dist/iswmacros.tex
-	latexmk -quiet -cd dist/iswmacros.tex
-	latexmk -c -cd dist/iswmacros.tex
-	rm dist/.latexmkrc
+	latexmk -norc -quiet -c -cd -r dist/iswbook.latexmkrc dist/iswmacros.tex
+	latexmk -norc -quiet    -cd -r dist/iswbook.latexmkrc dist/iswmacros.tex
+	latexmk -norc -quiet -c -cd -r dist/iswbook.latexmkrc dist/iswmacros.tex
 
 
 # Building of all necessary classes
@@ -56,7 +55,6 @@ iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl
 
 # copy all files needed for `iswmacros`
 iswmacros: iswbook $(SRC_DIR)/iswmacros.tex
-	cp $(SRC_DIR)/iswbook.latexmkrc $(BUILD_DIR)/.latexmkrc
 	cp $(SRC_DIR)/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
 
 # implicit target for making the images
