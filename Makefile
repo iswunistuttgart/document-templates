@@ -16,8 +16,9 @@ packages: src/*.cls
 # create list of macros
 macros: src/*.cls
 	cp src/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
+	cp src/iswartcl.latexmkrc $(BUILD_DIR)/.latexmkrc
 	$(PY) output-macros.py --output dist/macros.tex -- $?
-	cd $(BUILD_DIR) && latexmk -quiet -c iswmacros.tex && latexmk -quiet iswmacros.tex
+	cd $(BUILD_DIR) && latexmk -quiet -c iswmacros.tex && latexmk -quiet iswmacros.tex && rm .latexmkrc
 
 
 # Building of all necessary classes
