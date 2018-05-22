@@ -1,7 +1,7 @@
-\chapter{List of Macros}
+\section*{List of Macros}
 
 
-\section{iswartcl}
+\subsection*{iswartcl}
 
 \begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
@@ -48,6 +48,30 @@
       & $\matr[A][B]{M}$
       & Matrix notation for M with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\Dmatr{M}|
+      & $\Dmatr{M}$
+      & Matrix notation for time-derivative of $M$
+    \\
+  \latexinline|\Dmatr[P]{M}|
+      & $\Dmatr[P]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\Dmatr[A][B]{M}|
+      & $\Dmatr[A][B]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDmatr{M}|
+      & $\DDmatr{M}$
+      & Matrix notation for second time-derivative of $M$
+    \\
+  \latexinline|\DDmatr[P]{M}|
+      & $\DDmatr[P]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\DDmatr[A][B]{M}|
+      & $\DDmatr[A][B]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
   \latexinline|\vect{q}|
       & $\vect{q}$
       & Vector notation for q
@@ -59,6 +83,30 @@
   \latexinline|\vect[A][B]{q}|
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
+    \\
+  \latexinline|\Dvect{q}|
+      & $\Dvect{q}$
+      & Vector notation for time-derivative of $q$
+    \\
+  \latexinline|\Dvect[P]{q}|
+      & $\Dvect[P]{q}$
+      & Vector notation for time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\Dvect[A][B]{q}|
+      & $\Dvect[A][B]{q}$
+      & Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDvect{q}|
+      & $\DDvect{q}$
+      & Vector notation for second time-derivative of $q$
+    \\
+  \latexinline|\DDvect[P]{q}|
+      & $\DDvect[P]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\DDvect[A][B]{q}|
+      & $\DDvect[A][B]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
     \\
   \latexinline|\abs{x}|
       & $\abs{x}$
@@ -184,6 +232,10 @@
       & $\transp{A}$
       & Transpose of argument $A$ e.g., matrix or vector transpose
     \\
+  \latexinline|\transp[\mkern-2.5mu]{x}|
+      & $\transp[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
+    \\
   \latexinline|\trafom{A}{B}|
       & $\trafom{A}{B}$
       & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
@@ -199,6 +251,10 @@
   \latexinline|\hermconj{x}|
       & $\hermconj{x}$
       & Hermitian conjugate of matrix
+    \\
+  \latexinline|\hermconj[\mkern-2.5mu]{x}|
+      & $\hermconj[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
     \\
   \latexinline|\inv{A}|
       & $\inv{A}$
@@ -627,12 +683,152 @@
   \latexinline|\plg*{x}|
       & $\plg*{x}$
       & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\trademark|
+      & \trademark
+      & Add tm to anything trademarked
+    \\
+  \latexinline|\registered|
+      & \registered
+      & Add the (R) to anything registered like MATLAB\registered
+    \\
+  \latexinline|\textWrt|
+      & \textWrt
+      & With respect to
+    \\
+  \latexinline|\textWlog|
+      & \textWlog
+      & Without loss of generality
+    \\
+  \latexinline|\textAka|
+      & \textAka
+      & Also known as
+    \\
+  \latexinline|\textVv|
+      & \textVv
+      & Vice versa
+    \\
+  \latexinline|\textObda|
+      & \textObda
+      & Ohne Beschr\"ankung der Allgemeinheit
+    \\
+  \latexinline|\textZb|
+      & \textZb
+      & Zum Beispiel
+    \\
+  \latexinline|\textOae|
+      & \textOae
+      & Oder \"ahnlich(e(s))
+    \\
+  \latexinline|\textOa|
+      & \textOa
+      & Oder andere(s)
+    \\
+  \latexinline|\textUa|
+      & \textUa
+      & Unter anderem
+    \\
+  \latexinline|\textBzw|
+      & \textBzw
+      & Beziehungsweise (abbreviated)
+    \\
+  \latexinline|\textEh|
+      & \textEh
+      & Ehrenhalber
+    \\
+  \latexinline|\textDh|
+      & \textDh
+      & Das hei{\ss}t
+    \\
+  \latexinline|\textOg|
+      & \textOg
+      & Oben genannt
+    \\
+  \latexinline|\textGgf|
+      & \textGgf
+      & Gegebenenfalls
+    \\
+  \latexinline|\textCa|
+      & \textCa
+      & Circa
+    \\
+  \latexinline|\textEtc|
+      & \textEtc
+      & Et cetera
+    \\
+  \latexinline|\textIe|
+      & \textIe
+      & Id est
+    \\
+  \latexinline|\textCf|
+      & \textCf
+      & confer (\textIe see also)
+    \\
+  \latexinline|\textEg|
+      & \textEg
+      & Exemplari grati
+    \\
+  \latexinline|\textVs|
+      & \textVs
+      & Versus
+    \\
+  \latexinline|\textHc|
+      & \textHc
+      & Honoric causa
+    \\
+  \latexinline|\textHcMult|
+      & \textHcMult
+      & Honoris causa multi
+    \\
+  \latexinline|\textEtAl|
+      & \textEtAl
+      & et ali
+    \\
+  \latexinline|\textDiplIng|
+      & \textDiplIng
+      & Diplomingenieur
+    \\
+  \latexinline|\textDrIng|
+      & \textDrIng
+      & Doktoringenieur
+    \\
+  \latexinline|\textProf|
+      & \textProf
+      & Professor
+    \\
+  \latexinline|\textJuniorProf|
+      & \textJuniorProf
+      & Juniorprofessor
+    \\
+  \latexinline|\textGmbh|
+      & \textGmbh
+      & Gesellschaft mit beschr\"ankter Haftung
+    \\
+  \latexinline|\textAg|
+      & \textAg
+      & Aktiengesellschaft
+    \\
+  \latexinline|\textKg|
+      & \textKg
+      & Kommanditgesellschaft
+    \\
+  \latexinline|\textInc|
+      & \textInc
+      & Incorporated
+    \\
+  \latexinline|\textLtd|
+      & \textLtd
+      & Limited
+    \\
+  \latexinline|\textLlc|
+      & \textLlc
+      & Limited liability company
     \\
   \bottomrule
   \caption{List of macros of the \textinline|src/iswartcl.cls| class}
 \end{longtable}
 
-\section{iswbook}
+\subsection*{iswbook}
 
 \begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
@@ -679,6 +875,30 @@
       & $\matr[A][B]{M}$
       & Matrix notation for M with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\Dmatr{M}|
+      & $\Dmatr{M}$
+      & Matrix notation for time-derivative of $M$
+    \\
+  \latexinline|\Dmatr[P]{M}|
+      & $\Dmatr[P]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\Dmatr[A][B]{M}|
+      & $\Dmatr[A][B]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDmatr{M}|
+      & $\DDmatr{M}$
+      & Matrix notation for second time-derivative of $M$
+    \\
+  \latexinline|\DDmatr[P]{M}|
+      & $\DDmatr[P]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\DDmatr[A][B]{M}|
+      & $\DDmatr[A][B]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
   \latexinline|\vect{q}|
       & $\vect{q}$
       & Vector notation for q
@@ -690,6 +910,30 @@
   \latexinline|\vect[A][B]{q}|
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
+    \\
+  \latexinline|\Dvect{q}|
+      & $\Dvect{q}$
+      & Vector notation for time-derivative of $q$
+    \\
+  \latexinline|\Dvect[P]{q}|
+      & $\Dvect[P]{q}$
+      & Vector notation for time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\Dvect[A][B]{q}|
+      & $\Dvect[A][B]{q}$
+      & Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDvect{q}|
+      & $\DDvect{q}$
+      & Vector notation for second time-derivative of $q$
+    \\
+  \latexinline|\DDvect[P]{q}|
+      & $\DDvect[P]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\DDvect[A][B]{q}|
+      & $\DDvect[A][B]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
     \\
   \latexinline|\abs{x}|
       & $\abs{x}$
@@ -815,6 +1059,10 @@
       & $\transp{A}$
       & Transpose of argument $A$ e.g., matrix or vector transpose
     \\
+  \latexinline|\transp[\mkern-2.5mu]{x}|
+      & $\transp[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
+    \\
   \latexinline|\trafom{A}{B}|
       & $\trafom{A}{B}$
       & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
@@ -830,6 +1078,10 @@
   \latexinline|\hermconj{x}|
       & $\hermconj{x}$
       & Hermitian conjugate of matrix
+    \\
+  \latexinline|\hermconj[\mkern-2.5mu]{x}|
+      & $\hermconj[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
     \\
   \latexinline|\inv{A}|
       & $\inv{A}$
@@ -1258,12 +1510,152 @@
   \latexinline|\plg*{x}|
       & $\plg*{x}$
       & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\trademark|
+      & \trademark
+      & Add tm to anything trademarked
+    \\
+  \latexinline|\registered|
+      & \registered
+      & Add the (R) to anything registered like MATLAB\registered
+    \\
+  \latexinline|\textWrt|
+      & \textWrt
+      & With respect to
+    \\
+  \latexinline|\textWlog|
+      & \textWlog
+      & Without loss of generality
+    \\
+  \latexinline|\textAka|
+      & \textAka
+      & Also known as
+    \\
+  \latexinline|\textVv|
+      & \textVv
+      & Vice versa
+    \\
+  \latexinline|\textObda|
+      & \textObda
+      & Ohne Beschr\"ankung der Allgemeinheit
+    \\
+  \latexinline|\textZb|
+      & \textZb
+      & Zum Beispiel
+    \\
+  \latexinline|\textOae|
+      & \textOae
+      & Oder \"ahnlich(e(s))
+    \\
+  \latexinline|\textOa|
+      & \textOa
+      & Oder andere(s)
+    \\
+  \latexinline|\textUa|
+      & \textUa
+      & Unter anderem
+    \\
+  \latexinline|\textBzw|
+      & \textBzw
+      & Beziehungsweise (abbreviated)
+    \\
+  \latexinline|\textEh|
+      & \textEh
+      & Ehrenhalber
+    \\
+  \latexinline|\textDh|
+      & \textDh
+      & Das hei{\ss}t
+    \\
+  \latexinline|\textOg|
+      & \textOg
+      & Oben genannt
+    \\
+  \latexinline|\textGgf|
+      & \textGgf
+      & Gegebenenfalls
+    \\
+  \latexinline|\textCa|
+      & \textCa
+      & Circa
+    \\
+  \latexinline|\textEtc|
+      & \textEtc
+      & Et cetera
+    \\
+  \latexinline|\textIe|
+      & \textIe
+      & Id est
+    \\
+  \latexinline|\textCf|
+      & \textCf
+      & confer (\textIe see also)
+    \\
+  \latexinline|\textEg|
+      & \textEg
+      & Exemplari grati
+    \\
+  \latexinline|\textVs|
+      & \textVs
+      & Versus
+    \\
+  \latexinline|\textHc|
+      & \textHc
+      & Honoric causa
+    \\
+  \latexinline|\textHcMult|
+      & \textHcMult
+      & Honoris causa multi
+    \\
+  \latexinline|\textEtAl|
+      & \textEtAl
+      & et ali
+    \\
+  \latexinline|\textDiplIng|
+      & \textDiplIng
+      & Diplomingenieur
+    \\
+  \latexinline|\textDrIng|
+      & \textDrIng
+      & Doktoringenieur
+    \\
+  \latexinline|\textProf|
+      & \textProf
+      & Professor
+    \\
+  \latexinline|\textJuniorProf|
+      & \textJuniorProf
+      & Juniorprofessor
+    \\
+  \latexinline|\textGmbh|
+      & \textGmbh
+      & Gesellschaft mit beschr\"ankter Haftung
+    \\
+  \latexinline|\textAg|
+      & \textAg
+      & Aktiengesellschaft
+    \\
+  \latexinline|\textKg|
+      & \textKg
+      & Kommanditgesellschaft
+    \\
+  \latexinline|\textInc|
+      & \textInc
+      & Incorporated
+    \\
+  \latexinline|\textLtd|
+      & \textLtd
+      & Limited
+    \\
+  \latexinline|\textLlc|
+      & \textLlc
+      & Limited liability company
     \\
   \bottomrule
   \caption{List of macros of the \textinline|src/iswbook.cls| class}
 \end{longtable}
 
-\section{iswdctrt}
+\subsection*{iswdctrt}
 
 \begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
@@ -1310,6 +1702,30 @@
       & $\matr[A][B]{M}$
       & Matrix notation for M with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\Dmatr{M}|
+      & $\Dmatr{M}$
+      & Matrix notation for time-derivative of $M$
+    \\
+  \latexinline|\Dmatr[P]{M}|
+      & $\Dmatr[P]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\Dmatr[A][B]{M}|
+      & $\Dmatr[A][B]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDmatr{M}|
+      & $\DDmatr{M}$
+      & Matrix notation for second time-derivative of $M$
+    \\
+  \latexinline|\DDmatr[P]{M}|
+      & $\DDmatr[P]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\DDmatr[A][B]{M}|
+      & $\DDmatr[A][B]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
   \latexinline|\vect{q}|
       & $\vect{q}$
       & Vector notation for q
@@ -1321,6 +1737,30 @@
   \latexinline|\vect[A][B]{q}|
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
+    \\
+  \latexinline|\Dvect{q}|
+      & $\Dvect{q}$
+      & Vector notation for time-derivative of $q$
+    \\
+  \latexinline|\Dvect[P]{q}|
+      & $\Dvect[P]{q}$
+      & Vector notation for time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\Dvect[A][B]{q}|
+      & $\Dvect[A][B]{q}$
+      & Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDvect{q}|
+      & $\DDvect{q}$
+      & Vector notation for second time-derivative of $q$
+    \\
+  \latexinline|\DDvect[P]{q}|
+      & $\DDvect[P]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\DDvect[A][B]{q}|
+      & $\DDvect[A][B]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
     \\
   \latexinline|\abs{x}|
       & $\abs{x}$
@@ -1446,6 +1886,10 @@
       & $\transp{A}$
       & Transpose of argument $A$ e.g., matrix or vector transpose
     \\
+  \latexinline|\transp[\mkern-2.5mu]{x}|
+      & $\transp[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
+    \\
   \latexinline|\trafom{A}{B}|
       & $\trafom{A}{B}$
       & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
@@ -1461,6 +1905,10 @@
   \latexinline|\hermconj{x}|
       & $\hermconj{x}$
       & Hermitian conjugate of matrix
+    \\
+  \latexinline|\hermconj[\mkern-2.5mu]{x}|
+      & $\hermconj[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
     \\
   \latexinline|\inv{A}|
       & $\inv{A}$
@@ -1889,12 +2337,152 @@
   \latexinline|\plg*{x}|
       & $\plg*{x}$
       & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\trademark|
+      & \trademark
+      & Add tm to anything trademarked
+    \\
+  \latexinline|\registered|
+      & \registered
+      & Add the (R) to anything registered like MATLAB\registered
+    \\
+  \latexinline|\textWrt|
+      & \textWrt
+      & With respect to
+    \\
+  \latexinline|\textWlog|
+      & \textWlog
+      & Without loss of generality
+    \\
+  \latexinline|\textAka|
+      & \textAka
+      & Also known as
+    \\
+  \latexinline|\textVv|
+      & \textVv
+      & Vice versa
+    \\
+  \latexinline|\textObda|
+      & \textObda
+      & Ohne Beschr\"ankung der Allgemeinheit
+    \\
+  \latexinline|\textZb|
+      & \textZb
+      & Zum Beispiel
+    \\
+  \latexinline|\textOae|
+      & \textOae
+      & Oder \"ahnlich(e(s))
+    \\
+  \latexinline|\textOa|
+      & \textOa
+      & Oder andere(s)
+    \\
+  \latexinline|\textUa|
+      & \textUa
+      & Unter anderem
+    \\
+  \latexinline|\textBzw|
+      & \textBzw
+      & Beziehungsweise (abbreviated)
+    \\
+  \latexinline|\textEh|
+      & \textEh
+      & Ehrenhalber
+    \\
+  \latexinline|\textDh|
+      & \textDh
+      & Das hei{\ss}t
+    \\
+  \latexinline|\textOg|
+      & \textOg
+      & Oben genannt
+    \\
+  \latexinline|\textGgf|
+      & \textGgf
+      & Gegebenenfalls
+    \\
+  \latexinline|\textCa|
+      & \textCa
+      & Circa
+    \\
+  \latexinline|\textEtc|
+      & \textEtc
+      & Et cetera
+    \\
+  \latexinline|\textIe|
+      & \textIe
+      & Id est
+    \\
+  \latexinline|\textCf|
+      & \textCf
+      & confer (\textIe see also)
+    \\
+  \latexinline|\textEg|
+      & \textEg
+      & Exemplari grati
+    \\
+  \latexinline|\textVs|
+      & \textVs
+      & Versus
+    \\
+  \latexinline|\textHc|
+      & \textHc
+      & Honoric causa
+    \\
+  \latexinline|\textHcMult|
+      & \textHcMult
+      & Honoris causa multi
+    \\
+  \latexinline|\textEtAl|
+      & \textEtAl
+      & et ali
+    \\
+  \latexinline|\textDiplIng|
+      & \textDiplIng
+      & Diplomingenieur
+    \\
+  \latexinline|\textDrIng|
+      & \textDrIng
+      & Doktoringenieur
+    \\
+  \latexinline|\textProf|
+      & \textProf
+      & Professor
+    \\
+  \latexinline|\textJuniorProf|
+      & \textJuniorProf
+      & Juniorprofessor
+    \\
+  \latexinline|\textGmbh|
+      & \textGmbh
+      & Gesellschaft mit beschr\"ankter Haftung
+    \\
+  \latexinline|\textAg|
+      & \textAg
+      & Aktiengesellschaft
+    \\
+  \latexinline|\textKg|
+      & \textKg
+      & Kommanditgesellschaft
+    \\
+  \latexinline|\textInc|
+      & \textInc
+      & Incorporated
+    \\
+  \latexinline|\textLtd|
+      & \textLtd
+      & Limited
+    \\
+  \latexinline|\textLlc|
+      & \textLlc
+      & Limited liability company
     \\
   \bottomrule
   \caption{List of macros of the \textinline|src/iswdctrt.cls| class}
 \end{longtable}
 
-\section{iswstud}
+\subsection*{iswstud}
 
 \begin{longtable}{ p{0.29\linewidth} p{0.19\linewidth} p{0.48\linewidth} } \toprule
   \textbf{Code}
@@ -1941,6 +2529,30 @@
       & $\matr[A][B]{M}$
       & Matrix notation for M with pre-subscript A and pre-superscript B
     \\
+  \latexinline|\Dmatr{M}|
+      & $\Dmatr{M}$
+      & Matrix notation for time-derivative of $M$
+    \\
+  \latexinline|\Dmatr[P]{M}|
+      & $\Dmatr[P]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\Dmatr[A][B]{M}|
+      & $\Dmatr[A][B]{M}$
+      & Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDmatr{M}|
+      & $\DDmatr{M}$
+      & Matrix notation for second time-derivative of $M$
+    \\
+  \latexinline|\DDmatr[P]{M}|
+      & $\DDmatr[P]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-superscript $P$
+    \\
+  \latexinline|\DDmatr[A][B]{M}|
+      & $\DDmatr[A][B]{M}$
+      & Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+    \\
   \latexinline|\vect{q}|
       & $\vect{q}$
       & Vector notation for q
@@ -1952,6 +2564,30 @@
   \latexinline|\vect[A][B]{q}|
       & $\vect[A][B]{q}$
       & Vector notation for q with pre-subscript A and pre-superscript B
+    \\
+  \latexinline|\Dvect{q}|
+      & $\Dvect{q}$
+      & Vector notation for time-derivative of $q$
+    \\
+  \latexinline|\Dvect[P]{q}|
+      & $\Dvect[P]{q}$
+      & Vector notation for time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\Dvect[A][B]{q}|
+      & $\Dvect[A][B]{q}$
+      & Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+    \\
+  \latexinline|\DDvect{q}|
+      & $\DDvect{q}$
+      & Vector notation for second time-derivative of $q$
+    \\
+  \latexinline|\DDvect[P]{q}|
+      & $\DDvect[P]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-superscript $P$
+    \\
+  \latexinline|\DDvect[A][B]{q}|
+      & $\DDvect[A][B]{q}$
+      & Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
     \\
   \latexinline|\abs{x}|
       & $\abs{x}$
@@ -2077,6 +2713,10 @@
       & $\transp{A}$
       & Transpose of argument $A$ e.g., matrix or vector transpose
     \\
+  \latexinline|\transp[\mkern-2.5mu]{x}|
+      & $\transp[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
+    \\
   \latexinline|\trafom{A}{B}|
       & $\trafom{A}{B}$
       & Transformation matrix $\matr{T}$ from coordinate system $\frame{A}$ to $\frame{B}$
@@ -2092,6 +2732,10 @@
   \latexinline|\hermconj{x}|
       & $\hermconj{x}$
       & Hermitian conjugate of matrix
+    \\
+  \latexinline|\hermconj[\mkern-2.5mu]{x}|
+      & $\hermconj[\mkern-2.5mu]{x}$
+      & Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
     \\
   \latexinline|\inv{A}|
       & $\inv{A}$
@@ -2520,6 +3164,146 @@
   \latexinline|\plg*{x}|
       & $\plg*{x}$
       & Logarithm base $e$ of $x$ with automatically height-adjusted parentheses around $x$
+    \\
+  \latexinline|\trademark|
+      & \trademark
+      & Add tm to anything trademarked
+    \\
+  \latexinline|\registered|
+      & \registered
+      & Add the (R) to anything registered like MATLAB\registered
+    \\
+  \latexinline|\textWrt|
+      & \textWrt
+      & With respect to
+    \\
+  \latexinline|\textWlog|
+      & \textWlog
+      & Without loss of generality
+    \\
+  \latexinline|\textAka|
+      & \textAka
+      & Also known as
+    \\
+  \latexinline|\textVv|
+      & \textVv
+      & Vice versa
+    \\
+  \latexinline|\textObda|
+      & \textObda
+      & Ohne Beschr\"ankung der Allgemeinheit
+    \\
+  \latexinline|\textZb|
+      & \textZb
+      & Zum Beispiel
+    \\
+  \latexinline|\textOae|
+      & \textOae
+      & Oder \"ahnlich(e(s))
+    \\
+  \latexinline|\textOa|
+      & \textOa
+      & Oder andere(s)
+    \\
+  \latexinline|\textUa|
+      & \textUa
+      & Unter anderem
+    \\
+  \latexinline|\textBzw|
+      & \textBzw
+      & Beziehungsweise (abbreviated)
+    \\
+  \latexinline|\textEh|
+      & \textEh
+      & Ehrenhalber
+    \\
+  \latexinline|\textDh|
+      & \textDh
+      & Das hei{\ss}t
+    \\
+  \latexinline|\textOg|
+      & \textOg
+      & Oben genannt
+    \\
+  \latexinline|\textGgf|
+      & \textGgf
+      & Gegebenenfalls
+    \\
+  \latexinline|\textCa|
+      & \textCa
+      & Circa
+    \\
+  \latexinline|\textEtc|
+      & \textEtc
+      & Et cetera
+    \\
+  \latexinline|\textIe|
+      & \textIe
+      & Id est
+    \\
+  \latexinline|\textCf|
+      & \textCf
+      & confer (\textIe see also)
+    \\
+  \latexinline|\textEg|
+      & \textEg
+      & Exemplari grati
+    \\
+  \latexinline|\textVs|
+      & \textVs
+      & Versus
+    \\
+  \latexinline|\textHc|
+      & \textHc
+      & Honoric causa
+    \\
+  \latexinline|\textHcMult|
+      & \textHcMult
+      & Honoris causa multi
+    \\
+  \latexinline|\textEtAl|
+      & \textEtAl
+      & et ali
+    \\
+  \latexinline|\textDiplIng|
+      & \textDiplIng
+      & Diplomingenieur
+    \\
+  \latexinline|\textDrIng|
+      & \textDrIng
+      & Doktoringenieur
+    \\
+  \latexinline|\textProf|
+      & \textProf
+      & Professor
+    \\
+  \latexinline|\textJuniorProf|
+      & \textJuniorProf
+      & Juniorprofessor
+    \\
+  \latexinline|\textGmbh|
+      & \textGmbh
+      & Gesellschaft mit beschr\"ankter Haftung
+    \\
+  \latexinline|\textAg|
+      & \textAg
+      & Aktiengesellschaft
+    \\
+  \latexinline|\textKg|
+      & \textKg
+      & Kommanditgesellschaft
+    \\
+  \latexinline|\textInc|
+      & \textInc
+      & Incorporated
+    \\
+  \latexinline|\textLtd|
+      & \textLtd
+      & Limited
+    \\
+  \latexinline|\textLlc|
+      & \textLlc
+      & Limited liability company
     \\
   \bottomrule
   \caption{List of macros of the \textinline|src/iswstud.cls| class}
