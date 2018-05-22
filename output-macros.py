@@ -28,8 +28,12 @@ def create():
     # Parse the arguments given
     args = parser.parse_args()
 
-    # Loop over each given file and get its included packages
-    mcrs = [trawl_file(f) for f in args.files]
+    # Loop over each given file and get its full text content
+    file_lines = [trawl_file(f) for f in args.files]
+
+    # Then find blocks inside the list that start with '%%' and end with '%%'
+    # where each line in between starts with '%'
+    mcrs = { args.files[k]: find_macros(file_lines[k]) for k in range(0, len(args.files)) }
 
     # Write the output to either file or stdout
     write_output(args.files, mcrs, write=args.output)
@@ -47,33 +51,36 @@ def trawl_file(f):
     # Open the file
     try:
         with ps.open('r', encoding='utf-8') as s:
-            # Process the file
+            # Trawl all lines
             return trawl_lines(s)
     except BaseException as err:
         raise ReferenceError('Error processing file \'{}\''.format(f)) from err
-
-    return []
 
 
 def trawl_lines(f):
     """
     Process lines of the given file
+
     :param file f: A file object to read through
     :return str: The processed file content
     """
-    mcrs = []
+    lns = []
 
     # Loop over each line of the file
     for l in f:
+        # Trawl the current line
         p = trawl_line(l)
 
-        if type(p) is list:
-            mcrs.extend(p)
-        elif p:
-            mcrs.append(p)
+        # If a list was returned, we will extend our list with that list
+        if type(p) is list and len(p):
+            lns.extend(p)
+        # A string i.e., a single line of file was returned, so append it to
+        # the list of lines
+        elif type(p) is str and len(p):
+            lns.append(p)
 
     # Return the list of files
-    return mcrs
+    return lns
 
 
 def trawl_line(l):
@@ -105,18 +112,54 @@ def trawl_line(l):
     """
     Plain line of text, so scan this line
     """
-    # Regular expression to match either \usepackage or \RequirePackage
-    re_smpl = re.compile('\%\s+\@sample\s+(?P<code>.*)\s*:\s*(?P<description>.*)', re.IGNORECASE)
 
-    # Search for the package
-    smpl_found = re_smpl.search(l)
+    return l.rstrip()
 
-    # Found a code sample fragment?
-    if smpl_found:
-        return {'code': smpl_found.group('code'), 'description': smpl_found.group('description')}
 
-    # By default we will return none
-    return None
+def find_macros(lns):
+    """
+    Find the macros in the given list of file lines
+    :param list lns: List of the file's content
+    :return:
+    """
+
+    # Build our regexp: Matches anything of the following form
+    # %%
+    # *
+    # %%
+    rep = re.compile('^%{2}\n(?P<doc>.+?)\n%{2}$', re.MULTILINE | re.DOTALL)
+
+    # Match through the string of the file content
+    it = rep.finditer('\n'.join(lns))
+
+    # Holds our macros
+    mcrs = []
+
+    # Build some regexps to match certain things
+    re_group = re.compile('^\%\s+\@group:?\s+(?P<group>\w*).*$', re.MULTILINE | re.IGNORECASE)
+    re_see = re.compile('^\%\s+\@see:?\s+(?P<see>.*).*$', re.MULTILINE | re.IGNORECASE)
+    re_sample = re.compile('\%\s+\@sample\s+(?P<code>.*)\s*:\s*(?P<description>.*)', re.MULTILINE | re.IGNORECASE)
+
+    # If we found some macros, we will process them
+    for im in it:
+        # Store processed macro in here
+        m = {}
+        # Extract @group from the lines
+        m['groups'] = [ig.group('group') for ig in re_group.finditer(im.group('doc')) ]
+
+        # Find and parse all @see
+        m['see'] = [ims.group('see') for ims in re_see.finditer(im.group('doc'))]
+
+        # Find and parse all samples
+        m['samples'] = [{'code': ims.group('code'), 'desc': ims.group('description')} for ims in re_sample.finditer(im.group('doc'))]
+
+        # Append the macro to the list of macros if we found samples
+        if len(m['samples']):
+            # And append to list of macros
+            mcrs.append(m)
+
+    # Return the list of macros
+    return mcrs
 
 
 def write_output(fs, mcrs, write=False):
@@ -154,7 +197,12 @@ def write_output(fs, mcrs, write=False):
             # cnt.append('  \\bottomrule')
             cnt.append('    \\endlastfoot')
             # List of packages formatted to be in a tabular environment
-            cnt.extend(['  \latexinline|{}|\n      & ${}$\n      & {}\n    \\\\'.format(m['code'], m['code'], m['description']) for m in mcrs[k]])
+            for im in mcrs[fs[k]]:
+                if len(im['samples']):
+                    if len(im['groups']) and 'math' in im['groups']:
+                        cnt.extend(['  \latexinline|{}|\n      & ${}$\n      & {}\n    \\\\'.format(m['code'], m['code'], m['desc']) for m in im['samples']])
+                    else:
+                        cnt.extend(['  \latexinline|{}|\n      & {}\n      & {}\n    \\\\'.format(m['code'], m['code'], m['desc']) for m in im['samples']])
             # Close tabular and table
             cnt.append('  \\bottomrule')
             cnt.append('  \\caption{{List of macros of the \\textinline|{}| class}}'.format(fs[k]))
@@ -170,7 +218,7 @@ def write_output(fs, mcrs, write=False):
         # Open the "packages.md" file for writing
         p = pathlib.Path(write)
 
-        # And write the content to a file
+        # # And write the content to a file
         p.write_text(cnt, encoding='utf-8')
     else:
         # Store the print content in here
@@ -180,10 +228,10 @@ def write_output(fs, mcrs, write=False):
         for k in range(0, len(fs)):
             # Add the filename of the file
             cnt.append('# {}'.format(pathlib.Path(fs[k]).stem))
-            # List of macros formatted as "* {macro}: {description}"
-            cnt.extend(['* {}: {}'.format(m['code'], m['description']) for m in mcrs[k]])
-            # Empty line at the end of each package
-            cnt.append('\n')
+            # Loop over each macro
+            for im in mcrs[fs[k]]:
+                if len(im['samples']):
+                    cnt.extend(['* {}: {}'.format(m['code'], m['desc']) for m in im['samples']])
 
         # From list to string
         cnt = '\n'.join(cnt)
