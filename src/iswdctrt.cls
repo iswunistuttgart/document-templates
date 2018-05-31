@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.4.0}
+\def\fileversion{1.4.1}
 \def\filedate{2018/05/31}
 
 % Definition of the actual class interface
