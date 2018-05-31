@@ -154,6 +154,10 @@
 % Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
 \RequirePackage{footmisc}
 
+% The package provides four commands for vertically scaling and stretching objects. Its primary function is the ability to scale/stretch and shift one object to conform to the size of a specified second object. This feature can be useful in both equations and schematic diagrams.
+% Additionally, the scaling and stretching commands offer constraints on maximum width and/or minimum aspect ratio, which are often used to preserve legibility or for the sake of general appearance. 
+\RequirePackage{scalerel}
+
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
 
