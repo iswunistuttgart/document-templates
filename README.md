@@ -9,6 +9,7 @@ If you are just interested in finding the most recent class that you want to use
 | Class | Purpose | Version |
 |-------|---------|---------|
 | iswartcl | General documents | 1.4.1 |
+| iswbook | Book-like documents | 1.4.1 |
 | iswdctrt | Doctoral theses | 1.4.1 |
 | iswstud | Student theses | 1.4.1 |
 
