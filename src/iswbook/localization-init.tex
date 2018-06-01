@@ -18,3 +18,9 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \newcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \newcommand{\documentname}{Report}%
+}{}%

@@ -18,3 +18,9 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Umdruck}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Bericht}%
+}{}%
