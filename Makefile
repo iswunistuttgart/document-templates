@@ -4,7 +4,7 @@ BUILD_DIR = dist
 SRC_DIR = src
 
 .PHONY: all
-all: build $(FILES) images packages macros
+all: build classes images packages macros
 
 # build directory
 build:
@@ -21,6 +21,9 @@ macros: iswmacros
 	latexmk -norc -quiet    -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
 	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
 
+# Target to only build the classes
+.PHONY: classes
+classes: $(FILES)
 
 # Building of all necessary classes
 # build iswartcl cls, tex, rc, etc

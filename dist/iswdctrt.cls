@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.3.0}
-\def\filedate{2018/05/22}
+\def\fileversion{1.4.1}
+\def\filedate{2018/05/31}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -607,6 +607,10 @@
 % Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
 \RequirePackage{footmisc}
 
+% The package provides four commands for vertically scaling and stretching objects. Its primary function is the ability to scale/stretch and shift one object to conform to the size of a specified second object. This feature can be useful in both equations and schematic diagrams.
+% Additionally, the scaling and stretching commands offer constraints on maximum width and/or minimum aspect ratio, which are often used to preserve legibility or for the sake of general appearance. 
+\RequirePackage{scalerel}
+
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
 
@@ -1078,9 +1082,6 @@
 % @sample \of*{x, t}: Automatic height adjustment of the pairing parentheses
 % @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
 %%
-% \DeclarePairedDelimiterX{\of}[1]{\lparen}{\rparen}{%
-%   {#1}%
-% }%
 \DeclareDocumentCommand{\of}{ s o m }{%
   \mkern-1.0mu%
   \IfBooleanTF{#1}{%
@@ -1097,6 +1098,54 @@
     }%
   }%
 }%
+
+%%
+% @group math
+% @sample \overlinebm{M}: Overline the bm-typeset character M such that the overline is placed with a length matching the width of the upright version of the letter, and offsets the overstoke by 3mu to account for the italics.
+%%
+\DeclareDocumentCommand{\overlinebm}{ m }{%
+  \ThisStyle{\ooalign{%
+    $\SavedStyle\mkern3mu\overline{\phantom{\mathrm{#1}}}$\cr$\SavedStyle\bm{{#1}}$%
+  }}%
+}%
+
+%%
+% @group math
+% @sample \overlinevect{q}: Vector notation for overlined q
+% @sample \overlinevect[P]{q}: Vector notation for overlined q with pre-superscript P
+% @sample \overlinevect[A][B]{q}: Vector notation for overlined q with pre-subscript A and pre-superscript B
+%%
+\DeclareDocumentCommand{\overlinevect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\overlinebm{#3}}%
+    }{%
+      \prescript{#1}{}{\overlinebm{#3}}%
+    }%
+  }{%
+    \overlinebm{#3}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \overlinematr{M}: Matrix notation for overlined M
+% @sample \overlinematr[P]{M}: Matrix notation for overlined M with pre-superscript P
+% @sample \overlinematr[A][B]{M}: Matrix notation for overlined M with pre-subscript A and pre-superscript B
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\overlinematr}{ o o m }{
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\overlinebm{#3}}%
+    }{%
+      \prescript{#1}{}{\overlinebm{#3}}%
+    }%
+  }{%
+    \overlinebm{#3}%
+  }%
+}
+
 
 %%
 % @group math
@@ -1394,8 +1443,12 @@
 % @sample \transp{A}: Transpose of argument $A$ e.g., matrix or vector transpose
 % @sample \transp[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
 %%
-\DeclareDocumentCommand{\transp}{ O{\mkern-1.5mu} m }{%
-  #2^{#1\mbox{\textscale{0.6}{$\top$}}}%
+\DeclareDocumentCommand{\transp}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses{#3}^{#2\mbox{\textscale{0.6}{$\top$}}}%%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\top$}}}%%
+  }%
 }%
 
 %%
@@ -1411,7 +1464,7 @@
 % @group math
 % @sample \conj{m}: Conjugate complex of the argument
 %%
-\DeclareDocumentCommand{\conj}{ m }{%
+\DeclareDocumentCommand{\conj}{ s m }{%
   \overline{#1}%
 }%
 
@@ -1420,17 +1473,31 @@
 % @sample \hermconj{x}: Hermitian conjugate of matrix
 % @sample \hermconj[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
 %%
-\DeclareDocumentCommand{\hermconj}{ O{\mkern-1.5mu} m }{%
-  #2^{#1\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+\DeclareDocumentCommand{\hermconj}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses{#3}^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }%
 }%
 
 
 %%
 % @group math
 % @sample \inv{A}: Element inverse of A - usually used for matrix inverse
+% @sample \inv*{A}: Automatically wraps the argument in parentheses
+% @sample \inv*[\bigg]{A}: Sets the scaling of the parentheses around the argument to bigg
 %%
-\DeclareDocumentCommand{\inv}{ m }{%
-  #1^{-1}%
+\DeclareDocumentCommand{\inv}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{
+      \parentheses[#2]{#3}^{-1}%
+    }{%
+      \parentheses{#3}^{-1}%
+    }%
+  }{%
+    #3^{-1}%
+  }%
 }%
 
 %%
@@ -2206,9 +2273,9 @@
 %%
 \newcommand{\textHc}{h.c.\@\xspace}
 %%
-% @sample \textHcMult: Honoris causa multi
+% @sample \textHcMult: Honoris causa multiplex
 %%
-\newcommand{\textHcMult}{h.\@\xspace~c.\@\xspace~mult.\@\xspace}
+\newcommand{\textHcMult}{h.c.\@\xspace~mult.\@\xspace}
 %%
 % @sample \textEtAl: et ali
 %%
@@ -3583,10 +3650,10 @@
 % Adjustments to subsubsections
 \addtokomafont{subsubsection}{\color{subsubsection}}
 % We'll make paragraphs have medium font-weight
-\addtokomafont{paragraph}{\color{paragraph}\mdseries}
+\addtokomafont{paragraph}{\color{paragraph}}
 % And have sub-paragraphs have medium font-weight with a smaller font size
 % compared to paragraphs
-\addtokomafont{subparagraph}{\color{subparagraph}\mdseries\small}
+\addtokomafont{subparagraph}{\color{subparagraph}\small}
 % Font of label in a description list
 % \addtokomafont{descriptionlabel}{}
 
