@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.2.7}
-\def\filedate{2018/05/01}
+\def\fileversion{1.4.1}
+\def\filedate{2018/05/31}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -621,6 +621,10 @@
 % Some of the functions of the package are overlap with the functionality of other packages. The para option is also provided by the manyfoot and bigfoot packages, though those are both also portmanteau packages. (Don't be seduced by fnpara, whose implementation is improved by the present package.) The perpage option is also offered by footnpag and by the rather more general-purpose perpage
 \RequirePackage{footmisc}
 
+% The package provides four commands for vertically scaling and stretching objects. Its primary function is the ability to scale/stretch and shift one object to conform to the size of a specified second object. This feature can be useful in both equations and schematic diagrams.
+% Additionally, the scaling and stretching commands offer constraints on maximum width and/or minimum aspect ratio, which are often used to preserve legibility or for the sake of general appearance. 
+\RequirePackage{scalerel}
+
 % Enumerate and itemize within paragraphs. Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
 \RequirePackage{paralist}
 
@@ -1084,7 +1088,70 @@
 % @sample \of*{x, t}: Automatic height adjustment of the pairing parentheses
 % @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
 %%
-\DeclarePairedDelimiter{\of}{\lparen}{\rparen}%
+\DeclareDocumentCommand{\of}{ s o m }{%
+  \mkern-1.0mu%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \parens*[#2]{#3}%
+    }{%
+      \parens*{#3}%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \parens[#2]{#3}%
+    }{%
+      \parens{#3}%
+    }%
+  }%
+}%
+
+%%
+% @group math
+% @sample \overlinebm{M}: Overline the bm-typeset character M such that the overline is placed with a length matching the width of the upright version of the letter, and offsets the overstoke by 3mu to account for the italics.
+%%
+\DeclareDocumentCommand{\overlinebm}{ m }{%
+  \ThisStyle{\ooalign{%
+    $\SavedStyle\mkern3mu\overline{\phantom{\mathrm{#1}}}$\cr$\SavedStyle\bm{{#1}}$%
+  }}%
+}%
+
+%%
+% @group math
+% @sample \overlinevect{q}: Vector notation for overlined q
+% @sample \overlinevect[P]{q}: Vector notation for overlined q with pre-superscript P
+% @sample \overlinevect[A][B]{q}: Vector notation for overlined q with pre-subscript A and pre-superscript B
+%%
+\DeclareDocumentCommand{\overlinevect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\overlinebm{#3}}%
+    }{%
+      \prescript{#1}{}{\overlinebm{#3}}%
+    }%
+  }{%
+    \overlinebm{#3}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \overlinematr{M}: Matrix notation for overlined M
+% @sample \overlinematr[P]{M}: Matrix notation for overlined M with pre-superscript P
+% @sample \overlinematr[A][B]{M}: Matrix notation for overlined M with pre-subscript A and pre-superscript B
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\overlinematr}{ o o m }{
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\overlinebm{#3}}%
+    }{%
+      \prescript{#1}{}{\overlinebm{#3}}%
+    }%
+  }{%
+    \overlinebm{#3}%
+  }%
+}
+
 
 %%
 % @group math
@@ -1107,6 +1174,44 @@
 
 %%
 % @group math
+% @sample \Dmatr{M}: Matrix notation for time-derivative of $M$
+% @sample \Dmatr[P]{M}: Matrix notation for time-derivative of $M$ with pre-superscript $P$
+% @sample \Dmatr[A][B]{M}: Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\Dmatr}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\dot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\dot{#3}}}%
+    }%
+  }{%
+    \bm{\dot{#3}}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \DDmatr{M}: Matrix notation for second time-derivative of $M$
+% @sample \DDmatr[P]{M}: Matrix notation for second time-derivative of $M$ with pre-superscript $P$
+% @sample \DDmatr[A][B]{M}: Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\DDmatr}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\ddot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\ddot{#3}}}%
+    }%
+  }{%
+    \bm{\ddot{#3}}%
+  }%
+}%
+
+%%
+% @group math
 % @sample \vect{q}: Vector notation for q
 % @sample \vect[P]{q}: Vector notation for q with pre-superscript P
 % @sample \vect[A][B]{q}: Vector notation for q with pre-subscript A and pre-superscript B
@@ -1120,6 +1225,42 @@
     }%
   }{%
     \bm{#3}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \Dvect{q}: Vector notation for time-derivative of $q$
+% @sample \Dvect[P]{q}: Vector notation for time-derivative of $q$ with pre-superscript $P$
+% @sample \Dvect[A][B]{q}: Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+%%
+\DeclareDocumentCommand{\Dvect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\dot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\dot{#3}}}%
+    }%
+  }{%
+    \bm{\dot{#3}}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \DDvect{q}: Vector notation for second time-derivative of $q$
+% @sample \DDvect[P]{q}: Vector notation for second time-derivative of $q$ with pre-superscript $P$
+% @sample \DDvect[A][B]{q}: Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+%%
+\DeclareDocumentCommand{\DDvect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\ddot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\ddot{#3}}}%
+    }%
+  }{%
+    \bm{\ddot{#3}}%
   }%
 }%
 
@@ -1177,11 +1318,11 @@
 \DeclareMathOperator{\sign}{sign}%
 
 
-% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
 % @group math
 % @sample \dif: Differential operator (upface d). Used in integrals for the integrand.
 % @sample \dif[x]: Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
 \DeclareDocumentCommand{\dif}{ o }{%
   \operatorname{d}%
@@ -1306,9 +1447,14 @@
 %%
 % @group math
 % @sample \transp{A}: Transpose of argument $A$ e.g., matrix or vector transpose
+% @sample \transp[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
 %%
-\DeclareDocumentCommand{\transp}{ m }{%
-  {#1}^{\mkern-2.5mu\mathsf{T}}%
+\DeclareDocumentCommand{\transp}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses{#3}^{#2\mbox{\textscale{0.6}{$\top$}}}%%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\top$}}}%%
+  }%
 }%
 
 %%
@@ -1324,24 +1470,40 @@
 % @group math
 % @sample \conj{m}: Conjugate complex of the argument
 %%
-\DeclareDocumentCommand{\conj}{ m }{%
+\DeclareDocumentCommand{\conj}{ s m }{%
   \overline{#1}%
 }%
 
 %%
 % @group math
 % @sample \hermconj{x}: Hermitian conjugate of matrix
+% @sample \hermconj[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
 %%
-\DeclareDocumentCommand{\hermconj}{ m }{%
-  {#1}^{\mkern-3.5mu\mathsf{H}}%
+\DeclareDocumentCommand{\hermconj}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses{#3}^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }%
 }%
+
 
 %%
 % @group math
 % @sample \inv{A}: Element inverse of A - usually used for matrix inverse
+% @sample \inv*{A}: Automatically wraps the argument in parentheses
+% @sample \inv*[\bigg]{A}: Sets the scaling of the parentheses around the argument to bigg
 %%
-\DeclareDocumentCommand{\inv}{ m }{%
-  #1^{-1}%
+\DeclareDocumentCommand{\inv}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{
+      \parentheses[#2]{#3}^{-1}%
+    }{%
+      \parentheses{#3}^{-1}%
+    }%
+  }{%
+    #3^{-1}%
+  }%
 }%
 
 %%
@@ -1358,7 +1520,7 @@
 % @sample \evec[\xi]{x}: Name the unit axis coordinate vector $\xi$ rather than $e$
 %%
 \DeclareDocumentCommand{\evec}{ O{e} m }{%
-  \vect{#1}_{\mc{#2}}%
+  \hat{ \vect{#1} }_{\mc{#2}}%
 }%
 
 %%
@@ -1374,7 +1536,7 @@
 % @sample \arctant*{\frac{a}{b}}{x}: Arcus tangent 2 with automatically scaled pairing parentheses
 %%
 \DeclareDocumentCommand{\arctant}{ s o m m }{%
-  \arctantwo%
+  \arctantwo\, %
   \IfBooleanTF{#1}{%
     \of*{#3, #4}%
   }{%
@@ -1441,7 +1603,7 @@
 \DeclareDocumentCommand{\rotmatr}{ o o }{%
   \IfValueTF{#1}{%
     \IfValueTF{#2}{%
-      \matr[#2][#1]{\rotscal}%
+      \matr[#1][#2]{\rotscal}%
     }{%
       \matr[][#1]{\rotscal}%
     }%
@@ -2007,9 +2169,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% General typesetting
-% Add tm to any trademarked thing
+%%
+% @sample \trademark: Add tm to anything trademarked
+%%
 \newcommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
-% Add the (R) to any registered thing
+%%
+% @sample \registered: Add the (R) to anything registered like MATLAB\registered
+%%
 \newcommand{\registered}[1]{#1\textsuperscript{\textregistered}}
 
 
@@ -2017,90 +2183,158 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common English abbreviations
 
-% w.r.t. => with respect to [in Bezug zu/auf]
+%%
+% @sample \textWrt: With respect to
+%%
 \newcommand{\textWrt}{w.r.t.\@\xspace}
-% w.l.o.g. => without loss of generality [o.B.d.A => ohne Beschraenkung der Allgemeinheit]
+%%
+% @sample \textWlog: Without loss of generality
+%%
 \newcommand{\textWlog}{w.l.o.g.\@\xspace}
-% a.k.a. => also known as [aka => Auch bekannt als]
+%%
+% @sample \textAka: Also known as
+%%
 \newcommand{\textAka}{a.k.a.\@\xspace}
+%%
+% @sample \textVv: Vice versa
+%%
+\newcommand{\textVv}{v.v.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common German abbreviations
 
-% o.B.d.A => ohne Beschraenkung der Allgemeinheit
+%%
+% @sample \textObda: Ohne Beschr\"ankung der Allgemeinheit
+%%
 \newcommand{\textObda}{o.\@~B.\@~d.\@~A.\@\xspace}
-% z.B. => zum Beispiel
+%%
+% @sample \textZb: Zum Beispiel
+%%
 \newcommand{\textZb}{z.\@~B.\@\xspace}
-% o.\"a. => oder aehnliche(s)
+%%
+% @sample \textOae: Oder \"ahnlich(e(s))
+%%
 \newcommand{\textOae}{o.\@~\"a.\@\xspace}
-% o.a. => oder andere
+%%
+% @sample \textOa: Oder andere(s)
+%%
 \newcommand{\textOa}{o.\@~a.\@\xspace}
-% u.a. => unter anderem
+%%
+% @sample \textUa: Unter anderem
+%%
 \newcommand{\textUa}{u.\@~a.\@\xspace}
-% bzw. => beziehungweise
+%%
+% @sample \textBzw: Beziehungsweise (abbreviated)
+%%
 \newcommand{\textBzw}{bzw.\@\xspace}
-% E. h. => Ehrenhalber
+%%
+% @sample \textEh: Ehrenhalber
+%%
 \newcommand{\textEh}{E.\@\xspace~h.\@\xspace}
-% d.h. => das heisst
+%%
+% @sample \textDh: Das hei{\ss}t
+%%
 \newcommand{\textDh}{d.\@\xspace~h.\@\xspace}
-% o.g. => oben genannt
+%%
+% @sample \textOg: Oben genannt
+%%
 \newcommand{\textOg}{o.\@~g.\@\xspace}
-% ggf. => gegebenenfalls
+%%
+% @sample \textGgf: Gegebenenfalls
+%%
 \newcommand{\textGgf}{ggf.\@\xspace}
-% ca. => circa
+%%
+% @sample \textCa: Circa
+%%
 \newcommand{\textCa}{ca.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Latin abbreviations
-% etc. => et cetera
+%%
+% @sample \textEtc: Et cetera
+%%
 \newcommand{\textEtc}{etc.\@\xspace}
-% i.e. => id est => that is [das ist/heisst]
+%%
+% @sample \textIe: Id est
+%%
 \newcommand{\textIe}{i.e.\@,\xspace}
-% cf. => confer => refer to [siehe]
+%%
+% @sample \textCf: confer (\textIe see also)
+%%
 \newcommand{\textCf}{cf.\@\xspace}
-% e.g. => exemplari grati => for example [zum Beispiel]
+%%
+% @sample \textEg: Exemplari grati
+%%
 \newcommand{\textEg}{e.g.\@,\xspace}
-% vs. => versus => against [gegen]
+%%
+% @sample \textVs: Versus
+%%
 \newcommand{\textVs}{vs.\@\xspace}
-% h. c. => honoris causa
+%%
+% @sample \textHc: Honoric causa
+%%
 \newcommand{\textHc}{h.c.\@\xspace}
-% h. c. mult. => honoris causa mult.
-\newcommand{\textHcMult}{h.\@\xspace~c.\@\xspace~mult.\@\xspace}
-% et al. => honoris causa mult.
+%%
+% @sample \textHcMult: Honoris causa multiplex
+%%
+\newcommand{\textHcMult}{h.c.\@\xspace~mult.\@\xspace}
+%%
+% @sample \textEtAl: et ali
+%%
 \newcommand{\textEtAl}{et~al.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Titles
-% Dipl.-Ing. => Diplomingenieur
+%%
+% @sample \textDiplIng: Diplomingenieur
+%%
 \newcommand{\textDiplIng}{Dipl.-Ing.\@\xspace}
-% Dr.-Ing. => Doktoringenieur
+%%
+% @sample \textDrIng: Doktoringenieur
+%%
 \newcommand{\textDrIng}{Dr.-Ing.\@\xspace}
-% Prof. => Professor
+%%
+% @sample \textProf: Professor
+%%
 \newcommand{\textProf}{Prof.\@\xspace}
-% Junior-Prof. => Juniorprofessor
-\newcommand{\textJuniorProf}{Junior-Prof.\@\xspace}
+%%
+% @sample \textJuniorProf: Juniorprofessor
+%%
+\newcommand{\textJuniorProf}{Juniorprof.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Company types
-% GmbH => Gesellschaft mit beschraenker Haftung
+%%
+% @sample \textGmbh: Gesellschaft mit beschr\"ankter Haftung
+%%
 \newcommand{\textGmbh}{GmbH}
-% AG => Aktiengesellschaft
+%%
+% @sample \textAg: Aktiengesellschaft
+%%
 \newcommand{\textAg}{AG}
-% KG => Kommanditgesellschaft
+%%
+% @sample \textKg: Kommanditgesellschaft
+%%
 \newcommand{\textKg}{KG}
-% Inc. => Incorporated
+%%
+% @sample \textInc: Incorporated
+%%
 \newcommand{\textInc}{Inc.\@\xspace}
-% Ltd. => Limited
+%%
+% @sample \textLtd: Limited
+%%
 \newcommand{\textLtd}{Ltd.\@\xspace}
-% LLC => Limited liability company
+%%
+% @sample \textLlc: Limited liability company
+%%
 \newcommand{\textLlc}{LLC}
 
 % NOTE: In the following, command arguments are specified as follows
@@ -2838,10 +3072,10 @@
 % Adjustments to subsubsections
 \addtokomafont{subsubsection}{\color{subsubsection}}
 % We'll make paragraphs have medium font-weight
-\addtokomafont{paragraph}{\color{paragraph}\mdseries}
+\addtokomafont{paragraph}{\color{paragraph}}
 % And have sub-paragraphs have medium font-weight with a smaller font size
 % compared to paragraphs
-\addtokomafont{subparagraph}{\color{subparagraph}\mdseries\small}
+\addtokomafont{subparagraph}{\color{subparagraph}\small}
 % Font of label in a description list
 % \addtokomafont{descriptionlabel}{}
 
@@ -3049,7 +3283,7 @@
     \ifdefempty{\@coverpageImage}{}{%
       \begin{scope}%
         \clip (0, -0.30) rectangle (1, -0.65);%
-        \node[anchor=west, inner sep=0pt, outer sep=0pt] at (0.015, -0.475) {%
+        \node[inner sep=0pt, outer sep=0pt] at (0.5075, -0.475) {%
           \includegraphics[keepaspectratio, height=0.45\paperheight]{\@coverpageImage}%
         };%
       \end{scope}%

@@ -5,9 +5,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% General typesetting
-% Add tm to any trademarked thing
+%%
+% @sample \trademark: Add tm to anything trademarked
+%%
 \newcommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
-% Add the (R) to any registered thing
+%%
+% @sample \registered: Add the (R) to anything registered like MATLAB\registered
+%%
 \newcommand{\registered}[1]{#1\textsuperscript{\textregistered}}
 
 
@@ -15,88 +19,156 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common English abbreviations
 
-% w.r.t. => with respect to [in Bezug zu/auf]
+%%
+% @sample \textWrt: With respect to
+%%
 \newcommand{\textWrt}{w.r.t.\@\xspace}
-% w.l.o.g. => without loss of generality [o.B.d.A => ohne Beschraenkung der Allgemeinheit]
+%%
+% @sample \textWlog: Without loss of generality
+%%
 \newcommand{\textWlog}{w.l.o.g.\@\xspace}
-% a.k.a. => also known as [aka => Auch bekannt als]
+%%
+% @sample \textAka: Also known as
+%%
 \newcommand{\textAka}{a.k.a.\@\xspace}
+%%
+% @sample \textVv: Vice versa
+%%
+\newcommand{\textVv}{v.v.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Common German abbreviations
 
-% o.B.d.A => ohne Beschraenkung der Allgemeinheit
+%%
+% @sample \textObda: Ohne Beschr\"ankung der Allgemeinheit
+%%
 \newcommand{\textObda}{o.\@~B.\@~d.\@~A.\@\xspace}
-% z.B. => zum Beispiel
+%%
+% @sample \textZb: Zum Beispiel
+%%
 \newcommand{\textZb}{z.\@~B.\@\xspace}
-% o.\"a. => oder aehnliche(s)
+%%
+% @sample \textOae: Oder \"ahnlich(e(s))
+%%
 \newcommand{\textOae}{o.\@~\"a.\@\xspace}
-% o.a. => oder andere
+%%
+% @sample \textOa: Oder andere(s)
+%%
 \newcommand{\textOa}{o.\@~a.\@\xspace}
-% u.a. => unter anderem
+%%
+% @sample \textUa: Unter anderem
+%%
 \newcommand{\textUa}{u.\@~a.\@\xspace}
-% bzw. => beziehungweise
+%%
+% @sample \textBzw: Beziehungsweise (abbreviated)
+%%
 \newcommand{\textBzw}{bzw.\@\xspace}
-% E. h. => Ehrenhalber
+%%
+% @sample \textEh: Ehrenhalber
+%%
 \newcommand{\textEh}{E.\@\xspace~h.\@\xspace}
-% d.h. => das heisst
+%%
+% @sample \textDh: Das hei{\ss}t
+%%
 \newcommand{\textDh}{d.\@\xspace~h.\@\xspace}
-% o.g. => oben genannt
+%%
+% @sample \textOg: Oben genannt
+%%
 \newcommand{\textOg}{o.\@~g.\@\xspace}
-% ggf. => gegebenenfalls
+%%
+% @sample \textGgf: Gegebenenfalls
+%%
 \newcommand{\textGgf}{ggf.\@\xspace}
-% ca. => circa
+%%
+% @sample \textCa: Circa
+%%
 \newcommand{\textCa}{ca.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Latin abbreviations
-% etc. => et cetera
+%%
+% @sample \textEtc: Et cetera
+%%
 \newcommand{\textEtc}{etc.\@\xspace}
-% i.e. => id est => that is [das ist/heisst]
+%%
+% @sample \textIe: Id est
+%%
 \newcommand{\textIe}{i.e.\@,\xspace}
-% cf. => confer => refer to [siehe]
+%%
+% @sample \textCf: confer (\textIe see also)
+%%
 \newcommand{\textCf}{cf.\@\xspace}
-% e.g. => exemplari grati => for example [zum Beispiel]
+%%
+% @sample \textEg: Exemplari grati
+%%
 \newcommand{\textEg}{e.g.\@,\xspace}
-% vs. => versus => against [gegen]
+%%
+% @sample \textVs: Versus
+%%
 \newcommand{\textVs}{vs.\@\xspace}
-% h. c. => honoris causa
+%%
+% @sample \textHc: Honoric causa
+%%
 \newcommand{\textHc}{h.c.\@\xspace}
-% h. c. mult. => honoris causa mult.
-\newcommand{\textHcMult}{h.\@\xspace~c.\@\xspace~mult.\@\xspace}
-% et al. => honoris causa mult.
+%%
+% @sample \textHcMult: Honoris causa multiplex
+%%
+\newcommand{\textHcMult}{h.c.\@\xspace~mult.\@\xspace}
+%%
+% @sample \textEtAl: et ali
+%%
 \newcommand{\textEtAl}{et~al.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Titles
-% Dipl.-Ing. => Diplomingenieur
+%%
+% @sample \textDiplIng: Diplomingenieur
+%%
 \newcommand{\textDiplIng}{Dipl.-Ing.\@\xspace}
-% Dr.-Ing. => Doktoringenieur
+%%
+% @sample \textDrIng: Doktoringenieur
+%%
 \newcommand{\textDrIng}{Dr.-Ing.\@\xspace}
-% Prof. => Professor
+%%
+% @sample \textProf: Professor
+%%
 \newcommand{\textProf}{Prof.\@\xspace}
-% Junior-Prof. => Juniorprofessor
-\newcommand{\textJuniorProf}{Junior-Prof.\@\xspace}
+%%
+% @sample \textJuniorProf: Juniorprofessor
+%%
+\newcommand{\textJuniorProf}{Juniorprof.\@\xspace}
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Company types
-% GmbH => Gesellschaft mit beschraenker Haftung
+%%
+% @sample \textGmbh: Gesellschaft mit beschr\"ankter Haftung
+%%
 \newcommand{\textGmbh}{GmbH}
-% AG => Aktiengesellschaft
+%%
+% @sample \textAg: Aktiengesellschaft
+%%
 \newcommand{\textAg}{AG}
-% KG => Kommanditgesellschaft
+%%
+% @sample \textKg: Kommanditgesellschaft
+%%
 \newcommand{\textKg}{KG}
-% Inc. => Incorporated
+%%
+% @sample \textInc: Incorporated
+%%
 \newcommand{\textInc}{Inc.\@\xspace}
-% Ltd. => Limited
+%%
+% @sample \textLtd: Limited
+%%
 \newcommand{\textLtd}{Ltd.\@\xspace}
-% LLC => Limited liability company
+%%
+% @sample \textLlc: Limited liability company
+%%
 \newcommand{\textLlc}{LLC}

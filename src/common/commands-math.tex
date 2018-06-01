@@ -25,7 +25,70 @@
 % @sample \of*{x, t}: Automatic height adjustment of the pairing parentheses
 % @see https://tex.stackexchange.com/questions/2607/spacing-around-left-and-right
 %%
-\DeclarePairedDelimiter{\of}{\lparen}{\rparen}%
+\DeclareDocumentCommand{\of}{ s o m }{%
+  \mkern-1.0mu%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \parens*[#2]{#3}%
+    }{%
+      \parens*{#3}%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \parens[#2]{#3}%
+    }{%
+      \parens{#3}%
+    }%
+  }%
+}%
+
+%%
+% @group math
+% @sample \overlinebm{M}: Overline the bm-typeset character M such that the overline is placed with a length matching the width of the upright version of the letter, and offsets the overstoke by 3mu to account for the italics.
+%%
+\DeclareDocumentCommand{\overlinebm}{ m }{%
+  \ThisStyle{\ooalign{%
+    $\SavedStyle\mkern3mu\overline{\phantom{\mathrm{#1}}}$\cr$\SavedStyle\bm{{#1}}$%
+  }}%
+}%
+
+%%
+% @group math
+% @sample \overlinevect{q}: Vector notation for overlined q
+% @sample \overlinevect[P]{q}: Vector notation for overlined q with pre-superscript P
+% @sample \overlinevect[A][B]{q}: Vector notation for overlined q with pre-subscript A and pre-superscript B
+%%
+\DeclareDocumentCommand{\overlinevect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\overlinebm{#3}}%
+    }{%
+      \prescript{#1}{}{\overlinebm{#3}}%
+    }%
+  }{%
+    \overlinebm{#3}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \overlinematr{M}: Matrix notation for overlined M
+% @sample \overlinematr[P]{M}: Matrix notation for overlined M with pre-superscript P
+% @sample \overlinematr[A][B]{M}: Matrix notation for overlined M with pre-subscript A and pre-superscript B
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\overlinematr}{ o o m }{
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\overlinebm{#3}}%
+    }{%
+      \prescript{#1}{}{\overlinebm{#3}}%
+    }%
+  }{%
+    \overlinebm{#3}%
+  }%
+}
+
 
 %%
 % @group math
@@ -48,6 +111,44 @@
 
 %%
 % @group math
+% @sample \Dmatr{M}: Matrix notation for time-derivative of $M$
+% @sample \Dmatr[P]{M}: Matrix notation for time-derivative of $M$ with pre-superscript $P$
+% @sample \Dmatr[A][B]{M}: Matrix notation for time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\Dmatr}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\dot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\dot{#3}}}%
+    }%
+  }{%
+    \bm{\dot{#3}}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \DDmatr{M}: Matrix notation for second time-derivative of $M$
+% @sample \DDmatr[P]{M}: Matrix notation for second time-derivative of $M$ with pre-superscript $P$
+% @sample \DDmatr[A][B]{M}: Matrix notation for second time-derivative of $M$ with pre-subscript $A$ and pre-superscript $B$
+% @see http://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation
+%%
+\DeclareDocumentCommand{\DDmatr}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\ddot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\ddot{#3}}}%
+    }%
+  }{%
+    \bm{\ddot{#3}}%
+  }%
+}%
+
+%%
+% @group math
 % @sample \vect{q}: Vector notation for q
 % @sample \vect[P]{q}: Vector notation for q with pre-superscript P
 % @sample \vect[A][B]{q}: Vector notation for q with pre-subscript A and pre-superscript B
@@ -61,6 +162,42 @@
     }%
   }{%
     \bm{#3}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \Dvect{q}: Vector notation for time-derivative of $q$
+% @sample \Dvect[P]{q}: Vector notation for time-derivative of $q$ with pre-superscript $P$
+% @sample \Dvect[A][B]{q}: Vector notation for time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+%%
+\DeclareDocumentCommand{\Dvect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\dot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\dot{#3}}}%
+    }%
+  }{%
+    \bm{\dot{#3}}%
+  }%
+}%
+
+%%
+% @group math
+% @sample \DDvect{q}: Vector notation for second time-derivative of $q$
+% @sample \DDvect[P]{q}: Vector notation for second time-derivative of $q$ with pre-superscript $P$
+% @sample \DDvect[A][B]{q}: Vector notation for second time-derivative of $q$ with pre-subscript $A$ and pre-superscript $B$
+%%
+\DeclareDocumentCommand{\DDvect}{ o o m }{%
+  \IfValueTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#1}{\bm{\ddot{#3}}}%
+    }{%
+      \prescript{#1}{}{\bm{\ddot{#3}}}%
+    }%
+  }{%
+    \bm{\ddot{#3}}%
   }%
 }%
 
@@ -118,11 +255,11 @@
 \DeclareMathOperator{\sign}{sign}%
 
 
-% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
 % @group math
 % @sample \dif: Differential operator (upface d). Used in integrals for the integrand.
 % @sample \dif[x]: Index the differential operator with $x$. Necessary because there is a negative space after the operator.
+% @see http://tex.stackexchange.com/questions/135944/commath-and-ifinner
 %%
 \DeclareDocumentCommand{\dif}{ o }{%
   \operatorname{d}%
@@ -247,9 +384,14 @@
 %%
 % @group math
 % @sample \transp{A}: Transpose of argument $A$ e.g., matrix or vector transpose
+% @sample \transp[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the transpose symbol manually. This may be useful in case the superscript is too close or too far away from its base
 %%
-\DeclareDocumentCommand{\transp}{ m }{%
-  {#1}^{\mkern-2.5mu\mathsf{T}}%
+\DeclareDocumentCommand{\transp}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses{#3}^{#2\mbox{\textscale{0.6}{$\top$}}}%%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\top$}}}%%
+  }%
 }%
 
 %%
@@ -265,24 +407,40 @@
 % @group math
 % @sample \conj{m}: Conjugate complex of the argument
 %%
-\DeclareDocumentCommand{\conj}{ m }{%
+\DeclareDocumentCommand{\conj}{ s m }{%
   \overline{#1}%
 }%
 
 %%
 % @group math
 % @sample \hermconj{x}: Hermitian conjugate of matrix
+% @sample \hermconj[\mkern-2.5mu]{x}: Set the spacing of the superscript index for the Hermitian transpose manually. This may be useful in case the superscript is too close or too far away from its base
 %%
-\DeclareDocumentCommand{\hermconj}{ m }{%
-  {#1}^{\mkern-3.5mu\mathsf{H}}%
+\DeclareDocumentCommand{\hermconj}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses{#3}^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }%
 }%
+
 
 %%
 % @group math
 % @sample \inv{A}: Element inverse of A - usually used for matrix inverse
+% @sample \inv*{A}: Automatically wraps the argument in parentheses
+% @sample \inv*[\bigg]{A}: Sets the scaling of the parentheses around the argument to bigg
 %%
-\DeclareDocumentCommand{\inv}{ m }{%
-  #1^{-1}%
+\DeclareDocumentCommand{\inv}{ s o m }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{
+      \parentheses[#2]{#3}^{-1}%
+    }{%
+      \parentheses{#3}^{-1}%
+    }%
+  }{%
+    #3^{-1}%
+  }%
 }%
 
 %%
@@ -299,7 +457,7 @@
 % @sample \evec[\xi]{x}: Name the unit axis coordinate vector $\xi$ rather than $e$
 %%
 \DeclareDocumentCommand{\evec}{ O{e} m }{%
-  \vect{#1}_{\mc{#2}}%
+  \hat{ \vect{#1} }_{\mc{#2}}%
 }%
 
 %%
@@ -315,7 +473,7 @@
 % @sample \arctant*{\frac{a}{b}}{x}: Arcus tangent 2 with automatically scaled pairing parentheses
 %%
 \DeclareDocumentCommand{\arctant}{ s o m m }{%
-  \arctantwo%
+  \arctantwo\, %
   \IfBooleanTF{#1}{%
     \of*{#3, #4}%
   }{%
@@ -382,7 +540,7 @@
 \DeclareDocumentCommand{\rotmatr}{ o o }{%
   \IfValueTF{#1}{%
     \IfValueTF{#2}{%
-      \matr[#2][#1]{\rotscal}%
+      \matr[#1][#2]{\rotscal}%
     }{%
       \matr[][#1]{\rotscal}%
     }%
