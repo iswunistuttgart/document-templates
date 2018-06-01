@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.4.1}
-\def\filedate{2018/05/31}
+\def\fileversion{1.4.2}
+\def\filedate{2018/06/01}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -73,6 +73,9 @@
 
 % Declare the document type
 \def\DocumentType{book}
+\DeclareOption{regular}{\def\DocumentType{regular}}
+\DeclareOption{offprint}{\def\DocumentType{offprint}}
+\DeclareOption{report}{\def\DocumentType{report}}
 
 % Input more common options
 % Declare debug options
@@ -2377,6 +2380,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \newcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \newcommand{\documentname}{Report}%
+}{}%
 
   \addto\captionsenglish{%
 \university{University of Stuttgart}
@@ -2399,6 +2408,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionsUSenglish{%
 \university{University of Stuttgart}
@@ -2421,6 +2436,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionsamerican{%
 \university{University of Stuttgart}
@@ -2443,6 +2464,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionsUKenglish{%
 \university{University of Stuttgart}
@@ -2465,6 +2492,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionsbritish{%
 \university{University of Stuttgart}
@@ -2487,6 +2520,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionscanadian{%
 \university{University of Stuttgart}
@@ -2509,6 +2548,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionsaustralian{%
 \university{University of Stuttgart}
@@ -2531,6 +2576,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
   \addto\captionsnewzealand{%
 \university{University of Stuttgart}
@@ -2553,6 +2604,12 @@
 \renewcommand{\contentsname}{Table of Contents}
 %\renewcommand{\@dedicationname}{Dedication}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Offprint}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Report}%
+}{}%
   }
 
   \addto\captionsaustrian{%
@@ -2576,6 +2633,12 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Umdruck}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Bericht}%
+}{}%
   }%
   \addto\captionsgerman{%
 \university{Universit\"at Stuttgart}
@@ -2598,6 +2661,12 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Umdruck}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Bericht}%
+}{}%
   }%
   \addto\captionsgermanb{%
 \university{Universit\"at Stuttgart}
@@ -2620,6 +2689,12 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Umdruck}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Bericht}%
+}{}%
   }%
   \addto\captionsnaustrian{%
 \university{Universit\"at Stuttgart}
@@ -2642,6 +2717,12 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Umdruck}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Bericht}%
+}{}%
   }%
   \addto\captionsngerman{%
 \university{Universit\"at Stuttgart}
@@ -2664,6 +2745,12 @@
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
+\ifdefstring{\DocumentType}{offprint}{%
+  \renewcommand{\documentname}{Umdruck}%
+}{}%
+\ifdefstring{\DocumentType}{report}{%
+  \renewcommand{\documentname}{Bericht}%
+}{}%
   }%
 
 }{}%
