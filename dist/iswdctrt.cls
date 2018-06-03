@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.4.1}
-\def\filedate{2018/06/01}
+\def\fileversion{1.5.0}
+\def\filedate{2018/06/03}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -101,6 +101,9 @@
 % version
 \DeclareBoolOption[false]{accepted}
 
+% Add option to support code highlighting using minted package
+\DeclareBoolOption{code}
+
 % Pass any other options not known to the scrbook package
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{scrbook}}
 
@@ -199,7 +202,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Glossaries
 \PassOptionsToPackage{%
-  acronym,%
+  acronyms,%
   toc,%
   xindy,%
   nomain,%
@@ -408,18 +411,27 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex
-\PassOptionsToPackage{
-  style=iswbib,
+\PassOptionsToPackage{%
+  backend=biber,%
+  language=auto,%
+  style=ieee,%
   citestyle=authoryear,
-  sorting=nyt,
-  maxcitenames=1,
-  maxbibnames=99,
-  uniquename=false,
-  backend=biber,
-  dashed=false
+  % sorting=nyt, % NameYearTitle
+  sorting=none,% Like bibtex' `unrt`: number according to appearance in source
+  % style=authoryear-comp, % Author 1999, 2010
+  % bibstyle=authoryear,
+  dashed=false,% Do not substitute repeated authors with ---
+  mincitenames=1,% default 2
+  maxcitenames=1,% default 3
+  maxbibnames=10,% default: 3, et al.
+  isbn=false,% Hide ISBN
+  url=false,% Hide URL
+  doi=false,% Hide DOI
+  uniquename=false,%
+  giveninits=true,% Only first letter of given names -> increase chances for homogeneous bibliography
+  % backref=true,%
+  natbib=true,% natbib compatibility mode (\citep and \citet still work)
 }{biblatex}
-%doi=false,isbn=false,url=false
-
 
 
 
@@ -595,6 +607,18 @@
 
   % EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The package provides a visual markup extension to amsmath. The user-friendly interface allows the user to put a set of equations inside a box thus enhancing the \boxed feature of amsmath. As a side effect it's also possible to add material on both sides of the equations thus providing (and surpassing) the functionality of the cases package. Users of ntheorem will probably want to have a look at it as well, since the problem with end-of-theorem marks in gather and other environments can be circumvented using empheq.
   \RequirePackage{empheq}
+
+  % Provides macros to typeset bra-ket notation, as well as set specifiers, with a single (“|”) or a double (“||” or (“\|”) vertical bar specifier in between two bracketed parts. Each macro comes in a fixed-size version and an expanding version.
+  % If the package finds itself operating under e-tex, it uses the extended primitive \middle for more reliable results
+  \RequirePackage{braket}
+  
+  %  When typing an open interval as $]a,b[$, a closing bracket is being used in place of an opening fence and vice versa. This leads to the wrong spacing in, say, $]-a,b[$ or $A\in]a,b[=B$. The package attempts to solve this using:
+  %  \interval{a}{b} -> [a,b]
+  %  \interval[open]{a}{b} -> ]a,b[
+  %  \interval[open left]{a}{b} -> ]a,b]
+  % The package also supports fence scaling and ensures that the enclosing fences will end up having the proper closing and opening types.
+  % TeX maths does not do this job properly.
+  \RequirePackage{interval}
 \fi
 
 % A comprehensive (SI) units package. Typesetting values with units requires care to ensure that the combined mathematical meaning of the value plus unit combination is clear. In particular, the SI units system lays down a consistent set of units with rules on how they are to be used. However, different countries and publishers have differing conventions on the exact appearance of numbers (and units). A number of LaTeX packages have been developed to provide consistent application of the various rules: SIunits, sistyle, unitsdef and units are the leading examples. The numprint package provides a large number of number-related functions, while dcolumn and rccol provide tools for typesetting tabular numbers. The siunitx package takes the best from the existing packages, and adds new features and a consistent interface. A number of new ideas have been incorporated, to fill gaps in the existing provision. The package also provides backward-compatibility with SIunits, sistyle, unitsdef and units. The aim is to have one package to handle all of the possible unit-related needs of LaTeX users. The package relies on LaTeX 3 support from the l3kernel and l3packages bundles.
@@ -652,8 +676,13 @@
 % Show label, ref, cite and bib keys. The showkeys package modifies the \label, \ref, \pageref, \cite and \bibitem commands so that the 'internal' key is printed, without affecting the appearance of the rest of the text, so far as is possible (the keys typically appear in the margin). The package is part of the tools bundle in the LaTeX required distribution.
 \ifdraft{\RequirePackage{showkeys}}{}
 
-% Expand acronyms at least once. This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks. The package requires the suffix package, which in turn requires that it runs under e-TeX.
-\RequirePackage{acronym}
+% % Expand acronyms at least once. This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks. The package requires the suffix package, which in turn requires that it runs under e-TeX.
+% \RequirePackage{acronym}
+
+\ifDocumentcode
+  % The package that facilitates expressive syntax highlighting in LaTeX using the powerful Pygments library. The package also provides options to customize the highlighted source code output using fancyvrb. 
+  \RequirePackage{minted}
+\fi
 
 % Defines commands \counterwithin (which sets up a counter to be reset when another is incremented) and \counterwithout (which unsets such a relationship).
 \RequirePackage{chngcntr}
@@ -665,16 +694,16 @@
 % Interpretes quotation marks " and ' and correctly typesets them. Some LaTeX-Editors however provide an option for automatically replacing the correct LaTeX code for quotes, which should be preferred.
 \RequirePackage{csquotes}
 
-% Use biblatex, which is the (highly configurable) successor of bibtex and biber
-% biber is still used though to sort the bibliography in the background. 
-\RequirePackage{biblatex}
-
 % The dcolumn package makes use of the array package to define a "D" column format for use in tabular environments.
 % This package is part of the tools bundle in the LaTeX required distribution.
 \RequirePackage{dcolumn}
 
 % The European currency symbol for the Euro implemented in METAFONT, using the official European Commission dimensions, and providing several shapes (normal, slanted, bold, outline). The package also includes a LaTeX package which defines the macro, pre-compiled tfm files, and documentation.
 \RequirePackage{eurosym}
+
+% Use biblatex, which is the (highly configurable) successor of bibtex and biber
+% biber is still used though to sort the bibliography in the background. 
+\RequirePackage{biblatex}
 
 % The command \url is a form of verbatim command that allows linebreaks at certain characters or combinations of characters, accepts reconfiguration, and can usually be used in the argument to another command. (The \urldef command provides robust commands that serve in cases when \url doesn't work in an argument.) The command is intended for email addresses, hypertext links, directories/paths, etc., which normally have no spaces, so by default the package ignores spaces in its argument. However, a package option "allows spaces", which is useful for operating systems where spaces are a common part of file names.
 \RequirePackage{url}
@@ -684,14 +713,16 @@
 % The package depends on the author's kvoptions, ltxcmdsand refcount packages.
 \RequirePackage{hyperref}
 
-% This package provides a command much like hyperref's \url that typesets a URL using a typewriter-like font. However, if the dvips driver is being used, the original \url doesn't allow line breaks in the middle of the created link: the link comes in one atomic piece. This package allows such line breaks in the generated links. 
-% \RequirePackage{breakurl}
-
 % Intelligent cross-referencing. The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference. The formats used may be customised in the preamble of a document; babel support is available (though the choice of languages remains limited: currently Danish, Dutch, English, French, German, Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a means of referencing a list of references, each formatted according to its type. In such lists, it can collapse sequences of numerically-consecutive labels to a reference range.
 \RequirePackage{cleveref}
 
 % Create glossaries and lists of acronyms. The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and description (and optionally an associated symbol). Support for multiple languages is offered, and plural forms of terms may be specified. An additional package, glossaries-accsupp, can make use of the accsupp package mechanisms for accessibility support for PDF files containing glossaries. The user may define new glossary styles, and preambles and postambles can be specified. There is provision for loading a database of terms, but only terms used in the text will be added to the relevant glossary. The package uses an indexing program to provide the actual glossary; either makeindex or xindy may serve this purpose, and a Perl script is provided to serve as interface. The package distribution also provides the mfirstuc package, for changing the first letter of a word to upper case. The package supersedes the author's glossary package (which is now obsolete), and a conversion tool is provided.
 \RequirePackage{glossaries}
+\RequirePackage{glossaries-extra}
+\RequirePackage{glossary-longbooktabs}
+\RequirePackage{glossaries-extra-stylemods}
+\setabbreviationstyle[acronym]{long-short}
+\renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
 
 % Some packages from other authors may have problems with KOMA-Script. In my opinion some packages could be improved. With some packages this makes only sense, if KOMAScript was used. With some other packages the package author has another opinion. Sometimes proposals was never answered. Package scrhack contains all those improvement proposals for other packages. This means, scrhack redefines macros of packages from other authors! The redefinitions are only activated, if those packages were loaded. Users may prevent scrhack from redefining macros of individual packages.
 \RequirePackage{scrhack}
@@ -1280,9 +1311,15 @@
 % @group math
 % @sample \pow{x}: Second power of the argument
 % @sample \pow[n]{x}: n-th power of the argument
+% @sample \pow*{x}: Automatically adds and scales parentheses around the base $x$
+% @sample \pow*[n]{x}: Automatically adds and scales parentheses around the base $x$ of power $n$
 %%
-\DeclareDocumentCommand{\pow}{ O{2} m }{%
-  #2^{#1}%
+\DeclareDocumentCommand{\pow}{ s O{2} m }{%
+  \IfBooleanTF{#1}{%
+    \parens*{#3}^{#2}%
+  }{%
+    #3^{#2}%
+  }
 }%
 
 %%
@@ -3734,6 +3771,19 @@
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Glossaries definitions
+\RequirePackage{iswgloss}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code Highlighting
+\ifDocumentcode
+  % Style of lexing to use
+  \usemintedstyle{colorful}
+\fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Numbering of equations, figures, and tables according to their chapter
 \numberwithin{equation}{chapter}
