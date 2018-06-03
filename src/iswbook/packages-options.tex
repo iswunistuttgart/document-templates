@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% scriswbook
+% scrbook
 \PassOptionsToClass{
 %  abstract=on, %
   chapterprefix=false, %
@@ -18,20 +18,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex
 \PassOptionsToPackage{%
-	backend=biber,
-	%bibencoding=ascii,%
-	language=auto,%
-	style=ieee,%numeric-comp,%
-	sorting=none, % wie unsrt in bibtex: Nummern nach Zitierreihenfolge vergeben
-	%style=authoryear-comp, % Author 1999, 2010
-	%bibstyle=authoryear, dashed=true, % dashed: substitute rep. author with ---
-	%sorting=nyt, % name, year, title
-	maxbibnames=10, % default: 3, et al.
-	isbn=false,               %_ISBN ausblenden
-	%url = false,
-	doi=true,               %_DOI ausblenden
-	%uniquename=full,
-	giveninits=true,          %Only first letter of given names -> increase chances for homogeneous bibliography
-	%backref=true,%
-	natbib=true % natbib compatibility mode (\citep and \citet still work)
+  backend=biber,%
+  language=auto,%
+  style=ieee,%
+  citestyle=authoryear,
+  % sorting=nyt, % NameYearTitle
+  sorting=none,% Like bibtex' `unrt`: number according to appearance in source
+  % style=authoryear-comp, % Author 1999, 2010
+  % bibstyle=authoryear,
+  dashed=true,% Substitute repeated authors with ---
+  mincitenames=1,% default 2
+  maxcitenames=1,% default 3
+  maxbibnames=10,% default: 3, et al.
+  isbn=false,% Hide ISBN
+  url=false,% Hide URL
+  doi=false,% Hide DOI
+  % uniquename=full,
+  giveninits=true,% Only first letter of given names -> increase chances for homogeneous bibliography
+  % backref=true,%
+  natbib=true,% natbib compatibility mode (\citep and \citet still work)
 }{biblatex}
