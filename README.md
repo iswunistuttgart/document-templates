@@ -8,10 +8,10 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.4.1 |
+| iswartcl | General documents | 1.5.0 |
 | iswbook | Book-like documents | 1.4.2 |
-| iswdctrt | Doctoral theses | 1.4.1 |
-| iswstud | Student theses | 1.4.1 |
+| iswdctrt | Doctoral theses | 1.5.0 |
+| iswstud | Student theses | 1.5.0 |
 
 There are three ways to obtaining the necessary `.cls` and `.tex` files
   1. Clone the repository and obtain the files from the `dist/` directory
@@ -124,6 +124,13 @@ The style is already loaded in the respective class.
 
 If your thesis is highly mathematical, you should pass the `mathematics` option to the documentclass.
 This will load some more commonly used mathematics oriented packages and define several commands that can come in handy.
+
+### Code-heavy Thesis
+
+If you fancy adding many source code listings to your thesis, we have built-in support for awesome code highlighting using the `minted` package.
+Activate it by simply providing the `code` option to the document class.
+While it may require a bit more setup and configuration of your LaTeX environment at first, it will pay off in the long run.
+See the [minted documentation](https://ctan.org/pkg/minted) for more information.
 
 ### TikZ
 
