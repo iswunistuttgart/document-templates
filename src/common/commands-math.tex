@@ -223,9 +223,15 @@
 % @group math
 % @sample \pow{x}: Second power of the argument
 % @sample \pow[n]{x}: n-th power of the argument
+% @sample \pow*{x}: Automatically adds and scales parentheses around the base $x$
+% @sample \pow*[n]{x}: Automatically adds and scales parentheses around the base $x$ of power $n$
 %%
-\DeclareDocumentCommand{\pow}{ O{2} m }{%
-  #2^{#1}%
+\DeclareDocumentCommand{\pow}{ s O{2} m }{%
+  \IfBooleanTF{#1}{%
+    \parens*{#3}^{#2}%
+  }{%
+    #3^{#2}%
+  }
 }%
 
 %%
