@@ -142,6 +142,18 @@
 
   % EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The package provides a visual markup extension to amsmath. The user-friendly interface allows the user to put a set of equations inside a box thus enhancing the \boxed feature of amsmath. As a side effect it's also possible to add material on both sides of the equations thus providing (and surpassing) the functionality of the cases package. Users of ntheorem will probably want to have a look at it as well, since the problem with end-of-theorem marks in gather and other environments can be circumvented using empheq.
   \RequirePackage{empheq}
+
+  % Provides macros to typeset bra-ket notation, as well as set specifiers, with a single (“|”) or a double (“||” or (“\|”) vertical bar specifier in between two bracketed parts. Each macro comes in a fixed-size version and an expanding version.
+  % If the package finds itself operating under e-tex, it uses the extended primitive \middle for more reliable results
+  \RequirePackage{braket}
+  
+  %  When typing an open interval as $]a,b[$, a closing bracket is being used in place of an opening fence and vice versa. This leads to the wrong spacing in, say, $]-a,b[$ or $A\in]a,b[=B$. The package attempts to solve this using:
+  %  \interval{a}{b} -> [a,b]
+  %  \interval[open]{a}{b} -> ]a,b[
+  %  \interval[open left]{a}{b} -> ]a,b]
+  % The package also supports fence scaling and ensures that the enclosing fences will end up having the proper closing and opening types.
+  % TeX maths does not do this job properly.
+  \RequirePackage{interval}
 \fi
 
 % A comprehensive (SI) units package. Typesetting values with units requires care to ensure that the combined mathematical meaning of the value plus unit combination is clear. In particular, the SI units system lays down a consistent set of units with rules on how they are to be used. However, different countries and publishers have differing conventions on the exact appearance of numbers (and units). A number of LaTeX packages have been developed to provide consistent application of the various rules: SIunits, sistyle, unitsdef and units are the leading examples. The numprint package provides a large number of number-related functions, while dcolumn and rccol provide tools for typesetting tabular numbers. The siunitx package takes the best from the existing packages, and adds new features and a consistent interface. A number of new ideas have been incorporated, to fill gaps in the existing provision. The package also provides backward-compatibility with SIunits, sistyle, unitsdef and units. The aim is to have one package to handle all of the possible unit-related needs of LaTeX users. The package relies on LaTeX 3 support from the l3kernel and l3packages bundles.
