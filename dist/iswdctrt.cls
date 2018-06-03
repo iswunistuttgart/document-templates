@@ -1,5 +1,5 @@
 % Definition of class version and last release date
-\def\fileversion{1.4.1}
+\def\fileversion{1.5.0}
 \def\filedate{2018/06/03}
 
 % Definition of the actual class interface
@@ -1311,6 +1311,8 @@
 % @group math
 % @sample \pow{x}: Second power of the argument
 % @sample \pow[n]{x}: n-th power of the argument
+% @sample \pow*{x}: Automatically adds and scales parentheses around the base $x$
+% @sample \pow*[n]{x}: Automatically adds and scales parentheses around the base $x$ of power $n$
 %%
 \DeclareDocumentCommand{\pow}{ s O{2} m }{%
   \IfBooleanTF{#1}{%
