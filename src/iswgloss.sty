@@ -1,0 +1,179 @@
+\ProvidesPackage{iswgloss}
+
+% Define a new `unit` key for each glossary entry
+\glsaddkey{unit}{%
+  \glsentrytext{\glslabel}%
+}{%
+  \glsentryunit%
+}{%
+  \GLsentryunit%
+}{%
+  \glsunit%
+}{%
+  \Glsunit%
+}{%
+  \GLSunit%
+}
+% Do not expand anything inside the `unit` field so that we can typeset the unit with `\si{}`
+\glssetnoexpandfield{unit}
+
+% New glossary style for symbols
+\newglossarystyle{isw-long-symbol}{%
+  % Set the glossaries description to width of 0.65\linewidth
+  \setlength\glsdescwidth{0.75\linewidth}
+  % Set the `theglossary` style
+  \renewenvironment{theglossary}{% BEGIN
+    \begin{longtable}{%
+      % p{0.05\linewidth}% Symbol 
+      p{0.1\linewidth}% Symbol
+      p{\glsdescwidth}% Description
+      c% Unit
+    }%
+  }{% END
+    \end{longtable}%
+  }%
+  \renewcommand*{\glossaryheader}{
+    % \toprule 
+    \bfseries Symbol %
+      & \bfseries Description %
+      & \bfseries Unit %
+    \tabularnewline \midrule %
+    \endhead %
+  }%
+  \renewcommand*{\glsgroupheading}[1]{%
+    \multicolumn{3}{l}{}%
+    \tabularnewline%
+    % \midrule%
+    \multicolumn{3}{l}{%
+      \glstreegroupheaderfmt{\glsgetgrouptitle{##1}}
+      % \glsgetgrouptitle{##1}
+      % \glstreegroupheaderfmt{%
+      %   \glsnavhypertarget{##1}{\glsgetgrouptitle{##1}}%
+      % }%
+      % \indexspace%
+    }%
+    \tabularnewline \midrule%
+  }%
+  \renewcommand{\glossentry}[2]{%
+    \glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}}%
+      & \glossentrydesc{##1}%
+      & \glsunit{##1}%
+      % & \ifglshasfield{##1}{unit}{\glsunit{##1}}{}%
+    \tabularnewline%
+  }%
+  \renewcommand{\subglossentry}[3]{%
+    \glssubentryitem{##2}\glstarget{##2}{\glossentryname{##2}}%
+      & \glossentrydesc{##2}
+      & \ifglshasfield{##1}{unit}{\glsunit{##1}}{}%
+    \tabularnewline%
+  }%
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip \else & & \tabularnewline\fi
+  }%
+}
+
+
+% Glossary style for list of symbols without grouping
+\newglossarystyle{isw-long-symbol-nogroup}{
+  \setglossarystyle{isw-long-symbol}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand{\glsgroupskip}{}%
+}
+
+
+% New glossary style for acronyms
+\newglossarystyle{isw-long-acronym}{%
+  % Set the glossaries description to width of 0.65\linewidth
+  \setlength\glsdescwidth{0.600\linewidth}
+  % Set the `theglossary` style
+  \renewenvironment{theglossary}{% BEGIN
+    \begin{longtable}{%
+      p{0.375\linewidth}% Acronym
+      p{\glsdescwidth}% Description
+    }%
+  }{% END
+    \end{longtable}%
+  }%
+  \renewcommand*{\glossaryheader}{
+    % \toprule 
+    \bfseries Acronym %
+      & \bfseries Description %
+    \tabularnewline \midrule %
+    \endhead %
+  }%
+  \renewcommand*{\glsgroupheading}[1]{%
+    \multicolumn{2}{l}{}%
+    \tabularnewline%
+    % \midrule%
+    \multicolumn{2}{l}{%
+      \glstreegroupheaderfmt{\glsgetgrouptitle{##1}}
+    }%
+    \tabularnewline \midrule%
+  }%
+  \renewcommand{\glossentry}[2]{%
+    \glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}}%
+      & \glossentrydesc{##1}%
+    \tabularnewline%
+  }%
+  \renewcommand{\subglossentry}[3]{%
+    \glssubentryitem{##2}\glstarget{##2}{\glossentryname{##2}}%
+      & \glossentrydesc{##2}
+    \tabularnewline%
+  }%
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip \else & \tabularnewline\fi
+  }%
+}
+
+
+% New glossary style for notation
+\newglossarystyle{isw-long-notation}{%
+  % Set the glossaries description to width of 0.65\linewidth
+  \setlength\glsdescwidth{0.75\linewidth}
+  % Set the `theglossary` style
+  \renewenvironment{theglossary}{% BEGIN
+    \begin{longtable}{%
+      p{0.2\linewidth}% Notation
+      p{\glsdescwidth}% Description
+    }%
+  }{% END
+    \end{longtable}%
+  }%
+  \renewcommand*{\glossaryheader}{
+    % \toprule 
+    \bfseries Notation %
+    & \bfseries Description %
+    \tabularnewline \midrule %
+    \endhead %
+  }%
+  \renewcommand*{\glsgroupheading}[1]{%
+    \multicolumn{2}{l}{}%
+    \tabularnewline%
+    % \midrule%
+    \multicolumn{2}{l}{%
+      \glstreegroupheaderfmt{\glsgetgrouptitle{##1}}
+    }%
+    \tabularnewline \midrule%
+  }%
+  \renewcommand{\glossentry}[2]{%
+    \glsentryitem{##1}\glstarget{##1}{\glossentrysymbol{##1}}%
+      & \glossentrydesc{##1}%
+    \tabularnewline%
+  }%
+  \renewcommand{\subglossentry}[3]{%
+    \glssubentryitem{##2}\glstarget{##2}{\glossentrysymbol{##2}}%
+      & \glossentrydesc{##2}
+    \tabularnewline%
+  }%
+  % \renewcommand*{\glsgroupskip}{}
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip \else & \tabularnewline\fi
+  }%
+}
+
+% Glossary style for list of symbols without grouping
+\newglossarystyle{isw-long-notation-nogroup}{
+  \setglossarystyle{isw-long-notation}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand{\glsgroupskip}{}%
+}

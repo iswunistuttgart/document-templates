@@ -4,7 +4,7 @@ BUILD_DIR = dist
 SRC_DIR = src
 
 .PHONY: all
-all: build classes images packages macros
+all: build classes images glossaries packages macros
 
 # build directory
 build:
@@ -76,6 +76,12 @@ bbx: $(SRC_DIR)/iswbib.bbx
 # Copy the BIB file to build
 bib: $(SRC_DIR)/bibliography.bib
 	cp $(SRC_DIR)/bibliography.bib $(BUILD_DIR)/bibliography.bib
+
+.PHONY: glossaries
+glossaries: gloss-style
+
+gloss-style: $(SRC_DIR)/iswgloss.sty
+	cp: $(SRC_DIR)/iswgloss.sty $(BUILD_DIR)/iswgloss.sty
 
 
 # Semantic Versioning
