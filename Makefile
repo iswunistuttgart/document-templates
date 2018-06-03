@@ -4,7 +4,7 @@ BUILD_DIR = dist
 SRC_DIR = src
 
 .PHONY: all
-all: build classes images glossaries packages macros
+all: build classes images packages macros
 
 # build directory
 build:
@@ -28,19 +28,19 @@ classes: $(FILES)
 # Building of all necessary classes
 # build iswartcl cls, tex, rc, etc
 .PHONY: iswartcl
-iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl
+iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl glossaries
 
 # build iswstud cls, tex, rc, etc
 .PHONY: iswstud
-iswstud: iswstud-cls iswstud-tex iswstud-rc bbl
+iswstud: iswstud-cls iswstud-tex iswstud-rc bbl glossaries
 
 # build iswbook cls, tex, rc, etc
 .PHONY: iswbook
-iswbook: iswbook-cls iswbook-tex iswbook-rc bbl
+iswbook: iswbook-cls iswbook-tex iswbook-rc bbl glossaries
 
 # build iswdctrt cls, tex, rc, etc
 .PHONY: iswdctrt
-iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl
+iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl glossaries
 
 
 # implicit target for making `*.cls` files
@@ -78,10 +78,10 @@ bib: $(SRC_DIR)/bibliography.bib
 	cp $(SRC_DIR)/bibliography.bib $(BUILD_DIR)/bibliography.bib
 
 .PHONY: glossaries
-glossaries: gloss-style
+glossaries: glssty
 
-gloss-style: $(SRC_DIR)/iswgloss.sty
-	cp: $(SRC_DIR)/iswgloss.sty $(BUILD_DIR)/iswgloss.sty
+glssty: $(SRC_DIR)/iswgloss.sty
+	cp $(SRC_DIR)/iswgloss.sty $(BUILD_DIR)/iswgloss.sty
 
 
 # Semantic Versioning
