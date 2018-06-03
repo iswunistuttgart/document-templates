@@ -199,8 +199,13 @@
 % Show label, ref, cite and bib keys. The showkeys package modifies the \label, \ref, \pageref, \cite and \bibitem commands so that the 'internal' key is printed, without affecting the appearance of the rest of the text, so far as is possible (the keys typically appear in the margin). The package is part of the tools bundle in the LaTeX required distribution.
 \ifdraft{\RequirePackage{showkeys}}{}
 
-% Expand acronyms at least once. This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks. The package requires the suffix package, which in turn requires that it runs under e-TeX.
-\RequirePackage{acronym}
+% % Expand acronyms at least once. This package ensures that all acronyms used in the text are spelled out in full at least once. It also provides an environment to build a list of acronyms used. The package is compatible with pdf bookmarks. The package requires the suffix package, which in turn requires that it runs under e-TeX.
+% \RequirePackage{acronym}
+
+\ifDocumentcode
+  % The package that facilitates expressive syntax highlighting in LaTeX using the powerful Pygments library. The package also provides options to customize the highlighted source code output using fancyvrb. 
+  \RequirePackage{minted}
+\fi
 
 % Defines commands \counterwithin (which sets up a counter to be reset when another is incremented) and \counterwithout (which unsets such a relationship).
 \RequirePackage{chngcntr}
