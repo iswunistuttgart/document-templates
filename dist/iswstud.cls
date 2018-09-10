@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.5.1}
-\def\filedate{2018/06/12}
+\def\fileversion{1.6.0}
+\def\filedate{2018/09/10}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -421,7 +421,7 @@
 \PassOptionsToPackage{%
   backend=biber,%
   language=auto,%
-  style=iswbib,%
+  style=ieee,%
   citestyle=authoryear,
   % sorting=nyt, % NameYearTitle
   sorting=none,% Like bibtex' `unrt`: number according to appearance in source
