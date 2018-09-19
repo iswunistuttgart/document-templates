@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.5.1}
-\def\filedate{2018/09/10}
+\def\fileversion{1.5.2}
+\def\filedate{2018/09/19}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -2441,7 +2441,7 @@
 \newcommand{\draftname}{Draft}
 \newcommand{\mainexaminername}{First Examiner}
 \newcommand{\secondexaminername}{Second Examiner}
-\newcommand{\logosuffixname}{en}
+\newcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \newcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2507,7 +2507,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2573,7 +2573,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2639,7 +2639,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2705,7 +2705,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2771,7 +2771,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2837,7 +2837,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2903,7 +2903,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2969,7 +2969,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
