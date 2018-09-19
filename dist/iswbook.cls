@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.5.1}
-\def\filedate{2018/09/10}
+\def\fileversion{1.5.2}
+\def\filedate{2018/09/19}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -2399,7 +2399,7 @@
 %
 %
 \newcommand{\draftname}{Draft}
-\newcommand{\logosuffixname}{en}
+\newcommand{\logosuffixname}{-en}
 \newcommand{\fromname}{from}
 \newcommand{\submittedonname}{Submitted on}
 \newcommand{\keywordsname}{Keywords}
@@ -2427,7 +2427,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2455,7 +2455,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2483,7 +2483,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2511,7 +2511,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2539,7 +2539,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2567,7 +2567,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2595,7 +2595,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
@@ -2623,7 +2623,7 @@
 %
 %
 \renewcommand{\draftname}{Draft}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \renewcommand{\fromname}{from}
 \renewcommand{\submittedonname}{Submitted on}
 \renewcommand{\keywordsname}{Keywords}
