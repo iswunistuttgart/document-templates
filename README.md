@@ -13,10 +13,10 @@ If you are just interested in finding the most recent class that you want to use
 | iswdctrt | Doctoral theses | 1.5.2 |
 | iswstud | Student theses | 1.6.1 |
 
-There are three ways to obtaining the necessary `.cls` and `.tex` files
-  1. Clone the repository and obtain the files from the `dist/` directory
-  1. Download the build artifacts (i.e., only the file necessary and not the whole repository) from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) and unpack them to your local working directory
-  1. Build the files yourself after cloning this repository. Simply call `$ make all` in the root of this directory
+There are three ways to obtaining the necessary `.cls`, `.tex`, `.sty`, and `.bbx` files:
+  1. Clone the repository and obtain the files from directory `dist/`
+  1. Download the build artifacts i.e., only the file necessary and not the whole repository from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) (requires authentication) and unpack them to your local working directory
+  1. Build the files yourself after cloning this repository. Simply `$ make all` in the root of this directory
 
 In the long run this will be the on and only way to obtaining the files.
 
@@ -118,7 +118,12 @@ Additionally, you then must set the `\date` of your thesis to the date of your d
 
 Right from the start, bibliography can be included via `biblatex` as known from all other classes e.g., koma.
 Include your bib file in the preamble using `\addbibresource{literature.bib}` and towards the end of your document, `\printbibliography` to output the bibliography.
-The style is already loaded in the respective class.
+The style is already loaded in the respective class, but it requires existence of file `iswbib.bbx` in your local working directory (or at least on your LaTeX search path).
+Please keep in mind that the classes are using `biber` for generating your references and bibliographies.
+As such, you must adjust your compilation toolchain to call `biber` instead of the outdated `biblatex`.
+IDEs like TeXstudio allow for easy changing of the default bibliography compiler.
+YMMV depending on your IDE.
+On the other hand, if you make use of `latexmk`, it will automagically use the right compiler toolchain so as you will not have to worry much.
 
 ### Mathematics-heavy Thesis
 
