@@ -61,11 +61,19 @@ PS: The developers are solely using `latexmk`, so support for users using `latex
 ## Usage
 
 You can use these document classes for a magnitude of documents such as your bachelor's or master's thesis, a simple document, or a doctoral thesis.
-Please read on to find out more on the general structure of a document in either type.
+Please read on to find out more on the general structure of a document in either document class, but also about all available document class options.
 
 ### Doctoral Thesis `iswdctrt`
 
 Doctoral theses may be typeset in your language of preference (as long as it is either English or German, no other language is officially supported by the document class).
+
+```latex
+\documentclass[%
+  ngerman,% to allow an alternative titlepage and abstract in English
+  english,% main document language needs to be loaded last
+  bachelor, % Bachelor's thesis
+]{iswdctrt}
+```
 
 ### Student Thesis `iswstud`
 
@@ -74,7 +82,6 @@ Doctoral theses may be typeset in your language of preference (as long as it is 
   english,% to allow an alternative titlepage and abstract in English
   ngerman,% main document language needs to be loaded last
   bachelor, % Bachelor's thesis
-  bachelor-description, % Project description of a bachelor's thesis
 ]{iswstud}
 ```
 
@@ -178,6 +185,47 @@ The order of languages loaded matters, as the last loaded language is the docume
   english,% main document language needs to be loaded last
 ]{isw*}
 ```
+
+### Glossaries
+
+Glossaries (like glossaries, acronyms, symbols) are supported through the `glossaries` package, loaded automatically (in conjunction with `glossaries-extras`, `glossary-longbooktabs`, and `glossaries-extra-stylemods`).
+Our glossaries styles is defined in `iswgloss.sty` and activated automatically.
+Without going deep into how to use `glossaries` (please refer to CTAN), you need to define it within your document preamble using a snippet like
+
+```latex
+% Define new glossaries type for mathematical symbols
+% \newglossary{<label>}{<log>}{<out-ext>{<in-ext>}
+\newglossary[slg]{symbol}{sls}{slo}{List of Symbols}
+\newglossary[nlg]{notation}{nls}{nlo}{Notation}
+# Load acronyms glossaries
+\loadglsentries{path/to/glossaries/acronyms}
+# Load symbols glossaries
+\loadglsentries{path/to/glossaries/symbols}
+# Load nomenclature/notation glossaries
+\loadglsentries{path/to/glossaries/nomenclature}
+
+% Make indices and glossaries
+\makeindex
+\makeglossaries
+```
+
+To type out your glossaries, use something along the lines of
+
+```latex
+% Add all glossary values and not only the ones used/referred
+\glsaddall
+# You can increase spacing of glossaries' table's rows
+\renewcommand*{\arraystretch}{1.40}
+# Type out symbols
+\printglossary[type=symbol,style=isw-long-symbol-nogroup]
+# Type out notation
+\printglossary[type=notation,style=isw-long-notation-nogroup]
+# Type out acronyms
+\printglossary[type=\acronymtype,style=isw-long-acronym,nonumberlist]
+```
+
+That's about it for adding glossaries to your thesis/document.
+
 
 ## Development Team
 
