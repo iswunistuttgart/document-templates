@@ -3,6 +3,7 @@
 *.cls
 *.dict
 *.tex
+*.pdf
 
 # Created by https://www.gitignore.io/api/windows
 
