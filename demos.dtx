@@ -1,0 +1,441 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <mail@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{demos.dtx}
+%</driver>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{demos.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/04/23}{Initial version}
+%
+% \GetFileInfo{demos.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+%
+% \title{The \textsf{demos} package\thanks{This document
+%   corresponds to \textsf{demos}~\fileversion, dated \filedate.}}
+% \author{Scott Pakin \\ \texttt{scott+dtx@pakin.org}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing.\index{doing nothing|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+% \begin{macro}{\documentclass}
+% First off, we need to define the correct document class.
+%    \begin{macrocode}
+\documentclass[
+%    \end{macrocode}
+% The first few lines of our document class will globally determine which
+% languages we want to have loaded. These global options will then apply not
+% only to the corresponding document class, but also other packages like |babel|
+% or |isodate|.
+%
+% Load German as main language
+%    \begin{macrocode}
+%<*german>
+    english,
+    ngerman,
+%</german>
+%    \end{macrocode}
+% Load English as main language
+%    \begin{macrocode}
+%<*english>
+  ngerman,
+  english,
+%</english>
+%    \end{macrocode}
+% 
+% Now we will define the main thesis type.
+%    \begin{macrocode}
+%<bachelor>    degree=bachelor,
+%<master>    degree=master,
+%<doctorate>    degree=doctorate,
+%    \end{macrocode}
+% And some more, custom options can follow here
+%    \begin{macrocode}
+    paper=a4paper,
+%    \end{macrocode}
+%
+% Lastly, we define the correct document class to use.
+%    \begin{macrocode}
+%<article>  ]{ustuttartcl}
+%<book>  ]{ustuttbook}
+%<thesis>  ]{ustuttthesis}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\title}
+% This is what your thesis' title is going to be in the end
+%    \begin{macrocode}
+\title{...}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subtitle}
+% Some thesis may additionally contain subtitles
+%    \begin{macrocode}
+\subtitle{...}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\author}
+% Obviously, the author's name. Multiple authors \emph{must} be separated by |\and|.
+%    \begin{macrocode}
+\author{...}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\authorrunning}
+% If the document is written by multiple authors and you want a running version
+% of the authors' names on the page head, use this command.
+%    \begin{macrocode}
+\authorrunning{...}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\placeofbirth}
+% Place of birth of the autor. Only applies to doctoral theses.
+%    \begin{macrocode}
+%<doctorate>\placeofbirth{Stuttgart}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\date}
+% Date of your document's creation which is baked into PDF document properties,
+% as well as used in the title page
+%    \begin{macrocode}
+\date{\today}
+%    \end{macrocode}
+% or if you desire a specific print date
+%    \begin{macrocode}
+\date{\printdate{2019-04-23}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\university} 
+% Name of the university in document's main language
+%    \begin{macrocode}
+%<german>\university{Universit\"at Stuttgart}
+%<english>\university{University of Stuttgart}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\faculty}
+% Faculty name in document's main language
+%    \begin{macrocode}
+%<german>\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+%<english>\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\department}
+%    \begin{macrocode}
+%<german>\department{Institut f\"ur Steuerungstechnik%
+%<german>der Werkzeugmaschinen und Fertigungseinrichtungen}
+%<english>\department{Institute for Control Engineering%
+%<english>of Machine Tools and Manufacturing Units}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\departmentshort}
+% Short name of the department; usually its abbreviated name
+%    \begin{macrocode}
+%<german>\departmentshort{ISW}
+%<english>\departmentshort{ISW}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\major}
+% For any student thesis, put the name of your major here so it can be typeset
+% correctly in the titlepage
+%    \begin{macrocode}
+%<*thesis>
+%<bachelor|master>\major{Maschinenbau}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\universitylogo}
+% Path to the university's logo given as a regular \LaTeX path that works for
+% |\includegraphics|
+%    \begin{macrocode}
+%<german>\universitylogo{logo-university-de}
+%<english>\universitylogo{logo-university-en}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\departmentlogo}
+% Similar to the university logo, path to the department's logo given as regular
+% \LaTeX path that works for |\includegraphics|
+%    \begin{macrocode}
+%<german>\departmentlogo{logo-institute-de}
+%<english>\departmentlogo{logo-institute-en}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\advisor}
+% Name of your thesis advisor. In case of bachelor's or master's thesis, this is
+% usually going to be the first and only advisor of your thesis. In case of
+% doctoral theses, this is your main advisor or doctoral advisor. Further
+% advisors go into the |\coadvisor| macro
+%    \begin{macrocode}
+%<*thesis>
+\advisor{PD Dr.-Ing.\@ Andreas Pott}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\coadvisor}
+% Further advisors of your thesis. For bachelor's or master's theses, this
+% usually does not apply. For doctoral theses, these are the other advisors of
+% your graduation board.
+%    \begin{macrocode}
+%<*thesis>
+\coadvisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\dedication} 
+% You can dedicate your thesis to anyone. Since it's a macro, do not go overboard or haywire with formatting. Keep it simple.
+%    \begin{macrocode}
+%<*book|thesis>
+\dedication{This is to me!}
+%</book|thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\addbibresource}
+% With oour bibliography managed through |biblatex|, including the bibliography resources behaves slightly differently than with using |bibtex|.
+%    \begin{macrocode}
+\addbibresource{references.bib}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\loadglsentries}
+% Lastly, we will load glossaries entries using the intended way. The file
+% loaded is just a regular \LaTeX file, however, with proper markup for the
+% glossaries definitions.
+%    \begin{macrocode}
+\loadglsentries{symbols}
+\loadglsentries{notation}
+\loadglsentries{acronyms}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makeindex}
+% We must trigger the |makeindex| command to enable proper indexing of macros
+% and glossaries.
+%    \begin{macrocode}
+\makeindex
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makeglossaries}
+% Likewise, glossaries cannot be typeset of they have not been made.
+%    \begin{macrocode}
+\makeglossaries
+%    \end{macrocode}
+% \end{macro}
+% 
+% Finally, the actual document begins
+% \begin{environment}{document}
+%    \begin{macrocode}
+\begin{document}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\frontmatter}
+% Set up the document's front matter style: romain page numbers, et cetera.
+%    \begin{macrocode}
+\frontmatter
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\maketitle}
+% Create the title page
+%    \begin{macrocode}
+\maketitle
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{environment}{acknowledgements}
+% What's a good thesis without acknowledging someone else's share of the result?
+% Be it your (doctoral) advisor, colleagues, other students, your parents, or
+% the project funding agency. Give them a warm-felt shout out.
+%    \begin{macrocode}
+\begin{acknowledgements}%
+\end{acknowledgements}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{preface}
+% A preface is an introduction to a book or other literary work written by you.
+%    \begin{macrocode}
+\begin{preface}
+\end{preface}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\maketitle}
+% Most importantly, a table of contents should be type set right after all the
+% prefacing stuff.
+%    \begin{macrocode}
+\tableofcontents
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoffigures}
+% List of figures follows after the table of contents. This is most oftenly
+% needed as you will have more than 4 figures.
+%    \begin{macrocode}
+\listoffigures
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoftables}
+% List of tables follows if applicable. No need to typeset a list of tables in
+% case you have only some 3 or 4 tables in total.
+%    \begin{macrocode}
+\listoftables
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printglossary}
+% Output list of symbols from glossaries defined above
+%    \begin{macrocode}
+\printglossary[%
+    type=symbol,%
+    style=isw-long-symbol-nogroup,%
+  ]
+%    \end{macrocode}
+%
+% Also typeset glossaries on notation, if any
+%    \begin{macrocode}
+\printglossary[%
+    type=notation,%
+    style=isw-long-notation-nogroup,%
+  ]
+%    \end{macrocode}
+%
+% Lastly, output our glossaries of acronyms
+%    \begin{macrocode}
+\printglossary[%
+    type=\acronymtype,%
+    style=isw-long-acronym,%
+    nonumberlist,%
+    nogroupskip,%
+  ]
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\mainmatter}
+% Switch into the main document mode resetting page numbers, changing page
+% numbers to arabic, et cetera.
+%    \begin{macrocode}
+\mainmatter
+%    \end{macrocode}
+% \end{macro}
+%
+% Here is where you would now put your actual data content
+%    \begin{macrocode}
+%% Put your content here
+%    \end{macrocode}
+%
+% \begin{macro}{\printbibliography}
+% Eventually, a list of bibligraphy items will follow
+%    \begin{macrocode}
+\printbibliography
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{environment}{appendices}
+% In case you have content that's not supposed to be in the main document part
+% but still worth having it printed, it'll belong into the appendix. You enter |appendix|-mode by using the |appendices| environment.
+%    \begin{macrocode}
+\begin{appendices}
+\fixcleverefappendix
+%% Your appendix here
+\end{appendices}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{document}
+% Finally, close the document
+%    \begin{macrocode}
+\end{document}
+%    \end{macrocode}
+% \end{environment}
+%
+% \Finale

@@ -36,19 +36,39 @@ and version 1.3 or later is part of all distributions of LaTeX version
 
 \endpreamble
 
+% Main class files
 \generate{\file{ustuttartcl.cls}{\from{ustutt.dtx}{class,article}}}
 \generate{\file{ustuttbook.cls}{\from{ustutt.dtx}{class,book}}}
 \generate{\file{ustuttthesis.cls}{\from{ustutt.dtx}{class,thesis}}}
+
+% Translation
 \generate{\file{ustutt-German.dict}{\from{localization.dtx}{package,german}}}
 \generate{\file{ustutt-English.dict}{\from{localization.dtx}{package,english}}}
+
+% Glossaries style
 % \generate{\file{ustuttgloss.sty}{\from{ustuttgloss.dtx}{package}}}
+
+% Additional mixins
 \generate{\file{ustutttext.sty}{\from{ustutttext.dtx}{package}}}
 \generate{\file{ustuttmath.sty}{\from{ustuttmath.dtx}{package}}}
 \generate{\file{ustuttmechanics.sty}{\from{ustuttmechanics.dtx}{package}}}
 \generate{\file{ustuttsystemdynamics.sty}{\from{ustuttsystemdynamics.dtx}{package}}}
 \generate{\file{ustuttstatistics.sty}{\from{ustuttstatistics.dtx}{package}}}
+
+% TikZ/PGF
 % \generate{\file{ustuttpgf.sty}{\from{ustutttikzpgf.dtx}{package,pgf}}}
 % \generate{\file{ustutttikz.sty}{\from{ustutttikzpgf.dtx}{package,tikz}}}
+
+% Demos
+\generate{\file{ustuttbachelor_de.tex}{\from{demos.dtx}{thesis,bachelor,german}}}
+\generate{\file{ustuttbachelor_en.tex}{\from{demos.dtx}{thesis,bachelor,english}}}
+\generate{\file{ustuttmaster_de.tex}{\from{demos.dtx}{thesis,master,german}}}
+\generate{\file{ustuttmaster_en.tex}{\from{demos.dtx}{thesis,master,english}}}
+\generate{\file{ustuttdoctorate_de.tex}{\from{demos.dtx}{thesis,doctorate,german}}}
+\generate{\file{ustuttdoctorate_en.tex}{\from{demos.dtx}{thesis,doctorate,english}}}
+\generate{\file{acronyms.tex}{\from{demos.dtx}{acronyms}}}
+\generate{\file{symbols.tex}{\from{demos.dtx}{symbols}}}
+\generate{\file{nomenclature.tex}{\from{demos.dtx}{nomenclature}}}
 
 \obeyspaces
 \Msg{*************************************************************}
