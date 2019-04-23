@@ -18,8 +18,8 @@ ins: ustutt.ins $(SOURCES)
 
 .PHONY: clean
 clean:
-	latexmk -CA -silent *.dtx
-	latexmk -CA -silent *.tex
+	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || latexmk -CA -silent *.dtx
+	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || latexmk -CA -silent *.tex
 
 .PHONY: distclean
 distclean: clean
