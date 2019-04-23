@@ -2944,6 +2944,20 @@
 \renewcommand{\dblfloatpagefraction}{0.75}
 %    \end{macrocode}
 %
+% \begin{macro}{\fixcleverefappendix}
+% For some weird reason, if we want to use |cleverref| with the |appendix|
+% package, it does not typeset the chapter prefix correctly. This changes this
+% odd behavior.
+%    \begin{macrocode}
+\newcommand{\fixcleverefappendix}{%
+  \crefalias{chapter}{appendix}
+  \crefalias{section}{subappendix}
+  \crefalias{subsection}{subsubappendix}
+  \crefalias{subsubsection}{subsubsubappendix}
+}
+%    \end{macrocode}
+% \end{macro}
+%
 %
 %    \begin{macrocode}
 %<book|thesis>\let\originalmainmatter\mainmatter%
