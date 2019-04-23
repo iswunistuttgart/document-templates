@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
 SOURCES = ustuttartcl.dtx ustuttbook.dtx ustuttthesis.dtx ustuttmath.dtx
 SOURCES = ustuttmath.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx
@@ -13,7 +15,7 @@ ins: ustutt.ins $(SOURCES)
 %.pdf: %.dtx
 	latexmk $^
 	makeindex -s gind.ist $*.idx
-	makeindex -s gglo.ist -o $@.gls $*.glo
+	makeindex -s gglo.ist -o $*.gls $*.glo
 	latexmk $^
 
 .PHONY: clean
