@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
-SOURCES = ustutt.dtx ustuttartcl.dtx ustuttbook.dtx ustuttthesis.dtx ustuttmath.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx
+SOURCES = ustutt.dtx ustuttmath.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx
 PDFS = $(SOURCES:dtx=pdf)
 
 .PHONY: all
