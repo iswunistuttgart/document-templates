@@ -1,4 +1,4 @@
-compile-cls:
+build:
   image: philipptempel/docker-ubuntu-tug-texlive:latest
   stage: build
   script:
@@ -8,7 +8,11 @@ compile-cls:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     expire_in: 2 months
     paths:
-      - dist
+      - *.cls
+      - *.sty
+      - *.dict
+      - *.pdf
+      - *.tex
   tags:
     - docker
 

@@ -1,104 +1,35 @@
-PY = python3
-FILES = iswartcl iswstud iswbook iswdctrt
-BUILD_DIR = dist
-SRC_DIR = src
+INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
+SOURCES = ustuttartcl.dtx ustuttbook.dtx ustuttthesis.dtx ustuttmath.dtx
+SOURCES = ustuttmath.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx
+PDFS = $(SOURCES:dtx=pdf)
 
 .PHONY: all
-all: build classes images packages macros
+all: ins $(PDFS)
 
-# build directory
-build:
-	[ -d "$(BUILD_DIR)/" ] || mkdir $(BUILD_DIR)
+.PHONY: ins
+ins: ustutt.ins $(SOURCES)
+	pdflatex ustutt.ins
 
-# create list of packages
-packages: $(SRC_DIR)/*.cls
-	$(PY) output-packages.py --output packages.md -- $?
+%.pdf: %.dtx
+	latexmk $^
+	makeindex -s gind.ist $*.idx
+	makeindex -s gglo.ist -o $@.gls $*.glo
+	latexmk $^
 
-# create list of macros
-macros: iswmacros
-	$(PY) output-macros.py --output $(BUILD_DIR)/macros.tex -- $(SRC_DIR)/*.cls
-	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
-	latexmk -norc -quiet    -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
-	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
-
-# Target to only build the classes
-.PHONY: classes
-classes: $(FILES)
-
-# Building of all necessary classes
-# build iswartcl cls, tex, rc, etc
-.PHONY: iswartcl
-iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl glossaries
-
-# build iswstud cls, tex, rc, etc
-.PHONY: iswstud
-iswstud: iswstud-cls iswstud-tex iswstud-rc bbl glossaries
-
-# build iswbook cls, tex, rc, etc
-.PHONY: iswbook
-iswbook: iswbook-cls iswbook-tex iswbook-rc bbl glossaries
-
-# build iswdctrt cls, tex, rc, etc
-.PHONY: iswdctrt
-iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl glossaries
-
-
-# implicit target for making `*.cls` files
-%-cls: $(SRC_DIR)/%.cls $(SRC_DIR)/%/* $(SRC_DIR)/common/*
-	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
-
-# implicit target for making `*.tex` filesx
-%-tex: $(SRC_DIR)/%.tex
-	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
-
-# implicit target for making `*.rc` files
-%-rc: $(SRC_DIR)/%.latexmkrc
-	cp $(SRC_DIR)/$*.latexmkrc $(BUILD_DIR)/$*.latexmkrc
-
-
-# copy all files needed for `iswmacros`
-iswmacros: iswbook $(SRC_DIR)/iswmacros.tex
-	cp $(SRC_DIR)/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
-
-# implicit target for making the images
-images: $(SRC_DIR)/images*
-	rsync -a --exclude="*-converted-to*" $(SRC_DIR)/images $(BUILD_DIR)/
-
-
-# make all bibliography related things
-.PHONY: bbl
-bbl: bbx bib
-
-# copy the BBX file to build
-bbx: $(SRC_DIR)/iswbib.bbx
-	cp $(SRC_DIR)/iswbib.bbx $(BUILD_DIR)/iswbib.bbx
-
-# Copy the BIB file to build
-bib: $(SRC_DIR)/bibliography.bib
-	cp $(SRC_DIR)/bibliography.bib $(BUILD_DIR)/bibliography.bib
-
-.PHONY: glossaries
-glossaries: glssty
-
-glssty: $(SRC_DIR)/iswgloss.sty
-	cp $(SRC_DIR)/iswgloss.sty $(BUILD_DIR)/iswgloss.sty
-
-
-# Semantic Versioning
-# patch version bump for the given file(s)
-patch: $(SRC_DIR)/*.cls
-	$(PY) semver.py patch $?
-
-# minor version bump for the given file(s)
-minor: $(SRC_DIR)/*.cls
-	$(PY) semver.py minor $?
-
-# major version bump for the given file(s)
-major: $(SRC_DIR)/*.cls
-	$(PY) semver.py major $?
-
-
-# cleanup
 .PHONY: clean
 clean:
-	[ -d "$(BUILD_DIR)/" ] && rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/ || [ ! -d "$(BUILD_DIR)/" ]
+	latexmk -CA -silent *.dtx
+	latexmk -CA -silent *.tex
+
+.PHONY: distclean
+distclean: clean
+	[ `ls -1 *.cls 2>/dev/null | wc -l` == 0 ] || rm *.cls
+	[ `ls -1 *.sty 2>/dev/null | wc -l` == 0 ] || rm *.sty
+	[ `ls -1 *.dict 2>/dev/null | wc -l` == 0 ] || rm *.dict
+
+.PHONY: install
+install: cls
+	mkdir -p $(INSTALLDIR)
+	cp *.cls $(INSTALLDIR)
+	cp *.dict $(INSTALLDIR)
+	cp *.sty $(INSTALLDIR)

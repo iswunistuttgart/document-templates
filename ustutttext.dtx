@@ -1,0 +1,524 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <mail@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustutttext.dtx}
+%</driver>
+%<package>\def\fileversion{1.0.0}
+%<package>\def\filedate{2019/04/23}
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{ustutttext}
+%<*package>
+    [2019/04/23 v1.0 University of Stuttgart Text package file]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{hyperref}
+\usepackage{ustutttext}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+\begin{document}
+  \DocInput{ustutttext.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/04/23}{Initial version}
+%
+% \GetFileInfo{ustutttext.dtx}
+%
+% \DoNotIndex{\",\@,\newcommand,\textregistered,\textsuperscript,\texttrademark,\xspace}
+% 
+%
+% \title{The \textsf{ustutttext} package\thanks{This document
+%   corresponds to \textsf{ustutttext}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing. It is merely an example.  If this were a real macro,
+% you would put a paragraph here describing what the macro is supposed to do,
+% what its mandatory and optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+%
+% \begin{macro}{\registered}
+% A nicer way of putting \textregistered{} mark next to a text
+%    \begin{macrocode}
+\newcommand{\registered}[1]{#1\textsuperscript{\textregistered}}
+%    \end{macrocode}
+% Examples
+% \begin{verbatim}
+% \registered{MATLAB}
+% \end{verbatim}
+% \end{macro}
+%
+%
+% \begin{macro}{\trademark}
+% A nicer way of putting \texttrademark{} mark next to a text
+%    \begin{macrocode}
+\newcommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
+%    \end{macrocode}
+% Examples
+% \begin{verbatim}
+% \trademark{5G Toolbox}
+% \end{verbatim}
+% \end{macro}
+%
+%
+% \begin{macro}{\wrt}
+% With respect to
+%    \begin{macrocode}
+\newcommand{\wrt}{w.r.t.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\wolog}
+% Without loss of generality
+%    \begin{macrocode}
+\newcommand{\wolog}{w.l.o.g.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\aka}
+% AKA, also known as
+%    \begin{macrocode}
+\newcommand{\aka}{a.k.a.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\obda}
+% Ohne Beschr\"ankung der Allgemeinheit
+%    \begin{macrocode}
+\newcommand{\obda}{o.\@~B.\@~d.\@~A.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\zb}
+% Zum Beispiel
+%    \begin{macrocode}
+\newcommand{\zb}{z.\@~B.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\oae}
+% Oder \"ahnlich\{e,er,es,en\}
+%    \begin{macrocode}
+\newcommand{\oae}{o.\@~\"a.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\oa}
+% Oder andere
+%    \begin{macrocode}
+\newcommand{\oa}{o.\@~a.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ua}
+% Unter anderem
+%    \begin{macrocode}
+\newcommand{\ua}{u.\@~a.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\bzw}
+% Beziehungsweise
+%    \begin{macrocode}
+\newcommand{\bzw}{bzw.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dh}
+% Das hei{\ss}t
+%    \begin{macrocode}
+% \newcommand{\dh}{d.\@\xspace~h.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\og}
+% Oben genannt\{e,er,es,en\}
+%    \begin{macrocode}
+\newcommand{\og}{o.\@~g.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ggf}
+% Gegebenenfalls
+%    \begin{macrocode}
+\newcommand{\ggf}{ggf.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Latin Abbreviations}
+%
+%
+% \begin{macro}{\ca}
+% Circa: ``around''. In the sense of ``approximately'' or ``about''. Usually
+% used of a date.
+%    \begin{macrocode}
+\newcommand{\ca}{ca.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\vv}
+% Vice versa: ``with position turned''. Thus, ``the other way around'',
+% ``conversely'', et cetera.
+%    \begin{macrocode}
+\newcommand{\vv}{v.v.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\etc}
+% Et cetera: ``and the rest''. In modern usage, used to mean "``and so on''" or
+% "``and more''".
+%    \begin{macrocode}
+\newcommand{\etc}{etc.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\eg}
+% Exempli gratia: ``for the sake of example'', ``for example''. Exempli gratiā,
+% `for example', is usually abbreviated ``e.g.'' (less commonly, ``ex.\@ gr.'').
+% The abbreviation ``e.g.'' often is interpreted anglicised as `example given'.
+% It is not usually followed by a comma in British English, but it is in
+% American usage. It is often confused with i.e.\@ (id est, meaning `that is' or
+% `in other words'). Some writing styles give such abbreviations without
+% punctuation, as ie and eg.
+%    \begin{macrocode}
+\newcommand{\eg}{e.g.\@,\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ie}
+% Id est: ``That is (to say)'' in the sense of ``that means'' and ``which
+% means'', or ``in other words'', ``namely'', or sometimes ``in this case'',
+% depending on the context. The abbreviation may be followed by a comma or not,
+% depending on the style of the writer (or the grammatical sense of what
+% follows.) The comma is more apt to be dropped before a simple expression with
+% no punctuation of its own, and is more likely to be retained for multiple
+% items. It is often confused with e.g.\@ (exempli gratia, `for example'). Some
+% writing styles give such abbreviations without punctuation, as ie and eg.
+%    \begin{macrocode}
+\newcommand{\ie}{i.e.\@,\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\cf}
+% Confer: ``compare''. The abbreviation cf.\@ is used in text to suggest a
+% comparison with something else (cf.\@ citation signal).
+%    \begin{macrocode}
+\newcommand{\cf}{cf.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\vs}
+% Versus; ``towards''. Literally, ``in the direction [of]''. It is erroneously used in English for ``against'', probably as the truncation of ``adversus'', especially in reference to two opponents, e.g., the parties to litigation or a sports match. 
+%    \begin{macrocode}
+\newcommand{\vs}{vs.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\etal}
+% Et alii: ``and others''. Used similarly to et cetera (``and the rest'') to
+% denote names that, usually for the sake of space, are unenumerated/omitted.
+% Alii is masculine, and therefore it can be used to refer to men, or groups of
+% men and women; the feminine et aliae is proper when the "others" are all
+% female, but as with many loanwords, interlingual use, such as in reference
+% lists, is often invariable. Et alia is neuter plural and thus in Latin text is
+% properly used only for inanimate, genderless objects, but some use it as a
+% gender-neutral alternative. APA style uses et~al.\@ (normal font) if the work
+% cited was written by more than six authors; MLA style uses et~al.\@ for more than
+% three authors; AMA style lists all authors if $\leq 6$, and $3+$ et~al.\@ if
+% $>6$. AMA style forgoes the period (because it forgoes the period on
+% abbreviations generally) and it forgoes the italic (as it does with other
+% loanwords naturalized into scientific English); many journals that follow AMA
+% style do likewise.
+%    \begin{macrocode}
+\newcommand{\etal}{et~al.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\sic}
+% Sic: ``thus''. Or "``just so''". States that the preceding quoted material
+% appears exactly that way in the source, despite any errors of spelling,
+% grammar, usage, or fact that may be present. Used only for previous quoted
+% text; ita or similar must be used to mean "``thus''" when referring to
+% something about to be stated.
+%    \begin{macrocode}
+\newcommand{\sic}{sic\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ia}
+% Inter alia: ``among other things''. A term used in formal extract minutes to
+% indicate that the minute quoted has been taken from a fuller record of other
+% matters, or when alluding to the parent group after quoting a particular
+% example.
+%    \begin{macrocode}
+\newcommand{\ia}{i.a.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Titles and Degrees}
+%
+% \begin{macro}{\eh}
+% Ehrenhalber
+%    \begin{macrocode}
+\newcommand{\eh}{E.\@\xspace~h.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\hc}
+% \begin{macro}{\hcmult}
+% Honoris causa: honoary degree. In German ``ehrenhalber'', formerly E.~h.
+%    \begin{macrocode}
+\newcommand{\hc}{h.c.\@\xspace}
+\newcommand{\hcmult}{h.c.\@\xspace~mult.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%
+% \begin{macro}{\dipling}
+% Diplomingenieur
+%    \begin{macrocode}
+\newcommand{\dipling}{Dipl.-Ing.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\bsc}
+% Bachelor of Science
+%    \begin{macrocode}
+\newcommand{\bsc}{B.Sc.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msc}
+% Master of Science
+%    \begin{macrocode}
+% \newcommand{\msc}{M.Sc.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\meng}
+% Master of Engineering
+%    \begin{macrocode}
+\newcommand{\msc}{M.Eng.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dring}
+% Doktoringenieur
+%    \begin{macrocode}
+\newcommand{\dring}{Dr.-Ing.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\prof}
+% Professor
+%    \begin{macrocode}
+\newcommand{\prof}{Prof.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\phd}
+% PhD
+%    \begin{macrocode}
+\newcommand{\phd}{PhD\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\juniorprof}
+% Juniorprof
+%    \begin{macrocode}
+\newcommand{\juniorprof}{Juniorprof.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Legal Forms}
+%
+% \begin{macro}{\gmbh}
+% Gesellschaft mit beschr\"ankter Haftung
+%    \begin{macrocode}
+\newcommand{\gmbh}{GmbH\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ggmbh}
+% Gemeinn\"utzige Gesellschaft mit beschr\"ankter Haftung
+%    \begin{macrocode}
+\newcommand{\ggmbh}{gGmbH\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ug}
+% Unternehmergesellschaft (haftungsbeschr\"ankt)
+%    \begin{macrocode}
+\newcommand{\ug}{UG~(haftungsbeschr\"ankt)\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ag}
+% Aktiengesellschaft
+%    \begin{macrocode}
+\newcommand{\ag}{AG\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\gag}
+% Geminn\"utzige Aktiengesellschaft
+%    \begin{macrocode}
+\newcommand{\gag}{gAG\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\kga}
+% Kommanditgesellschaft auf Aktien
+%    \begin{macrocode}
+\newcommand{\kga}{KGaA}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\kg}
+% Kommanditgesellschaft
+%    \begin{macrocode}
+\newcommand{\kg}{KG\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\inc}
+% Incorporation
+%    \begin{macrocode}
+\newcommand{\inc}{Inc.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ltd}
+% Private company limited by shares
+%    \begin{macrocode}
+\newcommand{\ltd}{Ltd.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\llc}
+% Limited liability company
+%    \begin{macrocode}
+\newcommand{\llc}{LLC\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\sarl}
+% Soci\'et\'e \`a responsabilit\'e limit\'ee
+%    \begin{macrocode}
+\newcommand{\sarl}{SARL\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ev}
+% Eingetragener Verein
+%    \begin{macrocode}
+\newcommand{\ev}{e.\@\xspace~V.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+% \Finale
+\endinput
