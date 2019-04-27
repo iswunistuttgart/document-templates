@@ -497,9 +497,9 @@
 %    \begin{macrocode}
 \NewDocumentCommand{\eye}{ o }{%
   \IfValueTF{#1}{%
-    \mathbb{1}_{#1}%
+    \mathbb{I}_{#1}%
   }{%
-    \mathbb{1}%
+    \mathbb{I}%
   }%
 }%
 %    \end{macrocode}
@@ -510,9 +510,9 @@
 %    \begin{macrocode}
 \NewDocumentCommand{\zeros}{ o }{%
   \IfValueTF{#1}{%
-    \mathbb{0}_{#1}%
+    \mathds{0}_{#1}%
   }{%
-    \mathbb{0}%
+    \mathds{0}%
   }%
 }%
 %    \end{macrocode}
@@ -523,9 +523,9 @@
 %    \begin{macrocode}
 \NewDocumentCommand{\ones}{ o }{%
   \IfValueTF{#1}{%
-    \mathbb{1}_{#1}%
+    \mathds{1}_{#1}%
   }{%
-    \mathbb{1}%
+    \mathds{1}%
   }%
 }%
 %    \end{macrocode}
