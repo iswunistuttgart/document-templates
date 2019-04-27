@@ -10,7 +10,7 @@ SOURCE_PDFS = $(SOURCES:dtx=pdf)
 DEMO_PDFS = $(DEMOS:tex=pdf)
 
 .PHONY: all
-all: ins $(SOURCE_PDFS) $(DEMO_PDFS)
+all: ins $(SOURCE_PDFS)
 
 .PHONY: ins
 ins: ustutt.ins $(SOURCES)
