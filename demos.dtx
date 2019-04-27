@@ -56,12 +56,12 @@
 %
 % \GetFileInfo{demos.dtx}
 %
-% \DoNotIndex{\newcommand,\newenvironment}
+% \DoNotIndex{\",\@,\abs,\acronymtype,\and,\begin,\bigg,\bm,\cdoot,\dof,\eg,\ell,\end,\ensuremath,\equiv,\eye,\fixcleverefappendix,\geq,\gram,\ie,\in,\kilo,\Maass,\mass,\mathds,\mc,\ms,\nicefrac,\norm,\numposconstraints,\parentheses,\pow,\printdate,\secnd,\si,\sum,\textemdash,\times,\today,\transpose,\usepackage,\vect}
 % 
 %
 % \title{The \textsf{demos} package\thanks{This document
 %   corresponds to \textsf{demos}~\fileversion, dated \filedate.}}
-% \author{Scott Pakin \\ \texttt{scott+dtx@pakin.org}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
 %
 % \maketitle
 %
@@ -73,21 +73,13 @@
 %
 % Put text here.
 %
-% \DescribeMacro{\dummyMacro}
-% This macro does nothing.\index{doing nothing|usage} It is merely an
-% example.  If this were a real macro, you would put a paragraph here
-% describing what the macro is supposed to do, what its mandatory and
-% optional arguments are, and so forth.
-%
-% \DescribeEnv{dummyEnv}
-% This environment does nothing.  It is merely an example.
-% If this were a real environment, you would put a paragraph here
-% describing what the environment is supposed to do, what its
-% mandatory and optional arguments are, and so forth.
-%
 % \StopEventually{}
 %
 % \section{Implementation}
+%
+% \subsection{Documents}
+%
+%<*document>
 %
 % \begin{macro}{\documentclass}
 % First off, we need to define the correct document class.
@@ -131,6 +123,18 @@
 %<book>  ]{ustuttbook}
 %<thesis>  ]{ustuttthesis}
 %    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\usepackage}
+% For theses, we also include some sample packages to allow for typesetting of
+% the different glossaries
+%    \begin{macrocode}
+%<*thesis>
+\usepackage{ustutttext}
+\usepackage{ustuttmath}
+\usepackage{ustuttmechanics}
+%    \end{macrocode}
+%</thesis>
 % \end{macro}
 % 
 % \begin{macro}{\title}
@@ -248,9 +252,7 @@
 % doctoral theses, this is your main advisor or doctoral advisor. Further
 % advisors go into the |\coadvisor| macro
 %    \begin{macrocode}
-%<*thesis>
-\advisor{PD Dr.-Ing.\@ Andreas Pott}
-%</thesis>
+%<thesis>\advisor{PD Dr.-Ing.\@ Andreas Pott}
 %    \end{macrocode}
 % \end{macro}
 % 
@@ -259,18 +261,14 @@
 % usually does not apply. For doctoral theses, these are the other advisors of
 % your graduation board.
 %    \begin{macrocode}
-%<*thesis>
-\coadvisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
-%</thesis>
+%<thesis>\coadvisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\dedication} 
 % You can dedicate your thesis to anyone. Since it's a macro, do not go overboard or haywire with formatting. Keep it simple.
 %    \begin{macrocode}
-%<*book|thesis>
-\dedication{This is to me!}
-%</book|thesis>
+%<book|thesis>\dedication{This is to me!}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -285,10 +283,17 @@
 % Lastly, we will load glossaries entries using the intended way. The file
 % loaded is just a regular \LaTeX file, however, with proper markup for the
 % glossaries definitions.
+% To let the |glossaries| package now that there is a new glossaries type, we
+% call the |\newglossary| method with the syntax
+% |\newglossary{<label>}{<log>}{<out-ext>{<in-ext>}{<caption>}|
 %    \begin{macrocode}
+%<*thesis>
+\newglossary[slg]{symbol}{sls}{slo}{List of Symbols}
 \loadglsentries{symbols}
+\newglossary[nlg]{notation}{nls}{nlo}{Notation}
 \loadglsentries{notation}
 \loadglsentries{acronyms}
+%</thesis>
 %    \end{macrocode}
 % \end{macro}
 %
@@ -347,7 +352,7 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{macro}{\maketitle}
+% \begin{macro}{\tableofcontents}
 % Most importantly, a table of contents should be type set right after all the
 % prefacing stuff.
 %    \begin{macrocode}
@@ -438,4 +443,284 @@
 %    \end{macrocode}
 % \end{environment}
 %
+%</document>
+%
+% \subsection{Mixins}
+%
+% \subsubsection{Symbols}
+%
+% Symbols can generally be typeset using the |glossaries| package, however, they
+% would be added to the global glossaries list. Most often, this is not what we
+% want as we want a separate list of all symbols.
+%
+% Now, we are able to add all our glossary entries one by one
+% \begin{macro}{\newglossaryentry}
+%    \begin{macrocode}
+%<*symbols>
+\newglossaryentry{sym:degrees-of-freedom}{%
+  type=symbol,%
+  name={\ensuremath{\dof}},%
+  sort={degrees of freedom},%
+  unit={},%
+  symbol={%
+    \ensuremath{\dof}%
+  },%
+  description={%
+    Number of degrees of freedom of a rigid body.%
+  },%
+}
+%</symbols>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\glsadd}
+% If you are planning to set up your list of symbols manually, then you need to
+% add every entry manually.
+%    \begin{macrocode}
+%<symbols>\glsadd{sym:degrees-of-freedom}
+%    \end{macrocode}
+% You may likewise use the glossary's definition inside a macro that you use
+% later throughout your document. This way, the first appearance of the entry
+% will be marked and referenced in the list of glossaries. Your mileage may
+% vary.
+%
+% Following next, we will just add a few more entries to our nomenclature to
+% have a nice and long list.
+%    \begin{macrocode}
+%<*symbols>
+\newglossaryentry{sym:number-of-something}{%
+  type=symbol,%
+  name={\ensuremath{n_{\parentheses{}}}},%
+  sort={number of X},%
+  unit={},%
+  symbol={
+    \ensuremath{n_{\parentheses{}}}%
+  },%
+  description={%
+    Number of quantity given in subscript index %
+    ${}_{\parentheses{}}$ \eg $\numposconstraints$ %
+    is the number of position constraints in a constrained 5
+    multi-body system.%
+  },%
+}
+\glsadd{sym:degrees-of-freedom}
+%
+\newglossaryentry{sym:time}{%
+  type=symbol,%
+  name={\ensuremath{t}},%
+  sort={time},%
+  unit={\si{\second}},%
+  symbol={
+    \ensuremath{t}%
+  },%
+  description={%
+    Time; scalar quantity, described as fundamental quantity %
+    and considered an absolute\textemdash not to be confused %
+    with absolute time and space\textemdash \ie observed %
+    time intervals between pairs of events are the same for %
+    all observers.
+  },%
+}
+\glsadd{sym:time}
+%
+\newglossaryentry{sym:mass-scalar}{%
+  type=symbol,%
+  name={\ensuremath{\mass_{\ms{B}}}},%
+  sort={mass scalar},%
+  unit={\si{\kilo\gram}},%
+  symbol={
+    \ensuremath{\mass_{\ms{B}}}%
+  },%
+  description={Scalar mass of rigid body~$\mc{B}$},%
+}
+\glsadd{sym:mass-scalar}
+%
+\newglossaryentry{sym:mass-matrix}{%
+  type=symbol,%
+  name={\ensuremath{\Mass_{\ms{B}}}},%
+  sort={mass matrix},%
+  unit={\si{\kilo\gram}},%
+  symbol={
+    \ensuremath{\Mass_{\ms{B}}}%
+  },%
+  description={%
+    Multi-dimensional linear mass/inertia of rigid body~$\mc{B}$.%
+  },%
+}
+\glsadd{sym:mass-matrix}
+%
+\newglossaryentry{sym:identity-matrix}{%
+  type=symbol,%
+  name={\ensuremath{\eye[c]}},%
+  sort={identity matrix},%
+  unit={},%
+  symbol={
+    \ensuremath{\eye[c]}%
+  },%
+  description={%
+    Identity matrix in~$\mathds{R}^{c \times c}$.%
+  },%
+}
+\glsadd{sym:identity-matrix}
+%</symbols>
+%    \end{macrocode}
+% \end{macro}
+% </symbols>
+%
+% \subsubsection{Notation}
+%
+% Notation is a list similar to regular |glossaries|. As such, you can just follow the lines of the Symbols subsection.
+%
+% Now, we are able to add all our glossary entries one by one
+% \begin{macro}{\newglossaryentry}
+%    \begin{macrocode}
+%<*notation>
+\newglossaryentry{nom:matrix-quantity}{%
+  type=notation,%
+  name={matrix-quantity},%
+  sort=1,%
+  unit={},%
+  symbol={\ensuremath{\vect{M}}},%
+  description={%
+    Matrix quantities are, if not introduced otherwise, written in uppercase bold math font.%
+  },%
+}
+%</notation>
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \begin{macro}{\glsadd}
+% If you are planning to set up your nomenclature manually, then you need to add
+% every entry manually.
+%    \begin{macrocode}
+%<notation>\glsadd{nom:matrix-quantity}
+%    \end{macrocode}
+% You may likewise use the glossary's definition inside a macro that you use
+% later throughout your document. This way, the first appearance of the entry
+% will be marked and referenced in the list of glossaries. Your mileage may
+% vary.
+%
+% Following next, we will just add a few more entries to our nomenclature to
+% have a nice and long list.
+%
+%    \begin{macrocode}
+%<*notation>
+\newglossaryentry{nom:vector-quantity}{%
+  type=notation,%
+  name={vector-quantity},%
+  sort=2,%
+  unit={},%
+  symbol={\ensuremath{\bm{x}}},%
+  description={%
+    Vector quantities are, if not introduced otherwise, written %
+    in lowercase bold math font.%
+  },%
+}
+\glsadd{nom:vector-quantity}
+%
+\newglossaryentry{nom:scalar-quantity}{%
+  type=notation,%
+  name={scalar-quantity},%
+  sort=3,%
+  symbol={\ensuremath{x}},%
+  description={%
+    Scalar quantities are, if not introduced otherwise, written %
+    in lowercase light math font.%
+  },%
+}
+\glsadd{nom:scalar-quantity}
+%
+\newglossaryentry{nom:transpose}{%
+  type=notation,%
+  name={transpose},%
+  symbol={\ensuremath{\transpose{\parentheses{\cdot}}}},%
+  description={%
+    Transpose of vector or matrix~$\parentheses{\cdot}$ such %
+    that~$\transpose{\parentheses{\cdot}_{rc}} = \parentheses{\cdot}_{cr}$.%$
+  },%
+}
+\glsadd{nom:transpose}
+%
+\newglossaryentry{nom:norm}{%
+  type=notation,%
+  name={norm},%
+  symbol={\ensuremath{\norm{\cdot}_{p}}},%
+  description={%
+  ~$p$-norm (also called~$\ell_{p}$-norm) of vector~$\vect{v} \in %
+  \mathds{R}^{k}$ with~$p \geq 1$ given by~${ \norm{\vect{v}}_{p} = %
+  \parentheses[\bigg]{ \sum_{ j = 1}^{ k }{ \pow[p]{ \abs{ \vect{v}_{j} } } } }^{ \nicefrac{1}{p} } }$. %
+  If~$p$ is omitted, we assume~$p \equiv 2$.
+  },%
+}
+\glsadd{nom:norm}
+%</notation>
+%    \end{macrocode}
+% \end{macro}
+% </symbols>
+%
+%
+% \subsubsection{Acronyms}
+% Acronyms are natively supported by the glossaries package, however, need to be defined slightly differently compared to regular glossaries entries.
+%
+% \begin{macro}{\newacronym}
+% Simple acronyms, where the plural form is just the singular form with an
+% appended `s' in English or an appended `en' in German, can be defined using
+% the |\newacronym| macro. Any acronym is defined with three arguments being |label|, |short|, and |long| form.
+%    \begin{macrocode}
+%<acronyms>\newacronym{acr:CAD}{CAD}{computer-aided design}
+%    \end{macrocode}
+% When the plural form is different to the singular form, then we need to take a slightly different route i.e.,
+%    \begin{macrocode}
+%<*acronyms>
+\newacronym[%
+  shortplural=DOFs,%
+  longplural=degrees of freedom,%
+]{acr:DOF}{DOF}{degree of freedom}%
+\glsadd{acr:DOF}
+%</acronyms>
+%    \end{macrocode}
+%
+% Following next, we will just add a few more entries to our list of acronyms to
+% have a nice and long list.
+%    \begin{macrocode}
+%<*acronyms>
+\newacronym{acr:CDPR}{CDPR}{%
+  cable-driven parallel robot%
+}%
+\glsadd{acr:CDPR}
+%
+\newacronym{acr:NURBS}{NURBS}{%
+  non-uniform rational B-spline,%
+}%
+\glsadd{acr:NURBS}
+%
+\newacronym{acr:ODE}{ODE}{%
+  ordinary differential equation%
+}%
+\glsadd{acr:ODE}
+%
+\newacronym{acr:DAE}{DAE}{%
+  differential-algebraic equation%
+}%
+\glsadd{acr:DAE}
+%
+\newacronym{acr:PDE}{PDE}{%
+  partial differential equation%
+}%
+\glsadd{acr:PDE}
+%
+\newacronym{acr:IVP}{IVP}{%
+  initial value problem%
+}%
+\glsadd{acr:IVP}
+%
+\newacronym{acr:BVP}{BVP}{%
+  boundary value problem%
+}%
+\glsadd{acr:BVP}
+%</acronyms>
+%    \end{macrocode}
+% \end{macro}
+% 
 % \Finale
