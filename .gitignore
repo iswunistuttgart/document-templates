@@ -4,6 +4,11 @@
 *.dict
 *.tex
 *.pdf
+*.nlg
+*.nls
+*.slg
+*.slo
+*.sls
 
 # Created by https://www.gitignore.io/api/windows
 
