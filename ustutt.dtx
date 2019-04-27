@@ -127,11 +127,13 @@
 \RequirePackage{ifdraft}
 %    \end{macrocode}
 %
-% This package offers support for package authors who want to use options in
-% key-value format for their package options. The package is part of the oberdiek
-% bundle.
+% The pgfkeys package (part of the pgf distribution) is a well-designed way of
+% defining and using large numbers of keys for key-value syntaxes. However,
+% pgfkeys itself does not offer means of handling LaTeX class and package
+% options. This package adds such option handling to pgfkeys, in the same way
+% that kvoptions adds the same facility to the LaTeX standard keyval package.
 %    \begin{macrocode}
-\RequirePackage{kvoptions}
+\RequirePackage{pgfopts}
 %    \end{macrocode}
 %
 % With chngcntr currently not working in TeXlive 2018, we need to add this.
@@ -146,91 +148,198 @@
 %
 % This is where the fun part begins, as we are now defining our class options.
 %
-% Configure the kvoptions-package
+% Configure the |pgfopts|-package
 %    \begin{macrocode}
-\SetupKeyvalOptions{%
-  family=USBWDE,% University of Stuttgart, Baden-Wuerttemberg, Germany
-  prefix=ustutt@,%
+\pgfkeys{%
+  /ustutt/.is family,%
 }
 %    \end{macrocode}
 %
 % User can define, which type of document this is in case we are not typesetting
 % a thesis document
 %    \begin{macrocode}
+\def\ustutt@type{}
 %<*article|book>
-\DeclareStringOption{type}
+\pgfkeys{
+% Change path
+  /ustutt/type/.cd,
+% Define `type' as choice of options
+    .is choice,
+% A typical report thing
+    report/.code={%
+      \def\ustutt@type{report}%
+    },
+% Offprint of some sort
+    offprint/.code={%
+      \def\ustutt@type{offprint}%
+    },
+% Exams document
+    exam/.code={%
+      \def\ustutt@type{exam}%
+    },
+% Student assignment
+    assignment/.code={%
+      \def\ustutt@type{assignment}%
+    },
+% No default value
+    .initial={},%
+}
 %</article|book>
-%<thesis>\def\ustutt@type{}
+%<*thesis>
+\pgfkeys{
+% Change path
+  /ustutt/type/.cd,
+% Define `type' as choice just to be consistent among all classes
+    .is choice,
+% Thesis document itself
+    thesis/.code={%
+      \def\ustutt@type{thesis}%
+    },
+% Scientific proposals for students
+    proposal/.code={%
+      \def\ustutt@type{proposal},%
+    },%
+}
+%</thesis>
 %    \end{macrocode}
 %
 % With debug option enabled, frames will be drawn on all pages. This is mostly
 % just needed for developers
 %    \begin{macrocode}
-\DeclareBoolOption{debug}
+\newif\ifustutt@debug
+\ustutt@debugfalse
+\pgfkeys{
+  /ustutt/debug/.cd,
+    .is if=ustutt@debug,
+}
 %    \end{macrocode}
 %
 % Color space. By default, we define all colors as RGB, but there might be cases
 % where you want to professionally print your document. Then, you would want to
 % use color space |cmyk|
 %    \begin{macrocode}
-\DeclareBoolOption[true]{rgb}
-\DeclareComplementaryOption{cmyk}{rgb}
+\newif\ifustutt@rgb
+\ustutt@rgbtrue
+\pgfkeys{
+% Change path
+  /ustutt/.cd,
+% RGB will be the default
+    rgb/.code={%
+      \ustutt@rgbtrue%
+    },
+% CMYK is an option complementary to RGB
+    cmyk/.code={%
+      \ustutt@rgbfalse%
+    },
+}
 %    \end{macrocode}
 %
 % Author gender can be selected, applies to the theses' titlepages where we
 % distinguish (only in German, of course) between e.g., a male "Doktoringenieur"
-% and a female "Doktoringenieurin". Of course, options |male| and |female| must
-% be exclusive to one another.
+% and a female "Doktoringenieurin". Of course, options |gender=male| and
+% |gender=female| must be exclusive to one another.
 %    \begin{macrocode}
-\DeclareBoolOption{female}
-\DeclareComplementaryOption{male}{female}
+\newif\ifustutt@male
+\ustutt@maletrue
+\pgfkeys{
+% Change path
+  /ustutt/gender/.cd,%
+    .is choice,%
+% `Male' is the default choice
+    male/.code={%
+      \ustutt@maletrue%
+    },
+% `Female' is option complementary to `male'
+    female/.code={%
+      \ustutt@malefalse%
+    },
+}
 %    \end{macrocode}
 %
-% Major you are enrolled in.
+% Major the student is enrolled in.
 %    \begin{macrocode}
-%<thesis>\DeclareStringOption{degree}
+%<*thesis>
+\pgfkeys{
+% Change path
+  /ustutt/degree/.cd,%
+    .is choice,%
+% Doctorate's degree
+    doctorate/.code={%
+      \def\ustutt@degree{doctorate}%
+    },%
+% Master's degree
+    master/.code={%
+      \def\ustutt@degree{master}%
+    },%
+% Bachelor's degree
+    bachelor/.code={%
+      \def\ustutt@degree{bachelor}%
+    },%
+}
+%</thesis>
 %    \end{macrocode}
 %
 % Declare whether thesis was accepted and ready for print (use draft/final to
 % switch between draft and final version of either the submission or publishing
 % version). This will later on adffect some options of typesetting.
 %    \begin{macrocode}
-%<thesis>\DeclareBoolOption[false]{accepted}
+%<*thesis>
+\newif\ifustutt@accepted
+\ustutt@acceptedfalse
+\pgfkeys{
+  /ustutt/accepted/.cd,
+    .is if=ustutt@accepted,
+}
+%</thesis>
 %    \end{macrocode}
 %
 % Pass any other options not known to the underlying koma script class
 %    \begin{macrocode}
-%<article>\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
-%<book|thesis>\DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
+\pgfkeys{
+  /ustutt/.cd,
+    .unknown/.code={%
+      \let\currname\pgfkeyscurrentname%
+      \let\currval\pgfkeyscurrentvalue%
+      \ifx#1\pgfkeysnovalue%
+%<article>        %\PassOptionsToClass{\currname}{scrartcl}
+%<book|thesis>        %\PassOptionsToClass{\currname}{scrbook}
+      \else%
+%<article>        %\PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrartcl}
+%<book|thesis>        %\PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrbook}
+      \fi%
+    },
+}
 %    \end{macrocode}
 %
 % Execute default options
 %    \begin{macrocode}
 %<*class>
-\ExecuteOptions{%
-  debug=false,
+\pgfkeys{
+  /ustutt/.cd,
+    debug=false,
 % Please, by all means, don't hate on me for this default!
-  gender=male,%
-  debug=false,
-  rgb,
-  english,
-  ngerman,
-  draft,
-  paper=a4paper,
-  cleardoublepage=empty,%
-%<article>  oneside,%
-%<article>  open=any,%
-%<book>  twoside,%
-%<book>  open=right,%
-%<thesis>  twoside,%
-%<thesis>  open=right,%
+    gender=male,%
+    rgb,
+    english,
+    ngerman,
+    draft,
+    paper=a4paper,
+    cleardoublepage=empty,%
+%<article>    oneside,%
+%<article>    open=any,%
+%<book>    twoside,%
+%<book>    open=right,%
+%<thesis>    type=thesis,%
+%<thesis>    accepted=false,%
+%<thesis>    twoside,%
+%<thesis>    open=right,%
   }
 %</class>
 %    \end{macrocode}
 %
 % Process options passed to the class
 %    \begin{macrocode}
-\ProcessKeyvalOptions{USBWDE}
+\ProcessPgfOptions{/ustutt}
 \ProcessOptions\relax
 %    \end{macrocode}
 %
@@ -345,6 +454,13 @@
   shortcuts,%
   nopostdot,%
 }{glossaries}
+%    \end{macrocode}
+%
+% Glossaries extra
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  automake,%
+}{glossaries-extra}
 %    \end{macrocode}
 %
 %
@@ -499,6 +615,8 @@
 % to stop the redefinition of \cite and related commands from the harvard and
 % natbib packages.
   notcite,%
+% Print the keys in a distinguishing colour. The default value is a light grey.
+  color,%
 }{showkeys}
 %    \end{macrocode}
 %
@@ -687,10 +805,11 @@
 \RequirePackage{amsmath}
 %    \end{macrocode}
 %
-% Additional math symbolys. For a full list, see
+% Additional math symbols. For a full list, see
 % \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
 %    \begin{macrocode}
 \RequirePackage{amssymb}
+\RequirePackage{dsfont}
 %    \end{macrocode}
 %
 % Adds infix expressions to perform arithmetic on the arguments of the LaTeX
@@ -1036,7 +1155,14 @@
 % package is part of the tools bundle in the LaTeX required distribution.
 %    \begin{macrocode}
 \ifdraft{%
-  \RequirePackage[color]{showkeys}%
+  \RequirePackage{showkeys}%
+% Override the default format of the label just so that it will not run away
+% from the margin width.
+  \providecommand*\showkeyslabelformat[1]{%
+    \fbox{%
+      \makebox[0.90\marginparwidth]{\normalfont\small\ttfamily#1}%
+    }%
+  }%
 }{}
 %    \end{macrocode}
 %
@@ -1227,6 +1353,7 @@
 % \subsubsection{All Documents}
 %
 % \begin{macro}{\authorrunning}
+% \cmd{\authorrunning}\marg{author(s)}\\
 % Running names of authors
 %    \begin{macrocode}
 \newcommand{\authorrunning}[1]{%
@@ -1265,6 +1392,7 @@
 %
 %
 % \begin{macro}{\city}
+% \cmd{\city}\marg{name}\\
 % Name of city of publication
 %    \begin{macrocode}
 \newcommand{\city}[1]{\gdef\ustutt@city{#1}}
@@ -1280,6 +1408,7 @@
 %
 %
 % \begin{macro}{\university}
+% \cmd{\university}\marg{name}\\
 % University name in current language
 %    \begin{macrocode}
 \newcommand{\university}[1]{\gdef\ustutt@university{#1}}
@@ -1295,6 +1424,7 @@
 %
 %
 % \begin{macro}{\faculty}
+% \cmd{\faculty}\marg{name}\\
 % Faculty name in current language
 %    \begin{macrocode}
 \newcommand{\faculty}[1]{\gdef\ustutt@faculty{#1}}
@@ -1310,6 +1440,7 @@
 %
 %
 % \begin{macro}{\department}
+% \cmd{\department}\marg{name}\\
 % Long name of department in current language
 %    \begin{macrocode}
 \newcommand{\department}[1]{\gdef\ustutt@department@long{#1}}
@@ -1325,6 +1456,7 @@
 %
 %
 % \begin{macro}{\departmentshort}
+% \cmd{\departmentshort}\marg{shortname}\\
 % Short name of department in current language
 %    \begin{macrocode}
 \newcommand{\departmentshort}[1]{\gdef\ustutt@department@short{#1}}
@@ -1340,6 +1472,7 @@
 %
 %
 % \begin{macro}{\universitylogo}
+% \cmd{\universitylogo}\marg{path}\\
 % Path to the university's logo without the localized suffix. Can be absolute to
 % main document root or relative to |images| or |figures| directory.
 %    \begin{macrocode}
@@ -1356,6 +1489,7 @@
 %
 %
 % \begin{macro}{\departmentlogo}
+% \cmd{\departmentlogo}\marg{path}\\
 % Path to the department's logo without the localized suffix. Can be absolute to
 % main document root or relative to |images| or |figures| directory.
 %    \begin{macrocode}
@@ -1372,6 +1506,7 @@
 %
 %
 % \begin{macro}{\coverimage}
+% \cmd{\coverimage}\marg{path}\\
 % Path to the cover page's image. Can be absolute to main document root or
 % relative to |images| or |figures| directory.
 %    \begin{macrocode}
@@ -1388,6 +1523,7 @@
 %
 %
 % \begin{macro}{\covercredits}
+% \cmd{\covercredits}\marg{credits}\\
 % In case the coverpage image is copyrighted by someone or you want to thank
 % someone for taking the picture, give then credits for its
 %    \begin{macrocode}
@@ -1406,6 +1542,7 @@
 % \subsubsection{Thesis}
 %
 % \begin{macro}{\placeofbirth}
+% \cmd{\placeofbirth}\marg{name}\\
 % Place(s) of birth of author(s) of any thesis type.
 %    \begin{macrocode}
 %<thesis>\newcommand{\placeofbirth}[1]{\gdef\ustutt@thesis@placeofbirth{#1}}
@@ -1435,15 +1572,16 @@
 % \end{macro}
 %
 %
-% \begin{macro}{\authorname}
+% \begin{macro}{\byname}
 % Text saying "by" in current locale (author)
 %    \begin{macrocode}
-%<thesis>\newcommand{\authorname}{\translate{ustutt@thesis@authorname}}
+%<thesis>\newcommand{\byname}{\translate{ustutt@thesis@authorname}}
 %    \end{macrocode}
 % \end{macro}
 %
 %
 % \begin{macro}{\major}
+% \cmd{\major}\marg{name}\\
 % Major of study
 %    \begin{macrocode}
 %<thesis>\newcommand{\major}[1]{\gdef\ustutt@thesis@major{#1}}
@@ -1466,6 +1604,7 @@
 %
 %
 % \begin{macro}{\advisor}
+% \cmd{\advisor}\marg{advisor}\\
 % Name of the advisor of any thesis type.
 %    \begin{macrocode}
 %<thesis>\newcommand{\advisor}[1]{\gdef\ustutt@thesis@advisor{#1}}
@@ -1488,6 +1627,7 @@
 %
 %
 % \begin{macro}{\coadvisor}
+% \cmd{\coadvisor}\marg{coadvisor(s)}\\
 % List of co-advisors of any thesis type. Separate multiple advisors
 % by |\and|.
 %    \begin{macrocode}
@@ -1511,6 +1651,7 @@
 %
 %
 % \begin{macro}{\datesubmitted}
+% \cmd{\datesubmitted}\marg{date}\\
 % Date of thesis submission. Can be preformatted using |\printdate| or manually
 % formatted. Will be typeset on the title page if given.
 %    \begin{macrocode}
@@ -1535,6 +1676,7 @@
 %
 %
 % \begin{macro}{\datedefended}
+% \cmd{\datedefended}\marg{date}\\
 % Date of defense. Can be preformatted using |\printdate| or manually formatted.
 % Will be typeset on the title page if given
 %    \begin{macrocode}
@@ -1567,7 +1709,18 @@
 % \end{macro}
 %
 %
+% \begin{macro}{\unitname}
+% \cmd{\unitname}\marg{unit name in locale}\\
+% Name of "unit" in current locale
+%    \begin{macrocode}
+\newcommand{\unitname}{\GetTranslation{ustutt@unit}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \begin{macro}{\ustutt@thesis@pretext}
+% Outputs the thesis pretext "submitted to..." or "accepted by..." on the
+% titlepage.
 %    \begin{macrocode}
 %<*thesis>
 \newcommand{\ustutt@thesis@pretext}{%
@@ -1580,38 +1733,40 @@
     \ustutt@faculty\space%
     der \ustutt@university\space%
     zur Erlangung der W\"urde eine%
-      \ifustutt@female%
+      \ifdefstring{\usutt@gender}{female}{%
         r%
-      \else%
-        s%
-      \fi%
-    \space%
-    \ifdefstring{\ustutt@degree}{doctorate}{%
-      \translate{ustutt@thesis@degree@doctorate@long}%
-      \ifustutt@female%
-        in%
-      \else%
-        s%
-      \fi%
-    }{%
-      \ifdefstring{\ustutt@degree}{master}{%
-        \translate{ustutt@thesis@degree@master@long}%
       }{%
-        \ifdefstring{\ustutt@degree}{bachelor}{%
+        s%
+      }%
+    \space%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+      \translate{ustutt@thesis@degree@doctorate@long}%
+      \ifdefstring{\usutt@gender}{female}{%
+        in%
+      }{%
+        s%
+      }%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        \translate{ustutt@thesis@degree@master@long}%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
           \translate{ustutt@thesis@degree@bachelor@long}%
-        }{}%
+        }{% FALSE
+        }%
       }%
     }%
     ~%
-    \ifdefstring{\ustutt@degree}{doctorate}{%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
       (\translate{ustutt@thesis@degree@doctorate@short})\space%
-    }{%
-      \ifdefstring{\ustutt@degree}{master}{%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
         (\translate{ustutt@thesis@degree@master@short})\space%
-      }{%
-        \ifdefstring{\ustutt@degree}{bachelor}{%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
           (\translate{ustutt@thesis@degree@bachelor@short})\space%
-        }{}%
+        }{% FALSE
+        }%
       }%
     }%
     \ifustutt@accepted%
@@ -1619,26 +1774,28 @@
     \else%
       vorgelegte%
     \fi\space%
-    \ifdefstring{\ustutt@degree}{doctorate}{%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
       Abhandlung%
     }{%
-      \ifdefstring{\ustutt@degree}{mater}{%
+      \ifdefstring{\ustutt@degree}{master}{% FALSE
         Masterarbeit%
       }{%
-        \ifdefstring{\ustutt@degree}{bachelor}{%
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
           Bachelorarbeit%
-        }{}%
+        }{% FALSE
+        }%
       }%
     }%
   }{%
     A %
     {%
-      \ifdefstring{\ustutt@degree}{master}{%
-        master's %
-      }{%
-        \ifdefstring{\ustutt@degree}{bachelor}{%
-          bachelor's %
-        }{}%
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        master's%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          bachelor's%
+        }{% FALSE
+        }%
       }%
       \space%
     }%
@@ -1651,27 +1808,30 @@
     the faculty of \ustutt@faculty\space%
     at \ustutt@university\space%
     in partial fulfillment of the requirements of a\space%
-    \ifdefstring{\ustutt@degree}{doctorate}{%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
       \translate{ustutt@thesis@degree@doctorate@long}%
-    }{%
-      \ifdefstring{\ustutt@degree}{master}{%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
         \translate{ustutt@thesis@degree@master@long}%
-      }{%
-        \ifdefstring{\ustutt@degree}{bachelor}{%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
           \translate{ustutt@thesis@degree@bachelor@long}%
-        }{}%
+        }{% FALSE
+        }%
       }%
     }%
     ~%
-    \ifdefstring{\ustutt@degree}{doctorate}{%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
       (\translate{ustutt@thesis@degree@doctorate@short})\space%
-    }{%
-      \ifdefstring{\ustutt@degree}{master}{%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
         (\translate{ustutt@thesis@degree@master@short})\space%
-      }{%
-        \ifdefstring{\ustutt@degree}{bachelor}{%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
           (\translate{ustutt@thesis@degree@bachelor@short})\space%
-        }{}%
+        }{%
+         FALSE
+        }%
       }%
     }%
   }%
@@ -1693,8 +1853,8 @@
 }{%
   \end{spacing}%
   \vfill%
-  \ifdefempty{\@keywords}{%
-  }{%
+  \ifdefempty{\@keywords}{% TRUE
+  }{% FALSE
     \let\oldAnd\and%
     \renewcommand{\and}{\unskip,\xspace}%
     \textbf{\color{PrimaryColor}\keywordsname:}~\@keywords%
@@ -1749,13 +1909,21 @@
   \renewcommand{\and}{\unskip,\xspace}%
   \ifthispageodd{%
     \begin{tabu} to \linewidth {X[1,l] X[5,r]}%
-      \ifdefempty{\ustutt@city}{}{\ustutt@city, }\@date%
+      \ifdefempty{\ustutt@city}{% TRUE
+      }{% FAlSE
+        \ustutt@city, %
+      }%
+      \@date%
         & \@author%
     \end{tabu}%
   }{%
     \begin{tabu} to \linewidth {X[1,l] X[5,r]}%
       \@author%
-        & \ifdefempty{\ustutt@city}{}{\ustutt@city, }\@date%%
+        & \ifdefempty{\ustutt@city}{% TRUE
+          }{% FALSE
+            \ustutt@city, %
+          }%
+          \@date%
     \end{tabu}%
   }%
   \renewcommand{\and}{\oldAnd}%
@@ -1786,14 +1954,16 @@
 %
 % Colorful documents are much nicer than just plain black and white. Thus, let
 % us define a batch of basis colors and their nuances
+%
 % \begin{macro}{\colorlighter}
+% \cmd{\colorlighter}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
 % Define new color |#3| which is only |#2| parts of the original color |#1| and
 % the remainder White.
 %    \begin{macrocode}
 \newcommand{\colorlighter}[3]{%
-  % #1 Original color
-  % #2 Percentage of white mix
-  % #3 New color name
+% #1 Original color
+% #2 Percentage of white mix
+% #3 New color name
   \colorlet{#3}{#1!#2!White}%
 }
 %    \end{macrocode}
@@ -1806,13 +1976,14 @@
 % \end{macro}
 %
 % \begin{macro}{\colordarker}
+% \cmd{\colordarker}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
 % Define new color |#3| which is only |#2| parts of the original color |#1| and
 % the remainder Black.
 %    \begin{macrocode}
 \newcommand{\colordarker}[3]{%
-  % #1 Original color
-  % #2 Percentage of Black mix
-  % #3 New color name
+% #1 Original color
+% #2 Percentage of Black mix
+% #3 New color name
   \colorlet{#3}{#1!#2!Black}%
 }
 %    \end{macrocode}
@@ -2071,7 +2242,9 @@
 % We will provide some macros for easier colored-table creation
 %
 % \begin{macro}{\tablecolorwithhead}
-% Set the correct order of colors for tables with a head
+% \cmd{\tablecolorwithhead}\\
+% Trigger row colors in the correct order for tables with a single header row,
+% such that even and odd rows are colored similar to tables without header row.
 %    \begin{macrocode}
 \newcommand{\tablecolorwithhead}{\rowcolors{1}{TableRowEven}{TableRowOdd}}
 %    \end{macrocode}
@@ -2079,7 +2252,8 @@
 %
 %
 % \begin{macro}{\tablecolorwithouthead}
-% Set the correct order of colors for tables without a head
+% \cmd{\tablecolorwithouthead}\\
+% Set table row colors in the order for tables without any header rows.
 %    \begin{macrocode}
 \newcommand{\tablecolorwithouthead}{\rowcolors{1}{TableRowOdd}{TableRowEven}}
 %    \end{macrocode}
@@ -2087,6 +2261,7 @@
 %
 %
 % \begin{macro}{\tableheadcolor}
+% \cmd{\tableheadcolor}\\
 % Sets the table head row color
 %    \begin{macrocode}
 \newcommand{\tableheadcolor}{\rowcolor{TableHeader}}
@@ -2095,7 +2270,9 @@
 %
 %
 % \begin{macro}{\thead}
-% Command to apply styles for a table head column
+% \cmd{\thead}\marg{header celll content}\\
+% Command to apply styles for a table head column. Is placed inside the header
+% cell and takes the cell content as argument.
 %    \begin{macrocode}
 \newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
 %    \end{macrocode}
@@ -2103,6 +2280,7 @@
 %
 %
 % \begin{macro}{\theadbegin}
+% \cmd{\theadbegin}\\
 % Command to open a table header
 %    \begin{macrocode}
 \newcommand{\theadbegin}{\toprule\tableheadcolor}
@@ -2111,7 +2289,8 @@
 %
 %
 % \begin{macro}{\theadend}
-% And command to close a table header
+% \cmd{\theadend}\\
+% Command to close a table header
 %    \begin{macrocode}
 \newcommand{\theadend}{\midrule}
 %    \end{macrocode}
@@ -2119,7 +2298,8 @@
 %
 %
 % \begin{macro}{\crule}
-% Colored rule command
+% \cmd{\crule}\oarg{color}\marg{width}\marg{height}\\
+% Simpler command for a colored ruler.
 %    \begin{macrocode}
 \newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}
 %    \end{macrocode}
@@ -2640,7 +2820,9 @@
 %
 %
 % \begin{macro}{\coverpage}
-% This typesets the coverpage when executed.
+% \cmd{\coverpage}\\
+% Type set the coverpage wherever it is placed. Also outputs the coverpage
+% thanks/credits at the bottom of the the following page.
 %    \begin{macrocode}
 \newcommand{\coverpage}{%
   \noindent%
@@ -2709,12 +2891,14 @@
       at (0.50, -0.275)%
       {%
 % Write the document type onto the title page
-        \ifdefempty{\ustutt@type}{}{%
+        \ifdefstring{\ustutt@type}{thesis}{% TRUE
+        }{% FALSE
           {\usekomafont{coverpagedocumenttype}\translate{ustutt@documenttype@\expandafter\ustutt@type}}%
         }%
       };%
 % IMAGE
-    \ifdefempty{\ustutt@coverpage@image}{}{%
+    \ifdefempty{\ustutt@coverpage@image}{% TRUE
+    }{% FALSE
       \begin{scope}%
         \clip%
           (0.00,-0.30)%
@@ -2733,7 +2917,8 @@
       \end{scope}%
     };%
 % LOGOS
-    \ifdefempty{\ustutt@university@logo}{}{%
+    \ifdefempty{\ustutt@university@logo}{% TRUE
+    }{% FALSE
       \node[%
           anchor=west,%
         ]%
@@ -2745,7 +2930,8 @@
             ]{\ustutt@university@logo}%
         };%
     };%
-    \ifdefempty{\ustutt@department@logo}{}{%
+    \ifdefempty{\ustutt@department@logo}{% TRUE
+    }{% FALSE
       \node[%
           anchor=east,%
         ]%
@@ -2775,7 +2961,8 @@
   \end{tikzpicture}%
   \tikzexternalenable
   \clearpage%
-  \ifdefempty{\ustutt@coverpage@credits}{}{%
+  \ifdefempty{\ustutt@coverpage@credits}{% TRUE
+  }{% FALSE
     \newgeometry{%
       inner=1.50cm,%
       outer=1.50cm,%
@@ -2798,6 +2985,7 @@
 %
 %
 % \begin{macro}{\maketitle}
+% \cmd{|maketitle}\\
 % This macro is overwritten for all documents of type thesis to represent the
 % official template given by Faculty 7 (or at least as close as it can get).
 %    \begin{macrocode}
@@ -2819,7 +3007,8 @@
     \vskip 0.10cm%
     \begin{minipage}[t][1.50cm][c]{0.70\linewidth}%
       \centering%
-      \ifdefempty{\@subtitle}{}{%
+      \ifdefempty{\@subtitle}{% TRUE
+      }{% FALSE
         \usekomafont{subtitle}{\@subtitle}%
       }%
     \end{minipage}%
@@ -2834,7 +3023,7 @@
 % AUTHOR box is 80% wide and 3.50cm tall
     \begin{minipage}[t][2.50cm][c]{0.80\linewidth}
       \centering%
-      \authorname%
+      \byname%
       \vskip 0.50cm%
       {\usekomafont{author}%
       \begin{tabular}[t]{c}%
@@ -2842,9 +3031,9 @@
       \end{tabular}%
       }%
       \vskip 0.50cm%
-      \ifdefempty{\ustutt@thesis@placeofbirth}{%
+      \ifdefempty{\ustutt@thesis@placeofbirth}{% TRUE
         \par%
-      }{%
+      }{% FALSE
         \placeofbirthname\par%
         {\usekomafont{placeofbirth}%
         \begin{tabular}[t]{c}%
@@ -2864,7 +3053,8 @@
       \renewcommand{\and}{\par}%
       \renewcommand*{\arraystretch}{1.60}
       \begin{tabu} to \linewidth {X[2,l] X[3,l]}%
-        \ifdefempty{\ustutt@thesis@major}{}{%
+        \ifdefempty{\ustutt@thesis@major}{% TRUE
+        }{% FALSE
           {\majorname:}%
             & \ustutt@thesis@major\\%
         }%
@@ -2872,10 +3062,10 @@
           & \ustutt@thesis@advisor\\%
         {\coadvisorname:}%
           & {\ustutt@thesis@coadvisor}\\%
-        \ifdefstring{\ustutt@degree}{doctorate}{%
+        \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
           {\datedefendedname:}%
             & \ifustutt@accepted\@date\else\fi\\%
-        }{%
+        }{% FALSE
           {\ifustutt@accepted\datedefendedname\else\datesubmittedname\fi:}%
             & \@date\\%
         }%
@@ -2945,6 +3135,7 @@
 %    \end{macrocode}
 %
 % \begin{macro}{\fixcleverefappendix}
+% \cmd{\fixcleverefappendix}\\
 % For some weird reason, if we want to use |cleverref| with the |appendix|
 % package, it does not typeset the chapter prefix correctly. This changes this
 % odd behavior.
