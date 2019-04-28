@@ -279,21 +279,14 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\loadglsentries}
-% Lastly, we will load glossaries entries using the intended way. The file
-% loaded is just a regular \LaTeX file, however, with proper markup for the
-% glossaries definitions.
+% \begin{macro}{\newglossary}
+% \cmd{\newglossary}\oarg{}\marg{label}\marg{log}\marg{out-ext}\marg{in-ext}\marg{caption}
 % To let the |glossaries| package now that there is a new glossaries type, we
 % call the |\newglossary| method with the syntax
 % |\newglossary{<label>}{<log>}{<out-ext>{<in-ext>}{<caption>}|
 %    \begin{macrocode}
-%<*thesis>
-\newglossary[slg]{symbol}{sls}{slo}{List of Symbols}
-\loadglsentries{symbols}
-\newglossary[nlg]{notation}{nls}{nlo}{Notation}
-\loadglsentries{notation}
-\loadglsentries{acronyms}
-%</thesis>
+\newglossary[slg]{symbol}{sls}{slo}{\translate{ustutt@glossaries@symbols}}
+\newglossary[nlg]{notation}{nls}{nlo}{\translate{ustutt@glossaries@notation}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -309,6 +302,26 @@
 % Likewise, glossaries cannot be typeset of they have not been made.
 %    \begin{macrocode}
 \makeglossaries
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\loadglsentries}
+% Lastly, we will load glossaries entries using the intended way. The file
+% loaded is just a regular \LaTeX file, however, with proper markup for the
+% glossaries definitions.
+%    \begin{macrocode}
+%<*thesis>
+\loadglsentries{symbols}
+\loadglsentries{notation}
+\loadglsentries{acronyms}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\glsaddall}
+% For the sake of this demo, we will just add all defined glossaries entries
+%    \begin{macrocode}
+\glsaddall
 %    \end{macrocode}
 % \end{macro}
 % 
