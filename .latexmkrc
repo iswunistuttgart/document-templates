@@ -26,6 +26,16 @@ push @generated_exts, 'nlo', 'nls', 'nlg';
 $clean_ext .= '%R.nlo %R.nls %R.nlg';
 add_cus_dep('nlo', 'nls', 0, 'run_makeglossaries');
 
+# Function for making glossaries
+sub run_makeglossaries {
+  if ( $silent ) {
+    system "makeglossaries -q '$_[0]'";
+  }
+  else {
+    system "makeglossaries '$_[0]'";
+  };
+}
+
 # Overwrite `unlink_or_move` to support clean directory.
 use File::Path 'rmtree';
 sub unlink_or_move {
