@@ -453,6 +453,7 @@
   nomain,%
   shortcuts,%
   nopostdot,%
+  translate=babel,%
 }{glossaries}
 %    \end{macrocode}
 %
@@ -1345,6 +1346,12 @@
 % respective languages loaded dialect(s). Cool, eh?
 %    \begin{macrocode}
 \usedictionary{ustutt}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\renewcommand\appendixname{\translate{ustutt@appendix@name}}
+\renewcommand\appendixtocname{\translate{ustutt@appendix@tocname}}
+\renewcommand\appendixpagename{\translate{ustutt@appendix@pagename}}
 %    \end{macrocode}
 %
 %
