@@ -8,6 +8,7 @@ DEMOS = ustuttbachelor_de.tex ustuttbachelor_en.tex \
 	ustuttdoctorate_de.tex ustuttdoctorate_en.tex
 SOURCE_PDFS = $(SOURCES:dtx=pdf)
 DEMO_PDFS = $(DEMOS:tex=pdf)
+# DEMOS = $(DEMOS:tex=)
 
 .PHONY: all
 all: ins $(SOURCE_PDFS)
@@ -16,11 +17,17 @@ all: ins $(SOURCE_PDFS)
 ins: ustutt.ins $(SOURCES)
 	pdflatex ustutt.ins
 
+.PHONY: demos
+demos: $(DEMO_PDFS)
+
+$(DEMO_PDFS): $(DEMOS)
+	latexmk $<
+
 %.pdf: %.dtx
-	latexmk $^
+	pdflatex $^
 	makeindex -s gind.ist $*.idx
 	makeindex -s gglo.ist -o $*.gls $*.glo
-	latexmk $^
+	pdflatex $^
 
 .PHONY: clean
 clean:
