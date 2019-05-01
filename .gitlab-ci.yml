@@ -1,8 +1,13 @@
-build:
+stages:
+  - build
+  - demos
+  - ship
+
+ins:
   image: philipptempel/docker-ubuntu-tug-texlive:latest
   stage: build
   script:
-    - make clean
+    - make distclean
     - make all
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
@@ -13,6 +18,58 @@ build:
       - '*.dict'
       - '*.pdf'
       - '*.tex'
+  tags:
+    - docker
+
+demos:
+  image: philipptempel/docker-ubuntu-tug-texlive:latest
+  stage: demos
+  script:
+    - make demos
+  artifacts:
+    name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
+    expire_in: 2 months
+    paths:
+      - '*.cls'
+      - '*.sty'
+      - '*.dict'
+      - '*.pdf'
+      - '*.tex'
+  tags:
+    - docker
+
+release:
+  image:
+    name: tsub/ghr:latest
+    entrypoint: ["/bin/sh", "-c"]
+  stage: ship
+  variables:
+    DISTDIR: "dist/"
+    DEMOS: "ustuttbachelor_de.tex ustuttbachelor_en.tex ustuttmaster_de.tex ustuttmaster_en.tex ustuttdoctorate_de.tex ustuttdoctorate_en.tex"
+    DEMOS: "ustuttbachelor_de.pdf ustuttbachelor_en.pdf ustuttmaster_de.pdf ustuttmaster_en.pdf ustuttdoctorate_de.pdf ustuttdoctorate_en.pdf"
+    ADDL_INCLUDES: "acronyms.tex symbols.tex notation.tex"
+  script:
+    - '[ ! -d ${DISTDIR} ] || rm -r ${DISTDIR}'
+    - 'mkdir -p ${DISTDIR}/examples'
+    - 'cp LICENSE.txt ${DISTDIR}'
+    - 'cp *.md ${DISTDIR}'
+    - 'cp *.cls ${DISTDIR}'
+    - 'cp *.sty ${DISTDIR}'
+    - 'cp *.tex ${DISTDIR}'
+    - 'cp *.pdf ${DISTDIR}'
+    - 'mv ${DISTDIR}/ustutt*_*.* ${DISTDIR}/examples/'
+    - 'mv ${DISTDIR}/acronyms.tex ${DISTDIR}/examples/'
+    - 'mv ${DISTDIR}/notation.tex ${DISTDIR}/examples/'
+    - 'mv ${DISTDIR}/symbols.tex ${DISTDIR}/examples/'
+    - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_BUILD_REF_NAME}" ${DISTDIR}'
+  only:
+    - tags
+  artifacts:
+    name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
+    expire_in: 2 months
+    paths:
+      - '*.txt'
+      # - '${DISTDIR}/*'
   tags:
     - docker
 
