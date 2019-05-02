@@ -54,7 +54,7 @@ install: ins
 	cp *.sty $(INSTALLDIR)
 
 .PHONY: package
-package: all
+package: all demos
 	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
 	mkdir -p $(DISTDIR)/examples
 	cp *.cls $(DISTDIR)
