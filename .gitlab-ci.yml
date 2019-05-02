@@ -40,7 +40,7 @@ demos:
 
 release:
   image:
-    name: tsub/ghr:latest
+    name: chhinze/ghr
     entrypoint: ["/bin/sh", "-c"]
   stage: ship
   variables:
