@@ -1,5 +1,6 @@
 SHELL = /bin/bash
 
+DISTDIR = dist/
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
 SOURCES = ustutt.dtx demos.dtx \
 	ustuttmath.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx \
@@ -7,9 +8,10 @@ SOURCES = ustutt.dtx demos.dtx \
 DEMOS = ustuttbachelor_de.tex ustuttbachelor_en.tex \
 	ustuttmaster_de.tex ustuttmaster_en.tex \
 	ustuttdoctorate_de.tex ustuttdoctorate_en.tex
+ADDL_INCLUDES = acronyms.tex symbols.tex notation.tex
+
 SOURCE_PDFS = $(SOURCES:dtx=pdf)
 DEMO_PDFS = $(DEMOS:tex=pdf)
-# DEMOS = $(DEMOS:tex=)
 
 .PHONY: all
 all: ins $(SOURCE_PDFS)
@@ -50,6 +52,17 @@ install: ins
 	cp *.cls $(INSTALLDIR)
 	cp *.dict $(INSTALLDIR)
 	cp *.sty $(INSTALLDIR)
+
+.PHONY: package
+package: all
+	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
+	mkdir -p $(DISTDIR)/examples
+	cp *.cls $(DISTDIR)
+	cp *.dict $(DISTDIR)
+	cp *.sty $(DISTDIR)
+	cp $(DEMOS) $(DISTDIR)/examples
+	cp $(DEMO_PDFS) $(DISTDIR)/examples
+	cp $(ADDL_INCLUDES) $(DISTDIR)/examples
 
 .PHONY: uninstall
 uninstall: distclean
