@@ -45,6 +45,7 @@ clean:
 distclean: clean
 	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || latexmk -C -silent *.dtx
 	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || latexmk -C -silent *.tex
+	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
 
 .PHONY: install
 install: ins
@@ -55,7 +56,6 @@ install: ins
 
 .PHONY: package
 package: all demos
-	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
 	mkdir -p $(DISTDIR)/examples
 	cp *.cls $(DISTDIR)
 	cp *.dict $(DISTDIR)
