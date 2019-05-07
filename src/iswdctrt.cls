@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.5.2}
-\def\filedate{2018/09/19}
+\def\fileversion{1.6.0}
+\def\filedate{2019/05/07}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
