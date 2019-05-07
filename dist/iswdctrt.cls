@@ -1,6 +1,6 @@
 % Definition of class version and last release date
-\def\fileversion{1.5.1}
-\def\filedate{2018/06/12}
+\def\fileversion{1.6.0}
+\def\filedate{2019/05/07}
 
 % Definition of the actual class interface
 \NeedsTeXFormat{LaTeX2e}
@@ -412,24 +412,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex
 \PassOptionsToPackage{%
+  % General configuration of biblatex
   backend=biber,%
-  language=auto,%
-  style=ieee,%
-  citestyle=authoryear,
-  % sorting=nyt, % NameYearTitle
-  sorting=none,% Like bibtex' `unrt`: number according to appearance in source
-  % style=authoryear-comp, % Author 1999, 2010
-  % bibstyle=authoryear,
-  dashed=false,% Do not substitute repeated authors with ---
-  mincitenames=1,% default 2
-  maxcitenames=1,% default 3
-  maxbibnames=10,% default: 3, et al.
-  isbn=false,% Hide ISBN
-  url=false,% Hide URL
-  doi=false,% Hide DOI
-  uniquename=false,%
-  giveninits=true,% Only first letter of given names -> increase chances for homogeneous bibliography
-  % backref=true,%
+  backref=false,%
+  giveninits=true,%
+  autocite=inline,%
+  sorting=nyt,%
+  sortcites=true,%
+  %
+  % Configuration of text citations
+  citestyle=authoryear,%%
+  mincitenames=1,%
+  maxcitenames=2,%
+  %
+  % Configuration of bibliography
+  bibstyle=authoryear,%
+  maxbibnames=10,%
+  doi=false,%
+  isbn=false,%
+  url=false,%
   natbib=true,% natbib compatibility mode (\citep and \citet still work)
 }{biblatex}
 
@@ -2441,7 +2442,7 @@
 \newcommand{\draftname}{Draft}
 \newcommand{\mainexaminername}{First Examiner}
 \newcommand{\secondexaminername}{Second Examiner}
-\newcommand{\logosuffixname}{en}
+\newcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \newcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2507,7 +2508,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2573,7 +2574,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2639,7 +2640,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2705,7 +2706,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2771,7 +2772,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2837,7 +2838,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2903,7 +2904,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -2969,7 +2970,7 @@
 \renewcommand{\draftname}{Draft}
 \renewcommand{\mainexaminername}{First Examiner}
 \renewcommand{\secondexaminername}{Second Examiner}
-\renewcommand{\logosuffixname}{en}
+\renewcommand{\logosuffixname}{-en}
 \ifDocumentaccepted%
   \renewcommand{\submittedbyname}{Submitted by}
 \else%
@@ -3054,7 +3055,7 @@
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
 \renewcommand{\appendixpagename}{Anh\"ange}
-\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\abstractname}{Kurzfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
@@ -3166,7 +3167,7 @@
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
 \renewcommand{\appendixpagename}{Anh\"ange}
-\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\abstractname}{Kurzfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
@@ -3278,7 +3279,7 @@
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
 \renewcommand{\appendixpagename}{Anh\"ange}
-\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\abstractname}{Kurzfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
@@ -3390,7 +3391,7 @@
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
 \renewcommand{\appendixpagename}{Anh\"ange}
-\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\abstractname}{Kurzfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %
@@ -3502,7 +3503,7 @@
 \renewcommand{\appendixtocname}{Anh\"ange}
 \renewcommand{\appendixname}{Anhang}
 \renewcommand{\appendixpagename}{Anh\"ange}
-\renewcommand{\abstractname}{Zusammenfassung}
+\renewcommand{\abstractname}{Kurzfassung}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 %\renewcommand{\@dedicationname}{Widmung}
 %

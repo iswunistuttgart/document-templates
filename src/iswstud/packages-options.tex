@@ -18,23 +18,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex
 \PassOptionsToPackage{%
+  % General configuration of biblatex
   backend=biber,%
-  language=auto,%
-  style=iswbib,%
-  citestyle=authoryear,
-  % sorting=nyt, % NameYearTitle
-  sorting=none,% Like bibtex' `unrt`: number according to appearance in source
-  % style=authoryear-comp, % Author 1999, 2010
-  % bibstyle=authoryear,
-  dashed=true,% Substitute repeated authors with ---
-  mincitenames=1,% default 2
-  maxcitenames=1,% default 3
-  maxbibnames=10,% default: 3, et al.
-  isbn=false,% Hide ISBN
-  url=false,% Hide URL
-  doi=false,% Hide DOI
-  % uniquename=full,
-  giveninits=true,% Only first letter of given names -> increase chances for homogeneous bibliography
-  % backref=true,%
+  backref=false,%
+  giveninits=true,%
+  autocite=inline,%
+  sorting=nyt,%
+  sortcites=true,%
+  %
+  % Configuration of text citations
+  citestyle=ieee,%%
+  mincitenames=1,%
+  maxcitenames=2,%
+  %
+  % Configuration of bibliography
+  bibstyle=ieee,%
+  maxbibnames=10,%
+  doi=false,%
+  isbn=false,%
+  url=false,%
   natbib=true,% natbib compatibility mode (\citep and \citet still work)
 }{biblatex}

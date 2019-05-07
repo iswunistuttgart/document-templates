@@ -8,15 +8,15 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.5.1 |
-| iswbook | Book-like documents | 1.4.2 |
-| iswdctrt | Doctoral theses | 1.5.1 |
-| iswstud | Student theses | 1.5.1 |
+| iswartcl | General documents | 1.5.2 |
+| iswbook | Book-like documents | 1.5.1 |
+| iswdctrt | Doctoral theses | 1.5.2 |
+| iswstud | Student theses | 1.6.1 |
 
-There are three ways to obtaining the necessary `.cls` and `.tex` files
-  1. Clone the repository and obtain the files from the `dist/` directory
-  1. Download the build artifacts (i.e., only the file necessary and not the whole repository) from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) and unpack them to your local working directory
-  1. Build the files yourself after cloning this repository. Simply call `$ make all` in the root of this directory
+There are three ways to obtaining the necessary `.cls`, `.tex`, `.sty`, and `.bbx` files:
+  1. Clone the repository and obtain the files from directory `dist/`
+  1. Download the build artifacts i.e., only the file necessary and not the whole repository from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) (requires authentication) and unpack them to your local working directory
+  1. Build the files yourself after cloning this repository. Simply `$ make all` in the root of this directory
 
 In the long run this will be the on and only way to obtaining the files.
 
@@ -61,11 +61,19 @@ PS: The developers are solely using `latexmk`, so support for users using `latex
 ## Usage
 
 You can use these document classes for a magnitude of documents such as your bachelor's or master's thesis, a simple document, or a doctoral thesis.
-Please read on to find out more on the general structure of a document in either type.
+Please read on to find out more on the general structure of a document in either document class, but also about all available document class options.
 
 ### Doctoral Thesis `iswdctrt`
 
 Doctoral theses may be typeset in your language of preference (as long as it is either English or German, no other language is officially supported by the document class).
+
+```latex
+\documentclass[%
+  ngerman,% to allow an alternative titlepage and abstract in English
+  english,% main document language needs to be loaded last
+  bachelor, % Bachelor's thesis
+]{iswdctrt}
+```
 
 ### Student Thesis `iswstud`
 
@@ -74,7 +82,6 @@ Doctoral theses may be typeset in your language of preference (as long as it is 
   english,% to allow an alternative titlepage and abstract in English
   ngerman,% main document language needs to be loaded last
   bachelor, % Bachelor's thesis
-  bachelor-description, % Project description of a bachelor's thesis
 ]{iswstud}
 ```
 
@@ -118,7 +125,12 @@ Additionally, you then must set the `\date` of your thesis to the date of your d
 
 Right from the start, bibliography can be included via `biblatex` as known from all other classes e.g., koma.
 Include your bib file in the preamble using `\addbibresource{literature.bib}` and towards the end of your document, `\printbibliography` to output the bibliography.
-The style is already loaded in the respective class.
+The style is already loaded in the respective class, but it requires existence of file `iswbib.bbx` in your local working directory (or at least on your LaTeX search path).
+Please keep in mind that the classes are using `biber` for generating your references and bibliographies.
+As such, you must adjust your compilation toolchain to call `biber` instead of the outdated `biblatex`.
+IDEs like TeXstudio allow for easy changing of the default bibliography compiler.
+YMMV depending on your IDE.
+On the other hand, if you make use of `latexmk`, it will automagically use the right compiler toolchain so as you will not have to worry much.
 
 ### Mathematics-heavy Thesis
 
@@ -173,6 +185,47 @@ The order of languages loaded matters, as the last loaded language is the docume
   english,% main document language needs to be loaded last
 ]{isw*}
 ```
+
+### Glossaries
+
+Glossaries (like glossaries, acronyms, symbols) are supported through the `glossaries` package, loaded automatically (in conjunction with `glossaries-extras`, `glossary-longbooktabs`, and `glossaries-extra-stylemods`).
+Our glossaries styles is defined in `iswgloss.sty` and activated automatically.
+Without going deep into how to use `glossaries` (please refer to CTAN), you need to define it within your document preamble using a snippet like
+
+```latex
+% Define new glossaries type for mathematical symbols
+% \newglossary{<label>}{<log>}{<out-ext>{<in-ext>}
+\newglossary[slg]{symbol}{sls}{slo}{List of Symbols}
+\newglossary[nlg]{notation}{nls}{nlo}{Notation}
+# Load acronyms glossaries
+\loadglsentries{path/to/glossaries/acronyms}
+# Load symbols glossaries
+\loadglsentries{path/to/glossaries/symbols}
+# Load nomenclature/notation glossaries
+\loadglsentries{path/to/glossaries/nomenclature}
+
+% Make indices and glossaries
+\makeindex
+\makeglossaries
+```
+
+To type out your glossaries, use something along the lines of
+
+```latex
+% Add all glossary values and not only the ones used/referred
+\glsaddall
+# You can increase spacing of glossaries' table's rows
+\renewcommand*{\arraystretch}{1.40}
+# Type out symbols
+\printglossary[type=symbol,style=isw-long-symbol-nogroup]
+# Type out notation
+\printglossary[type=notation,style=isw-long-notation-nogroup]
+# Type out acronyms
+\printglossary[type=\acronymtype,style=isw-long-acronym,nonumberlist]
+```
+
+That's about it for adding glossaries to your thesis/document.
+
 
 ## Development Team
 
