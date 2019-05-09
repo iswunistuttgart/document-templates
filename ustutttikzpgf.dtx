@@ -1,0 +1,190 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustutttikzpgf.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{ustutttikzpgf}
+%<*package>
+    [2019/05/09 v1.0.0-a University of Stuttgart TikZ/PGF package file]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{ustutttikzpgf}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ustutttikzpgf.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2004/11/05}{Initial version}
+%
+% \GetFileInfo{ustutttikzpgf.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+%
+% \title{The \textsf{ustutttikzpgf} package\thanks{This document
+%   corresponds to \textsf{ustutttikzpgf}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel\\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+% \begin{macro}{\tikzustuttset}
+% \cmd{\tikzustuttset}\marg{keys, to=set}\\
+%    \begin{macrocode}
+\newcommand\tikzustuttset[1]{\tikzset{/ustutt/.cd, #1}}%
+%    \end{macrocode}
+%
+% \begin{macro}{\tikzustuttget}
+% \cmd{\tikzustuttget}\marg{key to get}\\
+%    \begin{macrocode}
+\newcommand\tikzustuttget[1]{\pgfkeysvalueof{/ustutt/#1}}%
+%    \end{macrocode}
+%
+% \begin{macro}{\tikzustuttresetstyle}
+% \cmd{\tikzustuttresetstyle}\\
+%    \begin{macrocode}
+\newcommand\tikzustuttresetstyle[1]{\tikzset{/ustutt/#1/.style={}}}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\usepgflibrary}
+% Let us load some PGF libraries
+%    \begin{macrocode}
+\usepgflibrary{plotmarks}
+\usepgflibrary{fpu}
+\usepgfplotslibrary{statistics}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\usetikzlibrary}
+% Let us load some fancy TikZ libraries
+%    \begin{macrocode}
+\usetikzlibrary{3d}
+\usetikzlibrary{colorbrewer}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{bending}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{external}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{pgfplots.statistics}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{spy}
+\usetikzlibrary{through}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pgfplosset}
+%    \begin{macrocode}
+\pgfplotsset{compat=newest}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pgfkeys}
+%    \begin{macrocode}
+\pgfkeys{%
+  % This namespace is a family of namespaces
+  /usutttt/.is family,%
+  % Fall back to searching inside /tikz/
+  /ustuttt/.belongs to family=/tikz,%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+% Set an initially empty style for "remaining keys"
+\tikzustuttresetstyle{remaining keys}%
+%
+% Handling of unknown options
+\tikzustuttset{%
+% Remaining keys not matching in this namespace
+  remaining keys/.style={},%
+%
+% collect unknown keys in style 'ustutt/remaining keys':
+  .unknown/.code={%
+    \let\currname\pgfkeyscurrentname%
+    \let\currval\pgfkeyscurrentvalue%
+    \ifx#1\pgfkeysnovalue%
+      \pgfqkeys{ustutt}{%
+        remaining keys/.append style/.expand once={\currname}%
+      }%
+    \else%
+      \pgfqkeys{ustut}{%
+        remaining keys/.append style/.expand twice={\expandafter\currname\expandafter=\currval}%
+      }%
+    \fi%
+  }%
+}%
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\pgfplotscreateplotcyclelist}
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{}{}
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \Finale
+\endinput
