@@ -359,12 +359,10 @@
   sortcites=true,%
 %
 % Configuration of text citations
-  citestyle=authoryear,%%
   mincitenames=1,%
   maxcitenames=2,%
 %
 % Configuration of bibliography
-  bibstyle=authoryear,%
   maxbibnames=10,%
   doi=false,%
   isbn=false,%
@@ -372,6 +370,15 @@
 % natbib compatibility mode (\citep and \citet still work)
   natbib=true,
 }{biblatex}
+\ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+  \PassOptionsToPackage{%
+    style=authoryear,%
+  }{biblatex}
+}{% FALSE
+  \PassOptionsToPackage{%
+    style=ieee,%
+  }{biblatex}
+}%
 %    \end{macrocode}
 %
 %

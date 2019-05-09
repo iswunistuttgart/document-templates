@@ -12,10 +12,10 @@ $clean_ext = 'acn bbl fdb_latexmk fls glo gls nav pdfsync pdf.gls pyg pytxcode r
 # Function for making glossaries
 sub run_makeglossaries {
   if ( $silent ) {
-    system "makeglossaries -q '$_[0]'";
+    system "makeglossaries -q $_[0]";
   }
   else {
-    system "makeglossaries '$_[0]'";
+    system "makeglossaries $_[0]";
   };
 }
 
