@@ -13,7 +13,11 @@ If you are just interested in finding the most recent class that you want to use
 | iswdctrt | Doctoral theses | 1.5.2 |
 | iswstud | Student theses | 1.6.1 |
 
-There are three ways to obtaining the necessary `.cls`, `.tex`, `.sty`, and `.bbx` files:
+## How to get it
+
+The simple way to get it up and running is to download the [Release](https://github.com/iswunistuttgart/latex-templates/releases) directly as compressed folder, which contains a minimal example setup for each class type including an example `.tex` file.
+
+There are three other ways to obtaining the necessary `.cls`, `.tex`, `.sty`, and `.bbx` files:
   1. Clone the repository and obtain the files from directory `dist/`
   1. Download the build artifacts i.e., only the file necessary and not the whole repository from our [GitLab build server](https://git.isw.uni-stuttgart.de/projekte/eigenentwicklungen/templates/latex/-/jobs/artifacts/master/download?job=compile-cls) (requires authentication) and unpack them to your local working directory
   1. Build the files yourself after cloning this repository. Simply `$ make all` in the root of this directory
