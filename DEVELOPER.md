@@ -10,6 +10,7 @@ To develop the templates, you need the following minimum setup on your local sys
   * LuaLaTeX
 * GNU make >= 3.50
 * Python >= 3.4
+* bumpversion (via pip or package-manager) >= 0.5.10
 * rsync > 3.1.*
 * Any IDE or LaTeX editor
 
@@ -48,3 +49,29 @@ The easiest way of testing your code for errors and avoiding to have to `make al
 Additionally, you may be a dedicated shell user and run `latexmk` from within the `src/` directory. This will compile all available tex files from said directory.
 
 There are no other or automated ways of testing your edits than above ways.
+
+## Versioning
+
+Automated versioning is configured via [`bumpversion`](https://github.com/peritus/bumpversion). You have to install it e.g. via `pip` or with your package-manager. The versioning format is
+
+```
+{major}.{minor}.{patch}-{prerelease}{prenum}
+```
+
+To finalize a new version, call in your terminal e.g.
+
+```sh
+bumpversion patch
+```
+
+to raise the patch number. If you bump the `prerelease` part it is configured to raise to values `dev` and then `rc`, starting with `prenum` 0. E.g. `bumpversion prerelease` might result in version 1.7.1-dev0.
+
+**Note:** Automated Git operations are turned off by default for new versions. You can automatically commit and tag your new version with
+
+```sh
+bumpversion --commit --tag {major|minor|patch|prerelease|prenum}
+```
+
+The tags and commit messages are already preconfigured.
+
+**Note:** The version number is raised according to the [Git flow model](https://nvie.com/posts/a-successful-git-branching-model/) i.e., `feature/*` branches should lead to new minor versions, `fix/*` branches to patch versions. Bumping the version should always occur in the `master` branch.
