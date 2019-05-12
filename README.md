@@ -8,10 +8,10 @@ If you are just interested in finding the most recent class that you want to use
 
 | Class | Purpose | Version |
 |-------|---------|---------|
-| iswartcl | General documents | 1.7 |
-| iswbook | Book-like documents | 1.7 |
-| iswdctrt | Doctoral theses | 1.7 |
-| iswstud | Student theses | 1.7 |
+| iswartcl | General documents | 1.7.0 |
+| iswbook | Book-like documents | 1.7.0 |
+| iswdctrt | Doctoral theses | 1.7.0 |
+| iswstud | Student theses | 1.7.0 |
 
 ## How to get it
 
