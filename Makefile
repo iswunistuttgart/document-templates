@@ -48,7 +48,7 @@ distclean: clean
 	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
 
 .PHONY: release
-release: all demos release_bachelor release_master release_doctorate
+release: release_bachelor release_master release_doctorate
 	mkdir -p $(DISTDIR)/release/examples
 	cp *.cls $(DISTDIR)release/
 	cp $(ADDL_INCLUDES) $(DISTDIR)release/
