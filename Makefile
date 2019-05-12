@@ -39,7 +39,7 @@ clean:
 	[ `ls -1 *.dict 2>/dev/null | wc -l` == 0 ] || rm *.dict
 	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || latexmk -c -silent *.dtx
 	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || latexmk -c -silent *.tex
-	rm -f $(DEMOS)
+	rm -f $(DEMOS) $(DEMO_PDFS) *.tex
 
 .PHONY: distclean
 distclean: clean
