@@ -27,10 +27,10 @@ $(DEMO_PDFS): $(DEMOS)
 	latexmk $(@F:pdf=tex)
 
 %.pdf: %.dtx
-	pdflatex $^
+	pdflatex --shell-escape $^
 	makeindex -s gind.ist $*.idx
 	makeindex -s gglo.ist -o $*.gls $*.glo
-	pdflatex $^
+	pdflatex --shell-escape $^
 
 .PHONY: clean
 clean:
