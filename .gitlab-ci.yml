@@ -48,6 +48,9 @@ release:
     DEMOS: "ustuttbachelor_de.tex ustuttbachelor_en.tex ustuttmaster_de.tex ustuttmaster_en.tex ustuttdoctorate_de.tex ustuttdoctorate_en.tex"
     DEMOS: "ustuttbachelor_de.pdf ustuttbachelor_en.pdf ustuttmaster_de.pdf ustuttmaster_en.pdf ustuttdoctorate_de.pdf ustuttdoctorate_en.pdf"
     ADDL_INCLUDES: "acronyms.tex symbols.tex notation.tex"
+  before_script:
+    - 'apk add --no-cache --update alpine-sdk'
+    - 'apk add --no-cache bash'
   script:
     - 'make release'
     - 'cd $(DISTDIR)'
