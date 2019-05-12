@@ -8,7 +8,7 @@ ins:
   stage: build
   script:
     - make distclean
-    - make -j 5 all
+    - make all
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     expire_in: 2 months
