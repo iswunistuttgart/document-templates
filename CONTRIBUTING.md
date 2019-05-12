@@ -1,8 +1,8 @@
-# Contributing to ISW LaTeX Templates
+# Contributing to UStutt LaTeX Templates
 
 Thank you for your contributions!
 
-## Reporting a bug with ISW LaTeX Templates
+## Reporting a bug with UStutt LaTeX Templates
 
 
 We work hard to process bugs that are reported, to assist with this please ensure the following details are always included:
