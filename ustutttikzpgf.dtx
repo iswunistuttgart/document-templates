@@ -27,7 +27,6 @@
 %
 %<*driver>
 \documentclass{ltxdoc}
-\usepackage{tikz}
 \PassOptionsToPackage{%
   usenames,%
   dvipsnames,%
@@ -36,8 +35,11 @@
   hyperref,%
 }{xcolor}
 \RequirePackage{xcolor}
+\usepackage{tikz}
 \usepackage{pgfplots}
 \usetikzlibrary{ustutt}
+\usepackage{minted}
+\setminted{fontsize=\footnotesize,baselinestretch=1}
 \EnableCrossrefs         
 \CodelineIndex
 \RecordChanges
@@ -72,11 +74,11 @@
 %
 % \GetFileInfo{ustutttikzpgf.dtx}
 %
-% \DoNotIndex{\newcommand,\newenvironment}
+% \DoNotIndex{\colorlet,\currname,\currval,\definecolor,\else,\expandafter,\fi,\ifustutt@rgb,\ifx,\let,\newcommand,\PassOptionsToPackage,\pgfkeys,\pgfkeyscurrentname,\pgfkeyscurrentvalue,\pgfkeysnovalue,\pgfkeysvalueof,\pgfplotsset,\pgfplotsmarklistfill,\pgfqkeys,\providecommand,\RequirePackage,\tikzset,\usepgfplotslibrary}
 % 
 %
-% \title{The \textsf{ustutttikzpgf} package\thanks{This document
-%   corresponds to \textsf{ustutttikzpgf}~\fileversion, dated \filedate.}}
+% \title{The \textsf{ustutt} tikz library\thanks{This document
+%   corresponds to \textsf{tikzlibraryustutt.code}~\fileversion, dated \filedate.}}
 % \author{Philipp Tempel\\ \texttt{latex@philipptempel.me}}
 %
 % \maketitle
@@ -163,7 +165,7 @@
 %
 % \begin{macro}{\colorlighter}
 % \cmd{\colorlighter}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
-% Define new color |#3| which is only |#2| parts of the original color |#1| and
+% Define new color \marg{new color name} which is only \marg{percentage of original color} parts of the original color \marg{original color} and
 % the remainder White.
 %    \begin{macrocode}
 \providecommand{\colorlighter}[3]{%
@@ -183,7 +185,7 @@
 %
 % \begin{macro}{\colordarker}
 % \cmd{\colordarker}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
-% Define new color |#3| which is only |#2| parts of the original color |#1| and
+% Define new color \marg{original color} which is only \marg{percentage of original color} parts of the original color \marg{original color} and
 % the remainder Black.
 %    \begin{macrocode}
 \providecommand{\colordarker}[3]{%
@@ -203,7 +205,7 @@
 %
 % Definition of our RGB colors
 %    \begin{macrocode}
-% s\ifustutt@rgb
+% \ifustutt@rgb
   \definecolor{PrimaryColor}{RGB}{62,68,76}% Anthracite
   \definecolor{AccentOne}{RGB}{0,190,255}% Turquoiuse blue
   \definecolor{AccentTwo}{RGB}{9,81,158}% Dark blue
@@ -262,7 +264,7 @@
 \colordarker{AccentOne}{50}{AccentOneDark}
 \colordarker{AccentTwo}{25}{AccentOneVeryDark}
 %    \end{macrocode}
-% Shades of accent one
+% Shades of accent two
 %    \begin{macrocode}
 \colorlighter{AccentTwo}{25}{AccentTwoVeryLight}
 \colorlighter{AccentTwo}{50}{AccentTwoLight}
@@ -271,7 +273,7 @@
 \colordarker{AccentTwo}{50}{AccentTwoDark}
 \colordarker{AccentTwo}{25}{AccentTwoVeryDark}
 %    \end{macrocode}
-% Shades of accent one
+% Shades of accent three
 %    \begin{macrocode}
 \colorlighter{AccentThree}{25}{AccentThreeVeryLight}
 \colorlighter{AccentThree}{50}{AccentThreeLight}
@@ -280,7 +282,7 @@
 \colordarker{AccentThree}{50}{AccentThreeDark}
 \colordarker{AccentThree}{25}{AccentThreeVeryDark}
 %    \end{macrocode}
-% Shades of accent one
+% Shades of accent four
 %    \begin{macrocode}
 \colorlighter{AccentFour}{25}{AccentFourVeryLight}
 \colorlighter{AccentFour}{50}{AccentFourLight}
@@ -289,7 +291,7 @@
 \colordarker{AccentFour}{50}{AccentFourDark}
 \colordarker{AccentFour}{25}{AccentFourVeryDark}
 %    \end{macrocode}
-% Shades of accent one
+% Shades of accent five
 %    \begin{macrocode}
 \colorlighter{AccentFive}{25}{AccentFiveVeryLight}
 \colorlighter{AccentFive}{50}{AccentFiveLight}
@@ -298,7 +300,7 @@
 \colordarker{AccentFive}{50}{AccentFiveDark}
 \colordarker{AccentFive}{25}{AccentFiveVeryDark}
 %    \end{macrocode}
-% Shades of accent one
+% Shades of accent six
 %    \begin{macrocode}
 \colorlighter{AccentSix}{25}{AccentSixVeryLight}
 \colorlighter{AccentSix}{50}{AccentSixLight}
@@ -314,12 +316,14 @@
 %    \begin{macrocode}
 \newcommand\tikzustuttset[1]{\tikzset{/ustutt/.cd, #1}}%
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\tikzustuttget}
 % \cmd{\tikzustuttget}\marg{key to get}\\
 %    \begin{macrocode}
 \newcommand\tikzustuttget[1]{\pgfkeysvalueof{/ustutt/#1}}%
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\tikzustuttresetstyle}
 % \cmd{\tikzustuttresetstyle}\\
@@ -371,7 +375,7 @@
 % \begin{macro}{\pgfplotscreateplotcyclelist}
 % We will create some cycle lists that can be used either a single or multi index cycle list. Refer to section 4.7.7 of the PGF manual
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/ustutt/color list}{%
+\pgfplotscreateplotcyclelist{/ustutt/black color list}{%
   {%
     color=Black,%
     draw opacity=1.00,%
@@ -384,32 +388,194 @@
   }%
 }
 %    \end{macrocode}
-% \begin{figure}
-%   \centering
-%   \begin{tikzpicture}
-%     \begin{axis}[
-%         stack plots=y,stack dir=minus,
-%         cycle list name=/ustutt/color list,
-%     ]
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
-%     \end{axis}
-%   \end{tikzpicture}
-% \end{figure}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/black color list,
+%   ]
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/black color list,
+  ]
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
+%
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/black color}{%
+\pgfplotscreateplotcyclelist{/ustutt/accent color list}{%
+  {%
+    color=AccentOne,%
+    draw opacity=1.00,%
+  },{%
+    color=AccentTwo,%
+    draw opacity=1.00,%
+  },{%
+    color=AccentThree,%
+    draw opacity=1.00,%
+  },{%
+    color=AccentFour,%
+    draw opacity=1.00,%
+  },{%
+    color=AccentFive,%
+    draw opacity=1.00,%
+  },{%
+    color=AccentSix,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/accent color list,
+%   ]
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/accent color list,
+  ]
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/ustutt/black color}{%
   {%
     color=Black,%
     draw opacity=1.00,%
@@ -418,7 +584,7 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/linestyles}{%
+\pgfplotscreateplotcyclelist{/ustutt/linestyles}{%
   {%
     solid,%
     draw opacity=1.00,%
@@ -434,9 +600,89 @@
   }%
 }
 %    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/linestyles,
+%   ]
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/linestyles,
+  ]
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
+%
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/linestyles*}{%
+\pgfplotscreateplotcyclelist{/ustutt/linestyles*}{%
   {%
     dashed,%
     draw opacity=1.00,%
@@ -476,9 +722,89 @@
   }%
 }
 %    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/linestyles*,
+%   ]
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/linestyles*,
+  ]
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
+%
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/mark list}{%
+\pgfplotscreateplotcyclelist{/ustutt/mark list}{%
   {%
     mark=*,%
     every mark/.append style={%
@@ -547,9 +873,89 @@
   }%
 }
 %    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/mark list,
+%   ]
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/mark list,
+  ]
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
+%
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/mark list*}{%
+\pgfplotscreateplotcyclelist{/ustutt/mark list*}{%
   {%
     mark=*,%
     every mark/.append style={%
@@ -642,10 +1048,89 @@
   }%
 }
 %    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/mark list*,
+%   ]
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/mark list*,
+  ]
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
 %
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/mark list nth}{%
+\pgfplotscreateplotcyclelist{/ustutt/mark list nth}{%
   {%
     mark=*,%
     every mark/.append style={%
@@ -714,10 +1199,89 @@
   }%
 }
 %    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/mark list nth,
+%   ]
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/mark list nth,
+  ]
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
 %
 %
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/mark list nth*}{%
+\pgfplotscreateplotcyclelist{/ustutt/mark list nth*}{%
   {%
     mark=*,%
     every mark/.append style={%
@@ -810,73 +1374,85 @@
   }%
 }
 %    \end{macrocode}
-%
-%
-%    \begin{macrocode}
-\pgfplotscreateplotcyclelist{/phlpptmpl/black patterns}{%
-  {%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill,%
-    fill opacity=1.00,%
-    pattern=north east lines,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill,%
-    fill opacity=1.00,%
-    pattern=north west lines,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill,%
-    fill opacity=1.00,%
-    pattern=crosshatch,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill,%
-    fill opacity=1.00,%
-    pattern=dots,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill,%
-    fill opacity=1.00,%
-    pattern=crosshatch dots,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill!25,%
-    fill opacity=1.00,%
-    pattern=north east lines,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill!25,%
-    fill opacity=1.00,%
-    pattern=north west lines,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill!25,%
-    fill opacity=1.00,%
-    pattern=crosshatch,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill!25,%
-    fill opacity=1.00,%
-    pattern=dots,%
-  },{%
-    draw=Black,%
-    draw opacity=1.00,%
-    fill=\pgfplotsmarklistfill!25,%
-    fill opacity=1.00,%
-    pattern=crosshatch dots,%
-  }%
-}%
-%    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       stack plots=y,stack dir=minus,small,
+%       cycle list name=/ustutt/mark list nth*,
+%   ]
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      stack plots=y,stack dir=minus,
+      cycle list name=/ustutt/mark list nth*,
+  ]
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+    \addplot+ [blue] coordinates {
+      (0,1) (0.5,1) (1,1)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
 %
 %
 %    \begin{macrocode}
@@ -957,6 +1533,160 @@
   }%
 }%
 %    \end{macrocode}
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth,height=2.00\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       ybar,
+%       bar width=1,
+%       xmin=2,
+%       xmax=33,
+%       xtick=data,
+%       xticklabels={Small,Large},
+%       minor y tick num=4,
+%   ]
+%     \addplot coordinates {(10,10) (25,15)};
+%     \addplot coordinates {(10,3) (25,5)};
+%     \addplot coordinates {(10,7) (25,12)};
+%     \addplot coordinates {(10,8) (25,7)};
+%     \addplot coordinates {(10,2) (25,14)};
+%     \addplot coordinates {(10,9) (25,11)};
+%     \addplot coordinates {(10,11) (25,9)};
+%     \addplot coordinates {(10,2) (25,6)};
+%     \addplot coordinates {(10,6) (25,17)};
+%     \addplot coordinates {(10,4) (25,11)};
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      ybar,
+      bar width=1,
+      xmin=2,
+      xmax=33,
+      xtick=data,
+      xticklabels={Small,Large},
+      minor y tick num=4,
+  ]
+    \addplot coordinates {
+        (10,10) (25,15)
+    };
+    \addplot coordinates {
+        (10,3) (25,5)
+    };
+    \addplot coordinates {
+        (10,7) (25,12)
+    };
+    \addplot coordinates {
+        (10,8) (25,7)
+    };
+    \addplot coordinates {
+        (10,2) (25,14)
+    };
+    \addplot coordinates {
+        (10,9) (25,11)
+    };
+    \addplot coordinates {
+        (10,11) (25,9)
+    };
+    \addplot coordinates {
+        (10,2) (25,6)
+    };
+    \addplot coordinates {
+        (10,6) (25,17)
+    };
+    \addplot coordinates {
+        (10,4) (25,11)
+    };
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
+%
+%
+% \begin{minipage}{0.49\linewidth}
+% \pgfplotsset{width=\linewidth,height=2.00\linewidth}
+% \begin{tikzpicture}
+%   \begin{axis}[
+%       smooth,
+%       stack plots=y,
+%       area style,
+%       xtick=data,
+%       minor y tick num=4,
+%       enlargelimits=0.05,
+%   ]
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%     \addplot coordinates {(0,1) (1,1) (2,2) (3,2)} \closedcycle;
+%   \end{axis}
+% \end{tikzpicture}
+% \end{minipage}%
+% \begin{minipage}{0.49\linewidth}
+% \iffalse
+%<*example>
+% \fi
+\begin{minted}{latex}
+\begin{tikzpicture}
+  \begin{axis}[
+      smooth,
+      stack plots=y,
+      area style,
+      xtick=data,
+      minor y tick num=4,
+      enlargelimits=0.05,
+  ]
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+    \addplot coordinates {
+        (0,1) (1,1) (2,2) (3,2)
+    } \closedcycle;
+  \end{axis}
+\end{tikzpicture}
+\end{minted}
+% \iffalse
+%</example>
+% \fi
+% \end{minipage}
 %
 % \end{macro}
 %
