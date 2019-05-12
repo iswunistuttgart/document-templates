@@ -20,14 +20,24 @@
 \ProvidesFile{ustutttikzpgf.dtx}
 %</driver>
 %<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{ustutttikzpgf}
+%<package>\ProvidesPackage{tikzlibraryustutt}
 %<*package>
     [2019/05/09 v1.0.0-a University of Stuttgart TikZ/PGF package file]
 %</package>
 %
 %<*driver>
 \documentclass{ltxdoc}
-\usepackage{ustutttikzpgf}
+\usepackage{tikz}
+\PassOptionsToPackage{%
+  usenames,%
+  dvipsnames,%
+  svgnames,%
+  table,%
+  hyperref,%
+}{xcolor}
+\RequirePackage{xcolor}
+\usepackage{pgfplots}
+\usetikzlibrary{ustutt}
 \EnableCrossrefs         
 \CodelineIndex
 \RecordChanges
@@ -83,24 +93,32 @@
 %
 % \section{Implementation}
 %
-% \begin{macro}{\tikzustuttset}
-% \cmd{\tikzustuttset}\marg{keys, to=set}\\
 %    \begin{macrocode}
-\newcommand\tikzustuttset[1]{\tikzset{/ustutt/.cd, #1}}%
+\PassOptionsToPackage{%
+  usenames,%
+  dvipsnames,%
+  svgnames,%
+  table,%
+  hyperref,%
+}{xcolor}
 %    \end{macrocode}
 %
-% \begin{macro}{\tikzustuttget}
-% \cmd{\tikzustuttget}\marg{key to get}\\
+%
 %    \begin{macrocode}
-\newcommand\tikzustuttget[1]{\pgfkeysvalueof{/ustutt/#1}}%
+\RequirePackage{xcolor}
+\RequirePackage{xcolor-solarized}
 %    \end{macrocode}
 %
-% \begin{macro}{\tikzustuttresetstyle}
-% \cmd{\tikzustuttresetstyle}\\
 %    \begin{macrocode}
-\newcommand\tikzustuttresetstyle[1]{\tikzset{/ustutt/#1/.style={}}}%
+\RequirePackage{pgfopts}
+\RequirePackage{pgf}
+\RequirePackage{pgfkeys}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{tikzscale}
+\usepgfplotslibrary{external}
+\pgfplotsset{compat=newest}
 %    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\usepgflibrary}
 % Let us load some PGF libraries
@@ -138,14 +156,185 @@
 \pgfplotsset{compat=newest}
 %    \end{macrocode}
 % \end{macro}
+% \subsubsection{Colors}
+%
+% Colorful documents are much nicer than just plain black and white. Thus, let
+% us define a batch of basis colors and their nuances
+%
+% \begin{macro}{\colorlighter}
+% \cmd{\colorlighter}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
+% Define new color |#3| which is only |#2| parts of the original color |#1| and
+% the remainder White.
+%    \begin{macrocode}
+\providecommand{\colorlighter}[3]{%
+% #1 Original color
+% #2 Percentage of white mix
+% #3 New color name
+  \colorlet{#3}{#1!#2!White}%
+}
+%    \end{macrocode}
+% For example, to get shades of Red lighter by 80\%, 50\%, and 20\%, use
+% \begin{verbatim}
+%   \colorlighter{Red}{0.20}{RedLighter}
+%   \colorlighter{Red}{0.50}{RedLight}
+%   \colorlighter{Red}{0.80}{RedVeryLight}
+% \end{verbatim}
+% \end{macro}
+%
+% \begin{macro}{\colordarker}
+% \cmd{\colordarker}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
+% Define new color |#3| which is only |#2| parts of the original color |#1| and
+% the remainder Black.
+%    \begin{macrocode}
+\providecommand{\colordarker}[3]{%
+% #1 Original color
+% #2 Percentage of Black mix
+% #3 New color name
+  \colorlet{#3}{#1!#2!Black}%
+}
+%    \end{macrocode}
+% For example, to get shades of Red darker by 80\%, 50\%, and 20\%, use
+% \begin{verbatim}
+%   \colordarker{Red}{0.20}{RedDarker}
+%   \colordarker{Red}{0.50}{RedDark}
+%   \colordarker{Red}{0.80}{RedVeryDark}
+% \end{verbatim}
+% \end{macro}
+%
+% Definition of our RGB colors
+%    \begin{macrocode}
+% s\ifustutt@rgb
+  \definecolor{PrimaryColor}{RGB}{62,68,76}% Anthracite
+  \definecolor{AccentOne}{RGB}{0,190,255}% Turquoiuse blue
+  \definecolor{AccentTwo}{RGB}{9,81,158}% Dark blue
+  \definecolor{AccentThree}{RGB}{62,68,76}% Anthracite
+  \definecolor{AccentFour}{RGB}{125,198,234}% Light blue-gray
+  \definecolor{AccentFive}{RGB}{159,153,152}% Light gray
+  \definecolor{AccentSix}{RGB}{255,213,0}% Yellow
+  \definecolor{UStuttDarkOne}{RGB}{62,68,76}% Anthracite
+  \definecolor{UStuttDarkTwo}{RGB}{0,0,0}% Black
+  \definecolor{UStuttLightOne}{RGB}{255,255,255}% White
+  \definecolor{UStuttLightTwo}{RGB}{159,153,152}% Light gray
+%    \end{macrocode}
+% and of the same colors given in CMYK color space
+%    \begin{macrocode}
+% \else
+%   \definecolor{PrimaryColor}{CMYK}{18,11,0,70}% Anthracite
+%   \definecolor{AccentOne}{CMYK}{100,25,0,0}% Turquoiuse blue
+%   \definecolor{AccentTwo}{CMYK}{94,49,0,38}% Dark blue
+%   \definecolor{AccentThree}{CMYK}{18,11,0,70}% Anthracite
+%   \definecolor{AccentFour}{CMYK}{47,15,0,8}% Light blue-gray
+%   \definecolor{AccentFive}{CMYK}{0,4,4,38}% Light gray
+%   \definecolor{AccentSix}{CMYK}{0,16,100,0}% Yellow
+%   \definecolor{UStuttDarkOne}{CMYK}{18,11,0,70}% Anthracite
+%   \definecolor{UStuttDarkTwo}{CMYK}{0,0,0,100}% Black
+%   \definecolor{UStuttLightOne}{CMYK}{0,0,0,0}% White
+%   \definecolor{UStuttLightTwo}{CMYK}{0,4,4,38}% Light gray
+% \fi
+%    \end{macrocode}
+%
+% More human readable color names
+%    \begin{macrocode}
+\colorlet{UStuttWhite}{UStuttLightOne}
+\colorlet{UStuttAnthracite}{UStuttDarkOne}
+\colorlet{UStuttGray}{AccentFive}
+\colorlet{UStuttTurquoise}{AccentOne}
+\colorlet{UStuttDarkBlue}{AccentTwo}
+\colorlet{UStuttBluegray}{AccentFour}
+\colorlet{UStuttYellow}{AccentSix}
+%    \end{macrocode}
+%
+% Shades of primary color
+%    \begin{macrocode}
+\colorlighter{PrimaryColor}{25}{PrimaryColorVeryLight}
+\colorlighter{PrimaryColor}{50}{PrimaryColorLight}
+\colorlighter{PrimaryColor}{75}{PrimaryColorLighter}
+\colordarker{PrimaryColor}{75}{PrimaryColorDarker}
+\colordarker{PrimaryColor}{50}{PrimaryColorDark}
+\colordarker{PrimaryColor}{25}{PrimaryColorVeryDark}
+%    \end{macrocode}
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentOne}{25}{AccentOneVeryLight}
+\colorlighter{AccentOne}{50}{AccentOneLight}
+\colorlighter{AccentOne}{75}{AccentOneLighter}
+\colordarker{AccentOne}{75}{AccentOneDarker}
+\colordarker{AccentOne}{50}{AccentOneDark}
+\colordarker{AccentTwo}{25}{AccentOneVeryDark}
+%    \end{macrocode}
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentTwo}{25}{AccentTwoVeryLight}
+\colorlighter{AccentTwo}{50}{AccentTwoLight}
+\colorlighter{AccentTwo}{75}{AccentTwoLighter}
+\colordarker{AccentTwo}{75}{AccentTwoDarker}
+\colordarker{AccentTwo}{50}{AccentTwoDark}
+\colordarker{AccentTwo}{25}{AccentTwoVeryDark}
+%    \end{macrocode}
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentThree}{25}{AccentThreeVeryLight}
+\colorlighter{AccentThree}{50}{AccentThreeLight}
+\colorlighter{AccentThree}{75}{AccentThreeLighter}
+\colordarker{AccentThree}{75}{AccentThreeDarker}
+\colordarker{AccentThree}{50}{AccentThreeDark}
+\colordarker{AccentThree}{25}{AccentThreeVeryDark}
+%    \end{macrocode}
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentFour}{25}{AccentFourVeryLight}
+\colorlighter{AccentFour}{50}{AccentFourLight}
+\colorlighter{AccentFour}{75}{AccentFourLighter}
+\colordarker{AccentFour}{75}{AccentFourDarker}
+\colordarker{AccentFour}{50}{AccentFourDark}
+\colordarker{AccentFour}{25}{AccentFourVeryDark}
+%    \end{macrocode}
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentFive}{25}{AccentFiveVeryLight}
+\colorlighter{AccentFive}{50}{AccentFiveLight}
+\colorlighter{AccentFive}{75}{AccentFiveLighter}
+\colordarker{AccentFive}{75}{AccentFiveDarker}
+\colordarker{AccentFive}{50}{AccentFiveDark}
+\colordarker{AccentFive}{25}{AccentFiveVeryDark}
+%    \end{macrocode}
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentSix}{25}{AccentSixVeryLight}
+\colorlighter{AccentSix}{50}{AccentSixLight}
+\colorlighter{AccentSix}{75}{AccentSixLighter}
+\colordarker{AccentSix}{75}{AccentSixDarker}
+\colordarker{AccentSix}{50}{AccentSixDark}
+\colordarker{AccentSix}{25}{AccentSixVeryDark}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\tikzustuttset}
+% \cmd{\tikzustuttset}\marg{keys, to=set}\\
+%    \begin{macrocode}
+\newcommand\tikzustuttset[1]{\tikzset{/ustutt/.cd, #1}}%
+%    \end{macrocode}
+%
+% \begin{macro}{\tikzustuttget}
+% \cmd{\tikzustuttget}\marg{key to get}\\
+%    \begin{macrocode}
+\newcommand\tikzustuttget[1]{\pgfkeysvalueof{/ustutt/#1}}%
+%    \end{macrocode}
+%
+% \begin{macro}{\tikzustuttresetstyle}
+% \cmd{\tikzustuttresetstyle}\\
+%    \begin{macrocode}
+\newcommand\tikzustuttresetstyle[1]{\tikzset{/ustutt/#1/.style={}}}%
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \begin{macro}{\pgfkeys}
 %    \begin{macrocode}
 \pgfkeys{%
-  % This namespace is a family of namespaces
+% This namespace is a family of namespaces
   /usutttt/.is family,%
-  % Fall back to searching inside /tikz/
+% Fall back to searching inside /tikz/
   /ustuttt/.belongs to family=/tikz,%
 }%
 %    \end{macrocode}
@@ -180,8 +369,593 @@
 %
 %
 % \begin{macro}{\pgfplotscreateplotcyclelist}
+% We will create some cycle lists that can be used either a single or multi index cycle list. Refer to section 4.7.7 of the PGF manual
 %    \begin{macrocode}
-\pgfplotscreateplotcyclelist{}{}
+\pgfplotscreateplotcyclelist{/ustutt/color list}{%
+  {%
+    color=Black,%
+    draw opacity=1.00,%
+  },{%
+    color=Black!66,%
+    draw opacity=1.00,%
+  },{%
+    color=Black!33,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+% \begin{figure}
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%         stack plots=y,stack dir=minus,
+%         cycle list name=/ustutt/color list,
+%     ]
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%       \addplot+ [blue] coordinates {(0,1) (0.5,1) (1,1)};
+%     \end{axis}
+%   \end{tikzpicture}
+% \end{figure}
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/black color}{%
+  {%
+    color=Black,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/linestyles}{%
+  {%
+    solid,%
+    draw opacity=1.00,%
+  },{%
+    dashed,%
+    draw opacity=1.00,%
+  },{%
+    dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    dotted,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/linestyles*}{%
+  {%
+    dashed,%
+    draw opacity=1.00,%
+  },{%
+    dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    dotted,%
+    draw opacity=1.00,%
+  },{%
+    dashdotdotted,%
+    draw opacity=1.00,%
+  },{%
+    densely dashed,%
+    draw opacity=1.00,%
+  },{%
+    densely dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    densely dotted,%
+    draw opacity=1.00,%
+  },{%
+    densely dashdotdotted,%
+    draw opacity=1.00,%
+  },{%
+    loosely dashed,%
+    draw opacity=1.00,%
+  },{%
+    loosely dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    loosely dotted,%
+    draw opacity=1.00,%
+  },{%
+    loosely dashdotdotted,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/mark list}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=star,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=PrimaryColor!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=|,%
+    every mark/.append style={%
+      solid,%
+      rotate=180,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/mark list*}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfcircle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfdiamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      rotate=180,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare right*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare left*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/mark list nth}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=star,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=|,%
+    every mark/.append style={%
+      solid,%
+      rotate=180,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/mark list nth*}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfcircle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfdiamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      rotate=180,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare right*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare left*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/phlpptmpl/black patterns}{%
+  {%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=north east lines,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=north west lines,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=crosshatch,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=dots,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=crosshatch dots,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=north east lines,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=north west lines,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=crosshatch,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=dots,%
+  },{%
+    draw=Black,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=crosshatch dots,%
+  }%
+}%
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotsset{%
+  bar cycle list/.style={%
+    cycle list={%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=north east lines,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=north west lines,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=crosshatch,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=dots,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=White,%
+        fill opacity=1.00,%
+        pattern=crosshatch dots,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=north east lines,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=north west lines,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=crosshatch,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=dots,%
+      },%
+      {%
+        draw=Black,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=crosshatch dots,%
+      }%
+    }%
+  }%
+}%
 %    \end{macrocode}
 %
 % \end{macro}

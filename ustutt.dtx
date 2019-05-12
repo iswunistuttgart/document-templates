@@ -3187,6 +3187,15 @@
 }{}
 %    \end{macrocode}
 %
+% Some packages to load when PGF is available
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{pgfplots}{%
+    \usetikzlibrary{ustutt}%
+  }{}
+}
+%    \end{macrocode}
+%
 %
 %    \begin{macrocode}
 \makeatletter
