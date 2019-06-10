@@ -257,6 +257,22 @@
 %    \end{macrocode}
 %
 %
+% \begin{macro}{\ProvideMathOperator}
+% \cmd{\ProvideMathOperator}\marg{opname}\marg{text}
+% Maybe not the cleanest way, but we shall also provide a |\ProvideMathOperator|
+% macro that allows to define math operators in a fail-safe way i.e., work like
+% |\providecommand|
+%    \begin{macrocode}
+\newcommand\ProvideMathOperator[2]{%
+  \ifdefined#1%
+  \else%
+    \DeclareMathOperator{#1}{#2}%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
 %
 % \begin{macro}{\parentheses}
 %    \begin{macrocode}
