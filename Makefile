@@ -3,7 +3,7 @@ SHELL = /bin/bash
 DISTDIR = dist/
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
 SOURCES = ustutt.dtx demos.dtx \
-	ustuttmath.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx \
+	ustuttcolors.dtx ustutttext.dtx ustuttmechanics.dtx ustuttstatistics.dtx ustuttsystemdynamics.dtx \
 	localization.dtx
 DEMOS = ustuttbachelor_de.tex ustuttbachelor_en.tex \
 	ustuttmaster_de.tex ustuttmaster_en.tex \
