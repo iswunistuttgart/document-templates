@@ -22,15 +22,15 @@
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<*article>
 \ProvidesClass{ustuttartcl}
-  [2019/04/21 v1.0.0-a University of Stuttgart LaTeX article class]
+  [2019/06/20 v1.0.0-a University of Stuttgart LaTeX class for articles]
 %</article>
 %<*book>
 \ProvidesClass{ustuttbook}
-  [2019/04/21 v1.0.0-a University of Stuttgart LaTeX book class]
+  [2019/06/20 v1.0.0-a University of Stuttgart LaTeX class for books]
 %</book>
 %<*thesis>
 \ProvidesClass{ustuttthesis}
-  [2019/04/21 v1.0.0-a University of Stuttgart LaTeX thesis class]
+  [2019/06/20 v1.0.0-a University of Stuttgart LaTeX class for theses]
 %</thesis>
 %<*class>
 \typeout{}
@@ -38,9 +38,9 @@
 \typeout{ by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>.}
 \typeout{ Institute for Control Engineering of Machine Tools and Manufacturing}
 \typeout{ Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
-%<article>\typeout{ Document class for articles, version v1.0.0-a (2019/04/21)}
-%<book>\typeout{ Document class for books, version v1.0.0-a (2019/04/21)}
-%<thesis>\typeout{ Document class for theses, version v1.0.0-a (2019/04/21)}
+%<article>\typeout{ Document class for articles, version v1.0.0-a (2019/06/20)}
+%<book>\typeout{ Document class for books, version v1.0.0-a (2019/06/20)}
+%<thesis>\typeout{ Document class for theses, version v1.0.0-a (2019/06/20)}
 \typeout{}
 %</class>
 %
@@ -382,42 +382,6 @@
 %    \end{macrocode}
 %
 %
-% Amsmath
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-% (default) center tags vertically
-  centertags,
-% (default) Place the subscripts and superscripts of summation symbols above and
-% below
-  sumlimits,
-% Like sumlimits, but for integral symbols.
-  intlimits,
-% (default) Like sumlimits, but for certain 'operator names' such as det, inf,
-% lim, max, min, that traditionally have subscripts placed underneath when they
-% occur in a displayed equation.
-  namelimits,
-% Place equation numbers on the right.
-  reqno,
-}{amsmath}
-%    \end{macrocode}
-%
-%
-% Appendix
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-  toc,%
-  page,%
-}{appendix}
-%    \end{macrocode}
-%
-%
-% Babel
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-}{babel}
-%    \end{macrocode}
-%
-%
 % Babelbib
 %    \begin{macrocode}
 \PassOptionsToPackage{%
@@ -431,23 +395,6 @@
 \PassOptionsToPackage{%
   capitalise,%
 }{cleveref}
-%    \end{macrocode}
-%
-%
-% Eurosym
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-  gen,%
-}{eurosym}
-%    \end{macrocode}
-%
-%
-% Footmisc
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-  hang,%
-  multiple,%
-}{footmisc}
 %    \end{macrocode}
 %
 %
@@ -594,27 +541,6 @@
 %    \end{macrocode}
 %
 %
-% Isodate
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-}{isodate}
-%    \end{macrocode}
-%
-%
-% Minted
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-}{minted}
-%    \end{macrocode}
-%
-%
-% Nth
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-}{nth}
-%    \end{macrocode}
-%
-%
 % showkeys
 %    \begin{macrocode}
 \PassOptionsToPackage{%
@@ -630,12 +556,10 @@
 %    \end{macrocode}
 %
 %
-% SIUnitX
+% Load the |geometry| package but not set any pagination parameters, just load
+% itself and make |\newgeometry| available.
 %    \begin{macrocode}
-\PassOptionsToPackage{%
-  per-mode=fraction,%
-  binary-units=true,%
-}{siunitx}
+\RequirePackage[pass]{geometry}
 %    \end{macrocode}
 %
 %
@@ -673,6 +597,20 @@
   footsepline=0.20pt,%
   draft=false,% To remove rulers inserted by the package
 }{scrlayer-scrpage}
+%    \end{macrocode}
+%
+% Tune the output format of dates according to language. This package provides
+% ten output formats of the commands |\today|, |\printdate|, |\printdate|-TeX,
+% and |\daterange| (partly language dependent). Formats available are: ISO
+% (yyyy-mm-dd), numeric (e.g., dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX
+% (yyyy/mm/dd), original (e.g., dd.\@ mmm yyyy), short original (e.g., dd.\@ mmm
+% yy), as well as numerical formats with Roman numerals for the month. The
+% commands |\printdate| and |\printdate|-TeX print any date. The command
+% |\daterange| prints a date range and leaves out unnecessary year or month
+% entries. This package supports German (old and new rules), Austrian, US
+% English, British English, French, Danish, Swedish, and Norwegian.
+%    \begin{macrocode}
+\RequirePackage{isodate}
 %    \end{macrocode}
 %
 %
@@ -772,8 +710,8 @@
 %
 % Fontspec is a package for X3LaTeX and LuaLaTeX. It provides an automatic and
 % unified interface to feature-rich AAT and OpenType fonts through the NFSS in
-% LaTeX running on X3TeX or LuaTeX engines. The package requires the l3kernel and
-% xparse bundles from the LaTeX 3 development team.
+% LaTeX running on X3TeX or LuaTeX engines. The package requires the l3kernel
+% and xparse bundles from the LaTeX 3 development team.
 %    \begin{macrocode}
 \RequirePackage{fontspec}
 %    \end{macrocode}
@@ -787,38 +725,9 @@
 \RequirePackage{textcomp}
 %    \end{macrocode}
 %
-% Tune the output format of dates according to language. This package provides
-% ten output formats of the commands |\today|, |\printdate|, |\printdate|-TeX,
-% and |\daterange| (partly language dependent). Formats available are: ISO
-% (yyyy-mm-dd), numeric (e.g., dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX
-% (yyyy/mm/dd), original (e.g., dd.\@ mmm yyyy), short original (e.g., dd.\@ mmm
-% yy), as well as numerical formats with Roman numerals for the month. The
-% commands |\printdate| and |\printdate|-TeX print any date. The command
-% |\daterange| prints a date range and leaves out unnecessary year or month
-% entries. This package supports German (old and new rules), Austrian, US
-% English, British English, French, Danish, Swedish, and Norwegian.
-%    \begin{macrocode}
-\RequirePackage{isodate}
-%    \end{macrocode}
-%
 % Latin modern font package
 %    \begin{macrocode}
 \RequirePackage{lmodern}
-%    \end{macrocode}
-%
-% The package provides the principal packages in the AMS-LaTeX distribution. It
-% adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it
-% is highly recommended as an adjunct to serious mathematical typesetting in
-% LaTeX. If you require more than these basic math symbols, please consider the |ustuttmath| package shipped with this class package.
-%    \begin{macrocode}
-\RequirePackage{amsmath}
-%    \end{macrocode}
-%
-% Additional math symbols. For a full list, see
-% \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
-%    \begin{macrocode}
-\RequirePackage{amssymb}
-\RequirePackage{dsfont}
 %    \end{macrocode}
 %
 % Adds infix expressions to perform arithmetic on the arguments of the LaTeX
@@ -837,20 +746,6 @@
 % spacings are also available.
 %    \begin{macrocode}
 \RequirePackage{setspace}
-%    \end{macrocode}
-%
-% The package provides an easy and flexible user interface to customize page
-% layout, implementing auto-centering and auto-balancing mechanisms so that the
-% users have only to give the least description for the page layout. For
-% example, if you want to set each margin 2cm without header space, what you
-% need is just |\usepackage[margin=2cm,nohead]{geometry}|. The package knows
-% about all the standard paper sizes, so that the user need not know what the
-% nominal 'real' dimensions of the paper are, just its standard name (such as
-% a4, letter, etc.). An important feature is the package's ability to
-% communicate the paper size it's set up to the output (whether via DVI
-% |\specials| or via direct interaction with pdf(La)TeX).
-%    \begin{macrocode}
-\RequirePackage{geometry}
 %    \end{macrocode}
 %
 % This package was developed as a general solution to the problem of including
@@ -904,96 +799,6 @@
 %    \begin{macrocode}
 \RequirePackage{xcolor}
 %    \end{macrocode}
-% Defines the 16 colors from Ethan Schoonover's Solarized palette
-%    \begin{macrocode}
-\RequirePackage{xcolor-solarized}
-%    \end{macrocode}
-%
-% The package has a lot of flexibility, including an option for specifying an
-% entry at the "natural" width of its text. The package is distributed with the
-% bigdelim and bigstrut packages, which can be used to advantage with
-% |\multirow| cells.
-%    \begin{macrocode}
-\RequirePackage{multirow}
-%    \end{macrocode}
-%
-% The bm package defines a command |\bm| which makes its argument bold. The
-% argument may be any maths object from a single symbol to an expression. This
-% is closely related to the specification of the |\boldsymbol| command in
-% AMS-LaTeX, but |\bm| is rather more careful in the way it does things.
-%    \begin{macrocode}
-\RequirePackage{bm}
-%    \end{macrocode}
-%
-% The package is intended for setting rich text into titling capitals (in which
-% the first character of words are capitalized). It automatically accounts for
-% diacritical marks (like umlauts), national symbols (like "ae"), punctuation,
-% and font changing commands that alter the appearance or size of the text. It
-% allows a list of predesignated words to be protected as lower-cased, and also
-% allows for titling exceptions of various sorts.
-%    \begin{macrocode}
-\RequirePackage{titlecaps}
-\Addlcwords{the,a,an,and,but,for,or,nor,to,with,without}
-%    \end{macrocode}
-%
-% The titling package provides control over the typesetting of the |\maketitle|
-% command and |\thanks| commands, and makes the |\title|, |\author| and |\date|
-% information permanently available. Multiple titles are allowed in a single
-% document. New titling elements can be added and a titlepage title can be
-% centered on a physical page.
-%    \begin{macrocode}
-% \RequirePackage{titling}
-%    \end{macrocode}
-%
-% Intermix single and multiple columns. Multicol defines a multicols environment
-% which typesets text in multiple columns (up to a maximum of 10), and (by
-% default) balances the end of each column at the end of the environment. The
-% package enables you to switch between any (permitted) number of columns at
-% will: there is no imposed "clear page" operation, as there is in unadorned
-% LaTeX at a switch between |\onecolumn| and |\twocolumn| sections. The
-% multicolumn environment can also be used inside a box, thus allowing
-% multicolumned insets in text. Multicol patches the output routine, and may
-% clash with other packages that do the same (e.g., longtable); furthermore,
-% there is no provision for single column floats inside a multicolumn
-% environment, so figures and tables must be coded in-line (using, for example,
-% the H modifier of the float package). The package is part of the tools bundle
-% in the LaTeX required distribution.
-%    \begin{macrocode}
-\RequirePackage{multicol}
-%    \end{macrocode}
-%
-% The package allows rows and columns to be coloured, and even individual cells.
-%    \begin{macrocode}
-\RequirePackage{colortbl}
-%    \end{macrocode}
-%
-% The package provides an environment, tabu, which will make any sort of tabular
-% (that doesn't need to split across pages), and an environment longtabu which
-% provides the facilities of tabu in a modified longtable environment. (Note
-% that this latter offers an enhancement of ltxtable.) The package requires the
-% array package, and needs e-TeX to run (since array.sty is present in every
-% conforming distribution of LaTeX, and since every publicly available LaTeX
-% format is built using e-TeX, the requirements are provided by default on any
-% reasonable system). The package also requires xcolor for coloured rules in
-% tables, and colortbl for coloured cells. The longtabu environment further
-% requires that longtable be loaded. The package itself does not load any of
-% these packages for the user. The tabu environment may be used in place of
-% tabular, tabular* and tabularx environments, as well as the array environment
-% in maths mode. It overloads tabularx's X-column specification, allowing a
-% width specification, alignment (l, r, c and j) and column type indication (p,
-% m and b). |\begin{tabu}| to <dimen> specifies a target width, and
-% |\begin{tabu}| spread <dimen> enlarges the environment's "natural" width.
-%    \begin{macrocode}
-\RequirePackage{tabu}
-%    \end{macrocode}
-%
-% The package enhances the quality of tables in LaTeX, providing extra commands
-% as well as behind-the-scenes optimisation. Guidelines are given as to what
-% constitutes a good table in this context. From version 1.61, the package
-% offers longtable compatibility.
-%    \begin{macrocode}
-\RequirePackage{booktabs}
-%    \end{macrocode}
 %
 % The package defines new commands |\Centering|, |\RaggedLeft|, and
 % |\RaggedRight| and new environments Center, FlushLeft, and FlushRight, which
@@ -1004,31 +809,19 @@
 \RequirePackage{ragged2e}
 %    \end{macrocode}
 %
-% A comprehensive (SI) units package. Typesetting values with units requires
-% care to ensure that the combined mathematical meaning of the value plus unit
-% combination is clear. In particular, the SI units system lays down a
-% consistent set of units with rules on how they are to be used. However,
-% different countries and publishers have differing conventions on the exact
-% appearance of numbers (and units). A number of LaTeX packages have been
-% developed to provide consistent application of the various rules: SIunits,
-% sistyle, unitsdef and units are the leading examples. The numprint package
-% provides a large number of number-related functions, while dcolumn and rccol
-% provide tools for typesetting tabular numbers. The siunitx package takes the
-% best from the existing packages, and adds new features and a consistent
-% interface. A number of new ideas have been incorporated, to fill gaps in the
-% existing provision. The package also provides backward-compatibility with
-% SIunits, sistyle, unitsdef and units. The aim is to have one package to handle
-% all of the possible unit-related needs of LaTeX users. The package relies on
-% LaTeX 3 support from the l3kernel and l3packages bundles.
-%    \begin{macrocode}
-\RequirePackage{siunitx}
-%    \end{macrocode}
-%
 % This package provides the command |\marginnote| that may be used instead of
 % |\marginpar| at almost every place where |\marginpar| cannot be used, e.g.,
 % inside floats, footnotes, or in frames made with the framed package.
 %    \begin{macrocode}
 \RequirePackage{marginnote}
+%    \end{macrocode}
+%
+% Enumerate and itemize within paragraphs. Provides enumerate and itemize
+% environments that can be used within paragraphs to format the items either as
+% running text or as separate paragraphs with a preceding number or symbol. Also
+% provides compacted versions of enumerate and itemize.
+%    \begin{macrocode}
+\RequirePackage{paralist}
 %    \end{macrocode}
 %
 % The package provides commands to change the page layout in the middle of a
@@ -1041,22 +834,6 @@
 \RequirePackage{changepage}
 %    \end{macrocode}
 %
-% A collection of ways to change the typesetting of footnotes. The package
-% provides means of changing the layout of the footnotes themselves (including
-% setting them in 'paragraphs' - the para option), a way to number footnotes per
-% page (the perpage option), to make footnotes disappear in a 'moving' argument
-% (stable option) and to deal with multiple references to footnotes from the
-% same place (multiple option). The package also has a range of techniques for
-% labelling footnotes with symbols rather than numbers. Some of the functions of
-% the package are overlap with the functionality of other packages. The para
-% option is also provided by the manyfoot and bigfoot packages, though those are
-% both also portmanteau packages. (Don't be seduced by fnpara, whose
-% implementation is improved by the present package.) The perpage option is also
-% offered by footnpag and by the rather more general-purpose perpage
-%    \begin{macrocode}
-\RequirePackage{footmisc}
-%    \end{macrocode}
-%
 % The package provides four commands for vertically scaling and stretching
 % objects. Its primary function is the ability to scale/stretch and shift one
 % object to conform to the size of a specified second object. This feature can
@@ -1066,14 +843,6 @@
 % general appearance.
 %    \begin{macrocode}
 \RequirePackage{scalerel}
-%    \end{macrocode}
-%
-% Enumerate and itemize within paragraphs. Provides enumerate and itemize
-% environments that can be used within paragraphs to format the items either as
-% running text or as separate paragraphs with a preceding number or symbol. Also
-% provides compacted versions of enumerate and itemize.
-%    \begin{macrocode}
-\RequirePackage{paralist}
 %    \end{macrocode}
 %
 % Set the font size relative to the current font size. The basic command of the
@@ -1101,22 +870,35 @@
 \RequirePackage{subcaption}
 %    \end{macrocode}
 %
-% The appendix package provides various ways of formatting the titles of
-% appendices. Also (sub)appendices environments are provided that can be used,
-% for example, for per chapter/section appendices. The word 'Appendix' or
-% similar can be prepended to the appendix number for article class documents.
-% The word 'Appendices' or similar can be added to the table of contents before
-% the appendices are listed. The word 'Appendices' or similar can be typeset as
-% a |\part|-like heading (page) in the body. An appendices environment is
-% provided which can be used instead of the |\appendix| command.
-%    \begin{macrocode}
-\RequirePackage{appendix}
-%    \end{macrocode}
-%
 % Indent first paragraph after section header. This minimalist package is part
 % of the latex-tools bundle in the LaTeX required distribution.
 %    \begin{macrocode}
 \RequirePackage{indentfirst}
+%    \end{macrocode}
+%
+% The package provides the principal packages in the AMS-LaTeX distribution. It
+% adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it
+% is highly recommended as an adjunct to serious mathematical typesetting in
+% LaTeX. If you require more than these basic math symbols, please consider the
+% |ustuttmath| package shipped with this class package. In either case, we'll
+% load |amsmath| here as it must be loaded before |cleveref|.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% Center tags vertically (default)
+    centertags,%
+% Place the subscripts and superscripts of summation symbols above and below
+% (default)
+    sumlimits,%
+% Like sumlimits, but for integral symbols.
+    intlimits,%
+% Like sumlimits, but for certain 'operator names' such as det, inf, lim, max,
+% min, that traditionally have subscripts placed underneath when they occur in a
+% displayed equation (default)
+    namelimits,%
+% Place equation numbers on the right.
+    reqno,%
+  }{amsmath}
+\RequirePackage{amsmath}
 %    \end{macrocode}
 %
 % The package lets the user mark things to do later, in a simple and visually
@@ -1124,18 +906,6 @@
 % customization/finetuning of the visual appearance.
 %    \begin{macrocode}
 \RequirePackage{todonotes}
-%    \end{macrocode}
-%
-% A package built on the standard LaTeX graphics package to perform all the
-% different sorts of rotation one might like, including complete figures and
-% tables with their captions.% If you want continuous text (i.e., more than one
-% page) set in landscape mode, use the lscape package instead. The rotating
-% packages only deals in rotated boxes (or floats, which are % themselves
-% boxes), and boxes always stay on one page. If you need to use the facilities
-% of the float in the same document, load rotating.sty via rotfloat, which
-% smooths the path between the rotating and float packages.
-%    \begin{macrocode}
-\RequirePackage{rotating}
 %    \end{macrocode}
 %
 % Control layout of itemize, enumerate, description. This package provides user
@@ -1155,6 +925,24 @@
 % redefine macros for these changes.
 %    \begin{macrocode}
 \RequirePackage{nth}
+%    \end{macrocode}
+%
+% The appendix package provides various ways of formatting the titles of
+% appendices. Also (sub)appendices environments are provided that can be used,
+% for example, for per chapter/section appendices. The word 'Appendix' or
+% similar can be prepended to the appendix number for article class documents.
+% The word 'Appendices' or similar can be added to the table of contents before
+% the appendices are listed. The word 'Appendices' or similar can be typeset as
+% a |\part|-like heading (page) in the body. An appendices environment is
+% provided which can be used instead of the |\appendix| command.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% add appendix to TOX
+    toc,%
+% Make a |\part| of |\chapter| page for the appendix starting page
+    page,%
+}{appendix}%
+\RequirePackage{appendix}
 %    \end{macrocode}
 %
 % Show label, ref, cite and bib keys. The showkeys package modifies the
@@ -1196,21 +984,6 @@
 % correct LaTeX code for quotes, which should be preferred.
 %    \begin{macrocode}
 \RequirePackage{csquotes}
-%    \end{macrocode}
-%
-% The dcolumn package makes use of the array package to define a "D" column
-% format for use in tabular environments. This package is part of the tools
-% bundle in the LaTeX required distribution.
-%    \begin{macrocode}
-\RequirePackage{dcolumn}
-%    \end{macrocode}
-%
-% The European currency symbol for the Euro implemented in METAFONT, using the
-% official European Commission dimensions, and providing several shapes (normal,
-% slanted, bold, outline). The package also includes a LaTeX package which
-% defines the macro, pre-compiled tfm files, and documentation.
-%    \begin{macrocode}
-\RequirePackage{eurosym}
 %    \end{macrocode}
 %
 % Use biblatex, which is the (highly configurable) successor of bibtex and biber

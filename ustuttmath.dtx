@@ -100,39 +100,23 @@
 % First, we need to load some dependencies
 %
 %
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-% Center tags vertically (default)
-  centertags,
-% Place the subscripts and superscripts of summation symbols above and below
-% (default)
-  sumlimits,
-% Like sumlimits, but for integral symbols.
-  intlimits,
-% Like sumlimits, but for certain 'operator names' such as det, inf, lim, max,
-% min, that traditionally have subscripts placed underneath when they occur in a
-% displayed equation (default)
-  namelimits,
-% Place equation numbers on the right.
-  reqno,
-}{amsmath}
-%    \end{macrocode}
-%
-%
+% The package is a toolbox of programming facilities geared primarily towards
+% LaTeX class and package authors. It provides LaTeX frontends to some of the
+% new primitives provided by e-TeX as well as some generic tools which are not
+% strictly related to e-TeX but match the profile of this package. Note that the
+% initial versions of this package were released under the name elatex. The
+% package provides functions that seem to offer alternative ways of implementing
+% some LaTeX kernel commands; nevertheless, the package will not modify any part
+% of the LaTeX kernel.
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
-%
-% The package provides the principal packages in the AMS-LaTeX distribution. It adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it is highly recommended as an adjunct to serious mathematical typesetting in LaTeX.
-%    \begin{macrocode}
-\RequirePackage{amsmath}
-%    \end{macrocode}
-%
-% Additional math symbolys for a list see
+% Additional math symbols. For a full list, see
 % \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
 %    \begin{macrocode}
 \RequirePackage{amssymb}
+\RequirePackage{dsfont}
 %    \end{macrocode}
 %
 % The bm package defines a command |\bm| which makes its argument bold. The
