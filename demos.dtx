@@ -427,13 +427,19 @@
 %
 % Here is where you would now put your actual data content
 %    \begin{macrocode}
-%% Put your content here
+%<<COMMENT
+% Put your content here
+%COMMENT
 %    \end{macrocode}
 %
 % \begin{macro}{\printbibliography}
 % Eventually, a list of bibligraphy items will follow
 %    \begin{macrocode}
+%<<COMMENT
+% Remove this line in your final document so that you will only have entries in
+% your bibliography that you actually cited
 \nocite{*}
+%COMMENT
 \printbibliography
 %    \end{macrocode}
 % \end{macro}
@@ -441,11 +447,14 @@
 %
 % \begin{environment}{appendices}
 % In case you have content that's not supposed to be in the main document part
-% but still worth having it printed, it'll belong into the appendix. You enter |appendix|-mode by using the |appendices| environment.
+% but still worth having it printed, it'll belong into the appendix. You enter
+% |appendix|-mode by using the |appendices| environment.
 %    \begin{macrocode}
 \begin{appendices}
 \fixcleverefappendix
-%% Your appendix here
+%<<COMMENT
+% Your appendix here, if not needed, remove the environment
+%COMMENT
 \end{appendices}
 %    \end{macrocode}
 % \end{environment}
