@@ -133,6 +133,7 @@
 % options. This package adds such option handling to pgfkeys, in the same way
 % that kvoptions adds the same facility to the LaTeX standard keyval package.
 %    \begin{macrocode}
+\RequirePackage{pgfkeys}
 \RequirePackage{pgfopts}
 %    \end{macrocode}
 %
@@ -211,26 +212,6 @@
 \pgfkeys{
   /ustutt/debug/.cd,
     .is if=ustutt@debug,
-}
-%    \end{macrocode}
-%
-% Color space. By default, we define all colors as RGB, but there might be cases
-% where you want to professionally print your document. Then, you would want to
-% use color space |cmyk|
-%    \begin{macrocode}
-\newif\ifustutt@rgb
-\ustutt@rgbtrue
-\pgfkeys{
-% Change path
-  /ustutt/.cd,
-% RGB will be the default
-    rgb/.code={%
-      \ustutt@rgbtrue%
-    },
-% CMYK is an option complementary to RGB
-    cmyk/.code={%
-      \ustutt@rgbfalse%
-    },
 }
 %    \end{macrocode}
 %
@@ -319,7 +300,7 @@
     debug=false,
 % Please, by all means, don't hate on me for this default!
     gender=male,%
-    rgb,
+    color=rgb,
     english,
     ngerman,
     draft,
@@ -786,7 +767,6 @@
 \RequirePackage{tikzscale}
 \usepgfplotslibrary{external}
 \pgfplotsset{compat=newest}
-% \usepgfplotslibrary{ustutt}
 %    \end{macrocode}
 %
 % The package starts from the basic facilities of the color package, and
@@ -1742,289 +1722,23 @@
 %
 % Colorful documents are much nicer than just plain black and white. Thus, let
 % us define a batch of basis colors and their nuances
-%
-% \begin{macro}{\colorlighter}
-% \cmd{\colorlighter}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
-% Define new color |#3| which is only |#2| parts of the original color |#1| and
-% the remainder White.
 %    \begin{macrocode}
-\newcommand{\colorlighter}[3]{%
-% #1 Original color
-% #2 Percentage of white mix
-% #3 New color name
-  \colorlet{#3}{#1!#2!White}%
-}
+\RequirePackage{ustuttcolors}
 %    \end{macrocode}
-% For example, to get shades of Red lighter by 80\%, 50\%, and 20\%, use
+%
+%
+% \begin{macro}{\crule}
+% \cmd{\crule}\oarg{color}\marg{width}\marg{height}\\
+% Simpler command for a colored ruler.
+%    \begin{macrocode}
+\newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}
+%    \end{macrocode}
+% Example usage
 % \begin{verbatim}
-%   \colorlighter{Red}{0.20}{RedLighter}
-%   \colorlighter{Red}{0.50}{RedLight}
-%   \colorlighter{Red}{0.80}{RedVeryLight}
+%   \crule{0.5\linewidth}{0.4pt}
+%   \crule[Red]{0.5\linewidth}{0.4pt}
 % \end{verbatim}
 % \end{macro}
-%
-% \begin{macro}{\colordarker}
-% \cmd{\colordarker}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
-% Define new color |#3| which is only |#2| parts of the original color |#1| and
-% the remainder Black.
-%    \begin{macrocode}
-\newcommand{\colordarker}[3]{%
-% #1 Original color
-% #2 Percentage of Black mix
-% #3 New color name
-  \colorlet{#3}{#1!#2!Black}%
-}
-%    \end{macrocode}
-% For example, to get shades of Red darker by 80\%, 50\%, and 20\%, use
-% \begin{verbatim}
-%   \colordarker{Red}{0.20}{RedDarker}
-%   \colordarker{Red}{0.50}{RedDark}
-%   \colordarker{Red}{0.80}{RedVeryDark}
-% \end{verbatim}
-% \end{macro}
-%
-% Definition of our RGB colors
-%    \begin{macrocode}
-\ifustutt@rgb
-  \definecolor{PrimaryColor}{RGB}{62,68,76}% Anthracite
-  \definecolor{AccentOne}{RGB}{0,190,255}% Turquoiuse blue
-  \definecolor{AccentTwo}{RGB}{9,81,158}% Dark blue
-  \definecolor{AccentThree}{RGB}{62,68,76}% Anthracite
-  \definecolor{AccentFour}{RGB}{125,198,234}% Light blue-gray
-  \definecolor{AccentFive}{RGB}{159,153,152}% Light gray
-  \definecolor{AccentSix}{RGB}{255,213,0}% Yellow
-  \definecolor{UStuttDarkOne}{RGB}{62,68,76}% Anthracite
-  \definecolor{UStuttDarkTwo}{RGB}{0,0,0}% Black
-  \definecolor{UStuttLightOne}{RGB}{255,255,255}% White
-  \definecolor{UStuttLightTwo}{RGB}{159,153,152}% Light gray
-%    \end{macrocode}
-% and of the same colors given in CMYK color space
-%    \begin{macrocode}
-\else
-  \definecolor{PrimaryColor}{CMYK}{18,11,0,70}% Anthracite
-  \definecolor{AccentOne}{CMYK}{100,25,0,0}% Turquoiuse blue
-  \definecolor{AccentTwo}{CMYK}{94,49,0,38}% Dark blue
-  \definecolor{AccentThree}{CMYK}{18,11,0,70}% Anthracite
-  \definecolor{AccentFour}{CMYK}{47,15,0,8}% Light blue-gray
-  \definecolor{AccentFive}{CMYK}{0,4,4,38}% Light gray
-  \definecolor{AccentSix}{CMYK}{0,16,100,0}% Yellow
-  \definecolor{UStuttDarkOne}{CMYK}{18,11,0,70}% Anthracite
-  \definecolor{UStuttDarkTwo}{CMYK}{0,0,0,100}% Black
-  \definecolor{UStuttLightOne}{CMYK}{0,0,0,0}% White
-  \definecolor{UStuttLightTwo}{CMYK}{0,4,4,38}% Light gray
-\fi
-%    \end{macrocode}
-%
-% More human readable color names
-%    \begin{macrocode}
-\colorlet{UStuttWhite}{UStuttLightOne}
-\colorlet{UStuttAnthracite}{UStuttDarkOne}
-\colorlet{UStuttGray}{AccentFive}
-\colorlet{UStuttTurquoise}{AccentOne}
-\colorlet{UStuttDarkBlue}{AccentTwo}
-\colorlet{UStuttBluegray}{AccentFour}
-\colorlet{UStuttYellow}{AccentSix}
-%    \end{macrocode}
-%
-% Shades of primary color
-%    \begin{macrocode}
-\colorlighter{PrimaryColor}{25}{PrimaryColorVeryLight}
-\colorlighter{PrimaryColor}{50}{PrimaryColorLight}
-\colorlighter{PrimaryColor}{75}{PrimaryColorLighter}
-\colordarker{PrimaryColor}{75}{PrimaryColorDarker}
-\colordarker{PrimaryColor}{50}{PrimaryColorDark}
-\colordarker{PrimaryColor}{25}{PrimaryColorVeryDark}
-%    \end{macrocode}
-% Shades of accent one
-%    \begin{macrocode}
-\colorlighter{AccentOne}{25}{AccentOneVeryLight}
-\colorlighter{AccentOne}{50}{AccentOneLight}
-\colorlighter{AccentOne}{75}{AccentOneLighter}
-\colordarker{AccentOne}{75}{AccentOneDarker}
-\colordarker{AccentOne}{50}{AccentOneDark}
-\colordarker{AccentTwo}{25}{AccentOneVeryDark}
-%    \end{macrocode}
-% Shades of accent two
-%    \begin{macrocode}
-\colorlighter{AccentTwo}{25}{AccentTwoVeryLight}
-\colorlighter{AccentTwo}{50}{AccentTwoLight}
-\colorlighter{AccentTwo}{75}{AccentTwoLighter}
-\colordarker{AccentTwo}{75}{AccentTwoDarker}
-\colordarker{AccentTwo}{50}{AccentTwoDark}
-\colordarker{AccentTwo}{25}{AccentTwoVeryDark}
-%    \end{macrocode}
-% Shades of accent three
-%    \begin{macrocode}
-\colorlighter{AccentThree}{25}{AccentThreeVeryLight}
-\colorlighter{AccentThree}{50}{AccentThreeLight}
-\colorlighter{AccentThree}{75}{AccentThreeLighter}
-\colordarker{AccentThree}{75}{AccentThreeDarker}
-\colordarker{AccentThree}{50}{AccentThreeDark}
-\colordarker{AccentThree}{25}{AccentThreeVeryDark}
-%    \end{macrocode}
-% Shades of accent four
-%    \begin{macrocode}
-\colorlighter{AccentFour}{25}{AccentFourVeryLight}
-\colorlighter{AccentFour}{50}{AccentFourLight}
-\colorlighter{AccentFour}{75}{AccentFourLighter}
-\colordarker{AccentFour}{75}{AccentFourDarker}
-\colordarker{AccentFour}{50}{AccentFourDark}
-\colordarker{AccentFour}{25}{AccentFourVeryDark}
-%    \end{macrocode}
-% Shades of accent five
-%    \begin{macrocode}
-\colorlighter{AccentFive}{25}{AccentFiveVeryLight}
-\colorlighter{AccentFive}{50}{AccentFiveLight}
-\colorlighter{AccentFive}{75}{AccentFiveLighter}
-\colordarker{AccentFive}{75}{AccentFiveDarker}
-\colordarker{AccentFive}{50}{AccentFiveDark}
-\colordarker{AccentFive}{25}{AccentFiveVeryDark}
-%    \end{macrocode}
-% Shades of accent six
-%    \begin{macrocode}
-\colorlighter{AccentSix}{25}{AccentSixVeryLight}
-\colorlighter{AccentSix}{50}{AccentSixLight}
-\colorlighter{AccentSix}{75}{AccentSixLighter}
-\colordarker{AccentSix}{75}{AccentSixDarker}
-\colordarker{AccentSix}{50}{AccentSixDark}
-\colordarker{AccentSix}{25}{AccentSixVeryDark}
-%    \end{macrocode}
-%
-%
-%
-% Colors for use in koma script elements
-% Line above header
-%    \begin{macrocode}
-\colorlet{headtopline}{PrimaryColor}
-%    \end{macrocode}
-% Line below header
-%    \begin{macrocode}
-\colorlet{headsepline}{PrimaryColor}
-%    \end{macrocode}
-% Line above footer
-%    \begin{macrocode}
-\colorlet{footsepline}{PrimaryColor}
-%    \end{macrocode}
-% Line below footer
-%    \begin{macrocode}
-\colorlet{footbotline}{PrimaryColor}
-%    \end{macrocode}
-% Line above footnotes
-%    \begin{macrocode}
-\colorlet{footnoterule}{PrimaryColor}
-%    \end{macrocode}
-% Footnote number
-%    \begin{macrocode}
-\colorlet{thefootnote}{PrimaryColor}
-%    \end{macrocode}
-%
-% Setting title to be written in main color, sans-serif, and Huge
-%    \begin{macrocode}
-\colorlet{title}{Black}
-%    \end{macrocode}
-% Setting subtitle to be written in main color, sans-serif, and large
-%    \begin{macrocode}
-\colorlet{subtitle}{Black}
-%    \end{macrocode}
-% Setting author to be written in main color, sans-serif, and huge
-%    \begin{macrocode}
-\colorlet{author}{Black}
-%    \end{macrocode}
-% Setting date to be written in main color, normal font, and normal size
-%    \begin{macrocode}
-\colorlet{date}{Black}
-%    \end{macrocode}
-% Page header and footer should be written in the main color and sans-serif
-%    \begin{macrocode}
-\colorlet{pageheadfoot}{PrimaryColor}
-%    \end{macrocode}
-% Page footer should be written in the main color, sans-serif and small font size
-%    \begin{macrocode}
-\colorlet{pagefoot}{PrimaryColor}
-%    \end{macrocode}
-% Create a new font for "place of birth"
-%    \begin{macrocode}
-\colorlet{placeofbirth}{Black}
-%    \end{macrocode}
-% Make page numbers printed in PrimaryColor
-%    \begin{macrocode}
-\colorlet{pagenumber}{PrimaryColor}
-%    \end{macrocode}
-%
-% Colors for document headings from part over sectioning down to paragraphs
-%    \begin{macrocode}
-\colorlet{part}{PrimaryColor}
-\colorlet{chapter}{part}
-\colorlet{disposition}{chapter}
-\colorlet{sectioning}{disposition}
-\colorlet{section}{sectioning}
-\colorlet{subsection}{sectioning}
-\colorlet{subsubsection}{sectioning}
-\colorlet{paragraph}{subsubsection}
-\colorlet{subparagraph}{paragraph}
-\colorlet{descriptionlabel}{subparagraph}
-%    \end{macrocode}
-% Color of dictum
-%    \begin{macrocode}
-\colorlet{dictum}{PrimaryColor}
-%    \end{macrocode}
-% Color of itemize bullets
-%    \begin{macrocode}
-\colorlet{itemizei}{PrimaryColor}
-\colorlet{itemizeii}{PrimaryColor}
-\colorlet{itemizeiii}{PrimaryColor}
-\colorlet{itemizeiv}{PrimaryColor}
-%    \end{macrocode}
-%
-% Color of float object's caption i.e., "Table" or "Figure"
-%    \begin{macrocode}
-\colorlet{captionlabel}{PrimaryColor}
-%    \end{macrocode}
-%
-%
-%
-% Colors for table elements
-%    \begin{macrocode}
-\colorlet{ArrayRuleColor}{PrimaryColor}
-\colorlet{TableHeader}{PrimaryColor}
-\colorlet{TableRowEven}{LightGray}
-\colorlet{TableRowOdd}{LightGray!50}
-\colorlet{TableCellHighlight}{AccentTwoLight}
-%    \end{macrocode}
-%
-% Make hyperref use these colors
-%    \begin{macrocode}
-\tikzifexternalizing{}{
-  \hypersetup{%
-% set color of anchors
-    anchorcolor=Black,%
-% color of border around citation links
-    citebordercolor=Black,%
-% color of citation links
-    citecolor=Black,%
-%  color of border aroundfile links
-    filebordercolor=Black,%
-% color of file links
-    filecolor=Black,%
-% color of border around links
-    linkbordercolor=Black,%
-% color of links
-    linkcolor=Black,%
-% color of border around menu links
-    menubordercolor=Black,%
-% color for menu links
-    menucolor=Black,%
-% color of border around 'run' links
-    runbordercolor=Black,%
-% color of 'run' links
-    runcolor=Black,%
-% color of border around URL links
-    urlbordercolor=Black,%
-% color of URL links
-    urlcolor=Black,%
-  }%
-}
-%    \end{macrocode}
 %
 %
 % We will provide some macros for easier colored-table creation
@@ -2085,17 +1799,12 @@
 % \end{macro}
 %
 %
-% \begin{macro}{\crule}
-% \cmd{\crule}\oarg{color}\marg{width}\marg{height}\\
-% Simpler command for a colored ruler.
+% \begin{macro}{\tcellhighlight}
+% \cmd{\tcellhighlight}\\
+% Command to highlight a table cell
 %    \begin{macrocode}
-\newcommand\crule[3][PrimaryColor]{\textcolor{#1}{\rule{#2}{#3}}}
+\newcommand{\tcellhighlight}{\cellcolor{TableCellHighlight}}
 %    \end{macrocode}
-% Example usage
-% \begin{verbatim}
-%   \crule{0.5\linewidth}{0.4pt}
-%   \crule[Red]{0.5\linewidth}{0.4pt}
-% \end{verbatim}
 % \end{macro}
 %
 %
