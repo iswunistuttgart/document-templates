@@ -14,11 +14,14 @@ SOURCE_PDFS = $(SOURCES:dtx=pdf)
 DEMO_PDFS = $(DEMOS:tex=pdf)
 
 .PHONY: all
-all: ins $(SOURCE_PDFS)
+all: ins docs $(SOURCE_PDFS)
 
 .PHONY: ins
 ins: ustutt.ins $(SOURCES)
 	pdflatex ustutt.ins
+
+.PHONY: docs
+docs: $(SOURCE_PDFS)
 
 .PHONY: demos
 demos: $(DEMO_PDFS)
