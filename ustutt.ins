@@ -45,8 +45,8 @@ and version 1.3 or later is part of all distributions of LaTeX version
 
 % Translation
 \generate{%
-  \file{ustutt-German.dict}{\from{localization.dtx}{package,german}}%
-  \file{ustutt-English.dict}{\from{localization.dtx}{package,english}}%
+  \file{ustutt-German.dict}{\from{ustuttlocalization.dtx}{package,german}}%
+  \file{ustutt-English.dict}{\from{ustuttlocalization.dtx}{package,english}}%
 }
 
 % Glossaries style
@@ -63,21 +63,21 @@ and version 1.3 or later is part of all distributions of LaTeX version
 }
 % TikZ/PGF
 \generate{%
-  \file{pgflibrarytikzustutt.code.tex}{\from{pgflibrarytikzustutt.dtx}{package}}%
+  \file{pgflibrarytikzustutt.code.tex}{\from{ustutttikzpgf.dtx}{package}}%
 }
 
 % Demos
 \nopostamble
 \generate{%
-  \file{ustuttbachelor_de.tex}{\from{demos.dtx}{document,thesis,bachelor,german}}%
-  \file{ustuttbachelor_en.tex}{\from{demos.dtx}{document,thesis,bachelor,english}}%
-  \file{ustuttmaster_de.tex}{\from{demos.dtx}{document,thesis,master,german}}%
-  \file{ustuttmaster_en.tex}{\from{demos.dtx}{document,thesis,master,english}}%
-  \file{ustuttdoctorate_de.tex}{\from{demos.dtx}{document,thesis,doctorate,german}}%
-  \file{ustuttdoctorate_en.tex}{\from{demos.dtx}{document,thesis,doctorate,english}}%
-  \file{acronyms.tex}{\from{demos.dtx}{mixin,acronyms}}%
-  \file{symbols.tex}{\from{demos.dtx}{mixin,symbols}}%
-  \file{notation.tex}{\from{demos.dtx}{mixin,notation}}%
+  \file{demos/de/ustuttbachelor.tex}{\from{ustuttdemos.dtx}{document,thesis,bachelor,german}}%
+  \file{demos/en/ustuttbachelor.tex}{\from{ustuttdemos.dtx}{document,thesis,bachelor,english}}%
+  \file{ustuttmaster_de.tex}{\from{ustuttdemos.dtx}{document,thesis,master,german}}%
+  \file{ustuttmaster_en.tex}{\from{ustuttdemos.dtx}{document,thesis,master,english}}%
+  \file{ustuttdoctorate_de.tex}{\from{ustuttdemos.dtx}{document,thesis,doctorate,german}}%
+  \file{ustuttdoctorate_en.tex}{\from{ustuttdemos.dtx}{document,thesis,doctorate,english}}%
+  \file{acronyms.tex}{\from{ustuttdemos.dtx}{mixin,acronyms}}%
+  \file{symbols.tex}{\from{ustuttdemos.dtx}{mixin,symbols}}%
+  \file{notation.tex}{\from{ustuttdemos.dtx}{mixin,notation}}%
 }
 
 
