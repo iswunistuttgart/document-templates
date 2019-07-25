@@ -230,13 +230,13 @@
 % \begin{macro}{\colordarker}
 % \cmd{\colordarker}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
 % Define new color |#3| which is only |#2| parts of the original color |#1| and
-% the remainder Black.
+% the remainder black.
 %    \begin{macrocode}
 \newcommand{\colordarker}[3]{%
 % #1 Original color
-% #2 Percentage of Black mix
+% #2 Percentage of black mix
 % #3 New color name
-  \colorlet{#3}{#1!#2!Black}%
+  \colorlet{#3}{#1!#2!black}%
 }
 %    \end{macrocode}
 % For example, to get shades of Red darker by 80\%, 50\%, and 20\%, use
@@ -265,7 +265,7 @@
   \definecolor{UStuttAccent6}{RGB}{236,218,145}
 % Anthracite
   \definecolor{UStuttDark1}{RGB}{62,68,76}
-% Black
+% black
   \definecolor{UStuttDark2}{RGB}{0,0,0}
 % White
   \definecolor{UStuttLight1}{RGB}{255,255,255}
@@ -287,7 +287,7 @@
   \definecolor{UStuttAccent6}{cmyk}{0,18,91,8}
 % Anthracite
   \definecolor{UStuttDark1}{cmyk}{18,11,0,70}
-% Black
+% black
   \definecolor{UStuttDark2}{cmyk}{0,0,0,100}
 % White
   \definecolor{UStuttLight1}{cmyk}{0,0,0,0}
@@ -543,19 +543,19 @@
 %
 % Setting title to be written in main color, sans-serif, and Huge
 %    \begin{macrocode}
-\colorlet{title}{Black}
+\colorlet{title}{black}
 %    \end{macrocode}
 % Setting subtitle to be written in main color, sans-serif, and large
 %    \begin{macrocode}
-\colorlet{subtitle}{Black}
+\colorlet{subtitle}{black}
 %    \end{macrocode}
 % Setting author to be written in main color, sans-serif, and huge
 %    \begin{macrocode}
-\colorlet{author}{Black}
+\colorlet{author}{black}
 %    \end{macrocode}
 % Setting date to be written in main color, normal font, and normal size
 %    \begin{macrocode}
-\colorlet{date}{Black}
+\colorlet{date}{black}
 %    \end{macrocode}
 % Page header and footer should be written in the main color and sans-serif
 %    \begin{macrocode}
@@ -567,7 +567,7 @@
 %    \end{macrocode}
 % Create a new font for "place of birth"
 %    \begin{macrocode}
-\colorlet{placeofbirth}{Black}
+\colorlet{placeofbirth}{black}
 %    \end{macrocode}
 % Make page numbers printed in UStuttAccent1
 %    \begin{macrocode}
@@ -686,31 +686,31 @@
   \@ifpackageloaded{hyperref}{%
     \hypersetup{%
 % set color of anchors
-      anchorcolor=Black,%
+      anchorcolor=black,%
 % color of border around citation links
-      citebordercolor=Black,%
+      citebordercolor=black,%
 % color of citation links
-      citecolor=Black,%
+      citecolor=black,%
 %  color of border aroundfile links
-      filebordercolor=Black,%
+      filebordercolor=black,%
 % color of file links
-      filecolor=Black,%
+      filecolor=black,%
 % color of border around links
-      linkbordercolor=Black,%
+      linkbordercolor=black,%
 % color of links
-      linkcolor=Black,%
+      linkcolor=black,%
 % color of border around menu links
-      menubordercolor=Black,%
+      menubordercolor=black,%
 % color for menu links
-      menucolor=Black,%
+      menucolor=black,%
 % color of border around 'run' links
-      runbordercolor=Black,%
+      runbordercolor=black,%
 % color of 'run' links
-      runcolor=Black,%
+      runcolor=black,%
 % color of border around URL links
-      urlbordercolor=Black,%
+      urlbordercolor=black,%
 % color of URL links
-      urlcolor=Black,%
+      urlcolor=black,%
     }%
   }{}%
 }
