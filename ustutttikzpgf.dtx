@@ -19,11 +19,6 @@
 %<*driver>
 \ProvidesFile{ustutttikzpgf.dtx}
 %</driver>
-%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
-%<package>\ProvidesPackage{pgflibrarytikzustutt.code}
-%<*package>
-    [2019/07/21 v1.0.0-a UStutt TikZ \& PGF library]
-%</package>
 %
 %<*driver>
 \documentclass{ltxdoc}
@@ -93,6 +88,7 @@
 \RequirePackage{ifdraft}
 \RequirePackage{pgfopts}
 \RequirePackage{xparse}
+\RequirePackage{ustuttcolors}
 %    \end{macrocode}
 
 % \begin{macro}{\tikzustuttset}
@@ -108,10 +104,10 @@
 %
 % \begin{macro}{\tikzustuttlet}
 % \cmd{\tikzustuttlet}\marg{full key}\marg{macro}\\
-% Wrapper around |\pgfkeyslet{/ustutt/#1}{#2}|
+% Wrapper around |\pgfkeyslet{/tikzustutt/#1}{#2}|
 %    \begin{macrocode}
 \NewDocumentCommand{\tikzustuttlet}{ m m }{%
-  \pgfkeyslet{/ustutt/#1}{#2}%
+  \pgfkeyslet{/tikzustutt/#1}{#2}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -119,10 +115,10 @@
 %
 % \begin{macro}{\tikzustuttvalueof}
 % \cmd{\tikzustuttvalueof}\marg{full key}\\
-% Wrapper around |\pgfkeysvalueof{/ustutt/#1}|
+% Wrapper around |\pgfkeysvalueof{/tikzustutt/#1}|
 %    \begin{macrocode}
 \NewDocumentCommand{\tikzustuttvalueof}{ m }{%
-  \pgfkeysvalueof{/ustutt/#1}%
+  \pgfkeysvalueof{/tikzustutt/#1}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -130,10 +126,10 @@
 %
 % \begin{macro}{\tikzustuttgetvalue}
 % \cmd{\tikzustuttgetvalue}\marg{full key}\marg{macro}\\
-% Wrapper around |\pgfkeysgetvalue{/ustutt/#1}{#2}|
+% Wrapper around |\pgfkeysgetvalue{/tikzustutt/#1}{#2}|
 %    \begin{macrocode}
 \NewDocumentCommand{\tikzustuttgetvalue}{ m m }{%
-  \pgfkeysgetvalue{/ustutt/#1}{#2}%
+  \pgfkeysgetvalue{/tikzustutt/#1}{#2}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -141,10 +137,10 @@
 %
 % \begin{macro}{\tikzustuttresetstyle}
 % \cmd{\tikzustuttresetstyle}\marg{fullkey}\\
-% Wrapper around |\pgfqkeys{/ustutt/#1/.style}{{}}|
+% Wrapper around |\pgfqkeys{/tikzustutt/#1/.style}{{}}|
 %    \begin{macrocode}
 \NewDocumentCommand{\tikzustuttresetstyle}{ m }{%
-  \pgfqkeys{/ustutt/#1/.style}{{}}%
+  \pgfqkeys{/tikzustutt/#1/.style}{{}}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -152,13 +148,975 @@
 %
 % \begin{macro}{\tikzustuttifdefined}
 % \cmd{\tikzustuttifdefined}\marg{full key}\marg{if}\marg{else}\\
-% Wrapper around |\pgfkeysifdefined{/ustutt/#1}{#2}{#3}|
+% Wrapper around |\pgfkeysifdefined{/tikzustutt/#1}{#2}{#3}|
 %    \begin{macrocode}
 \NewDocumentCommand{\tikzustuttifdefined}{ m m m }{%
-  \pgfkeysifdefined{/ustutt/#1}{#2}{#3}%
+  \pgfkeysifdefined{/tikzustutt/#1}{#2}{#3}%
 }%
 %    \end{macrocode}
 % \end{macro}
+%
+%
+% \subsection{TikZ \& PGF Libraries}
+% \begin{macro}{\usetikzlibrary}
+%    \begin{macrocode}
+\usepgflibrary{plotmarks}
+\usepgflibrary{fpu}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\usetikzlibrary}
+%    \begin{macrocode}
+\usetikzlibrary{3d}
+\usetikzlibrary{angles}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{bending}
+\usetikzlibrary{calc}
+\usetikzlibrary{colorbrewer}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{external}
+\usetikzlibrary{fadings}
+\usetikzlibrary{fit}
+\usetikzlibrary{intersections}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{patterns}
+\usetikzlibrary{pgfplots.statistics}
+\usetikzlibrary{pgfplots.groupplots}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{positioning}
+\usetikzlibrary{quotes}
+\usetikzlibrary{shadows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{spy}
+\usetikzlibrary{through}
+\usetikzlibrary{trees}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{PGF Configuration}
+%    \begin{macrocode}
+\pgfplotsset{compat=newest}
+%    \end{macrocode}
+%
+% \begin{macro}{\pgfkeys}
+%    \begin{macrocode}
+\pgfkeys{%
+% This namespace is a family of namespaces
+  /tikzustutt/.is family,%
+% Fall back to searching inside /pgf/
+  % /tikzustutt/.belongs to family=/pgf,%
+% Forward anything unknown to the '/pgf' namespace
+  /tikzustutt/.search also={/tikz,/pgf,/pgfplots},%
+  % /tikzustutt/.unknown/.forward to=/pgf,%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Interface}
+%
+% \begin{macro}
+%    \begin{macrocode}
+% Handling of unknown options
+\tikzustuttset{%
+% Remaining keys not matching in this namespace
+  remaining keys/.style={},%
+%
+% collect unknown keys in style 'ustutt/remaining keys':
+  .unknown/.code={%
+    \let\currname\pgfkeyscurrentname%
+    \let\currval\pgfkeyscurrentvalue%
+    \ifx#1\pgfkeysnovalue%
+      \pgfqkeys{ustutt}{%
+        remaining keys/.append style/.expand once={\currname}%
+      }%
+    \else%
+      \pgfqkeys{ustutt}{%
+        remaining keys/.append style/.expand twice={\expandafter\currname\expandafter=\currval}%
+      }%
+    \fi%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Default colors for axes components}
+%    \begin{macrocode}
+\tikzustuttset{%
+% Axis border and background
+  axis border color/.initial=UStuttAnthracite,%
+  axis background color/.initial=White,%
+%
+% Legend border color and background
+  legend background color/.initial=UStuttGrayVeryLight,%
+  legend border color/.initial=UStuttGray,%
+%
+% Grid colors
+  minor grid color/.initial=UStuttGray,%
+  major grid color/.initial=UStuttGray,%
+%
+% Axes labels
+  label color/.initial=UStuttAnthracite,%
+  xlabel color/.initial=UStuttAnthracite,%
+  ylabel color/.initial=UStuttAnthracite,%
+  zlabel color/.initial=UStuttAnthracite,%
+%
+% Axes titles
+  title color/.initial=UStuttAnthracite,%
+%
+% Zoom-in Spy Box
+  zoom in spy box color/.initial=UStuttAccentOne,%
+}
+%    \end{macrocode}
+%
+%
+% \subsection{Node Styles}
+%
+%    \begin{macrocode}
+\tikzustuttset{%
+% No inside margin
+  no margin/.style={%
+    inner sep=0pt,%
+  },%
+% A very tight node inside
+  very tight margin/.style={%
+    inner sep=0.0416625em,%
+  },%
+% A tight node inside
+  tight margin/.style={%
+    inner sep=0.16665em,%
+  },%
+% Normal node inside
+  normal margin/.style={%
+    inner sep=0.3333em,%
+  },%
+% Loose node inside
+  loose margin/.style={%
+    inner sep=0.6666em,%
+  },%
+% Very loose node inside
+  very loose margin/.style={%
+    inner sep=1.3332em,%
+  },%
+  super loose margin/.style={%
+    inner sep=5.3328em,%
+  },%
+% No outside distance
+  no padding/.style={%
+    outer sep=0pt,%
+  },%
+% A very tight node outside
+  very tight padding/.style={%
+    outer sep=0.0416625em,%
+  },%
+% A tight node outside
+  tight padding/.style={%
+    outer sep=0.16665em,%
+  },%
+% A normal node outside
+  normal padding/.style={%
+    outer sep=0.3333em,%
+  },%
+% A loose node outside
+  loose padding/.style={%
+    outer sep=0.6666em,%
+  },%
+% A very loose node outside
+  very loose padding/.style={%
+    outer sep=1.3332em,%
+  },%
+  super loose padding/.style={%
+    outer sep=5.3328em,%
+  },%
+% A boxed node
+  boxed/.style={%
+    draw,%
+  },%
+%
+% A highlighted style
+  highlighted/.style={%
+    color=\tikzustuttvalueof{highlight color},%
+  },%
+% Draw a top border
+  top border/.style={%
+    append after command={%
+      \pgfextra{%
+        \begin{pgfinterruptpath}%
+          \draw[%
+              #1,%
+            ]%
+            (\tikzlastnode.north west)%
+            -- (\tikzlastnode.north east)%
+            ;%
+        \end{pgfinterruptpath}%
+      }%
+    }%
+  },%
+% Draw a right border
+  right border/.style={%
+    append after command={%
+      \pgfextra{%
+        \begin{pgfinterruptpath}%
+          \draw[%
+              #1,%
+            ]%
+            (\tikzlastnode.north east)%
+            -- (\tikzlastnode.south east)%
+            ;%
+        \end{pgfinterruptpath}%
+      }%
+    }%
+  },%
+% Draw a bottom border
+  bottom border/.style={%
+    append after command={%
+      \pgfextra{%
+        \begin{pgfinterruptpath}%
+          \draw[%
+              #1,%
+            ]%
+            (\tikzlastnode.south east)%
+            -- (\tikzlastnode.south west)%
+            ;%
+        \end{pgfinterruptpath}%
+      }%
+    }%
+  },%
+% Draw a left border
+  left border/.style={%
+    append after command={%
+      \pgfextra{%
+        \begin{pgfinterruptpath}%
+          \draw[%
+              #1,%
+            ]%
+            (\tikzlastnode.south west)%
+            -- (\tikzlastnode.north west)%
+            ;%
+        \end{pgfinterruptpath}%
+      }%
+    }%
+  },%
+% left bordered/.initial={},%
+  cross/.style={%
+    cross out,%
+    draw,%
+    minimum size=2(#1-\pgflinewidth),%
+    inner sep=0pt,%
+    outer sep=0pt,%
+  },%
+  cross/.default={1pt},%
+}
+%    \end{macrocode}
+%
+%
+% \subsection{Line Styles and Widths}
+%
+%    \begin{macrocode}
+\tikzustuttset{%
+  ultra thin/.style={%
+    line width=0.15pt,%
+  },%
+  very thin/.style={%
+    line width=0.30pt,%
+  },%
+% DEFAULT
+  thin/.style={%
+    line width=0.60pt,%
+  },%
+  semithick/.style={%
+    line width=0.90pt,%
+  },%
+  thick/.style={%
+    line width=1.20pt,%
+  },%
+  very thick/.style={%
+    line width=1.60pt,%
+  },%
+  ultra thick/.style={%
+    line width=2.00pt,%
+  },%
+}
+%    \end{macrocode}
+%
+%
+% \subsection{Cycle Styles}
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/color list}{%
+  {%
+    color=UStuttAccent1,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent2,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent3,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent4,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent6,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/color list*}{%
+  {%
+    color=UStuttAccent1,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent2,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent3,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent4,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent6,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent1Lighter,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent2Lighter,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent3Lighter,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent4Lighter,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent6Lighter,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent1Light,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent2Light,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent3Light,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent4Light,%
+    draw opacity=1.00,%
+  },{%
+    color=UStuttAccent6Light,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/black color}{%
+  {%
+    color=Black,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/linestyles}{%
+  {%
+    solid,%
+    draw opacity=1.00,%
+  },{%
+    dashed,%
+    draw opacity=1.00,%
+  },{%
+    dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    dotted,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/linestyles*}{%
+  {%
+    solid,%
+    draw opacity=1.00,%
+  },{%
+    dashed,%
+    draw opacity=1.00,%
+  },{%
+    dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    dotted,%
+    draw opacity=1.00,%
+  },{%
+    dashdotdotted,%
+    draw opacity=1.00,%
+  },{%
+    densely dashed,%
+    draw opacity=1.00,%
+  },{%
+    densely dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    densely dotted,%
+    draw opacity=1.00,%
+  },{%
+    densely dashdotdotted,%
+    draw opacity=1.00,%
+  },{%
+    loosely dashed,%
+    draw opacity=1.00,%
+  },{%
+    loosely dashdotted,%
+    draw opacity=1.00,%
+  },{%
+    loosely dotted,%
+    draw opacity=1.00,%
+  },{%
+    loosely dashdotdotted,%
+    draw opacity=1.00,%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/mark list}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=star,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      % fill=\pgfplotsmarklistfill!33,%
+      fill=UStuttAnthracite!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=|,%
+    every mark/.append style={%
+      solid,%
+      rotate=180,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/mark list*}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfcircle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfdiamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      rotate=180,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare right*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare left*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/mark list nth}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=star,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=|,%
+    every mark/.append style={%
+      solid,%
+      rotate=180,%
+      draw opacity=1.00,%
+      fill=none,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/mark list nth*}{%
+  {%
+    mark=*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=square*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=triangle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=pentagon*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfcircle*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfdiamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      rotate=180,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=otimes*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill!33,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=diamond*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=White,%
+      % fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare right*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  },{%
+    mark=halfsquare left*,%
+    every mark/.append style={%
+      solid,%
+      draw opacity=1.00,%
+      fill=\pgfplotsmarklistfill,%
+      fill opacity=1.00,%
+    },%
+  }%
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotscreateplotcyclelist{/tikzustutt/black patterns}{%
+  {%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=north east lines,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=north west lines,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=crosshatch,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=dots,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill,%
+    fill opacity=1.00,%
+    pattern=crosshatch dots,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=north east lines,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=north west lines,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=crosshatch,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=dots,%
+  },{%
+    draw=UStuttAnthracite,%
+    draw opacity=1.00,%
+    fill=\pgfplotsmarklistfill!25,%
+    fill opacity=1.00,%
+    pattern=crosshatch dots,%
+  }%
+}%
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\pgfplotsset{%
+  bar cycle list/.style={%
+    cycle list={%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=north east lines,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=north west lines,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=crosshatch,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill,%
+        fill opacity=1.00,%
+        pattern=dots,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=White,%
+        fill opacity=1.00,%
+        pattern=crosshatch dots,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=north east lines,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=north west lines,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=crosshatch,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=dots,%
+      },%
+      {%
+        draw=UStuttAnthracite,%
+        draw opacity=1.00,%
+        fill=\pgfplotsmarklistfill!25,%
+        fill opacity=1.00,%
+        pattern=crosshatch dots,%
+      }%
+    }%
+  }%
+}%
+%    \end{macrocode}
+%
+%
+% \subsection{Plot Styles}
+%
+%    \begin{macrocode}
+\tikzustuttset{
+  tufte-like/.style={%
+    /pgfplots/separate axis lines,%
+    /pgfplots/axis x line*=bottom,%
+    /pgfplots/axis x line shift=8pt,%
+    /pgfplots/xlabel shift=8pt,%
+    /pgfplots/axis y line*=left,%
+    /pgfplots/axis y line shift=8pt,%
+    /pgfplots/ylabel shift=8pt,%
+  },%
+}
+%    \end{macrocode}
 %
 %
 %
