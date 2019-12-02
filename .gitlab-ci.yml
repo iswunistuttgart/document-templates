@@ -4,7 +4,7 @@ stages:
   - ship
 
 ins:
-  image: philipptempel/docker-ubuntu-tug-texlive:2018
+  image: philipptempel/docker-ubuntu-tug-texlive:2019
   stage: build
   script:
     - make distclean
@@ -22,7 +22,7 @@ ins:
     - docker
 
 demos:
-  image: philipptempel/docker-ubuntu-tug-texlive:2018
+  image: philipptempel/docker-ubuntu-tug-texlive:2019
   stage: demos
   script:
     - make -j 5 demos
