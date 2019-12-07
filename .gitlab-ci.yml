@@ -23,7 +23,7 @@ ins:
 
 docs:
   image: philipptempel/docker-ubuntu-tug-texlive:2019
-  stage: ins
+  stage: build
   script:
     - make docs
   artifacts:
@@ -42,7 +42,7 @@ docs:
 
 dist:
   image: philipptempel/docker-ubuntu-tug-texlive:2019
-  stage: ship
+  stage: demos
   script:
     - make dist
   artifacts:
