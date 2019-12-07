@@ -10,6 +10,10 @@
 *.slo
 *.sls
 
+# release directory
+dist/*
+
+
 # Created by https://www.gitignore.io/api/windows
 
 ### Windows ###
