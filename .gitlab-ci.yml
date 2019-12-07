@@ -1,11 +1,12 @@
 stages:
-  - build
-  - demos
+  - ins
+  - docs
+  - dist
   - ship
 
 ins:
   image: philipptempel/docker-ubuntu-tug-texlive:2019
-  stage: build
+  stage: ins
   script:
     - make distclean
     - make ins
@@ -23,7 +24,7 @@ ins:
 
 docs:
   image: philipptempel/docker-ubuntu-tug-texlive:2019
-  stage: build
+  stage: docs
   script:
     - make docs
   artifacts:
@@ -35,14 +36,12 @@ docs:
       - '*.dict'
       - '*.pdf'
       - '*.tex'
-  dependencies:
-    - ins
   tags:
     - docker
 
 dist:
   image: philipptempel/docker-ubuntu-tug-texlive:2019
-  stage: demos
+  stage: dist
   script:
     - make dist
   artifacts:
@@ -54,8 +53,6 @@ dist:
       - '*.dict'
       - '*.pdf'
       - '*.tex'
-  dependencies:
-    - docs
   tags:
     - docker
 
@@ -69,7 +66,6 @@ ghr:
     - 'apk add --no-cache bash'
   script:
     - 'cd dist/'
-    - 'ls dist/'
     - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_BUILD_REF_NAME}" article/'
     - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_BUILD_REF_NAME}" bachelor/'
     - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_BUILD_REF_NAME}" book/'
@@ -77,8 +73,9 @@ ghr:
     - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_BUILD_REF_NAME}" master/'
   only:
     - tags
-  dependencies:
-    - dist
+  needs:
+    - job: dist
+      artifacts: true
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     expire_in: 2 months
