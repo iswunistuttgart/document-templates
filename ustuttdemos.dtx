@@ -133,6 +133,8 @@
 % the different glossaries
 %    \begin{macrocode}
 %<*thesis>
+\usepackage{ustuttgloss}
+\usepackage{ustuttappendix}
 \usepackage{ustutttext}
 \usepackage{ustuttmath}
 \usepackage{ustuttmechanics}
@@ -293,8 +295,8 @@
 % call the |\newglossary| method with the syntax
 % |\newglossary{<label>}{<log>}{<out-ext>{<in-ext>}{<caption>}|
 %    \begin{macrocode}
-\newglossary[slg]{symbol}{sls}{slo}{\translate{ustutt@glossaries@symbols}}
-\newglossary[nlg]{notation}{nls}{nlo}{\translate{ustutt@glossaries@notation}}
+%<thesis>\newglossary[slg]{symbol}{sls}{slo}{\translate{ustutt@glossaries@symbols}}
+%<thesis>\newglossary[nlg]{notation}{nls}{nlo}{\translate{ustutt@glossaries@notation}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -302,14 +304,14 @@
 % We must trigger the |makeindex| command to enable proper indexing of macros
 % and glossaries.
 %    \begin{macrocode}
-\makeindex
+%<thesis>\makeindex
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\makeglossaries}
 % Likewise, glossaries cannot be typeset of they have not been made.
 %    \begin{macrocode}
-\makeglossaries
+%<thesis>\makeglossaries
 %    \end{macrocode}
 % \end{macro}
 %
@@ -329,7 +331,7 @@
 % \begin{macro}{\glsaddall}
 % For the sake of this demo, we will just add all defined glossaries entries
 %    \begin{macrocode}
-\glsaddall
+%<thesis>\glsaddall
 %    \end{macrocode}
 % \end{macro}
 % 
@@ -402,28 +404,34 @@
 % \begin{macro}{\printglossary}
 % Output list of symbols from glossaries defined above
 %    \begin{macrocode}
+%<*thesis>
 \printglossary[%
     type=symbol,%
     style=isw-long-symbol-nogroup,%
   ]
+%</thesis>
 %    \end{macrocode}
 %
 % Also typeset glossaries on notation, if any
 %    \begin{macrocode}
+%<*thesis>
 \printglossary[%
     type=notation,%
     style=isw-long-notation-nogroup,%
   ]
+%</thesis>
 %    \end{macrocode}
 %
 % Lastly, output our glossaries of acronyms
 %    \begin{macrocode}
+%<*thesis>
 \printglossary[%
     type=\acronymtype,%
     style=isw-long-acronym,%
     nonumberlist,%
     nogroupskip,%
   ]
+%</thesis>
 %    \end{macrocode}
 % \end{macro}
 %
@@ -440,12 +448,12 @@
 %<<COMMENT
 % Put your content here instead of the following line
 %COMMENT
-%<*book>
+%<*book|thesis>
 \Blinddocument
 \Blinddocument
 \Blinddocument
 \Blinddocument
-%</book>
+%</book|thesis>
 %<*article>
 \blinddocument
 \blinddocument
@@ -470,12 +478,12 @@
 % but still worth having it printed, it'll belong into the appendix. You enter
 % |appendix|-mode by using the |appendices| environment.
 %    \begin{macrocode}
-\begin{appendices}
-\fixcleverefappendix
-%<<COMMENT
-% Your appendix here, if not needed, remove the environment
-%COMMENT
-\end{appendices}
+% \begin{appendices}
+% \fixcleverefappendix
+% %<<COMMENT
+% % Your appendix here, if not needed, remove the environment
+% %COMMENT
+% \end{appendices}
 %    \end{macrocode}
 % \end{environment}
 %

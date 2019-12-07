@@ -1,0 +1,219 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttappendix.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%<class>\ProvidesClass{ustuttappendix}
+%<*class>
+    [2019/12/07 v1.0.0 University of Stuttgart Appendix package]
+%</class>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttappendix.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/12/07}{Initial version}
+%
+% \GetFileInfo{ustuttappendix.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+%
+% \title{The \textsf{cskeleton} class\thanks{This document
+%   corresponds to \textsf{cskeleton}~\fileversion, dated \filedate.}}
+% \author{Scott Pakin \\ \texttt{scott+dtx@pakin.org}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%
+% \section{Implementation}
+%
+% The package (once part of the exsheets package), provides a framework for
+% providing multilingual features to a LaTeX package. The packge has its own
+% basic dictionaries for English, Dutch, French, German and Spanish; it aims to
+% use translation material for English, Dutch, French, German, Italian, Spanish,
+% Catalan, Turkish, Croatian, Hungarian, Danish and Portuguese from babel or
+% polyglossia if either is in use in the document. (Additional languages from
+% the multilingual packages may be possible: ask the author.)
+%    \begin{macrocode}
+\RequirePackage{translations}
+%    \end{macrocode}
+%
+% The |translator| package is a \LaTeX package that provides a flexible
+% mechanism for translating individual words into different languages. For
+% example, it can be used to translate a word like ``figure'' into, say, the
+% German word ``Abbildung''. Such a translation mechanism is useful when the
+% author of some package would like to localize the package such that texts are
+% correctly translated into the language preferred by the user. The |translator|
+% package is \textit{not} intended to be used to automatically translate more
+% than a few words.
+%    \begin{macrocode}
+\RequirePackage{translator}
+%    \end{macrocode}
+%
+% The appendix package provides various ways of formatting the titles of
+% appendices. Also (sub)appendices environments are provided that can be used,
+% for example, for per chapter/section appendices. The word 'Appendix' or
+% similar can be prepended to the appendix number for article class documents.
+% The word 'Appendices' or similar can be added to the table of contents before
+% the appendices are listed. The word 'Appendices' or similar can be typeset as
+% a |\part|-like heading (page) in the body. An appendices environment is
+% provided which can be used instead of the |\appendix| command.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% add appendix to TOX
+    toc,%
+% Make a |\part| of |\chapter| page for the appendix starting page
+    page,%
+}{appendix}%
+\RequirePackage{appendix}
+%    \end{macrocode}
+%
+% We will make the appendix have a blue bar spanning the width of the page
+% \begin{macro}{\appendixpage}
+%    \begin{macrocode}
+\renewcommand*{\appendixpage}{%
+  \clear@ppage%
+  \newgeometry{%
+    inner=0cm,%
+    outer=0cm,%
+    top=0cm,%
+    bottom=0cm,%
+  }%
+  \thispagestyle{plain}%
+  \if@twocolumn\onecolumn\@tempswatrue\else\@tempswafalse\fi%
+  \null\vfil%
+  \markboth{}{}%
+  {%
+    \tikzexternaldisable%
+    \begin{tikzpicture}[%
+        remember picture,%
+        overlay,%
+        inner sep=0pt,%
+        outer sep=0pt,%
+        x=\paperwidth,%
+        y=\paperheight,%
+      ]%
+      %
+      \node[%
+          draw=UStuttColorful,%
+          fill=UStuttColorful,%
+          inner sep=0pt,%
+          outer sep=0pt,%
+          align=center,%
+          text width=1.05\paperwidth,%
+          minimum height=4.00\baselineskip,%
+          anchor=south,%
+        ]%
+        at (current page.center)%
+        {%
+          \interlinepenalty\@M{\usekomafont{part}{\color{UStuttWhite}{\appendixpagename}}}%
+        };%
+    \end{tikzpicture}%
+    \tikzexternalenable%
+  }%
+  \if@dotoc@pp%
+    \addappheadtotoc%
+  \fi%
+  \vfil\newpage%
+  \if@twoside%
+    \if@openright%
+      \null%
+      \thispagestyle{empty}%
+      \newpage%
+    \fi%
+  \fi%
+  \if@tempswa%
+    \twocolumn%
+  \fi%
+  \restoregeometry%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\fixcleverefappendix}
+% \cmd{\fixcleverefappendix}\\
+% For some weird reason, if we want to use |cleverref| with the |appendix|
+% package, it does not typeset the chapter prefix correctly. This changes this
+% odd behavior.
+%    \begin{macrocode}
+\newcommand{\fixcleverefappendix}{%
+  \crefalias{chapter}{appendix}
+  \crefalias{section}{subappendix}
+  \crefalias{subsection}{subsubappendix}
+  \crefalias{subsubsection}{subsubsubappendix}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Localization}
+%
+% Localization is implemented in a very fancy way. By making use of the
+% |translator| package, we can offload any localized text to a |.dict| file
+% while keeping the main |cls| file clean of any localization. In addition, we
+% do not have to make sure we define each localizable string for every language
+% and dialect that |babel| has to offer. Using |translator|, we define a
+% |German| and |English| dictionary, that is automatically mapped to the
+% respective languages loaded dialect(s). Cool, eh?
+%    \begin{macrocode}
+\usedictionary{ustutt}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\renewcommand\appendixname{\translate{ustutt@appendix@name}}
+\renewcommand\appendixtocname{\translate{ustutt@appendix@tocname}}
+\renewcommand\appendixpagename{\translate{ustutt@appendix@pagename}}
+%    \end{macrocode}
+%
+% \Finale
+\endinput

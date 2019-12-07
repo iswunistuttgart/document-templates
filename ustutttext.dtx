@@ -112,6 +112,18 @@
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
+% The package lets the user mark things to do later, in a simple and visually
+% appealing way. The package takes several options to enable
+% customization/finetuning of the visual appearance.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+    obeyFinal,%
+    colorinlistoftodos,%
+    textsize=footnotesize,%
+}{todonotes}
+\RequirePackage{todonotes}
+%    \end{macrocode}
+%
 % A collection of ways to change the typesetting of footnotes. The package
 % provides means of changing the layout of the footnotes themselves (including
 % setting them in 'paragraphs' - the para option), a way to number footnotes per
@@ -180,14 +192,6 @@
 % |\begin{tabu}| spread <dimen> enlarges the environment's "natural" width.
 %    \begin{macrocode}
 \RequirePackage{tabu}
-%    \end{macrocode}
-%
-% The package enhances the quality of tables in LaTeX, providing extra commands
-% as well as behind-the-scenes optimisation. Guidelines are given as to what
-% constitutes a good table in this context. From version 1.61, the package
-% offers longtable compatibility.
-%    \begin{macrocode}
-\RequirePackage{booktabs}
 %    \end{macrocode}
 %
 % A comprehensive (SI) units package. Typesetting values with units requires

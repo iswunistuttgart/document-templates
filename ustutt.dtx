@@ -414,33 +414,6 @@
 %    \end{macrocode}
 %
 %
-% Glossaries
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-  automake,%
-  acronyms,%
-  toc,%
-  xindy,%
-  nomain,%
-  shortcuts,%
-  nopostdot,%
-  translate=babel,%
-}{glossaries}
-%    \end{macrocode}
-%
-% Glossaries extra: This package provides improvements and extra features to
-% the glossaries package. Some of the default glossaries.sty behaviour is
-% changed by glossaries-extra.sty. See the user manual
-% glossaries-extra-manual.pdf for further details. glossaries-extra.sty
-% requires the glossaries package and, naturally, all packages required by
-% glossaries.sty. 
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-  automake,%
-}{glossaries-extra}
-%    \end{macrocode}
-%
-%
 % Graphicx
 %    \begin{macrocode}
 \PassOptionsToPackage{%
@@ -638,30 +611,6 @@
 }{scrlayer-scrpage}
 %    \end{macrocode}
 %
-% Tune the output format of dates according to language. This package provides
-% ten output formats of the commands |\today|, |\printdate|, |\printdate|-TeX,
-% and |\daterange| (partly language dependent). Formats available are: ISO
-% (yyyy-mm-dd), numeric (e.g., dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX
-% (yyyy/mm/dd), original (e.g., dd.\@ mmm yyyy), short original (e.g., dd.\@ mmm
-% yy), as well as numerical formats with Roman numerals for the month. The
-% commands |\printdate| and |\printdate|-TeX print any date. The command
-% |\daterange| prints a date range and leaves out unnecessary year or month
-% entries. This package supports German (old and new rules), Austrian, US
-% English, British English, French, Danish, Swedish, and Norwegian.
-%    \begin{macrocode}
-\RequirePackage{isodate}
-%    \end{macrocode}
-%
-%
-% Todnotes
-%    \begin{macrocode}
-\PassOptionsToPackage{%
-  obeyFinal,%
-  colorinlistoftodos,%
-  textsize=footnotesize,%
-}{todonotes}
-%    \end{macrocode}
-%
 %
 % Url
 %    \begin{macrocode}
@@ -834,6 +783,20 @@
 \pgfplotsset{compat=newest}
 %    \end{macrocode}
 %
+% Tune the output format of dates according to language. This package provides
+% ten output formats of the commands |\today|, |\printdate|, |\printdate|-TeX,
+% and |\daterange| (partly language dependent). Formats available are: ISO
+% (yyyy-mm-dd), numeric (e.g., dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX
+% (yyyy/mm/dd), original (e.g., dd.\@ mmm yyyy), short original (e.g., dd.\@ mmm
+% yy), as well as numerical formats with Roman numerals for the month. The
+% commands |\printdate| and |\printdate|-TeX print any date. The command
+% |\daterange| prints a date range and leaves out unnecessary year or month
+% entries. This package supports German (old and new rules), Austrian, US
+% English, British English, French, Danish, Swedish, and Norwegian.
+%    \begin{macrocode}
+\RequirePackage{isodate}
+%    \end{macrocode}
+%
 % The package starts from the basic facilities of the color package, and
 % provides easy driver-independent access to several kinds of color tints,
 % shades, tones, and mixes of arbitrary colors. It allows a user to select a
@@ -940,13 +903,6 @@
 \RequirePackage{amsmath}
 %    \end{macrocode}
 %
-% The package lets the user mark things to do later, in a simple and visually
-% appealing way. The package takes several options to enable
-% customization/finetuning of the visual appearance.
-%    \begin{macrocode}
-\RequirePackage{todonotes}
-%    \end{macrocode}
-%
 % Control layout of itemize, enumerate, description. This package provides user
 % control over the layout of the three basic list environments: enumerate,
 % itemize and description. It supersedes both enumerate and mdwlist (providing
@@ -966,22 +922,12 @@
 \RequirePackage{nth}
 %    \end{macrocode}
 %
-% The appendix package provides various ways of formatting the titles of
-% appendices. Also (sub)appendices environments are provided that can be used,
-% for example, for per chapter/section appendices. The word 'Appendix' or
-% similar can be prepended to the appendix number for article class documents.
-% The word 'Appendices' or similar can be added to the table of contents before
-% the appendices are listed. The word 'Appendices' or similar can be typeset as
-% a |\part|-like heading (page) in the body. An appendices environment is
-% provided which can be used instead of the |\appendix| command.
+% The package enhances the quality of tables in LaTeX, providing extra commands
+% as well as behind-the-scenes optimisation. Guidelines are given as to what
+% constitutes a good table in this context. From version 1.61, the package
+% offers longtable compatibility.
 %    \begin{macrocode}
-\PassOptionsToPackage{%
-% add appendix to TOX
-    toc,%
-% Make a |\part| of |\chapter| page for the appendix starting page
-    page,%
-}{appendix}%
-\RequirePackage{appendix}
+\RequirePackage{booktabs}
 %    \end{macrocode}
 %
 % Show label, ref, cite and bib keys. The showkeys package modifies the
@@ -1070,32 +1016,6 @@
 \RequirePackage{cleveref}
 %    \end{macrocode}
 %
-% Create glossaries and lists of acronyms. The glossaries package supports
-% acronyms and multiple glossaries, and has provision for operation in several
-% languages (using the facilities of either babel or polyglossia). New entries
-% are defined to have a name and description (and optionally an associated
-% symbol). Support for multiple languages is offered, and plural forms of terms
-% may be specified. An additional package, glossaries-accsupp, can make use of
-% the accsupp package mechanisms for accessibility support for PDF files
-% containing glossaries. The user may define new glossary styles, and preambles
-% and postambles can be specified. There is provision for loading a database of
-% terms, but only terms used in the text will be added to the relevant glossary.
-% The package uses an indexing program to provide the actual glossary; either
-% makeindex or xindy may serve this purpose, and a Perl script is provided to
-% serve as interface. The package distribution also provides the mfirstuc
-% package, for changing the first letter of a word to upper case. The package
-% supersedes the author's glossary package (which is now obsolete), and a
-% conversion tool is provided.
-%    \begin{macrocode}
-\RequirePackage{glossaries}
-\RequirePackage{glossaries-extra}
-\RequirePackage{glossary-longbooktabs}
-\RequirePackage{glossaries-extra-stylemods}
-\RequirePackage{ustuttgloss}
-\setabbreviationstyle[acronym]{long-short}
-\renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
-%    \end{macrocode}
-%
 % Some packages from other authors may have problems with KOMA-Script. In my
 % opinion some packages could be improved. With some packages this makes only
 % sense, if KOMAScript was used. With some other packages the package author has
@@ -1135,68 +1055,6 @@
 %
 % \subsection{Sectioning Styles}
 %
-% We will make the appendix have a blue bar spanning the width of the page
-% \begin{macro}{\appendixpage}
-%    \begin{macrocode}
-\renewcommand*{\appendixpage}{%
-  \clear@ppage%
-  \newgeometry{%
-    inner=0cm,%
-    outer=0cm,%
-    top=0cm,%
-    bottom=0cm,%
-  }%
-  \thispagestyle{plain}%
-  \if@twocolumn\onecolumn\@tempswatrue\else\@tempswafalse\fi%
-  \null\vfil%
-  \markboth{}{}%
-  {%
-    \tikzexternaldisable%
-    \begin{tikzpicture}[%
-        remember picture,%
-        overlay,%
-        inner sep=0pt,%
-        outer sep=0pt,%
-        x=\paperwidth,%
-        y=\paperheight,%
-      ]%
-      %
-      \node[%
-          draw=UStuttColorful,%
-          fill=UStuttColorful,%
-          inner sep=0pt,%
-          outer sep=0pt,%
-          align=center,%
-          text width=1.05\paperwidth,%
-          minimum height=4.00\baselineskip,%
-          anchor=south,%
-        ]%
-        at (current page.center)%
-        {%
-          \interlinepenalty\@M{\usekomafont{part}{\color{UStuttWhite}{\appendixpagename}}}%
-        };%
-    \end{tikzpicture}%
-    \tikzexternalenable%
-  }%
-  \if@dotoc@pp%
-    \addappheadtotoc%
-  \fi%
-  \vfil\newpage%
-  \if@twoside%
-    \if@openright%
-      \null%
-      \thispagestyle{empty}%
-      \newpage%
-    \fi%
-  \fi%
-  \if@tempswa%
-    \twocolumn%
-  \fi%
-  \restoregeometry%
-}
-%    \end{macrocode}
-% \end{macro}
-%
 %
 % \subsection{Localization}
 %
@@ -1209,12 +1067,6 @@
 % respective languages loaded dialect(s). Cool, eh?
 %    \begin{macrocode}
 \usedictionary{ustutt}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\renewcommand\appendixname{\translate{ustutt@appendix@name}}
-\renewcommand\appendixtocname{\translate{ustutt@appendix@tocname}}
-\renewcommand\appendixpagename{\translate{ustutt@appendix@pagename}}
 %    \end{macrocode}
 %
 %
@@ -2807,21 +2659,6 @@
 % Require fuller float pages on 2-column pages
 \renewcommand{\dblfloatpagefraction}{0.75}
 %    \end{macrocode}
-%
-% \begin{macro}{\fixcleverefappendix}
-% \cmd{\fixcleverefappendix}\\
-% For some weird reason, if we want to use |cleverref| with the |appendix|
-% package, it does not typeset the chapter prefix correctly. This changes this
-% odd behavior.
-%    \begin{macrocode}
-\newcommand{\fixcleverefappendix}{%
-  \crefalias{chapter}{appendix}
-  \crefalias{section}{subappendix}
-  \crefalias{subsection}{subsubappendix}
-  \crefalias{subsubsection}{subsubsubappendix}
-}
-%    \end{macrocode}
-% \end{macro}
 %
 %
 %    \begin{macrocode}
