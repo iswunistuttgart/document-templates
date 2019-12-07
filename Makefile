@@ -40,7 +40,7 @@ docs: $(DOCS)
 dist: ins dist_bachelor dist_master dist_doctorate dist_book dist_article
 
 # dist class for theses
-dist_%: ustuttthesis.cls
+dist_%: ins
 	# create the directory
 	mkdir -p $(DISTDIR)/$*
 	# copy class file over
@@ -57,7 +57,7 @@ dist_%: ustuttthesis.cls
 	$(LATEXMK) -c -cd $(DISTDIR)/$*/$*_*.tex
 
 # dist class for articles
-dist_article: ustuttartcl.cls
+dist_article: ins
 	# create the directory
 	mkdir -p $(DISTDIR)/article
 	# copy class file over
@@ -74,7 +74,7 @@ dist_article: ustuttartcl.cls
 	$(LATEXMK) -c -cd $(DISTDIR)/article/article_*.tex
 
 # dist class for books
-dist_book: ustuttbook.cls
+dist_book: ins
 	# create the directory
 	mkdir -p $(DISTDIR)/book
 	# copy class file over
@@ -103,7 +103,7 @@ clean:
 .PHONY: distclean
 distclean: clean
 	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.dtx
-	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.tex
+	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.tex && rm -f *.tex
 	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
 
 # copy compiled files over to user's texmf home
