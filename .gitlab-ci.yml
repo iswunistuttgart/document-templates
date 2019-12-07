@@ -53,6 +53,7 @@ dist:
       - '*.dict'
       - '*.pdf'
       - '*.tex'
+      - 'dist/*'
   tags:
     - docker
 
