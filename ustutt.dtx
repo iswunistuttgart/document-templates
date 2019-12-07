@@ -316,6 +316,7 @@
   /ustutt/fancyfooter/.cd,
     .is if=ustutt@fancyfooter,
 }
+%</book|thesis>
 %    \end{macrocode}
 %
 % Pass any other options not known to the underlying koma script class
@@ -759,7 +760,7 @@
 % This package provides a useful macro to manage widow lines. 
 %    \begin{macrocode}
 \ifustutt@nowidow
-\RequirePackage[all]{nowidow}
+  \RequirePackage[all]{nowidow}
 \fi
 %    \end{macrocode}
 %
@@ -2029,15 +2030,15 @@
 \if@twoside%
   \lehead*[]{\headmark}
   \cehead*[]{}
-%<article>\rehead*[]{\@authorrunning}
-%<book>\rehead*[]{}
+%<article>  \rehead*[]{\@authorrunning}
+%<book>  \rehead*[]{}
 \fi
 %    \end{macrocode}
 % Odd pages (right pages) from inside to outside
 %    \begin{macrocode}
 \if@twoside%
-%<article>\lohead*[]{\@authorrunning}
-%<book>\lohead*[]{}
+%<article>  \lohead*[]{\@authorrunning}
+%<book>  \lohead*[]{}
   \cohead*[]{}
   \rohead*[]{\headmark}
 \fi
@@ -2059,7 +2060,7 @@
 % Two sided documents' even pages (left pages) from outside to inside
 %    \begin{macrocode}
 \if@twoside%
-  \ifustutt@fancyfooter
+  \ifustutt@fancyfooter%
     \lefoot*{% 
       \makebox[0pt][r]{%
 % page number
@@ -2073,15 +2074,15 @@
 % push to the left so that text starts where marginpar starts
         \hspace{\marginparsep}%
       }% 
-    }
+    }%
     \cefoot*{}
     \refoot*{}
   \else
     \lefoot*{\pagemark}
     \cefoot*{}
     \refoot*{}
-  \fi
-\fi
+  \fi%
+\fi%
 %    \end{macrocode}
 % Two sided documents' odd pages (right pages) from inside to outside
 %    \begin{macrocode}
@@ -2107,8 +2108,8 @@
     \lofoot*{}
     \cofoot*{}
     \rofoot*{\pagemark}
-  \fi
-\fi
+  \fi%
+\fi%
 %    \end{macrocode}
 %
 %
@@ -2843,7 +2844,7 @@
 %    \begin{macrocode}
 \ifdraft{
 % Set the overfullrule to 1.50pt if we are in draft mode
-\overfullrule=1.50pt
+  \overfullrule=1.50pt
 }{}
 %    \end{macrocode}
 %

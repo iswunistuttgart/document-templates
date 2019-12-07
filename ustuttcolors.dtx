@@ -184,7 +184,7 @@
 % CMYK is an option complementary to RGB
     space/cmyk/.code={%
       \ustutt@rgbfalse%
-    },
+    },%
     space/.initial=rgb,%
 }
 \pgfkeys{%
@@ -268,10 +268,9 @@
 % \end{verbatim}
 % \end{macro}
 %
-% Definition of colors in CMYK color space
+% Definition of colors in CMYK color space and RGB color space
 %    \begin{macrocode}
 \ifustutt@rgb
-\typeout{is in rgb}
 % Dark blue
   \definecolor{AccentOne}{RGB}{0,81,158}
 % Light blue
@@ -293,7 +292,6 @@
 % Light gray
   \definecolor{UStuttLightTwo}{RGB}{159,153,152}
 \else
-\typeout{is in cmyk}
 % Dark blue
   \definecolor{AccentOne}{cmyk}{100,70,0,0}
 % Light blue
@@ -314,9 +312,6 @@
   \definecolor{UStuttLightOne}{cmyk}{0,0,0,0}
 % Light gray
   \definecolor{UStuttLightTwo}{cmyk}{0,4,4,38}
-%    \end{macrocode}
-% and of the same colors given in RGB color space
-%    \begin{macrocode}
 \fi
 %    \end{macrocode}
 %
