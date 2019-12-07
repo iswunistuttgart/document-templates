@@ -284,13 +284,13 @@
 % Light orange
   \definecolor{AccentSix}{RGB}{236,218,145}
 % Anthracite
-  \definecolor{UStuttDarkOne}{RGB}{62,68,76}
+  \definecolor{DarkOne}{RGB}{62,68,76}
 % black
-  \definecolor{UStuttDarkTwo}{RGB}{0,0,0}
+  \definecolor{DarkTwo}{RGB}{0,0,0}
 % White
-  \definecolor{UStuttLightOne}{RGB}{255,255,255}
+  \definecolor{LightOne}{RGB}{255,255,255}
 % Light gray
-  \definecolor{UStuttLightTwo}{RGB}{159,153,152}
+  \definecolor{LightTwo}{RGB}{159,153,152}
 \else
 % Dark blue
   \definecolor{AccentOne}{cmyk}{100,70,0,0}
@@ -305,31 +305,31 @@
 % Light orange
   \definecolor{AccentSix}{cmyk}{0,18,91,8}
 % Anthracite
-  \definecolor{UStuttDarkOne}{cmyk}{18,11,0,70}
+  \definecolor{DarkOne}{cmyk}{18,11,0,70}
 % black
-  \definecolor{UStuttDarkTwo}{cmyk}{0,0,0,100}
+  \definecolor{DarkTwo}{cmyk}{0,0,0,100}
 % White
-  \definecolor{UStuttLightOne}{cmyk}{0,0,0,0}
+  \definecolor{LightOne}{cmyk}{0,0,0,0}
 % Light gray
-  \definecolor{UStuttLightTwo}{cmyk}{0,4,4,38}
+  \definecolor{LightTwo}{cmyk}{0,4,4,38}
 \fi
 %    \end{macrocode}
 %
 % More human readable color names
 %    \begin{macrocode}
-\colorlet{UStuttWhite}{UStuttLightOne}
-\colorlet{UStuttBlack}{UStuttDarkTwo}
-\colorlet{UStuttAnthracite}{UStuttDarkOne}
-\colorlet{UStuttGray}{UStuttLightTwo}
-\colorlet{UStuttDarkBlue}{AccentOne}
-\colorlet{UStuttLightBlue}{AccentTwo}
-\colorlet{UStuttDarkGreen}{AccentThree}
-\colorlet{UStuttLightGreen}{AccentFour}
-\colorlet{UStuttDarkOrange}{AccentFive}
-\colorlet{UStuttLightOrange}{AccentSix}
+\colorlet{UStuttWhite}{LightOne}
+\colorlet{UStuttBlack}{DarkTwo}
+\colorlet{UStuttAnthracite}{DarkOne}
+\colorlet{UStuttGray}{LightTwo}
+\colorlet{DarkBlue}{AccentOne}
+\colorlet{LightBlue}{AccentTwo}
+\colorlet{DarkGreen}{AccentThree}
+\colorlet{LightGreen}{AccentFour}
+\colorlet{DarkOrange}{AccentFive}
+\colorlet{LightOrange}{AccentSix}
 % And the `colorful` color option
 \ifustutt@colorful
-  \colorlet{UStuttColorful}{AccentOne}
+  \colorlet{UStuttColorful}{DarkBlue}
 \else 
   \colorlet{UStuttColorful}{UStuttAnthracite}
 \fi
@@ -437,102 +437,102 @@
 %
 % Shades of dark one color
 %    \begin{macrocode}
-\colorlighter{UStuttDarkOne}{25}{UStuttDarkOneVeryLight}
-\colorlighter{UStuttDarkOne}{50}{UStuttDarkOneLight}
-\colorlighter{UStuttDarkOne}{75}{UStuttDarkOneLighter}
-\colordarker{UStuttDarkOne}{75}{UStuttDarkOneDarker}
-\colordarker{UStuttDarkOne}{50}{UStuttDarkOneDark}
-\colordarker{UStuttDarkOne}{25}{UStuttDarkOneVeryDark}
+\colorlighter{DarkOne}{25}{DarkOneVeryLight}
+\colorlighter{DarkOne}{50}{DarkOneLight}
+\colorlighter{DarkOne}{75}{DarkOneLighter}
+\colordarker{DarkOne}{75}{DarkOneDarker}
+\colordarker{DarkOne}{50}{DarkOneDark}
+\colordarker{DarkOne}{25}{DarkOneVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark two color
 %    \begin{macrocode}
-\colorlighter{UStuttDarkTwo}{25}{UStuttDarkTwoVeryLight}
-\colorlighter{UStuttDarkTwo}{50}{UStuttDarkTwoLight}
-\colorlighter{UStuttDarkTwo}{75}{UStuttDarkTwoLighter}
-\colordarker{UStuttDarkTwo}{75}{UStuttDarkTwoDarker}
-\colordarker{UStuttDarkTwo}{50}{UStuttDarkTwoDark}
-\colordarker{UStuttDarkTwo}{25}{UStuttDarkTwoVeryDark}
+\colorlighter{DarkTwo}{25}{DarkTwoVeryLight}
+\colorlighter{DarkTwo}{50}{DarkTwoLight}
+\colorlighter{DarkTwo}{75}{DarkTwoLighter}
+\colordarker{DarkTwo}{75}{DarkTwoDarker}
+\colordarker{DarkTwo}{50}{DarkTwoDark}
+\colordarker{DarkTwo}{25}{DarkTwoVeryDark}
 %    \end{macrocode}
 %
 % Shades of light one color
 %    \begin{macrocode}
-\colorlighter{UStuttLightOne}{25}{UStuttLightOneVeryLight}
-\colorlighter{UStuttLightOne}{50}{UStuttLightOneLight}
-\colorlighter{UStuttLightOne}{75}{UStuttLightOneLighter}
-\colordarker{UStuttLightOne}{75}{UStuttLightOneDarker}
-\colordarker{UStuttLightOne}{50}{UStuttLightOneDark}
-\colordarker{UStuttLightOne}{25}{UStuttLightOneVeryDark}
+\colorlighter{LightOne}{25}{LightOneVeryLight}
+\colorlighter{LightOne}{50}{LightOneLight}
+\colorlighter{LightOne}{75}{LightOneLighter}
+\colordarker{LightOne}{75}{LightOneDarker}
+\colordarker{LightOne}{50}{LightOneDark}
+\colordarker{LightOne}{25}{LightOneVeryDark}
 %    \end{macrocode}
 %
 % Shades of light two color
 %    \begin{macrocode}
-\colorlighter{UStuttLightTwo}{25}{UStuttLightTwoVeryLight}
-\colorlighter{UStuttLightTwo}{50}{UStuttLightTwoLight}
-\colorlighter{UStuttLightTwo}{75}{UStuttLightTwoLighter}
-\colordarker{UStuttLightTwo}{75}{UStuttLightTwoDarker}
-\colordarker{UStuttLightTwo}{50}{UStuttLightTwoDark}
-\colordarker{UStuttLightTwo}{25}{UStuttLightTwoVeryDark}
+\colorlighter{LightTwo}{25}{LightTwoVeryLight}
+\colorlighter{LightTwo}{50}{LightTwoLight}
+\colorlighter{LightTwo}{75}{LightTwoLighter}
+\colordarker{LightTwo}{75}{LightTwoDarker}
+\colordarker{LightTwo}{50}{LightTwoDark}
+\colordarker{LightTwo}{25}{LightTwoVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark blue accent
 %    \begin{macrocode}
-\colorlighter{UStuttDarkBlue}{25}{UStuttDarkBlueVeryLight}
-\colorlighter{UStuttDarkBlue}{50}{UStuttDarkBlueLight}
-\colorlighter{UStuttDarkBlue}{75}{UStuttDarkBlueLighter}
-\colordarker{UStuttDarkBlue}{75}{UStuttDarkBlueDarker}
-\colordarker{UStuttDarkBlue}{50}{UStuttDarkBlueDark}
-\colordarker{UStuttDarkBlue}{25}{UStuttDarkBlueVeryDark}
+\colorlighter{DarkBlue}{25}{DarkBlueVeryLight}
+\colorlighter{DarkBlue}{50}{DarkBlueLight}
+\colorlighter{DarkBlue}{75}{DarkBlueLighter}
+\colordarker{DarkBlue}{75}{DarkBlueDarker}
+\colordarker{DarkBlue}{50}{DarkBlueDark}
+\colordarker{DarkBlue}{25}{DarkBlueVeryDark}
 %    \end{macrocode}
 %
 % Shades of light blue accent
 %    \begin{macrocode}
-\colorlighter{UStuttLightBlue}{25}{UStuttLightBlueVeryLight}
-\colorlighter{UStuttLightBlue}{50}{UStuttLightBlueLight}
-\colorlighter{UStuttLightBlue}{75}{UStuttLightBlueLighter}
-\colordarker{UStuttLightBlue}{75}{UStuttLightBlueDarker}
-\colordarker{UStuttLightBlue}{50}{UStuttLightBlueDark}
-\colordarker{UStuttLightBlue}{25}{UStuttLightBlueVeryDark}
+\colorlighter{LightBlue}{25}{LightBlueVeryLight}
+\colorlighter{LightBlue}{50}{LightBlueLight}
+\colorlighter{LightBlue}{75}{LightBlueLighter}
+\colordarker{LightBlue}{75}{LightBlueDarker}
+\colordarker{LightBlue}{50}{LightBlueDark}
+\colordarker{LightBlue}{25}{LightBlueVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark green accent
 %    \begin{macrocode}
-\colorlighter{UStuttDarkGreen}{25}{UStuttDarkGreenVeryLight}
-\colorlighter{UStuttDarkGreen}{50}{UStuttDarkGreenLight}
-\colorlighter{UStuttDarkGreen}{75}{UStuttDarkGreenLighter}
-\colordarker{UStuttDarkGreen}{75}{UStuttDarkGreenDarker}
-\colordarker{UStuttDarkGreen}{50}{UStuttDarkGreenDark}
-\colordarker{UStuttDarkGreen}{25}{UStuttDarkGreenVeryDark}
+\colorlighter{DarkGreen}{25}{DarkGreenVeryLight}
+\colorlighter{DarkGreen}{50}{DarkGreenLight}
+\colorlighter{DarkGreen}{75}{DarkGreenLighter}
+\colordarker{DarkGreen}{75}{DarkGreenDarker}
+\colordarker{DarkGreen}{50}{DarkGreenDark}
+\colordarker{DarkGreen}{25}{DarkGreenVeryDark}
 %    \end{macrocode}
 %
 % Shades of light green accent
 %    \begin{macrocode}
-\colorlighter{UStuttLightGreen}{25}{UStuttLightGreenVeryLight}
-\colorlighter{UStuttLightGreen}{50}{UStuttLightGreenLight}
-\colorlighter{UStuttLightGreen}{75}{UStuttLightGreenLighter}
-\colordarker{UStuttLightGreen}{75}{UStuttLightGreenDarker}
-\colordarker{UStuttLightGreen}{50}{UStuttLightGreenDark}
-\colordarker{UStuttLightGreen}{25}{UStuttLightGreenVeryDark}
+\colorlighter{LightGreen}{25}{LightGreenVeryLight}
+\colorlighter{LightGreen}{50}{LightGreenLight}
+\colorlighter{LightGreen}{75}{LightGreenLighter}
+\colordarker{LightGreen}{75}{LightGreenDarker}
+\colordarker{LightGreen}{50}{LightGreenDark}
+\colordarker{LightGreen}{25}{LightGreenVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark orange accent
 %    \begin{macrocode}
-\colorlighter{UStuttDarkOrange}{25}{UStuttDarkOrangeVeryLight}
-\colorlighter{UStuttDarkOrange}{50}{UStuttDarkOrangeLight}
-\colorlighter{UStuttDarkOrange}{75}{UStuttDarkOrangeLighter}
-\colordarker{UStuttDarkOrange}{75}{UStuttDarkOrangeDarker}
-\colordarker{UStuttDarkOrange}{50}{UStuttDarkOrangeDark}
-\colordarker{UStuttDarkOrange}{25}{UStuttDarkOrangeVeryDark}
+\colorlighter{DarkOrange}{25}{DarkOrangeVeryLight}
+\colorlighter{DarkOrange}{50}{DarkOrangeLight}
+\colorlighter{DarkOrange}{75}{DarkOrangeLighter}
+\colordarker{DarkOrange}{75}{DarkOrangeDarker}
+\colordarker{DarkOrange}{50}{DarkOrangeDark}
+\colordarker{DarkOrange}{25}{DarkOrangeVeryDark}
 %    \end{macrocode}
 %
 % Shades of light orange accent
 %    \begin{macrocode}
-\colorlighter{UStuttLightOrange}{25}{UStuttLightOrangeVeryLight}
-\colorlighter{UStuttLightOrange}{50}{UStuttLightOrangeLight}
-\colorlighter{UStuttLightOrange}{75}{UStuttLightOrangeLighter}
-\colordarker{UStuttLightOrange}{75}{UStuttLightOrangeDarker}
-\colordarker{UStuttLightOrange}{50}{UStuttLightOrangeDark}
-\colordarker{UStuttLightOrange}{25}{UStuttLightOrangeVeryDark}
+\colorlighter{LightOrange}{25}{LightOrangeVeryLight}
+\colorlighter{LightOrange}{50}{LightOrangeLight}
+\colorlighter{LightOrange}{75}{LightOrangeLighter}
+\colordarker{LightOrange}{75}{LightOrangeDarker}
+\colordarker{LightOrange}{50}{LightOrangeDark}
+\colordarker{LightOrange}{25}{LightOrangeVeryDark}
 %    \end{macrocode}
 %
 % Shades of the `colorful` color
@@ -642,9 +642,9 @@
 %    \begin{macrocode}
 \colorlet{ArrayRuleColor}{UStuttColorful}
 \colorlet{TableHeader}{AccentOne}
-\colorlet{TableRowEven}{UStuttLightOne}
-\colorlet{TableRowOdd}{UStuttLightTwoVeryLight}
-\colorlet{TableCellHighlight}{UStuttLightTwo}
+\colorlet{TableRowEven}{LightOne}
+\colorlet{TableRowOdd}{LightTwoVeryLight}
+\colorlet{TableCellHighlight}{LightTwo}
 %    \end{macrocode}
 %
 %
@@ -653,7 +653,7 @@
 % Create a color matrix to be displayed within a document showing all the colors available in the UStutt package
 %    \begin{macrocode}
 \NewDocumentCommand{\ustuttcolormatrix}{ }{%
-  \newcommand{\ustuttcolorlist}{AccentOne,AccentTwo,AccentThree,AccentFour,AccentFive,AccentSix,UStuttWhite,UStuttBlack,UStuttAnthracite,UStuttGray,UStuttDarkBlue,UStuttLightBlue,UStuttDarkGreen,UStuttLightGreen,UStuttDarkOrange,UStuttLightOrange}
+  \newcommand{\ustuttcolorlist}{AccentOne,AccentTwo,AccentThree,AccentFour,AccentFive,AccentSix,UStuttWhite,UStuttBlack,UStuttAnthracite,UStuttGray,DarkBlue,LightBlue,DarkGreen,LightGreen,DarkOrange,LightOrange}
   \newcommand{\ustutthuelist}{VeryLight,Light,Lighter,,Darker,Dark,VeryDark}
   \begin{tikzpicture}[%
       x=1.00cm,%
