@@ -4,7 +4,7 @@ DISTDIR = dist/
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
 SOURCES = $(shell find ./ -type f -name "ustutt*.dtx")
 DICTIONARIES = ustutt-English.dict ustutt-German.dict
-ADDL_INCLUDES = references.bib images $(DICTIONARIES) tikzlibraryustutt.code.tex acronyms.tex symbols.tex notation.tex
+ADDL_INCLUDES = .latexmkrc references.bib images $(DICTIONARIES) tikzlibraryustutt.code.tex acronyms.tex symbols.tex notation.tex ipa-authoryear.bbx ipa-authoryear.cbx
 DOCS = $(SOURCES:dtx=pdf)
 
 LATEX = pdflatex --shell-escape
@@ -36,6 +36,7 @@ docs: $(DOCS)
 # 	mkdir -p $(DISTDIR)
 
 # combination of everything that needs to be done for distributing
+.PHONY:
 dist: ins dist_bachelor dist_master dist_doctorate dist_book dist_article
 
 # dist class for theses
