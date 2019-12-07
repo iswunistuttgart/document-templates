@@ -197,6 +197,27 @@
 }
 %    \end{macrocode}
 %
+% Colorful thesis may be fun for some, but others may want a nearly black and
+% white (or at least grayscale thesis style). Choose the `colorful` option to
+% have a bit more color in your document.
+%    \begin{macrocode}
+\newif\ifustutt@colorful
+\ustutt@colorfulfalse
+\pgfkeys{
+% Change path
+  /ustutt/color/.cd,%
+    colorful/.is if=ustutt@colorful,%
+}
+\pgfkeys{%
+% Change path
+  /ustutt/color/.cd,%
+% A short-hand alias for |space=cmyk|
+    cmyk/.link={/ustutt/color/space=cmyk},%
+% A short-hand alias for |space=rgb|
+    rgb/.link={/ustutt/color/space=rgb},%
+}
+%    \end{macrocode}
+%
 % Process options passed to the package
 %    \begin{macrocode}
 \ProcessPgfOptions{/ustutt/color}
@@ -252,47 +273,47 @@
 \ifustutt@rgb
 \typeout{is in rgb}
 % Dark blue
-  \definecolor{UStuttAccent1}{RGB}{0,81,158}
+  \definecolor{AccentOne}{RGB}{0,81,158}
 % Light blue
-  \definecolor{UStuttAccent2}{RGB}{0,190,255}
+  \definecolor{AccentTwo}{RGB}{0,190,255}
 % Dark green
-  \definecolor{UStuttAccent3}{RGB}{59,140,122}
+  \definecolor{AccentThree}{RGB}{59,140,122}
 % Light green
-  \definecolor{UStuttAccent4}{RGB}{125,155,101}
+  \definecolor{AccentFour}{RGB}{125,155,101}
 % Dark orange
-  \definecolor{UStuttAccent5}{RGB}{228,175,52}
+  \definecolor{AccentFive}{RGB}{228,175,52}
 % Light orange
-  \definecolor{UStuttAccent6}{RGB}{236,218,145}
+  \definecolor{AccentSix}{RGB}{236,218,145}
 % Anthracite
-  \definecolor{UStuttDark1}{RGB}{62,68,76}
+  \definecolor{UStuttDarkOne}{RGB}{62,68,76}
 % black
-  \definecolor{UStuttDark2}{RGB}{0,0,0}
+  \definecolor{UStuttDarkTwo}{RGB}{0,0,0}
 % White
-  \definecolor{UStuttLight1}{RGB}{255,255,255}
+  \definecolor{UStuttLightOne}{RGB}{255,255,255}
 % Light gray
-  \definecolor{UStuttLight2}{RGB}{159,153,152}
+  \definecolor{UStuttLightTwo}{RGB}{159,153,152}
 \else
 \typeout{is in cmyk}
 % Dark blue
-  \definecolor{UStuttAccent1}{cmyk}{100,70,0,0}
+  \definecolor{AccentOne}{cmyk}{100,70,0,0}
 % Light blue
-  \definecolor{UStuttAccent2}{cmyk}{255,65,0,0}
+  \definecolor{AccentTwo}{cmyk}{255,65,0,0}
 % Dark green
-  \definecolor{UStuttAccent3}{cmyk}{81,0,18,45}
+  \definecolor{AccentThree}{cmyk}{81,0,18,45}
 % Light green
-  \definecolor{UStuttAccent4}{cmyk}{30,0,54,40}
+  \definecolor{AccentFour}{cmyk}{30,0,54,40}
 % Dark orange
-  \definecolor{UStuttAccent5}{cmyk}{0,53,176,11}
+  \definecolor{AccentFive}{cmyk}{0,53,176,11}
 % Light orange
-  \definecolor{UStuttAccent6}{cmyk}{0,18,91,8}
+  \definecolor{AccentSix}{cmyk}{0,18,91,8}
 % Anthracite
-  \definecolor{UStuttDark1}{cmyk}{18,11,0,70}
+  \definecolor{UStuttDarkOne}{cmyk}{18,11,0,70}
 % black
-  \definecolor{UStuttDark2}{cmyk}{0,0,0,100}
+  \definecolor{UStuttDarkTwo}{cmyk}{0,0,0,100}
 % White
-  \definecolor{UStuttLight1}{cmyk}{0,0,0,0}
+  \definecolor{UStuttLightOne}{cmyk}{0,0,0,0}
 % Light gray
-  \definecolor{UStuttLight2}{cmyk}{0,4,4,38}
+  \definecolor{UStuttLightTwo}{cmyk}{0,4,4,38}
 %    \end{macrocode}
 % and of the same colors given in RGB color space
 %    \begin{macrocode}
@@ -301,16 +322,22 @@
 %
 % More human readable color names
 %    \begin{macrocode}
-\colorlet{UStuttWhite}{UStuttLight1}
-\colorlet{UStuttBlack}{UStuttDark2}
-\colorlet{UStuttAnthracite}{UStuttDark1}
-\colorlet{UStuttGray}{UStuttLight2}
-\colorlet{UStuttDarkBlue}{UStuttAccent1}
-\colorlet{UStuttLightBlue}{UStuttAccent2}
-\colorlet{UStuttDarkGreen}{UStuttAccent3}
-\colorlet{UStuttLightGreen}{UStuttAccent4}
-\colorlet{UStuttDarkOrange}{UStuttAccent5}
-\colorlet{UStuttLightOrange}{UStuttAccent6}
+\colorlet{UStuttWhite}{UStuttLightOne}
+\colorlet{UStuttBlack}{UStuttDarkTwo}
+\colorlet{UStuttAnthracite}{UStuttDarkOne}
+\colorlet{UStuttGray}{UStuttLightTwo}
+\colorlet{UStuttDarkBlue}{AccentOne}
+\colorlet{UStuttLightBlue}{AccentTwo}
+\colorlet{UStuttDarkGreen}{AccentThree}
+\colorlet{UStuttLightGreen}{AccentFour}
+\colorlet{UStuttDarkOrange}{AccentFive}
+\colorlet{UStuttLightOrange}{AccentSix}
+% And the `colorful` color option
+\ifustutt@colorful
+  \colorlet{UStuttColorful}{AccentOne}
+\else 
+  \colorlet{UStuttColorful}{UStuttAnthracite}
+\fi
 %    \end{macrocode}
 %
 % Shades of white
@@ -355,102 +382,102 @@
 %
 % Shades of accent one
 %    \begin{macrocode}
-\colorlighter{UStuttAccent1}{25}{UStuttAccent1VeryLight}
-\colorlighter{UStuttAccent1}{50}{UStuttAccent1Light}
-\colorlighter{UStuttAccent1}{75}{UStuttAccent1Lighter}
-\colordarker{UStuttAccent1}{75}{UStuttAccent1Darker}
-\colordarker{UStuttAccent1}{50}{UStuttAccent1Dark}
-\colordarker{UStuttAccent2}{25}{UStuttAccent1VeryDark}
+\colorlighter{AccentOne}{25}{AccentOneVeryLight}
+\colorlighter{AccentOne}{50}{AccentOneLight}
+\colorlighter{AccentOne}{75}{AccentOneLighter}
+\colordarker{AccentOne}{75}{AccentOneDarker}
+\colordarker{AccentOne}{50}{AccentOneDark}
+\colordarker{AccentOne}{25}{AccentOneVeryDark}
 %    \end{macrocode}
 %
 % Shades of accent two
 %    \begin{macrocode}
-\colorlighter{UStuttAccent2}{25}{UStuttAccent2VeryLight}
-\colorlighter{UStuttAccent2}{50}{UStuttAccent2Light}
-\colorlighter{UStuttAccent2}{75}{UStuttAccent2Lighter}
-\colordarker{UStuttAccent2}{75}{UStuttAccent2Darker}
-\colordarker{UStuttAccent2}{50}{UStuttAccent2Dark}
-\colordarker{UStuttAccent2}{25}{UStuttAccent2VeryDark}
+\colorlighter{AccentTwo}{25}{AccentTwoVeryLight}
+\colorlighter{AccentTwo}{50}{AccentTwoLight}
+\colorlighter{AccentTwo}{75}{AccentTwoLighter}
+\colordarker{AccentTwo}{75}{AccentTwoDarker}
+\colordarker{AccentTwo}{50}{AccentTwoDark}
+\colordarker{AccentTwo}{25}{AccentTwoVeryDark}
 %    \end{macrocode}
 %
 % Shades of accent three
 %    \begin{macrocode}
-\colorlighter{UStuttAccent3}{25}{UStuttAccent3VeryLight}
-\colorlighter{UStuttAccent3}{50}{UStuttAccent3Light}
-\colorlighter{UStuttAccent3}{75}{UStuttAccent3Lighter}
-\colordarker{UStuttAccent3}{75}{UStuttAccent3Darker}
-\colordarker{UStuttAccent3}{50}{UStuttAccent3Dark}
-\colordarker{UStuttAccent3}{25}{UStuttAccent3VeryDark}
+\colorlighter{AccentThree}{25}{AccentThreeVeryLight}
+\colorlighter{AccentThree}{50}{AccentThreeLight}
+\colorlighter{AccentThree}{75}{AccentThreeLighter}
+\colordarker{AccentThree}{75}{AccentThreeDarker}
+\colordarker{AccentThree}{50}{AccentThreeDark}
+\colordarker{AccentThree}{25}{AccentThreeVeryDark}
 %    \end{macrocode}
 %
 % Shades of accent four
 %    \begin{macrocode}
-\colorlighter{UStuttAccent4}{25}{UStuttAccent4VeryLight}
-\colorlighter{UStuttAccent4}{50}{UStuttAccent4Light}
-\colorlighter{UStuttAccent4}{75}{UStuttAccent4Lighter}
-\colordarker{UStuttAccent4}{75}{UStuttAccent4Darker}
-\colordarker{UStuttAccent4}{50}{UStuttAccent4Dark}
-\colordarker{UStuttAccent4}{25}{UStuttAccent4VeryDark}
+\colorlighter{AccentFour}{25}{AccentFourVeryLight}
+\colorlighter{AccentFour}{50}{AccentFourLight}
+\colorlighter{AccentFour}{75}{AccentFourLighter}
+\colordarker{AccentFour}{75}{AccentFourDarker}
+\colordarker{AccentFour}{50}{AccentFourDark}
+\colordarker{AccentFour}{25}{AccentFourVeryDark}
 %    \end{macrocode}
 %
 % Shades of accent five
 %    \begin{macrocode}
-\colorlighter{UStuttAccent5}{25}{UStuttAccent5VeryLight}
-\colorlighter{UStuttAccent5}{50}{UStuttAccent5Light}
-\colorlighter{UStuttAccent5}{75}{UStuttAccent5Lighter}
-\colordarker{UStuttAccent5}{75}{UStuttAccent5Darker}
-\colordarker{UStuttAccent5}{50}{UStuttAccent5Dark}
-\colordarker{UStuttAccent5}{25}{UStuttAccent5VeryDark}
+\colorlighter{AccentFive}{25}{AccentFiveVeryLight}
+\colorlighter{AccentFive}{50}{AccentFiveLight}
+\colorlighter{AccentFive}{75}{AccentFiveLighter}
+\colordarker{AccentFive}{75}{AccentFiveDarker}
+\colordarker{AccentFive}{50}{AccentFiveDark}
+\colordarker{AccentFive}{25}{AccentFiveVeryDark}
 %    \end{macrocode}
 %
 % Shades of accent six
 %    \begin{macrocode}
-\colorlighter{UStuttAccent6}{25}{UStuttAccent6VeryLight}
-\colorlighter{UStuttAccent6}{50}{UStuttAccent6Light}
-\colorlighter{UStuttAccent6}{75}{UStuttAccent6Lighter}
-\colordarker{UStuttAccent6}{75}{UStuttAccent6Darker}
-\colordarker{UStuttAccent6}{50}{UStuttAccent6Dark}
-\colordarker{UStuttAccent6}{25}{UStuttAccent6VeryDark}
+\colorlighter{AccentSix}{25}{AccentSixVeryLight}
+\colorlighter{AccentSix}{50}{AccentSixLight}
+\colorlighter{AccentSix}{75}{AccentSixLighter}
+\colordarker{AccentSix}{75}{AccentSixDarker}
+\colordarker{AccentSix}{50}{AccentSixDark}
+\colordarker{AccentSix}{25}{AccentSixVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark one color
 %    \begin{macrocode}
-\colorlighter{UStuttDark1}{25}{UStuttDark1VeryLight}
-\colorlighter{UStuttDark1}{50}{UStuttDark1Light}
-\colorlighter{UStuttDark1}{75}{UStuttDark1Lighter}
-\colordarker{UStuttDark1}{75}{UStuttDark1Darker}
-\colordarker{UStuttDark1}{50}{UStuttDark1Dark}
-\colordarker{UStuttDark1}{25}{UStuttDark1VeryDark}
+\colorlighter{UStuttDarkOne}{25}{UStuttDarkOneVeryLight}
+\colorlighter{UStuttDarkOne}{50}{UStuttDarkOneLight}
+\colorlighter{UStuttDarkOne}{75}{UStuttDarkOneLighter}
+\colordarker{UStuttDarkOne}{75}{UStuttDarkOneDarker}
+\colordarker{UStuttDarkOne}{50}{UStuttDarkOneDark}
+\colordarker{UStuttDarkOne}{25}{UStuttDarkOneVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark two color
 %    \begin{macrocode}
-\colorlighter{UStuttDark2}{25}{UStuttDark2VeryLight}
-\colorlighter{UStuttDark2}{50}{UStuttDark2Light}
-\colorlighter{UStuttDark2}{75}{UStuttDark2Lighter}
-\colordarker{UStuttDark2}{75}{UStuttDark2Darker}
-\colordarker{UStuttDark2}{50}{UStuttDark2Dark}
-\colordarker{UStuttDark2}{25}{UStuttDark2VeryDark}
+\colorlighter{UStuttDarkTwo}{25}{UStuttDarkTwoVeryLight}
+\colorlighter{UStuttDarkTwo}{50}{UStuttDarkTwoLight}
+\colorlighter{UStuttDarkTwo}{75}{UStuttDarkTwoLighter}
+\colordarker{UStuttDarkTwo}{75}{UStuttDarkTwoDarker}
+\colordarker{UStuttDarkTwo}{50}{UStuttDarkTwoDark}
+\colordarker{UStuttDarkTwo}{25}{UStuttDarkTwoVeryDark}
 %    \end{macrocode}
 %
 % Shades of light one color
 %    \begin{macrocode}
-\colorlighter{UStuttLight1}{25}{UStuttLight1VeryLight}
-\colorlighter{UStuttLight1}{50}{UStuttLight1Light}
-\colorlighter{UStuttLight1}{75}{UStuttLight1Lighter}
-\colordarker{UStuttLight1}{75}{UStuttLight1Darker}
-\colordarker{UStuttLight1}{50}{UStuttLight1Dark}
-\colordarker{UStuttLight1}{25}{UStuttLight1VeryDark}
+\colorlighter{UStuttLightOne}{25}{UStuttLightOneVeryLight}
+\colorlighter{UStuttLightOne}{50}{UStuttLightOneLight}
+\colorlighter{UStuttLightOne}{75}{UStuttLightOneLighter}
+\colordarker{UStuttLightOne}{75}{UStuttLightOneDarker}
+\colordarker{UStuttLightOne}{50}{UStuttLightOneDark}
+\colordarker{UStuttLightOne}{25}{UStuttLightOneVeryDark}
 %    \end{macrocode}
 %
 % Shades of light two color
 %    \begin{macrocode}
-\colorlighter{UStuttLight2}{25}{UStuttLight2VeryLight}
-\colorlighter{UStuttLight2}{50}{UStuttLight2Light}
-\colorlighter{UStuttLight2}{75}{UStuttLight2Lighter}
-\colordarker{UStuttLight2}{75}{UStuttLight2Darker}
-\colordarker{UStuttLight2}{50}{UStuttLight2Dark}
-\colordarker{UStuttLight2}{25}{UStuttLight2VeryDark}
+\colorlighter{UStuttLightTwo}{25}{UStuttLightTwoVeryLight}
+\colorlighter{UStuttLightTwo}{50}{UStuttLightTwoLight}
+\colorlighter{UStuttLightTwo}{75}{UStuttLightTwoLighter}
+\colordarker{UStuttLightTwo}{75}{UStuttLightTwoDarker}
+\colordarker{UStuttLightTwo}{50}{UStuttLightTwoDark}
+\colordarker{UStuttLightTwo}{25}{UStuttLightTwoVeryDark}
 %    \end{macrocode}
 %
 % Shades of dark blue accent
@@ -513,32 +540,42 @@
 \colordarker{UStuttLightOrange}{25}{UStuttLightOrangeVeryDark}
 %    \end{macrocode}
 %
+% Shades of the `colorful` color
+%    \begin{macrocode}
+\colorlighter{UStuttColorful}{25}{UStuttColorfulVeryLight}
+\colorlighter{UStuttColorful}{50}{UStuttColorfulLight}
+\colorlighter{UStuttColorful}{75}{UStuttColorfulLighter}
+\colordarker{UStuttColorful}{75}{UStuttColorfulDarker}
+\colordarker{UStuttColorful}{50}{UStuttColorfulDark}
+\colordarker{UStuttColorful}{25}{UStuttColorfulVeryDark}
+%    \end{macrocode}
+%
 %
 %
 % Colors for use in koma script elements
 % Line above header
 %    \begin{macrocode}
-\colorlet{headtopline}{UStuttAccent1}
+\colorlet{headtopline}{UStuttColorful}
 %    \end{macrocode}
 % Line below header
 %    \begin{macrocode}
-\colorlet{headsepline}{UStuttAccent1}
+\colorlet{headsepline}{UStuttColorful}
 %    \end{macrocode}
 % Line above footer
 %    \begin{macrocode}
-\colorlet{footsepline}{UStuttAccent1}
+\colorlet{footsepline}{UStuttColorful}
 %    \end{macrocode}
 % Line below footer
 %    \begin{macrocode}
-\colorlet{footbotline}{UStuttAccent1}
+\colorlet{footbotline}{UStuttColorful}
 %    \end{macrocode}
 % Line above footnotes
 %    \begin{macrocode}
-\colorlet{footnoterule}{UStuttAccent1}
+\colorlet{footnoterule}{UStuttColorful}
 %    \end{macrocode}
 % Footnote number
 %    \begin{macrocode}
-\colorlet{thefootnote}{UStuttAccent1}
+\colorlet{thefootnote}{UStuttColorful}
 %    \end{macrocode}
 %
 % Setting title to be written in main color, sans-serif, and Huge
@@ -559,24 +596,24 @@
 %    \end{macrocode}
 % Page header and footer should be written in the main color and sans-serif
 %    \begin{macrocode}
-\colorlet{pageheadfoot}{UStuttAccent1}
+\colorlet{pageheadfoot}{UStuttBlack}
 %    \end{macrocode}
 % Page footer should be written in the main color, sans-serif and small font size
 %    \begin{macrocode}
-\colorlet{pagefoot}{UStuttAccent1}
+\colorlet{pagefoot}{UStuttBlack}
 %    \end{macrocode}
 % Create a new font for "place of birth"
 %    \begin{macrocode}
 \colorlet{placeofbirth}{black}
 %    \end{macrocode}
-% Make page numbers printed in UStuttAccent1
+% Make page numbers printed in UStuttBlack
 %    \begin{macrocode}
-\colorlet{pagenumber}{UStuttAccent1}
+\colorlet{pagenumber}{UStuttBlack}
 %    \end{macrocode}
 %
 % Colors for document headings from part over sectioning down to paragraphs
 %    \begin{macrocode}
-\colorlet{part}{UStuttAccent1}
+\colorlet{part}{UStuttBlack}
 \colorlet{chapter}{part}
 \colorlet{disposition}{chapter}
 \colorlet{sectioning}{disposition}
@@ -589,30 +626,30 @@
 %    \end{macrocode}
 % Color of dictum
 %    \begin{macrocode}
-\colorlet{dictum}{UStuttAccent1}
+\colorlet{dictum}{AccentOne}
 %    \end{macrocode}
 % Color of itemize bullets
 %    \begin{macrocode}
-\colorlet{itemizei}{UStuttAccent1}
-\colorlet{itemizeii}{UStuttAccent1}
-\colorlet{itemizeiii}{UStuttAccent1}
-\colorlet{itemizeiv}{UStuttAccent1}
+\colorlet{itemizei}{AccentOne}
+\colorlet{itemizeii}{AccentOne}
+\colorlet{itemizeiii}{AccentOne}
+\colorlet{itemizeiv}{AccentOne}
 %    \end{macrocode}
 %
 % Color of float object's caption i.e., "Table" or "Figure"
 %    \begin{macrocode}
-\colorlet{captionlabel}{UStuttAccent1}
+\colorlet{captionlabel}{AccentOne}
 %    \end{macrocode}
 %
 %
 %
 % Colors for table elements
 %    \begin{macrocode}
-\colorlet{ArrayRuleColor}{UStuttAccent1}
-\colorlet{TableHeader}{UStuttAccent1}
-\colorlet{TableRowEven}{UStuttLight1}
-\colorlet{TableRowOdd}{UStuttLight2VeryLight}
-\colorlet{TableCellHighlight}{UStuttLight2}
+\colorlet{ArrayRuleColor}{UStuttColorful}
+\colorlet{TableHeader}{AccentOne}
+\colorlet{TableRowEven}{UStuttLightOne}
+\colorlet{TableRowOdd}{UStuttLightTwoVeryLight}
+\colorlet{TableCellHighlight}{UStuttLightTwo}
 %    \end{macrocode}
 %
 %
@@ -621,7 +658,7 @@
 % Create a color matrix to be displayed within a document showing all the colors available in the UStutt package
 %    \begin{macrocode}
 \NewDocumentCommand{\ustuttcolormatrix}{ }{%
-  \newcommand{\ustuttcolorlist}{UStuttAccent1,UStuttAccent2,UStuttAccent3,UStuttAccent4,UStuttAccent5,UStuttAccent6,UStuttWhite,UStuttBlack,UStuttAnthracite,UStuttGray,UStuttDarkBlue,UStuttLightBlue,UStuttDarkGreen,UStuttLightGreen,UStuttDarkOrange,UStuttLightOrange}
+  \newcommand{\ustuttcolorlist}{AccentOne,AccentTwo,AccentThree,AccentFour,AccentFive,AccentSix,UStuttWhite,UStuttBlack,UStuttAnthracite,UStuttGray,UStuttDarkBlue,UStuttLightBlue,UStuttDarkGreen,UStuttLightGreen,UStuttDarkOrange,UStuttLightOrange}
   \newcommand{\ustutthuelist}{VeryLight,Light,Lighter,,Darker,Dark,VeryDark}
   \begin{tikzpicture}[%
       x=1.00cm,%

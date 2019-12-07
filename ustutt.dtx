@@ -137,6 +137,12 @@
 \RequirePackage{pgfopts}
 %    \end{macrocode}
 %
+%  The package generalises the macro patching commands provided by Philipp
+% Lehmann’s etoolbox. 
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+%    \end{macrocode}
+%
 % With chngcntr currently not working in TeXlive 2018, we need to add this.
 %
 % @TODO Remove once there is a chngcntr update
@@ -219,6 +225,16 @@
 }
 %    \end{macrocode}
 %
+% Enforce no widows and orphans in document with a simple switch
+%    \begin{macrocode}
+\newif\ifustutt@nowidow
+\ustutt@nowidowfalse
+\pgfkeys{
+  /ustutt/nowidow/.cd,
+    .is if=ustutt@nowidow,%
+}
+%    \end{macrocode}
+%
 % Author gender can be selected, applies to the theses' titlepages where we
 % distinguish (only in German, of course) between e.g., a male "Doktoringenieur"
 % and a female "Doktoringenieurin". Of course, options |gender=male| and
@@ -276,6 +292,30 @@
     .is if=ustutt@accepted,
 }
 %</thesis>
+%    \end{macrocode}
+%
+% Let the user choose fancy headings for chapter openings (only in book-like
+% classes) or the conventional style
+%    \begin{macrocode}
+%<*book|thesis>
+\newif\ifustutt@fancychapter
+\ustutt@fancychapterfalse
+\pgfkeys{
+  /ustutt/fancychapter/.cd,
+    .is if=ustutt@fancychapter,
+}
+%</book|thesis>
+%    \end{macrocode}
+%
+% Let the user choose fancy footer page numbers
+%    \begin{macrocode}
+%<*book|thesis>
+\newif\ifustutt@fancyfooter
+\ustutt@fancyfooterfalse
+\pgfkeys{
+  /ustutt/fancyfooter/.cd,
+    .is if=ustutt@fancyfooter,
+}
 %    \end{macrocode}
 %
 % Pass any other options not known to the underlying koma script class
@@ -342,6 +382,7 @@
   autocite=inline,%
   sorting=nyt,%
   sortcites=true,%
+  style=ipa-authoryear,%
 %
 % Configuration of text citations
   mincitenames=1,%
@@ -355,15 +396,6 @@
 % natbib compatibility mode (\citep and \citet still work)
   natbib=true,
 }{biblatex}
-\ifdefstring{\ustutt@degree}{doctorate}{% TRUE
-  \PassOptionsToPackage{%
-    style=authoryear,%
-  }{biblatex}
-}{% FALSE
-  \PassOptionsToPackage{%
-    style=ieee,%
-  }{biblatex}
-}%
 %    \end{macrocode}
 %
 %
@@ -397,7 +429,12 @@
 }{glossaries}
 %    \end{macrocode}
 %
-% Glossaries extra
+% Glossaries extra: This package provides improvements and extra features to
+% the glossaries package. Some of the default glossaries.sty behaviour is
+% changed by glossaries-extra.sty. See the user manual
+% glossaries-extra-manual.pdf for further details. glossaries-extra.sty
+% requires the glossaries package and, naturally, all packages required by
+% glossaries.sty. 
 %    \begin{macrocode}
 \PassOptionsToPackage{%
   automake,%
@@ -550,7 +587,7 @@
 %
 %    \begin{macrocode}
 \PassOptionsToClass{
-%<book|thesis>  chapterprefixline=true,%
+%<book|thesis>  chapterprefix=true,%
 % half a line vertical space between paragraphs; there must be at least 1 em free
 % space in the last line of a paragraph
   parskip=half-,
@@ -570,6 +607,24 @@
   captions=tableheading,%
 %<article>}{scrartcl}
 %<book|thesis>}{scrbook}
+%    \end{macrocode}
+%
+% When a thesis becomes accepted and goes to the publisher, we need a different
+% font size by default because the publisher will want an A4 document that is
+% going to be printed on A5. As such, 12pt font size isn't enough and it must
+% be upped to 14pt
+%    \begin{macrocode}
+%<*doctorate>
+\ifustutt@accepted
+  \PassOptionsToClass{%
+    fontsize=14pt,%
+  }{scrbook}
+\else
+  \PassOptionsToClass{%
+    fontsize=12pt,%
+  }{scrbook}
+\fi
+%</doctorate>
 %    \end{macrocode}
 %
 %
@@ -699,6 +754,13 @@
 % and xparse bundles from the LaTeX 3 development team.
 %    \begin{macrocode}
 \RequirePackage{fontspec}
+%    \end{macrocode}
+
+% This package provides a useful macro to manage widow lines. 
+%    \begin{macrocode}
+\ifustutt@nowidow
+\RequirePackage[all]{nowidow}
+\fi
 %    \end{macrocode}
 %
 % The package supports the Text Companion fonts, which provide many text symbols
@@ -852,12 +914,6 @@
 % package is distributed with caption.
 %    \begin{macrocode}
 \RequirePackage{subcaption}
-%    \end{macrocode}
-%
-% Indent first paragraph after section header. This minimalist package is part
-% of the latex-tools bundle in the LaTeX required distribution.
-%    \begin{macrocode}
-\RequirePackage{indentfirst}
 %    \end{macrocode}
 %
 % The package provides the principal packages in the AMS-LaTeX distribution. It
@@ -1055,49 +1111,92 @@
 %
 %
 %
+% \subsection{Overall layout style}
+%
+% For phd theses, the style when using Fraunhofer as publisher is a bit... strange, but will account for it right here, right now, even in draft mode, as long as it's a doctoral thesis
+%    \begin{macrocode}
+%<*doctorate>
+\geometry{
+  top=3.00cm,%
+  bottom=3.00cm,%
+  outer=2.00cm,%
+  inner=2.00cm,%
+  heightrounded,%
+  marginparwidth=1.50cm,%
+  marginparsep=0.25cm,%
+  headheight=1.25cm,%
+  headsep=1.25cm,%
+  footskip=1.00cm,%
+  footnotesep=2.00\baselineskip,%
+}
+%</doctorate>
+%    \end{macrocode}
+%
+%
+%
 % \subsection{Sectioning Styles}
 %
+% We will make the appendix have a blue bar spanning the width of the page
+% \begin{macro}{\appendixpage}
 %    \begin{macrocode}
-%<*book|thesis>
-\RedeclareSectionCommand[%
-  beforeskip=1.5\baselineskip,%
-  afterskip=1.5\baselineskip,%
-]{chapter}
-%</book|thesis>
-%    \end{macrocode}
-%
-% This just changes how a numbered chapter's number is to be typeset
-%    \begin{macrocode}
-%<*book|thesis>
-\renewcommand*{\chapterformat}{%
-  \enskip\mbox{%
-    \scalebox{3}{\thechapter\autodot}%
+\renewcommand*{\appendixpage}{%
+  \clear@ppage%
+  \newgeometry{%
+    inner=0cm,%
+    outer=0cm,%
+    top=0cm,%
+    bottom=0cm,%
   }%
-}
-%</book|thesis>
-%    \end{macrocode}
-%
-% We add horizontal bars above and below the chapters heading for both numbered
-% and unnumbered chapters.
-%    \begin{macrocode}
-%<*book|thesis>
-\renewcommand\chapterlinesformat[3]{%
-% #1 level
-% #2 number (formatted)
-% #3 text (formatted)
-  \parbox[b]{\textwidth}{\hrulefill\enskip#2}%
-  \par%
-  \parbox[c]{\textwidth}{%
-    \interlinepenalty\@M%
-    \RaggedRight%
-    \strut#3%
-    \par%
-    \vskip 10\p@%
+  \thispagestyle{plain}%
+  \if@twocolumn\onecolumn\@tempswatrue\else\@tempswafalse\fi%
+  \null\vfil%
+  \markboth{}{}%
+  {%
+    \tikzexternaldisable%
+    \begin{tikzpicture}[%
+        remember picture,%
+        overlay,%
+        inner sep=0pt,%
+        outer sep=0pt,%
+        x=\paperwidth,%
+        y=\paperheight,%
+      ]%
+      %
+      \node[%
+          draw=UStuttColorful,%
+          fill=UStuttColorful,%
+          inner sep=0pt,%
+          outer sep=0pt,%
+          align=center,%
+          text width=1.05\paperwidth,%
+          minimum height=4.00\baselineskip,%
+          anchor=south,%
+        ]%
+        at (current page.center)%
+        {%
+          \interlinepenalty\@M{\usekomafont{part}{\color{UStuttWhite}{\appendixpagename}}}%
+        };%
+    \end{tikzpicture}%
+    \tikzexternalenable%
   }%
-  \hrule%
+  \if@dotoc@pp%
+    \addappheadtotoc%
+  \fi%
+  \vfil\newpage%
+  \if@twoside%
+    \if@openright%
+      \null%
+      \thispagestyle{empty}%
+      \newpage%
+    \fi%
+  \fi%
+  \if@tempswa%
+    \twocolumn%
+  \fi%
+  \restoregeometry%
 }
-%</book|thesis>
 %    \end{macrocode}
+% \end{macro}
 %
 %
 % \subsection{Localization}
@@ -1676,29 +1775,14 @@
   \end{spacing}%
 %
   \vfill%
+% 
+  \vspace*{2.00\baselineskip}%
 %
-  \let\oldAnd\and%
-  \renewcommand{\and}{\unskip,\xspace}%
   \ifthispageodd{%
-    \begin{tabu} to \linewidth {X[1,l] X[5,r]}%
-      \ifdefempty{\ustutt@city}{% TRUE
-      }{% FAlSE
-        \ustutt@city, %
-      }%
-      \@date%
-        & \@author%
-    \end{tabu}%
+    \@author\hfill\ustutt@city, \today
   }{%
-    \begin{tabu} to \linewidth {X[1,l] X[5,r]}%
-      \@author%
-        & \ifdefempty{\ustutt@city}{% TRUE
-          }{% FALSE
-            \ustutt@city, %
-          }%
-          \@date%
-    \end{tabu}%
-  }%
-  \renewcommand{\and}{\oldAnd}%
+    \ustutt@city, \today\hfill\@author
+  }
 }
 %</book|thesis>
 %    \end{macrocode}
@@ -1735,7 +1819,7 @@
 % \cmd{\crule}\oarg{color}\marg{width}\marg{height}\\
 % Simpler command for a colored ruler.
 %    \begin{macrocode}
-\newcommand\crule[3][UStuttAnthracite]{\textcolor{#1}{\rule{#2}{#3}}}
+\newcommand\crule[3][UStuttColorful]{\textcolor{#1}{\rule{#2}{#3}}}
 %    \end{macrocode}
 % Example usage
 % \begin{verbatim}
@@ -1866,31 +1950,96 @@
 %
 %
 %
+% \subsection{Chapter styling}
+%
+% Make sure chapter headings are ragged left from the `ragged2e` package
+%    \begin{macrocode}
+%<book|thesis>\renewcommand*{\raggedchapter}{\raggedleft}
+%    \end{macrocode}
+%
+%
+% A fancy right-sided chapter line, if the `fancychapter` option is given
+%    \begin{macrocode}
+%<*book|thesis>
+% \ifustutt@fancychapter
+  \renewcommand*{\chapterformat}{%
+% prints localized chapter prefix i.e., 'Chapter' or not
+    \chapappifchapterprefix{}%
+% spacing between chapter prefix and chapter number
+    \enskip%
+% spacing to the chapter number
+    \resizebox{!}{1.10\baselineskip}{\thechapter}%
+% a box that basically behaves like an `\rlap`
+    \makebox[0pt][l]{%
+% pad to start on the margin par
+      \hspace{\marginparsep}%
+% box around the colored bar
+      \raisebox{\dp\strutbox}[\ht\strutbox][\dp\strutbox]{%
+% colored bar itself
+        {\color{UStuttColorful}{\rule[-\dp\strutbox]{5.00cm}{1.00\baselineskip}}}%
+      }%
+    }%
+  }%
+  \renewcommand{\chapterlinesformat}[3]{%
+    \parbox{\dimexpr\linewidth-2\fboxrule-2\fboxsep}{%
+      \raggedchapter\@hangfrom{#2}#3% 
+    }%
+  }%
+  \renewcommand{\chapterlineswithprefixformat}[3]{%
+    \parbox{\dimexpr\linewidth-2\fboxrule-2\fboxsep}{%
+      \raggedchapter#2#3%
+    }%
+  }%
+% \fi
+%</book|thesis>
+%    \end{macrocode}
+%
+% Also add more spacing before and after the chapter heading
+%    \begin{macrocode}
+%<*book|thesis>
+\RedeclareSectionCommand[%
+  beforeskip=30pt,%
+  afterskip=20pt,%
+]{chapter}
+\renewcommand*\chapterheadmidvskip{%
+  \par\nobreak\vspace{10pt}%
+}
+%</book|thesis>
+%    \end{macrocode}
+%
+%
+%
 % \subsection{Header styles}
+%
+%    \begin{macrocode}
+\clearpairofpagestyles
+%    \end{macrocode}
 %
 % Onesided documents' headers
 %    \begin{macrocode}
 \if@twoside\else
-\ihead*[]{\@authorrunning}
-\chead*[]{}
-\ohead*[]{\headmark}
+  \ihead*[]{\@authorrunning}
+  \chead*[]{}
+  \ohead*[]{\headmark}
 \fi
 %    \end{macrocode}
 %
 % Even pages (left pages) from outside to inside
 %    \begin{macrocode}
 \if@twoside%
-\lehead*[]{\headmark}
-\cehead*[]{}
-\rehead*[]{\@authorrunning}
+  \lehead*[]{\headmark}
+  \cehead*[]{}
+%<article>\rehead*[]{\@authorrunning}
+%<book>\rehead*[]{}
 \fi
 %    \end{macrocode}
 % Odd pages (right pages) from inside to outside
 %    \begin{macrocode}
 \if@twoside%
-\lohead*[]{\@authorrunning}
-\cohead*[]{}
-\rohead*[]{\headmark}
+%<article>\lohead*[]{\@authorrunning}
+%<book>\lohead*[]{}
+  \cohead*[]{}
+  \rohead*[]{\headmark}
 \fi
 %    \end{macrocode}
 %
@@ -1901,26 +2050,64 @@
 % Onesided documents' footers
 %    \begin{macrocode}
 \if@twoside\else
-\ifoot*[]{}
-\cfoot*[]{}
-\ofoot*[\pagemark]{\pagemark}
+  \ifoot*[]{}
+  \cfoot*[]{}
+  \ofoot*[\pagemark]{\pagemark}
 \fi
 %    \end{macrocode}
 %
 % Two sided documents' even pages (left pages) from outside to inside
 %    \begin{macrocode}
 \if@twoside%
-\lefoot*[\pagemark]{\pagemark}
-\cefoot*[]{}
-\refoot*[]{}
+  \ifustutt@fancyfooter
+    \lefoot*{% 
+      \makebox[0pt][r]{%
+% page number
+        \pagemark%
+% spacing between page mark and vertical bar
+        \enskip%
+% vertical bar
+        \raisebox{0pt}[\ht\strutbox][\dp\strutbox]{%
+          {\color{UStuttColorful}{\rule[-\dp\strutbox]{2.00pt}{1.00\baselineskip}}}%
+        }% 
+% push to the left so that text starts where marginpar starts
+        \hspace{\marginparsep}%
+      }% 
+    }
+    \cefoot*{}
+    \refoot*{}
+  \else
+    \lefoot*{\pagemark}
+    \cefoot*{}
+    \refoot*{}
+  \fi
 \fi
 %    \end{macrocode}
 % Two sided documents' odd pages (right pages) from inside to outside
 %    \begin{macrocode}
 \if@twoside%
-\lofoot*[]{}
-\cofoot*[]{}
-\rofoot*[\pagemark]{\pagemark}
+  \ifustutt@fancyfooter
+    \lofoot*{}
+    \cofoot*{}
+    \rofoot*{% 
+      \makebox[0pt][l]{%
+% push to the right so that text starts where marginpar starts
+        \hspace{\marginparsep}%
+% vertical bar
+        \raisebox{0pt}[\ht\strutbox][\dp\strutbox]{%
+          {\color{UStuttColorful}{\rule[-\dp\strutbox]{2.00pt}{1.00\baselineskip}}}%
+        }%
+% spacing between bar and page mark
+        \enskip%
+%  page number
+        \pagemark%
+      }% 
+    }
+  \else
+    \lofoot*{}
+    \cofoot*{}
+    \rofoot*{\pagemark}
+  \fi
 \fi
 %    \end{macrocode}
 %
@@ -1929,6 +2116,8 @@
 % Footnote
 %    \begin{macrocode}
 \renewcommand{\footnoterule}{\kern-3.00pt{\color{footnoterule}{\hrule width 2.00in}}\kern2.60pt}
+\renewcommand{\footnoterule}{\kern-3pt{\color{footnoterule}{\hrule width 2in}}\kern2.6pt}
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\normalfont\color{UStuttColorful}\@thefnmark}}}
 \renewcommand{\thefootnote}{\textcolor{thefootnote}{\arabic{footnote}}}
 %    \end{macrocode}
 %
@@ -2009,7 +2198,7 @@
 %
 % \paragraph{Headings}
 % 
-% All headings
+% All headings are typeset in Roman family and in bold font series
 %    \begin{macrocode}
 \addtokomafont{disposition}{\color{disposition}\rmfamily\bfseries}
 %    \end{macrocode}
@@ -2017,11 +2206,6 @@
 % All sections (section, subsection, subsubsection)
 %    \begin{macrocode}
 \addtokomafont{sectioning}{\color{sectioning}}
-%    \end{macrocode}
-%
-% Adjustments to chapter prefix
-%    \begin{macrocode}
-%<book|thesis>\addtokomafont{chapterprefix}{\RaggedLeft}
 %    \end{macrocode}
 %
 % Adjustment to sections
@@ -2233,10 +2417,10 @@
   singlelinecheck=off,%
 % Affects the whole figure caption
   font={%
+    small,%
   },%
 % Affects only the label name and its number
   labelfont={%
-    footnotesize,%
     bf,%
     color=captionlabel,%
   },%
@@ -2261,7 +2445,7 @@
 %    \end{macrocode}
 % Setup captions of subfigures
 %    \begin{macrocode}
-\captionsetup[subfigure]{%
+\captionsetup[sub]{%
   position=below,%
   belowskip=2.00pt,%
   textfont={sl},
@@ -2307,16 +2491,6 @@
 \numberwithin{table}{chapter}
 \counterwithout{footnote}{chapter}
 %</book|thesis>
-%    \end{macrocode}
-%
-%
-% Formatting part heading
-%    \begin{macrocode}
-\addtokomafont{part}{\color{part}\Huge}
-%    \end{macrocode}
-% Formatting chapter heading
-%    \begin{macrocode}
-%<book|thesis>\addtokomafont{chapter}{\color{chapter}\Huge\bfseries}
 %    \end{macrocode}
 %
 %

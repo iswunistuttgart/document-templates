@@ -114,7 +114,10 @@
 %    \end{macrocode}
 % And some more, custom options can follow here
 %    \begin{macrocode}
-    paper=a4paper,
+    paper=a4paper,%
+    fancychapter,%
+    fancyfooter,%
+    % colorful,%
 %    \end{macrocode}
 %
 % Lastly, we define the correct document class to use.
@@ -136,6 +139,11 @@
 %    \end{macrocode}
 %</thesis>
 % \end{macro}
+%
+% Load package demo content
+%    \begin{macrocode}
+\usepackage[math]{blindtext}
+%    \end{macrocode}
 % 
 % \begin{macro}{\title}
 % This is what your thesis' title is going to be in the end
@@ -430,8 +438,18 @@
 % Here is where you would now put your actual data content
 %    \begin{macrocode}
 %<<COMMENT
-% Put your content here
+% Put your content here instead of the following line
 %COMMENT
+%<*book>
+\Blinddocument
+\Blinddocument
+\Blinddocument
+\Blinddocument
+%</book>
+%<*article>
+\blinddocument
+\blinddocument
+%</article>
 %    \end{macrocode}
 %
 % \begin{macro}{\printbibliography}
