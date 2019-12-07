@@ -309,14 +309,12 @@
 %
 % Let the user choose fancy footer page numbers
 %    \begin{macrocode}
-%<*book|thesis>
 \newif\ifustutt@fancyfooter
 \ustutt@fancyfooterfalse
 \pgfkeys{
   /ustutt/fancyfooter/.cd,
     .is if=ustutt@fancyfooter,
 }
-%</book|thesis>
 %    \end{macrocode}
 %
 % Pass any other options not known to the underlying koma script class
@@ -327,11 +325,11 @@
       \let\currname\pgfkeyscurrentname%
       \let\currval\pgfkeyscurrentvalue%
       \ifx#1\pgfkeysnovalue%
-%<article>        %\PassOptionsToClass{\currname}{scrartcl}
-%<book|thesis>        %\PassOptionsToClass{\currname}{scrbook}
+%<article>        \PassOptionsToClass{\currname}{scrartcl}
+%<book|thesis>        \PassOptionsToClass{\currname}{scrbook}
       \else%
-%<article>        %\PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrartcl}
-%<book|thesis>        %\PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrbook}
+%<article>        \PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrartcl}
+%<book|thesis>        \PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrbook}
       \fi%
     },
 }
