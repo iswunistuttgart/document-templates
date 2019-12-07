@@ -1961,7 +1961,7 @@
 % A fancy right-sided chapter line, if the `fancychapter` option is given
 %    \begin{macrocode}
 %<*book|thesis>
-% \ifustutt@fancychapter
+\ifustutt@fancychapter
   \renewcommand*{\chapterformat}{%
 % prints localized chapter prefix i.e., 'Chapter' or not
     \chapappifchapterprefix{}%
@@ -1990,7 +1990,7 @@
       \raggedchapter#2#3%
     }%
   }%
-% \fi
+\fi
 %</book|thesis>
 %    \end{macrocode}
 %
