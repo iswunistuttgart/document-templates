@@ -335,7 +335,7 @@
 % \begin{macro}{\frontmatter}
 % Set up the document's front matter style: romain page numbers, et cetera.
 %    \begin{macrocode}
-\frontmatter
+%<book|thesis>\frontmatter
 %    \end{macrocode}
 % \end{macro}
 %
@@ -352,16 +352,18 @@
 % Be it your (doctoral) advisor, colleagues, other students, your parents, or
 % the project funding agency. Give them a warm-felt shout out.
 %    \begin{macrocode}
+%<*book|thesis>
 \begin{acknowledgements}%
 \end{acknowledgements}
+%</book|thesis>
 %    \end{macrocode}
 % \end{environment}
 %
 % \begin{environment}{preface}
 % A preface is an introduction to a book or other literary work written by you.
 %    \begin{macrocode}
-\begin{preface}
-\end{preface}
+%<book|thesis>\begin{preface}
+%<book|thesis>\end{preface}
 %    \end{macrocode}
 % \end{environment}
 %
@@ -421,7 +423,7 @@
 % Switch into the main document mode resetting page numbers, changing page
 % numbers to arabic, et cetera.
 %    \begin{macrocode}
-\mainmatter
+%<book|thesis>\mainmatter
 %    \end{macrocode}
 % \end{macro}
 %
