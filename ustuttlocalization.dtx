@@ -1,0 +1,390 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttlocalization.dtx}
+%</driver>
+%<german>\ProvidesDictionary{ustutt}{German}
+%<english>\ProvidesDictionary{ustutt}{English}
+%<*package>
+    [2019/12/07 v1.0.0 UStutt dictionary]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttlocalization.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2004/11/05}{Initial version}
+%
+% \GetFileInfo{ustuttlocalization.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+%
+%
+% \title{The \textsf{ustuttlocalization} package\thanks{This document
+%   corresponds to \textsf{ustuttlocalization}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing.\index{doing nothing|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+%
+% \subsection{Articles, Books, etc.}
+%
+%
+% \paragraph{Document types}
+%
+% \begin{macro}{ustutt@documenttype@report}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@documenttype@report}{Bericht}
+%<english>\providetranslation{ustutt@documenttype@report}{Report}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ustutt@documenttype@offprint}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@documenttype@offprint}{Umdruck}
+%<english>\providetranslation{ustutt@documenttype@offprint}{Offprint}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ustutt@documenttype@exam}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@documenttype@exam}{Pr\"ufung}
+%<english>\providetranslation{ustutt@documenttype@exam}{Exam}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ustutt@documenttype@assignment}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@documenttype@assignments}{\"Ubungsaufgabe}
+%<english>\providetranslation{ustutt@documenttype@assignment}{Assignment}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{ustutt@documenttype@proposal}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@documenttype@proposal}{Projektexpos\'e}
+%<english>\providetranslation{ustutt@documenttype@proposal}{Scientific Proposal}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \paragraph{Other properties}
+%
+% \begin{macro}{ustutt@departmentofuniversityname}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@departmentofuniversityname}{der}
+%<english>\providetranslation{ustutt@departmentofuniversityname}{of}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@acknowledgements}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@acknowledgements}{Danksagung}
+%<english>\providetranslation{ustutt@acknowledgements}{Acknowledgements}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@preface}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@preface}{Vorwort}
+%<english>\providetranslation{ustutt@preface}{Preface}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@abstract}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@abstract}{Kurzfassung}
+%<english>\providetranslation{ustutt@abstract}{Abstract}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@appendix@tocname}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@appendix@tocname}{Anh\"ange}
+%<english>\providetranslation{ustutt@appendix@tocname}{Appendices}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@appendix@pagename}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@appendix@pagename}{Anh\"ange}
+%<english>\providetranslation{ustutt@appendix@pagename}{Appendices}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@appendix@name}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@appendix@name}{Anhang}
+%<english>\providetranslation{ustutt@appendix@name}{Appendix}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@keywords}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@keywords}{Schlagw\"orter}
+%<english>\providetranslation{ustutt@keywords}{Keywords}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@university}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@university}{Universit\"at Stuttgart}
+%<english>\providetranslation{ustutt@university}{University of Stuttgart}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@logosuffix}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@logosuffix}{-de}
+%<english>\providetranslation{ustutt@logosuffix}{-en}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Glossaries}
+%
+%
+% \begin{macro}{ustutt@glossaries@abbreviations}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@glossaries@abbreviations}{Abk\"urzungsverzeichnis}
+%<english>\providetranslation{ustutt@glossaries@abbreviations}{List of Acronyms}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@glossaries@acronyms}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@glossaries@acronyms}{Abk\"urzungsverzeichnis}
+%<english>\providetranslation{ustutt@glossaries@acronyms}{List of Acronyms}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@glossaries@symbols}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@glossaries@symbols}{Symbolverzeichnis}
+%<english>\providetranslation{ustutt@glossaries@symbols}{List of Symbols}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@glossaries@notation}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@glossaries@notation}{Bezeichnungsverzeichnis}
+%<english>\providetranslation{ustutt@glossaries@notation}{List of Notation}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@glossaries@unit}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@glossaries@unit}{Einheit}
+%<english>\providetranslation{ustutt@glossaries@unit}{Unit}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Thesis}
+%
+%
+% \begin{macro}{ustutt@thesis@advisor}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@advisor}{Hauptberichter}
+%<english>\providetranslation{ustutt@thesis@advisor}{Advisor}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@coadvisor}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@coadvisor}{Mitberichter}
+%<english>\providetranslation{ustutt@thesis@coadvisor}{Co-Advisor}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@draft}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@draft}{Entwurf}
+%<english>\providetranslation{ustutt@draft}{Draft}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@major}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@major}{Studiengang}
+%<english>\providetranslation{ustutt@thesis@major}{Major}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@datesubmitted}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@datesubmitted}{Eingereicht am}
+%<english>\providetranslation{ustutt@thesis@datesubmitted}{Submitted on}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@datedefended}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@datedefended}{Tag der m\"undlichen Pr\"ufung}
+%<english>\providetranslation{ustutt@thesis@datedefended}{Defended on}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@placeofbirth}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@placeofbirth}{aus}
+%<english>\providetranslation{ustutt@thesis@placeofbirth}{from}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@submittedby}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@submittedby}{vorgelegt von}
+%<english>\providetranslation{ustutt@thesis@submittedby}{submitted by}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@authorname}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@authorname}{von}
+%<english>\providetranslation{ustutt@thesis@authorname}{by}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Majors and Degrees}
+%
+%
+% \begin{macro}{ustutt@thesis@degree@doctorate@long}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@degree@doctorate@long}{Doktoringenieur}
+%<english>\providetranslation{ustutt@thesis@degree@doctorate@long}{Doctorate}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@degree@doctorate@short}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@degree@doctorate@short}{Dr.-Ing.\@}
+%<english>\providetranslation{ustutt@thesis@degree@doctorate@short}{Dr.-Ing.\@}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@degree@master@long}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@degree@master@long}{Master of Science}
+%<english>\providetranslation{ustutt@thesis@degree@master@long}{Master of Science}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@degree@master@short}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@degree@master@short}{M.Sc.\@}
+%<english>\providetranslation{ustutt@thesis@degree@master@short}{M.Sc.\@}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@degree@bachelor@long}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@degree@bachelor@long}{Bachelor of Science}
+%<english>\providetranslation{ustutt@thesis@degree@bachelor@long}{Bachelor of Science}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{ustutt@thesis@degree@bachelor@short}
+%    \begin{macrocode}
+%<german>\providetranslation{ustutt@thesis@degree@bachelor@short}{B.Sc.\@}
+%<english>\providetranslation{ustutt@thesis@degree@bachelor@short}{B.Sc.\@}
+%    \end{macrocode}
+% \end{macro}
+%
+% \Finale
+\endinput

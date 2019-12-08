@@ -1,104 +1,117 @@
-PY = python3
-FILES = iswartcl iswstud iswbook iswdctrt
-BUILD_DIR = dist
-SRC_DIR = src
+SHELL = /bin/bash
+
+DISTDIR = dist/
+INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
+SOURCES = $(shell find ./ -type f -name "ustutt*.dtx")
+DICTIONARIES = ustutt-English.dict ustutt-German.dict
+ADDL_INCLUDES = .latexmkrc references.bib images $(DICTIONARIES) tikzlibraryustutt.code.tex acronyms.tex symbols.tex notation.tex ipa-authoryear.bbx ipa-authoryear.cbx
+DOCS = $(SOURCES:dtx=pdf)
+
+LATEX = pdflatex --shell-escape
+MAKEINDEX = makeindex -s
+LATEXMK = latexmk
 
 .PHONY: all
-all: build classes images packages macros
+all: ins docs dist
 
-# build directory
-build:
-	[ -d "$(BUILD_DIR)/" ] || mkdir $(BUILD_DIR)
+.PHONY: ins
+ins: ustutt.ins $(SOURCES)
+	$(LATEX) ustutt.ins
 
-# create list of packages
-packages: $(SRC_DIR)/*.cls
-	$(PY) output-packages.py --output packages.md -- $?
+.PHONY: docs
+docs: $(DOCS)
 
-# create list of macros
-macros: iswmacros
-	$(PY) output-macros.py --output $(BUILD_DIR)/macros.tex -- $(SRC_DIR)/*.cls
-	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
-	latexmk -norc -quiet    -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
-	latexmk -norc -quiet -c -cd -r $(BUILD_DIR)/iswbook.latexmkrc $(BUILD_DIR)/iswmacros.tex
+# any PDF file depends on its base documented TeX file
+%.pdf: %.dtx
+	$(LATEX) $^
+	$(MAKEINDEX) gind.ist $*.idx
+	$(MAKEINDEX) gglo.ist -o $*.gls $*.glo
+	$(LATEX) $^
 
-# Target to only build the classes
-.PHONY: classes
-classes: $(FILES)
+# class files depend on the insaller
+%.cls: ins
 
-# Building of all necessary classes
-# build iswartcl cls, tex, rc, etc
-.PHONY: iswartcl
-iswartcl: iswartcl-cls iswartcl-tex iswartcl-rc bbl glossaries
+# combination of everything that needs to be done for distributing
+.PHONY:
+dist: ins dist_bachelor dist_master dist_doctorate dist_book dist_article
 
-# build iswstud cls, tex, rc, etc
-.PHONY: iswstud
-iswstud: iswstud-cls iswstud-tex iswstud-rc bbl glossaries
+# dist class for theses
+dist_%: ins
+	# create the directory
+	mkdir -p $(DISTDIR)/$*
+	# copy class file over
+	cp ustuttthesis.cls $(DISTDIR)/$*/
+	# copy all style files over
+	cp *.sty $(DISTDIR)/$*/
+	# copy source files over
+	cp $*_*.tex $(DISTDIR)/$*/
+	# copy additional includes over
+	cp -r $(ADDL_INCLUDES) $(DISTDIR)/$*/
+	# compile the latex source files in the dist directory
+	$(LATEXMK) -cd $(DISTDIR)/$*/$*_*.tex
+	# and remove auxiliary files from the dist directory
+	$(LATEXMK) -c -cd $(DISTDIR)/$*/$*_*.tex
 
-# build iswbook cls, tex, rc, etc
-.PHONY: iswbook
-iswbook: iswbook-cls iswbook-tex iswbook-rc bbl glossaries
+# dist class for articles
+dist_article: ins
+	# create the directory
+	mkdir -p $(DISTDIR)/article
+	# copy class file over
+	cp ustuttartcl.cls $(DISTDIR)/article/
+	# copy all style files over
+	cp *.sty $(DISTDIR)/article/
+	# copy source files over
+	cp article_*.tex $(DISTDIR)/article/
+	# copy additional includes over
+	cp -r $(ADDL_INCLUDES) $(DISTDIR)/article/
+	# compile the latex source files in the dist directory
+	$(LATEXMK) -cd $(DISTDIR)/article/article_*.tex
+	# and remove auxiliary files from the dist directory
+	$(LATEXMK) -c -cd $(DISTDIR)/article/article_*.tex
 
-# build iswdctrt cls, tex, rc, etc
-.PHONY: iswdctrt
-iswdctrt: iswdctrt-cls iswdctrt-tex iswdctrt-rc bbl glossaries
+# dist class for books
+dist_book: ins
+	# create the directory
+	mkdir -p $(DISTDIR)/book
+	# copy class file over
+	cp ustuttbook.cls $(DISTDIR)/book/
+	# copy all style files over
+	cp *.sty $(DISTDIR)/book/
+	# copy source files over
+	cp book_*.tex $(DISTDIR)/book/
+	# copy additional includes over
+	cp -r $(ADDL_INCLUDES) $(DISTDIR)/book/
+	# compile the latex source files in the dist directory
+	$(LATEXMK) -cd $(DISTDIR)/book/book_*.tex
+	# and remove auxiliary files from the dist directory
+	$(LATEXMK) -c -cd $(DISTDIR)/book/book_*.tex
 
-
-# implicit target for making `*.cls` files
-%-cls: $(SRC_DIR)/%.cls $(SRC_DIR)/%/* $(SRC_DIR)/common/*
-	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
-
-# implicit target for making `*.tex` filesx
-%-tex: $(SRC_DIR)/%.tex
-	$(PY) build.py --dest=$(BUILD_DIR)/ -- $<
-
-# implicit target for making `*.rc` files
-%-rc: $(SRC_DIR)/%.latexmkrc
-	cp $(SRC_DIR)/$*.latexmkrc $(BUILD_DIR)/$*.latexmkrc
-
-
-# copy all files needed for `iswmacros`
-iswmacros: iswbook $(SRC_DIR)/iswmacros.tex
-	cp $(SRC_DIR)/iswmacros.tex $(BUILD_DIR)/iswmacros.tex
-
-# implicit target for making the images
-images: $(SRC_DIR)/images*
-	rsync -a --exclude="*-converted-to*" $(SRC_DIR)/images $(BUILD_DIR)/
-
-
-# make all bibliography related things
-.PHONY: bbl
-bbl: bbx bib
-
-# copy the BBX file to build
-bbx: $(SRC_DIR)/iswbib.bbx
-	cp $(SRC_DIR)/iswbib.bbx $(BUILD_DIR)/iswbib.bbx
-
-# Copy the BIB file to build
-bib: $(SRC_DIR)/bibliography.bib
-	cp $(SRC_DIR)/bibliography.bib $(BUILD_DIR)/bibliography.bib
-
-.PHONY: glossaries
-glossaries: glssty
-
-glssty: $(SRC_DIR)/iswgloss.sty
-	cp $(SRC_DIR)/iswgloss.sty $(BUILD_DIR)/iswgloss.sty
-
-
-# Semantic Versioning
-# patch version bump for the given file(s)
-patch: $(SRC_DIR)/*.cls
-	$(PY) semver.py patch $?
-
-# minor version bump for the given file(s)
-minor: $(SRC_DIR)/*.cls
-	$(PY) semver.py minor $?
-
-# major version bump for the given file(s)
-major: $(SRC_DIR)/*.cls
-	$(PY) semver.py major $?
-
-
-# cleanup
+# clean directory from all dirt
 .PHONY: clean
 clean:
-	[ -d "$(BUILD_DIR)/" ] && rm -rf $(BUILD_DIR)/ && mkdir $(BUILD_DIR)/ || [ ! -d "$(BUILD_DIR)/" ]
+	[ `ls -1 *.cls 2>/dev/null | wc -l` == 0 ] || rm *.cls
+	[ `ls -1 *.sty 2>/dev/null | wc -l` == 0 ] || rm *.sty
+	[ `ls -1 *.dict 2>/dev/null | wc -l` == 0 ] || rm *.dict
+	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -c -silent *.dtx
+	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -c -silent *.tex
+
+# reseat directory to its original, distributed state
+.PHONY: distclean
+distclean: clean
+	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.dtx
+	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.tex && rm -f *.tex
+	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
+
+# copy compiled files over to user's texmf home
+.PHONY: install
+install: ins
+	mkdir -p $(INSTALLDIR)
+	cp *.cls $(INSTALLDIR)
+	cp *.sty $(INSTALLDIR)
+	cp *.dict $(INSTALLDIR)
+	cp $(DICTIONARIES) $(INSTALLDIR)
+
+# uninstall from user's texmf home
+.PHONY: uninstall
+uninstall: distclean
+	rm -rf $(INSTALLDIR)

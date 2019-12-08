@@ -1,0 +1,752 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttcolors.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{ustuttcolors}
+%<*package>
+    [2019/12/07 v1.0.0 University of Stuttgart LaTeX Colors]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{ustuttcolors}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttcolors.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/12/07}{Initial version}
+%
+% \GetFileInfo{ustuttcolors.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+%
+% \title{The \textsf{ustuttcolors} package\thanks{This document
+%   corresponds to \textsf{ustuttcolors}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% See what colors we have
+% 
+% \begin{figure}
+%   \centering
+%   \ustuttcolormatrix
+% \end{figure}
+%
+% \section{Usage}
+%
+%
+% \section{Implementation}
+%
+%
+% \subsection{Packages}
+%
+%
+% \subsubsection{Package Options}
+%
+% These are probably the most commonly used and SO-suggested options to |xcolor|
+% pacakge, so we'll just pop them right in here.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  usenames,%
+  dvipsnames,%
+  svgnames,%
+  table,%
+  hyperref,%
+}{xcolor}
+%    \end{macrocode}
+%
+%
+% \subsubsection{Package Loading}
+%
+% The package is a toolbox of programming facilities geared primarily towards
+% LaTeX class and package authors. It provides LaTeX frontends to some of the
+% new primitives provided by e-TeX as well as some generic tools which are not
+% strictly related to e-TeX but match the profile of this package. Note that the
+% initial versions of this package were released under the name elatex. The
+% package provides functions that seem to offer alternative ways of implementing
+% some LaTeX kernel commands; nevertheless, the package will not modify any part
+% of the LaTeX kernel.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+%    \end{macrocode}
+%
+% The pgfkeys package (part of the pgf distribution) is a well-designed way of
+% defining and using large numbers of keys for key-value syntaxes. However,
+% pgfkeys itself does not offer means of handling LaTeX class and package
+% options. This package adds such option handling to pgfkeys, in the same way
+% that kvoptions adds the same facility to the LaTeX standard keyval package.
+%    \begin{macrocode}
+\RequirePackage{pgfkeys}
+\RequirePackage{pgfopts}
+%    \end{macrocode}
+%
+% The package starts from the basic facilities of the color package, and
+% provides easy driver-independent access to several kinds of color tints,
+% shades, tones, and mixes of arbitrary colors. It allows a user to select a
+% document-wide target color model and offers complete tools for conversion
+% between eight color models. Additionally, there is a command for alternating
+% row colors plus repeated non-aligned material (like horizontal lines) in
+% tables. Colors can be mixed like |\color{red!30!green!40!blue}|.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+%    \end{macrocode}
+%
+% PGFPlots draws high-quality function plots in normal or logarithmic scaling
+% with a user-friendly interface directly in TeX. The user supplies axis labels,
+% legend entries and the plot coordinates for one or more plots and PGFPlots
+% applies axis scaling, computes any logarithms and axis ticks and draws the
+% plots, supporting line plots, scatter plots, piecewise constant plots, bar
+% plots, area plots, mesh-- and surface plots and some more. Pgfplots is based
+% on PGF/TikZ (PGF); it runs equally for LaTeX/TeX/ConTeXt.
+%    \begin{macrocode}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{tikzscale}
+\usepgfplotslibrary{external}
+\pgfplotsset{compat=newest}
+%    \end{macrocode}
+%
+%
+% \subsection{Package Options}
+%
+% Configure the |pgfopts|-package
+%    \begin{macrocode}
+\pgfkeys{%
+  /ustutt/color/.cd,%
+    .is family,%
+}
+%    \end{macrocode}
+%
+% Color space. By default, we define all colors as RGB, but there might be cases
+% where you want to professionally print your document. Then, you would want to
+% use color space |cmyk|
+%    \begin{macrocode}
+\newif\ifustutt@rgb
+\ustutt@rgbtrue
+\pgfkeys{
+% Change path
+  /ustutt/color/.cd,%
+    space/.is choice,%
+% RGB will be the default
+    space/rgb/.code={%
+      \ustutt@rgbtrue%
+    },
+% CMYK is an option complementary to RGB
+    space/cmyk/.code={%
+      \ustutt@rgbfalse%
+    },%
+    space/.initial=rgb,%
+}
+\pgfkeys{%
+% Change path
+  /ustutt/color/.cd,%
+% A short-hand alias for |space=cmyk|
+    cmyk/.link={/ustutt/color/space=cmyk},%
+% A short-hand alias for |space=rgb|
+    rgb/.link={/ustutt/color/space=rgb},%
+}
+%    \end{macrocode}
+%
+% Colorful thesis may be fun for some, but others may want a nearly black and
+% white (or at least grayscale thesis style). Choose the `colorful` option to
+% have a bit more color in your document.
+%    \begin{macrocode}
+\newif\ifustutt@colorful
+\ustutt@colorfulfalse
+\pgfkeys{
+% Change path
+  /ustutt/color/.cd,%
+    colorful/.is if=ustutt@colorful,%
+}
+\pgfkeys{%
+% Change path
+  /ustutt/color/.cd,%
+% A short-hand alias for |space=cmyk|
+    cmyk/.link={/ustutt/color/space=cmyk},%
+% A short-hand alias for |space=rgb|
+    rgb/.link={/ustutt/color/space=rgb},%
+}
+%    \end{macrocode}
+%
+% Process options passed to the package
+%    \begin{macrocode}
+\ProcessPgfOptions{/ustutt/color}
+% \ProcessOptions\relax
+%    \end{macrocode}
+%
+%
+% \subsection{Macros}
+%
+%
+% \begin{macro}{\colorlighter}
+% \cmd{\colorlighter}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
+% Define new color |#3| which is only |#2| parts of the original color |#1| and
+% the remainder White.
+%    \begin{macrocode}
+\newcommand{\colorlighter}[3]{%
+% #1 Original color
+% #2 Percentage of white mix
+% #3 New color name
+  \colorlet{#3}{#1!#2!White}%
+}
+%    \end{macrocode}
+% For example, to get shades of Red lighter by 80\%, 50\%, and 20\%, use
+% \begin{verbatim}
+%   \colorlighter{Red}{0.20}{RedLighter}
+%   \colorlighter{Red}{0.50}{RedLight}
+%   \colorlighter{Red}{0.80}{RedVeryLight}
+% \end{verbatim}
+% \end{macro}
+%
+% \begin{macro}{\colordarker}
+% \cmd{\colordarker}\marg{original color}\marg{percentage of original color}\marg{new color name}\\
+% Define new color |#3| which is only |#2| parts of the original color |#1| and
+% the remainder black.
+%    \begin{macrocode}
+\newcommand{\colordarker}[3]{%
+% #1 Original color
+% #2 Percentage of black mix
+% #3 New color name
+  \colorlet{#3}{#1!#2!black}%
+}
+%    \end{macrocode}
+% For example, to get shades of Red darker by 80\%, 50\%, and 20\%, use
+% \begin{verbatim}
+%   \colordarker{Red}{0.20}{RedDarker}
+%   \colordarker{Red}{0.50}{RedDark}
+%   \colordarker{Red}{0.80}{RedVeryDark}
+% \end{verbatim}
+% \end{macro}
+%
+% Definition of colors in CMYK color space and RGB color space
+%    \begin{macrocode}
+\ifustutt@rgb
+% Dark blue
+  \definecolor{AccentOne}{RGB}{0,81,158}
+% Light blue
+  \definecolor{AccentTwo}{RGB}{0,190,255}
+% Dark green
+  \definecolor{AccentThree}{RGB}{59,140,122}
+% Light green
+  \definecolor{AccentFour}{RGB}{125,155,101}
+% Dark orange
+  \definecolor{AccentFive}{RGB}{228,175,52}
+% Light orange
+  \definecolor{AccentSix}{RGB}{236,218,145}
+% Anthracite
+  \definecolor{DarkOne}{RGB}{62,68,76}
+% black
+  \definecolor{DarkTwo}{RGB}{0,0,0}
+% White
+  \definecolor{LightOne}{RGB}{255,255,255}
+% Light gray
+  \definecolor{LightTwo}{RGB}{159,153,152}
+\else
+% Dark blue
+  \definecolor{AccentOne}{cmyk}{100,70,0,0}
+% Light blue
+  \definecolor{AccentTwo}{cmyk}{255,65,0,0}
+% Dark green
+  \definecolor{AccentThree}{cmyk}{81,0,18,45}
+% Light green
+  \definecolor{AccentFour}{cmyk}{30,0,54,40}
+% Dark orange
+  \definecolor{AccentFive}{cmyk}{0,53,176,11}
+% Light orange
+  \definecolor{AccentSix}{cmyk}{0,18,91,8}
+% Anthracite
+  \definecolor{DarkOne}{cmyk}{18,11,0,70}
+% black
+  \definecolor{DarkTwo}{cmyk}{0,0,0,100}
+% White
+  \definecolor{LightOne}{cmyk}{0,0,0,0}
+% Light gray
+  \definecolor{LightTwo}{cmyk}{0,4,4,38}
+\fi
+%    \end{macrocode}
+%
+% More human readable color names
+%    \begin{macrocode}
+\colorlet{UStuttWhite}{LightOne}
+\colorlet{UStuttBlack}{DarkTwo}
+\colorlet{UStuttAnthracite}{DarkOne}
+\colorlet{UStuttGray}{LightTwo}
+\colorlet{DarkBlue}{AccentOne}
+\colorlet{LightBlue}{AccentTwo}
+\colorlet{DarkGreen}{AccentThree}
+\colorlet{LightGreen}{AccentFour}
+\colorlet{DarkOrange}{AccentFive}
+\colorlet{LightOrange}{AccentSix}
+% And the `colorful` color option
+\ifustutt@colorful
+  \colorlet{UStuttColorful}{DarkBlue}
+\else 
+  \colorlet{UStuttColorful}{UStuttAnthracite}
+\fi
+%    \end{macrocode}
+%
+% Shades of white
+%    \begin{macrocode}
+\colorlighter{UStuttWhite}{25}{UStuttWhiteVeryLight}
+\colorlighter{UStuttWhite}{50}{UStuttWhiteLight}
+\colorlighter{UStuttWhite}{75}{UStuttWhiteLighter}
+\colordarker{UStuttWhite}{75}{UStuttWhiteDarker}
+\colordarker{UStuttWhite}{50}{UStuttWhiteDark}
+\colordarker{UStuttWhite}{25}{UStuttWhiteVeryDark}
+%    \end{macrocode}
+%
+% Shades of black
+%    \begin{macrocode}
+\colorlighter{UStuttBlack}{25}{UStuttBlackVeryLight}
+\colorlighter{UStuttBlack}{50}{UStuttBlackLight}
+\colorlighter{UStuttBlack}{75}{UStuttBlackLighter}
+\colordarker{UStuttBlack}{75}{UStuttBlackDarker}
+\colordarker{UStuttBlack}{50}{UStuttBlackDark}
+\colordarker{UStuttBlack}{25}{UStuttBlackVeryDark}
+%    \end{macrocode}
+%
+% Shades of anthracite
+%    \begin{macrocode}
+\colorlighter{UStuttAnthracite}{25}{UStuttAnthraciteVeryLight}
+\colorlighter{UStuttAnthracite}{50}{UStuttAnthraciteLight}
+\colorlighter{UStuttAnthracite}{75}{UStuttAnthraciteLighter}
+\colordarker{UStuttAnthracite}{75}{UStuttAnthraciteDarker}
+\colordarker{UStuttAnthracite}{50}{UStuttAnthraciteDark}
+\colordarker{UStuttAnthracite}{25}{UStuttAnthraciteVeryDark}
+%    \end{macrocode}
+%
+% Shades of gray
+%    \begin{macrocode}
+\colorlighter{UStuttGray}{25}{UStuttGrayVeryLight}
+\colorlighter{UStuttGray}{50}{UStuttGrayLight}
+\colorlighter{UStuttGray}{75}{UStuttGrayLighter}
+\colordarker{UStuttGray}{75}{UStuttGrayDarker}
+\colordarker{UStuttGray}{50}{UStuttGrayDark}
+\colordarker{UStuttGray}{25}{UStuttGrayVeryDark}
+%    \end{macrocode}
+%
+% Shades of accent one
+%    \begin{macrocode}
+\colorlighter{AccentOne}{25}{AccentOneVeryLight}
+\colorlighter{AccentOne}{50}{AccentOneLight}
+\colorlighter{AccentOne}{75}{AccentOneLighter}
+\colordarker{AccentOne}{75}{AccentOneDarker}
+\colordarker{AccentOne}{50}{AccentOneDark}
+\colordarker{AccentOne}{25}{AccentOneVeryDark}
+%    \end{macrocode}
+%
+% Shades of accent two
+%    \begin{macrocode}
+\colorlighter{AccentTwo}{25}{AccentTwoVeryLight}
+\colorlighter{AccentTwo}{50}{AccentTwoLight}
+\colorlighter{AccentTwo}{75}{AccentTwoLighter}
+\colordarker{AccentTwo}{75}{AccentTwoDarker}
+\colordarker{AccentTwo}{50}{AccentTwoDark}
+\colordarker{AccentTwo}{25}{AccentTwoVeryDark}
+%    \end{macrocode}
+%
+% Shades of accent three
+%    \begin{macrocode}
+\colorlighter{AccentThree}{25}{AccentThreeVeryLight}
+\colorlighter{AccentThree}{50}{AccentThreeLight}
+\colorlighter{AccentThree}{75}{AccentThreeLighter}
+\colordarker{AccentThree}{75}{AccentThreeDarker}
+\colordarker{AccentThree}{50}{AccentThreeDark}
+\colordarker{AccentThree}{25}{AccentThreeVeryDark}
+%    \end{macrocode}
+%
+% Shades of accent four
+%    \begin{macrocode}
+\colorlighter{AccentFour}{25}{AccentFourVeryLight}
+\colorlighter{AccentFour}{50}{AccentFourLight}
+\colorlighter{AccentFour}{75}{AccentFourLighter}
+\colordarker{AccentFour}{75}{AccentFourDarker}
+\colordarker{AccentFour}{50}{AccentFourDark}
+\colordarker{AccentFour}{25}{AccentFourVeryDark}
+%    \end{macrocode}
+%
+% Shades of accent five
+%    \begin{macrocode}
+\colorlighter{AccentFive}{25}{AccentFiveVeryLight}
+\colorlighter{AccentFive}{50}{AccentFiveLight}
+\colorlighter{AccentFive}{75}{AccentFiveLighter}
+\colordarker{AccentFive}{75}{AccentFiveDarker}
+\colordarker{AccentFive}{50}{AccentFiveDark}
+\colordarker{AccentFive}{25}{AccentFiveVeryDark}
+%    \end{macrocode}
+%
+% Shades of accent six
+%    \begin{macrocode}
+\colorlighter{AccentSix}{25}{AccentSixVeryLight}
+\colorlighter{AccentSix}{50}{AccentSixLight}
+\colorlighter{AccentSix}{75}{AccentSixLighter}
+\colordarker{AccentSix}{75}{AccentSixDarker}
+\colordarker{AccentSix}{50}{AccentSixDark}
+\colordarker{AccentSix}{25}{AccentSixVeryDark}
+%    \end{macrocode}
+%
+% Shades of dark one color
+%    \begin{macrocode}
+\colorlighter{DarkOne}{25}{DarkOneVeryLight}
+\colorlighter{DarkOne}{50}{DarkOneLight}
+\colorlighter{DarkOne}{75}{DarkOneLighter}
+\colordarker{DarkOne}{75}{DarkOneDarker}
+\colordarker{DarkOne}{50}{DarkOneDark}
+\colordarker{DarkOne}{25}{DarkOneVeryDark}
+%    \end{macrocode}
+%
+% Shades of dark two color
+%    \begin{macrocode}
+\colorlighter{DarkTwo}{25}{DarkTwoVeryLight}
+\colorlighter{DarkTwo}{50}{DarkTwoLight}
+\colorlighter{DarkTwo}{75}{DarkTwoLighter}
+\colordarker{DarkTwo}{75}{DarkTwoDarker}
+\colordarker{DarkTwo}{50}{DarkTwoDark}
+\colordarker{DarkTwo}{25}{DarkTwoVeryDark}
+%    \end{macrocode}
+%
+% Shades of light one color
+%    \begin{macrocode}
+\colorlighter{LightOne}{25}{LightOneVeryLight}
+\colorlighter{LightOne}{50}{LightOneLight}
+\colorlighter{LightOne}{75}{LightOneLighter}
+\colordarker{LightOne}{75}{LightOneDarker}
+\colordarker{LightOne}{50}{LightOneDark}
+\colordarker{LightOne}{25}{LightOneVeryDark}
+%    \end{macrocode}
+%
+% Shades of light two color
+%    \begin{macrocode}
+\colorlighter{LightTwo}{25}{LightTwoVeryLight}
+\colorlighter{LightTwo}{50}{LightTwoLight}
+\colorlighter{LightTwo}{75}{LightTwoLighter}
+\colordarker{LightTwo}{75}{LightTwoDarker}
+\colordarker{LightTwo}{50}{LightTwoDark}
+\colordarker{LightTwo}{25}{LightTwoVeryDark}
+%    \end{macrocode}
+%
+% Shades of dark blue accent
+%    \begin{macrocode}
+\colorlighter{DarkBlue}{25}{DarkBlueVeryLight}
+\colorlighter{DarkBlue}{50}{DarkBlueLight}
+\colorlighter{DarkBlue}{75}{DarkBlueLighter}
+\colordarker{DarkBlue}{75}{DarkBlueDarker}
+\colordarker{DarkBlue}{50}{DarkBlueDark}
+\colordarker{DarkBlue}{25}{DarkBlueVeryDark}
+%    \end{macrocode}
+%
+% Shades of light blue accent
+%    \begin{macrocode}
+\colorlighter{LightBlue}{25}{LightBlueVeryLight}
+\colorlighter{LightBlue}{50}{LightBlueLight}
+\colorlighter{LightBlue}{75}{LightBlueLighter}
+\colordarker{LightBlue}{75}{LightBlueDarker}
+\colordarker{LightBlue}{50}{LightBlueDark}
+\colordarker{LightBlue}{25}{LightBlueVeryDark}
+%    \end{macrocode}
+%
+% Shades of dark green accent
+%    \begin{macrocode}
+\colorlighter{DarkGreen}{25}{DarkGreenVeryLight}
+\colorlighter{DarkGreen}{50}{DarkGreenLight}
+\colorlighter{DarkGreen}{75}{DarkGreenLighter}
+\colordarker{DarkGreen}{75}{DarkGreenDarker}
+\colordarker{DarkGreen}{50}{DarkGreenDark}
+\colordarker{DarkGreen}{25}{DarkGreenVeryDark}
+%    \end{macrocode}
+%
+% Shades of light green accent
+%    \begin{macrocode}
+\colorlighter{LightGreen}{25}{LightGreenVeryLight}
+\colorlighter{LightGreen}{50}{LightGreenLight}
+\colorlighter{LightGreen}{75}{LightGreenLighter}
+\colordarker{LightGreen}{75}{LightGreenDarker}
+\colordarker{LightGreen}{50}{LightGreenDark}
+\colordarker{LightGreen}{25}{LightGreenVeryDark}
+%    \end{macrocode}
+%
+% Shades of dark orange accent
+%    \begin{macrocode}
+\colorlighter{DarkOrange}{25}{DarkOrangeVeryLight}
+\colorlighter{DarkOrange}{50}{DarkOrangeLight}
+\colorlighter{DarkOrange}{75}{DarkOrangeLighter}
+\colordarker{DarkOrange}{75}{DarkOrangeDarker}
+\colordarker{DarkOrange}{50}{DarkOrangeDark}
+\colordarker{DarkOrange}{25}{DarkOrangeVeryDark}
+%    \end{macrocode}
+%
+% Shades of light orange accent
+%    \begin{macrocode}
+\colorlighter{LightOrange}{25}{LightOrangeVeryLight}
+\colorlighter{LightOrange}{50}{LightOrangeLight}
+\colorlighter{LightOrange}{75}{LightOrangeLighter}
+\colordarker{LightOrange}{75}{LightOrangeDarker}
+\colordarker{LightOrange}{50}{LightOrangeDark}
+\colordarker{LightOrange}{25}{LightOrangeVeryDark}
+%    \end{macrocode}
+%
+% Shades of the `colorful` color
+%    \begin{macrocode}
+\colorlighter{UStuttColorful}{25}{UStuttColorfulVeryLight}
+\colorlighter{UStuttColorful}{50}{UStuttColorfulLight}
+\colorlighter{UStuttColorful}{75}{UStuttColorfulLighter}
+\colordarker{UStuttColorful}{75}{UStuttColorfulDarker}
+\colordarker{UStuttColorful}{50}{UStuttColorfulDark}
+\colordarker{UStuttColorful}{25}{UStuttColorfulVeryDark}
+%    \end{macrocode}
+%
+%
+%
+% Colors for use in koma script elements
+% Line above header
+%    \begin{macrocode}
+\colorlet{headtopline}{UStuttColorful}
+%    \end{macrocode}
+% Line below header
+%    \begin{macrocode}
+\colorlet{headsepline}{UStuttColorful}
+%    \end{macrocode}
+% Line above footer
+%    \begin{macrocode}
+\colorlet{footsepline}{UStuttColorful}
+%    \end{macrocode}
+% Line below footer
+%    \begin{macrocode}
+\colorlet{footbotline}{UStuttColorful}
+%    \end{macrocode}
+% Line above footnotes
+%    \begin{macrocode}
+\colorlet{footnoterule}{UStuttColorful}
+%    \end{macrocode}
+% Footnote number
+%    \begin{macrocode}
+\colorlet{thefootnote}{UStuttColorful}
+%    \end{macrocode}
+%
+% Setting title to be written in main color, sans-serif, and Huge
+%    \begin{macrocode}
+\colorlet{title}{black}
+%    \end{macrocode}
+% Setting subtitle to be written in main color, sans-serif, and large
+%    \begin{macrocode}
+\colorlet{subtitle}{black}
+%    \end{macrocode}
+% Setting author to be written in main color, sans-serif, and huge
+%    \begin{macrocode}
+\colorlet{author}{black}
+%    \end{macrocode}
+% Setting date to be written in main color, normal font, and normal size
+%    \begin{macrocode}
+\colorlet{date}{black}
+%    \end{macrocode}
+% Page header and footer should be written in the main color and sans-serif
+%    \begin{macrocode}
+\colorlet{pageheadfoot}{UStuttBlack}
+%    \end{macrocode}
+% Page footer should be written in the main color, sans-serif and small font size
+%    \begin{macrocode}
+\colorlet{pagefoot}{UStuttBlack}
+%    \end{macrocode}
+% Create a new font for "place of birth"
+%    \begin{macrocode}
+\colorlet{placeofbirth}{black}
+%    \end{macrocode}
+% Make page numbers printed in UStuttBlack
+%    \begin{macrocode}
+\colorlet{pagenumber}{UStuttBlack}
+%    \end{macrocode}
+%
+% Colors for document headings from part over sectioning down to paragraphs
+%    \begin{macrocode}
+\colorlet{part}{UStuttBlack}
+\colorlet{chapter}{part}
+\colorlet{disposition}{chapter}
+\colorlet{sectioning}{disposition}
+\colorlet{section}{sectioning}
+\colorlet{subsection}{sectioning}
+\colorlet{subsubsection}{sectioning}
+\colorlet{paragraph}{subsubsection}
+\colorlet{subparagraph}{paragraph}
+\colorlet{descriptionlabel}{subparagraph}
+%    \end{macrocode}
+% Color of dictum
+%    \begin{macrocode}
+\colorlet{dictum}{AccentOne}
+%    \end{macrocode}
+% Color of itemize bullets
+%    \begin{macrocode}
+\colorlet{itemizei}{AccentOne}
+\colorlet{itemizeii}{AccentOne}
+\colorlet{itemizeiii}{AccentOne}
+\colorlet{itemizeiv}{AccentOne}
+%    \end{macrocode}
+%
+% Color of float object's caption i.e., "Table" or "Figure"
+%    \begin{macrocode}
+\colorlet{captionlabel}{AccentOne}
+%    \end{macrocode}
+%
+%
+%
+% Colors for table elements
+%    \begin{macrocode}
+\colorlet{ArrayRuleColor}{UStuttColorful}
+\colorlet{TableHeader}{AccentOne}
+\colorlet{TableRowEven}{LightOne}
+\colorlet{TableRowOdd}{LightTwoVeryLight}
+\colorlet{TableCellHighlight}{LightTwo}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\ustuttcolormatrix}
+% \cmd{\ustuttcolormatrix}\\
+% Create a color matrix to be displayed within a document showing all the colors available in the UStutt package
+%    \begin{macrocode}
+\NewDocumentCommand{\ustuttcolormatrix}{ }{%
+  \newcommand{\ustuttcolorlist}{AccentOne,AccentTwo,AccentThree,AccentFour,AccentFive,AccentSix,UStuttWhite,UStuttBlack,UStuttAnthracite,UStuttGray,DarkBlue,LightBlue,DarkGreen,LightGreen,DarkOrange,LightOrange}
+  \newcommand{\ustutthuelist}{VeryLight,Light,Lighter,,Darker,Dark,VeryDark}
+  \begin{tikzpicture}[%
+      x=1.00cm,%
+      y=-1.00cm,%
+    ]
+% Draw row names i.e., color names
+    \foreach \color [count=\y from 0] in \ustuttcolorlist {
+      \draw[%
+        ]%
+        (0,\y)%
+          node[%
+              align=right,%
+              anchor=east,%
+            ]%
+            {\color};
+    }
+% Draw column names i.e., hue names
+    \foreach \hue [count=\x from 0] in \ustutthuelist {
+      \draw[
+        ]%
+        (\x+0.50,-0.50)%
+          node[%
+              anchor=west,%
+              align=left,%
+              rotate=90,%
+            ]%
+            {\hue};
+    }
+% Draw the rectangles
+    \foreach \color [count=\y from 0] in \ustuttcolorlist {
+      \draw[%
+        ]%
+        (0,\y)%
+          node[%
+              align=right,%
+              anchor=east,%
+            ]%
+            {\color};
+      \foreach \hue [count=\x from 0] in \ustutthuelist {
+        \draw[
+            color=\color\hue,%
+            draw,%
+            fill,%
+            fill opacity=1.00,%
+            draw opacity=1.00,%
+          ]%
+          (\x,\y-0.50)%
+            rectangle ++(1.00,1.00);
+      }
+    }
+  \end{tikzpicture}
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% Make hyperref use these colors
+%    \begin{macrocode}
+\tikzifexternalizing{%
+% In TikZ externalizing mode
+}{%
+% Nin TikZ externalizing mode
+  \@ifpackageloaded{hyperref}{%
+    \hypersetup{%
+% set color of anchors
+      anchorcolor=black,%
+% color of border around citation links
+      citebordercolor=black,%
+% color of citation links
+      citecolor=black,%
+%  color of border aroundfile links
+      filebordercolor=black,%
+% color of file links
+      filecolor=black,%
+% color of border around links
+      linkbordercolor=black,%
+% color of links
+      linkcolor=black,%
+% color of border around menu links
+      menubordercolor=black,%
+% color for menu links
+      menucolor=black,%
+% color of border around 'run' links
+      runbordercolor=black,%
+% color of 'run' links
+      runcolor=black,%
+% color of border around URL links
+      urlbordercolor=black,%
+% color of URL links
+      urlcolor=black,%
+    }%
+  }{}%
+}
+%    \end{macrocode}
+%
+% \Finale
+\endinput

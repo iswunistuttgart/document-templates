@@ -1,8 +1,18 @@
-# Add worktree folders
-!*/.gitkeep
-wt-*
-worktree*
-src/*.pdf
+# DocStrip related stuff
+*.sty
+*.cls
+*.dict
+*.tex
+*.pdf
+*.nlg
+*.nls
+*.slg
+*.slo
+*.sls
+
+# release directory
+dist/*
+
 
 # Created by https://www.gitignore.io/api/windows
 

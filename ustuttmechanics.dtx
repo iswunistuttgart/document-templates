@@ -1,0 +1,1711 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttmechanics.dtx}
+%</driver>
+%<package>\def\fileversion{1.0.0}
+%<package>\def\filedate{2019/12/07}
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{ustuttmechanics}
+%<*package>
+    [2019/12/07 v1.0.0 University of Stuttgart Mechanics package file]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{hyperref}
+\usepackage{ustuttmechanics}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttmechanics.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/12/07}{Initial version}
+%
+% \GetFileInfo{ustuttmechanics.dtx}
+%
+% \DoNotIndex{\alpha,\ddot,\ddotvect,\delta,\dot,\dotvect,\eta,\gamma,\IfBooleanTF,\IfValueTF,\jacobian,\kappa,\lambda,\matr,\mc,\ms,\mu,\NewDocumentCommand,\ndot,\ndotvect,\nu,\omega,\overline,\overlinematr,\overlinevect,\Phi,\prescript,\RequirePackage,\Sigma,\sigma,\tau,\theta,\varepsilon,\varphi,\varrho,\vect,\xi}
+%
+% 
+%
+% \title{The \textsf{ustuttmechanics} package\thanks{This document
+%   corresponds to \textsf{ustuttmechanics}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% If you want to use |ustuttmechanics|, you must also load package |ustuttmath|.
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing. It is merely an example.  If this were a real macro,
+% you would put a paragraph here describing what the macro is supposed to do,
+% what its mandatory and optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+%
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\RequirePackage{ustuttmath}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\dof}
+%    \begin{macrocode}
+\NewDocumentCommand{\dof}{ }{%
+  n%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\transmission}
+%    \begin{macrocode}
+\NewDocumentCommand{\transmission}{ }{%
+  \nu%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\damping}
+%    \begin{macrocode}
+\NewDocumentCommand{\damping}{ }{%
+  D%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\angularfrequency}
+%    \begin{macrocode}
+\NewDocumentCommand{\angularfrequency}{ }{
+  \omega%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\naturalfrequency}
+%    \begin{macrocode}
+\NewDocumentCommand{\naturalfrequency}{ }{
+  \omega%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\gravitysymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\gravitysymbol}{ }{%
+  G%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msgravity}
+%    \begin{macrocode}
+\NewDocumentCommand{\msgravity}{ }{%
+  \ms{\gravitysymbol}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\gravity}
+%    \begin{macrocode}
+\NewDocumentCommand{\gravity}{ s }{%
+  \IfBooleanTF{#1}{%
+    \gravitysymbol%
+  }{%
+    \vect{\gravitysymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\radius}
+%    \begin{macrocode}
+\NewDocumentCommand{\radius}{ }{%
+  r%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\diameter}
+%    \begin{macrocode}
+\NewDocumentCommand{\diameter}{ }{%
+  d%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\length}
+%    \begin{macrocode}
+\NewDocumentCommand{\length}{ }{%
+  L%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\crosssection}
+%    \begin{macrocode}
+\NewDocumentCommand{\crosssection}{ }{%
+  A%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\volume}
+%    \begin{macrocode}
+\NewDocumentCommand{\volume}{ }{%
+  V%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\unitdensity}
+%    \begin{macrocode}
+\NewDocumentCommand{\unitdensity}{ }{%
+  \varrho%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\mass}
+%    \begin{macrocode}
+\NewDocumentCommand{\mass}{ }{%
+  m%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\inertia}
+%    \begin{macrocode}
+\NewDocumentCommand{\inertia}{ }{%
+  J%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\secondmomentofarea}
+%    \begin{macrocode}
+\NewDocumentCommand{\secondmomentofarea}{ }{%
+  I%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\youngsmodulus}
+%    \begin{macrocode}
+\NewDocumentCommand{\youngsmodulus}{ }{%
+  E%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\elasticity}
+%    \begin{macrocode}
+\NewDocumentCommand{\elasticity}{ s }{%
+  \IfBooleanTF{#1}{%
+    \youngsmodulus%
+  }{%
+    \vect{\youngsmodulus}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\shearmodulus}
+%    \begin{macrocode}
+\NewDocumentCommand{\shearmodulus}{ }{%
+  G%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\viscousmodulus}
+%    \begin{macrocode}
+\NewDocumentCommand{\viscousmodulus}{ }{%
+  \eta%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\viscosity}
+%    \begin{macrocode}
+\NewDocumentCommand{\viscosity}{ s }{%
+  \IfBooleanTF{#1}{%
+    \viscousmodulus%
+  }{%
+    \vect{\viscousmodulus}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\stiffness}
+%    \begin{macrocode}
+\NewDocumentCommand{\stiffness}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{K}%
+    }{%
+      K%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \matr[#2][#3]{K}%
+    }{%
+      \matr{K}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\stiffnessy}
+%    \begin{macrocode}
+\NewDocumentCommand{\stiffnessy}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\overline{K}}%
+    }{%
+      \overline{K}%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\overlinematr{K}}%
+    }{%
+      \overlinematr{K}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\Mass}
+%    \begin{macrocode}
+\NewDocumentCommand{\Mass}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{M}%
+    }{%
+      M%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\matr{M}}%
+    }{%
+      \matr{M}%
+    }%
+  }%
+}%s
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\Massy}
+%    \begin{macrocode}
+\NewDocumentCommand{\Massy}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\matr{M}}%
+  }{%
+    \matr{M}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dynforcessymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\dynforcessymbol}{ }{%
+  \gamma%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dynforces}
+%    \begin{macrocode}
+\NewDocumentCommand{\dynforces}{ }{%
+  \vect{\dynforcessymbol}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\work}
+%    \begin{macrocode}
+\NewDocumentCommand{\work}{ }{%
+  W%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\energy}
+%    \begin{macrocode}
+\NewDocumentCommand{\energy}{ }{%
+  E%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\energypotential}
+%    \begin{macrocode}
+\NewDocumentCommand{\energypotential}{ }{%
+  U%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\energykinetic}
+%    \begin{macrocode}
+\NewDocumentCommand{\energykinetic}{ }{%
+  T%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\energydissipative}
+%    \begin{macrocode}
+\NewDocumentCommand{\energydissipative}{ }{%
+  P%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msexternal}
+%    \begin{macrocode}
+\NewDocumentCommand{\msexternal}{}{%
+  \ms{ext}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msinternal}
+%    \begin{macrocode}
+\NewDocumentCommand{\msinternal}{}{%
+  \ms{int}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msdynamic}
+%    \begin{macrocode}
+\NewDocumentCommand{\msdynamic}{}{%
+  \ms{dyn}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtual}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtual}{ m }{%
+  \delta{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualwork}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualwork}{ }{%
+  \virtual{\work}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualworkinternal}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualworkinternal}{ }{%
+  \virtual{\work}_{\msinternal}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualworkexternal}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualworkexternal}{ }{%
+  \virtual{\work}_{\msexternal}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualworkdynamic}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualworkdynamic}{ }{%
+  \virtual{\work}_{\msdynamic}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualdisplacement}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualdisplacement}{ O{x} }{%
+  \virtual{\vect{#1}}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\genqsymb}
+%    \begin{macrocode}
+\NewDocumentCommand{\genqsymb}{ }{%
+  q%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\genq}
+%    \begin{macrocode}
+\NewDocumentCommand{\genq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \genqsymb%
+  }{%
+    \vect{\genqsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotgenq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\genqsymb}%
+  }{%
+    \dotvect{\genqsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotgenq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\genqsymb}%
+  }{%
+    \ddotvect{\genqsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotgenq}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \ndot{#2}{\genqsymb}%
+  }{%
+    \ndotvect{#2}{\genqsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\genqlin}
+%    \begin{macrocode}
+\NewDocumentCommand{\genqlin}{ s }{%
+  \IfBooleanTF{#1}{%
+    \overline{\genqsymb}%
+  }{%
+    \overlinevect{\genqsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotgenqlin}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotgenqlin}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\overline{\genqsymb}}%
+  }{%
+    \dot{\overlinevect{\genqsymb}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotgenqlin}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotgenqlin}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\overline{\genqsymb}}%
+  }{%
+    \ddot{\overlinevect{\genqsymb}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotgenqlin}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotgenqlin}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ndot{\overline{\genqsymb}}%
+  }{%
+    \ndot{\overlinevect{\genqsymb}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualgenq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \virtual{\genqsymb}%
+  }{%
+    \virtual{\vect{\genqsymb}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualdotgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualdotgenq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \virtual{\dot{\genqsymb}}%
+  }{%
+    \virtual{\dotvect{\genqsymb}}%
+  }%
+}%s
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualddotgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualddotgenq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \virtual{\ddot{\genqsymb}}%
+  }{%
+    \virtual{\ddotvect{\genqsymb}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\virtualndotgenq}
+%    \begin{macrocode}
+\NewDocumentCommand{\virtualndotgenq}{ s }{%
+  \IfBooleanTF{#1}{%
+    \virtual{\ndot{\genqsymb}}%
+  }{%
+    \virtual{\ndotvect{\genqsymb}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\genvsymb}
+%    \begin{macrocode}
+\NewDocumentCommand{\genvsymb}{ }{%
+  v%
+}%s
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\genv}
+%    \begin{macrocode}
+\NewDocumentCommand{\genv}{ s }{%
+  \IfBooleanTF{#1}{%
+    \genvsymb%
+  }{%
+    \vect{\genvsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotgenv}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotgenv}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\genvsymb}%
+  }{%
+    \dotvect{\genvsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotgenv}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotgenv}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\genvsymb}%
+  }{%
+    \ddotvect{\genvsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotgenv}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotgenv}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ndot{\genvsymb}%
+  }{%
+    \ndotvect{\genvsymb}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\statesymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\statesymbol}{ }{%
+  y%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\state}
+%    \begin{macrocode}
+\NewDocumentCommand{\state}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\vect{\statesymbol}}%
+  }{%
+    \vect{\statesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\dotvect{\statesymbol}}%
+  }{%
+    \dotvect{\statesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ddotvect{\statesymbol}}%
+  }{%
+    \ddotvect{\statesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ndotvect{\statesymbol}}%
+  }{%
+    \ndotvect{\statesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\auxstatesymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\auxstatesymbol}{ }{%
+  v%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\auxstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\auxstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\vect{\auxstatesymbol}}%
+  }{%
+    \vect{\auxstatesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotauxstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotauxstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\dotvect{\auxstatesymbol}}%
+  }{%
+    \dotvect{\auxstatesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotauxstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotauxstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ddotvect{\auxstatesymbol}}%
+  }{%
+    \ddotvect{\auxstatesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotauxstate}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotauxstate}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ndotvect{\auxstatesymbol}}%
+  }{%
+    \ndotvect{\auxstatesymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\inertiatensor}
+%    \begin{macrocode}
+\NewDocumentCommand{\inertiatensor}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\matr{\inertia}}%
+  }{%
+    \matr{\inertia}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\fictitiousforces}
+%    \begin{macrocode}
+\NewDocumentCommand{\fictitiousforces}{ }{%
+  \vect{h}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\fictitiousforcesy}
+%    \begin{macrocode}
+\NewDocumentCommand{\fictitiousforcesy}{ }{%
+  \overlinevect{h}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \subsection{Constrained Mechanics}
+%
+%
+% \begin{macro}{\constraintssymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\constraintssymbol}{ }{%
+  \Phi%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\posconstraintssymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\posconstraintssymbol}{ }{%
+  g%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\velconstraintssymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\velconstraintssymbol}{ }{%
+  G%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\numconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\numconstraints}{ }{%
+  n_{\constraintssymbol}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\numposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\numposconstraints}{ }{%
+  n_{\posconstraintssymbol}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\numvelconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\numvelconstraints}{ }{%
+  n_{\velconstraintssymbol}%
+}%
+%    \end{macrocode}
+% \end{macro}v
+%
+%
+% \begin{macro}{\posconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\posconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \posconstraintssymbol%
+  }{%
+    \vect{\posconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotposconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\posconstraintssymbol}%
+  }{%
+    \dotvect{\posconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotposconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\posconstraintssymbol}%
+  }{%
+    \ddotvect{\posconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotposconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ndot{\posconstraintssymbol}%
+  }{%
+    \ndotvect{\posconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\velconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\velconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \velconstraintssymbol%
+  }{%
+    \vect{\velconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotvelconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotvelconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\velconstraintssymbol}%
+  }{%
+    \dotvect{\velconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotvelconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotvelconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\velconstraintssymbol}%
+  }{%
+    \ddotvect{\velconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotvelconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotvelconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ndot{\velconstraintssymbol}%
+  }{%
+    \ndotvect{\velconstraintssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\jacposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\jacposconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \jacobian{\posconstraintssymbol}%
+  }{%
+    \jacobian{\vect{\posconstraintssymbol}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\jacvelconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\jacvelconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \jacobian{\velconstraintssymbol}%
+  }{%
+    \jacobian{\vect{\velconstraintssymbol}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\jacdotposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\jacdotposconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \jacobian{\dotposconstraints*}%
+  }{%
+    \jacobian{\dotposconstraints}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotjacposconstraints}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotjacposconstraints}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\jacobian{\posconstraintssymbol}}%
+  }{%
+    \dot{\jacobian{\vect{\posconstraintssymbol}}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\posconstraintforcessymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\posconstraintforcessymbol}{ }{%
+  \lambda%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\velconstraintforcessymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\velconstraintforcessymbol}{ }{%
+  \mu%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\posconstraintforces}
+%    \begin{macrocode}
+\NewDocumentCommand{\posconstraintforces}{ s }{%
+  \IfBooleanTF{#1}{%
+    \posconstraintforcessymbol%
+  }{%
+    \vect{\posconstraintforcessymbol}
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\velconstraintforces}
+%    \begin{macrocode}
+\NewDocumentCommand{\velconstraintforces}{ s }{%
+  \IfBooleanTF{#1}{%
+    \velconstraintforcessymbol%
+  }{%
+    \vect{\velconstraintforcessymbol}
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \subsection{Classical Mechanics}
+%
+%
+% \begin{macro}{\lagrangian}
+%    \begin{macrocode}
+\NewDocumentCommand{\lagrangian}{ }{%
+  L%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\lagrangemultisymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\lagrangemultisymbol}{ }{%
+  \lambda%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\lagrangemultip}
+%    \begin{macrocode}
+\NewDocumentCommand{\lagrangemultip}{ s }{%
+  \IfBooleanTF{#1}{%
+    \lagrangemultisymbol%
+  }{%
+    \vect{\lagrangemultisymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotlagrangemultip}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotlagrangemultip}{ s }{%
+  \IfBooleanTF{#1}{%
+    \lagrangemultisymbol%
+  }{%
+    \dotvect{\lagrangemultisymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\linpos}
+%    \begin{macrocode}
+\NewDocumentCommand{\linpos}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\vect{p}}%
+  }{%
+    \vect{p}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\linvel}
+%    \begin{macrocode}
+\NewDocumentCommand{\linvel}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\vect{v}}%
+  }{%
+    \vect{v}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\linacc}
+%    \begin{macrocode}
+\NewDocumentCommand{\linacc}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{a}%
+    }{%
+      a%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\vect{a}}%
+    }{%
+      \vect{a}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\angpos}
+%    \begin{macrocode}
+\NewDocumentCommand{\angpos}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\varphi}%
+    }{%
+      \varphi%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\vect{\varphi}}%
+    }{%
+      \vect{\varphi}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\angvel}
+%    \begin{macrocode}
+\NewDocumentCommand{\angvel}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\omega}%
+    }{%
+      \omega%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\vect{\omega}}%
+    }{%
+      \vect{\omega}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\angacc}
+%    \begin{macrocode}
+\NewDocumentCommand{\angacc}{ s o O{} }{%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\alpha}%
+    }{%
+      \alpha%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \prescript{#2}{#3}{\vect{\alpha}}%
+    }{%
+      \vect{\alpha}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\force}
+%    \begin{macrocode}
+\NewDocumentCommand{\force}{ s }{%
+  \IfBooleanTF{#1}{%
+    f%
+  }{%
+    \vect{f}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\torque}
+%    \begin{macrocode}
+\NewDocumentCommand{\torque}{ s }{%
+  \IfBooleanTF{#1}{%
+    \tau%
+  }{%
+    \vect{\tau}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \subsection{Stress and Strain}
+%
+%
+% \begin{macro}{\strainsymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\strainsymbol}{ }{%
+  \varepsilon%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\strain}
+%    \begin{macrocode}
+\NewDocumentCommand{\strain}{ s }{%
+  \IfBooleanTF{#1}{%
+    \strainsymbol%
+  }{%
+    \vect{\strainsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotstrain}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotstrain}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\strainsymbol}%
+  }{%
+    \dotvect{\strainsymbol}
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotstrain}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotstrain}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\strainsymbol}%
+  }{%
+    \ddotvect{\strainsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotstrain}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotstrain}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ndot{\strainsymbol}%
+  }{%
+    \ndotvect{\strainsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tension}
+%    \begin{macrocode}
+\NewDocumentCommand{\tension}{ s }{%
+  \IfBooleanTF{#1}{%
+    \tau%
+  }{%
+    \tau%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\stresssymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\stresssymbol}{ }{%
+  \sigma%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\stress}
+%    \begin{macrocode}
+\NewDocumentCommand{\stress}{ s }{%
+  \IfBooleanTF{#1}{%
+    \stresssymbol%
+  }{%
+    \vect{\stresssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotstress}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotstress}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\stresssymbol}%
+  }{%
+    \dotvect{\stresssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotstress}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotstress}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\stresssymbol}%
+  }{%
+    \ddotvect{\stresssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotstress}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotstress}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ndot{\stresssymbol}%
+  }{%
+    \ndotvect{\stresssymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}s
+%
+%
+% \begin{macro}{\bendsymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\bendsymbol}{ }{%
+  \kappa%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\bend}
+%    \begin{macrocode}
+\NewDocumentCommand{\bend}{ s }{%
+  \IfBooleanTF{#1}{%
+    \bendsymbol%
+  }{%
+    \vect{\bendsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotbend}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotbend}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\bendsymbol}%
+  }{%
+    \dotvect{\bendsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotbend}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotbend}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\bendsymbol}%
+  }{%
+    \ddotvect{\bendsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pathcoord}
+%    \begin{macrocode}
+\NewDocumentCommand{\pathcoord}{ }{%
+  \xi%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotpathcoord}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotpathcoord}{ }{%
+  \dot{\pathcoord}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotpathcoord}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotpathcoord}{ }{%
+  \ddot{\pathcoord}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \subsection{Coordinate Systems}
+%
+%
+% \begin{macro}{\worldsymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\worldsymbol}{ }{%
+  \mc{O}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msworld}
+%    \begin{macrocode}
+\NewDocumentCommand{\msworld}{ }{%
+  \ms{\worldsymbol}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\systemsymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\systemsymbol}{ }{%
+  \Sigma%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\mssystem}
+%    \begin{macrocode}
+\NewDocumentCommand{\mssystem}{ }{%
+  \systemsymbol%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arbpoint}
+%    \begin{macrocode}
+\NewDocumentCommand{\arbpoint}{ }{%
+  \mc{T}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msarbpoint}
+%    \begin{macrocode}
+\NewDocumentCommand{\msarbpoint}{ }{%
+  \ms{\arbpoint}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \subsection{Rotations}
+%
+%
+% \begin{macro}{\rotvector}
+%    \begin{macrocode}
+\NewDocumentCommand{\rotvector}{ s }{%
+  \IfBooleanTF{#1}{%
+    \theta%
+  }{%
+    \vect{\theta}%
+  }
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\orientparam}
+%    \begin{macrocode}
+\NewDocumentCommand{\orientparam}{ }{%
+  \eta%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotorientparam}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotorientparam}{ }{%
+  \dot{\eta}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotorientparam}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotorientparam}{ }{%
+  \ddot{\eta}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotorientparam}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotorientparam}{ }{%
+  \ndot{\eta}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\eulerangles}
+%    \begin{macrocode}
+\NewDocumentCommand{\eulerangles}{ }{%
+  \orientparam_{\ms{Eul}}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\taitbryanangles}
+%    \begin{macrocode}
+\NewDocumentCommand{\taitbryanangles}{ }{%
+  \orientparam_{\ms{TB}}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \Finale
+\endinput
