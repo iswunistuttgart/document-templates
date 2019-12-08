@@ -1,0 +1,777 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttdemos.dtx}[2019/12/07 v1.0.0 University of Stuttgart LaTeX demo files generator]
+%</driver>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttdemos.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/12/07}{Initial version}
+%
+% \GetFileInfo{ustuttdemos.dtx}
+%
+% \DoNotIndex{\",\@,\abs,\acronymtype,\and,\begin,\bigg,\bm,\cdoot,\dof,\eg,\ell,\end,\ensuremath,\equiv,\eye,\fixcleverefappendix,\geq,\gram,\ie,\in,\kilo,\Maass,\mass,\mathds,\mc,\ms,\nicefrac,\norm,\numposconstraints,\parentheses,\pow,\printdate,\secnd,\si,\sum,\textemdash,\times,\today,\transpose,\usepackage,\vect}
+% 
+%
+% \title{The \textsf{ustuttdemos} package\thanks{This document
+%   corresponds to \textsf{ustuttdemos}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+% \subsection{Documents}
+%
+%<*document>
+%
+% \begin{macro}{\documentclass}
+% First off, we need to define the correct document class.
+%    \begin{macrocode}
+\documentclass[
+%    \end{macrocode}
+% The first few lines of our document class will globally determine which
+% languages we want to have loaded. These global options will then apply not
+% only to the corresponding document class, but also other packages like |babel|
+% or |isodate|.
+%
+% Load German as main language
+%    \begin{macrocode}
+%<*german>
+    english,
+    ngerman,
+%</german>
+%    \end{macrocode}
+% Load English as main language
+%    \begin{macrocode}
+%<*english>
+  ngerman,
+  english,
+%</english>
+%    \end{macrocode}
+% 
+% Now we will define the main thesis type.
+%    \begin{macrocode}
+%<bachelor>    degree=bachelor,
+%<master>    degree=master,
+%<doctorate>    degree=doctorate,
+%    \end{macrocode}
+% And some more, custom options can follow here
+%    \begin{macrocode}
+    paper=a4paper,%
+    fancychapter,%
+    fancyfooter,%
+    % colorful,%
+%    \end{macrocode}
+%
+% Lastly, we define the correct document class to use.
+%    \begin{macrocode}
+%<article>  ]{ustuttartcl}
+%<book>  ]{ustuttbook}
+%<thesis>  ]{ustuttthesis}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\usepackage}
+% For theses, we also include some sample packages to allow for typesetting of
+% the different glossaries
+%    \begin{macrocode}
+%<*thesis>
+\usepackage{ustuttgloss}
+\usepackage{ustuttappendix}
+\usepackage{ustutttext}
+\usepackage{ustuttmath}
+\usepackage{ustuttmechanics}
+%    \end{macrocode}
+%</thesis>
+% \end{macro}
+%
+% Load package demo content
+%    \begin{macrocode}
+\usepackage[math]{blindtext}
+%    \end{macrocode}
+% 
+% \begin{macro}{\title}
+% This is what your thesis' title is going to be in the end
+%    \begin{macrocode}
+\title{...}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\subtitle}
+% Some thesis may additionally contain subtitles
+%    \begin{macrocode}
+\subtitle{...}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\author}
+% Obviously, the author's name. Multiple authors \emph{must} be separated by |\and|.
+%    \begin{macrocode}
+\author{...}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\authorrunning}
+% If the document is written by multiple authors and you want a running version
+% of the authors' names on the page head, use this command.
+%    \begin{macrocode}
+\authorrunning{...}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\placeofbirth}
+% Place of birth of the autor. Only applies to doctoral theses.
+%    \begin{macrocode}
+%<doctorate>\placeofbirth{Stuttgart}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\date}
+% Date of your document's creation which is baked into PDF document properties,
+% as well as used in the title page
+%    \begin{macrocode}
+\date{\today}
+%    \end{macrocode}
+% or if you desire a specific print date
+%    \begin{macrocode}
+\date{\printdate{2019-04-23}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\university} 
+% Name of the university in document's main language
+%    \begin{macrocode}
+%<german>\university{Universit\"at Stuttgart}
+%<english>\university{University of Stuttgart}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\faculty}
+% Faculty name in document's main language
+%    \begin{macrocode}
+%<german>\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+%<english>\faculty{Konstruktions-, Produktions- und Fahrzeugtechnik}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\department}
+%    \begin{macrocode}
+%<german>\department{Institut f\"ur Steuerungstechnik %
+%<german>der Werkzeugmaschinen und Fertigungseinrichtungen}
+%<english>\department{Institute for Control Engineering %
+%<english>of Machine Tools and Manufacturing Units}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\departmentshort}
+% Short name of the department; usually its abbreviated name
+%    \begin{macrocode}
+%<german>\departmentshort{ISW}
+%<english>\departmentshort{ISW}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\major}
+% For any student thesis, put the name of your major here so it can be typeset
+% correctly in the titlepage
+%    \begin{macrocode}
+%<*thesis>
+%<bachelor|master>\major{Maschinenbau}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\universitylogo}
+% Path to the university's logo given as a regular \LaTeX path that works for
+% |\includegraphics|
+%    \begin{macrocode}
+%<german>\universitylogo{logo-university-de}
+%<english>\universitylogo{logo-university-en}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\departmentlogo}
+% Similar to the university logo, path to the department's logo given as regular
+% \LaTeX path that works for |\includegraphics|
+%    \begin{macrocode}
+%<german>\departmentlogo{logo-institute-de}
+%<english>\departmentlogo{logo-institute-en}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\advisor}
+% Name of your thesis advisor. In case of bachelor's or master's thesis, this is
+% usually going to be the first and only advisor of your thesis. In case of
+% doctoral theses, this is your main advisor or doctoral advisor. Further
+% advisors go into the |\coadvisor| macro
+%    \begin{macrocode}
+%<thesis>\advisor{PD Dr.-Ing.\@ Andreas Pott}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\coadvisor}
+% Further advisors of your thesis. For bachelor's or master's theses, this
+% usually does not apply. For doctoral theses, these are the other advisors of
+% your graduation board.
+%    \begin{macrocode}
+%<thesis>\coadvisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\dedication} 
+% You can dedicate your thesis to anyone. Since it's a macro, do not go overboard or haywire with formatting. Keep it simple.
+%    \begin{macrocode}
+%<book|thesis>\dedication{This is to me!}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\addbibresource}
+% With oour bibliography managed through |biblatex|, including the bibliography resources behaves slightly differently than with using |bibtex|.
+%    \begin{macrocode}
+\addbibresource{references.bib}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\newglossary}
+% \cmd{\newglossary}\oarg{}\marg{label}\marg{log}\marg{out-ext}\marg{in-ext}\marg{caption}
+% To let the |glossaries| package now that there is a new glossaries type, we
+% call the |\newglossary| method with the syntax
+% |\newglossary{<label>}{<log>}{<out-ext>{<in-ext>}{<caption>}|
+%    \begin{macrocode}
+%<thesis>\newglossary[slg]{symbol}{sls}{slo}{\translate{ustutt@glossaries@symbols}}
+%<thesis>\newglossary[nlg]{notation}{nls}{nlo}{\translate{ustutt@glossaries@notation}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makeindex}
+% We must trigger the |makeindex| command to enable proper indexing of macros
+% and glossaries.
+%    \begin{macrocode}
+%<thesis>\makeindex
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makeglossaries}
+% Likewise, glossaries cannot be typeset of they have not been made.
+%    \begin{macrocode}
+%<thesis>\makeglossaries
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\loadglsentries}
+% Lastly, we will load glossaries entries using the intended way. The file
+% loaded is just a regular \LaTeX file, however, with proper markup for the
+% glossaries definitions.
+%    \begin{macrocode}
+%<*thesis>
+\loadglsentries{symbols}
+\loadglsentries{notation}
+\loadglsentries{acronyms}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\glsaddall}
+% For the sake of this demo, we will just add all defined glossaries entries
+%    \begin{macrocode}
+%<thesis>\glsaddall
+%    \end{macrocode}
+% \end{macro}
+% 
+% Finally, the actual document begins
+% \begin{environment}{document}
+%    \begin{macrocode}
+\begin{document}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\frontmatter}
+% Set up the document's front matter style: romain page numbers, et cetera.
+%    \begin{macrocode}
+%<book|thesis>\frontmatter
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\maketitle}
+% Create the title page
+%    \begin{macrocode}
+\maketitle
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{environment}{acknowledgements}
+% What's a good thesis without acknowledging someone else's share of the result?
+% Be it your (doctoral) advisor, colleagues, other students, your parents, or
+% the project funding agency. Give them a warm-felt shout out.
+%    \begin{macrocode}
+%<*book|thesis>
+\begin{acknowledgements}%
+\end{acknowledgements}
+%</book|thesis>
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{preface}
+% A preface is an introduction to a book or other literary work written by you.
+%    \begin{macrocode}
+%<book|thesis>\begin{preface}
+%<book|thesis>\end{preface}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\tableofcontents}
+% Most importantly, a table of contents should be type set right after all the
+% prefacing stuff.
+%    \begin{macrocode}
+\tableofcontents
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoffigures}
+% List of figures follows after the table of contents. This is most oftenly
+% needed as you will have more than 4 figures.
+%    \begin{macrocode}
+\listoffigures
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listoftables}
+% List of tables follows if applicable. No need to typeset a list of tables in
+% case you have only some 3 or 4 tables in total.
+%    \begin{macrocode}
+\listoftables
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printglossary}
+% Output list of symbols from glossaries defined above
+%    \begin{macrocode}
+%<*thesis>
+\printglossary[%
+    type=symbol,%
+    style=isw-long-symbol-nogroup,%
+  ]
+%</thesis>
+%    \end{macrocode}
+%
+% Also typeset glossaries on notation, if any
+%    \begin{macrocode}
+%<*thesis>
+\printglossary[%
+    type=notation,%
+    style=isw-long-notation-nogroup,%
+  ]
+%</thesis>
+%    \end{macrocode}
+%
+% Lastly, output our glossaries of acronyms
+%    \begin{macrocode}
+%<*thesis>
+\printglossary[%
+    type=\acronymtype,%
+    style=isw-long-acronym,%
+    nonumberlist,%
+    nogroupskip,%
+  ]
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\mainmatter}
+% Switch into the main document mode resetting page numbers, changing page
+% numbers to arabic, et cetera.
+%    \begin{macrocode}
+%<book|thesis>\mainmatter
+%    \end{macrocode}
+% \end{macro}
+%
+% Here is where you would now put your actual data content
+%    \begin{macrocode}
+%<<COMMENT
+% Put your content here instead of the following line
+%COMMENT
+%<*book|thesis>
+\Blinddocument
+\Blinddocument
+\Blinddocument
+\Blinddocument
+%</book|thesis>
+%<*article>
+\blinddocument
+\blinddocument
+%</article>
+%    \end{macrocode}
+%
+% \begin{macro}{\printbibliography}
+% Eventually, a list of bibligraphy items will follow
+%    \begin{macrocode}
+%<<COMMENT
+% Remove this line in your final document so that you will only have entries in
+% your bibliography that you actually cited
+\nocite{*}
+%COMMENT
+\printbibliography
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{environment}{appendices}
+% In case you have content that's not supposed to be in the main document part
+% but still worth having it printed, it'll belong into the appendix. You enter
+% |appendix|-mode by using the |appendices| environment.
+%    \begin{macrocode}
+% \begin{appendices}
+% \fixcleverefappendix
+% %<<COMMENT
+% % Your appendix here, if not needed, remove the environment
+% %COMMENT
+% \end{appendices}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{environment}{document}
+% Finally, close the document
+%    \begin{macrocode}
+\end{document}
+%    \end{macrocode}
+% \end{environment}
+%
+%</document>
+%
+% \subsection{Mixins}
+%
+% \subsubsection{Symbols}
+%
+% Symbols can generally be typeset using the |glossaries| package, however, they
+% would be added to the global glossaries list. Most often, this is not what we
+% want as we want a separate list of all symbols.
+%
+% Now, we are able to add all our glossary entries one by one
+% \begin{macro}{\newglossaryentry}
+%    \begin{macrocode}
+%<*symbols>
+\newglossaryentry{sym:degrees-of-freedom}{%
+  type=symbol,%
+  name={\ensuremath{\dof}},%
+  sort={degrees of freedom},%
+  unit={},%
+  symbol={%
+    \ensuremath{\dof}%
+  },%
+  description={%
+    Number of degrees of freedom of a rigid body.%
+  },%
+}
+%</symbols>
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\glsadd}
+% If you are planning to set up your list of symbols manually, then you need to
+% add every entry manually.
+%    \begin{macrocode}
+%<symbols>\glsadd{sym:degrees-of-freedom}
+%    \end{macrocode}
+% You may likewise use the glossary's definition inside a macro that you use
+% later throughout your document. This way, the first appearance of the entry
+% will be marked and referenced in the list of glossaries. Your mileage may
+% vary.
+%
+% Following next, we will just add a few more entries to our nomenclature to
+% have a nice and long list.
+%    \begin{macrocode}
+%<*symbols>
+\newglossaryentry{sym:number-of-something}{%
+  type=symbol,%
+  name={\ensuremath{n_{\parentheses{}}}},%
+  sort={number of X},%
+  unit={},%
+  symbol={
+    \ensuremath{n_{\parentheses{}}}%
+  },%
+  description={%
+    Number of quantity given in subscript index %
+    ${}_{\parentheses{}}$ \eg $\numposconstraints$ %
+    is the number of position constraints in a constrained 5
+    multi-body system.%
+  },%
+}
+\glsadd{sym:degrees-of-freedom}
+%
+\newglossaryentry{sym:time}{%
+  type=symbol,%
+  name={\ensuremath{t}},%
+  sort={time},%
+  unit={\si{\second}},%
+  symbol={
+    \ensuremath{t}%
+  },%
+  description={%
+    Time; scalar quantity, described as fundamental quantity %
+    and considered an absolute\textemdash not to be confused %
+    with absolute time and space\textemdash \ie observed %
+    time intervals between pairs of events are the same for %
+    all observers.
+  },%
+}
+\glsadd{sym:time}
+%
+\newglossaryentry{sym:mass-scalar}{%
+  type=symbol,%
+  name={\ensuremath{\mass_{\ms{B}}}},%
+  sort={mass scalar},%
+  unit={\si{\kilo\gram}},%
+  symbol={
+    \ensuremath{\mass_{\ms{B}}}%
+  },%
+  description={Scalar mass of rigid body~$\mc{B}$},%
+}
+\glsadd{sym:mass-scalar}
+%
+\newglossaryentry{sym:mass-matrix}{%
+  type=symbol,%
+  name={\ensuremath{\Mass_{\ms{B}}}},%
+  sort={mass matrix},%
+  unit={\si{\kilo\gram}},%
+  symbol={
+    \ensuremath{\Mass_{\ms{B}}}%
+  },%
+  description={%
+    Multi-dimensional linear mass/inertia of rigid body~$\mc{B}$.%
+  },%
+}
+\glsadd{sym:mass-matrix}
+%
+\newglossaryentry{sym:identity-matrix}{%
+  type=symbol,%
+  name={\ensuremath{\eye[c]}},%
+  sort={identity matrix},%
+  unit={},%
+  symbol={
+    \ensuremath{\eye[c]}%
+  },%
+  description={%
+    Identity matrix in~$\mathds{R}^{c \times c}$.%
+  },%
+}
+\glsadd{sym:identity-matrix}
+%</symbols>
+%    \end{macrocode}
+% \end{macro}
+% </symbols>
+%
+% \subsubsection{Notation}
+%
+% Notation is a list similar to regular |glossaries|. As such, you can just follow the lines of the Symbols subsection.
+%
+% Now, we are able to add all our glossary entries one by one
+% \begin{macro}{\newglossaryentry}
+%    \begin{macrocode}
+%<*notation>
+\newglossaryentry{nom:matrix-quantity}{%
+  type=notation,%
+  name={matrix-quantity},%
+  sort=1,%
+  unit={},%
+  symbol={\ensuremath{\vect{M}}},%
+  description={%
+    Matrix quantities are, if not introduced otherwise, written in uppercase bold math font.%
+  },%
+}
+%</notation>
+%    \end{macrocode}
+%
+% \end{macro}
+%
+% \begin{macro}{\glsadd}
+% If you are planning to set up your nomenclature manually, then you need to add
+% every entry manually.
+%    \begin{macrocode}
+%<notation>\glsadd{nom:matrix-quantity}
+%    \end{macrocode}
+% You may likewise use the glossary's definition inside a macro that you use
+% later throughout your document. This way, the first appearance of the entry
+% will be marked and referenced in the list of glossaries. Your mileage may
+% vary.
+%
+% Following next, we will just add a few more entries to our nomenclature to
+% have a nice and long list.
+%
+%    \begin{macrocode}
+%<*notation>
+\newglossaryentry{nom:vector-quantity}{%
+  type=notation,%
+  name={vector-quantity},%
+  sort=2,%
+  unit={},%
+  symbol={\ensuremath{\bm{x}}},%
+  description={%
+    Vector quantities are, if not introduced otherwise, written %
+    in lowercase bold math font.%
+  },%
+}
+\glsadd{nom:vector-quantity}
+%
+\newglossaryentry{nom:scalar-quantity}{%
+  type=notation,%
+  name={scalar-quantity},%
+  sort=3,%
+  symbol={\ensuremath{x}},%
+  description={%
+    Scalar quantities are, if not introduced otherwise, written %
+    in lowercase light math font.%
+  },%
+}
+\glsadd{nom:scalar-quantity}
+%
+\newglossaryentry{nom:transpose}{%
+  type=notation,%
+  name={transpose},%
+  symbol={\ensuremath{\transpose{\parentheses{\cdot}}}},%
+  description={%
+    Transpose of vector or matrix~$\parentheses{\cdot}$ such %
+    that~$\transpose{\parentheses{\cdot}_{rc}} = \parentheses{\cdot}_{cr}$.%$
+  },%
+}
+\glsadd{nom:transpose}
+%
+\newglossaryentry{nom:norm}{%
+  type=notation,%
+  name={norm},%
+  symbol={\ensuremath{\norm{\cdot}_{p}}},%
+  description={%
+  $p$-norm (also called~$\ell_{p}$-norm) of vector~$\vect{v} \in %
+  \mathds{R}^{k}$ with~$p \geq 1$ given by~${ \norm{\vect{v}}_{p} = %
+  \parentheses[\bigg]{ \sum_{ j = 1}^{ k }{ \pow[p]{ \abs{ \vect{v}_{j} } } } }^{ \nicefrac{1}{p} } }$. %
+  If~$p$ is omitted, we assume~$p \equiv 2$.
+  },%
+}
+\glsadd{nom:norm}
+%</notation>
+%    \end{macrocode}
+% \end{macro}
+% </symbols>
+%
+%
+% \subsubsection{Acronyms}
+% Acronyms are natively supported by the glossaries package, however, need to be defined slightly differently compared to regular glossaries entries.
+%
+% \begin{macro}{\newacronym}
+% Simple acronyms, where the plural form is just the singular form with an
+% appended `s' in English or an appended `en' in German, can be defined using
+% the |\newacronym| macro. Any acronym is defined with three arguments being |label|, |short|, and |long| form.
+%    \begin{macrocode}
+%<acronyms>\newacronym{acr:CAD}{CAD}{computer-aided design}
+%    \end{macrocode}
+% When the plural form is different to the singular form, then we need to take a slightly different route i.e.,
+%    \begin{macrocode}
+%<*acronyms>
+\newacronym[%
+  shortplural=DOFs,%
+  longplural=degrees of freedom,%
+]{acr:DOF}{DOF}{degree of freedom}%
+\glsadd{acr:DOF}
+%</acronyms>
+%    \end{macrocode}
+%
+% Following next, we will just add a few more entries to our list of acronyms to
+% have a nice and long list.
+%    \begin{macrocode}
+%<*acronyms>
+\newacronym{acr:CDPR}{CDPR}{%
+  cable-driven parallel robot%
+}%
+\glsadd{acr:CDPR}
+%
+\newacronym{acr:NURBS}{NURBS}{%
+  non-uniform rational B-spline,%
+}%
+\glsadd{acr:NURBS}
+%
+\newacronym{acr:ODE}{ODE}{%
+  ordinary differential equation%
+}%
+\glsadd{acr:ODE}
+%
+\newacronym{acr:DAE}{DAE}{%
+  differential-algebraic equation%
+}%
+\glsadd{acr:DAE}
+%
+\newacronym{acr:PDE}{PDE}{%
+  partial differential equation%
+}%
+\glsadd{acr:PDE}
+%
+\newacronym{acr:IVP}{IVP}{%
+  initial value problem%
+}%
+\glsadd{acr:IVP}
+%
+\newacronym{acr:BVP}{BVP}{%
+  boundary value problem%
+}%
+\glsadd{acr:BVP}
+%</acronyms>
+%    \end{macrocode}
+% \end{macro}
+% 
+% \Finale

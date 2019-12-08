@@ -1,0 +1,351 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttgloss.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{ustuttgloss}
+%<*package>
+    [2019/12/07 v1.0.0 University of Stuttgart glossaries file]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttgloss.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2004/11/05}{Initial version}
+%
+% \GetFileInfo{ustuttgloss.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment}
+% 
+%
+% \title{The \textsf{ustuttgloss} package\thanks{This document
+%   corresponds to \textsf{ustuttgloss}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% This package is intended if you want to have configuration-easy use of the
+% glossaries package and just want a drop-in solution.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+% \subsection{Load Packages}
+%
+%
+% Load all the glossaries package and its useful extensions.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  automake,%
+  acronyms,%
+  toc,%
+  xindy,%
+  shortcuts,%
+  nopostdot,%
+  translate=babel,%
+}{glossaries}
+%    \end{macrocode}
+%
+% Glossaries extra: This package provides improvements and extra features to
+% the glossaries package. Some of the default glossaries.sty behaviour is
+% changed by glossaries-extra.sty. See the user manual
+% glossaries-extra-manual.pdf for further details. glossaries-extra.sty
+% requires the glossaries package and, naturally, all packages required by
+% glossaries.sty. 
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  automake,%
+}{glossaries-extra}
+%    \end{macrocode}
+%
+% Create glossaries and lists of acronyms. The glossaries package supports
+% acronyms and multiple glossaries, and has provision for operation in several
+% languages (using the facilities of either babel or polyglossia). New entries
+% are defined to have a name and description (and optionally an associated
+% symbol). Support for multiple languages is offered, and plural forms of terms
+% may be specified. An additional package, glossaries-accsupp, can make use of
+% the accsupp package mechanisms for accessibility support for PDF files
+% containing glossaries. The user may define new glossary styles, and preambles
+% and postambles can be specified. There is provision for loading a database of
+% terms, but only terms used in the text will be added to the relevant glossary.
+% The package uses an indexing program to provide the actual glossary; either
+% makeindex or xindy may serve this purpose, and a Perl script is provided to
+% serve as interface. The package distribution also provides the mfirstuc
+% package, for changing the first letter of a word to upper case. The package
+% supersedes the author's glossary package (which is now obsolete), and a
+% conversion tool is provided.
+%    \begin{macrocode}
+\RequirePackage{glossaries}
+\RequirePackage{glossaries-extra}
+\RequirePackage{glossary-longbooktabs}
+\RequirePackage{glossaries-extra-stylemods}
+\setabbreviationstyle[acronym]{long-short}
+\renewcommand{\glossarypreamble}{\glsfindwidesttoplevelname[\currentglossary]}
+%    \end{macrocode}
+%
+% \begin{macro}{\glsaddkey}
+% Define a new |unit| key for each glossary entry
+%    \begin{macrocode}
+\glsaddkey{unit}{%
+  \glsentrytext{\glslabel}%
+}{%
+  \glsentryunit%
+}{%
+  \GLsentryunit%
+}{%
+  \glsunit%
+}{%
+  \Glsunit%
+}{%
+  \GLSunit%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% 
+% \begin{macro}{\glssetnoexpandfield}
+% Do not expand anything inside the |unit| field so that we can typeset the unit
+% with |\si|
+%    \begin{macrocode}
+\glssetnoexpandfield{unit}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\newglossarystyle}
+% New glossary style for symbols
+%    \begin{macrocode}
+\newglossarystyle{isw-long-symbol}{%
+  % Set the glossaries description to width of 0.65\linewidth
+  \setlength\glsdescwidth{0.70\linewidth}%
+  % Set the `theglossary` style
+  \renewenvironment{theglossary}{% BEGIN
+    \centering%
+    \begin{longtable}{%
+      % p{0.05\linewidth}% Symbol 
+      p{\widthof{{Symbol}}}% Symbol
+      p{\glsdescwidth}% Description
+      p{\widthof{{Einheit}}}% Unit
+    }%
+  }{% END
+    \end{longtable}%
+  }%
+  \renewcommand*{\glossaryheader}{%
+    % \toprule 
+    \bfseries \symbolname%
+      & \bfseries \descriptionname%
+      & \bfseries \unitname%
+    \tabularnewline \midrule%
+    \endhead%
+  }%
+  \renewcommand*{\glsgroupheading}[1]{%
+    \multicolumn{3}{l}{}%
+    \tabularnewline%
+    % \midrule%
+    \multicolumn{3}{l}{%
+      \glstreegroupheaderfmt{\glsgetgrouptitle{##1}}%
+      % \glsgetgrouptitle{##1}
+      % \glstreegroupheaderfmt{%
+      %   \glsnavhypertarget{##1}{\glsgetgrouptitle{##1}}%
+      % }%
+      % \indexspace%
+    }%
+    \tabularnewline \midrule%
+  }%
+  \renewcommand{\glossentry}[2]{%
+    \glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}}%
+      & \glossentrydesc{##1}%
+      & \glsunit{##1}%
+      % & \ifglshasfield{##1}{unit}{\glsunit{##1}}{}%
+    \tabularnewline%
+  }%
+  \renewcommand{\subglossentry}[3]{%
+    \glssubentryitem{##2}\glstarget{##2}{\glossentryname{##2}}%
+      & \glossentrydesc{##2}
+      & \ifglshasfield{##1}{unit}{\glsunit{##1}}{}%
+    \tabularnewline%
+  }%
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip \else & & \tabularnewline\fi%
+  }%
+}
+%    \end{macrocode}
+%
+% Glossary style for list of symbols without grouping
+%    \begin{macrocode}
+\newglossarystyle{isw-long-symbol-nogroup}{%
+  \setglossarystyle{isw-long-symbol}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand{\glsgroupskip}{}%
+}
+%    \end{macrocode}
+%
+%
+% New glossary style for acronyms
+%    \begin{macrocode}
+\newglossarystyle{isw-long-acronym}{%
+  % Set the glossaries description to width of 0.65\linewidth
+  \setlength\glsdescwidth{0.64\linewidth}%
+  % Set the `theglossary` style
+  \renewenvironment{theglossary}{% BEGIN
+    \centering%
+    \begin{longtable}{%
+      p{\widthof{{Abk\"urzung}}}% Acronym
+      p{\glsdescwidth}% Description
+    }%
+  }{% END
+    \end{longtable}%
+  }%
+  \renewcommand*{\glossaryheader}{%
+    % \toprule 
+    \bfseries \acronymname%
+      & \bfseries \descriptionname%
+    \tabularnewline \midrule%
+    \endhead%
+  }%
+  \renewcommand*{\glsgroupheading}[1]{%
+    \multicolumn{2}{l}{%
+      \glstreegroupheaderfmt{\glsgetgrouptitle{##1}}%
+    }%
+    \tabularnewline \midrule%
+  }%
+  \renewcommand{\glossentry}[2]{%
+    \glsentryitem{##1}\glstarget{##1}{\glossentryname{##1}}%
+      & \glossentrydesc{##1}%
+    \tabularnewline%
+  }%
+  \renewcommand{\subglossentry}[3]{%
+    \glssubentryitem{##2}\glstarget{##2}{\glossentryname{##2}}%
+      & \glossentrydesc{##2}
+    \tabularnewline%
+  }%
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip \else & \tabularnewline\fi%
+  }%
+}
+%    \end{macrocode}
+%
+%
+% Glossary style for acronyms without group heading
+%    \begin{macrocode}
+\newglossarystyle{isw-long-acronym-nogroup}{%
+  \setglossarystyle{isw-long-acronym}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand{\glsgroupskip}{%
+    \ifglsnogroupskip \else & \tabularnewline\fi%
+  }%
+}
+%    \end{macrocode}
+%
+%
+% New glossary style for notation
+%    \begin{macrocode}
+\newglossarystyle{isw-long-notation}{%
+  % Set the glossaries description to width of 0.65\linewidth
+  \setlength\glsdescwidth{0.74\linewidth}%
+  % Set the `theglossary` style
+  \renewenvironment{theglossary}{% BEGIN
+    \centering%
+    \begin{longtable}{%
+      p{\widthof{{Eintrag}}}% Notation
+      p{\glsdescwidth}% Description
+    }%
+  }{% END
+    \end{longtable}%
+  }%
+  \renewcommand*{\glossaryheader}{%
+    % \toprule 
+    \bfseries \symbolname%
+    & \bfseries \descriptionname%
+    \tabularnewline \midrule%
+    \endhead%
+  }%
+  \renewcommand*{\glsgroupheading}[1]{%
+    \multicolumn{2}{l}{}%
+    \tabularnewline%
+    % \midrule%
+    \multicolumn{2}{l}{%
+      \glstreegroupheaderfmt{\glsgetgrouptitle{##1}}%
+    }%
+    \tabularnewline \midrule%
+  }%
+  \renewcommand{\glossentry}[2]{%
+    \glsentryitem{##1}\glstarget{##1}{\glossentrysymbol{##1}}%
+      & \glossentrydesc{##1}%
+    \tabularnewline%
+  }%
+  \renewcommand{\subglossentry}[3]{%
+    \glssubentryitem{##2}\glstarget{##2}{\glossentrysymbol{##2}}%
+      & \glossentrydesc{##2}
+    \tabularnewline%
+  }%
+  % \renewcommand*{\glsgroupskip}{}
+  \renewcommand*{\glsgroupskip}{%
+    \ifglsnogroupskip \else & \tabularnewline\fi
+  }%
+}
+%    \end{macrocode}
+%
+%
+% Glossary style for list of symbols without grouping
+%    \begin{macrocode}
+\newglossarystyle{isw-long-notation-nogroup}{%
+  \setglossarystyle{isw-long-notation}%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand{\glsgroupskip}{}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \Finale
+\endinput

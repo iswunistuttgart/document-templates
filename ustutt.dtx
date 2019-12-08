@@ -1,0 +1,2721 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustutt.dtx}
+%</driver>
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<*article>
+\ProvidesClass{ustuttartcl}
+  [2019/12/07 v1.0.0 University of Stuttgart LaTeX class for articles]
+%</article>
+%<*book>
+\ProvidesClass{ustuttbook}
+  [2019/12/07 v1.0.0 University of Stuttgart LaTeX class for books]
+%</book>
+%<*thesis>
+\ProvidesClass{ustuttthesis}
+  [2019/12/07 v1.0.0 University of Stuttgart LaTeX class for theses]
+%</thesis>
+%<*class>
+\typeout{}
+\typeout{University of Stuttgart LaTeX template class created and maintained}
+\typeout{ by Philipp Tempel <philipp.tempel@isw.uni-stuttgart.de>.}
+\typeout{ Institute for Control Engineering of Machine Tools and Manufacturing}
+\typeout{ Units, ISW, Seidenstrasse 36, D-70174 Stuttgart, Germany.}
+%<article>\typeout{ Document class for articles, version v1.0.0 (2019/12/07)}
+%<book>\typeout{ Document class for books, version v1.0.0 (2019/12/07)}
+%<thesis>\typeout{ Document class for theses, version v1.0.0 (2019/12/07)}
+\typeout{}
+%</class>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\usepackage{hyperref}
+\begin{document}
+  \DocInput{ustutt.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/12/07}{Initial version}
+%
+% \GetFileInfo{ustutt.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment,\PassOptionsToPackage,\PassOptionsToClass,\RequirePackage,\ExecuteOptions,\DeclareOption,\DeclareBoolOption,\DeclareStringOption,\DeclareComplementaryOption}
+%
+%
+% \title{The \textsf{ustutt*} classes\thanks{This document
+%   corresponds to \textsf{ustutt}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%
+% \section{Implementation}
+%
+% \subsection{Setup Tasks}
+% 
+% Some tasks have to be performed before we can initialize options to the class
+% or load all necessary packages. This is what's going on here.
+%
+% The package is a toolbox of programming facilities geared primarily towards
+% LaTeX class and package authors. It provides LaTeX frontends to some of the
+% new primitives provided by e-TeX as well as some generic tools which are not
+% strictly related to e-TeX but match the profile of this package. Note that the
+% initial versions of this package were released under the name elatex. The
+% package provides functions that seem to offer alternative ways of implementing
+% some LaTeX kernel commands; nevertheless, the package will not modify any part
+% of the LaTeX kernel.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+%    \end{macrocode}
+%
+% The package defines commands that switch according to the prevailing 'draft'
+% or 'final' options; each command takes two arguments, the first for the
+% 'true', the second for the 'false' case. Commands are: |\ifdraft| determines
+% whether we're operating in draft ('true') or final mode; |\ifoptiondraft|
+% determines whether a 'draft' option has been given; and |\ifoptionfinal|
+% determines whether a 'final' option has been given.
+%    \begin{macrocode}
+\RequirePackage{ifdraft}
+%    \end{macrocode}
+%
+% The pgfkeys package (part of the pgf distribution) is a well-designed way of
+% defining and using large numbers of keys for key-value syntaxes. However,
+% pgfkeys itself does not offer means of handling LaTeX class and package
+% options. This package adds such option handling to pgfkeys, in the same way
+% that kvoptions adds the same facility to the LaTeX standard keyval package.
+%    \begin{macrocode}
+\RequirePackage{pgfkeys}
+\RequirePackage{pgfopts}
+%    \end{macrocode}
+%
+%  The package generalises the macro patching commands provided by Philipp
+% Lehmann’s etoolbox. 
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+%    \end{macrocode}
+%
+% With chngcntr currently not working in TeXlive 2018, we need to add this.
+%
+% @TODO Remove once there is a chngcntr update
+%    \begin{macrocode}
+\let\counterwithout\relax
+\let\counterwithin\relax
+%    \end{macrocode}
+%
+% \subsection{Definition of Class Options}
+%
+% This is where the fun part begins, as we are now defining our class options.
+%
+% Configure the |pgfopts|-package
+%    \begin{macrocode}
+\pgfkeys{%
+  /ustutt/.is family,%
+  /ustutt/.cd,%
+    .search also={%
+      /ustutt/color,%
+  },%
+}
+%    \end{macrocode}
+%
+% User can define, which type of document this is in case we are not typesetting
+% a thesis document
+%    \begin{macrocode}
+\def\ustutt@type{}
+%<*article|book>
+\pgfkeys{
+% Change path
+  /ustutt/type/.cd,
+% Define `type' as choice of options
+    .is choice,
+% A typical report thing
+    report/.code={%
+      \def\ustutt@type{report}%
+    },
+% Offprint of some sort
+    offprint/.code={%
+      \def\ustutt@type{offprint}%
+    },
+% Exams document
+    exam/.code={%
+      \def\ustutt@type{exam}%
+    },
+% Student assignment
+    assignment/.code={%
+      \def\ustutt@type{assignment}%
+    },
+% No default value
+    .initial={},%
+}
+%</article|book>
+%<*thesis>
+\pgfkeys{
+% Change path
+  /ustutt/type/.cd,
+% Define `type' as choice just to be consistent among all classes
+    .is choice,
+% Thesis document itself
+    thesis/.code={%
+      \def\ustutt@type{thesis}%
+    },
+% Scientific proposals for students
+    proposal/.code={%
+      \def\ustutt@type{proposal},%
+    },%
+}
+%</thesis>
+%    \end{macrocode}
+%
+% With debug option enabled, frames will be drawn on all pages. This is mostly
+% just needed for developers
+%    \begin{macrocode}
+\newif\ifustutt@debug
+\ustutt@debugfalse
+\pgfkeys{
+  /ustutt/debug/.cd,
+    .is if=ustutt@debug,
+}
+%    \end{macrocode}
+%
+% Enforce no widows and orphans in document with a simple switch
+%    \begin{macrocode}
+\newif\ifustutt@nowidow
+\ustutt@nowidowfalse
+\pgfkeys{
+  /ustutt/nowidow/.cd,
+    .is if=ustutt@nowidow,%
+}
+%    \end{macrocode}
+%
+% Author gender can be selected, applies to the theses' titlepages where we
+% distinguish (only in German, of course) between e.g., a male "Doktoringenieur"
+% and a female "Doktoringenieurin". Of course, options |gender=male| and
+% |gender=female| must be exclusive to one another.
+%    \begin{macrocode}
+\newif\ifustutt@male
+\ustutt@maletrue
+\pgfkeys{
+% Change path
+  /ustutt/gender/.cd,%
+    .is choice,%
+% `Male' is the default choice
+    male/.code={%
+      \ustutt@maletrue%
+    },
+% `Female' is option complementary to `male'
+    female/.code={%
+      \ustutt@malefalse%
+    },
+}
+%    \end{macrocode}
+%
+% Major the student is enrolled in.
+%    \begin{macrocode}
+%<*thesis>
+\pgfkeys{
+% Change path
+  /ustutt/degree/.cd,%
+    .is choice,%
+% Doctorate's degree
+    doctorate/.code={%
+      \def\ustutt@degree{doctorate}%
+    },%
+% Master's degree
+    master/.code={%
+      \def\ustutt@degree{master}%
+    },%
+% Bachelor's degree
+    bachelor/.code={%
+      \def\ustutt@degree{bachelor}%
+    },%
+}
+%</thesis>
+%    \end{macrocode}
+%
+% Declare whether thesis was accepted and ready for print (use draft/final to
+% switch between draft and final version of either the submission or publishing
+% version). This will later on adffect some options of typesetting.
+%    \begin{macrocode}
+%<*thesis>
+\newif\ifustutt@accepted
+\ustutt@acceptedfalse
+\pgfkeys{
+  /ustutt/accepted/.cd,
+    .is if=ustutt@accepted,
+}
+%</thesis>
+%    \end{macrocode}
+%
+% Let the user choose fancy headings for chapter openings (only in book-like
+% classes) or the conventional style
+%    \begin{macrocode}
+%<*book|thesis>
+\newif\ifustutt@fancychapter
+\ustutt@fancychapterfalse
+\pgfkeys{
+  /ustutt/fancychapter/.cd,
+    .is if=ustutt@fancychapter,
+}
+%</book|thesis>
+%    \end{macrocode}
+%
+% Let the user choose fancy footer page numbers
+%    \begin{macrocode}
+\newif\ifustutt@fancyfooter
+\ustutt@fancyfooterfalse
+\pgfkeys{
+  /ustutt/fancyfooter/.cd,
+    .is if=ustutt@fancyfooter,
+}
+%    \end{macrocode}
+%
+% Pass any other options not known to the underlying koma script class
+%    \begin{macrocode}
+\pgfkeys{
+  /ustutt/.cd,
+    .unknown/.code={%
+      \let\currname\pgfkeyscurrentname%
+      \let\currval\pgfkeyscurrentvalue%
+      \ifx#1\pgfkeysnovalue%
+%<article>        \PassOptionsToClass{\currname}{scrartcl}
+%<book|thesis>        \PassOptionsToClass{\currname}{scrbook}
+      \else%
+%<article>        \PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrartcl}
+%<book|thesis>        \PassOptionsToClass{\expandafter\currname\expandafter=\currval}{scrbook}
+      \fi%
+    },
+}
+%    \end{macrocode}
+%
+% Execute default options
+%    \begin{macrocode}
+%<*class>
+\pgfkeys{
+  /ustutt/.cd,
+    debug=false,
+% Please, by all means, don't hate on me for this default!
+    gender=male,%
+    color=rgb,
+    english,
+    ngerman,
+    draft,
+    paper=a4paper,
+    cleardoublepage=empty,%
+%<article>    oneside,%
+%<article>    open=any,%
+%<book>    twoside,%
+%<book>    open=right,%
+%<thesis>    type=thesis,%
+%<thesis>    accepted=false,%
+%<thesis>    twoside,%
+%<thesis>    open=right,%
+  }
+%</class>
+%    \end{macrocode}
+%
+% Process options passed to the class
+%    \begin{macrocode}
+\ProcessPgfOptions{/ustutt}
+% \ProcessOptions\relax
+%    \end{macrocode}
+%
+%
+% \subsection{Package Options}
+%
+% To keep our concerns separated, we first define all package options, and then
+% load all packages. Definition of package options is done alphabetically
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% General configuration of biblatex
+  backend=biber,%
+  backref=false,%
+  giveninits=true,%
+  autocite=inline,%
+  sorting=nyt,%
+  sortcites=true,%
+  style=ipa-authoryear,%
+%
+% Configuration of text citations
+  mincitenames=1,%
+  maxcitenames=2,%
+%
+% Configuration of bibliography
+  maxbibnames=10,%
+  doi=false,%
+  isbn=false,%
+  url=false,%
+% natbib compatibility mode (\citep and \citet still work)
+  natbib=true,
+}{biblatex}
+%    \end{macrocode}
+%
+%
+% Babelbib
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  fixlanguage,%
+}{babelbib}
+%    \end{macrocode}
+%
+%
+% Cleveref
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  capitalise,%
+}{cleveref}
+%    \end{macrocode}
+%
+%
+% Graphicx
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  final,%
+}{graphicx}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% do bibliographical back references
+  backref=false,
+% set base URL for document
+  baseurl={http://www.isw.uni-stuttgart.de/},
+% make bookmarks
+  bookmarks=true,
+% put section numbers in bookmarks
+  bookmarksnumbered=true,
+% open up bookmark tree
+  bookmarksopen=false,
+% level to which bookmarks are open
+  bookmarksopenlevel=1,
+% to specity which 'toc' file to mimic
+  bookmarkstype=toc,
+% allow links to break ove rlines
+  breaklinks=true,
+% to produce CJK bookmarks
+  CJKbookmarks=false,
+% color links
+  colorlinks=true,
+% provide details of anchors defined; same as verbose
+  debug=false,
+% destinations are named by the fist \label after the anchor creation
+  destlabel=false,
+% use small caps instead of color for links
+  frenchlinks=false,
+% make figures hyper links
+  hyperfigures=false,
+% set up hyperlinked footnotes
+  hyperfootnotes=true,
+% set up hyperlinked indices
+  hyperindex=true,
+% use guessable names for links
+  hypertexnames=true,
+% redefine LaTeX internals
+  implicit=true,
+% make page number, not text, be link on TOC, LOF, and LOT
+  linktocpage=false,
+% Color all links in TOC
+  linktoc=all,
+% use LaTeX-computed names for links
+  naturalnames=false,
+% allow nesting of links
+  nesting=false,
+% put an anchor on every page
+  pageanchor=true,
+% backreference by page number
+  pagebackref=false,
+% width of PDF link border
+  pdfborder={0, 0, 1},
+% position the document window in the center of the screen
+  pdfcenterwindow=false,
+% display document title instead of file name in title bar
+  pdfdisplaydoctitle=true,
+% resize document window to fit document size
+  pdffitwindow=false,
+% set default mode of PDF display
+  pdfpagemode=UseOutlines,
+% page at which PDF document opens
+  pdfstartpage=1,
+% starting view of PDF document
+  pdfstartview=Fit,
+% raise up links (for HyperTeX backend)
+  raiselinks=false,
+% set page size by special driver commands
+  setpagesize=true,
+% Unicode encoded pdf strings
+  unicode=true,
+% be chatty
+  verbose=false,
+}{hyperref}
+%    \end{macrocode}
+%
+% Set layout of PDF document in case it is twosided
+%    \begin{macrocode}
+\if@twoside%
+  \PassOptionsToPackage{%
+    pdfpagelayout=TwoColumnRight,%
+  }{hyperref}%
+%    \end{macrocode}
+% Set layout of PDF document in case it is onesided
+%    \begin{macrocode}
+\else
+  \PassOptionsToPackage{%
+    pdfpagelayout=OneColumn,%
+  }{hyperref}%
+\fi
+%    \end{macrocode}
+% We need to explicitely tell hyperref that we are in draft or final mode
+%
+% @see \url{https://en.wikibooks.org/wiki/LaTeX/Print_version\#Problems_with_draft_mode}
+%
+% Draft case
+%    \begin{macrocode}
+\ifdraft{%
+  \PassOptionsToPackage{%
+    final=false,%
+    draft=true,%
+  }{hyperref}%
+%    \end{macrocode}
+% Final case
+%    \begin{macrocode}
+}{%
+  \PassOptionsToPackage{%
+    draft=false,%
+    final=true,%
+  }{hyperref}%
+}
+%    \end{macrocode}
+%
+%
+% showkeys
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% to stop the redefinition of \ref and \pageref, and related commands from the
+% varioref package
+  notref,%
+% to stop the redefinition of \cite and related commands from the harvard and
+% natbib packages.
+  notcite,%
+% Print the keys in a distinguishing colour. The default value is a light grey.
+  color,%
+}{showkeys}
+%    \end{macrocode}
+%
+%
+% Load the |geometry| package but not set any pagination parameters, just load
+% itself and make |\newgeometry| available.
+%    \begin{macrocode}
+\RequirePackage[pass]{geometry}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\PassOptionsToClass{
+%<book|thesis>  chapterprefix=true,%
+% half a line vertical space between paragraphs; there must be at least 1 em free
+% space in the last line of a paragraph
+  parskip=half-,
+% The bibliography will be represented by an entry at the table of contents, but
+% will not be numbered.
+  toc=bibliography,
+% The lists of floating environments i.e., the list of figures and the list of
+% tables, will be represented by entries at the table of contents, but will not
+% be numbered.
+  toc=listof,
+  version=last,%
+  numbers=noenddot,%
+% use geometry package and pass it calculated page dimensions
+  usegeometry,
+  fontsize=12pt,%
+  DIV=calc,%
+  captions=tableheading,%
+%<article>}{scrartcl}
+%<book|thesis>}{scrbook}
+%    \end{macrocode}
+%
+% When a thesis becomes accepted and goes to the publisher, we need a different
+% font size by default because the publisher will want an A4 document that is
+% going to be printed on A5. As such, 12pt font size isn't enough and it must
+% be upped to 14pt
+%    \begin{macrocode}
+%<*doctorate>
+\ifustutt@accepted
+  \PassOptionsToClass{%
+    fontsize=14pt,%
+  }{scrbook}
+\else
+  \PassOptionsToClass{%
+    fontsize=12pt,%
+  }{scrbook}
+\fi
+%</doctorate>
+%    \end{macrocode}
+%
+%
+% scrlayer-scrpage
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  automark,%
+  headsepline=0.20pt,%
+  headtopline=0.00pt,%
+  footsepline=0.20pt,%
+  draft=false,% To remove rulers inserted by the package
+}{scrlayer-scrpage}
+%    \end{macrocode}
+%
+%
+% Url
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  obeyspaces,%
+  hyphens,%
+  spaces%
+}{url}
+%    \end{macrocode}
+%
+%
+% These are probably the most commonly used and SO-suggested options to |xcolor|
+% pacakge, so we'll just pop them right in here.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  usenames,%
+  dvipsnames,%
+  svgnames,%
+  table,%
+  hyperref,%
+}{xcolor}
+%    \end{macrocode}
+%
+%
+% \subsection{Package Loading}
+%
+% This is the first time this template is actually doing something: loading
+% packages.
+%
+% For simplicity, we'll derive everything from the standard koma script
+% classes.
+%    \begin{macrocode}
+%<article>\LoadClass{scrartcl}
+%<book|thesis>\LoadClass{scrbook}
+\RequirePackage{scrlayer-scrpage}
+%    \end{macrocode}
+%
+% Now we can load all our much-needed packages
+%
+% Load the language class
+%    \begin{macrocode}
+\RequirePackage{babel}
+%    \end{macrocode}
+%
+% This package provides expandable checks for the current language based on macro \languagename or hyphenation patterns.
+% The package is part of the oberdiek bundle.
+%    \begin{macrocode}
+\RequirePackage{iflang}
+%    \end{macrocode}
+%
+% This package (once part of the exsheets package), provides a framework for
+% providing multilingual features to a LaTeX package. The packge has its own
+% basic dictionaries for English, Dutch, French, German and Spanish; it aims to
+% use translation material for English, Dutch, French, German, Italian, Spanish,
+% Catalan, Turkish, Croatian, Hungarian, Danish and Portuguese from babel or
+% polyglossia if either is in use in the document. (Additional languages from
+% the multilingual packages may be possible: ask the author.)
+%    \begin{macrocode}
+\RequirePackage{translations}
+%    \end{macrocode}
+%
+% The |translator| package is a \LaTeX package that provides a flexible
+% mechanism for translating individual words into different languages. For
+% example, it can be used to translate a word like ``figure'' into, say, the
+% German word ``Abbildung''. Such a translation mechanism is useful when the
+% author of some package would like to localize the package such that texts are
+% correctly translated into the language preferred by the user. The |translator|
+% package is \textit{not} intended to be used to automatically translate more
+% than a few words.
+%    \begin{macrocode}
+\RequirePackage{translator}
+%    \end{macrocode}
+%
+% The xspace package provides a single command that looks at what comes after it
+% in the command stream, and decides whether to insert a space to replace one
+% "eaten" by the TeX command decoder. The decision is based on what came after
+% any space, not on whether there was a space (which is unknowable): so if the
+% next thing proves to be punctuation, the chances are there was no space, but if
+% it's a letter, there's probably a need for space. This technique is not
+% perfect, but works in a large proportion of cases. The package is part of the
+% latex-tools bundle in the LaTeX required distribution.
+%    \begin{macrocode}
+\RequirePackage{xspace}
+%    \end{macrocode}
+%
+% Fontspec is a package for X3LaTeX and LuaLaTeX. It provides an automatic and
+% unified interface to feature-rich AAT and OpenType fonts through the NFSS in
+% LaTeX running on X3TeX or LuaTeX engines. The package requires the l3kernel
+% and xparse bundles from the LaTeX 3 development team.
+%    \begin{macrocode}
+\RequirePackage{fontspec}
+%    \end{macrocode}
+
+% This package provides a useful macro to manage widow lines. 
+%    \begin{macrocode}
+\ifustutt@nowidow
+  \RequirePackage[all]{nowidow}
+\fi
+%    \end{macrocode}
+%
+% The package supports the Text Companion fonts, which provide many text symbols
+% (such as baht, bullet, copyright, musicalnote, onequarter, section, and yen),
+% in the TS1 encoding. Note that the package has been adopted as part of the
+% LaTeX distribution; the reference here is to the original package, which is now
+% little used (if at all).
+%    \begin{macrocode}
+\RequirePackage{textcomp}
+%    \end{macrocode}
+%
+% Latin modern font package
+%    \begin{macrocode}
+\RequirePackage{lmodern}
+%    \end{macrocode}
+%
+% Adds infix expressions to perform arithmetic on the arguments of the LaTeX
+% commands |\setcounter|, |\addtocounter|, |\setlength|, and |\addtolength|.
+% Since many packages start their arithmetic by storing an argument in a
+% register, the package has wide applicability. This package is part of the
+% latex-tools bundle in the LaTeX required distribution.
+%    \begin{macrocode}
+\RequirePackage{calc}
+%    \end{macrocode}
+%
+% Provides support for setting the spacing between lines in a document. Package
+% options include singlespacing, onehalfspacing, and doublespacing.
+% Alternatively, the spacing can be changed as required with the
+% |\singlespacing|, |\onehalfspacing|, and |\doublespacing| commands. Other size
+% spacings are also available.
+%    \begin{macrocode}
+\RequirePackage{setspace}
+%    \end{macrocode}
+%
+% This package was developed as a general solution to the problem of including
+% graphics in \LaTeX 2.09; as such there are obsolete copies to be found on the
+% web (though no longer on the archive). These old versions should not be used
+% with current LaTeX. The current 'preferred' solution is the LaTeX graphicx
+% package, but the graphics bundle does contain a version of epsfig for use with
+% current LaTeX.
+%    \begin{macrocode}
+\RequirePackage{epsfig}
+%    \end{macrocode}
+%
+% The package builds upon the graphics package, providing a key-value interface
+% for optional arguments to the |\includegraphics| command. This interface
+% provides facilities that go far beyond what the graphics package offers on its
+% own. For extended documentation, see epslatex. The package is part of the
+% latex-graphics bundle, which is one of the collections in the LaTeX 'required'
+% set of packages.
+%    \begin{macrocode}
+\RequirePackage{graphicx}
+%    \end{macrocode}
+% Let us also add two common directories as grahpics paths so there is no need
+% to prefix the common folder |figures| or |images| in any |\includegraphics|
+%    \begin{macrocode}
+\graphicspath{{figures/}{images/}}
+%    \end{macrocode}
+%
+% PGFPlots draws high-quality function plots in normal or logarithmic scaling
+% with a user-friendly interface directly in TeX. The user supplies axis labels,
+% legend entries and the plot coordinates for one or more plots and PGFPlots
+% applies axis scaling, computes any logarithms and axis ticks and draws the
+% plots, supporting line plots, scatter plots, piecewise constant plots, bar
+% plots, area plots, mesh-- and surface plots and some more. Pgfplots is based
+% on PGF/TikZ (PGF); it runs equally for LaTeX/TeX/ConTeXt.
+%    \begin{macrocode}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{tikzscale}
+\usepgfplotslibrary{external}
+\pgfplotsset{compat=newest}
+%    \end{macrocode}
+%
+% Tune the output format of dates according to language. This package provides
+% ten output formats of the commands |\today|, |\printdate|, |\printdate|-TeX,
+% and |\daterange| (partly language dependent). Formats available are: ISO
+% (yyyy-mm-dd), numeric (e.g., dd.\,mm.~yyyy), short (e.g.,dd.\,mm.\,yy), TeX
+% (yyyy/mm/dd), original (e.g., dd.\@ mmm yyyy), short original (e.g., dd.\@ mmm
+% yy), as well as numerical formats with Roman numerals for the month. The
+% commands |\printdate| and |\printdate|-TeX print any date. The command
+% |\daterange| prints a date range and leaves out unnecessary year or month
+% entries. This package supports German (old and new rules), Austrian, US
+% English, British English, French, Danish, Swedish, and Norwegian.
+%    \begin{macrocode}
+\RequirePackage{isodate}
+%    \end{macrocode}
+%
+% The package starts from the basic facilities of the color package, and
+% provides easy driver-independent access to several kinds of color tints,
+% shades, tones, and mixes of arbitrary colors. It allows a user to select a
+% document-wide target color model and offers complete tools for conversion
+% between eight color models. Additionally, there is a command for alternating
+% row colors plus repeated non-aligned material (like horizontal lines) in
+% tables. Colors can be mixed like |\color{red!30!green!40!blue}|.
+%    \begin{macrocode}
+\RequirePackage{xcolor}
+%    \end{macrocode}
+%
+% The package defines new commands |\Centering|, |\RaggedLeft|, and
+% |\RaggedRight| and new environments Center, FlushLeft, and FlushRight, which
+% set ragged text and are easily configurable to allow hyphenation (the
+% corresponding commands in LaTeX, all of whose names are lower-case, prevent
+% hyphenation altogether).
+%    \begin{macrocode}
+\RequirePackage{ragged2e}
+%    \end{macrocode}
+%
+% This package provides the command |\marginnote| that may be used instead of
+% |\marginpar| at almost every place where |\marginpar| cannot be used, e.g.,
+% inside floats, footnotes, or in frames made with the framed package.
+%    \begin{macrocode}
+\RequirePackage{marginnote}
+%    \end{macrocode}
+%
+% Enumerate and itemize within paragraphs. Provides enumerate and itemize
+% environments that can be used within paragraphs to format the items either as
+% running text or as separate paragraphs with a preceding number or symbol. Also
+% provides compacted versions of enumerate and itemize.
+%    \begin{macrocode}
+\RequirePackage{paralist}
+%    \end{macrocode}
+%
+% The package provides four commands for vertically scaling and stretching
+% objects. Its primary function is the ability to scale/stretch and shift one
+% object to conform to the size of a specified second object. This feature can
+% be useful in both equations and schematic diagrams. Additionally, the scaling
+% and stretching commands offer constraints on maximum width and/or minimum
+% aspect ratio, which are often used to preserve legibility or for the sake of
+% general appearance.
+%    \begin{macrocode}
+\RequirePackage{scalerel}
+%    \end{macrocode}
+%
+% Set the font size relative to the current font size. The basic command of the
+% package is |\relsize|, whose argument is a number of |\magsteps| to change
+% size; from this are defined commands |\larger|, |\smaller|, |\textlarger|,
+% etc.
+%    \begin{macrocode}
+\RequirePackage{relsize}
+%    \end{macrocode}
+%
+% The caption package provides many ways to customise the captions in floating
+% environments like figure and table, and cooperates with many other packages.
+% Facilities include rotating captions, sideways captions, continued captions
+% (for tables or figures that come in several parts). A list of compatibility
+% notes, for other packages, is provided in the documentation. The package also
+% provides the "caption outside float" facility, in the same way that simpler
+% packages like capt-of do. The package supersedes caption2.
+%    \begin{macrocode}
+\RequirePackage{caption}
+%    \end{macrocode}
+% The package provides a means of using facilities analagous to those of the
+% caption package, when writing captions for subfigures and the like. The
+% package is distributed with caption.
+%    \begin{macrocode}
+\RequirePackage{subcaption}
+%    \end{macrocode}
+%
+% The package provides the principal packages in the AMS-LaTeX distribution. It
+% adapts for use in LaTeX most of the mathematical features found in AMS-TeX; it
+% is highly recommended as an adjunct to serious mathematical typesetting in
+% LaTeX. If you require more than these basic math symbols, please consider the
+% |ustuttmath| package shipped with this class package. In either case, we'll
+% load |amsmath| here as it must be loaded before |cleveref|.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+% Center tags vertically (default)
+    centertags,%
+% Place the subscripts and superscripts of summation symbols above and below
+% (default)
+    sumlimits,%
+% Like sumlimits, but for integral symbols.
+    intlimits,%
+% Like sumlimits, but for certain 'operator names' such as det, inf, lim, max,
+% min, that traditionally have subscripts placed underneath when they occur in a
+% displayed equation (default)
+    namelimits,%
+% Place equation numbers on the right.
+    reqno,%
+  }{amsmath}
+\RequirePackage{amsmath}
+%    \end{macrocode}
+%
+% Control layout of itemize, enumerate, description. This package provides user
+% control over the layout of the three basic list environments: enumerate,
+% itemize and description. It supersedes both enumerate and mdwlist (providing
+% well-structured replacements for all their funtionality), and in addition
+% provides functions to compute the layout of labels, and to 'clone' the
+% standard environments, to create new environments with counters of their own.
+%    \begin{macrocode}
+\RequirePackage{enumitem}
+%    \end{macrocode}
+%
+% Generate English ordinal numbers. The command |\nth| generates English ordinal
+% numbers of the form 1st, 2nd, 3rd, 4th, etc. LaTeX package options may specify
+% that the ordinal mark be superscripted, and that negative numbers may be
+% treated; Plain TeX users have no access to package options, so need to
+% redefine macros for these changes.
+%    \begin{macrocode}
+\RequirePackage{nth}
+%    \end{macrocode}
+%
+% The package enhances the quality of tables in LaTeX, providing extra commands
+% as well as behind-the-scenes optimisation. Guidelines are given as to what
+% constitutes a good table in this context. From version 1.61, the package
+% offers longtable compatibility.
+%    \begin{macrocode}
+\RequirePackage{booktabs}
+%    \end{macrocode}
+%
+% Show label, ref, cite and bib keys. The showkeys package modifies the
+% |\label|, |\ref|, |\pageref|, |\cite| and |\bibitem| commands so that the
+% 'internal' key is printed, without affecting the appearance of the rest of the
+% text, so far as is possible (the keys typically appear in the margin). The
+% package is part of the tools bundle in the LaTeX required distribution.
+%    \begin{macrocode}
+\ifdraft{%
+  \RequirePackage{showkeys}%
+% Override the default format of the label just so that it will not run away
+% from the margin width.
+  \providecommand*\showkeyslabelformat[1]{%
+    \fbox{%
+      \makebox[0.90\marginparwidth]{\normalfont\small\ttfamily#1}%
+    }%
+  }%
+}{}
+%    \end{macrocode}
+%
+% Defines commands |\counterwithin| (which sets up a counter to be reset when
+% another is incremented) and |\counterwithout| (which unsets such a
+% relationship).
+%    \begin{macrocode}
+\RequirePackage{chngcntr}
+%    \end{macrocode}
+%
+% LaTeX's built-in two-column code finishes off a document exactly where the
+% text stops; this will typically leave an isolated left-hand column, or a
+% right-hand column shorter than the left-hand one. This package modifies the
+% LaTeX output routine to make the two columns as nearly of the same length as
+% possible. Only used with two-column layout (or, in general, multicols)
+%    \begin{macrocode}
+\RequirePackage{flushend}
+%    \end{macrocode}
+%
+% Interpretes quotation marks " and ' and correctly typesets them. Some
+% LaTeX-Editors however provide an option for automatically replacing the
+% correct LaTeX code for quotes, which should be preferred.
+%    \begin{macrocode}
+\RequirePackage{csquotes}
+%    \end{macrocode}
+%
+% Use biblatex, which is the (highly configurable) successor of bibtex and biber
+% biber is still used though to sort the bibliography in the background.
+%    \begin{macrocode}
+\RequirePackage{biblatex}
+%    \end{macrocode}
+%
+% The command |\url| is a form of verbatim command that allows linebreaks at
+% certain characters or combinations of characters, accepts reconfiguration, and
+% can usually be used in the argument to another command. (The |\urldef| command
+% provides robust commands that serve in cases when |\url| doesn't work in an
+% argument.) The command is intended for email addresses, hypertext links,
+% directories/paths, etc., which normally have no spaces, so by default the
+% package ignores spaces in its argument. However, a package option "allows
+% spaces", which is useful for operating systems where spaces are a common part
+% of file names.
+%    \begin{macrocode}
+\RequirePackage{url}
+%    \end{macrocode}
+% The hyperref package is used to handle cross-referencing commands in LaTeX to
+% produce hypertext links in the document. The package provides backends for the
+% |\special| set defined for HyperTeX DVI processors; for embedded pdfmark
+% commands for processing by Acrobat Distiller (dvips and Y\&Y's dvipsone); for
+% Y\&Y's dviwindo; for PDF control within pdfTeX and dvipdfm; for TeX4ht; and
+% for VTeX's pdf and HTML backends. The package is distributed with the backref
+% and nameref packages, which make use of the facilities of hyperref. The
+% package depends on the author's kvoptions, ltxcmdsand refcount packages.
+%    \begin{macrocode}
+\tikzifexternalizing{}{%
+  \RequirePackage{hyperref}%
+}
+%    \end{macrocode}
+%
+% Intelligent cross-referencing. The package enhances LaTeX's cross-referencing
+% features, allowing the format of references to be determined automatically
+% according to the type of reference. The formats used may be customised in the
+% preamble of a document; babel support is available (though the choice of
+% languages remains limited: currently Danish, Dutch, English, French, German,
+% Italian, Norwegian, Russian, Spanish and Ukranian). The package also offers a
+% means of referencing a list of references, each formatted according to its
+% type. In such lists, it can collapse sequences of numerically-consecutive
+% labels to a reference range.
+%    \begin{macrocode}
+\RequirePackage{cleveref}
+%    \end{macrocode}
+%
+% Some packages from other authors may have problems with KOMA-Script. In my
+% opinion some packages could be improved. With some packages this makes only
+% sense, if KOMAScript was used. With some other packages the package author has
+% another opinion. Sometimes proposals was never answered. Package scrhack
+% contains all those improvement proposals for other packages. This means,
+% scrhack redefines macros of packages from other authors! The redefinitions are
+% only activated, if those packages were loaded. Users may prevent scrhack from
+% redefining macros of individual packages.
+%    \begin{macrocode}
+\RequirePackage{scrhack}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Overall layout style}
+%
+% For phd theses, the style when using Fraunhofer as publisher is a bit... strange, but will account for it right here, right now, even in draft mode, as long as it's a doctoral thesis
+%    \begin{macrocode}
+%<*doctorate>
+\geometry{
+  top=3.00cm,%
+  bottom=3.00cm,%
+  outer=2.00cm,%
+  inner=2.00cm,%
+  heightrounded,%
+  marginparwidth=1.50cm,%
+  marginparsep=0.25cm,%
+  headheight=1.25cm,%
+  headsep=1.25cm,%
+  footskip=1.00cm,%
+  footnotesep=2.00\baselineskip,%
+}
+%</doctorate>
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Sectioning Styles}
+%
+%
+% \subsection{Localization}
+%
+% Localization is implemented in a very fancy way. By making use of the
+% |translator| package, we can offload any localized text to a |.dict| file
+% while keeping the main |cls| file clean of any localization. In addition, we
+% do not have to make sure we define each localizable string for every language
+% and dialect that |babel| has to offer. Using |translator|, we define a
+% |German| and |English| dictionary, that is automatically mapped to the
+% respective languages loaded dialect(s). Cool, eh?
+%    \begin{macrocode}
+\usedictionary{ustutt}
+%    \end{macrocode}
+%
+%
+% \subsection{Macros}
+%
+% \subsubsection{All Documents}
+%
+% \begin{macro}{\authorrunning}
+% \cmd{\authorrunning}\marg{author(s)}\\
+% Running names of authors
+%    \begin{macrocode}
+\newcommand{\authorrunning}[1]{%
+  \let\oldAnd\and%
+  \renewcommand{\and}{\unskip,\xspace}%
+  \renewcommand{\@authorrunning}{#1}%
+  \renewcommand{\and}{\oldAnd}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@authorrunning}
+% Internal macro for parsed running authors. We have to replace the original
+% |\and| separator from |%| to something else for we are currently not within a
+% tabular environment.
+%    \begin{macrocode}
+\newcommand{\@authorrunning}[1]{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\acknowledgementsname}
+% Name of the chapter "Acknowledgements"
+%    \begin{macrocode}
+\newcommand{\acknowledgementsname}{\translate{ustutt@acknowledgements}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\prefacename}
+% Name of the chapter "Preface"
+%    \begin{macrocode}
+\newcommand{\prefacename}{\translate{ustutt@preface}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\city}
+% \cmd{\city}\marg{name}\\
+% Name of city of publication
+%    \begin{macrocode}
+\newcommand{\city}[1]{\gdef\ustutt@city{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@city}
+% Internal macro of city of publication
+%    \begin{macrocode}
+\newcommand{\ustutt@city}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\university}
+% \cmd{\university}\marg{name}\\
+% University name in current language
+%    \begin{macrocode}
+\newcommand{\university}[1]{\gdef\ustutt@university{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@university}
+% Internal macro of university name in current language
+%    \begin{macrocode}
+\newcommand{\ustutt@university}{\translate{ustutt@university}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\faculty}
+% \cmd{\faculty}\marg{name}\\
+% Faculty name in current language
+%    \begin{macrocode}
+\newcommand{\faculty}[1]{\gdef\ustutt@faculty{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@faculty}
+% Internal macro of faculty name in current language
+%    \begin{macrocode}
+\newcommand{\ustutt@faculty}{\translate{ustutt@faculty}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\department}
+% \cmd{\department}\marg{name}\\
+% Long name of department in current language
+%    \begin{macrocode}
+\newcommand{\department}[1]{\gdef\ustutt@department@long{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@department@long}
+% Internal macro of department long name in current language
+%    \begin{macrocode}
+\newcommand{\ustutt@department@long}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\departmentshort}
+% \cmd{\departmentshort}\marg{shortname}\\
+% Short name of department in current language
+%    \begin{macrocode}
+\newcommand{\departmentshort}[1]{\gdef\ustutt@department@short{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@department@short}
+% Internal macro of department short name in current language
+%    \begin{macrocode}
+\newcommand{\ustutt@department@short}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\universitylogo}
+% \cmd{\universitylogo}\marg{path}\\
+% Path to the university's logo without the localized suffix. Can be absolute to
+% main document root or relative to |images| or |figures| directory.
+%    \begin{macrocode}
+\newcommand{\universitylogo}[1]{\gdef\ustutt@university@logo{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@university@logo}
+% Internal macro of university logo path
+%    \begin{macrocode}
+\newcommand{\ustutt@university@logo}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\departmentlogo}
+% \cmd{\departmentlogo}\marg{path}\\
+% Path to the department's logo without the localized suffix. Can be absolute to
+% main document root or relative to |images| or |figures| directory.
+%    \begin{macrocode}
+\newcommand{\departmentlogo}[1]{\gdef\ustutt@department@logo{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@department@logo}
+% Internal macro of department logo path
+%    \begin{macrocode}
+\newcommand{\ustutt@department@logo}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\coverimage}
+% \cmd{\coverimage}\marg{path}\\
+% Path to the cover page's image. Can be absolute to main document root or
+% relative to |images| or |figures| directory.
+%    \begin{macrocode}
+\newcommand{\coverimage}[1]{\gdef\ustutt@coverpage@image{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@coverpage@image}
+% Internal macro of cover page image path
+%    \begin{macrocode}
+\newcommand{\ustutt@coverpage@image}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\covercredits}
+% \cmd{\covercredits}\marg{credits}\\
+% In case the coverpage image is copyrighted by someone or you want to thank
+% someone for taking the picture, give then credits for its
+%    \begin{macrocode}
+\newcommand{\covercredits}[1]{\gdef\ustutt@coverpage@credits{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@coverpage@credits}
+% Internal macro of cover page credits
+%    \begin{macrocode}
+\newcommand{\ustutt@coverpage@credits}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection{Thesis}
+%
+% \begin{macro}{\placeofbirth}
+% \cmd{\placeofbirth}\marg{name}\\
+% Place(s) of birth of author(s) of any thesis type.
+%    \begin{macrocode}
+%<thesis>\newcommand{\placeofbirth}[1]{\gdef\ustutt@thesis@placeofbirth{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@placeofbirth}
+% Internal macro of place(s) of birth of author(s) of any thesis type.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@placeofbirth}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\placeofbirthname}
+% Text saying "from" in current locale (place of birth)
+%    \begin{macrocode}
+%<thesis>\newcommand{\placeofbirthname}{\translate{ustutt@thesis@placeofbirth}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\submittedbyname}
+% Text saying "submitted by" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\submittedbyname}{\translate{ustutt@thesis@submittedby}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\byname}
+% Text saying "by" in current locale (author)
+%    \begin{macrocode}
+%<thesis>\newcommand{\byname}{\translate{ustutt@thesis@authorname}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\major}
+% \cmd{\major}\marg{name}\\
+% Major of study
+%    \begin{macrocode}
+%<thesis>\newcommand{\major}[1]{\gdef\ustutt@thesis@major{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@major}
+% Internal macro of major of study.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@major}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\majorname}
+% Text saying "major" in current locale (place of birth)
+%    \begin{macrocode}
+%<thesis>\newcommand{\majorname}{\translate{ustutt@thesis@major}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\advisor}
+% \cmd{\advisor}\marg{advisor}\\
+% Name of the advisor of any thesis type.
+%    \begin{macrocode}
+%<thesis>\newcommand{\advisor}[1]{\gdef\ustutt@thesis@advisor{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@advisor}
+% Internal macro of advisor of any thesis type.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@advisor}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\advisorname}
+% Text saying "Advisor" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\advisorname}{\translate{ustutt@thesis@advisor}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\coadvisor}
+% \cmd{\coadvisor}\marg{coadvisor(s)}\\
+% List of co-advisors of any thesis type. Separate multiple advisors
+% by |\and|.
+%    \begin{macrocode}
+%<thesis>\newcommand{\coadvisor}[1]{\gdef\ustutt@thesis@coadvisor{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@coadvisor}
+% Internal macro of list of co-advisors of any thesis type.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@coadvisor}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\coadvisorname}
+% Text saying "Co-Advisor" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\coadvisorname}{\translate{ustutt@thesis@coadvisor}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\datesubmitted}
+% \cmd{\datesubmitted}\marg{date}\\
+% Date of thesis submission. Can be preformatted using |\printdate| or manually
+% formatted. Will be typeset on the title page if given.
+%    \begin{macrocode}
+%<thesis>\newcommand{\datesubmitted}[1]{\gdef\ustutt@thesis@datesubmitted{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@datesubmitted}
+% Internal macro of date of submission.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@datesubmitted}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\datesubmittedname}
+% Text saying "Submitted on" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\datesubmittedname}{\translate{ustutt@thesis@datesubmitted}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\datedefended}
+% \cmd{\datedefended}\marg{date}\\
+% Date of defense. Can be preformatted using |\printdate| or manually formatted.
+% Will be typeset on the title page if given
+%    \begin{macrocode}
+%<thesis>\newcommand{\datedefended}[1]{\gdef\ustutt@thesis@datedefended{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@datedefended}
+% Internal macro of date of defense
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@datedefended}{}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\datedefendedname}
+% Text saying "Defended on" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\datedefendedname}{\translate{ustutt@thesis@datedefended}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\departmentofuniversityname}
+% Text saying "at" between the department's and the university's name in current
+% locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\departmentofuniversityname}{\translate{ustutt@departmentofuniversityname}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\unitname}
+% \cmd{\unitname}\marg{unit name in locale}\\
+% Name of "unit" in current locale
+%    \begin{macrocode}
+\newcommand{\unitname}{\GetTranslation{ustutt@unit}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ustutt@thesis@pretext}
+% Outputs the thesis pretext "submitted to..." or "accepted by..." on the
+% titlepage.
+%    \begin{macrocode}
+%<*thesis>
+\newcommand{\ustutt@thesis@pretext}{%
+  \ifcurrentbaselanguage{german}{%
+    \ifustutt@accepted%
+      Von der Fakult\"at%
+    \else%
+      Der Fakult\"at%
+    \fi\space%
+    \ustutt@faculty\space%
+    der \ustutt@university\space%
+    zur Erlangung der W\"urde eine%
+      \ifdefstring{\usutt@gender}{female}{%
+        r%
+      }{%
+        s%
+      }%
+    \space%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+      \translate{ustutt@thesis@degree@doctorate@long}%
+      \ifdefstring{\usutt@gender}{female}{%
+        in%
+      }{%
+        s%
+      }%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        \translate{ustutt@thesis@degree@master@long}%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          \translate{ustutt@thesis@degree@bachelor@long}%
+        }{% FALSE
+        }%
+      }%
+    }%
+    ~%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+      (\translate{ustutt@thesis@degree@doctorate@short})\space%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        (\translate{ustutt@thesis@degree@master@short})\space%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          (\translate{ustutt@thesis@degree@bachelor@short})\space%
+        }{% FALSE
+        }%
+      }%
+    }%
+    \ifustutt@accepted%
+      akzeptierte%
+    \else%
+      vorgelegte%
+    \fi\space%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+      Abhandlung%
+    }{%
+      \ifdefstring{\ustutt@degree}{master}{% FALSE
+        Masterarbeit%
+      }{%
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          Bachelorarbeit%
+        }{% FALSE
+        }%
+      }%
+    }%
+  }{%
+    A %
+    {%
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        master's%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          bachelor's%
+        }{% FALSE
+        }%
+      }%
+      \space%
+    }%
+    thesis %
+    \ifustutt@accepted%
+      accepted by%
+    \else%
+      submitted to%
+    \fi\space%
+    the faculty of \ustutt@faculty\space%
+    at \ustutt@university\space%
+    in partial fulfillment of the requirements of a\space%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+      \translate{ustutt@thesis@degree@doctorate@long}%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        \translate{ustutt@thesis@degree@master@long}%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          \translate{ustutt@thesis@degree@bachelor@long}%
+        }{% FALSE
+        }%
+      }%
+    }%
+    ~%
+    \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+      (\translate{ustutt@thesis@degree@doctorate@short})\space%
+    }{% FALSE
+      \ifdefstring{\ustutt@degree}{master}{% TRUE
+        (\translate{ustutt@thesis@degree@master@short})\space%
+      }{% FALSE
+        \ifdefstring{\ustutt@degree}{bachelor}{% TRUE
+          (\translate{ustutt@thesis@degree@bachelor@short})\space%
+        }{%
+         FALSE
+        }%
+      }%
+    }%
+  }%
+}
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{environment}{abstract}
+% As per definition of koma-script, there is no |abstract| environment in the
+% book class, as such we will define it ourself here as new environment.
+%    \begin{macrocode}
+%<*book|thesis>
+\newenvironment{abstract}{%
+  \chapter*{\abstractname}%
+  \addcontentsline{toc}{chapter}{\abstractname}%
+  \begin{spacing}{1.150}%
+}{%
+  \end{spacing}%
+  \vfill%
+  \ifdefempty{\@keywords}{% TRUE
+  }{% FALSE
+    \let\oldAnd\and%
+    \renewcommand{\and}{\unskip,\xspace}%
+    \textbf{\color{UStuttAnthracite}\keywordsname:}~\@keywords%
+    \renewcommand{\and}{\oldAnd}
+  }%
+}
+%</book|thesis>
+%    \end{macrocode}
+% \end{environment}
+%
+%
+% \begin{environment}{intro}
+% Much like an abstract for the document, an intro is an introductive text to a
+% chapter of a book or thesis.
+%    \begin{macrocode}
+%<*book|thesis>
+\newenvironment{intro}{%
+  \noindent\ignorespaces%
+  \begin{adjustwidth}{0.05\linewidth}{0.05\linewidth}%
+    \begin{spacing}{1.25}%
+      \setlength{\parskip}{0pt}
+      \setlength{\parindent}{15pt}
+      \slshape%
+}{%
+      \par\noindent%
+      \ignorespacesafterend%
+    \end{spacing}%
+    \normalfont%
+  \end{adjustwidth}%
+  \vspace*{\baselineskip}%
+}%
+%</book|thesis>
+%    \end{macrocode}
+% \end{environment}
+%
+%
+% \begin{environment}{acknowledgements}
+% Similarly, there usually exists not environment for acknowledgements in a
+% thesis document, which is why we are providing one here.
+%    \begin{macrocode}
+%<*book|thesis>
+\newenvironment{acknowledgements}{%
+  \chapter*{\acknowledgementsname}%
+  \addcontentsline{toc}{chapter}{\acknowledgementsname}%
+  \begin{spacing}{1.175}%
+}{%
+  \end{spacing}%
+%
+  \vfill%
+% 
+  \vspace*{2.00\baselineskip}%
+%
+  \ifthispageodd{%
+    \@author\hfill\ustutt@city, \today
+  }{%
+    \ustutt@city, \today\hfill\@author
+  }
+}
+%</book|thesis>
+%    \end{macrocode}
+% \end{environment}
+%
+%
+% \begin{environment}{preface}
+% Similarly, there usually exists not environment for acknowledgements in a
+% thesis document, which is why we are providing one here.
+%    \begin{macrocode}
+%<*book|thesis>
+\newenvironment{preface}{%
+  \chapter*{\prefacename}%
+  \addcontentsline{toc}{chapter}{\prefacename}%
+  \begin{spacing}{1.175}%
+}{%
+  \end{spacing}%
+}
+%</book|thesis>
+%    \end{macrocode}
+% \end{environment}
+%
+%
+% \subsubsection{Colors}
+%
+% Colorful documents are much nicer than just plain black and white. Thus, let
+% us define a batch of basis colors and their nuances
+%    \begin{macrocode}
+\RequirePackage{ustuttcolors}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\crule}
+% \cmd{\crule}\oarg{color}\marg{width}\marg{height}\\
+% Simpler command for a colored ruler.
+%    \begin{macrocode}
+\newcommand\crule[3][UStuttColorful]{\textcolor{#1}{\rule{#2}{#3}}}
+%    \end{macrocode}
+% Example usage
+% \begin{verbatim}
+%   \crule{0.5\linewidth}{0.4pt}
+%   \crule[Red]{0.5\linewidth}{0.4pt}
+% \end{verbatim}
+% \end{macro}
+%
+%
+% We will provide some macros for easier colored-table creation
+%
+% \begin{macro}{\tablecolorwithhead}
+% \cmd{\tablecolorwithhead}\\
+% Trigger row colors in the correct order for tables with a single header row,
+% such that even and odd rows are colored similar to tables without header row.
+%    \begin{macrocode}
+\newcommand{\tablecolorwithhead}{\rowcolors{1}{TableRowEven}{TableRowOdd}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tablecolorwithouthead}
+% \cmd{\tablecolorwithouthead}\\
+% Set table row colors in the order for tables without any header rows.
+%    \begin{macrocode}
+\newcommand{\tablecolorwithouthead}{\rowcolors{1}{TableRowOdd}{TableRowEven}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tableheadcolor}
+% \cmd{\tableheadcolor}\\
+% Sets the table head row color
+%    \begin{macrocode}
+\newcommand{\tableheadcolor}{\rowcolor{TableHeader}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\thead}
+% \cmd{\thead}\marg{header celll content}\\
+% Command to apply styles for a table head column. Is placed inside the header
+% cell and takes the cell content as argument.
+%    \begin{macrocode}
+\newcommand{\thead}[1]{{\color{White}{\bfseries{#1}}}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\theadbegin}
+% \cmd{\theadbegin}\\
+% Command to open a table header
+%    \begin{macrocode}
+\newcommand{\theadbegin}{\toprule\tableheadcolor}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\theadend}
+% \cmd{\theadend}\\
+% Command to close a table header
+%    \begin{macrocode}
+\newcommand{\theadend}{\midrule}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tcellhighlight}
+% \cmd{\tcellhighlight}\\
+% Command to highlight a table cell
+%    \begin{macrocode}
+\newcommand{\tcellhighlight}{\cellcolor{TableCellHighlight}}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \paragraph{Counter definition}
+%
+% Set counter for the section numbering
+%    \begin{macrocode}
+\setcounter{secnumdepth}{3}
+%    \end{macrocode}
+%
+% Set counter of what to show in the Toc and what not
+%    \begin{macrocode}
+\setcounter{tocdepth}{2}
+%    \end{macrocode}
+%
+%
+% Thickness of header top line
+%    \begin{macrocode}
+\KOMAoptions{headtopline=false}
+%    \end{macrocode}
+%
+% Thickness of header separator line
+%    \begin{macrocode}
+\KOMAoptions{headsepline=0.66pt}
+%    \end{macrocode}
+%
+% Thickness of footer separator line
+%    \begin{macrocode}
+\KOMAoptions{footsepline=0.66pt}
+%    \end{macrocode}
+%
+% Thickness of footer bottom line
+%    \begin{macrocode}
+\KOMAoptions{footbotline=false}
+%    \end{macrocode}
+%
+% Line above header
+%    \begin{macrocode}
+\addtokomafont{headtopline}{\color{headtopline}}
+%    \end{macrocode}
+%
+% Line below header
+%    \begin{macrocode}
+\addtokomafont{headsepline}{\color{headsepline}}
+%    \end{macrocode}
+%
+% Line above footer
+%    \begin{macrocode}
+\addtokomafont{footsepline}{\color{footsepline}}
+%    \end{macrocode}
+%
+% Line below footer
+%    \begin{macrocode}
+\addtokomafont{footbotline}{\color{footbotline}}
+%
+%
+%
+% \subsection{Chapter styling}
+%
+% Make sure chapter headings are ragged left from the `ragged2e` package
+%    \begin{macrocode}
+%<book|thesis>\renewcommand*{\raggedchapter}{\raggedleft}
+%    \end{macrocode}
+%
+%
+% A fancy right-sided chapter line, if the `fancychapter` option is given
+%    \begin{macrocode}
+%<*book|thesis>
+\ifustutt@fancychapter
+  \renewcommand*{\chapterformat}{%
+% prints localized chapter prefix i.e., 'Chapter' or not
+    \chapappifchapterprefix{}%
+% spacing between chapter prefix and chapter number
+    \enskip%
+% spacing to the chapter number
+    \resizebox{!}{1.10\baselineskip}{\thechapter}%
+% a box that basically behaves like an `\rlap`
+    \makebox[0pt][l]{%
+% pad to start on the margin par
+      \hspace{\marginparsep}%
+% box around the colored bar
+      \raisebox{\dp\strutbox}[\ht\strutbox][\dp\strutbox]{%
+% colored bar itself
+        {\color{UStuttColorful}{\rule[-\dp\strutbox]{5.00cm}{1.00\baselineskip}}}%
+      }%
+    }%
+  }%
+  \renewcommand{\chapterlinesformat}[3]{%
+    \parbox{\dimexpr\linewidth-2\fboxrule-2\fboxsep}{%
+      \raggedchapter\@hangfrom{#2}#3% 
+    }%
+  }%
+  \renewcommand{\chapterlineswithprefixformat}[3]{%
+    \parbox{\dimexpr\linewidth-2\fboxrule-2\fboxsep}{%
+      \raggedchapter#2#3%
+    }%
+  }%
+\fi
+%</book|thesis>
+%    \end{macrocode}
+%
+% Also add more spacing before and after the chapter heading
+%    \begin{macrocode}
+%<*book|thesis>
+\RedeclareSectionCommand[%
+  beforeskip=30pt,%
+  afterskip=20pt,%
+]{chapter}
+\renewcommand*\chapterheadmidvskip{%
+  \par\nobreak\vspace{10pt}%
+}
+%</book|thesis>
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Header styles}
+%
+%    \begin{macrocode}
+\clearpairofpagestyles
+%    \end{macrocode}
+%
+% Onesided documents' headers
+%    \begin{macrocode}
+\if@twoside\else
+  \ihead*[]{\@authorrunning}
+  \chead*[]{}
+  \ohead*[]{\headmark}
+\fi
+%    \end{macrocode}
+%
+% Even pages (left pages) from outside to inside
+%    \begin{macrocode}
+\if@twoside%
+  \lehead*[]{\headmark}
+  \cehead*[]{}
+%<article>  \rehead*[]{\@authorrunning}
+%<book>  \rehead*[]{}
+\fi
+%    \end{macrocode}
+% Odd pages (right pages) from inside to outside
+%    \begin{macrocode}
+\if@twoside%
+%<article>  \lohead*[]{\@authorrunning}
+%<book>  \lohead*[]{}
+  \cohead*[]{}
+  \rohead*[]{\headmark}
+\fi
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Footer styles}
+%
+% Onesided documents' footers
+%    \begin{macrocode}
+\if@twoside\else
+  \ifoot*[]{}
+  \cfoot*[]{}
+  \ofoot*[\pagemark]{\pagemark}
+\fi
+%    \end{macrocode}
+%
+% Two sided documents' even pages (left pages) from outside to inside
+%    \begin{macrocode}
+\if@twoside%
+  \ifustutt@fancyfooter%
+    \lefoot*{% 
+      \makebox[0pt][r]{%
+% page number
+        \pagemark%
+% spacing between page mark and vertical bar
+        \enskip%
+% vertical bar
+        \raisebox{0pt}[\ht\strutbox][\dp\strutbox]{%
+          {\color{UStuttColorful}{\rule[-\dp\strutbox]{2.00pt}{1.00\baselineskip}}}%
+        }% 
+% push to the left so that text starts where marginpar starts
+        \hspace{\marginparsep}%
+      }% 
+    }%
+    \cefoot*{}
+    \refoot*{}
+  \else
+    \lefoot*{\pagemark}
+    \cefoot*{}
+    \refoot*{}
+  \fi%
+\fi%
+%    \end{macrocode}
+% Two sided documents' odd pages (right pages) from inside to outside
+%    \begin{macrocode}
+\if@twoside%
+  \ifustutt@fancyfooter
+    \lofoot*{}
+    \cofoot*{}
+    \rofoot*{% 
+      \makebox[0pt][l]{%
+% push to the right so that text starts where marginpar starts
+        \hspace{\marginparsep}%
+% vertical bar
+        \raisebox{0pt}[\ht\strutbox][\dp\strutbox]{%
+          {\color{UStuttColorful}{\rule[-\dp\strutbox]{2.00pt}{1.00\baselineskip}}}%
+        }%
+% spacing between bar and page mark
+        \enskip%
+%  page number
+        \pagemark%
+      }% 
+    }
+  \else
+    \lofoot*{}
+    \cofoot*{}
+    \rofoot*{\pagemark}
+  \fi%
+\fi%
+%    \end{macrocode}
+%
+%
+%
+% Footnote
+%    \begin{macrocode}
+\renewcommand{\footnoterule}{\kern-3.00pt{\color{footnoterule}{\hrule width 2.00in}}\kern2.60pt}
+\renewcommand{\footnoterule}{\kern-3pt{\color{footnoterule}{\hrule width 2in}}\kern2.6pt}
+\renewcommand\@makefnmark{\hbox{\@textsuperscript{\normalfont\color{UStuttColorful}\@thefnmark}}}
+\renewcommand{\thefootnote}{\textcolor{thefootnote}{\arabic{footnote}}}
+%    \end{macrocode}
+%
+%
+%
+% \paragraph{Komafont definitions}
+%
+% Setting title to be written in main color, sans-serif, and Huge
+%    \begin{macrocode}
+\setkomafont{title}{\color{title}\Huge}
+%    \end{macrocode}
+%
+% Create a new font for title on coverpage, typeset like the regular title just
+% in sans-serif and white
+%    \begin{macrocode}
+\newkomafont{coverpagetitle}{\usekomafont{title}\sffamily\color{White}}
+%    \end{macrocode}
+%
+% Setting subtitle to be written in main color, sans-serif, and large
+%    \begin{macrocode}
+\setkomafont{subtitle}{\color{subtitle}\Large}
+%    \end{macrocode}
+%
+% Setting subtitle on coverpage to be written like the title, but in sans-serif
+% and in White
+%    \begin{macrocode}
+\newkomafont{coverpagesubtitle}{\usekomafont{subtitle}\sffamily\color{White}}
+%    \end{macrocode}
+%
+% Setting dedication to be typeset wit
+%    \begin{macrocode}
+\setkomafont{dedication}{\slshape\large}
+%    \end{macrocode}
+%
+% Setting author to be written in main color, sans-serif, and huge
+%    \begin{macrocode}
+\addtokomafont{author}{\color{author}}
+%    \end{macrocode}
+%
+% Setting date to be written in main color, normal font, and normal size
+%    \begin{macrocode}
+\setkomafont{date}{\color{date}\normalfont\normalsize}
+%    \end{macrocode}
+%
+% Date on coverpage much like regular date, except... white and sans-serif
+%    \begin{macrocode}
+\newkomafont{coverpagedate}{\usekomafont{date}\sffamily\color{White}}
+%    \end{macrocode}
+%
+% New font style for the "document type"
+%    \begin{macrocode}
+\newkomafont{documenttype}{\Large\color{title}}
+\newkomafont{coverpagedocumenttype}{\usekomafont{documenttype}\sffamily\color{White}}
+%    \end{macrocode}
+%
+% Page header and footer should be written in the main color and sans-serif
+%    \begin{macrocode}
+\setkomafont{pageheadfoot}{\color{pageheadfoot}}
+%    \end{macrocode}
+%
+% Page footer should be written in the main color, sans-serif and small font
+% size
+%    \begin{macrocode}
+\setkomafont{pagefoot}{\color{pagefoot}\small}
+%    \end{macrocode}
+%
+% Create a new font for "place of birth"
+%    \begin{macrocode}
+\newkomafont{placeofbirth}{\color{placeofbirth}\normalfont\normalsize}
+%    \end{macrocode}
+%
+% Make page numbers printed in UStuttAnthracite
+%    \begin{macrocode}
+\addtokomafont{pagenumber}{\color{pagenumber}}
+%    \end{macrocode}
+%
+%
+%
+% \paragraph{Headings}
+% 
+% All headings are typeset in Roman family and in bold font series
+%    \begin{macrocode}
+\addtokomafont{disposition}{\color{disposition}\rmfamily\bfseries}
+%    \end{macrocode}
+%
+% All sections (section, subsection, subsubsection)
+%    \begin{macrocode}
+\addtokomafont{sectioning}{\color{sectioning}}
+%    \end{macrocode}
+%
+% Adjustment to sections
+%    \begin{macrocode}
+\addtokomafont{section}{\color{section}}
+%    \end{macrocode}
+%
+% Adjustments to subsection
+%    \begin{macrocode}
+\addtokomafont{subsection}{\color{subsection}}
+%    \end{macrocode}
+%
+% Adjustments to subsubsections
+%    \begin{macrocode}
+\addtokomafont{subsubsection}{\color{subsubsection}}
+%    \end{macrocode}
+%
+% We'll make paragraphs have medium font-weight
+%    \begin{macrocode}
+\addtokomafont{paragraph}{\color{paragraph}}
+%    \end{macrocode}
+%
+% And have sub-paragraphs have medium font-weight with a smaller font size
+% compared to paragraphs
+%    \begin{macrocode}
+\addtokomafont{subparagraph}{\color{subparagraph}\slshape\mdseries}
+%    \end{macrocode}
+%
+% Font of label in a description list
+%    \begin{macrocode}
+\setkomafont{descriptionlabel}{\color{descriptionlabel}\rmfamily\bfseries}
+%    \end{macrocode}
+%
+%
+%% DICTUM (Part and chapter prefix)
+%    \begin{macrocode}
+%<*book|thesis>
+\renewcommand{\dictumwidth}{0.80\linewidth}
+\setkomafont{dictum}{\color{dictum}\slshape}
+%</book|thesis>
+%    \end{macrocode}
+%
+%
+%
+% \paragraph{Tables}
+% Stretch padding between table rows globally
+%    \begin{macrocode}
+\renewcommand{\arraystretch}{1.10}
+\setlength{\aboverulesep}{0.00pt}
+\setlength{\belowrulesep}{0.00pt}
+\setlength{\belowbottomsep}{0.00pt}
+%    \end{macrocode}
+%
+%
+%
+% \paragraph{Itemize Environments}
+% Level 1
+%    \begin{macrocode}
+\setlist[itemize,1]{%
+  leftmargin=1.50em,%
+  label={%
+    \protect\tikz[%
+        baseline=-\the\dimexpr\fontdimen22\textfont2\relax,%
+      ]%
+      \draw[%
+          mark=*,%
+          mark size=0.40ex,%
+          mark options={%
+            draw=itemizei,%
+            fill=itemizei,%
+          },%
+        ]
+        plot coordinates{(0.00,0.00)};
+  }%
+}
+%    \end{macrocode}
+% Level 2
+%    \begin{macrocode}
+\setlist[itemize,2]{%
+  leftmargin=1.50em,%
+  label={%
+    \protect\tikz[%
+        baseline=-\the\dimexpr\fontdimen22\textfont2\relax,%
+      ]%
+      \draw[%
+          mark=square*,%
+          mark size=0.40ex,%
+          mark options={%
+            draw=itemizeii,%
+            fill=itemizeii,%
+          },%
+        ]
+        plot coordinates{(0.00,0.00)};
+  }%
+}
+%    \end{macrocode}
+% Level 3
+%    \begin{macrocode}
+\setlist[itemize,3]{%
+  leftmargin=1.50em,%
+  label={%
+    \protect\tikz[%
+        baseline=-\the\dimexpr\fontdimen22\textfont2\relax,%
+      ]%
+      \draw[%
+          mark=*,%
+          mark size=0.40ex,%
+          mark options={%
+            line width=1.00pt,%
+            draw=itemizeiii,%
+            fill=White,%
+          },%
+        ]
+        plot coordinates{(0.00,0.00)};
+  }%
+}
+%    \end{macrocode}
+% Level 4
+%    \begin{macrocode}
+\setlist[itemize,4]{%
+  leftmargin=1.50em,%
+  label={%
+    \protect\tikz[%
+        baseline=-\the\dimexpr\fontdimen22\textfont2\relax,%
+      ]%
+      \draw[%
+          mark=square*,%
+          mark size=0.40ex,%
+          mark options={%
+            line width=1.00pt,% 
+            draw=itemizeiv,%
+            fill=White,%
+          },%
+        ]
+        plot coordinates{(0.00,0.00)};
+  }%
+}
+%    \end{macrocode}
+% Level 5 ... oo - WHY? Who is using more than four levels of itemization?
+%
+%
+%
+% \paragraph{Enumerate Environments}
+% Level 1
+%    \begin{macrocode}
+\setlist[enumerate,1]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 2
+%    \begin{macrocode}
+\setlist[enumerate,2]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 3
+%    \begin{macrocode}
+\setlist[enumerate,3]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 4
+%    \begin{macrocode}
+\setlist[enumerate,4]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 5 ... oo - WHY? Who is using more than four levels of enumerations?
+%
+%
+%
+% \paragraph{Description Environments}
+% Level 1
+%    \begin{macrocode}
+\setlist[description,1]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 2
+%    \begin{macrocode}
+\setlist[description,2]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 3
+%    \begin{macrocode}
+\setlist[description,3]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 4
+%    \begin{macrocode}
+\setlist[description,4]{%
+  leftmargin=1.50em,%
+}
+%    \end{macrocode}
+% Level 5 ... oo - WHY? Who is using more than four levels of enumerations?
+%
+%
+%
+% Captions of all floats
+% Setup captions of all floats (figures and captions)
+%    \begin{macrocode}
+\captionsetup{
+  format=hang,%
+  labelsep=colon,%
+  textformat=simple,%
+  justification=justified,%
+  singlelinecheck=off,%
+% Affects the whole figure caption
+  font={%
+    small,%
+  },%
+% Affects only the label name and its number
+  labelfont={%
+    bf,%
+    color=captionlabel,%
+  },%
+  textfont={% Affects only the actual float caption
+  },%
+  labelformat=simple,%
+}
+%    \end{macrocode}
+% Setup captions of tables
+%    \begin{macrocode}
+\captionsetup[table]{%
+  position=above,%
+  belowskip=2.00pt,%
+}
+%    \end{macrocode}
+% Setup captions of figures
+%    \begin{macrocode}
+\captionsetup[figure]{%
+  position=below,%
+  belowskip=2.00pt,%
+}
+%    \end{macrocode}
+% Setup captions of subfigures
+%    \begin{macrocode}
+\captionsetup[sub]{%
+  position=below,%
+  belowskip=2.00pt,%
+  textfont={sl},
+  subrefformat=simple,%
+  labelformat=simple,%
+}
+%    \end{macrocode}
+% This will make sure that subfigure labels (both in the caption as well as in
+% references such as `|\subref|`) are typeset as `|(\alph)|`.
+%    \begin{macrocode}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+%    \end{macrocode}
+%
+%
+% \paragraph{New Column Types}
+%
+% Regular text columns as mini-paragraphs with \textbf{L}eft-justified, \textbf{C}enter-justified, and \textbf{R}ight-justified
+%    \begin{macrocode}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+%    \end{macrocode}
+%
+% Math-mode columns: left (B), right (M), and center (N) math aligned columns
+%    \begin{macrocode}
+\newcolumntype{B}{>{$}l<{$}}
+\newcolumntype{N}{>{$}c<{$}}
+\newcolumntype{M}{>{$}r<{$}}
+%    \end{macrocode}
+%
+%
+% Numbering of equations, figures, and tables according to their chapter
+%    \begin{macrocode}
+%<*article>
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\counterwithout{footnote}{section}
+%</article>
+%<*book|thesis>
+\numberwithin{equation}{chapter}
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+\counterwithout{footnote}{chapter}
+%</book|thesis>
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\coverpage}
+% \cmd{\coverpage}\\
+% Type set the coverpage wherever it is placed. Also outputs the coverpage
+% thanks/credits at the bottom of the the following page.
+%    \begin{macrocode}
+\newcommand{\coverpage}{%
+  \noindent%
+  \thispagestyle{empty}%
+  \newgeometry{%
+    inner=0.00cm,%
+    outer=0.00cm,%
+    top=0.00cm,%
+    bottom=0.00cm,%
+  }%
+  \tikzexternaldisable
+  \begin{tikzpicture}[%
+      remember picture,%
+      overlay,%
+      inner sep=0.00pt,%
+      outer sep=0.00pt,%
+      x=\paperwidth,%
+      y=\paperheight,%
+    ]%
+% BACKGROUND
+    \draw[%
+        fill=AccentFourVeryLight,%
+        draw=AccentFourVeryLight,%
+      ]%
+      (0.00, 0.00)%
+        rectangle (1.00, -1.00);
+% BLOCK for TITLE and SUBTITLE
+    \draw[%
+        fill=AccentOne,%
+        draw=AccentOne,%
+      ]%
+      (0.00, 0.10)%
+        rectangle (1.00,-0.25);%
+% TITLE
+    \node[%
+        align=center,%
+        anchor=south,%
+        text width=0.90\paperwidth,%
+      ]%
+      at (0.50, -0.083)%
+      {%
+        \usekomafont{coverpagetitle}\@title%
+      };%
+% SUBTITLE
+    \node[%
+        align=center,%
+        anchor=north,%
+        text width=0.75\paperwidth,%
+      ]%
+      at (0.50,-0.166)%
+      {%
+        \usekomafont{coverpagesubtitle}\@subtitle%
+      };%
+% GRAY BLOCK BELOW TITLE
+    \draw[%
+        fill=UStuttAnthracite,%
+        draw=UStuttAnthracite,%
+      ]%
+      (0.00,-0.25)%
+        rectangle (1.00,-0.70);%
+% % TYPE OF DOCUMENT
+    \node[%
+        align=center,%
+        text width=0.70\paperwidth,%
+        ]%
+      at (0.50, -0.275)%
+      {%
+% Write the document type onto the title page
+        \ifdefstring{\ustutt@type}{thesis}{% TRUE
+        }{% FALSE
+          {\usekomafont{coverpagedocumenttype}\translate{ustutt@documenttype@\expandafter\ustutt@type}}%
+        }%
+      };%
+% IMAGE
+    \ifdefempty{\ustutt@coverpage@image}{% TRUE
+    }{% FALSE
+      \begin{scope}%
+        \clip%
+          (0.00,-0.30)%
+            rectangle (1.00,-0.65);%
+        \node[%
+            inner sep=0.00pt,%
+            outer sep=0.00pt,%
+          ]%
+          at (0.5075,-0.475)%
+          {%
+            \includegraphics[%
+                keepaspectratio,%
+                height=0.45\paperheight,%
+              ]{\ustutt@coverpage@image}%
+          };%
+      \end{scope}%
+    };%
+% LOGOS
+    \ifdefempty{\ustutt@university@logo}{% TRUE
+    }{% FALSE
+      \node[%
+          anchor=west,%
+        ]%
+        at (0.083,-0.875)%
+        {%
+          \includegraphics[%
+              width=0.30\paperwidth,%
+              keepaspectratio,%
+            ]{\ustutt@university@logo}%
+        };%
+    };%
+    \ifdefempty{\ustutt@department@logo}{% TRUE
+    }{% FALSE
+      \node[%
+          anchor=east,%
+        ]%
+        at (0.917,-0.875)%
+        {%
+          \includegraphics[%
+              width=0.30\paperwidth,%
+              height=0.08\paperwidth,%
+              keepaspectratio,%
+            ]{\ustutt@department@logo}%
+        };%
+    };%
+% DATE
+    \node[%
+      ]%
+      at (0.50,-0.95)%
+      {%
+        \usekomafont{coverpagedate}\the\year%
+      };%
+% LEFT BAR
+    \draw[%
+        fill=AccentTwo,%
+        draw=AccentTwo,%
+      ]%
+      (0.00, 0.10)%
+        rectangle (0.033,-1.00);
+  \end{tikzpicture}%
+  \tikzexternalenable
+  \clearpage%
+  \ifdefempty{\ustutt@coverpage@credits}{% TRUE
+  }{% FALSE
+    \newgeometry{%
+      inner=1.50cm,%
+      outer=1.50cm,%
+      top=1.50cm,%
+      bottom=1.50cm,%
+    }%
+    \thispagestyle{empty}%
+    \vfill%
+    \begin{minipage}[l]{0.80\linewidth}
+      \smaller%
+      \ustutt@coverpage@credits%
+    \end{minipage}%
+    \clearpage%
+  }
+  \restoregeometry%
+  \setcounter{page}{1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\maketitle}
+% \cmd{|maketitle}\\
+% This macro is overwritten for all documents of type thesis to represent the
+% official template given by Faculty 7 (or at least as close as it can get).
+%    \begin{macrocode}
+%<*thesis>
+\renewcommand{\maketitle}{%
+  \newgeometry{%
+    inner=1.50cm,%
+    outer=1.50cm,%
+    top=1.50cm,%
+    bottom=1.50cm,%
+  }%
+  \begin{titlepage}%
+    \thispagestyle{empty}%
+    \centering%
+    \begin{minipage}[t][3.00cm][c]{0.90\linewidth}%
+      \centering%
+      {\usekomafont{title}{\@title}\par}%
+    \end{minipage}
+    \vskip 0.10cm%
+    \begin{minipage}[t][1.50cm][c]{0.70\linewidth}%
+      \centering%
+      \ifdefempty{\@subtitle}{% TRUE
+      }{% FALSE
+        \usekomafont{subtitle}{\@subtitle}%
+      }%
+    \end{minipage}%
+    \vskip 1.50cm%
+    \begin{minipage}[t][1.50cm][t]{0.75\linewidth}%
+      \centering%
+      \begin{spacing}{1.25}
+        \ustutt@thesis@pretext%
+      \end{spacing}
+    \end{minipage}
+    \vskip 1.50cm%
+% AUTHOR box is 80% wide and 3.50cm tall
+    \begin{minipage}[t][2.50cm][c]{0.80\linewidth}
+      \centering%
+      \byname%
+      \vskip 0.50cm%
+      {\usekomafont{author}%
+      \begin{tabular}[t]{c}%
+        \@author%
+      \end{tabular}%
+      }%
+      \vskip 0.50cm%
+      \ifdefempty{\ustutt@thesis@placeofbirth}{% TRUE
+        \par%
+      }{% FALSE
+        \placeofbirthname\par%
+        {\usekomafont{placeofbirth}%
+        \begin{tabular}[t]{c}%
+          \ustutt@thesis@placeofbirth%
+        \end{tabular}%
+        }\par%
+      }%
+    \end{minipage}
+    \vskip 1.00cm%
+    \begin{minipage}[t][1.00cm][c]{0.50\linewidth}
+      \centering%
+      \ifdraft{\color{Red}{\bfseries\ttfamily\Huge\draftname}}{}
+    \end{minipage}%
+    \vskip 1.00cm%
+    \begin{minipage}[c][3.00cm][c]{0.90\linewidth}%
+      \let\oldAnd\and%
+      \renewcommand{\and}{\par}%
+      \renewcommand*{\arraystretch}{1.60}
+      \begin{tabu} to \linewidth {X[2,l] X[3,l]}%
+        \ifdefempty{\ustutt@thesis@major}{% TRUE
+        }{% FALSE
+          {\majorname:}%
+            & \ustutt@thesis@major\\%
+        }%
+        {\advisorname:}%
+          & \ustutt@thesis@advisor\\%
+        {\coadvisorname:}%
+          & {\ustutt@thesis@coadvisor}\\%
+        \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+          {\datedefendedname:}%
+            & \ifustutt@accepted\@date\else\fi\\%
+        }{% FALSE
+          {\ifustutt@accepted\datedefendedname\else\datesubmittedname\fi:}%
+            & \@date\\%
+        }%
+      \end{tabu}%
+    \renewcommand{\and}{\oldAnd}%
+    \end{minipage}%
+    \vfill%
+    \begin{minipage}[t]{0.75\linewidth}
+      \centering%
+      \ustutt@department@long\space \departmentofuniversityname\space \ustutt@university.\par%
+    \end{minipage}
+    \vfill%
+    \begin{minipage}[t][1.00cm][t]{0.20\linewidth}
+      \centering%
+      \the\year%
+    \end{minipage}%
+  \end{titlepage}%
+  \restoregeometry%
+  \cleardoublepage%
+  {%
+    \thispagestyle{empty}%
+    \begin{center}%
+      \centering\large\vfill%
+      \usekomafont{dedication}{\@dedication}%
+      \vfill%
+    \end{center}%
+    \cleardoublepage%
+  }%
+  \setcounter{page}{1}%
+}%
+%</thesis>
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsection{Cleanup Tasks}
+%
+% We will change \LaTeX's default penalties to introduce slightly more dense pages. See p.105 of "TeX Unbound" for suggested values. See pp. 199-200 of Lamport's "LaTeX" book for details.
+%    \begin{macrocode}
+% No single lines of text of the following paragraph on the current page's bottom
+% \clubpenalty=9000
+% No single lines of text of the previous paragraph on a new page's top
+% \widowpenalty=10000
+% \displaywidowpenalty=10000
+% General parameters, for ALL pages:
+% max fraction of floats at top
+\renewcommand{\topfraction}{0.80}
+% max fraction of floats at bottom
+\renewcommand{\bottomfraction}{0.80}
+% Parameters for TEXT pages (not float pages):
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+% 2 may work better
+\setcounter{totalnumber}{4}
+% for 2-column pages
+\setcounter{dbltopnumber}{2}
+% Fit big float above 2-col. text
+\renewcommand{\dbltopfraction}{0.80}
+% Allow minimal text w. figs
+\renewcommand{\textfraction}{0.15}
+% Parameters for FLOAT pages (not text pages). The larger the number, the
+% fulller we require float pages to be. N.B.: floatpagefraction MUST be less
+% than topfraction!!
+\renewcommand{\floatpagefraction}{0.75}
+% Require fuller float pages on 2-column pages
+\renewcommand{\dblfloatpagefraction}{0.75}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+%<book|thesis>\let\originalmainmatter\mainmatter%
+%<book|thesis>\renewcommand{\mainmatter}{%
+%<article>\newcommand{\mainmatter}{%  
+%<book|thesis>\originalmainmatter%
+\setlength{\parindent}{1.00em}%
+\arrayrulecolor{ArrayRuleColor}%
+% Set line spacing to 1.25
+\setstretch{1.25}%
+}%s
+%    \end{macrocode}
+%
+%
+% Make overfull hboxes stand out more visually to the user by increasing their
+% ruler width
+%    \begin{macrocode}
+\ifdraft{
+% Set the overfullrule to 1.50pt if we are in draft mode
+  \overfullrule=1.50pt
+}{}
+%    \end{macrocode}
+%
+% Some packages to load when PGF is available
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{pgfplots}{%
+    \usetikzlibrary{ustutt}%
+  }{}
+}
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\makeatletter
+\AtBeginDocument{
+  % \tikzifexternalizing{}{%
+  %   \let\oldAnd\and%
+  %   \renewcommand{\and}{, }%
+  %   \hypersetup{
+  %     pdfauthor={\@author},%
+  %     pdftitle={\@title},%
+  %     % pdfkeywords={\@keywords},%
+  %   }%
+  %   \renewcommand{\and}{\oldAnd}%
+  % }%
+}
+\preto\tabular{\global\rownum=\z@}
+\makeatother
+%    \end{macrocode}
+%
+% We also need to perform some tasks right when thee document is started i.e.,
+% right after |\begin{document}| and before any content.
+%
+%    \begin{macrocode}
+\AtBeginDocument{
+  \recalctypearea%
+  \pagenumbering{Roman}%
+  \pagenumbering{arabic}%
+  \pagestyle{scrheadings}%
+% Adjust color of array rulers i.e., table borders
+  \arrayrulecolor{ArrayRuleColor}%
+}
+%    \end{macrocode}
+%
+%
+%
+% \Finale
+\endinput

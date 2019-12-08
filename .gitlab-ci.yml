@@ -1,14 +1,93 @@
-compile-cls:
-  image: philipptempel/docker-ubuntu-tug-texlive:latest
-  stage: build
+stages:
+  - ins
+  - docs
+  - dist
+  - ship
+
+ins:
+  image: philipptempel/docker-ubuntu-tug-texlive:2019
+  stage: ins
   script:
-    - make clean
-    - make all
+    - make distclean
+    - make ins
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     expire_in: 2 months
     paths:
-      - dist
+      - '*.cls'
+      - '*.sty'
+      - '*.dict'
+      - '*.pdf'
+      - '*.tex'
   tags:
     - docker
 
+docs:
+  image: philipptempel/docker-ubuntu-tug-texlive:2019
+  stage: docs
+  script:
+    - make docs
+  artifacts:
+    name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
+    expire_in: 2 months
+    paths:
+      - '*.cls'
+      - '*.sty'
+      - '*.dict'
+      - '*.pdf'
+      - '*.tex'
+  tags:
+    - docker
+
+dist:
+  image: philipptempel/docker-ubuntu-tug-texlive:2019
+  stage: dist
+  script:
+    - make dist
+  artifacts:
+    name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
+    expire_in: 2 months
+    paths:
+      - '*.cls'
+      - '*.sty'
+      - '*.dict'
+      - '*.pdf'
+      - '*.tex'
+      - 'dist/*'
+  tags:
+    - docker
+
+ghr:
+  image:
+    name: chhinze/ghr
+    entrypoint: ["/bin/sh", "-c"]
+  stage: ship
+  before_script:
+    - 'apk add --no-cache --update alpine-sdk'
+    - 'apk add --no-cache bash'
+    - 'apk add --no-cache zip'
+  script:
+    # change directory where all the build files are
+    - 'cd dist/'
+    # zip each directory
+    - 'zip -r article.zip article/'
+    - 'zip -r bachelor.zip bachelor/'
+    - 'zip -r book.zip book/'
+    - 'zip -r doctorate.zip doctorate/'
+    - 'zip -r master.zip master/'
+    # change back to previous directory
+    - 'cd ../'
+    # and release all files
+    - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_COMMIT_TAG}" dist/'
+  only:
+    - tags
+  needs:
+    - job: dist
+      artifacts: true
+  artifacts:
+    name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
+    expire_in: 2 months
+    paths:
+      - 'dist/*'
+  tags:
+    - docker

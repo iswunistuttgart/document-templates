@@ -1,0 +1,1685 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2019 by Philipp Tempel <latex@philipptempel.me>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{ustuttmath.dtx}
+%</driver>
+%<package>\def\fileversion{1.0.0}
+%<package>\def\filedate{2019/12/07}
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{ustuttmath}
+%<*package>
+    [2019/12/07 v1.0.0 University of Stuttgart Math package file]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{hyperref}
+\usepackage{ustuttmath}
+\CodelineIndex
+\EnableCrossrefs
+\RecordChanges
+\begin{document}
+  \DocInput{ustuttmath.dtx}
+  \PrintChanges
+  \PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2019/12/07}{Initial version}
+%
+% \GetFileInfo{ustuttmath.dtx}
+%
+% \DoNotIndex{\!,\,,\:,\bm,\bullet,\cdot,\cr,\crossp@inner,\ddot,\DeclareMathOperator,\DeclarePairedDelimiterX,\def,\dfrac,\dot,\dotp@inner,\dotsc,\frac,\hat,\ifblank,\IfBooleanTF,\IfValueT,\IfValueTF,\infty,\lbrace,\lparen,\lVert,\lvert,\mathinner,\mathrm,\mathsf,\mbox,\mkern,\ndot,\NewDocumentCommand,\ooalign,\operatorname,\otimes,\outerp@inner,\overline,\partial,\PassOptionsToPackage,\phantom,\prescripts,\rbrace,\renewcommand,\RequirePackage,\rparen,\runner,\rVert,\rvert,\SavedStyle,\smaller,\text,\textscale,\tfrac,\ThisStyle,\times,\top}
+% 
+%
+% \title{The \textsf{ustuttmath} package\thanks{This document
+%   corresponds to \textsf{ustuttmath}~\fileversion, dated \filedate.}}
+% \author{Philipp Tempel \\ \texttt{latex@philipptempel.me}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+%
+% \DescribeMacro{\dummyMacro}
+% This macro does nothing. It is merely an example.  If this were a real macro,
+% you would put a paragraph here describing what the macro is supposed to do,
+% what its mandatory and optional arguments are, and so forth.
+%
+% \DescribeEnv{dummyEnv}
+% This environment does nothing.  It is merely an example.
+% If this were a real environment, you would put a paragraph here
+% describing what the environment is supposed to do, what its
+% mandatory and optional arguments are, and so forth.
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+%
+% First, we need to load some dependencies
+%
+%
+% The package is a toolbox of programming facilities geared primarily towards
+% LaTeX class and package authors. It provides LaTeX frontends to some of the
+% new primitives provided by e-TeX as well as some generic tools which are not
+% strictly related to e-TeX but match the profile of this package. Note that the
+% initial versions of this package were released under the name elatex. The
+% package provides functions that seem to offer alternative ways of implementing
+% some LaTeX kernel commands; nevertheless, the package will not modify any part
+% of the LaTeX kernel.
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+%    \end{macrocode}
+%
+% Additional math symbols. For a full list, see
+% \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
+%    \begin{macrocode}
+\RequirePackage{amssymb}
+\RequirePackage{dsfont}
+%    \end{macrocode}
+%
+% The bm package defines a command |\bm| which makes its argument bold. The
+% argument may be any maths object from a single symbol to an expression. This
+% is closely related to the specification of the |\boldsymbol| command in
+% AMS-LaTeX, but |\bm| is rather more careful in the way it does things.
+%    \begin{macrocode}
+\RequirePackage{bm}
+%    \end{macrocode}
+%
+% A comprehensive (SI) units package. Typesetting values with units requires
+% care to ensure that the combined mathematical meaning of the value plus unit
+% combination is clear. In particular, the SI units system lays down a
+% consistent set of units with rules on how they are to be used. However,
+% different countries and publishers have differing conventions on the exact
+% appearance of numbers (and units). A number of LaTeX packages have been
+% developed to provide consistent application of the various rules: SIunits,
+% sistyle, unitsdef and units are the leading examples. The numprint package
+% provides a large number of number-related functions, while dcolumn and rccol
+% provide tools for typesetting tabular numbers. The siunitx package takes the
+% best from the existing packages, and adds new features and a consistent
+% interface. A number of new ideas have been incorporated, to fill gaps in the
+% existing provision. The package also provides backward-compatibility with
+% SIunits, sistyle, unitsdef and units. The aim is to have one package to handle
+% all of the possible unit-related needs of LaTeX users. The package relies on
+% LaTeX 3 support from the l3kernel and l3packages bundles.
+%    \begin{macrocode}
+\RequirePackage{siunitx}
+%    \end{macrocode}
+%
+% The dcolumn package makes use of the array package to define a "D" column
+% format for use in tabular environments. This package is part of the tools
+% bundle in the LaTeX required distribution.
+%    \begin{macrocode}
+\RequirePackage{dcolumn}
+%    \end{macrocode}
+%
+% Typeset in-line fractions in a "nice" way. The package typesets fractions
+% "nicely" - in the form 'a/b' (i.e., staggered with a slash between them,
+% rather than directly one over the other). The package is distributed as part
+% of a bundle including the units package. Nicefrac's facilities are provided,
+% in a cleaner way, by the (experimental) xfrac package, but see also the faktor
+% package for quotient spaces and the like.
+%    \begin{macrocode}
+\RequirePackage{nicefrac}
+%    \end{macrocode}
+%
+% fouridx - Left sub- and superscripts in maths mode The package enables left
+% subscripts and superscripts in maths mode. The sub- and superscripts are
+% raised for optimum fitting to the symbol indexed, in such a way that left
+% and right sub- and superscripts are set on the same level, as appropriate.
+% The package provides an alternative to the use of the |\sideset| command in
+% the amsmath package.
+%    \begin{macrocode}
+\RequirePackage{fouridx}
+%    \end{macrocode}
+%
+% Place lines through maths formulae. A package to draw diagonal lines
+% ("cancelling" a term) and arrows with limits (cancelling a term "to a value")
+% through parts of maths formulae.
+%    \begin{macrocode}
+\RequirePackage{cancel}
+%    \end{macrocode}
+%
+% Mathtools provides a series of packages designed to enhance the appearance of
+% documents containing a lot of mathematics. The main backbone is amsmath, so
+% those unfamiliar with this required part of the LaTeX system will probably not
+% find the packages very useful. Mathtools provides many useful tools for
+% mathematical typesetting. It is based on amsmath and fixes various
+% deficiencies of amsmath and standard LaTeX. It provides:
+% * Extensible symbols, such as brackets, arrows, harpoons, etc.;
+% * Various symbols such as |\coloneqq| (:=);
+% * Easy creation of new tag forms;
+% * Showing equation numbers only for referenced equations;
+% * Extensible arrows, harpoons and hookarrows;
+% * Starred versions of the amsmath matrix environments for specifying the
+%   column alignment;
+% * More building blocks: multlined, cases-like environments, new gathered
+%   environments;
+% * Maths versions of |\makebox|, |\llap|, |\rlap| etc.;
+% * Cramped math styles; and more...
+%    \begin{macrocode}
+\RequirePackage{mathtools}
+%    \end{macrocode}
+%
+% EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The
+% package provides a visual markup extension to amsmath. The user-friendly
+% interface allows the user to put a set of equations inside a box thus
+% enhancing the |\boxed| feature of amsmath. As a side effect it's also possible
+% to add material on both sides of the equations thus providing (and surpassing)
+% the functionality of the cases package. Users of ntheorem will probably want
+% to have a look at it as well, since the problem with end-of-theorem marks in
+% gather and other environments can be circumvented using empheq.
+%    \begin{macrocode}
+\RequirePackage{empheq}
+%    \end{macrocode}
+%
+% Provides macros to typeset bra-ket notation, as well as set specifiers, with a
+% single bar, a double bar, or vertical bar specifier in between two bracketed
+% parts. Each macro comes in a fixed-size version and an expanding version. If
+% the package finds itself operating under e-tex, it uses the extended primitive
+% |\middle| for more reliable results
+%    \begin{macrocode}
+\RequirePackage{braket}
+%    \end{macrocode}
+%
+%  When typing an open interval as $]a,b[$, a closing bracket is being used in
+%  place of an opening fence and vice versa. This leads to the wrong spacing in,
+%  say, $]-a,b[$ or $A \in ]a,b[ = B$. The package attempts to solve this using
+%
+%  |\interval{a}{b}| -> $\interval{a}{b}$
+%
+%  |\interval[open]{a}{b}| -> $\interval[open]{a}{b}$
+%
+%  |\interval[open left]{a}{b}| -> $\interval[open left]{a}{b}$
+%
+% The package also supports fence scaling and ensures that the enclosing fences
+% will end up having the proper closing and opening types. TeX maths does not do
+% this job properly.
+%    \begin{macrocode}
+\RequirePackage{interval}
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\ProvideMathOperator}
+% \cmd{\ProvideMathOperator}\marg{opname}\marg{text}
+% Maybe not the cleanest way, but we shall also provide a |\ProvideMathOperator|
+% macro that allows to define math operators in a fail-safe way i.e., work like
+% |\providecommand|
+%    \begin{macrocode}
+\newcommand\ProvideMathOperator[2]{%
+  \ifdefined#1%
+  \else%
+    \DeclareMathOperator{#1}{#2}%
+  \fi%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\parentheses}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\parentheses}[1]{\lparen}{\rparen}{%
+  \ifblank{#1}{\cdot}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\cparentheses}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\cparentheses}[1]{\lbrace}{\rbrace}{%
+  \ifblank{#1}{\cdot}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ceil}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\ceil}[1]{\lceil}{\rceil}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\floor}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\floor}[1]{\lfloor}{\rfloor}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\lerp}
+%    \begin{macrocode}
+\NewDocumentCommand{\lerp}{ O{t} m m }{%
+  \parentheses*{%
+    1%
+    -%
+    #1%
+  } \,%
+  #2%
+  +%
+  #1 \,%
+  #3%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\of}
+%    \begin{macrocode}
+\NewDocumentCommand{\of}{ s o m }{%
+  \mkern-1.0mu%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \parentheses*[#2]{#3}%
+    }{%
+      \parentheses*{#3}%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \parentheses[#2]{#3}%
+    }{%
+      \parentheses{#3}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\cof}
+%    \begin{macrocode}
+\NewDocumentCommand{\cof}{ s o m }{%
+  \mkern-1.0mu%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{%
+      \cparentheses*[#2]{#3}%
+    }{%
+      \cparentheses*{#3}%
+    }%
+  }{%
+    \IfValueTF{#2}{%
+      \cparentheses[#2]{#3}%
+    }{%
+      \cparentheses{#3}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\overlinebm}
+%    \begin{macrocode}
+\NewDocumentCommand{\overlinebm}{ m }{%
+  \ThisStyle{\ooalign{%
+    $\SavedStyle\mkern2.5mu\overline{\phantom{\mathrm{#1}}}$\cr$\SavedStyle\bm{{#1}}$%
+  }}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\overlinevect}
+%    \begin{macrocode}
+\NewDocumentCommand{\overlinevect}{ m }{%
+  \overlinebm{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\overlinematr}
+%    \begin{macrocode}
+\NewDocumentCommand{\overlinematr}{ m }{
+  \overlinebm{#1}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\vect}
+%    \begin{macrocode}
+\NewDocumentCommand{\vect}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\bm{#3}}%
+  }{%
+    \bm{#3}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotvect}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotvect}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\dot{\vect{#3}}}%
+  }{%
+    \dot{\vect{#3}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotvect}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotvect}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ddot{\vect{#3}}}%
+  }{%
+    \ddot{\vect{#3}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotvect}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndot}{ m m }{%
+  #2^{\parentheses{#1}}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pr}
+%    \begin{macrocode}
+\NewDocumentCommand{\pr}{ m }{%
+  #1^{\prime}\mkern-1.2mu%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ppr}
+%    \begin{macrocode}
+\NewDocumentCommand{\ppr}{ m }{%
+  #1^{\prime\prime}\mkern-1.2mu%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pppr}
+%    \begin{macrocode}
+\NewDocumentCommand{\pppr}{ m }{%
+  #1^{\prime\prime\prime}\mkern-1.2mu%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\jacobian}
+%    \begin{macrocode}
+\NewDocumentCommand{\jacobian}{ s o O{} m }{%
+  \jacobiansymbol%
+  \IfValueT{#2}{_{#2}^{#3}}%
+  \mkern-1.0mu%
+  \IfBooleanTF{#1}{%
+    \parentheses*{#4}%
+  }{%
+    #4%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotjacobian}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotjacobian}{ m }{%
+  \dot{\jacobiansymbol}\mkern-1.0mu#1%
+}%
+%    \end{macrocode}
+% \end{macro}v
+%
+%
+% \begin{macro}{\ddotjacobian}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotjacobian}{ m }{%
+  \ddot{\jacobiansymbol}\mkern-1.0mu#1%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\eye}
+%    \begin{macrocode}
+\NewDocumentCommand{\eye}{ o }{%
+  \IfValueTF{#1}{%
+    \mathbb{I}_{#1}%
+  }{%
+    \mathbb{I}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\zeros}
+%    \begin{macrocode}
+\NewDocumentCommand{\zeros}{ o }{%
+  \IfValueTF{#1}{%
+    \mathds{0}_{#1}%
+  }{%
+    \mathds{0}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ones}
+%    \begin{macrocode}
+\NewDocumentCommand{\ones}{ o }{%
+  \IfValueTF{#1}{%
+    \mathds{1}_{#1}%
+  }{%
+    \mathds{1}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotvect}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotvect}{ o O{} m m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ndot{#3}{#4}}%
+  }{%
+    \ndot{#4}{\vect{#3}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\matr}
+%    \begin{macrocode}
+\NewDocumentCommand{\matr}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\bm{#3}}%
+  }{%
+    \bm{#3}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotmatr}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotmatr}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\dot{\matr{#3}}}%
+  }{%
+    \dot{\matr{#3}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotmatr}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotmatr}{ o O{} m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ddot{\matr{#3}}}%
+  }{%
+    \ddot{\matr{#3}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ndotmatr}
+%    \begin{macrocode}
+\NewDocumentCommand{\ndotmatr}{ o O{} m m }{%
+  \IfValueTF{#1}{%
+    \prescript{#1}{#2}{\ndot{#3}{#4}}%
+  }{%
+    \ndot{#4}{\matr{#3}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\abs}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\abs}[1]{\lvert}{\rvert}{%
+  \ifblank{#1}{\:\cdot\:}{#1}
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\norm}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\norm}[1]{\lVert}{\rVert}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pnorm}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\pnorm}[1]{\lVert}{\rVert_{p}}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\twonorm}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\twonorm}[1]{\lVert}{\rVert_{2}}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\onenorm}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\onenorm}[1]{\lVert}{\rVert_{1}}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\maxnorm}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\maxnorm}[1]{\lVert}{\rVert_{\infty}}{%
+  \ifblank{#1}{\:\cdot\:}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pow}
+%    \begin{macrocode}
+\NewDocumentCommand{\pow}{ s O{2} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses*{#3}^{#2}%
+  }{%
+    #3^{#2}%
+  }
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\skewm}
+%    \begin{macrocode}
+\DeclarePairedDelimiterX{\skewm}[1]{[}{]_{\mkern-2.5mu\times}}{#1}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotp}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotp}{ s m m }{%
+  \def\dotp@inner{#2 \bullet #3}%
+  \IfBooleanTF{#1}{%
+    \parentheses*{\dotp@inner}%
+  }{
+    \dotp@inner%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\innerp}
+%    \begin{macrocode}
+\NewDocumentCommand{\innerp}{ s m m }{%
+  \def\innerpp{\langle #2 \, , #3 \rangle}%
+  \IfBooleanTF{#1}{%
+    \overline{\innerpp}%
+  }{%
+    \innerpp%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\crossp}
+%    \begin{macrocode}
+\NewDocumentCommand{\crossp}{s o m m}{%
+  \def\crossp@inner{#3 \times #4}%
+  \IfBooleanTF{#1}{%
+    \IfValueTF{#2}{
+      \parentheses[#2]{\crossp@inner}%
+    }{%
+      \parentheses*{\crossp@inner}%
+    }
+  }{%
+    \crossp@inner%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\outerp}
+%    \begin{macrocode}
+\NewDocumentCommand{\outerp}{ s m m }{%
+  \def\outerp@inner{#2 \otimes #3}%
+  \IfBooleanTF{#1}{%
+    \parentheses*{\outerp@inner}%
+  }{
+    \outerp@inner%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dif}
+%    \begin{macrocode}
+\NewDocumentCommand{\dif}{ o }{%
+  \operatorname{d}%
+  \IfValueT{#1}{%
+    _{#1}%
+  }%
+  \!%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\Dif}
+%    \begin{macrocode}
+\NewDocumentCommand{\Dif}{ o }{%
+  \operatorname{D}%
+  \IfValueT{#1}{%
+    _{#1}%
+  }%
+  \!%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pd}
+%    \begin{macrocode}
+\newcommand{\pd}[3][]{%
+  \frac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tpd}
+%    \begin{macrocode}
+\newcommand{\tpd}[3][]{%
+  \mathinner{%
+    \tfrac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dpd}
+%    \begin{macrocode}
+\newcommand{\dpd}[3][]{%
+  \mathinner{%
+    \dfrac{ \partial{^{#1}}#2 }{ \partial{#3^{#1}} }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\md}
+%    \begin{macrocode}
+\newcommand{\md}[6]{%
+  \frac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tmd}
+%    \begin{macrocode}
+\newcommand{\tmd}[6]{%
+  \mathinner{%
+    \tfrac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dmd}
+%    \begin{macrocode}
+\newcommand{\dmd}[6]{%
+  \mathinner{%
+    \dfrac{ \partial{^{#2}}#1 }{ \partial{#3^{#4}}\partial{#5^{#6}} }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\od}
+%    \begin{macrocode}
+\newcommand{\od}[3][]{%
+  \frac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tod}
+%    \begin{macrocode}
+\newcommand{\tod}[3][]{%
+  \mathinner{%
+    \tfrac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dod}
+%    \begin{macrocode}
+\newcommand{\dod}[3][]{%
+  \mathinner{%
+    \dfrac{ \dif{^{#1}}#2 }{ \dif{#3^{#1}} }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\td}
+%    \begin{macrocode}
+\NewDocumentCommand{\td}{ m }{%
+  \dif{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\tol}
+%    \begin{macrocode}
+\NewDocumentCommand{\tol}{ O{\varepsilon} }{%
+  #1%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\threshold}
+%    \begin{macrocode}
+\NewDocumentCommand{\threshold}{ }{%
+  \epsilon%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\residual}
+%    \begin{macrocode}
+\NewDocumentCommand{\residual}{ s }{%
+  \IfBooleanTF{#1}{%
+    e%
+  }{%
+    \vect{e}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\stepsize}
+%    \begin{macrocode}
+\NewDocumentCommand{\stepsize}{ }{%
+  h%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\funcindex}
+%    \begin{macrocode}
+\NewDocumentCommand{\funcindex}{ }{%
+  k%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\loopindex}
+%    \begin{macrocode}
+\NewDocumentCommand{\loopindex}{ }{%
+  l%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\iterindex}
+%    \begin{macrocode}
+\NewDocumentCommand{\iterindex}{ }{%
+  k%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\itervar}
+%    \begin{macrocode}
+\NewDocumentCommand{\itervar}{ s }{%
+  \IfBooleanTF{#1}{%
+    x%
+  }{
+    \vect{x}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\iterstep}
+%    \begin{macrocode}
+\NewDocumentCommand{\iterstep}{ s }{%
+  \IfBooleanTF{#1}{%
+    \Delta x%
+  }{
+    \Delta \vect{x}%
+  }%
+}%s
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\factorial}
+%    \begin{macrocode}
+\NewDocumentCommand{\factorial}{ m }{%
+  #1!
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\pinv}
+%    \begin{macrocode}
+\NewDocumentCommand{\pinv}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses*{#2}%
+  }{%
+    #2%
+  }%
+  ^{+}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\quat}
+%    \begin{macrocode}
+\NewDocumentCommand{\quat}{ s }{%
+  \IfBooleanTF{#1}{%
+    \Theta%
+  }{%
+    \vect{\Theta}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotquat}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotquat}{ s }{%
+  \IfBooleanTF{#1}{%
+    \dot{\Theta}%
+  }{%
+    \dotvect{\Theta}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotquat}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotquat}{ s }{%
+  \IfBooleanTF{#1}{%
+    \ddot{\Theta}%
+  }{%
+    \ddotvect{\Theta}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\quatratemat}
+%    \begin{macrocode}
+\NewDocumentCommand{\quatratemat}{ }{%
+  \matr{W}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\coordsys}
+%    \begin{macrocode}
+\NewDocumentCommand{\coordsys}{ m }{%
+  \mathcal{K}_{ \ms{#1} }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\transform}
+%    \begin{macrocode}
+\NewDocumentCommand{\transform}{ O{T} m m }{%
+  \matr[#2][#3]{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\discretenabla}
+%    \begin{macrocode}
+\NewDocumentCommand{\discretenabla}{}{%
+  \overline{\nabla}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\vectset}
+%    \begin{macrocode}
+\NewDocumentCommand{\vectset}{ >{\SplitList{;}}m }{%
+  \langle%
+  {\ProcessList{#1}{\vectsetitem}}%
+  \rangle%
+}%
+\newcommand\vectsetitem[1]{#1\let\vectsetitem\vectsetitema}
+\newcommand\vectsetitema[1]{; #1}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\kronecker}
+%    \begin{macrocode}
+\NewDocumentCommand{\kronecker}{ O{i} O{j} }{%
+  \delta_{#1#2}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dirac}
+%    \begin{macrocode}
+\NewDocumentCommand{\dirac}{ }{%
+  \delta%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\const}
+%    \begin{macrocode}
+\NewDocumentCommand{\const}{ }{%
+  \text{const}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\msconst}
+%    \begin{macrocode}
+\NewDocumentCommand{\msconst}{ }{%
+  \ms{const}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\heaviside}
+%    \begin{macrocode}
+\NewDocumentCommand{\heaviside}{ g }{%
+  H%
+  % \mathds{H}%
+  \IfValueT{#1}{%
+    \of{#1}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\polydeg}
+%    \begin{macrocode}
+\NewDocumentCommand{\polydeg}{ }{%
+  d%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\Re}
+%    \begin{macrocode}
+\renewcommand{\Re}{\operatorname{Re}}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\Im}
+%    \begin{macrocode}
+\renewcommand{\Im}{\operatorname{Im}}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\transpose}
+%    \begin{macrocode}
+\NewDocumentCommand{\transpose}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses*{#3}^{#2\mbox{\textscale{0.6}{$\top$}}}%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\top$}}}%
+  }%
+  \mkern-1.0mu%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\conjugate}
+%    \begin{macrocode}
+\NewDocumentCommand{\conjugate}{ s m }{%
+  \overline{#2}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\hermconjugate}
+%    \begin{macrocode}
+\NewDocumentCommand{\hermconjugate}{ s O{\mkern-1.5mu} m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses*{#3}^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }{%
+    #3^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\inv}
+%    \begin{macrocode}
+\NewDocumentCommand{\inv}{ s m }{%
+  \IfBooleanTF{#1}{%
+    \parentheses*{#2}^{-1}%
+  }{%
+    #2^{-1}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\evec}
+%    \begin{macrocode}
+\NewDocumentCommand{\evec}{ s O{e} m }{%
+  \IfBooleanTF{#1}{%
+    \vect{#2}_{\ms{#3}}%
+  }{%
+    \hat{ \vect{#2} }_{\ms{#3}}%
+  }
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\evecx}
+%    \begin{macrocode}
+\NewDocumentCommand{\evecx}{ s O{e} }{%
+  \IfBooleanTF{#1}{%
+    \evec*[#2]{x}%
+  }{%
+    \evec[#2]{x}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\evecy}
+%    \begin{macrocode}
+\NewDocumentCommand{\evecy}{ s O{e} }{%
+  \IfBooleanTF{#1}{%
+    \evec*[#2]{y}%
+  }{%
+    \evec[#2]{y}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\evecz}
+%    \begin{macrocode}
+\NewDocumentCommand{\evecz}{ s O{e} }{%
+  \IfBooleanTF{#1}{%
+    \evec*[#2]{z}%
+  }{%
+    \evec[#2]{z}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arctant}
+%    \begin{macrocode}
+\NewDocumentCommand{\arctant}{ s o m m }{%
+  \arctantwo\,%
+  \IfBooleanTF{#1}{%
+    \of*{#3, #4}%
+  }{%
+    \of{#3, #4}%
+  }
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\irange}
+%    \begin{macrocode}
+\NewDocumentCommand{\irange}{s o m g}{%
+  \def\runner{\IfValueTF{#4}{#4}{i}}%
+  \IfValueTF{#2}{%
+    \IfBooleanTF{#1}{%
+      {\runner = \parentheses*{1, #2, \dotsc, #3}}%
+    }{%
+      {\runner = \parentheses{1, #2, \dotsc, #3}}%
+    }%
+  }{%
+    \IfBooleanTF{#1}{%
+      {\runner = \parentheses*{1, \dotsc, #3}}%
+    }{%
+      {\runner = \parentheses{1, \dotsc, #3}}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ms}
+%    \begin{macrocode}
+\NewDocumentCommand{\ms}{ m }{%
+  % {\mbox{\text{\smaller[1]#1}}}%
+  {\mbox{\textscale{0.6}{\text{\smaller[1]#1}}}}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\mc}
+%    \begin{macrocode}
+\NewDocumentCommand{\mc}{ m }{%
+  \text{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rotationsymbol}
+%    \begin{macrocode}
+\NewDocumentCommand{\rotationsymbol}{ }{%
+  R%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rotation}
+%    \begin{macrocode}
+\NewDocumentCommand{\rotation}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \matr[#1][#2]{\rotationsymbol}%
+  }{%
+    \matr{\rotationsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\dotrotation}
+%    \begin{macrocode}
+\NewDocumentCommand{\dotrotation}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \dotmatr[#1][#2]{\rotationsymbol}%
+  }{%
+    \dotmatr{\rotationsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\ddotrotation}
+%    \begin{macrocode}
+\NewDocumentCommand{\ddotrotation}{ o O{} }{%
+  \IfValueTF{#1}{%
+    \ddotmatr[#1][#2]{\rotationsymbol}%
+  }{%
+    \ddotmatr{\rotationsymbol}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rotationx}
+%    \begin{macrocode}
+\NewDocumentCommand{\rotationx}{ s g }{%
+  \rotation_{\ms{x}}%
+  \IfValueT{#2}{%
+    \IfBooleanTF{#1}{%
+      \of*{#2}%
+    }{%
+      \of{#2}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rotationy}
+%    \begin{macrocode}
+\NewDocumentCommand{\rotationy}{ o O{} }{%
+  \rotation_{\ms{y}}%
+  \IfValueT{#2}{%
+    \IfBooleanTF{#1}{%
+      \of*{#2}%
+    }{%
+      \of{#2}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rotationz}
+%    \begin{macrocode}
+\NewDocumentCommand{\rotationz}{ o O{} }{%
+  \rotation_{\ms{z}}%
+  \IfValueT{#2}{%
+    \IfBooleanTF{#1}{%
+      \of*{#2}%
+    }{%
+      \of{#2}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\imgu}
+%    \begin{macrocode}
+\NewDocumentCommand{\imgu}{ }{%
+  {\imagu\mkern1mu}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\imgu}
+%    \begin{macrocode}
+\NewDocumentCommand{\vertbar}{}{%
+  \rule[-1ex]{0.5pt}{2.5ex}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\imgu}
+%    \begin{macrocode}
+\NewDocumentCommand{\horzbar}{}{%
+  \rule[.5ex]{2.5ex}{0.5pt}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\imgu}
+%    \begin{macrocode}
+\NewDocumentCommand{\SO}{ O{3} }{%
+  \mathop{\mathrm{SO}}\of{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\imgu}
+%    \begin{macrocode}
+\NewDocumentCommand{\bigo}{ }{%
+  \mathcal{O}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\diag}
+%    \begin{macrocode}
+\DeclareMathOperator{\diag}{diag}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\sign}
+%    \begin{macrocode}
+\DeclareMathOperator{\sign}{sign}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arctantwo}
+%    \begin{macrocode}
+\DeclareMathOperator{\arctantwo}{atan2}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\imagu}
+%    \begin{macrocode}
+\DeclareMathOperator{\imagu}{\mathrm{i}}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\trace}
+%    \begin{macrocode}
+\DeclareMathOperator{\trace}{tr}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arcsec}
+%    \begin{macrocode}
+\DeclareMathOperator{\arcsec}{arcsec}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arccot}
+%    \begin{macrocode}
+\DeclareMathOperator{\arccot}{arccot}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arccsc}
+%    \begin{macrocode}
+\DeclareMathOperator{\arccsc}{arccsc}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\sech}
+%    \begin{macrocode}
+\DeclareMathOperator{\sech}{sech}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\csch}
+%    \begin{macrocode}
+\DeclareMathOperator{\csch}{csch}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arcsinh}
+%    \begin{macrocode}
+\DeclareMathOperator{\arcsinh}{arcsinh}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arccosh}
+%    \begin{macrocode}
+\DeclareMathOperator{\arccosh}{arccosh}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arctanh}
+%    \begin{macrocode}
+\DeclareMathOperator{\arctanh}{arctanh}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arcsech}
+%    \begin{macrocode}
+\DeclareMathOperator{\arcsech}{arcsech}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arccsch}
+%    \begin{macrocode}
+\DeclareMathOperator{\arccsch}{arccsch}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arccoth}
+%    \begin{macrocode}
+\DeclareMathOperator{\arccoth}{arccoth}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\arccoth}
+%    \begin{macrocode}
+\DeclareMathOperator{\adj}{adj}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rank}
+%    \begin{macrocode}
+\DeclareMathOperator{\rank}{rank}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\blkdiag}
+%    \begin{macrocode}
+\DeclareMathOperator{\blkdiag}{blockdiag}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\vertcat}
+%    \begin{macrocode}
+\DeclareMathOperator{\vertcat}{vertcat}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\horzcat}
+%    \begin{macrocode}
+\DeclareMathOperator{\horzcat}{horzcat}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\jacobiansymbol}
+%    \begin{macrocode}
+\DeclareMathOperator{\jacobiansymbol}{D}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\SIinterval}
+%    \begin{macrocode}
+\NewDocumentCommand{\SIinterval}{ O{} m m m }{%
+  \interval[#1]{#2}{#3}\,\si{#4}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\SIset}
+%    \begin{macrocode}
+\NewDocumentCommand{\SIset}{ O{} m m }{%
+  \SIlist[%
+      open-bracket={\lbrace},%
+      close-bracket={\rbrace},%
+      list-separator={,},%
+      list-pair-separator={,},%
+      list-final-separator={,},%
+      #1,%
+    ]{#2}{#3}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\SIsetlist}
+%    \begin{macrocode}
+\NewDocumentCommand{\SIsetlist}{ O{} m m }{%
+  \SIlist[%
+      open-bracket={\lbrace},%
+      close-bracket={\rbrace},%
+      list-separator={,},%
+      list-pair-separator={,\dots,},%
+      list-final-separator={,\dots,},%
+      #1,%
+    ]{#2}{#3}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\numset}
+%    \begin{macrocode}
+\NewDocumentCommand{\numset}{ s O{} m }{%
+  \def\nl{%
+    \numlist[%
+      open-bracket={\lbrace},%
+      close-bracket={\rbrace},%
+      list-separator={,},%
+      list-pair-separator={,},%
+      list-final-separator={,},%
+      #2,%
+    ]{#3}%
+  }%
+  \IfBooleanTF{#1}{%
+    \left\{%
+      \nl%
+    \right\}
+  }{%
+    \{%
+      \nl%
+    \}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\numsetlist}
+%    \begin{macrocode}
+\NewDocumentCommand{\numsetlist}{ s O{} m }{%
+  \def\nl{%
+    \numlist[%
+      open-bracket={\lbrace},%
+      close-bracket={\rbrace},%
+      list-separator={\, ,},%
+      list-pair-separator={\, , \dotsc ,},%
+      list-final-separator={\, , \dotsc ,},%
+      #2,%
+    ]{#3}%
+  }%
+  \IfBooleanTF{#1}{%
+    \left\{%
+      \nl%
+    \right\}
+  }{%
+    \{%
+      \nl%
+    \}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \Finale
+\endinput
