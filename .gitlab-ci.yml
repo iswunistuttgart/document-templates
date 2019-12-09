@@ -81,9 +81,6 @@ ghr:
     - 'ghr -t ${GHR_GITHUB_TOKEN} -r ${GHR_GITHUB_REPO} -u ${GHR_GITHUB_USERNAME} -replace "${CI_COMMIT_TAG}" dist/'
   only:
     - tags
-  needs:
-    - job: dist
-      artifacts: true
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     expire_in: 2 months
