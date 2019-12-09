@@ -5,7 +5,7 @@ stages:
   - ship
 
 ins:
-  image: philipptempel/docker-ubuntu-tug-texlive:ee99de0b8885504711380a2a2b2e091abd31760bfd94ad6e54a2ba01e59c98bf
+  image: philipptempel/docker-ubuntu-tug-texlive:latest
   stage: ins
   script:
     - make distclean
@@ -23,7 +23,7 @@ ins:
     - docker
 
 docs:
-  image: philipptempel/docker-ubuntu-tug-texlive:ee99de0b8885504711380a2a2b2e091abd31760bfd94ad6e54a2ba01e59c98bf
+  image: philipptempel/docker-ubuntu-tug-texlive:latest
   stage: docs
   script:
     - make docs
@@ -40,7 +40,7 @@ docs:
     - docker
 
 dist:
-  image: philipptempel/docker-ubuntu-tug-texlive:ee99de0b8885504711380a2a2b2e091abd31760bfd94ad6e54a2ba01e59c98bf
+  image: philipptempel/docker-ubuntu-tug-texlive:latest
   stage: dist
   script:
     - make dist
