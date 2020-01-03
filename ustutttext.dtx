@@ -122,6 +122,18 @@
 \RequirePackage{todonotes}
 %    \end{macrocode}
 %
+% The xspace package provides a single command that looks at what comes after it
+% in the command stream, and decides whether to insert a space to replace one
+% "eaten" by the TeX command decoder. The decision is based on what came after
+% any space, not on whether there was a space (which is unknowable): so if the
+% next thing proves to be punctuation, the chances are there was no space, but
+% if it's a letter, there's probably a need for space. This technique is not
+% perfect, but works in a large proportion of cases.
+% The package is part of the latex-tools bundle in the LaTeX required distribution. 
+%    \begin{macrocode}
+\RequirePackage{xspace}
+%    \end{macrocode}
+%
 % A collection of ways to change the typesetting of footnotes. The package
 % provides means of changing the layout of the footnotes themselves (including
 % setting them in 'paragraphs' - the para option), a way to number footnotes per
