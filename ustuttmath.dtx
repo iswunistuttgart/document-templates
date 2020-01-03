@@ -150,6 +150,26 @@
 % all of the possible unit-related needs of LaTeX users. The package relies on
 % LaTeX 3 support from the l3kernel and l3packages bundles.
 %    \begin{macrocode}
+\PassOptionsToPackage{%
+% General styling
+    multi-part-units=brackets,%
+    zero-decimal-to-integer=false,%
+    add-decimal-zero=false,%
+    add-integer-zero=true,%
+    per-mode=reciprocal,%
+% Rounding
+    round-mode=places,%
+    round-precision=3,%
+    round-half=even,%
+% Products |\SI{1x2x3}|
+    product-units=power,%
+% Ranges |\SIrange|
+    range-units=brackets,%
+% Lists |\SIlist|
+    list-units=brackets,%
+% Tables
+    table-unit-alignment=left,%
+  }{siunitx}
 \RequirePackage{siunitx}
 %    \end{macrocode}
 %
