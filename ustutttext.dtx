@@ -712,5 +712,123 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
+%
+% \subsection{Notes Macros}
+%
+%
+% \begin{macro}{\comment}
+% \cmd{\comment}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\comment}{ s O{} g }{
+  \IfNoValueTF{#3}{%
+    \todo[color=Blue!40, bordercolor=Blue, #2]{\textbf{Comment!}}%
+  }{%
+    \todo[color=Blue!40, bordercolor=Blue, prepend, caption={\textbf{Comment!}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\note}
+% \cmd{\note}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\note}{ s O{} g }{
+  \IfNoValueTF{#3}{%
+    \todo[color=Violet!40, bordercolor=Violet, #2]{\textbf{Note!}}%
+  }{%
+    \todo[color=Violet!40, bordercolor=Violet, prepend, caption={\textbf{Note!}}, #2]{#3}%
+  }%
+  \xspace%
+}
+%
+%
+% \begin{macro}{\addref}
+% \cmd{\addref}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\addref}{ s O{} g }{
+  \IfNoValueTF{#3}{%
+    \todo[color=Orange!40, bordercolor=Orange, #2]{\textbf{Add Reference!}}%
+  }{%
+    \todo[color=Orange!40, bordercolor=Orange, prepend, caption={\textbf{Add Reference!}}, #2]{#3}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rewrite}
+% \cmd{\rewrite}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\rewrite}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Green!40, bordercolor=Green, #2]{\textbf{Rewrite!}}%
+  }{%
+    \todo[color=Green!40, bordercolor=Green, prepend, caption={\textbf{Rewrite!}}, #2]{#3}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\amend}
+% \cmd{\amend}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\amend}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Purple!40, bordercolor=Purple, #2]{\textbf{Amend!}}%
+  }{%
+    \todo[color=Purple!40, bordercolor=Purple, prepend, caption={\textbf{Amend!}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\correct}
+% \cmd{\correct}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\correct}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Red!40, bordercolor=Red, #2]{\textbf{Needs Correction!}}%
+  }{%
+    \todo[color=Red!40, bordercolor=Red, prepend, caption={\textbf{Needs Correction!}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\talkabout}
+% \cmd{\talkabout}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\talkabout}{ s O{} m }{%
+  \todo[color=Gray!40, bordercolor=Gray, inline, prepend, caption={\textbf{Talk about}}, #2]{{#3}}%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\question}
+% \cmd{\question}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\question}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Magenta!70, bordercolor=Magenta, #2]{\textbf{Question?}}%
+  }{%
+    \todo[color=Magenta!70, bordercolor=Magenta, prepend, caption={\textbf{Question?}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \Finale
 \endinput
