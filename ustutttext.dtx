@@ -110,6 +110,19 @@
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
+%
+% These are probably the most commonly used and SO-suggested options to |xcolor|
+% pacakge, so we'll just pop them right in here.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  usenames,%
+  dvipsnames,%
+  svgnames,%
+  table,%
+  hyperref,%
+}{xcolor}
+%    \end{macrocode}
+%
 % The package lets the user mark things to do later, in a simple and visually
 % appealing way. The package takes several options to enable
 % customization/finetuning of the visual appearance.
