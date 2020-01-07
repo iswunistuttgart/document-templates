@@ -110,17 +110,13 @@
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
-%
-% These are probably the most commonly used and SO-suggested options to |xcolor|
-% pacakge, so we'll just pop them right in here.
+% xparse – A generic document command parser
+% The package provides a high-level interface for producing document-level
+% commands. In that way, it offers a replacement for LaTeX2ε’s \newcommand
+% macro, with significantly improved functionality.
+% The package is distributed as part of the l3packages bundle.
 %    \begin{macrocode}
-\PassOptionsToPackage{%
-  usenames,%
-  dvipsnames,%
-  svgnames,%
-  table,%
-  hyperref,%
-}{xcolor}
+\RequirePackage{xparse}
 %    \end{macrocode}
 %
 % The package lets the user mark things to do later, in a simple and visually
