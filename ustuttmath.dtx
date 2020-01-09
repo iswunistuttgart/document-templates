@@ -63,7 +63,7 @@
 %
 % \GetFileInfo{ustuttmath.dtx}
 %
-% \DoNotIndex{\!,\,,\:,\bm,\bullet,\cdot,\cr,\crossp@inner,\ddot,\DeclareMathOperator,\DeclarePairedDelimiterX,\def,\dfrac,\dot,\dotp@inner,\dotsc,\frac,\hat,\ifblank,\IfBooleanTF,\IfValueT,\IfValueTF,\infty,\lbrace,\lparen,\lVert,\lvert,\mathinner,\mathrm,\mathsf,\mbox,\mkern,\ndot,\NewDocumentCommand,\ooalign,\operatorname,\otimes,\outerp@inner,\overline,\partial,\PassOptionsToPackage,\phantom,\prescripts,\rbrace,\renewcommand,\RequirePackage,\rparen,\runner,\rVert,\rvert,\SavedStyle,\smaller,\text,\textscale,\tfrac,\ThisStyle,\times,\top}
+% \DoNotIndex{\!,\,,\:,\bm,\bullet,\cdot,\cr,\crossp@inner,\ddot,\DeclareMathOperator,\DeclarePairedDelimiterX,\def,\dfrac,\dot,\dotp@inner,\dotsc,\frac,\hat,\ifblank,\IfBooleanTF,\IfValueT,\IfValueTF,\infty,\lbrace,\lparen,\lVert,\lvert,\mathinner,\mathrm,\mathsf,\mbox,\mkern,\ndot,\ProvideDocumentCommand,\ooalign,\operatorname,\otimes,\outerp@inner,\overline,\partial,\PassOptionsToPackage,\phantom,\prescripts,\rbrace,\renewcommand,\RequirePackage,\rparen,\runner,\rVert,\rvert,\SavedStyle,\smaller,\text,\textscale,\tfrac,\ThisStyle,\times,\top}
 % 
 %
 % \title{The \textsf{ustuttmath} package\thanks{This document
@@ -110,6 +110,23 @@
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
+% xparse – A generic document command parser
+% The package provides a high-level interface for producing document-level
+% commands. In that way, it offers a replacement for LaTeX2ε’s \newcommand
+% macro, with significantly improved functionality.
+% The package is distributed as part of the l3packages bundle.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+%    \end{macrocode}
+%
+% Set the font size relative to the current font size. The basic command of the
+% package is |\relsize|, whose argument is a number of |\magsteps| to change
+% size; from this are defined commands |\larger|, |\smaller|, |\textlarger|,
+% etc.
+%    \begin{macrocode}
+\RequirePackage{relsize}
+%    \end{macrocode}
+%
 % Additional math symbols. For a full list, see
 % \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
 %    \begin{macrocode}
@@ -142,6 +159,26 @@
 % all of the possible unit-related needs of LaTeX users. The package relies on
 % LaTeX 3 support from the l3kernel and l3packages bundles.
 %    \begin{macrocode}
+\PassOptionsToPackage{%
+% General styling
+    multi-part-units=brackets,%
+    zero-decimal-to-integer=false,%
+    add-decimal-zero=false,%
+    add-integer-zero=true,%
+    per-mode=reciprocal,%
+% Rounding
+    round-mode=places,%
+    round-precision=3,%
+    round-half=even,%
+% Products |\SI{1x2x3}|
+    product-units=power,%
+% Ranges |\SIrange|
+    range-units=brackets,%
+% Lists |\SIlist|
+    list-units=brackets,%
+% Tables
+    table-unit-alignment=left,%
+  }{siunitx}
 \RequirePackage{siunitx}
 %    \end{macrocode}
 %
@@ -294,7 +331,7 @@
 %
 % \begin{macro}{\lerp}
 %    \begin{macrocode}
-\NewDocumentCommand{\lerp}{ O{t} m m }{%
+\ProvideDocumentCommand{\lerp}{ O{t} m m }{%
   \parentheses*{%
     1%
     -%
@@ -311,7 +348,7 @@
 %
 % \begin{macro}{\of}
 %    \begin{macrocode}
-\NewDocumentCommand{\of}{ s o m }{%
+\ProvideDocumentCommand{\of}{ s o m }{%
   \mkern-1.0mu%
   \IfBooleanTF{#1}{%
     \IfValueTF{#2}{%
@@ -333,7 +370,7 @@
 %
 % \begin{macro}{\cof}
 %    \begin{macrocode}
-\NewDocumentCommand{\cof}{ s o m }{%
+\ProvideDocumentCommand{\cof}{ s o m }{%
   \mkern-1.0mu%
   \IfBooleanTF{#1}{%
     \IfValueTF{#2}{%
@@ -355,7 +392,7 @@
 %
 % \begin{macro}{\overlinebm}
 %    \begin{macrocode}
-\NewDocumentCommand{\overlinebm}{ m }{%
+\ProvideDocumentCommand{\overlinebm}{ m }{%
   \ThisStyle{\ooalign{%
     $\SavedStyle\mkern2.5mu\overline{\phantom{\mathrm{#1}}}$\cr$\SavedStyle\bm{{#1}}$%
   }}%
@@ -366,7 +403,7 @@
 %
 % \begin{macro}{\overlinevect}
 %    \begin{macrocode}
-\NewDocumentCommand{\overlinevect}{ m }{%
+\ProvideDocumentCommand{\overlinevect}{ m }{%
   \overlinebm{#1}%
 }%
 %    \end{macrocode}
@@ -375,7 +412,7 @@
 %
 % \begin{macro}{\overlinematr}
 %    \begin{macrocode}
-\NewDocumentCommand{\overlinematr}{ m }{
+\ProvideDocumentCommand{\overlinematr}{ m }{
   \overlinebm{#1}%
 }
 %    \end{macrocode}
@@ -384,7 +421,7 @@
 %
 % \begin{macro}{\vect}
 %    \begin{macrocode}
-\NewDocumentCommand{\vect}{ o O{} m }{%
+\ProvideDocumentCommand{\vect}{ o O{} m }{%
   \IfValueTF{#1}{%
     \prescript{#1}{#2}{\bm{#3}}%
   }{%
@@ -397,7 +434,7 @@
 %
 % \begin{macro}{\dotvect}
 %    \begin{macrocode}
-\NewDocumentCommand{\dotvect}{ o O{} m }{%
+\ProvideDocumentCommand{\dotvect}{ o O{} m }{%
   \IfValueTF{#1}{%
     \prescript{#1}{#2}{\dot{\vect{#3}}}%
   }{%
@@ -410,7 +447,7 @@
 %
 % \begin{macro}{\ddotvect}
 %    \begin{macrocode}
-\NewDocumentCommand{\ddotvect}{ o O{} m }{%
+\ProvideDocumentCommand{\ddotvect}{ o O{} m }{%
   \IfValueTF{#1}{%
     \prescript{#1}{#2}{\ddot{\vect{#3}}}%
   }{%
@@ -421,10 +458,16 @@
 % \end{macro}
 %
 %
-% \begin{macro}{\ndotvect}
+% \begin{macro}{\ndot}
+% \cmd{\ndot}\marg{num}\marg{var} Puts |num| in parentheses above |var|.
+% \cmd{\ndot}*\marg{num}\marg{var} Puts |num| in parentheses above |var| and automatically adjusts the size of the parentheses.
 %    \begin{macrocode}
-\NewDocumentCommand{\ndot}{ m m }{%
-  #2^{\parentheses{#1}}%
+\ProvideDocumentCommand{\ndot}{ s m m }{%
+  \IfBooleanTF{#1}{%
+    #3^{\parentheses*{#2}}%
+  }{%
+    #3^{\parentheses{#2}}%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -432,7 +475,7 @@
 %
 % \begin{macro}{\pr}
 %    \begin{macrocode}
-\NewDocumentCommand{\pr}{ m }{%
+\ProvideDocumentCommand{\pr}{ m }{%
   #1^{\prime}\mkern-1.2mu%
 }
 %    \end{macrocode}
@@ -441,7 +484,7 @@
 %
 % \begin{macro}{\ppr}
 %    \begin{macrocode}
-\NewDocumentCommand{\ppr}{ m }{%
+\ProvideDocumentCommand{\ppr}{ m }{%
   #1^{\prime\prime}\mkern-1.2mu%
 }
 %    \end{macrocode}
@@ -450,7 +493,7 @@
 %
 % \begin{macro}{\pppr}
 %    \begin{macrocode}
-\NewDocumentCommand{\pppr}{ m }{%
+\ProvideDocumentCommand{\pppr}{ m }{%
   #1^{\prime\prime\prime}\mkern-1.2mu%
 }
 %    \end{macrocode}
@@ -459,7 +502,7 @@
 %
 % \begin{macro}{\jacobian}
 %    \begin{macrocode}
-\NewDocumentCommand{\jacobian}{ s o O{} m }{%
+\ProvideDocumentCommand{\jacobian}{ s o O{} m }{%
   \jacobiansymbol%
   \IfValueT{#2}{_{#2}^{#3}}%
   \mkern-1.0mu%
@@ -475,7 +518,7 @@
 %
 % \begin{macro}{\dotjacobian}
 %    \begin{macrocode}
-\NewDocumentCommand{\dotjacobian}{ m }{%
+\ProvideDocumentCommand{\dotjacobian}{ m }{%
   \dot{\jacobiansymbol}\mkern-1.0mu#1%
 }%
 %    \end{macrocode}
@@ -484,7 +527,7 @@
 %
 % \begin{macro}{\ddotjacobian}
 %    \begin{macrocode}
-\NewDocumentCommand{\ddotjacobian}{ m }{%
+\ProvideDocumentCommand{\ddotjacobian}{ m }{%
   \ddot{\jacobiansymbol}\mkern-1.0mu#1%
 }%
 %    \end{macrocode}
@@ -493,7 +536,7 @@
 %
 % \begin{macro}{\eye}
 %    \begin{macrocode}
-\NewDocumentCommand{\eye}{ o }{%
+\ProvideDocumentCommand{\eye}{ o }{%
   \IfValueTF{#1}{%
     \mathbb{I}_{#1}%
   }{%
@@ -506,7 +549,7 @@
 %
 % \begin{macro}{\zeros}
 %    \begin{macrocode}
-\NewDocumentCommand{\zeros}{ o }{%
+\ProvideDocumentCommand{\zeros}{ o }{%
   \IfValueTF{#1}{%
     \mathds{0}_{#1}%
   }{%
@@ -519,7 +562,7 @@
 %
 % \begin{macro}{\ones}
 %    \begin{macrocode}
-\NewDocumentCommand{\ones}{ o }{%
+\ProvideDocumentCommand{\ones}{ o }{%
   \IfValueTF{#1}{%
     \mathds{1}_{#1}%
   }{%
@@ -532,11 +575,11 @@
 %
 % \begin{macro}{\ndotvect}
 %    \begin{macrocode}
-\NewDocumentCommand{\ndotvect}{ o O{} m m }{%
+\ProvideDocumentCommand{\ndotvect}{ o O{} m m }{%
   \IfValueTF{#1}{%
-    \prescript{#1}{#2}{\ndot{#3}{#4}}%
+    \prescript{#1}{#2}{\ndot{#3}{\vect{#4}}}%
   }{%
-    \ndot{#4}{\vect{#3}}%
+    \ndot{#3}{\vect{#4}}%
   }%
 }%
 %    \end{macrocode}
@@ -545,7 +588,7 @@
 %
 % \begin{macro}{\matr}
 %    \begin{macrocode}
-\NewDocumentCommand{\matr}{ o O{} m }{%
+\ProvideDocumentCommand{\matr}{ o O{} m }{%
   \IfValueTF{#1}{%
     \prescript{#1}{#2}{\bm{#3}}%
   }{%
@@ -558,7 +601,7 @@
 %
 % \begin{macro}{\dotmatr}
 %    \begin{macrocode}
-\NewDocumentCommand{\dotmatr}{ o O{} m }{%
+\ProvideDocumentCommand{\dotmatr}{ o O{} m }{%
   \IfValueTF{#1}{%
     \prescript{#1}{#2}{\dot{\matr{#3}}}%
   }{%
@@ -571,7 +614,7 @@
 %
 % \begin{macro}{\ddotmatr}
 %    \begin{macrocode}
-\NewDocumentCommand{\ddotmatr}{ o O{} m }{%
+\ProvideDocumentCommand{\ddotmatr}{ o O{} m }{%
   \IfValueTF{#1}{%
     \prescript{#1}{#2}{\ddot{\matr{#3}}}%
   }{%
@@ -584,11 +627,11 @@
 %
 % \begin{macro}{\ndotmatr}
 %    \begin{macrocode}
-\NewDocumentCommand{\ndotmatr}{ o O{} m m }{%
+\ProvideDocumentCommand{\ndotmatr}{ o O{} m m }{%
   \IfValueTF{#1}{%
-    \prescript{#1}{#2}{\ndot{#3}{#4}}%
+    \prescript{#1}{#2}{\ndot{#3}{\matr{#4}}}%
   }{%
-    \ndot{#4}{\matr{#3}}%
+    \ndot{#3}{\matr{#4}}%
   }%
 }%
 %    \end{macrocode}
@@ -651,7 +694,7 @@
 %
 % \begin{macro}{\pow}
 %    \begin{macrocode}
-\NewDocumentCommand{\pow}{ s O{2} m }{%
+\ProvideDocumentCommand{\pow}{ s O{2} m }{%
   \IfBooleanTF{#1}{%
     \parentheses*{#3}^{#2}%
   }{%
@@ -671,7 +714,7 @@
 %
 % \begin{macro}{\dotp}
 %    \begin{macrocode}
-\NewDocumentCommand{\dotp}{ s m m }{%
+\ProvideDocumentCommand{\dotp}{ s m m }{%
   \def\dotp@inner{#2 \bullet #3}%
   \IfBooleanTF{#1}{%
     \parentheses*{\dotp@inner}%
@@ -685,7 +728,7 @@
 %
 % \begin{macro}{\innerp}
 %    \begin{macrocode}
-\NewDocumentCommand{\innerp}{ s m m }{%
+\ProvideDocumentCommand{\innerp}{ s m m }{%
   \def\innerpp{\langle #2 \, , #3 \rangle}%
   \IfBooleanTF{#1}{%
     \overline{\innerpp}%
@@ -699,7 +742,7 @@
 %
 % \begin{macro}{\crossp}
 %    \begin{macrocode}
-\NewDocumentCommand{\crossp}{s o m m}{%
+\ProvideDocumentCommand{\crossp}{s o m m}{%
   \def\crossp@inner{#3 \times #4}%
   \IfBooleanTF{#1}{%
     \IfValueTF{#2}{
@@ -717,7 +760,7 @@
 %
 % \begin{macro}{\outerp}
 %    \begin{macrocode}
-\NewDocumentCommand{\outerp}{ s m m }{%
+\ProvideDocumentCommand{\outerp}{ s m m }{%
   \def\outerp@inner{#2 \otimes #3}%
   \IfBooleanTF{#1}{%
     \parentheses*{\outerp@inner}%
@@ -731,7 +774,7 @@
 %
 % \begin{macro}{\dif}
 %    \begin{macrocode}
-\NewDocumentCommand{\dif}{ o }{%
+\ProvideDocumentCommand{\dif}{ o }{%
   \operatorname{d}%
   \IfValueT{#1}{%
     _{#1}%
@@ -744,7 +787,7 @@
 %
 % \begin{macro}{\Dif}
 %    \begin{macrocode}
-\NewDocumentCommand{\Dif}{ o }{%
+\ProvideDocumentCommand{\Dif}{ o }{%
   \operatorname{D}%
   \IfValueT{#1}{%
     _{#1}%
@@ -850,7 +893,7 @@
 %
 % \begin{macro}{\td}
 %    \begin{macrocode}
-\NewDocumentCommand{\td}{ m }{%
+\ProvideDocumentCommand{\td}{ m }{%
   \dif{#1}%
 }%
 %    \end{macrocode}
@@ -859,7 +902,7 @@
 %
 % \begin{macro}{\tol}
 %    \begin{macrocode}
-\NewDocumentCommand{\tol}{ O{\varepsilon} }{%
+\ProvideDocumentCommand{\tol}{ O{\varepsilon} }{%
   #1%
 }%
 %    \end{macrocode}
@@ -868,7 +911,7 @@
 %
 % \begin{macro}{\threshold}
 %    \begin{macrocode}
-\NewDocumentCommand{\threshold}{ }{%
+\ProvideDocumentCommand{\threshold}{ }{%
   \epsilon%
 }%
 %    \end{macrocode}
@@ -877,7 +920,7 @@
 %
 % \begin{macro}{\residual}
 %    \begin{macrocode}
-\NewDocumentCommand{\residual}{ s }{%
+\ProvideDocumentCommand{\residual}{ s }{%
   \IfBooleanTF{#1}{%
     e%
   }{%
@@ -890,7 +933,7 @@
 %
 % \begin{macro}{\stepsize}
 %    \begin{macrocode}
-\NewDocumentCommand{\stepsize}{ }{%
+\ProvideDocumentCommand{\stepsize}{ }{%
   h%
 }%
 %    \end{macrocode}
@@ -899,7 +942,7 @@
 %
 % \begin{macro}{\funcindex}
 %    \begin{macrocode}
-\NewDocumentCommand{\funcindex}{ }{%
+\ProvideDocumentCommand{\funcindex}{ }{%
   k%
 }%
 %    \end{macrocode}
@@ -908,7 +951,7 @@
 %
 % \begin{macro}{\loopindex}
 %    \begin{macrocode}
-\NewDocumentCommand{\loopindex}{ }{%
+\ProvideDocumentCommand{\loopindex}{ }{%
   l%
 }%
 %    \end{macrocode}
@@ -917,7 +960,7 @@
 %
 % \begin{macro}{\iterindex}
 %    \begin{macrocode}
-\NewDocumentCommand{\iterindex}{ }{%
+\ProvideDocumentCommand{\iterindex}{ }{%
   k%
 }
 %    \end{macrocode}
@@ -926,7 +969,7 @@
 %
 % \begin{macro}{\itervar}
 %    \begin{macrocode}
-\NewDocumentCommand{\itervar}{ s }{%
+\ProvideDocumentCommand{\itervar}{ s }{%
   \IfBooleanTF{#1}{%
     x%
   }{
@@ -939,7 +982,7 @@
 %
 % \begin{macro}{\iterstep}
 %    \begin{macrocode}
-\NewDocumentCommand{\iterstep}{ s }{%
+\ProvideDocumentCommand{\iterstep}{ s }{%
   \IfBooleanTF{#1}{%
     \Delta x%
   }{
@@ -952,7 +995,7 @@
 %
 % \begin{macro}{\factorial}
 %    \begin{macrocode}
-\NewDocumentCommand{\factorial}{ m }{%
+\ProvideDocumentCommand{\factorial}{ m }{%
   #1!
 }%
 %    \end{macrocode}
@@ -961,7 +1004,7 @@
 %
 % \begin{macro}{\pinv}
 %    \begin{macrocode}
-\NewDocumentCommand{\pinv}{ s m }{%
+\ProvideDocumentCommand{\pinv}{ s m }{%
   \IfBooleanTF{#1}{%
     \parentheses*{#2}%
   }{%
@@ -975,7 +1018,7 @@
 %
 % \begin{macro}{\quat}
 %    \begin{macrocode}
-\NewDocumentCommand{\quat}{ s }{%
+\ProvideDocumentCommand{\quat}{ s }{%
   \IfBooleanTF{#1}{%
     \Theta%
   }{%
@@ -988,7 +1031,7 @@
 %
 % \begin{macro}{\dotquat}
 %    \begin{macrocode}
-\NewDocumentCommand{\dotquat}{ s }{%
+\ProvideDocumentCommand{\dotquat}{ s }{%
   \IfBooleanTF{#1}{%
     \dot{\Theta}%
   }{%
@@ -1001,7 +1044,7 @@
 %
 % \begin{macro}{\ddotquat}
 %    \begin{macrocode}
-\NewDocumentCommand{\ddotquat}{ s }{%
+\ProvideDocumentCommand{\ddotquat}{ s }{%
   \IfBooleanTF{#1}{%
     \ddot{\Theta}%
   }{%
@@ -1014,7 +1057,7 @@
 %
 % \begin{macro}{\quatratemat}
 %    \begin{macrocode}
-\NewDocumentCommand{\quatratemat}{ }{%
+\ProvideDocumentCommand{\quatratemat}{ }{%
   \matr{W}%
 }%
 %    \end{macrocode}
@@ -1023,7 +1066,7 @@
 %
 % \begin{macro}{\coordsys}
 %    \begin{macrocode}
-\NewDocumentCommand{\coordsys}{ m }{%
+\ProvideDocumentCommand{\coordsys}{ m }{%
   \mathcal{K}_{ \ms{#1} }%
 }%
 %    \end{macrocode}
@@ -1032,7 +1075,7 @@
 %
 % \begin{macro}{\transform}
 %    \begin{macrocode}
-\NewDocumentCommand{\transform}{ O{T} m m }{%
+\ProvideDocumentCommand{\transform}{ O{T} m m }{%
   \matr[#2][#3]{#1}%
 }%
 %    \end{macrocode}
@@ -1041,7 +1084,7 @@
 %
 % \begin{macro}{\discretenabla}
 %    \begin{macrocode}
-\NewDocumentCommand{\discretenabla}{}{%
+\ProvideDocumentCommand{\discretenabla}{}{%
   \overline{\nabla}%
 }%
 %    \end{macrocode}
@@ -1050,7 +1093,7 @@
 %
 % \begin{macro}{\vectset}
 %    \begin{macrocode}
-\NewDocumentCommand{\vectset}{ >{\SplitList{;}}m }{%
+\ProvideDocumentCommand{\vectset}{ >{\SplitList{;}}m }{%
   \langle%
   {\ProcessList{#1}{\vectsetitem}}%
   \rangle%
@@ -1063,7 +1106,7 @@
 %
 % \begin{macro}{\kronecker}
 %    \begin{macrocode}
-\NewDocumentCommand{\kronecker}{ O{i} O{j} }{%
+\ProvideDocumentCommand{\kronecker}{ O{i} O{j} }{%
   \delta_{#1#2}%
 }%
 %    \end{macrocode}
@@ -1072,7 +1115,7 @@
 %
 % \begin{macro}{\dirac}
 %    \begin{macrocode}
-\NewDocumentCommand{\dirac}{ }{%
+\ProvideDocumentCommand{\dirac}{ }{%
   \delta%
 }%
 %    \end{macrocode}
@@ -1081,7 +1124,7 @@
 %
 % \begin{macro}{\const}
 %    \begin{macrocode}
-\NewDocumentCommand{\const}{ }{%
+\ProvideDocumentCommand{\const}{ }{%
   \text{const}%
 }%
 %    \end{macrocode}
@@ -1090,7 +1133,7 @@
 %
 % \begin{macro}{\msconst}
 %    \begin{macrocode}
-\NewDocumentCommand{\msconst}{ }{%
+\ProvideDocumentCommand{\msconst}{ }{%
   \ms{const}%
 }%
 %    \end{macrocode}
@@ -1099,7 +1142,7 @@
 %
 % \begin{macro}{\heaviside}
 %    \begin{macrocode}
-\NewDocumentCommand{\heaviside}{ g }{%
+\ProvideDocumentCommand{\heaviside}{ g }{%
   H%
   % \mathds{H}%
   \IfValueT{#1}{%
@@ -1112,7 +1155,7 @@
 %
 % \begin{macro}{\polydeg}
 %    \begin{macrocode}
-\NewDocumentCommand{\polydeg}{ }{%
+\ProvideDocumentCommand{\polydeg}{ }{%
   d%
 }%
 %    \end{macrocode}
@@ -1135,7 +1178,7 @@
 %
 % \begin{macro}{\transpose}
 %    \begin{macrocode}
-\NewDocumentCommand{\transpose}{ s O{\mkern-1.5mu} m }{%
+\ProvideDocumentCommand{\transpose}{ s O{\mkern-1.5mu} m }{%
   \IfBooleanTF{#1}{%
     \parentheses*{#3}^{#2\mbox{\textscale{0.6}{$\top$}}}%
   }{%
@@ -1149,7 +1192,7 @@
 %
 % \begin{macro}{\conjugate}
 %    \begin{macrocode}
-\NewDocumentCommand{\conjugate}{ s m }{%
+\ProvideDocumentCommand{\conjugate}{ s m }{%
   \overline{#2}%
 }%
 %    \end{macrocode}
@@ -1158,7 +1201,7 @@
 %
 % \begin{macro}{\hermconjugate}
 %    \begin{macrocode}
-\NewDocumentCommand{\hermconjugate}{ s O{\mkern-1.5mu} m }{%
+\ProvideDocumentCommand{\hermconjugate}{ s O{\mkern-1.5mu} m }{%
   \IfBooleanTF{#1}{%
     \parentheses*{#3}^{#2\mbox{\textscale{0.6}{$\mathsf{H}$}}}%
   }{%
@@ -1171,7 +1214,7 @@
 %
 % \begin{macro}{\inv}
 %    \begin{macrocode}
-\NewDocumentCommand{\inv}{ s m }{%
+\ProvideDocumentCommand{\inv}{ s m }{%
   \IfBooleanTF{#1}{%
     \parentheses*{#2}^{-1}%
   }{%
@@ -1184,7 +1227,7 @@
 %
 % \begin{macro}{\evec}
 %    \begin{macrocode}
-\NewDocumentCommand{\evec}{ s O{e} m }{%
+\ProvideDocumentCommand{\evec}{ s O{e} m }{%
   \IfBooleanTF{#1}{%
     \vect{#2}_{\ms{#3}}%
   }{%
@@ -1197,7 +1240,7 @@
 %
 % \begin{macro}{\evecx}
 %    \begin{macrocode}
-\NewDocumentCommand{\evecx}{ s O{e} }{%
+\ProvideDocumentCommand{\evecx}{ s O{e} }{%
   \IfBooleanTF{#1}{%
     \evec*[#2]{x}%
   }{%
@@ -1210,7 +1253,7 @@
 %
 % \begin{macro}{\evecy}
 %    \begin{macrocode}
-\NewDocumentCommand{\evecy}{ s O{e} }{%
+\ProvideDocumentCommand{\evecy}{ s O{e} }{%
   \IfBooleanTF{#1}{%
     \evec*[#2]{y}%
   }{%
@@ -1223,7 +1266,7 @@
 %
 % \begin{macro}{\evecz}
 %    \begin{macrocode}
-\NewDocumentCommand{\evecz}{ s O{e} }{%
+\ProvideDocumentCommand{\evecz}{ s O{e} }{%
   \IfBooleanTF{#1}{%
     \evec*[#2]{z}%
   }{%
@@ -1236,7 +1279,7 @@
 %
 % \begin{macro}{\arctant}
 %    \begin{macrocode}
-\NewDocumentCommand{\arctant}{ s o m m }{%
+\ProvideDocumentCommand{\arctant}{ s o m m }{%
   \arctantwo\,%
   \IfBooleanTF{#1}{%
     \of*{#3, #4}%
@@ -1250,7 +1293,7 @@
 %
 % \begin{macro}{\irange}
 %    \begin{macrocode}
-\NewDocumentCommand{\irange}{s o m g}{%
+\ProvideDocumentCommand{\irange}{s o m g}{%
   \def\runner{\IfValueTF{#4}{#4}{i}}%
   \IfValueTF{#2}{%
     \IfBooleanTF{#1}{%
@@ -1272,9 +1315,8 @@
 %
 % \begin{macro}{\ms}
 %    \begin{macrocode}
-\NewDocumentCommand{\ms}{ m }{%
-  % {\mbox{\text{\smaller[1]#1}}}%
-  {\mbox{\textscale{0.6}{\text{\smaller[1]#1}}}}%
+\ProvideDocumentCommand{\ms}{ m }{%
+  {\mbox{\textscale{0.6}{\mc{\smaller[1]#1}}}}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -1282,7 +1324,7 @@
 %
 % \begin{macro}{\mc}
 %    \begin{macrocode}
-\NewDocumentCommand{\mc}{ m }{%
+\ProvideDocumentCommand{\mc}{ m }{%
   \text{#1}%
 }%
 %    \end{macrocode}
@@ -1291,7 +1333,7 @@
 %
 % \begin{macro}{\rotationsymbol}
 %    \begin{macrocode}
-\NewDocumentCommand{\rotationsymbol}{ }{%
+\ProvideDocumentCommand{\rotationsymbol}{ }{%
   R%
 }%
 %    \end{macrocode}
@@ -1300,7 +1342,7 @@
 %
 % \begin{macro}{\rotation}
 %    \begin{macrocode}
-\NewDocumentCommand{\rotation}{ o O{} }{%
+\ProvideDocumentCommand{\rotation}{ o O{} }{%
   \IfValueTF{#1}{%
     \matr[#1][#2]{\rotationsymbol}%
   }{%
@@ -1313,7 +1355,7 @@
 %
 % \begin{macro}{\dotrotation}
 %    \begin{macrocode}
-\NewDocumentCommand{\dotrotation}{ o O{} }{%
+\ProvideDocumentCommand{\dotrotation}{ o O{} }{%
   \IfValueTF{#1}{%
     \dotmatr[#1][#2]{\rotationsymbol}%
   }{%
@@ -1326,7 +1368,7 @@
 %
 % \begin{macro}{\ddotrotation}
 %    \begin{macrocode}
-\NewDocumentCommand{\ddotrotation}{ o O{} }{%
+\ProvideDocumentCommand{\ddotrotation}{ o O{} }{%
   \IfValueTF{#1}{%
     \ddotmatr[#1][#2]{\rotationsymbol}%
   }{%
@@ -1339,7 +1381,7 @@
 %
 % \begin{macro}{\rotationx}
 %    \begin{macrocode}
-\NewDocumentCommand{\rotationx}{ s g }{%
+\ProvideDocumentCommand{\rotationx}{ s g }{%
   \rotation_{\ms{x}}%
   \IfValueT{#2}{%
     \IfBooleanTF{#1}{%
@@ -1355,7 +1397,7 @@
 %
 % \begin{macro}{\rotationy}
 %    \begin{macrocode}
-\NewDocumentCommand{\rotationy}{ o O{} }{%
+\ProvideDocumentCommand{\rotationy}{ o O{} }{%
   \rotation_{\ms{y}}%
   \IfValueT{#2}{%
     \IfBooleanTF{#1}{%
@@ -1371,7 +1413,7 @@
 %
 % \begin{macro}{\rotationz}
 %    \begin{macrocode}
-\NewDocumentCommand{\rotationz}{ o O{} }{%
+\ProvideDocumentCommand{\rotationz}{ o O{} }{%
   \rotation_{\ms{z}}%
   \IfValueT{#2}{%
     \IfBooleanTF{#1}{%
@@ -1387,7 +1429,7 @@
 %
 % \begin{macro}{\imgu}
 %    \begin{macrocode}
-\NewDocumentCommand{\imgu}{ }{%
+\ProvideDocumentCommand{\imgu}{ }{%
   {\imagu\mkern1mu}%
 }%
 %    \end{macrocode}
@@ -1396,7 +1438,7 @@
 %
 % \begin{macro}{\imgu}
 %    \begin{macrocode}
-\NewDocumentCommand{\vertbar}{}{%
+\ProvideDocumentCommand{\vertbar}{}{%
   \rule[-1ex]{0.5pt}{2.5ex}%
 }%
 %    \end{macrocode}
@@ -1405,7 +1447,7 @@
 %
 % \begin{macro}{\imgu}
 %    \begin{macrocode}
-\NewDocumentCommand{\horzbar}{}{%
+\ProvideDocumentCommand{\horzbar}{}{%
   \rule[.5ex]{2.5ex}{0.5pt}%
 }%
 %    \end{macrocode}
@@ -1414,7 +1456,7 @@
 %
 % \begin{macro}{\imgu}
 %    \begin{macrocode}
-\NewDocumentCommand{\SO}{ O{3} }{%
+\ProvideDocumentCommand{\SO}{ O{3} }{%
   \mathop{\mathrm{SO}}\of{#1}%
 }%
 %    \end{macrocode}
@@ -1423,7 +1465,7 @@
 %
 % \begin{macro}{\imgu}
 %    \begin{macrocode}
-\NewDocumentCommand{\bigo}{ }{%
+\ProvideDocumentCommand{\bigo}{ }{%
   \mathcal{O}%
 }%
 %    \end{macrocode}
@@ -1586,7 +1628,7 @@
 %
 % \begin{macro}{\SIinterval}
 %    \begin{macrocode}
-\NewDocumentCommand{\SIinterval}{ O{} m m m }{%
+\ProvideDocumentCommand{\SIinterval}{ O{} m m m }{%
   \interval[#1]{#2}{#3}\,\si{#4}%
 }%
 %    \end{macrocode}
@@ -1595,7 +1637,7 @@
 %
 % \begin{macro}{\SIset}
 %    \begin{macrocode}
-\NewDocumentCommand{\SIset}{ O{} m m }{%
+\ProvideDocumentCommand{\SIset}{ O{} m m }{%
   \SIlist[%
       open-bracket={\lbrace},%
       close-bracket={\rbrace},%
@@ -1611,7 +1653,7 @@
 %
 % \begin{macro}{\SIsetlist}
 %    \begin{macrocode}
-\NewDocumentCommand{\SIsetlist}{ O{} m m }{%
+\ProvideDocumentCommand{\SIsetlist}{ O{} m m }{%
   \SIlist[%
       open-bracket={\lbrace},%
       close-bracket={\rbrace},%
@@ -1627,7 +1669,7 @@
 %
 % \begin{macro}{\numset}
 %    \begin{macrocode}
-\NewDocumentCommand{\numset}{ s O{} m }{%
+\ProvideDocumentCommand{\numset}{ s O{} m }{%
   \def\nl{%
     \numlist[%
       open-bracket={\lbrace},%
@@ -1654,7 +1696,7 @@
 %
 % \begin{macro}{\numsetlist}
 %    \begin{macrocode}
-\NewDocumentCommand{\numsetlist}{ s O{} m }{%
+\ProvideDocumentCommand{\numsetlist}{ s O{} m }{%
   \def\nl{%
     \numlist[%
       open-bracket={\lbrace},%

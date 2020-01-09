@@ -63,7 +63,7 @@
 %
 % \GetFileInfo{ustutttext.dtx}
 %
-% \DoNotIndex{\",\@,\newcommand,\textregistered,\textsuperscript,\texttrademark,\xspace}
+% \DoNotIndex{\",\@,\newcommand,\textregistered,\textsuperscript,\texttrademark,\xspace,\providecommand}
 % 
 %
 % \title{The \textsf{ustutttext} package\thanks{This document
@@ -110,6 +110,15 @@
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
+% xparse – A generic document command parser
+% The package provides a high-level interface for producing document-level
+% commands. In that way, it offers a replacement for LaTeX2ε’s \newcommand
+% macro, with significantly improved functionality.
+% The package is distributed as part of the l3packages bundle.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+%    \end{macrocode}
+%
 % The package lets the user mark things to do later, in a simple and visually
 % appealing way. The package takes several options to enable
 % customization/finetuning of the visual appearance.
@@ -120,6 +129,18 @@
     textsize=footnotesize,%
 }{todonotes}
 \RequirePackage{todonotes}
+%    \end{macrocode}
+%
+% The xspace package provides a single command that looks at what comes after it
+% in the command stream, and decides whether to insert a space to replace one
+% "eaten" by the TeX command decoder. The decision is based on what came after
+% any space, not on whether there was a space (which is unknowable): so if the
+% next thing proves to be punctuation, the chances are there was no space, but
+% if it's a letter, there's probably a need for space. This technique is not
+% perfect, but works in a large proportion of cases.
+% The package is part of the latex-tools bundle in the LaTeX required distribution. 
+%    \begin{macrocode}
+\RequirePackage{xspace}
 %    \end{macrocode}
 %
 % A collection of ways to change the typesetting of footnotes. The package
@@ -268,7 +289,7 @@
 % \begin{macro}{\registered}
 % A nicer way of putting \textregistered{} mark next to a text
 %    \begin{macrocode}
-\newcommand{\registered}[1]{#1\textsuperscript{\textregistered}}
+\providecommand{\registered}[1]{#1\textsuperscript{\textregistered}}
 %    \end{macrocode}
 % Examples
 % \begin{verbatim}
@@ -280,7 +301,7 @@
 % \begin{macro}{\trademark}
 % A nicer way of putting \texttrademark{} mark next to a text
 %    \begin{macrocode}
-\newcommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
+\providecommand{\trademark}[1]{#1\textsuperscript{\texttrademark}}
 %    \end{macrocode}
 % Examples
 % \begin{verbatim}
@@ -292,7 +313,7 @@
 % \begin{macro}{\wrt}
 % With respect to
 %    \begin{macrocode}
-\newcommand{\wrt}{w.r.t.\@\xspace}
+\providecommand{\wrt}{w.r.t.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -300,7 +321,7 @@
 % \begin{macro}{\wolog}
 % Without loss of generality
 %    \begin{macrocode}
-\newcommand{\wolog}{w.l.o.g.\@\xspace}
+\providecommand{\wolog}{w.l.o.g.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -308,7 +329,7 @@
 % \begin{macro}{\aka}
 % AKA, also known as
 %    \begin{macrocode}
-\newcommand{\aka}{a.k.a.\@\xspace}
+\providecommand{\aka}{a.k.a.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -316,7 +337,7 @@
 % \begin{macro}{\obda}
 % Ohne Beschr\"ankung der Allgemeinheit
 %    \begin{macrocode}
-\newcommand{\obda}{o.\@~B.\@~d.\@~A.\@\xspace}
+\providecommand{\obda}{o.\@~B.\@~d.\@~A.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -324,7 +345,7 @@
 % \begin{macro}{\zb}
 % Zum Beispiel
 %    \begin{macrocode}
-\newcommand{\zb}{z.\@~B.\@\xspace}
+\providecommand{\zb}{z.\@~B.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -332,7 +353,7 @@
 % \begin{macro}{\oae}
 % Oder \"ahnlich\{e,er,es,en\}
 %    \begin{macrocode}
-\newcommand{\oae}{o.\@~\"a.\@\xspace}
+\providecommand{\oae}{o.\@~\"a.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -340,7 +361,7 @@
 % \begin{macro}{\oa}
 % Oder andere
 %    \begin{macrocode}
-\newcommand{\oa}{o.\@~a.\@\xspace}
+\providecommand{\oa}{o.\@~a.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -348,7 +369,7 @@
 % \begin{macro}{\ua}
 % Unter anderem
 %    \begin{macrocode}
-\newcommand{\ua}{u.\@~a.\@\xspace}
+\providecommand{\ua}{u.\@~a.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -356,7 +377,7 @@
 % \begin{macro}{\bzw}
 % Beziehungsweise
 %    \begin{macrocode}
-\newcommand{\bzw}{bzw.\@\xspace}
+\providecommand{\bzw}{bzw.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -364,7 +385,7 @@
 % \begin{macro}{\dh}
 % Das hei{\ss}t
 %    \begin{macrocode}
-% \newcommand{\dh}{d.\@\xspace~h.\@\xspace}
+% \providecommand{\dh}{d.\@\xspace~h.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -372,7 +393,7 @@
 % \begin{macro}{\og}
 % Oben genannt\{e,er,es,en\}
 %    \begin{macrocode}
-\newcommand{\og}{o.\@~g.\@\xspace}
+\providecommand{\og}{o.\@~g.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -380,7 +401,7 @@
 % \begin{macro}{\ggf}
 % Gegebenenfalls
 %    \begin{macrocode}
-\newcommand{\ggf}{ggf.\@\xspace}
+\providecommand{\ggf}{ggf.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -392,7 +413,7 @@
 % Circa: ``around''. In the sense of ``approximately'' or ``about''. Usually
 % used of a date.
 %    \begin{macrocode}
-\newcommand{\ca}{ca.\@\xspace}
+\providecommand{\ca}{ca.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -401,7 +422,7 @@
 % Vice versa: ``with position turned''. Thus, ``the other way around'',
 % ``conversely'', et cetera.
 %    \begin{macrocode}
-\newcommand{\vv}{v.v.\@\xspace}
+\providecommand{\vv}{v.v.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -410,7 +431,7 @@
 % Et cetera: ``and the rest''. In modern usage, used to mean "``and so on''" or
 % "``and more''".
 %    \begin{macrocode}
-\newcommand{\etc}{etc.\@\xspace}
+\providecommand{\etc}{etc.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -424,7 +445,7 @@
 % `in other words'). Some writing styles give such abbreviations without
 % punctuation, as ie and eg.
 %    \begin{macrocode}
-\newcommand{\eg}{e.g.\@,\xspace}
+\providecommand{\eg}{e.g.\@,\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -439,7 +460,7 @@
 % items. It is often confused with e.g.\@ (exempli gratia, `for example'). Some
 % writing styles give such abbreviations without punctuation, as ie and eg.
 %    \begin{macrocode}
-\newcommand{\ie}{i.e.\@,\xspace}
+\providecommand{\ie}{i.e.\@,\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -448,7 +469,7 @@
 % Confer: ``compare''. The abbreviation cf.\@ is used in text to suggest a
 % comparison with something else (cf.\@ citation signal).
 %    \begin{macrocode}
-\newcommand{\cf}{cf.\@\xspace}
+\providecommand{\cf}{cf.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -456,7 +477,7 @@
 % \begin{macro}{\vs}
 % Versus; ``towards''. Literally, ``in the direction [of]''. It is erroneously used in English for ``against'', probably as the truncation of ``adversus'', especially in reference to two opponents, e.g., the parties to litigation or a sports match. 
 %    \begin{macrocode}
-\newcommand{\vs}{vs.\@\xspace}
+\providecommand{\vs}{vs.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -477,7 +498,7 @@
 % loanwords naturalized into scientific English); many journals that follow AMA
 % style do likewise.
 %    \begin{macrocode}
-\newcommand{\etal}{et~al.\@\xspace}
+\providecommand{\etal}{et~al.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -489,7 +510,7 @@
 % text; ita or similar must be used to mean "``thus''" when referring to
 % something about to be stated.
 %    \begin{macrocode}
-\newcommand{\sic}{sic\xspace}
+\providecommand{\sic}{sic\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -500,7 +521,7 @@
 % matters, or when alluding to the parent group after quoting a particular
 % example.
 %    \begin{macrocode}
-\newcommand{\ia}{i.a.\@\xspace}
+\providecommand{\ia}{i.a.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -510,7 +531,7 @@
 % \begin{macro}{\eh}
 % Ehrenhalber
 %    \begin{macrocode}
-\newcommand{\eh}{E.\@\xspace~h.\@\xspace}
+\providecommand{\eh}{E.\@\xspace~h.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -519,8 +540,8 @@
 % \begin{macro}{\hcmult}
 % Honoris causa: honoary degree. In German ``ehrenhalber'', formerly E.~h.
 %    \begin{macrocode}
-\newcommand{\hc}{h.c.\@\xspace}
-\newcommand{\hcmult}{h.c.\@\xspace~mult.\@\xspace}
+\providecommand{\hc}{h.c.\@\xspace}
+\providecommand{\hcmult}{h.c.\@\xspace~mult.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -529,7 +550,7 @@
 % \begin{macro}{\dipling}
 % Diplomingenieur
 %    \begin{macrocode}
-\newcommand{\dipling}{Dipl.-Ing.\@\xspace}
+\providecommand{\dipling}{Dipl.-Ing.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -537,7 +558,7 @@
 % \begin{macro}{\bsc}
 % Bachelor of Science
 %    \begin{macrocode}
-\newcommand{\bsc}{B.Sc.\@\xspace}
+\providecommand{\bsc}{B.Sc.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -545,7 +566,7 @@
 % \begin{macro}{\msc}
 % Master of Science
 %    \begin{macrocode}
-% \newcommand{\msc}{M.Sc.\@\xspace}
+% \providecommand{\msc}{M.Sc.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -553,7 +574,7 @@
 % \begin{macro}{\meng}
 % Master of Engineering
 %    \begin{macrocode}
-\newcommand{\msc}{M.Eng.\@\xspace}
+\providecommand{\msc}{M.Eng.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -561,7 +582,7 @@
 % \begin{macro}{\dring}
 % Doktoringenieur
 %    \begin{macrocode}
-\newcommand{\dring}{Dr.-Ing.\@\xspace}
+\providecommand{\dring}{Dr.-Ing.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -569,7 +590,7 @@
 % \begin{macro}{\prof}
 % Professor
 %    \begin{macrocode}
-\newcommand{\prof}{Prof.\@\xspace}
+\providecommand{\prof}{Prof.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -577,7 +598,7 @@
 % \begin{macro}{\phd}
 % PhD
 %    \begin{macrocode}
-\newcommand{\phd}{PhD\@\xspace}
+\providecommand{\phd}{PhD\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -585,7 +606,7 @@
 % \begin{macro}{\juniorprof}
 % Juniorprof
 %    \begin{macrocode}
-\newcommand{\juniorprof}{Juniorprof.\@\xspace}
+\providecommand{\juniorprof}{Juniorprof.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -595,7 +616,7 @@
 % \begin{macro}{\gmbh}
 % Gesellschaft mit beschr\"ankter Haftung
 %    \begin{macrocode}
-\newcommand{\gmbh}{GmbH\xspace}
+\providecommand{\gmbh}{GmbH\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -603,7 +624,7 @@
 % \begin{macro}{\ggmbh}
 % Gemeinn\"utzige Gesellschaft mit beschr\"ankter Haftung
 %    \begin{macrocode}
-\newcommand{\ggmbh}{gGmbH\xspace}
+\providecommand{\ggmbh}{gGmbH\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -611,7 +632,7 @@
 % \begin{macro}{\ug}
 % Unternehmergesellschaft (haftungsbeschr\"ankt)
 %    \begin{macrocode}
-\newcommand{\ug}{UG~(haftungsbeschr\"ankt)\xspace}
+\providecommand{\ug}{UG~(haftungsbeschr\"ankt)\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -619,7 +640,7 @@
 % \begin{macro}{\ag}
 % Aktiengesellschaft
 %    \begin{macrocode}
-\newcommand{\ag}{AG\xspace}
+\providecommand{\ag}{AG\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -627,7 +648,7 @@
 % \begin{macro}{\gag}
 % Geminn\"utzige Aktiengesellschaft
 %    \begin{macrocode}
-\newcommand{\gag}{gAG\xspace}
+\providecommand{\gag}{gAG\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -635,7 +656,7 @@
 % \begin{macro}{\kga}
 % Kommanditgesellschaft auf Aktien
 %    \begin{macrocode}
-\newcommand{\kga}{KGaA}
+\providecommand{\kga}{KGaA}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -643,7 +664,7 @@
 % \begin{macro}{\kg}
 % Kommanditgesellschaft
 %    \begin{macrocode}
-\newcommand{\kg}{KG\xspace}
+\providecommand{\kg}{KG\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -651,7 +672,7 @@
 % \begin{macro}{\inc}
 % Incorporation
 %    \begin{macrocode}
-\newcommand{\inc}{Inc.\@\xspace}
+\providecommand{\inc}{Inc.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -659,7 +680,7 @@
 % \begin{macro}{\ltd}
 % Private company limited by shares
 %    \begin{macrocode}
-\newcommand{\ltd}{Ltd.\@\xspace}
+\providecommand{\ltd}{Ltd.\@\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -667,7 +688,7 @@
 % \begin{macro}{\llc}
 % Limited liability company
 %    \begin{macrocode}
-\newcommand{\llc}{LLC\xspace}
+\providecommand{\llc}{LLC\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -675,7 +696,7 @@
 % \begin{macro}{\sarl}
 % Soci\'et\'e \`a responsabilit\'e limit\'ee
 %    \begin{macrocode}
-\newcommand{\sarl}{SARL\xspace}
+\providecommand{\sarl}{SARL\xspace}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -683,7 +704,125 @@
 % \begin{macro}{\ev}
 % Eingetragener Verein
 %    \begin{macrocode}
-\newcommand{\ev}{e.\@\xspace~V.\@\xspace}
+\providecommand{\ev}{e.\@\xspace~V.\@\xspace}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \subsection{Notes Macros}
+%
+%
+% \begin{macro}{\comment}
+% \cmd{\comment}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\comment}{ s O{} g }{
+  \IfNoValueTF{#3}{%
+    \todo[color=Blue!40, bordercolor=Blue, #2]{\textbf{Comment!}}%
+  }{%
+    \todo[color=Blue!40, bordercolor=Blue, prepend, caption={\textbf{Comment!}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\note}
+% \cmd{\note}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\note}{ s O{} g }{
+  \IfNoValueTF{#3}{%
+    \todo[color=Violet!40, bordercolor=Violet, #2]{\textbf{Note!}}%
+  }{%
+    \todo[color=Violet!40, bordercolor=Violet, prepend, caption={\textbf{Note!}}, #2]{#3}%
+  }%
+  \xspace%
+}
+%
+%
+% \begin{macro}{\addref}
+% \cmd{\addref}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\addref}{ s O{} g }{
+  \IfNoValueTF{#3}{%
+    \todo[color=Orange!40, bordercolor=Orange, #2]{\textbf{Add Reference!}}%
+  }{%
+    \todo[color=Orange!40, bordercolor=Orange, prepend, caption={\textbf{Add Reference!}}, #2]{#3}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\rewrite}
+% \cmd{\rewrite}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\rewrite}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Green!40, bordercolor=Green, #2]{\textbf{Rewrite!}}%
+  }{%
+    \todo[color=Green!40, bordercolor=Green, prepend, caption={\textbf{Rewrite!}}, #2]{#3}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\amend}
+% \cmd{\amend}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\amend}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Purple!40, bordercolor=Purple, #2]{\textbf{Amend!}}%
+  }{%
+    \todo[color=Purple!40, bordercolor=Purple, prepend, caption={\textbf{Amend!}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\correct}
+% \cmd{\correct}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\correct}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Red!40, bordercolor=Red, #2]{\textbf{Needs Correction!}}%
+  }{%
+    \todo[color=Red!40, bordercolor=Red, prepend, caption={\textbf{Needs Correction!}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\talkabout}
+% \cmd{\talkabout}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\talkabout}{ s O{} m }{%
+  \todo[color=Gray!40, bordercolor=Gray, inline, prepend, caption={\textbf{Talk about}}, #2]{{#3}}%
+  \xspace%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\question}
+% \cmd{\question}\oarg{options}\marg{text}
+%    \begin{macrocode}
+\ProvideDocumentCommand{\question}{ s O{} g }{%
+  \IfNoValueTF{#3}{%
+    \todo[color=Magenta!70, bordercolor=Magenta, #2]{\textbf{Question?}}%
+  }{%
+    \todo[color=Magenta!70, bordercolor=Magenta, prepend, caption={\textbf{Question?}}, #2]{\color{White}{#3}}%
+  }%
+  \xspace%
+}
 %    \end{macrocode}
 % \end{macro}
 %

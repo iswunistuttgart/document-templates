@@ -79,7 +79,7 @@
 %
 % \GetFileInfo{ustutt.dtx}
 %
-% \DoNotIndex{\newcommand,\newenvironment,\PassOptionsToPackage,\PassOptionsToClass,\RequirePackage,\ExecuteOptions,\DeclareOption,\DeclareBoolOption,\DeclareStringOption,\DeclareComplementaryOption}
+% \DoNotIndex{\newcommand,\newenvironment,\PassOptionsToPackage,\PassOptionsToClass,\RequirePackage,\ExecuteOptions,\DeclareOption,\DeclareBoolOption,\DeclareStringOption,\DeclareComplementaryOption,\xspace}
 %
 %
 % \title{The \textsf{ustutt*} classes\thanks{This document
@@ -115,6 +115,15 @@
 % of the LaTeX kernel.
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
+%    \end{macrocode}
+%
+% xparse – A generic document command parser
+% The package provides a high-level interface for producing document-level
+% commands. In that way, it offers a replacement for LaTeX2ε’s \newcommand
+% macro, with significantly improved functionality.
+% The package is distributed as part of the l3packages bundle.
+%    \begin{macrocode}
+\RequirePackage{xparse}
 %    \end{macrocode}
 %
 % The package defines commands that switch according to the prevailing 'draft'
@@ -2501,7 +2510,7 @@
 %
 %
 % \begin{macro}{\maketitle}
-% \cmd{|maketitle}\\
+% \cmd{\maketitle}\\
 % This macro is overwritten for all documents of type thesis to represent the
 % official template given by Faculty 7 (or at least as close as it can get).
 %    \begin{macrocode}

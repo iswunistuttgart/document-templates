@@ -96,14 +96,34 @@
 % \section{Implementation}
 %
 %
+% The package is a toolbox of programming facilities geared primarily towards
+% LaTeX class and package authors. It provides LaTeX frontends to some of the
+% new primitives provided by e-TeX as well as some generic tools which are not
+% strictly related to e-TeX but match the profile of this package. Note that the
+% initial versions of this package were released under the name elatex. The
+% package provides functions that seem to offer alternative ways of implementing
+% some LaTeX kernel commands; nevertheless, the package will not modify any part
+% of the LaTeX kernel.
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
 %    \end{macrocode}
 %
+% xparse – A generic document command parser
+% The package provides a high-level interface for producing document-level
+% commands. In that way, it offers a replacement for LaTeX2ε’s \newcommand
+% macro, with significantly improved functionality.
+% The package is distributed as part of the l3packages bundle.
+%    \begin{macrocode}
+\RequirePackage{xparse}
+%    \end{macrocode}
 %
 %    \begin{macrocode}
 \RequirePackage{ustuttmath}
 %    \end{macrocode}
+%
+%
+%
+% \section{Macros}
 %
 %
 % \begin{macro}{\tf}
