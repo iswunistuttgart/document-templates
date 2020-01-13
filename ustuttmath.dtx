@@ -127,10 +127,35 @@
 \RequirePackage{relsize}
 %    \end{macrocode}
 %
-% Additional math symbols. For a full list, see
+% amsfonts – TeX fonts from the American Mathematical Society
+% An extended set of fonts for use in mathematics, including: extra mathematical
+% symbols; blackboard bold letters (uppercase only); fraktur letters; subscript
+% sizes of bold math italic and bold Greek letters; subscript sizes of large
+% symbols such as sum and product; added sizes of the Computer Modern small caps
+% font; cyrillic fonts (from the University of Washington); Euler mathematical
+% fonts. All fonts are provided as Adobe Type 1 files, and all except the Euler
+% fonts are provided as METAFONT source.
+% The distribution also includes the canonical Type 1 versions of the Computer
+% Modern family of fonts.
+% Basic LaTeX support for the symbol fonts is provided by amsfonts.sty, with
+% names of individual symbols defined in amssymb.sty. The Euler fonts are
+% supported by separate packages; details can be found in the documentation. 
+% For a full list of additional math symbols, see
 % \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
 %    \begin{macrocode}
 \RequirePackage{amssymb}
+%    \end{macrocode}
+%
+% doublestroke – Typeset mathematical double stroke symbols
+% A font based on Computer Modern Roman useful for typesetting the mathematical
+% symbols for the natural numbers (N), whole numbers (Z), rational numbers (Q),
+% real numbers (R) and complex numbers (C); coverage includes all Roman capital
+% letters, ‘1’, ‘h’ and ‘k’. The font is available both as METAFONT source and
+% in Adobe Type 1 format, and LaTeX macros for its use are provided.
+% The fonts appear in the blackboard bold sampler. 
+% For a full list of additional math symbols, see
+% \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/dsfont-symbols.pdf}
+%    \begin{macrocode}
 \RequirePackage{dsfont}
 %    \end{macrocode}
 %
@@ -551,9 +576,9 @@
 %    \begin{macrocode}
 \ProvideDocumentCommand{\zeros}{ o }{%
   \IfValueTF{#1}{%
-    \mathds{0}_{#1}%
+    \mathbb{0}_{#1}%
   }{%
-    \mathds{0}%
+    \mathbb{0}%
   }%
 }%
 %    \end{macrocode}
@@ -564,9 +589,9 @@
 %    \begin{macrocode}
 \ProvideDocumentCommand{\ones}{ o }{%
   \IfValueTF{#1}{%
-    \mathds{1}_{#1}%
+    \mathbb{1}_{#1}%
   }{%
-    \mathds{1}%
+    \mathbb{1}%
   }%
 }%
 %    \end{macrocode}
@@ -1144,7 +1169,6 @@
 %    \begin{macrocode}
 \ProvideDocumentCommand{\heaviside}{ g }{%
   H%
-  % \mathds{H}%
   \IfValueT{#1}{%
     \of{#1}%
   }%
