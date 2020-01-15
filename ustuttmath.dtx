@@ -127,6 +127,27 @@
 \RequirePackage{relsize}
 %    \end{macrocode}
 %
+% Mathtools provides a series of packages designed to enhance the appearance of
+% documents containing a lot of mathematics. The main backbone is amsmath, so
+% those unfamiliar with this required part of the LaTeX system will probably not
+% find the packages very useful. Mathtools provides many useful tools for
+% mathematical typesetting. It is based on amsmath and fixes various
+% deficiencies of amsmath and standard LaTeX. It provides:
+% * Extensible symbols, such as brackets, arrows, harpoons, etc.;
+% * Various symbols such as |\coloneqq| (:=);
+% * Easy creation of new tag forms;
+% * Showing equation numbers only for referenced equations;
+% * Extensible arrows, harpoons and hookarrows;
+% * Starred versions of the amsmath matrix environments for specifying the
+%   column alignment;
+% * More building blocks: multlined, cases-like environments, new gathered
+%   environments;
+% * Maths versions of |\makebox|, |\llap|, |\rlap| etc.;
+% * Cramped math styles; and more...
+%    \begin{macrocode}
+% \RequirePackage{mathtools}
+%    \end{macrocode}
+%
 % amsfonts – TeX fonts from the American Mathematical Society
 % An extended set of fonts for use in mathematics, including: extra mathematical
 % symbols; blackboard bold letters (uppercase only); fraktur letters; subscript
@@ -143,6 +164,8 @@
 % For a full list of additional math symbols, see
 % \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
 %    \begin{macrocode}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
 \RequirePackage{amssymb}
 %    \end{macrocode}
 %
@@ -239,27 +262,6 @@
 % through parts of maths formulae.
 %    \begin{macrocode}
 \RequirePackage{cancel}
-%    \end{macrocode}
-%
-% Mathtools provides a series of packages designed to enhance the appearance of
-% documents containing a lot of mathematics. The main backbone is amsmath, so
-% those unfamiliar with this required part of the LaTeX system will probably not
-% find the packages very useful. Mathtools provides many useful tools for
-% mathematical typesetting. It is based on amsmath and fixes various
-% deficiencies of amsmath and standard LaTeX. It provides:
-% * Extensible symbols, such as brackets, arrows, harpoons, etc.;
-% * Various symbols such as |\coloneqq| (:=);
-% * Easy creation of new tag forms;
-% * Showing equation numbers only for referenced equations;
-% * Extensible arrows, harpoons and hookarrows;
-% * Starred versions of the amsmath matrix environments for specifying the
-%   column alignment;
-% * More building blocks: multlined, cases-like environments, new gathered
-%   environments;
-% * Maths versions of |\makebox|, |\llap|, |\rlap| etc.;
-% * Cramped math styles; and more...
-%    \begin{macrocode}
-\RequirePackage{mathtools}
 %    \end{macrocode}
 %
 % EMPHasizing EQuations. The empheq package is part of the mathtools bundle. The
@@ -1200,13 +1202,20 @@
 % \end{macro}
 %
 %
+% \begin{macro}{\transposesymbol}
+%    \begin{macrocode}
+\newcommand{\transposesymbol}{\mbox{\textscale{0.6}{$\top$}}}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \begin{macro}{\transpose}
 %    \begin{macrocode}
 \ProvideDocumentCommand{\transpose}{ s O{\mkern-1.5mu} m }{%
   \IfBooleanTF{#1}{%
-    \parentheses*{#3}^{#2\mbox{\textscale{0.6}{$\top$}}}%
+    \parentheses*{#3}^{#2\transposesymbol}%
   }{%
-    #3^{#2\mbox{\textscale{0.6}{$\top$}}}%
+    #3^{#2\transposesymbol}%
   }%
   \mkern-1.0mu%
 }%
