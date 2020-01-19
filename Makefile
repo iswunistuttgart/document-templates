@@ -4,7 +4,8 @@ DISTDIR = dist/
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
 SOURCES = $(shell find ./ -type f -name "ustutt*.dtx")
 DICTIONARIES = ustutt-English.dict ustutt-German.dict
-ADDL_INCLUDES = .latexmkrc references.bib images $(DICTIONARIES) tikzlibraryustutt.code.tex acronyms.tex symbols.tex notation.tex ipa-authoryear.bbx ipa-authoryear.cbx
+ADLL_INSTALL = tikzlibraryustutt.code.tex ipa-authoryear.bbx ipa-authoryear.cbx
+ADDL_DIST = .latexmkrc references.bib images acronyms.tex symbols.tex notation.tex
 DOCS = $(SOURCES:dtx=pdf)
 
 LATEX = pdflatex --shell-escape
@@ -46,7 +47,8 @@ dist_%: ins
 	# copy source files over
 	cp $*_*.tex $(DISTDIR)/$*/
 	# copy additional includes over
-	cp -r $(ADDL_INCLUDES) $(DISTDIR)/$*/
+	cp -r $(ADLL_INSTALL) $(DISTDIR)/$*/
+	cp -r $(ADDL_DIST) $(DISTDIR)/$*/
 	# compile the latex source files in the dist directory
 	$(LATEXMK) -cd $(DISTDIR)/$*/$*_*.tex
 	# and remove auxiliary files from the dist directory
@@ -63,7 +65,8 @@ dist_article: ins
 	# copy source files over
 	cp article_*.tex $(DISTDIR)/article/
 	# copy additional includes over
-	cp -r $(ADDL_INCLUDES) $(DISTDIR)/article/
+	cp -r $(ADLL_INSTALL) $(DISTDIR)/article/
+	cp -r $(ADDL_DIST) $(DISTDIR)/article/
 	# compile the latex source files in the dist directory
 	$(LATEXMK) -cd $(DISTDIR)/article/article_*.tex
 	# and remove auxiliary files from the dist directory
@@ -80,7 +83,8 @@ dist_book: ins
 	# copy source files over
 	cp book_*.tex $(DISTDIR)/book/
 	# copy additional includes over
-	cp -r $(ADDL_INCLUDES) $(DISTDIR)/book/
+	cp -r $(ADLL_INSTALL) $(DISTDIR)/book/
+	cp -r $(ADDL_DIST) $(DISTDIR)/book/
 	# compile the latex source files in the dist directory
 	$(LATEXMK) -cd $(DISTDIR)/book/book_*.tex
 	# and remove auxiliary files from the dist directory
@@ -109,7 +113,7 @@ install: ins
 	cp *.cls $(INSTALLDIR)
 	cp *.sty $(INSTALLDIR)
 	cp *.dict $(INSTALLDIR)
-	cp $(DICTIONARIES) $(INSTALLDIR)
+	cp -r $(ADLL_INSTALL) $(INSTALLDIR)
 
 # uninstall from user's texmf home
 .PHONY: uninstall
