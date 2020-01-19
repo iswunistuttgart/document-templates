@@ -4,7 +4,7 @@ DISTDIR = dist/
 INSTALLDIR = $(shell kpsewhich --var-value TEXMFHOME)/tex/latex/ustutt/
 SOURCES = $(shell find ./ -type f -name "ustutt*.dtx")
 DICTIONARIES = ustutt-English.dict ustutt-German.dict
-ADLL_INSTALL = tikzlibraryustutt.code.tex ipa-authoryear.bbx ipa-authoryear.cbx
+ADLL_INSTALL = tikzlibraryustutt.code.tex ipa-authoryear.bbx ipa-authoryear.cbx $(DICTIONARIES)
 ADDL_DIST = .latexmkrc references.bib images acronyms.tex symbols.tex notation.tex
 DOCS = $(SOURCES:dtx=pdf)
 
@@ -51,7 +51,7 @@ dist_%: ins
 	cp -r $(ADDL_DIST) $(DISTDIR)/$*/
 	# compile the latex source files in the dist directory
 	$(LATEXMK) -cd $(DISTDIR)/$*/$*_*.tex
-	# and remove auxiliary files from the dist directory
+	# remove auxiliary files from the dist directory
 	$(LATEXMK) -c -cd $(DISTDIR)/$*/$*_*.tex
 
 # dist class for articles
