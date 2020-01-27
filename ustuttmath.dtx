@@ -148,25 +148,19 @@
 % \RequirePackage{mathtools}
 %    \end{macrocode}
 %
-% amsfonts – TeX fonts from the American Mathematical Society
-% An extended set of fonts for use in mathematics, including: extra mathematical
-% symbols; blackboard bold letters (uppercase only); fraktur letters; subscript
-% sizes of bold math italic and bold Greek letters; subscript sizes of large
-% symbols such as sum and product; added sizes of the Computer Modern small caps
-% font; cyrillic fonts (from the University of Washington); Euler mathematical
-% fonts. All fonts are provided as Adobe Type 1 files, and all except the Euler
-% fonts are provided as METAFONT source.
-% The distribution also includes the canonical Type 1 versions of the Computer
-% Modern family of fonts.
-% Basic LaTeX support for the symbol fonts is provided by amsfonts.sty, with
-% names of individual symbols defined in amssymb.sty. The Euler fonts are
-% supported by separate packages; details can be found in the documentation. 
-% For a full list of additional math symbols, see
-% \url{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
+% amsmath – AMS mathematical facilities for LaTeX
+% The principal package in the AMS-LaTeX distribution. It adapts for use in
+% LaTeX most of the mathematical features found in AMS-TeX; it is highly
+% recommended as an adjunct to serious mathematical typesetting in LaTeX.
+% When amsmath is loaded, AMS-LaTeX packages amsbsy (for bold symbols), amsopn
+% (for operator names) and amstext (for text embedded in mathematics) are also
+% loaded.
+% amsmath is part of the LaTeX required distribution; however, several
+% contributed packages add still further to its appeal; examples are empheq,
+% which provides functions for decorating and highlighting mathematics, and
+% ntheorem, for specifying theorem (and similar) definitions. 
 %    \begin{macrocode}
-\RequirePackage{amsfonts}
 \RequirePackage{amsmath}
-\RequirePackage{amssymb}
 %    \end{macrocode}
 %
 % doublestroke – Typeset mathematical double stroke symbols
