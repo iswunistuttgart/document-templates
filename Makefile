@@ -97,12 +97,14 @@ clean:
 	[ `ls -1 *.sty 2>/dev/null | wc -l` == 0 ] || rm *.sty
 	[ `ls -1 *.dict 2>/dev/null | wc -l` == 0 ] || rm *.dict
 	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -c -silent *.dtx
+	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -c -silent *.ins
 	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -c -silent *.tex
 
 # reseat directory to its original, distributed state
 .PHONY: distclean
 distclean: clean
 	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.dtx
+	[ `ls -1 *.dtx 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.ins
 	[ `ls -1 *.tex 2>/dev/null | wc -l` == 0 ] || $(LATEXMK) -C -silent *.tex && rm -f *.tex
 	[ ! -d $(DISTDIR) ] || rm -r $(DISTDIR)
 
