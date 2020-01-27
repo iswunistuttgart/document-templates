@@ -577,11 +577,7 @@
 % \begin{macro}{\zeros}
 %    \begin{macrocode}
 \ProvideDocumentCommand{\zeros}{ o }{%
-  \IfValueTF{#1}{%
-    \mathbb{0}_{#1}%
-  }{%
-    \mathbb{0}%
-  }%
+  \mathds{O}\IfValueT{#1}{_{#1}}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -590,11 +586,7 @@
 % \begin{macro}{\ones}
 %    \begin{macrocode}
 \ProvideDocumentCommand{\ones}{ o }{%
-  \IfValueTF{#1}{%
-    \mathbb{1}_{#1}%
-  }{%
-    \mathbb{1}%
-  }%
+  \mathds{1}\IfValueT{#1}{_{#1}}%
 }%
 %    \end{macrocode}
 % \end{macro}
