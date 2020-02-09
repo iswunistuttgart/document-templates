@@ -284,6 +284,16 @@
 %    \end{macrocode}
 %
 %
+% \paragraph{New Column Types}
+%
+% Regular text columns as mini-paragraphs with \textbf{L}eft-justified, \textbf{C}enter-justified, and \textbf{R}ight-justified
+%    \begin{macrocode}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
+%    \end{macrocode}
+%
+%
 % \subsection{Macros}
 %
 % \begin{macro}{\registered}
