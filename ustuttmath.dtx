@@ -145,16 +145,29 @@
 % * Maths versions of |\makebox|, |\llap|, |\rlap| etc.;
 % * Cramped math styles; and more...
 %    \begin{macrocode}
-% \RequirePackage{mathtools}
+\RequirePackage{mathtools}
 %    \end{macrocode}
 %
+% amsthm – Typesetting theorems (AMS style)
+% 
+% The package facilitates the kind of theorem setup typically needed in
+% American Mathematical Society publications. The package offers the theorem
+% setup of the AMS document classes (amsart, amsbook, etc.) encapsulated in
+% \LaTeX package form so that it can be used with other document classes.
+% 
+% Amsthm is part of the (required) AMS-LaTeX distribution, so should be present in any LaTeX distribution. 
+% \begin{macrocode}
+\RequirePackage{amsthm}
+% \end{macrocode}
+%
 % amsmath – AMS mathematical facilities for LaTeX
+%
 % The principal package in the AMS-LaTeX distribution. It adapts for use in
 % LaTeX most of the mathematical features found in AMS-TeX; it is highly
 % recommended as an adjunct to serious mathematical typesetting in LaTeX.
-% When amsmath is loaded, AMS-LaTeX packages amsbsy (for bold symbols), amsopn
-% (for operator names) and amstext (for text embedded in mathematics) are also
-% loaded.
+% When amsmath is loaded, AMS-\LaTeX packages \|amsbsy\| (for bold symbols),
+% \|amsopn\| (for operator names) and amstext (for text embedded in mathematics)
+% are also loaded.
 % amsmath is part of the LaTeX required distribution; however, several
 % contributed packages add still further to its appeal; examples are empheq,
 % which provides functions for decorating and highlighting mathematics, and
@@ -163,7 +176,28 @@
 \RequirePackage{amsmath}
 %    \end{macrocode}
 %
+% amsfonts – TeX fonts from the American Mathematical Society
+%
+% An extended set of fonts for use in mathematics, including: extra mathematical
+% symbols; blackboard bold letters (uppercase only); fraktur letters; subscript
+% sizes of bold math italic and bold Greek letters; subscript sizes of large
+% symbols such as sum and product; added sizes of the Computer Modern small caps
+% font; cyrillic fonts (from the University of Washington); Euler mathematical
+% fonts. All fonts are provided as Adobe Type 1 files, and all except the Euler
+% fonts are provided as METAFONT source.
+%
+% The distribution also includes the canonical Type 1 versions of the Computer
+% Modern family of fonts.
+%
+% Basic LaTeX support for the symbol fonts is provided by amsfonts.sty, with
+% names of individual symbols defined in amssymb.sty. The Euler fonts are
+% supported by separate packages; details can be found in the documentation. 
+%    \begin{macrocode}
+\RequirePackage{amssymb}
+%    \end{macrocode}
+%
 % doublestroke – Typeset mathematical double stroke symbols
+%
 % A font based on Computer Modern Roman useful for typesetting the mathematical
 % symbols for the natural numbers (N), whole numbers (Z), rational numbers (Q),
 % real numbers (R) and complex numbers (C); coverage includes all Roman capital
