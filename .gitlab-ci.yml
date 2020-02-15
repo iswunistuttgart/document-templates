@@ -26,7 +26,7 @@ docs:
   image: philipptempel/docker-ubuntu-tug-texlive:2019
   stage: docs
   script:
-    - make docs
+    - make -j 5 docs
   artifacts:
     name: "${CI_PROJECT_PATH_SLUG}_${CI_COMMIT_REF_NAME}"
     expire_in: 2 months
