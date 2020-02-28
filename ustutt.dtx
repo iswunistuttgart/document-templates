@@ -1326,14 +1326,14 @@
 %
 % \begin{macro}{\advisor}
 % \cmd{\advisor}\marg{advisor}\\
-% Name of the advisor of any thesis type.
+% Name of the advisor of doctoral theses.
 %    \begin{macrocode}
 %<thesis>\newcommand{\advisor}[1]{\gdef\ustutt@thesis@advisor{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\ustutt@thesis@advisor}
-% Internal macro of advisor of any thesis type.
+% Internal macro of advisor of doctoral theses.
 %    \begin{macrocode}
 %<thesis>\newcommand{\ustutt@thesis@advisor}{}
 %    \end{macrocode}
@@ -1346,18 +1346,39 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \cmd{\examiner}\marg{examiner}\\
+% Name of examiner of student theses.
+%    \begin{macrocode}
+%<thesis>\newcommand{\examiner}[1]{\gdef\ustutt@thesis@examiner{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@examiner}
+% Internal macro of examiner of student theses.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@examiner}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\examinername}
+% Text saying "Examiner" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\examinername}{\translate{ustutt@thesis@examiner}}
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \begin{macro}{\coadvisor}
 % \cmd{\coadvisor}\marg{coadvisor(s)}\\
-% List of co-advisors of any thesis type. Separate multiple advisors
-% by |\and|.
+% List of co-advisors of any thesis type. Separate multiple advisors by
+% |\and|.
 %    \begin{macrocode}
 %<thesis>\newcommand{\coadvisor}[1]{\gdef\ustutt@thesis@coadvisor{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\ustutt@thesis@coadvisor}
-% Internal macro of list of co-advisors of any thesis type.
+% Internal macro of list of co-advisors of doctoral theses.
 %    \begin{macrocode}
 %<thesis>\newcommand{\ustutt@thesis@coadvisor}{}
 %    \end{macrocode}
@@ -1367,6 +1388,28 @@
 % Text saying "Co-Advisor" in current locale.
 %    \begin{macrocode}
 %<thesis>\newcommand{\coadvisorname}{\translate{ustutt@thesis@coadvisor}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \cmd{\supervisor}\marg{supervisor(s)}\\
+% List of supervisor(s) of student theses. Separate multiple supervisors by
+% |\and|.
+%    \begin{macrocode}
+%<thesis>\newcommand{\supervisor}[1]{\gdef\ustutt@thesis@supervisor{#1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\ustutt@thesis@supervisor}
+% Internal macro of list of supervisor of student thses.
+%    \begin{macrocode}
+%<thesis>\newcommand{\ustutt@thesis@supervisor}{}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\supervisorname}
+% Text saying "Supervisor" in current locale.
+%    \begin{macrocode}
+%<thesis>\newcommand{\supervisorname}{\translate{ustutt@thesis@supervisor}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2583,16 +2626,20 @@
           {\majorname:}%
             & \ustutt@thesis@major\\%
         }%
+        \ifdefstring{\ustutt@degree}{doctorate}{% doctorate thesis
         {\advisorname:}%
           & \ustutt@thesis@advisor\\%
         {\coadvisorname:}%
           & {\ustutt@thesis@coadvisor}\\%
-        \ifdefstring{\ustutt@degree}{doctorate}{% TRUE
-          {\datedefendedname:}%
-            & \ifustutt@accepted\@date\else\fi\\%
-        }{% FALSE
-          {\ifustutt@accepted\datedefendedname\else\datesubmittedname\fi:}%
-            & \@date\\%
+        {\datedefendedname:}%
+          & \ifustutt@accepted\@date\else\fi\\%
+        }{% bachelor, master, etc
+        {\examinername:}%
+          & \ustutt@thesis@examiner\\%
+        {\supervisorname:}%
+          & {\ustutt@thesis@supervisor}\\%
+        {\ifustutt@accepted\datedefendedname\else\datesubmittedname\fi:}%
+          & \@date\\%
         }%
       \end{tabu}%
     \renewcommand{\and}{\oldAnd}%

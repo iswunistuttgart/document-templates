@@ -257,21 +257,27 @@
 % \end{macro}
 % 
 % \begin{macro}{\advisor}
-% Name of your thesis advisor. In case of bachelor's or master's thesis, this is
-% usually going to be the first and only advisor of your thesis. In case of
-% doctoral theses, this is your main advisor or doctoral advisor. Further
-% advisors go into the |\coadvisor| macro
+% \begin{macro}{\examiner}
+% Name of your thesis advisor/examiner. In case of bachelor's or master's
+% thesis, this is usually going to be the first and only advisor of your
+% thesis. In case of doctoral theses, this is your main advisor or doctoral
+% advisor. Further advisors go into the |\coadvisor| macro (for doctoral theses
+% only).
 %    \begin{macrocode}
-%<thesis>\advisor{PD Dr.-Ing.\@ Andreas Pott}
+%<doctorate>\advisor{PD Dr.-Ing.\@ Andreas Pott}
+%<bachelor|master>\examiner{PD Dr.-Ing.\@ Andreas Pott}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % 
 % \begin{macro}{\coadvisor}
-% Further advisors of your thesis. For bachelor's or master's theses, this
-% usually does not apply. For doctoral theses, these are the other advisors of
-% your graduation board.
+% \begin{macro}{\supervisor}
+% Further advisors of doctoral thesis or daily supervisor(s) of bachelor 
+% theses. For doctoral theses, these are the members of your doctoral graduation
+% board.
 %    \begin{macrocode}
-%<thesis>\coadvisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
+%<doctorate>\coadvisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
+%<bachelor|master>\supervisor{Prof.\@ Dr.\@ Bernard Haasdonk \and Marc Gouttefarde, Ph.D.}
 %    \end{macrocode}
 % \end{macro}
 %
