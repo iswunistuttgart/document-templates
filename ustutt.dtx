@@ -410,21 +410,49 @@
   autocite=inline,%
   sorting=nyt,%
   sortcites=true,%
-  style=ipa-authoryear,%
 %
-% Configuration of text citations
-  mincitenames=1,%
-  maxcitenames=2,%
-%
-% Configuration of bibliography
-  maxbibnames=10,%
-  doi=false,%
-  isbn=false,%
-  url=false,%
 % natbib compatibility mode (\citep and \citet still work)
   natbib=true,
 }{biblatex}
 %    \end{macrocode}
+%
+% Adjustments for doctoral theses documents
+%
+%<*thesis>
+%    \begin{macrocode}
+\ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+% biblatex
+  \PassOptionsToPackage{%
+    style=ipa-authoryear,%
+    introcite=label,%
+    maxcitenames=1,%
+    maxbibnames=99,%
+    uniquename=false,%
+    uniquelist=false,%
+    dashed=false,%
+    articlein=false,%
+    innamebeforetitle=true,%
+% Configuration of bibliography
+    maxbibnames=10,%
+    doi=false,%
+    isbn=false,%
+    url=false,%
+  }{biblatex}%
+}{% FALSE (NOT doctorate)
+% biblatex
+  \PassOptionsToPackage{%
+  % General configuration of biblatex
+    backend=biber,%
+    backref=false,%
+    giveninits=true,%
+    autocite=inline,%
+    sorting=nyt,%
+    sortcites=true,%
+    style=din1505,%
+  }{biblatex}
+}%
+%    \end{macrocode}
+%</thesis>
 %
 %
 % Babelbib
