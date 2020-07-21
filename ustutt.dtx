@@ -326,6 +326,25 @@
 }
 %    \end{macrocode}
 %
+% User may pass additional options to underlying packages that are being loaded
+% by this class
+%    \begin{macrocode}
+\pgfkeys{
+  /ustutt/biblatex/.code={%
+    \PassOptionsToPackage{#1}{biblatex}%
+  },%
+  /ustutt/hyperref/.code={%
+    \PassOptionsToPackage{#1}{hyperref}%
+  },%
+  /ustutt/xcolor/.code={%
+    \PassOptionsToPackage{#1}{xcolor}%
+  },%
+  /ustutt/cleveref/.code={%
+    \PassOptionsToPackage{#1}{cleveref}%
+  },%
+}
+%    \end{macrocode}
+%
 % Pass any other options not known to the underlying koma script class
 %    \begin{macrocode}
 \pgfkeys{
