@@ -219,7 +219,7 @@
     proposal/.code={%
       \def\ustutt@type{proposal},%
     },%
-}
+}%
 %</thesis>
 %    \end{macrocode}
 %
@@ -382,6 +382,7 @@
 % To keep our concerns separated, we first define all package options, and then
 % load all packages. Definition of package options is done alphabetically
 %    \begin{macrocode}
+% biblatex
 \PassOptionsToPackage{%
 % General configuration of biblatex
   backend=biber,%
@@ -409,6 +410,7 @@
 %
 % Babelbib
 %    \begin{macrocode}
+% babelbib
 \PassOptionsToPackage{%
   fixlanguage,%
 }{babelbib}
@@ -417,6 +419,7 @@
 %
 % Cleveref
 %    \begin{macrocode}
+% cleveref
 \PassOptionsToPackage{%
   capitalise,%
 }{cleveref}
@@ -425,13 +428,16 @@
 %
 % Graphicx
 %    \begin{macrocode}
+% graphicx
 \PassOptionsToPackage{%
   final,%
 }{graphicx}
 %    \end{macrocode}
 %
 %
+% Hyperref
 %    \begin{macrocode}
+% hyperref
 \PassOptionsToPackage{%
 % do bibliographical back references
   backref=false,
@@ -515,7 +521,7 @@
 %    \end{macrocode}
 % Set layout of PDF document in case it is onesided
 %    \begin{macrocode}
-\else
+\else%
   \PassOptionsToPackage{%
     pdfpagelayout=OneColumn,%
   }{hyperref}%
@@ -546,6 +552,7 @@
 %
 % showkeys
 %    \begin{macrocode}
+% showkeys
 \PassOptionsToPackage{%
 % to stop the redefinition of \ref and \pageref, and related commands from the
 % varioref package
@@ -569,8 +576,8 @@
 %    \begin{macrocode}
 \PassOptionsToClass{
 %<book|thesis>  chapterprefix=true,%
-% half a line vertical space between paragraphs; there must be at least 1 em free
-% space in the last line of a paragraph
+% half a line vertical space between paragraphs; there must be at least 1em
+% free space in the last line of a paragraph
   parskip=half-,
 % The bibliography will be represented by an entry at the table of contents, but
 % will not be numbered.
@@ -2365,14 +2372,15 @@
 %
 % \paragraph{New Column Types}
 %
-% Regular text columns as mini-paragraphs with \textbf{L}eft-justified, \textbf{C}enter-justified, and \textbf{R}ight-justified
+% Regular text columns as mini-paragraphs with \textbf{L}eft-justified,
+% \textbf{C}enter-justified, and \textbf{R}ight-justified text.
 %    \begin{macrocode}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\RaggedLeft\arraybackslash}p{#1}}
 %    \end{macrocode}
 %
-% Math-mode columns: left (B), right (M), and center (N) math aligned columns
+% Math-mode columns: left (B), center (N), and right (M) aligned math columns.
 %    \begin{macrocode}
 \newcolumntype{B}{>{$}l<{$}}
 \newcolumntype{N}{>{$}c<{$}}
@@ -2380,7 +2388,7 @@
 %    \end{macrocode}
 %
 %
-% Numbering of equations, figures, and tables according to their chapter
+% Numbering of equations, figures, and tables according to their chapter.
 %    \begin{macrocode}
 %<*article>
 \numberwithin{equation}{section}
