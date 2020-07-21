@@ -603,15 +603,18 @@
 % be upped to 14pt
 %    \begin{macrocode}
 %<*doctorate>
-\ifustutt@accepted
-  \PassOptionsToClass{%
-    fontsize=14pt,%
-  }{scrbook}
-\else
-  \PassOptionsToClass{%
-    fontsize=12pt,%
-  }{scrbook}
-\fi
+\ifdefstring{\ustutt@degree}{doctorate}{% TRUE
+  \ifustutt@accepted
+    \PassOptionsToClass{%
+      fontsize=14pt,%
+    }{scrbook}
+  \else
+    \PassOptionsToClass{%
+      fontsize=12pt,%
+    }{scrbook}
+  \fi
+}{% FALSE (NOT doctorate)
+}
 %</doctorate>
 %    \end{macrocode}
 %
