@@ -29,7 +29,7 @@ docs: $(DOCS)
 	$(MAKEINDEX) gglo.ist -o $*.gls $*.glo
 	$(LATEX) $^
 
-# class files depend on the insaller
+# class files depend on the installer
 %.cls: ins
 
 # combination of everything that needs to be done for distributing
