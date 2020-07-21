@@ -471,9 +471,17 @@
 % Eventually, a list of bibligraphy items will follow
 %    \begin{macrocode}
 %<<COMMENT
-% Remove this line in your final document so that you will only have entries in
-% your bibliography that you actually cited
+% Remove the folllowing line in your final document so that you will only have
+% entries in your bibliography that you actually cited
 \nocite{*}
+%COMMENT
+%<<COMMENT
+% If you check your bibliography and see an item label (the bold text in the
+% left column) that is wider than its column width causing the right column to
+% shift down one line, then you have to use the following code
+% \setlength{\introcitewidth}{\widthof{\textbf{%
+% THE TEXT OF THE LONGEST LABEL IN HERE%
+% }}
 %COMMENT
 \printbibliography
 %    \end{macrocode}
