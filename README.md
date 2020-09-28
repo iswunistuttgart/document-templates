@@ -15,6 +15,8 @@ If you are interested in just finding the most recent files you need for writing
 
 [Download most recent release](https://github.com/iswunistuttgart/latex-templates)
 
+> **Note:** If you are a student writing your thesis at ISW, please use the newer student templates. You can find it on <https://github.com/iswunistuttgart/latex_template_students> or directly write on [Overleaf](https://www.overleaf.com/latex/templates/isw-student-thesis/xjwkfntnwrwc) (account needed).
+
 ## Requirements
 
 ### LaTeX Distribution
