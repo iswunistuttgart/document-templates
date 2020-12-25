@@ -5,7 +5,7 @@ stages:
   - ship
 
 ins:
-  image: philipptempel/docker-ubuntu-tug-texlive:2019
+  image: philipptempel/docker-ubuntu-tug-texlive:2019-full
   stage: ins
   script:
     - make distclean
@@ -23,7 +23,7 @@ ins:
     - docker
 
 docs:
-  image: philipptempel/docker-ubuntu-tug-texlive:2019
+  image: philipptempel/docker-ubuntu-tug-texlive:2019-full
   stage: docs
   script:
     - make -j 5 docs
@@ -40,7 +40,7 @@ docs:
     - docker
 
 dist:
-  image: philipptempel/docker-ubuntu-tug-texlive:2019
+  image: philipptempel/docker-ubuntu-tug-texlive:2019-full
   stage: dist
   script:
     - make dist
