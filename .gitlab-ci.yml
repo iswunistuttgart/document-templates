@@ -23,7 +23,7 @@ ins:
     - docker
 
 docs:
-  image: philipptempel/docker-ubuntu-tug-texlive:2019f-ull
+  image: philipptempel/docker-ubuntu-tug-texlive:2019-full
   stage: docs
   script:
     - make -j 5 docs
